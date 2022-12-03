@@ -47,17 +47,28 @@ while (linkQueue.TryDequeue(out var uri))
             style.Remove();
         }
 
-        //using var sw = new StreamWriter();
+        foreach (var link in page.QuerySelectorAll("a"))
+        {
+            if (link.Attributes["href"]?.Value.StartsWith("/docs") == true)
+            {
+                var fullUri = new Uri(baseUri, link.Attributes["href"].Value!);
+                linkQueue.Queue(fullUri);
+            }
+        }
 
         var str = page.ToHtml(new PrettyMarkupFormatter());
 
         var path = uri.AbsolutePath.Trim('/');
         if (path.StartsWith("docs"))
-            path = path[4..];
+            path = path[4..].Trim('/');
 
         if (path == "")
         {
             path = "index.html";
+        }
+        else
+        {
+            path += ".html";
         }
 
         var file = Path.Combine(dir.FullName, path);
@@ -69,7 +80,7 @@ while (linkQueue.TryDequeue(out var uri))
             Directory.CreateDirectory(dirName);
         }
 
-        await File.WriteAllTextAsync($"{uri.AbsolutePath.Trim('/')}.html", str).ConfigureAwait(false);
+        await File.WriteAllTextAsync(file, str).ConfigureAwait(false);
     }
     catch (Exception ex)
     {

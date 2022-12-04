@@ -52,6 +52,11 @@ while (linkQueue.TryDequeue(out var uri))
             style.Remove();
         }
 
+        foreach (var footer in page.QuerySelectorAll("footer"))
+        {
+            footer.Remove();
+        }
+
         foreach (var link in page.QuerySelectorAll("a"))
         {
             if (link.Attributes["href"]?.Value.StartsWith("/docs") == true)
@@ -66,6 +71,11 @@ while (linkQueue.TryDequeue(out var uri))
                 if (hashPos > -1)
                 {
                     href = href[..hashPos];
+                }
+
+                if (href.EndsWith("/index"))
+                {
+                    href = href[..^6];
                 }
 
                 var fullUri = new Uri(baseUri, href);

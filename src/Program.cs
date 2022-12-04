@@ -57,19 +57,43 @@ while (linkQueue.TryDequeue(out var uri))
             footer.Remove();
         }
 
+        foreach (var image in page.QuerySelectorAll("svg"))
+        {
+            image.Remove();
+        }
+
+        // Search
+        page.QuerySelector("#search_container")?.Remove();
+
+        // Remove generated class names
+        foreach (var el in page.QuerySelectorAll("[class]"))
+        {
+            el.Attributes.RemoveNamedItem("class");
+        }
+
+        // 
         foreach (var link in page.QuerySelectorAll("a"))
         {
-            if (link.Attributes["href"]?.Value.StartsWith("/docs") == true)
-            {
-                var href = link.Attributes["href"]?.Value.Replace("/en-US/", "/");
+            var attrib = link.Attributes["href"];
 
-                if (href == null || href.Contains("site-map?tag=") || href.Contains("sessioninvalidated", StringComparison.InvariantCultureIgnoreCase))
+            if (attrib is null)
+            {
+                continue;
+            }
+
+            if (attrib.Value.StartsWith("/docs") == true)
+            {
+                var href = attrib.Value.Replace("/en-US/", "/");
+
+                if (href == null || href.Contains("site-map?tag="))
                     continue;
 
                 var hashPos = href.IndexOf("#");
+                string hash = "";
 
                 if (hashPos > -1)
                 {
+                    hash = href[hashPos..];
                     href = href[..hashPos];
                 }
 
@@ -79,6 +103,8 @@ while (linkQueue.TryDequeue(out var uri))
                 }
 
                 var fullUri = new Uri(baseUri, href);
+
+                attrib.Value = fullUri.AbsolutePath + hash;
 
                 if (fullUri.Query != "")
                     continue;

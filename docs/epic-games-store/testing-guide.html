@@ -1,0 +1,997 @@
+
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li>
+					<button tabindex="0" type="button" aria-haspopup="true"></button>
+				</li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Epic Games Store Testing Guide" data-mui-internal-clone-element="true">Epic Games Store Testing Guide</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<div>
+				<nav>
+					<ol>
+						<li>
+							<a href="/docs">Epic Developer Resources</a>
+						</li>
+						<li aria-hidden="true"></li>
+						<li>
+							<button tabindex="0" type="button" aria-haspopup="true"></button>
+						</li>
+						<li aria-hidden="true"></li>
+						<li>
+							<span aria-label="Epic Games Store Testing Guide" data-mui-internal-clone-element="true">Epic Games Store Testing Guide</span>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			<div>
+				<div>
+					<div id="search_container">
+						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+							<input type="hidden" name="filter" value="Documentation">
+							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
+							<button type="submit" aria-label="Search"></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h1>Epic Games Store Testing Guide</h1>
+			<h2>Test cases to help you ensure a great player experience</h2>
+			<div>
+				<div>19 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Are you a Closed Beta partner?</strong>
+						If you are not participating in the Closed Beta release, you can access documentation by using your Epic Games account to
+						<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/contactsupport">sign in to the Knowledge Base</a>.</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="overview">Overview</h2>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>This guide aims to help partners promote an optimal experience for users while also ensuring compliance with Epic Games Store requirements. The sections below provide test cases and recommendations for cross-play multiplayer requirements, Epic Online Services (EOS), and a variety of player experience topics.</p>
+			<p>Before distributing your product or any updates on the Epic Games Store, it is
+				<strong>strongly recommended</strong>
+				that you review and verify these test cases to ensure a successful launch.</p>
+			<div>
+				<h2 id="epic-online-services">Epic Online Services</h2>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<div>
+				<h3 id="epic-account-services-player-consent">Epic Account Services Player Consent</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>Games using Epic Account Services require player consent to share data. As long as games use the correct
+				<a href="/docs/epic-account-services/auth-interface#preferred-login-types-for-epic-account">CredentialType</a>,  players should be directed to grant consent a single time when first launching the game. For games sold in the Epic Games Store, this consent may be granted automatically at time of purchase. Players have the ability to revoke consent at any time from their
+				<a href="https://www.epicgames.com/account/connections">Account Connections</a>
+				page.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Sign into an account that is
+					<u>not</u>
+					associated with your Dev Portal organization.</li>
+				<li>Ensure the game is not listed on the Account Connections page.</li>
+				<li>Launch the game.</li>
+				<li>Complete the consent flow when prompted.</li>
+				<li>Exit and relaunch the game, confirming the consent flow does not display.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>The account proceeds into gameplay without seeing the consent flow after providing initial consent. Games on the Epic Games Store should use
+					<a href="/docs/epic-account-services/auth-interface#epic-games-launcher">ExchangeCode</a>
+					rather than AccountPortal to ensure correct behavior.</li>
+				<li>The Epic Account Services application has its Brand Settings in the
+					<em>Published</em>
+					state prior to game release. Applications that have yet to complete Brand Review cannot allow accounts outside your organization to sign in.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Consent flow only displays on the initial game launch.</li>
+				<li>Epic Account Services application has completed Brand Review.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Consent flow displays on subsequent game launches after initial consent was provided.</li>
+				<li>Epic Account Services application has not completed Brand Review. Brand Settings are set to
+					<em>Not Configured</em>
+					or
+					<em>Under Review</em>.</li>
+			</ul>
+			<div>
+				<h3 id="connect-interface-access-token-renewal">Connect Interface Access Token Renewal</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>The Connect Interface requires games to renew players’ access tokens on an hourly basis to maintain a connection to Epic Online Services (EOS).</p>
+			<p>Games should use the
+				<a href="/docs/game-services/eos-connect-interface#user-authentication-status-change-notification">AddNotifyAuthExpiration</a>
+				function to be notified when an access token is about to expire, and proceed to renew the log-in. Failure to carry out this renewal process results in service calls failing once the token expires.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Launch the game and complete the initial sign-in flow.</li>
+				<li>Wait 60 minutes.</li>
+				<li>Attempt to use any EOS functionality implemented in the game (e.g., achievements, multiplayer, Player Data Storage, etc.).</li>
+				<li>Verify through your game application’s local log file that the game client receives the
+					<a href="/docs/api-ref/callbacks/eos-connect-on-auth-expiration-callback">OnAuthExpirationCallback</a>
+					notification from EOS SDK and successfully refreshes the authentication using the
+					<a href="/docs/api-ref/functions/eos-connect-login">EOS_Connect_Login</a>
+					API.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>Features of the game using EOS functionality continue to function as expected after at least 60 minutes have passed.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>EOS functionality remains usable after 60 minutes of gameplay.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>EOS functionality becomes unusable after 60 minutes have passed from initial sign-in.</li>
+			</ul>
+			<div>
+				<h3 id="offline-mode-support">Offline Mode Support</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>The Epic Games Launcher allows users to opt in to
+				<a href="https://www.epicgames.com/help/en-US/epic-games-store-c73/launcher-support-c82/run-games-in-offline-mode-using-the-epic-games-launcher-a6724">Offline Mode</a>, which passes the
+				<code>epicusername</code>
+				and
+				<code>epicuserid</code>
+				command line arguments to the game process upon launch.</p>
+			<p>However, an Exchange Code is not provided, and Epic Online Services (EOS) functionality, including entitlement checks, is not available to the game. You can choose to restrict or allow access to any additional content gated by entitlements, or you can implement a secure entitlement cache to allow players to proceed offline for a set period of time.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>While connected to the internet, access the Epic Games Launcher and select
+					<strong>Enable Offline Mode Browsing</strong>
+					in the Settings menu.</li>
+				<li>Exit the launcher and disable the computer’s internet connection.</li>
+				<li>Restart the launcher, entering your account’s email address to proceed.</li>
+				<li>Launch the game.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>Game remains stable, and player is alerted to the lack of internet connection when attempting to enter areas of the game that require an active connection.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game remains fully playable in Offline Mode.</li>
+				<li>Game remains playable in Offline Mode but restricts access to certain content.</li>
+				<li>Game informs player that game cannot be launched in Offline Mode.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game crashes when launched in Offline Mode.</li>
+				<li>Game displays misleading or uninformative messaging when launched in Offline Mode.</li>
+			</ul>
+			<div>
+				<h3 id="sandboxdeployment-id-handling-epic-games-store-publishing-tools-only">Sandbox/Deployment ID Handling (Epic Games Store publishing tools only)</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>All products configured using the Epic Games Store publishing tools in the Dev Portal are equipped with a standard set of three
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management#sandboxes">sandboxes</a>: Dev, Stage and Live.</p>
+			<p>As static Sandbox ID and Deployment ID values are required to initialize Epic Online Services (EOS), the following implementation is recommended to ensure the build can handle being downloaded and used across multiple sandboxes:</p>
+			<ul>
+				<li>
+					<strong>Sandbox ID</strong>: This ID can be obtained from the Epic Games Launcher at launch time in the form of the
+					<code>epicsandboxid</code>
+					launch argument provided to all games.</li>
+				<li>
+					<strong>Deployment ID</strong>: This ID can be set within your build in a custom if/switch statement block targeting the expected deployment for the sandbox in question.</li>
+			</ul>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Promote the build from the Dev to Stage sandbox.</li>
+				<li>Sign in to an account that owns the game in both the Dev and Stage sandboxes.</li>
+				<li>Launch the game in the Dev sandbox and ensure any implemented EOS features behave as expected.</li>
+				<li>Exit the game and relaunch in the Stage sandbox, testing the same features.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>EOS features remain usable across different sandboxes.</li>
+				<li>Player state should be distinct between sandboxes. If achievements or add-on purchases have only been completed in a single sandbox, they should not be available in other sandboxes.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game handles the
+					<code>epicsandboxid</code>
+					launch argument and dynamically sets the correct Sandbox ID and Deployment ID.</li>
+				<li>Game dependencies require hard-coding Sandbox ID and Deployment ID values, and Live values are used for each.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game references Dev or Stage sandbox/deployment when downloaded from Live sandbox, blocking sign-in for players.</li>
+				<li>Live deployment is set to
+					<em>Private</em>
+					at time of game release, blocking sign-in for players outside the Dev Portal organization.</li>
+			</ul>
+			<div>
+				<h2 id="player-experience">Player Experience</h2>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<div>
+				<h3 id="epic-games-store-achievements">Epic Games Store Achievements</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>Games published to the Epic Games Store can leverage
+				<a href="/docs/epic-games-store/services/epic-achievements">Epic Games Store achievements</a>
+				to enhance the player experience by rewarding users with experience points (XP) for various interactions with your game. These achievements utilize the
+				<a href="/docs/game-services/achievements">Epic Online Services achievement</a>
+				functionality for in-game integration.</p>
+			<p>With Epic Online Services achievements implemented in the game, Epic Games Store achievements can be configured in the Dev Portal by specifying XP values for the achievements. Epic Games Store achievements require the use of
+				<a href="/docs/epic-account-services">Epic Account Services</a>
+				to authenticate the player and record their achievement progress and unlocks.</p>
+			<p>To optimize the player experience, we recommend enabling the
+				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">Epic Games overlay</a>
+				to display achievements and achievement progress in game.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Launch the game.</li>
+				<li>Sign in to an Epic Games account in the game.</li>
+				<li>Advance the gameplay to a point where an achievement is unlocked.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>If the Epic Games overlay is enabled:
+					<!-- -->
+					<ul>
+						<li>The overlay (opened with
+							<em>Shift+F3</em>) displays the game’s available achievements on the Achievements tab.</li>
+						<li>An XP value displays for each achievement listed on the Achievements tab.</li>
+						<li>The achievement unlock notification displays at the top center of the screen along with an unlock sound and the proper tier (i.e., bronze, silver, gold, or platinum) for the achievement.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Achievements are correctly shown and unlocked in the game using the Epic Games overlay.</li>
+				<li>Achievements are correctly unlocked in the game and displayed on the game’s product page in the Epic Games Store.</li>
+			</ul>
+			<center>
+				<div>
+					<div>
+						<div style="max-width:400px">
+							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+								<img alt="Epic Games overlay displaying Epic Games Store achievements" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+								<noscript>
+									<img alt="Epic Games overlay displaying Epic Games Store achievements" sizes="100vw" srcset="null/epic-games-store/test-guide/achievements/achievements-overlay.png 640w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 750w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 828w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 1080w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 1200w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 1920w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 2048w, null/epic-games-store/test-guide/achievements/achievements-overlay.png 3840w" src="null/epic-games-store/test-guide/achievements/achievements-overlay.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+								</noscript>
+							</span>
+						</div>
+					</div>
+				</div>
+			</center>
+			<center>
+				<em>An example Epic Games overlay displaying Epic Games Store achievements</em>
+			</center>
+			<br>
+			<center>
+				<div>
+					<div>
+						<div style="max-width:400px">
+							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+								<img alt="Epic Games Store product page displaying achievements" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+								<noscript>
+									<img alt="Epic Games Store product page displaying achievements" sizes="100vw" srcset="null/epic-games-store/test-guide/achievements/egs-achievements-page.png 640w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 750w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 828w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 1080w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 1200w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 1920w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 2048w, null/epic-games-store/test-guide/achievements/egs-achievements-page.png 3840w" src="null/epic-games-store/test-guide/achievements/egs-achievements-page.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+								</noscript>
+							</span>
+						</div>
+					</div>
+				</div>
+			</center>
+			<center>
+				<em>An example Epic Games Store product page displaying achievements</em>
+			</center>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Achievements in the Epic Games overlay only show Epic Online Services achievements (without XP,  rarity, and tier)</li>
+			</ul>
+			<center>
+				<div>
+					<div>
+						<div style="max-width:400px">
+							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+								<img alt="Epic Games overlay displaying Epic Online Services achievements" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+								<noscript>
+									<img alt="Epic Games overlay displaying Epic Online Services achievements" sizes="100vw" srcset="null/epic-games-store/test-guide/achievements/fail-achievements.png 640w, null/epic-games-store/test-guide/achievements/fail-achievements.png 750w, null/epic-games-store/test-guide/achievements/fail-achievements.png 828w, null/epic-games-store/test-guide/achievements/fail-achievements.png 1080w, null/epic-games-store/test-guide/achievements/fail-achievements.png 1200w, null/epic-games-store/test-guide/achievements/fail-achievements.png 1920w, null/epic-games-store/test-guide/achievements/fail-achievements.png 2048w, null/epic-games-store/test-guide/achievements/fail-achievements.png 3840w" src="null/epic-games-store/test-guide/achievements/fail-achievements.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+								</noscript>
+							</span>
+						</div>
+					</div>
+				</div>
+			</center>
+			<center>
+				<em>An example Epic Games overlay displaying Epic Online Services achievements</em>
+			</center>
+			<div>
+				<h3 id="unicode-character-support">Unicode Character Support</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>Both Windows and Epic Games accounts allow players to use characters outside the Latin alphabet in their display names. Games should include users with this configuration in their test pass.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Sign into a Windows user account including a non-Latin character.</li>
+				<li>Sign into an Epic Games account with a display name including a non-Latin character.</li>
+				<li>Install the game into a folder including a non-Latin character.</li>
+				<li>Launch the game.</li>
+				<li>Proceed into each game mode and create save data.</li>
+				<li>Exit and relaunch the game.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>All game modes should function as expected.</li>
+				<li>Save data should remain accessible after relaunching the game.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game remains fully functional when launched by a user with non-Latin characters included in their Windows user account and installation folder.</li>
+				<li>Display name of Epic Games account is depicted accurately in-game.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game fails to launch when installation folder includes non-Latin characters.</li>
+				<li>Game fails to save or load player data when installation folder or display name of Epic Games account includes non-Latin characters.</li>
+				<li>Game displays null characters in place of non-Latin characters in display name.</li>
+			</ul>
+			<div>
+				<h3 id="redistributable-installation">Redistributable Installation</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>The Epic Games Store does not currently handle automatic installation of common redistributables like DirectX or Visual C++. Partners are responsible for handling the installation of any prerequisites needed for their games. To learn more about the options available, review
+				<a href="/docs/epic-games-store/services/game-prereqs-installer">Game Prerequisite Installers</a>.</p>
+			<p>The Epic Games Launcher installs prerequisite redistributables configured using the
+				<code>PrereqIds</code>
+				argument when uploading builds using the BuildPatch Tool. However, players may choose to uninstall these redistributables at any time. Games should alert players to the missing prerequisites and provide the information needed to address the issue.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Install the game, including any configured redistributables.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: The Epic Games Launcher treats return codes 0, 1638, and 3010 as successes.</li>
+					</ul>
+				</li>
+				<li>Launch the game and proceed into gameplay.</li>
+				<li>Uninstall the required redistributables.</li>
+				<li>Attempt to launch the game.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>Game informs player of any missing redistributables needed.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game installs the required redistributables upon initial launch.</li>
+				<li>Game informs player of any missing redistributables after they have been removed.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game fails to launch when redistributables have been removed.</li>
+				<li>Game does not inform player on how to resolve the issue.</li>
+			</ul>
+			<div>
+				<h3 id="language-and-locale-settings">Language and Locale Settings</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>Games have access to three key settings detailing a player’s location, language, and locale:</p>
+			<ul>
+				<li>
+					<strong>Account Region</strong>: Used by the Epic Games Store to determine which offers, prices, and age ratings are available to a player. For games using regional builds and launch times tied to local time zones, account region is also used to drive these features. This region code can be obtained for a player through the
+					<code>Country</code>
+					property of
+					<a href="/docs/api-ref/structs/eos-user-info">EOS_UserInfo</a>.</li>
+				<li>
+					<strong>Preferred Communication Language</strong>: Used to determine which language is used when contacting the player through email. This language code can be obtained for a player through the
+					<code>PreferredLanguage</code>
+					property of
+					<a href="/docs/api-ref/structs/eos-user-info">EOS_UserInfo</a>.</li>
+				<li>
+					<strong>Launcher Language</strong>: Used to determine which language displays within the Epic Games Launcher. This language code is provided to all games via the
+					<code>epiclocale</code>
+					argument when launching a game (see table below).</li>
+			</ul>
+			<p>
+				<strong>Supported Launcher Languages</strong>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Launcher Language</th>
+						<th>epiclocale Argument</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Arabic</td>
+						<td>ar</td>
+					</tr>
+					<tr>
+						<td>English</td>
+						<td>en-US</td>
+					</tr>
+					<tr>
+						<td>German</td>
+						<td>de</td>
+					</tr>
+					<tr>
+						<td>Spanish (Spain)</td>
+						<td>es-ES</td>
+					</tr>
+					<tr>
+						<td>Spanish (Latin America)</td>
+						<td>es-MX</td>
+					</tr>
+					<tr>
+						<td>French</td>
+						<td>fr</td>
+					</tr>
+					<tr>
+						<td>Italian</td>
+						<td>it</td>
+					</tr>
+					<tr>
+						<td>Japanese</td>
+						<td>ja</td>
+					</tr>
+					<tr>
+						<td>Korean</td>
+						<td>ko</td>
+					</tr>
+					<tr>
+						<td>Polish</td>
+						<td>pl</td>
+					</tr>
+					<tr>
+						<td>Portuguese</td>
+						<td>pt-BR</td>
+					</tr>
+					<tr>
+						<td>Russian</td>
+						<td>ru</td>
+					</tr>
+					<tr>
+						<td>Thai</td>
+						<td>th</td>
+					</tr>
+					<tr>
+						<td>Turkish</td>
+						<td>tr</td>
+					</tr>
+					<tr>
+						<td>Chinese (Simplified)</td>
+						<td>zh-Hans</td>
+					</tr>
+					<tr>
+						<td>Chinese (Traditional)</td>
+						<td>zh-Hant</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Set the Epic Games Launcher Language setting to a language supported by the game.</li>
+				<li>Launch the game.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>Game automatically sets the correct display language or allows the player to freely switch between supported languages via in-game options.</li>
+				<li>Game is able to handle and parse all
+					<a href="/docs/web-api-ref/authentication#game-client-on-the-epic-games-store-1">command line parameters</a>
+					provided by the launcher without crashing.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game handles
+					<code>epiclocale</code>
+					argument and automatically sets in-game language.</li>
+				<li>Game launches in single default language but allows players to manually set language through in-game option.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game lists a Supported Language on the product page, but players are unable to apply this setting through use of the
+					<code>epiclocale</code>
+					argument or in-game option.</li>
+			</ul>
+			<div>
+				<h3 id="build-update-size-optimization">Build Update Size Optimization</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>As part of the build upload process, the
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries">BuildPatch Tool</a>
+				automatically compares the data in the build to previous uploads and optimizes the generated patches to reduce the download size for existing players.</p>
+			<div>
+				<p>This process has been improved with
+					<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool v1.5.0</a>, and data is now compared across all artifacts tied to a product, rather than the single artifact of original upload. We
+					<strong>strongly recommend</strong>
+					using the latest version of the BuildPatch Tool available for download in Dev Portal.</p>
+			</div>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Install the current version of the game using a staging artifact or private sandbox.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: The ability to download from a private sandbox is only available to partners participating in the Self-Publishing Tools Closed Beta.</li>
+					</ul>
+				</li>
+				<li>Set the next update of the game live in the test environment.</li>
+				<li>Restart the launcher and observe the download size of the update.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>The update should result in a download size roughly representative of the binary delta between the builds, rather than a full redownload of the game.</li>
+				<li>The download size for the update between two specific build versions can be further optimized by using the BuildPatch Tool’s
+					<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#reducing-update-size">BinaryOptimiseDelta</a>
+					mode. This command should be run with an empty CloudDir folder and may take additional time to complete processing compared to previous uploads for the game.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Player is able to download updates between build versions without issue.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Player re-downloads entire game when updating between build versions, due to use of outdated BuildPatch Tool for upload.</li>
+			</ul>
+			<div>
+				<h3 id="launcher-cloud-saves">Launcher Cloud Saves</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>We encourage all games that save data locally to take advantage of the Cloud Saves feature supported by the Epic Games Launcher. For detailed test cases, review
+				<a href="/docs/epic-games-store/services/cloud-save">Cloud Saves</a>.</p>
+			<div>
+				<h3 id="easy-anti-cheat">Easy Anti-Cheat</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>All games that implement Easy Anti-Cheat should ensure the test cases outlined in the
+				<a href="/docs/game-services/anti-cheat/anti-cheat-integration-check-list">Anti-Cheat Integration Checklist</a>
+				have been verified prior to release.</p>
+			<div>
+				<h2 id="crossplay">Crossplay</h2>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>At Epic Games, we want to ensure players can play with their friends, regardless of which store they use to purchase your game. As such, all titles coming to the Epic Games Store that offer online multiplayer must support cross-platform multiplayer with all other PC storefronts. Cross-play with other non-PC platforms (e.g., consoles) is optional but encouraged.</p>
+			<p>The Epic Games Store does not require crossplay to be implemented via any particular service or account system.
+				<a href="https://dev.epicgames.com/services">Epic Online Services</a>
+				and Epic Games accounts are offered free of charge as one potential solution. Publisher-based or other third-party solutions are supported and welcomed. Where supported, multiplayer functionality on Epic Games Store must be at parity with other PC storefronts.</p>
+			<div>
+				<p>A crossplay-enabled build must be provided
+					<strong>at least four weeks prior to any public launch</strong>
+					to allow sufficient time for independent testing and verification. When initiating the testing process, provide the following details:</p>
+				<br>
+				<ul>
+					<li>Artifact ID and Sandbox ID of Epic Games Store build</li>
+					<li>Two to three keys to redeem the build on other PC storefronts, as well as branch details if applicable</li>
+					<li>Any additional steps needed to grant access to specific accounts or machines</li>
+				</ul>
+			</div>
+			<div>
+				<h3 id="server-browser--matchmaking">Server Browser / Matchmaking</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>If server browser or matchmaking is supported, players must be able to connect across storefront boundaries by default (e.g. without having to manually opt-in through a menu option).</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Have one or more players launch the game on the Epic Games Store.</li>
+				<li>Have one or more players launch the game on another storefront (e.g., Steam).</li>
+				<li>If the game has a server browser:
+					<!-- -->
+					<ul>
+						<li>Have one player on the Epic Games Store create a game.</li>
+						<li>Have additional players on the Epic Games Store and other storefront join the game.</li>
+						<li>Repeat the two steps above with the player on the other storefront creating the game and the player on the Epic Games Store joining the game.</li>
+					</ul>
+				</li>
+				<li>If the game has matchmaking:
+					<!-- -->
+					<ul>
+						<li>Have all players across both storefronts look for a match at the same time.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>All Epic Games Store and other PC store games should be listed together.</li>
+				<li>An Epic Games Store player can join a game hosted via Epic Games Store or another PC platform via server browser/matchmaking.</li>
+				<li>A player on another PC platform can join a game hosted via Epic Games Store or another PC platform via server browser/matchmaking.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Players across storefronts can create and join the same pool of multiplayer game sessions by default.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Players do not join the same pool of multiplayer game sessions after completing account linking and must set additional options to enter gameplay.</li>
+			</ul>
+			<div>
+				<h3 id="game-session-invites">Game Session Invites</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>If direct game session invites are supported, they must be supported across storefront boundaries. Where supported, in-game friend functionality on Epic Games Store must be at parity with other PC storefronts. These invites should work bi-directionally.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Have one or more players launch the game on the Epic Games Store.</li>
+				<li>Have one or more players launch the game on another storefront (e.g., Steam).</li>
+				<li>Create friend relationships between two or more players across storefronts through any means the game supports (ie. Epic Games accounts, Discord, custom accounts, etc.).</li>
+				<li>Have one player send a game session invite to a player on another storefront.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>An Epic Games Store player has a way to send a direct game invite to a friend playing on another PC platform.</li>
+				<li>A player on another PC platform has a way to send a direct game invite to a friend playing on the Epic Games Store.</li>
+				<li>If the Friends list can be used to send a direct game invite on another PC platform, friends across storefront boundaries must be displayed in the same list.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game allows invites through a consistent mechanism (overlay, in-game menu, or invite codes) on each storefront.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game supports disparate invite mechanisms across storefronts (e.g., overlay and invite codes on Storefront A, and only invite codes on Storefront B).</li>
+				<li>Game supports direct game invites, but friends are displayed in separate per-storefront lists.</li>
+			</ul>
+			<div>
+				<h3 id="epic-account-services">Epic Account Services</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>If your game uses
+				<a href="/docs/epic-account-services">Epic Account Services</a>
+				to provide cross-play functionality, use the following checklist to validate the handling of all required scenarios. Note that while this is one of the ways you can implement cross-play, it is not required and you are welcome to implement any other solution of your choice.</p>
+			<div>
+				<h4 id="steam-account-linking-and-epic-account-services-consent">Steam account linking and Epic Account Services consent</h4>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>If a player who has not yet linked their Steam and Epic Games accounts chooses to authenticate to Epic Account Services using their Steam account, the game should prompt for account linking, then automatically proceed to the Epic Account Service (EAS) consent flow.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Revoke any existing consent to the game on the Apps tab on the
+					<a href="https://www.epicgames.com/account/connections">Connections</a>
+					page.</li>
+				<li>Unlink any existing Steam account on the Accounts tab on the
+					<a href="https://www.epicgames.com/account/connections">Connections</a>
+					page.</li>
+				<li>Launch the game on Steam.</li>
+				<li>Trigger the in-game Epic Games account linking flow.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: To ensure account linking is understood to be optional, account linking and EAS consent should be driven by explicit player action (e.g., through a
+							<em>Link Epic Games account</em>
+							menu option), rather than included as part of the default launch flow.</li>
+					</ul>
+				</li>
+				<li>Complete the subsequent Epic Account Services consent flow.</li>
+				<li>Exit the game and repeat steps 2-4 to ensure the player is able to restore the account link without being prompted to complete the Epic Account Services consent flow a second time.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>Steam account linking is requested. Once completed, the Epic Account Services consent flow is initiated.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game displays account linking flow, then proceeds to Epic Account Services consent flow.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game does not provide in-game UI to link Steam and Epic Games accounts; player must manually link accounts on epicgames.com.</li>
+				<li>Game skips account linking and proceeds directly to AccountPortal login flow.</li>
+				<li>Logging in fails after the player removes account link, and game does not provide opportunity to restore account linking.</li>
+			</ul>
+			<div>
+				<h4 id="epic-account-services-consent-with-linked-steam-account">Epic Account Services consent with linked Steam account</h4>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>If a player has previously connected their Steam and Epic Games accounts, but Epic Account Services (EAS) application consent for the game has not yet been provided, the EOS SDK automatically prompts the user for consent during the Auth Interface Login API call. Through the Epic Games account management page, users can review the list of applications they have given data sharing consent to. On this page, users may also revoke access to any of the applications. If application consent is revoked, the user will be prompted for consent the next time they attempt login within your game application.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Ensure a Steam account has been linked on the Accounts tab on the
+					<a href="https://www.epicgames.com/account/connections">Connections</a>
+					page.</li>
+				<li>Revoke any existing consent to the game on the Apps tab on the
+					<a href="https://www.epicgames.com/account/connections">Connections</a>
+					page.</li>
+				<li>Launch the game on Steam.</li>
+				<li>Trigger the in-game Epic Games account authentication flow.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: In cases where the use of Epic Account Services is optional, EAS consent and logging in should be driven by explicit player action (e.g., through a
+							<em>Link Epic Games account</em>
+							menu option), rather than included as part of the default launch flow.</li>
+					</ul>
+				</li>
+				<li>Complete the subsequent Epic Account Services consent flow.</li>
+				<li>Restart the game and ensure that the player is able to sign into Epic Account Services without being prompted for consent.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>The Epic Account Services consent flow is initiated using the linked Epic Games account, and the player is not prompted for consent on subsequent launches.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Player is prompted for Epic Account Services application consent on initial launch and is able to proceed with login.</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game skips account linking and proceeds directly to AccountPortal login flow.</li>
+				<li>Logging in fails if player has not provided Epic Account Services consent, and game does not provide opportunity to complete consent flow.</li>
+				<li>Epic Account Services consent flow displays on subsequent game launches after content has already been provided.</li>
+			</ul>
+			<div>
+				<h3 id="epic-online-services-redistributable">Epic Online Services Redistributable</h3>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+			</div>
+			<p>Using Epic Online Services, you can integrate in-game user authentication through Epic Account Services and unify social experiences across any PC storefront. As an example of this implementation, users on Steam would be able to see and interact with both their Epic Games friends and Steam friends from a single list using the Epic Games overlay.</p>
+			<p>In order to enable the Epic Games overlay in your games on PC storefronts other than the Epic Games Store, the Epic Online Services redistributable must be installed by your game as part of its installation process. To learn more, review
+				<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer">Redistributable Installer</a>. Note that the redistributable installer is not needed for the Epic Games Store and should not be included with the Epic Games Store game build.</p>
+			<p>
+				<strong>Test Steps</strong>
+			</p>
+			<ol>
+				<li>Ensure
+					<code>EpicOnlineServicesInstaller.exe</code>
+					is included in your game’s build.</li>
+				<li>Ensure your game’s installation is configured to install, and uninstall, the
+					<code>EpicOnlineServicesInstaller.exe</code>
+					as part of your game’s redistributable dependencies (i.e., via
+					<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer#steam-installscript">a Steam installscript.vdf</a>
+					).</li>
+				<li>Ensure the game is launched via the
+					<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer#bootstrapper-application">EOSBootstrapper.exe process</a>.</li>
+				<li>Launch the game for the first time after installation.</li>
+				<li>Sign into an Epic Games account in the game.</li>
+				<li>Open the Epic Games overlay using the
+					<strong>Shift+F3 shortcut</strong>.</li>
+				<li>Exit the game.</li>
+				<li>Uninstall
+					<em>Epic Online Services</em>
+					via
+					<strong>Windows Settings &gt; Apps &amp; Features</strong>.</li>
+				<li>Launch the game. The game should detect that the redistributable installation is missing and instruct the player to verify the game file integrity.</li>
+				<li>Exit the game. Then, in Steam, right-click the game and select
+					<strong>Properties</strong>. Navigate to the
+					<strong>Local Files</strong>
+					tab and click
+					<strong>Verify the integrity of game files…</strong>
+				</li>
+				<li>Relaunch the game.</li>
+			</ol>
+			<p>
+				<strong>Expected Results</strong>
+			</p>
+			<ul>
+				<li>Launching the game for the first time after installation triggers the Epic Online Services installer.</li>
+				<li>In game, the Epic Games overlay loads after Epic Account authentication.</li>
+				<li>In game, Shift+F3 brings up the Epic Games overlay.</li>
+				<li>Relaunching the game after uninstallation of Epic Online Services instructs players to verify game file integrity to reinstall Epic Online Services.</li>
+				<li>After game file integrity verification and relaunching the game, the Epic Games overlay and account linking function as expected.</li>
+			</ul>
+			<p>
+				<strong>Pass Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game includes Epic Online Services redistributable as part of game installation flow and log-in occurs without issue.</li>
+				<li>Game informs users how to install the Epic Online Services redistributable when uninstalled.
+					<!-- -->
+					<ul>
+						<li>On Steam, the recommended method is having the game use the
+							<code>EOS_Platform_GetDesktopCrossplayStatus</code>
+							SDK API at startup to detect if the service installation is missing. If missing, the game then informs the user to close the game and verify game file integrity in Steam.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>Fail Scenarios</strong>
+			</p>
+			<ul>
+				<li>Game does not include Epic Online Services redistributable in installation flow.</li>
+				<li>Game does not inform user how to complete log-in if redistributable has been manually uninstalled.</li>
+			</ul>
+			<div id="toolbox_panel">
+				<div>
+					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
+				</div>
+				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
+			</div>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#epic-online-services">Epic Online Services</a>
+					</li>
+					<li>
+						<a href="#epic-account-services-player-consent">Epic Account Services Player Consent</a>
+					</li>
+					<li>
+						<a href="#connect-interface-access-token-renewal">Connect Interface Access Token Renewal</a>
+					</li>
+					<li>
+						<a href="#offline-mode-support">Offline Mode Support</a>
+					</li>
+					<li>
+						<a href="#sandboxdeployment-id-handling-epic-games-store-publishing-tools-only">Sandbox/Deployment ID Handling (Epic Games Store publishing tools only)</a>
+					</li>
+					<li>
+						<a href="#player-experience">Player Experience</a>
+					</li>
+					<li>
+						<a href="#epic-games-store-achievements">Epic Games Store Achievements</a>
+					</li>
+					<li>
+						<a href="#unicode-character-support">Unicode Character Support</a>
+					</li>
+					<li>
+						<a href="#redistributable-installation">Redistributable Installation</a>
+					</li>
+					<li>
+						<a href="#language-and-locale-settings">Language and Locale Settings</a>
+					</li>
+					<li>
+						<a href="#build-update-size-optimization">Build Update Size Optimization</a>
+					</li>
+					<li>
+						<a href="#launcher-cloud-saves">Launcher Cloud Saves</a>
+					</li>
+					<li>
+						<a href="#easy-anti-cheat">Easy Anti-Cheat</a>
+					</li>
+					<li>
+						<a href="#crossplay">Crossplay</a>
+					</li>
+					<li>
+						<a href="#server-browser--matchmaking">Server Browser / Matchmaking</a>
+					</li>
+					<li>
+						<a href="#game-session-invites">Game Session Invites</a>
+					</li>
+					<li>
+						<a href="#epic-account-services">Epic Account Services</a>
+					</li>
+					<li>
+						<a href="#steam-account-linking-and-epic-account-services-consent">Steam account linking and Epic Account Services consent</a>
+					</li>
+					<li>
+						<a href="#epic-account-services-consent-with-linked-steam-account">Epic Account Services consent with linked Steam account</a>
+					</li>
+					<li>
+						<a href="#epic-online-services-redistributable">Epic Online Services Redistributable</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

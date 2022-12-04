@@ -61,6 +61,13 @@ while (linkQueue.TryDequeue(out var uri))
                 if (href == null || href.Contains("site-map?tag=") || href.Contains("sessioninvalidated", StringComparison.InvariantCultureIgnoreCase))
                     continue;
 
+                var hashPos = href.IndexOf("#");
+
+                if (hashPos > -1)
+                {
+                    href = href[..hashPos];
+                }
+
                 var fullUri = new Uri(baseUri, href);
 
                 if (fullUri.Query != "")

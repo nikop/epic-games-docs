@@ -5,8 +5,6 @@ using EpicDocSync;
 
 using System.Collections.Concurrent;
 using System.Globalization;
-using System.Net;
-using System.Text.RegularExpressions;
 
 
 // Config
@@ -20,9 +18,10 @@ var config = Configuration.Default;
 var context = BrowsingContext.New(config);
 
 var baseUri = new Uri("https://dev.epicgames.com/docs");
-var linkQueue = new LinkQueue();
 
+var linkQueue = new LinkQueue();
 linkQueue.Queue(baseUri);
+
 
 while (linkQueue.TryDequeue(out var uri))
 {
@@ -47,6 +46,12 @@ while (linkQueue.TryDequeue(out var uri))
         if (page is null)
             continue;
 
+        var hero = page.QuerySelector("div.hero__header");
+        hero?.Remove();
+
+        var toolbox = page.QuerySelector("#toolbox_panel");
+        toolbox?.Remove();
+
         foreach (var style in page.QuerySelectorAll("style"))
         {
             style.Remove();
@@ -69,6 +74,19 @@ while (linkQueue.TryDequeue(out var uri))
         foreach (var el in page.QuerySelectorAll("[class]"))
         {
             el.Attributes.RemoveNamedItem("class");
+        }
+
+        // Remove uselesss tags
+        foreach (var el in page.QuerySelectorAll("[data-mui-internal-clone-element]"))
+        {
+            el.Attributes.RemoveNamedItem("data-mui-internal-clone-element");
+        }
+
+        // Remove uselesss buttons
+        foreach (var el in page.QuerySelectorAll("button"))
+        {
+            if (el.ChildElementCount == 0)
+                el.Remove();
         }
 
         // 
@@ -113,7 +131,7 @@ while (linkQueue.TryDequeue(out var uri))
             }
         }
 
-        var str = page.ToHtml(new PrettyMarkupFormatter());
+        var str = page.ToHtml(new PrettyMarkupFormatter()).Trim();
 
         var path = uri.AbsolutePath.Trim('/');
         if (path.StartsWith("docs"))
@@ -122,10 +140,6 @@ while (linkQueue.TryDequeue(out var uri))
         if (path == "")
         {
             path = "index";
-        }
-        else
-        {
-            //path += ".html";
         }
 
         var file = Path.Combine(dir.FullName, path);

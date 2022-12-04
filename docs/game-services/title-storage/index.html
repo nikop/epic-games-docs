@@ -12,7 +12,7 @@
 				</li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Title Storage Interface">Title Storage Interface</span>
+					<span aria-label="Title Storage Interface" data-mui-internal-clone-element="true">Title Storage Interface</span>
 				</li>
 			</ol>
 		</nav>
@@ -32,7 +32,7 @@
 						</li>
 						<li aria-hidden="true"></li>
 						<li>
-							<span aria-label="Title Storage Interface">Title Storage Interface</span>
+							<span aria-label="Title Storage Interface" data-mui-internal-clone-element="true">Title Storage Interface</span>
 						</li>
 					</ol>
 				</nav>
@@ -98,11 +98,11 @@
 			</div>
 			<div>
 				<h2 id="file-management">File Management</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h3 id="file-name-format">File Name Format</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>File names in EOS take the following form:
 				<code>Directory0/Directory1/DirectoryN/Filename.Extension</code>
@@ -139,7 +139,7 @@
 				(64) characters.</p>
 			<div>
 				<h3 id="querying-files">Querying Files</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The EOS SDK enables you to retrieve information about files stored on the cloud through a few querying API calls. Your query will return metadata about one or more files, including each file's name, size (in bytes), and MD5 hash. You can then request and manage your own copy of this metadata, and use it to access or modify the files. Because files are stored in encrypted form on the backend, metadata such as file size and MD5 hash reflects the encrypted file, rather than the original file you uploaded through the
 				<a href="/docs/dev-portal">Dev Portal</a>.</p>
@@ -151,7 +151,7 @@
 			</div>
 			<div>
 				<h4 id="querying-a-single-file">Querying a Single File</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>If you only need information about a single file, and you know that file's name, you can call
 				<code>EOS_TitleStorage_QueryFile</code>
@@ -198,7 +198,7 @@
 				structure. If the call succeeded, EOS now has data about your file in the cache.</p>
 			<div>
 				<h4 id="querying-multiple-files-by-tag">Querying Multiple Files by Tag</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To query multiple files at once, or to query files without knowing the exact file names, you must first apply tags to your files through the Dev Portal. The EOS SDK can then query files based on those tags. File tags are strings that use the same formatting rules as EOS file names. When querying files this way, you must provide one or more tags, and the EOS SDK will retrieve a list of all files that contain at least one of the tags. To do this, call
 				<code>EOS_TitleStorage_QueryFileList</code>
@@ -251,7 +251,7 @@
 				data structure. If the call succeeded, the data structure contains the number of files found, and the information about those files is available in the EOS cache.</p>
 			<div>
 				<h4 id="querying-all-files">Querying All Files</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Title Storage Interface does not provide a specific API call to query all files. However, if you apply a certain tag to every file you upload, you could use
 				<code>EOS_TitleStorage_QueryFileListOptions</code>
@@ -259,7 +259,7 @@
 			<p>(#ExaminingCachedFileInformation)</p>
 			<div>
 				<h3 id="examining-cached-file-information">Examining Cached File Information</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Once EOS has retrieved and cached information about one or more files, you can retrieve information on a specific file by calling
 				<code>EOS_TitleStorage_CopyFileMetadataByFilename</code>
@@ -282,7 +282,7 @@
 			</div>
 			<div>
 				<h3 id="accessing-files">Accessing Files</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Title Storage Interface supports reading files from the cloud asynchronously. Reading is a streaming operation, and EOS provides handles that you can use to check a stream's progress, or throttle or interrupt it.</p>
 			<p>
@@ -388,7 +388,7 @@
 			<p>(#DataCachingAndEncryption)</p>
 			<div>
 				<h3 id="data-caching-and-encryption">Data Caching and Encryption</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Title Storage Interface caches file data and metadata in the
 				<code>CacheDirectory</code>
@@ -429,13 +429,13 @@
 			</div>
 			<div>
 				<h3 id="file-overriding">File Overriding</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>In some cases, you may want to provide different versions of a file based various on conditions; for example, different game servers may have their own configuration settings. You can redirect requests for specific file names to alternate files at the Title Storage level. To do this, set up your file structure using the
 				<a href="/docs/dev-portal">Developer Portal</a>. The back-end service will determine which file to return based on the incoming query. The end result of  this setup is that the developers can request a single file name with the EOS SDK from within the application, but be provided with different file data according to the back-end system's criteria.</p>
 			<div>
 				<h2 id="file-decryption-tool">File Decryption Tool</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>You can the
 				<a href="/docs/game-services/file-decryption-tool">
@@ -450,7 +450,7 @@
 				easily and conveniently.</p>
 			<div>
 				<h2 id="usage-limitations">Usage Limitations</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Title Storage enables developers using Epic Online Services (EOS) to distribute game-specific encrypted data from cloud servers. Data can be grouped via tags and is available to all users across all platforms. For general information about throttling, usage quotas, and best practices, see
 				<a href="/docs/epic-online-services/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
@@ -475,7 +475,7 @@
 			</table>
 			<div>
 				<h2 id="differences-from-player-data-storage">Differences from Player Data Storage</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Title Storage Interface and the
 				<a href="/docs/game-services/player-data-storage">Player Data Storage Interface</a>
@@ -506,9 +506,9 @@
 			</ol>
 			<div id="toolbox_panel">
 				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label=""></button>
+					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
 				</div>
-				<button tabindex="0" type="button" aria-label="Print"></button>
+				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>

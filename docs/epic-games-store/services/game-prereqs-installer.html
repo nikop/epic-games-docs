@@ -12,7 +12,7 @@
 				</li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Game Prerequisite Installers" data-mui-internal-clone-element="true">Game Prerequisite Installers</span>
+					<span aria-label="Game Prerequisite Installers">Game Prerequisite Installers</span>
 				</li>
 			</ol>
 		</nav>
@@ -32,7 +32,7 @@
 						</li>
 						<li aria-hidden="true"></li>
 						<li>
-							<span aria-label="Game Prerequisite Installers" data-mui-internal-clone-element="true">Game Prerequisite Installers</span>
+							<span aria-label="Game Prerequisite Installers">Game Prerequisite Installers</span>
 						</li>
 					</ol>
 				</nav>
@@ -79,12 +79,12 @@
 			</ul>
 			<div>
 				<h2 id="before-you-start">Before You Start</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>When you build an application that uses library DLLs supplied by Visual Studio, users of your application must also have those DLLs on their computers for the application to run. Because most users probably do not have Visual Studio installed, you must provide these DLLs for them. Visual Studio makes these DLLs available as redistributable files that you can include in your application installer.</p>
 			<div>
 				<h2 id="app-local-deployment">App-Local Deployment</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>When packaging your game for upload via the BuildPatchTool, you can include your prerequisites installation by copying the necessary dynamic-link libraries (DLLs) into the same directory as your game executable.</p>
 			<p>This method is not the only way to include your prerequisites installation, but it is Epic Games’ preferred practice. The benefits of using app-local 
@@ -96,7 +96,7 @@
 				</a>.</p>
 			<div>
 				<h4 id="how-to-do-it">How to do it</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Copy the necessary Visual Studio DLLs from their install directory to your application’s directory. Use the following articles from Microsoft to identify the DLLs you must bundle with your application:
 				<a href="https://docs.microsoft.com/en-us/cpp/windows/determining-which-dlls-to-redistribute?view=msvc-160&amp;viewFallbackFrom=vs-2019">Determining Which DLLs to Redistribute</a>
@@ -104,7 +104,7 @@
 				<a href="https://docs.microsoft.com/en-us/cpp/windows/walkthrough-deploying-a-visual-cpp-application-to-an-application-local-folder?view=msvc-160&amp;viewFallbackFrom=vs-2019">Walkthrough: Deploying a Visual C++ Application to an Application-local Folder</a>.</p>
 			<div>
 				<h2 id="epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>If copying the dependent DLLs is not a viable solution, then you can have the Epic Games Launcher run an installer upon first launch of the game. The installer is skipped if the associated IDs are already installed on the local machine, so users only see the installation process the first time or when including new dependencies.</p>
 			<p>Configuring a prerequisite installation with the Epic Games Launcher allows you to run a full installer. However, there are significant drawbacks. Users may decline, not see, or misunderstand the elevation prompt if offered, and any non-zero return code from the prerequisite installer can cause issues. Also, installing Visual Studio DLLs by this method can cause them to fail and result in your application not running. For more information, see
@@ -112,7 +112,7 @@
 				from Microsoft’s website.</p>
 			<div>
 				<h4 id="how-to-do-it-1">How to do it</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To configure a prerequisite installer with the Epic Games Launcher, you use BuildPatchTool command line arguments. The following batch file snippet example shows how to run the UE3Redist installer as your first step.</p>
 			<div>
@@ -178,7 +178,7 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
+					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<p>
@@ -201,12 +201,12 @@
 			<p>This method can also trigger another install if a subsequent update to your game adds new prerequisites. You would need to add a new unique ID to the list of prerequisites. The launcher would recognize the new ID as not installed causing it to launch your installer again. Once the installer completes successfully, the launcher marks those IDs as installed on the local machine and does not launch the installer again.</p>
 			<div>
 				<h2 id="batch-script">Batch Script</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>If the preferred methods above do not work for your game, you can use a batch file to conditionally check for the prerequisites being installed before passing through to your game. This method is simple to develop and flexible. However, a DOS box flashes briefly when your game is run from the Epic Games Launcher. Also, with a slow installation (greater than two minutes), your exchange code could expire before it is passed onto the game causing you to relaunch the game.</p>
 			<div>
 				<h4 id="how-to-do-it-2">How to do it</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Create a batch file that you will use as your executable as specified in BuildPatchTool. This batch file needs to check for the prerequisites and then forward the command line arguments on to your game. The following batch file is a hypothetical UE3 title that requires the UE3Redist.exe installer to be run on the player’s machine. It is set up to be run from the Binaries directory and has the UE3Redist.exe installer in a Windows subdirectory.</p>
 			<div>
@@ -259,7 +259,7 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
+					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<p>
@@ -282,14 +282,14 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
+					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<div id="toolbox_panel">
 				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
+					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label=""></button>
 				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Print"></button>
 			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>

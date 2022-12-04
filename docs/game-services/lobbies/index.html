@@ -12,7 +12,7 @@
 				</li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Lobbies Interface" data-mui-internal-clone-element="true">Lobbies Interface</span>
+					<span aria-label="Lobbies Interface">Lobbies Interface</span>
 				</li>
 			</ol>
 		</nav>
@@ -32,7 +32,7 @@
 						</li>
 						<li aria-hidden="true"></li>
 						<li>
-							<span aria-label="Lobbies Interface" data-mui-internal-clone-element="true">Lobbies Interface</span>
+							<span aria-label="Lobbies Interface">Lobbies Interface</span>
 						</li>
 					</ol>
 				</nav>
@@ -69,7 +69,7 @@
 				handle is ticking for appropriate callbacks to trigger when operations complete.</p>
 			<div>
 				<h2 id="creating-and-destroying-a-lobby">Creating and Destroying a Lobby</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The
 				<code>EOS_Lobby_CreateLobby</code>
@@ -199,7 +199,7 @@
 				<code>EOS_LMS_CLOSED</code>.</p>
 			<div>
 				<h3 id="lobby-lifecycle">Lobby Lifecycle</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The lifecycle of a lobby generally follows this sequence:</p>
 			<ul>
@@ -213,7 +213,7 @@
 			</ul>
 			<div>
 				<h2 id="joining-or-leaving-a-lobby">Joining or Leaving a Lobby</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Calling
 				<code>EOS_Lobby_JoinLobby</code>
@@ -224,7 +224,7 @@
 				<code>EOS_Lobby_LeaveLobby</code>. If the departing user is the current lobby owner, EOS will select a new owner from the remaining users. All members will receive notification when any user leaves, as well as when ownership changes.</p>
 			<div>
 				<h2 id="inviting-users-to-a-lobby">Inviting Users to a Lobby</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Users who are in a lobby can invite others to join them with the
 				<code>EOS_Lobby_SendInvite</code>
@@ -240,11 +240,11 @@
 				<strong>Invite</strong>
 				button, the social overlay, and lobbies, see
 				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">Social Overlay Integration: Using Lobbies</a>. For invite functionality with the Epic Games Launcher, be sure to map your deployments to your
-				<a href="/docs/epic-games-store/tech-features-config/artifacts">artifacts</a>
+				<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>
 				as well.</p>
 			<div>
 				<h3 id="rejecting-an-invitation">Rejecting an Invitation</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To reject the invitation, call
 				<code>EOS_Lobby_RejectInvite</code>
@@ -288,7 +288,7 @@
 				data structure. If successful, the invitation is permanently deleted from the system.</p>
 			<div>
 				<h3 id="updating-all-invitations">Updating All Invitations</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To ensure that your local cache contains all pending invitations, call
 				<code>EOS_Lobby_QueryInvites</code>
@@ -326,7 +326,7 @@
 				data structure. On success, the local cache contains all pending invitations for the specified user that you can search. This is useful at startup to discover any invitations that were sent while the user was offline. During play, users with a registered notification should rarely need to call this function.</p>
 			<div>
 				<h3 id="retrieving-an-invitation-from-the-cache">Retrieving an Invitation from the Cache</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To examine a cached invitation, first call
 				<code>EOS_Lobby_GetInviteCount</code>
@@ -401,7 +401,7 @@
 				if the call succeeds. On success, the output parameters that you provided will contain a copy of the invitation data and its size. You are responsible for freeing the buffer when you no longer need it.</p>
 			<div>
 				<h3 id="notifications">Notifications</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Users receive invitations in real time as long as they have registered a callback through
 				<code>EOS_Lobby_AddNotifyLobbyInviteReceived</code>. The callback data includes all of the relevant information about the invitation. At this point, users can use
@@ -412,7 +412,7 @@
 				to remove your callback from the notification list.</p>
 			<div>
 				<h2 id="removing-a-member-from-a-lobby">Removing a Member from a Lobby</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The lobby owner may remove a lobby member at any time. To do this, call
 				<code>EOS_Lobby_KickMember</code>
@@ -464,7 +464,7 @@
 				event.</p>
 			<div>
 				<h2 id="searching-for-a-lobby">Searching for a Lobby</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>
 				<code>EOS_Lobby_CreateLobbySearch</code>
@@ -482,20 +482,20 @@
 				to reclaim the memory it was using.</p>
 			<div>
 				<h3 id="searching-by-lobby-id">Searching By Lobby ID</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>If a user has the exact lobby ID, they can search directly for it with
 				<code>EOS_LobbySearch_SetLobbyId</code>. Sharing the lobby ID with other users is outside the scope of the API.</p>
 			<div>
 				<h3 id="searching-by-user-id">Searching By User ID</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>
 				<code>EOS_LobbySearch_SetTargetUserId</code>
 				takes a known user ID and will return search results representing lobbies for which the target user is a member.</p>
 			<div>
 				<h3 id="searching-by-attributes">Searching By Attributes</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The most robust way to find lobbies is to search for a desired subset of settings. This could be in response to the user choosing a collection of filters in a user interface, it could be done automatically behind the scenes based on the user's skill and other factors, or it could be a combination of both methods.</p>
 			<p>
@@ -509,7 +509,7 @@
 				between them.</p>
 			<div>
 				<h4 id="comparison-operators">Comparison Operators</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table>
 				<thead>
@@ -596,14 +596,14 @@
 			</table>
 			<div>
 				<h3 id="limiting-search-results">Limiting Search Results</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To limit the maximum number of search results that you can retrieve, use the
 				<code>EOS_LobbySearch_SetMaxResults</code>
 				function.</p>
 			<div>
 				<h2 id="getting-information-about-a-lobby">Getting Information about a Lobby</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To learn about a lobby, users can request an
 				<code>EOS_HLobbyDetails</code>
@@ -652,7 +652,7 @@
 				function to avoid leaking memory. The data is a snapshot and will not update if any information about the lobby changes after you receive it.</p>
 			<div>
 				<h3 id="permission-levels">Permission Levels</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>A lobby's Permission Level controls the conditions that users can discover and join the lobby. The owner can change these at any time by calling
 				<code>EOS_LobbyModification_SetPermissionLevel</code>. The following settings are available:</p>
@@ -686,7 +686,7 @@
 			</table>
 			<div>
 				<h2 id="modifying-the-lobby-or-user-information">Modifying the Lobby or User Information</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>A lobby owner can modify a lobby or a member can change their user information by calling
 				<code>EOS_Lobby_UpdateLobbyModification</code>
@@ -694,13 +694,13 @@
 				<code>EOS_HLobbyModification</code>).</p>
 			<div>
 				<h3 id="changing-ownership">Changing Ownership</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The owner may promote another member of the lobby to owner status by calling
 				<code>EOS_Lobby_PromoteMember</code>. A lobby can only have one owner, so the caller loses owner status in the process. All members will receive notification of this event.</p>
 			<div>
 				<h3 id="lobby-and-lobby-member-properties">Lobby and Lobby Member Properties</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The lobby and each member can have application-specific, key-value attributes, supported by the
 				<code>EOS_Lobby_Attribute</code>
@@ -813,22 +813,22 @@
 				<code>EOS_Lobby_UpdateLobby</code>. When the operation finishes, the modifications will have been made and other lobby members will receive notification. You also receive a call to your callback function.</p>
 			<div>
 				<h2 id="event-notifications">Event Notifications</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Users have a persistent connection to the lobby and are notified of events that happen during a lobby's lifetime. Registering for a notification can be done at startup since enough information is provided with each callback to fully describe the lobby affected.</p>
 			<div>
 				<h3 id="lobby-data-update">Lobby Data Update</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Any time the lobby owner makes a change to the properties of the lobby, all lobby members receive a notification. The notification simply states that something has changed. The game should evaluate all the available data in the lobby and reapply it to the game.</p>
 			<div>
 				<h3 id="user-data-update">User Data Update</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Any time a lobby member makes a change to the properties of their own data, all lobby members receive a notification. The notification simply states that something has changed. The game should evaluate all the available data for the lobby member and reapply it to the game.</p>
 			<div>
 				<h3 id="lobby-member-status">Lobby Member Status</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The following activities of users in the lobby cause notifications to go out to all other users in the lobby as they occur:</p>
 			<table>
@@ -879,7 +879,7 @@
 			</table>
 			<div>
 				<h2 id="voice-communications">Voice Communications</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>You can host EOS Voice chat rooms on Epic servers using EOS Lobbies, or on your own backend servers. Users can communicate one-on-one or in groups across multiple platforms, during a match, or in your product’s lobby. See
 				<a href="/docs/game-services/voice#voice-flow-with-lobbies">Voice with Lobbies</a>
@@ -888,7 +888,7 @@
 				for more information.</p>
 			<div>
 				<h3 id="maintaining-a-connection">Maintaining a Connection</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Applications that use the EOS Lobbies RTC rooms features do not need to manually join or leave voice rooms, this is automatically handled internally by the Lobby system.  If the lobby is successfully created with an RTC Room enabled, the lobby system will automatically join and maintain the connection to the RTC room as long as the local user remains in the lobby.</p>
 			<p>Applications may use the optional
@@ -898,7 +898,7 @@
 				functions for informational purposes if desired. An appropriate example would be showing a disconnected icon when disconnected from Lobby RTC services while in a multiplayer lobby.</p>
 			<div>
 				<h3 id="interacting-with-rtc-functions">Interacting with RTC Functions</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>To interact with the the
 				<code>EOS_RTC_</code>* or
@@ -920,7 +920,7 @@
 			</ul>
 			<div>
 				<h3 id="lobby-rtc-replacement-functions">Lobby RTC-Replacement Functions</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The following functions are used to replace
 				<code>EOS_RTC_</code>* functions that would normally be used, but are incompatible Lobbies, either due to the feature being handled internally, the data no longer being application-provided, or the functionality being an
@@ -967,7 +967,7 @@
 			</table>
 			<div>
 				<h3 id="hard-mute">Hard Mute</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>As a lobby owner you can hard-mute an existing lobby member by calling
 				<code>EOS_Lobby_HardMuteMember</code>
@@ -1029,7 +1029,7 @@
 				contains the member whose hard mute status has been updated.</p>
 			<div>
 				<h2 id="usage-limitations">Usage Limitations</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Lobbies provide a persistent connection between your users, for the purpose of sharing game and user state with real-time updates. Typically, users can create or join lobbies to chat with other users, form teams, select pre-game options, and wait for additional users to join in before playing together. For general information about throttling, usage quotas, and best practices, see
 				<a href="/docs/epic-online-services/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
@@ -1149,9 +1149,9 @@
 			</table>
 			<div id="toolbox_panel">
 				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
+					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label=""></button>
 				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
+				<button tabindex="0" type="button" aria-label="Print"></button>
 			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>

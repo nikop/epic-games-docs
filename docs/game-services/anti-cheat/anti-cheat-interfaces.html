@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Anti-Cheat Interface" data-mui-internal-clone-element="true">Anti-Cheat Interface</span>
+					<span aria-label="Anti-Cheat Interface">Anti-Cheat Interface</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Anti-Cheat Interface" data-mui-internal-clone-element="true">Anti-Cheat Interface</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Anti-Cheat Interface</h1>
 			<h2>Understand the prerequisites, network architecture, platform components, and more involved in implementing Anti-Cheat in your EOS product.</h2>
@@ -111,45 +78,37 @@
 			</ol>
 			<div>
 				<h2 id="development-prerequisites">Development prerequisites</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>For the anti-cheat services to be effective, they must go on top of a solid game foundation that follows security best practices and actively addresses game issues as they arise.</p>
 			<div>
 				<h3 id="game-architecture">Game architecture</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>We highly recommend using dedicated game servers with authority over as much of the game state as possible.</p>
 			<p>For example, cheats allowing players to fly, teleport, or move extremely fast can usually be completely prevented at the game architecture level by giving game servers authority over player positions and movement.</p>
 			<div>
 				<h3 id="game-exploits">Game exploits</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Game logic errors, bugs, or edge cases are often discovered and exploited by players. However, anti-cheat understands the game code to be working as written and cannot solve these issues. As the game developer, you must fix these problems as you continue to develop and new exploits are discovered.</p>
 			<div>
 				<h3 id="game-level-anti-cheat">Game level Anti-Cheat</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Your own development team can prevent and detect cheating at the game level using their knowledge of game-specific details. Games targeted by cheat sellers see major benefit from having a small development team to address game issues, complemented by the anti-cheat service.</p>
 			<div>
 				<h3 id="player-reports">Player reports</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>It is critical to implement the
 				<a href="/docs/game-services/reports-interface">Reports Interface</a>
 				to allow players to submit reports when they believe another player in the same game session is cheating. This provides valuable context and feedback on the effectiveness of the anti-cheat protection in each game.</p>
 			<div>
 				<h3 id="player-progression-management">Player progression management</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The anti-cheat service cannot effectively protect offline or solo play scenarios where progress is later synced to the game’s servers.</p>
 			<div>
 				<h2 id="game-network-architecture">Game network architecture</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Anti-Cheat interfaces support different modes for a variety of game network architectures. While the Anti-Cheat Client interface supports each of these game networks, the Anti-Cheat Server interface works specifically for dedicated servers (client-server mode).</p>
 			<div>
 				<h3 id="dedicated-server-client-server-mode">Dedicated server (Client-Server mode)</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Use this mode with an authoritative game server, and implement both the Anti-Cheat Client and Server interfaces.</p>
 			<div>
@@ -175,7 +134,6 @@
 				</a>.</p>
 			<div>
 				<h3 id="peer-to-peer-mesh-peer-to-peer-mode">Peer-to-Peer mesh (Peer-to-Peer mode)</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Use this mode with a full-mesh layout where each game client exchanges network messages with every other game client, but none of them has full authority over the game session.</p>
 			<div>
@@ -198,7 +156,6 @@
 				function for each peer that participates in the same game session as the local user.</p>
 			<div>
 				<h3 id="listen-server">Listen server</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>When a single player acts as an authoritative game host for a game session, you must use either Peer-to-Peer or Client-Server mode.</p>
 			<div>
@@ -238,7 +195,6 @@
 			</ul>
 			<div>
 				<h2 id="client-credentials-and-policy-configuration">Client credentials and policy configuration</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>When configuring your
 				<a href="/docs/dev-portal/client-credentials">client credentials</a>
@@ -274,7 +230,6 @@
 				Allows the client credential holder to submit anti-cheat gameplay data for any user, and should only be used with trusted official dedicated servers that you are confident cannot be tampered with.</p>
 			<div>
 				<h2 id="platform-components">Platform components</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Using the Anti-Cheat interfaces requires distributing some binaries to game clients, included in the EOS SDK package. In the EOS SDK zip file, browse to
 				<strong>SDK &gt; Tools &gt; EOS_AntiCheatTools</strong>. Files in the
@@ -282,7 +237,6 @@
 				subdirectory should only be distributed to players as part of the game client. The other files are for development use only, and should not be distributed. You must update the platform component files in use every time you update to a new version of the EOS SDK.</p>
 			<div>
 				<h3 id="windows">Windows</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<p>The Anti-Cheat Client only supports 64-bit Windows versions. 32-bit games are supported as long as the operating system itself has been installed with 64-bit support.</p>
@@ -321,7 +275,6 @@
 			</table>
 			<div>
 				<h4 id="windows-dist-subdirectory-structure">Windows 'dist' Subdirectory Structure</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -376,17 +329,14 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h4 id="windows-service-installer">Windows service installer</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>For Windows, you must configure an anti-cheat system service to install and uninstall with your game. This requires the Windows user to have admin rights while installing the game, but does not require admin rights to start the game later. When an anti-cheat protected game starts, the anti-cheat bootstrapper automatically starts the Windows service. When the game exits, the Windows service automatically stops.</p>
 			<div>
 				<h5 id="configuration">Configuration</h5>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<ol>
 				<li>Obtain your
@@ -407,16 +357,13 @@
 			</ol>
 			<div>
 				<h5 id="store-specific-prerequisites">Store-specific prerequisites</h5>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h6 id="epic-games-store">Epic Games Store</h6>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Refer to the Epic Games Store documentation provided to you.</p>
 			<div>
 				<h6 id="steam">Steam</h6>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Refer to the
 				<a href="https://partner.steamgames.com/doc/sdk/installscripts">Steamworks Installscript documentation</a>. Typically, you define a “<a href="https://partner.steamgames.com/doc/sdk/installscripts#run_process">Run Process</a>” block to trigger the service install operation and a “<a href="https://partner.steamgames.com/doc/sdk/installscripts#runOnUninstall">Run Process On Uninstall</a>” block to trigger the service uninstall operation.</p>
@@ -425,7 +372,6 @@
 			</div>
 			<div>
 				<h3 id="mac">Mac</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<table>
 				<thead>
@@ -449,7 +395,6 @@
 				<h4 id="mac-dist-subdirectory-structure">Mac
 					<strong>dist</strong>
 					Subdirectory Structure</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -494,12 +439,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="linux">Linux</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<table>
 				<thead>
@@ -523,7 +466,6 @@
 				<h4 id="linux-dist-subdirectory-structure">Linux
 					<strong>dist</strong>
 					Subdirectory Structure</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -568,12 +510,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h2 id="linux-wineproton-support">Linux Wine/Proton support</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>It is possible to run many Windows games on Linux using the Wine or Proton compatibility layers and the anti-cheat client protection can support this configuration. To enable support for your game, you must be using SDK version 1.14 or greater and activate a
 				<a href="/docs/game-services/anti-cheat/using-anti-cheat#client-module-setup-and-updates">client module</a>
@@ -581,7 +521,6 @@
 			<p>Players running the game using Wine or Proton will use the Linux client module, so you should test and activate client module updates for Linux regularly in addition to Windows.</p>
 			<div>
 				<h3 id="console-support">Console support</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Console platforms generally rely on hardware security features to prevent arbitrary code execution, which is a prerequisite for most types of cheats. Because these platform-specific security features cover most needs, anti-cheat client protection is not offered for consoles. However, a subset of anti-cheat client APIs is available to support cross-platform play.</p>
 			<p>To support cross-platform play between PC and console users, you must first determine whether a player is using a platform that does not require client protection when they join a protected game session. This check must not rely on the player’s game client being untampered. Having the game client send a message indicating the platform it is using is not enough since a malicious user could manipulate the value to avoid anti-cheat enforcement.</p>
@@ -594,12 +533,6 @@
 				<a href="/docs/game-services/eos-connect-interface#user-verification-using-an-id-token">EOS ID Tokens</a>
 				or, for Epic Accounts,
 				<a href="/docs/epic-account-services/auth-interface#user-verification-using-an-id-token">EAS ID Tokens</a>.</p>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
 				<a href="/docs/en-US/site-map?tag=%20Anti-Cheat">

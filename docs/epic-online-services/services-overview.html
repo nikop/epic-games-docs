@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="EOS SDK Key Information" data-mui-internal-clone-element="true">EOS SDK Key Information</span>
+					<span aria-label="EOS SDK Key Information">EOS SDK Key Information</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="EOS SDK Key Information" data-mui-internal-clone-element="true">EOS SDK Key Information</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>EOS SDK Key Information</h1>
 			<h2>The Epic Online Services (EOS) SDK is available in C and C#.</h2>
@@ -95,14 +62,12 @@
 			</ul>
 			<div>
 				<h3 id="release-versioning">Release Versioning</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>EOS SDK versioning guarantees backwards compatibility with products using an older version of the SDK, even with API changes. Every interface, function, and data type has a version associated with it.</p>
 			<p>When a new SDK version is released, the SDK recognizes and supports older versions and reacts appropriately to data and function calls coming from them. This may include calling the original version of the function internally, migrating the original input structures to newer forms, or setting up reasonable defaults where possible.</p>
 			<p>Older products using the SDK maintain compatibility with EOS without updates.</p>
 			<div>
 				<h3 id="interface-handles">Interface Handles</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The EOS features group together by modular, service-specific interfaces. For example, the
 				<a href="/docs/game-services/lobbies">Lobbies Interface</a>
@@ -113,7 +78,6 @@
 				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>. An interface handle's lifetime lasts as long as the Platform Interface itself and is required as the first parameter to every API function using an interface.</p>
 			<div>
 				<h3 id="naming-conventions">Naming Conventions</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To help convey usage and intent, EOS SDK interfaces use consistent naming conventions and prefixes:</p>
 			<table>
@@ -170,7 +134,6 @@
 			</table>
 			<div>
 				<h3 id="function-signatures">Function signatures</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Every function in the EOS SDK has a similar, predictable signature:</p>
 			<ul>
@@ -185,7 +148,6 @@
 			</ul>
 			<div>
 				<h3 id="error-handling">Error handling</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Error codes from the EOS C SDK functions use the type
 				<code>EOS_EResult</code>
@@ -261,12 +223,10 @@
 				<a href="/docs/epic-online-services/sdk-error-codes">EOS SDK Error Codes</a>.</p>
 			<div>
 				<h3 id="strings">Strings</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Strings, both as input and as output, must be in UTF-8 form.</p>
 			<div>
 				<h3 id="memory-allocation">Memory Allocation</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>When an SDK function needs to provide a data structure to a callback, the SDK allocates the memory for the data, and frees the memory as soon as the callback function completes. If you need to cache a copy of that data, you must make your copy during the lifetime of the callback function. In addition, if your system requires custom memory allocators, you must specify them at SDK creation time.</p>
 			<p>SDK Functions with the verb
@@ -279,7 +239,6 @@
 				function before shutting the SDK down. The C# SDK does not need to manually release copied structs because the wrapper does this automatically for you.</p>
 			<div>
 				<h3 id="service-usage-limitations">Service Usage Limitations</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>For a stable and reliable ecosystem for all users, Epic Online Services (EOS) implements client request rate limiting and service usage quotas. When the SDK APIs are integrated correctly with your code, the request limits and usage quotas should never be reached.</p>
 			<p>However, be mindful of the limits and pay attention to the SDK’s log output. During internal play testing, any erroneous log output should be checked to verify that EOS functions are not returning the
@@ -290,7 +249,6 @@
 				<!-- --> can have on the overall EOS ecosystem.</p>
 			<div>
 				<h4 id="request-throttling">Request Throttling</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>When the EOS SDK detects that calls to the backend service are coming in too rapidly, the local client self-throttles by rejecting API calls with the
 				<code>EOS_TooManyRequests</code>
@@ -300,7 +258,6 @@
 				and internally handles the retry logic with the time specified in the HTTP data.</p>
 			<div>
 				<h4 id="service-usage-quotas">Service Usage Quotas</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Each service applies usage quotas on a per-<em>deployment</em>
 				basis to ensure that the backend services always have the necessary capacity readily available for products.</p>
@@ -308,17 +265,10 @@
 			<p>If an application reaches a usage quota limit for a backend service, any following requests for new resource allocations fail until the usage rate of the service lowers to acceptable levels.</p>
 			<div>
 				<h3 id="eos-sdk-api-reference">EOS SDK API Reference</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>See the
 				<a href="/docs/api-ref">EOS API Reference</a>
 				documentation.</p>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Getting%20Started">Getting Started</a>
 			</div>

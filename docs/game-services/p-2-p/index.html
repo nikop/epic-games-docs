@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,9 +6,7 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
 					<span aria-label="NAT P2P Interface">NAT P2P Interface</span>
@@ -19,36 +16,6 @@
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="NAT P2P Interface">NAT P2P Interface</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>NAT P2P Interface</h1>
 			<h2>Interface to send and receive data between users, and related networking functionality.</h2>
@@ -68,7 +35,6 @@
 				between users. This enables them to send and receive data between one another directly, typically for the purpose of a multiplayer game. Connections made with the EOS P2P Interface are only established between authenticated users, and are secure-by-default using DTLS, which provides two distinct advantages. First, the speed of handling P2P connections is significantly increased, in that EOS's authentication greatly reduces the need for connections to be re-negotiated. Second, the process of securely handling connections is itself greatly simplified for the SDK user, abstracting out the need for detailed network socket management and condensing most functions to what data needs to be sent and to whom.</p>
 			<div>
 				<h2 id="accessing-the-p2p-interface">Accessing the P2P Interface</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>In order to use the functions within the EOS P2P Interface, you must first obtain a valid
 				<code>EOS_HP2P</code>
@@ -79,7 +45,6 @@
 				<a href="/docs/game-services/eos-platform-interface">EOS Platform Interface</a>.</p>
 			<div>
 				<h2 id="managing-p2p-connections">Managing P2P Connections</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The P2P Interface uses the struct
 				<code>EOS_P2P_SocketId</code>
@@ -123,7 +88,6 @@
 				<code>EOS_Success</code>, then take note that any out-parameters that the function provides will be unset unless specified otherwise.</p>
 			<div>
 				<h3 id="requesting-connections">Requesting Connections</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>When a local user attempts to send information to a remote user, such as with the
 				<code>EOS_P2P_SendPacket</code>
@@ -142,7 +106,6 @@
 			<p>If multiple connections are open with a particular user, only the first connection must be negotiated. This greatly increases the speed at which data may be received with subsequent connection requests.</p>
 			<div>
 				<h3 id="receiving-connection-request-notifications">Receiving Connection Request Notifications</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>When a user receives a connection request, a notify event is fired to all bound
 				<strong>Peer Connection Request Handlers</strong>.</p>
@@ -265,7 +228,6 @@
 			</table>
 			<div>
 				<h3 id="accepting-connections">Accepting Connections</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The
 				<code>EOS_P2P_AcceptConnection</code>
@@ -359,7 +321,6 @@
 				multiple times before a Connection Closed event fires will have no effect.</p>
 			<div>
 				<h3 id="closing-connections">Closing Connections</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The
 				<code>EOS_P2P_CloseConnection</code>
@@ -518,7 +479,6 @@
 				were successfully closed.</p>
 			<div>
 				<h3 id="receiving-connection-closed-notifications">Receiving Connection Closed Notifications</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>When an open or pending connection closes, a
 				<strong>Connection Closed Event</strong>
@@ -637,12 +597,10 @@
 			</table>
 			<div>
 				<h2 id="sending-and-receiving-data-through-p2p-connections">Sending and Receiving Data Through P2P Connections</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Once a P2P Connection is successfully established, users may send and receive data through it.</p>
 			<div>
 				<h3 id="sending-data">Sending Data</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The
 				<code>EOS_P2P_SendPacket</code>
@@ -755,7 +713,6 @@
 				if the supplied information was valid and could be sent. Note that a return of Success only denotes that the packet can be successfully sent, not whether or not it is successfully delivered. Successful delivery is not guaranteed, as data is sent unreliably.</p>
 			<div>
 				<h3 id="receiving-data">Receiving Data</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The P2P Interface queues packets that a user receives internally, awaiting a call to the
 				<code>EOS_P2P_ReceivePacket</code>
@@ -901,7 +858,6 @@
 			</div>
 			<div>
 				<h3 id="determining-packet-size">Determining Packet Size</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>
 				<code>EOS_P2P_GetNextReceivedPacketSize</code>
@@ -986,7 +942,6 @@
 				instead.</p>
 			<div>
 				<h2 id="determining-nat-type">Determining NAT Type</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>While the P2P Interface will attempt NAT-traversal, it is not always possible to receive incoming connections when one or more peers has a restrictive NAT. In these cases a relay is required, which will be used automatically in case of NAT-traversal failure. To help determine if the user can easily connect to peers, the P2P Interface can query the local user's
 				<strong>NAT Type</strong>
@@ -1167,12 +1122,6 @@
 				if
 				<code>EOS_P2P_QueryNATType</code>
 				has not been called before, or if it has not been completed.</p>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label=""></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print"></button>
-			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
 				<a href="/docs/en-US/site-map?tag=%20P2P">

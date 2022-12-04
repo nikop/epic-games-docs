@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Player Data Storage Interface" data-mui-internal-clone-element="true">Player Data Storage Interface</span>
+					<span aria-label="Player Data Storage Interface">Player Data Storage Interface</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Player Data Storage Interface" data-mui-internal-clone-element="true">Player Data Storage Interface</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Player Data Storage Interface</h1>
 			<h2>Interface to handle cloud-based data management</h2>
@@ -97,11 +64,9 @@
 			<!-- -->
 			<div>
 				<h2 id="file-management">File Management</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h3 id="file-name-format">File Name Format</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>File names in EOS take the following form:
 				<code>Directory0/Directory1/DirectoryN/Filename.Extension</code>
@@ -139,7 +104,6 @@
 				(64) characters.</p>
 			<div>
 				<h3 id="querying-files">Querying Files</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>You can get information about one or all files stored on the cloud by querying EOS. Either query type will return metadata about the file or files it discovers, including the file's name, data size (in bytes, unencrypted), and MD5 hash. You can then cache a copy of this information before accessing or modifying files. Note that since files are stored in an encrypted form on the backend, some metadata (such as file size and hash) is provided for the encrypted file. The metadata won’t exactly match values that correspond to the file you pass to the API.</p>
 			<div>
@@ -149,7 +113,6 @@
 			</div>
 			<div>
 				<h4 id="querying-all-files">Querying All Files</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To retrieve information about all files, call
 				<code>EOS_PlayerDataStorage_QueryFileList</code>
@@ -188,7 +151,6 @@
 				data structure. If the call succeeded, the data structure contains the number of files found, and the information about those files is available in the EOS cache.</p>
 			<div>
 				<h4 id="querying-a-single-file">Querying a Single File</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>If you only need information about a single file, and you know that file's name, you can call
 				<code>EOS_PlayerDataStorage_QueryFile</code>
@@ -233,7 +195,6 @@
 				structure. If the call succeeded, EOS now has data about your file in the cache.</p>
 			<div>
 				<h4 id="examining-cached-file-information">Examining Cached File Information</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Once EOS has retrieved and cached information about one or more files, you can retrieve information on a specific file by calling
 				<code>EOS_PlayerDataStorage_CopyFileMetadataByFilename</code>
@@ -305,12 +266,10 @@
 			</table>
 			<div>
 				<h3 id="accessing-and-modifying-files">Accessing and Modifying Files</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>EOS supports reading, writing, and deleting files from the cloud asynchronously. Reading and writing are streaming operations, and EOS provides handles that the game can use to check a stream's progress, or throttle or interrupt it.</p>
 			<div>
 				<h4 id="reading-a-file">Reading a File</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To read a file from the cloud (or your local cache) with a known name, call
 				<code>EOS_PlayerDataStorage_ReadFile</code>. You will need to pass in an
@@ -430,7 +389,6 @@
 			</div>
 			<div>
 				<h4 id="writing-a-file">Writing a File</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To write a file with a known name, call
 				<code>EOS_PlayerDataStorage_WriteFile</code>. You will need to pass in an
@@ -531,7 +489,6 @@
 				parameter. This parameter indicates success or failure and includes the name of the file. To avoid data loss, ensure that this callback runs before before letting the user quit the game or shut down the console.</p>
 			<div>
 				<h4 id="copying-a-file">Copying a File</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>If you wish to make a copy of a file, you can do so without manually reading and writing the file's full data content. Call
 				<code>EOS_PlayerDataStorage_DuplicateFile</code>
@@ -591,7 +548,6 @@
 			</div>
 			<div>
 				<h4 id="deleting-a-file">Deleting a File</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>You can delete a file by calling
 				<code>EOS_PlayerDataStorage_DeleteFileOptions</code>
@@ -634,13 +590,11 @@
 				to it. File deletion operations can fail if the user does not own the file.</p>
 			<div>
 				<h3 id="data-caching-and-encryption">Data Caching and Encryption</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Player Data Storage Interface caches file data and metadata in the CacheDirectory folder on the client system. Whenever possible, EOS will use this data instead of streaming from the cloud, for both read and write operations, using MD5 checksum testing to prevent data corruption and to determine when the locally cached file is identical to the version on the cloud, in which case read and write operations can complete in a single callback cycle. Any successful read or write operation updates the cache, while deletion clears the cached file and removes its metadata. EOS does not clear the cache upon shutdown, enabling reuse of cached files in future sessions.</p>
 			<p>Player Data Storage files are always stored with encryption, using the key you provide during EOS Platform initialization. The encryption key itself is not stored on the cloud, so we can't use the key to access your data.</p>
 			<div>
 				<h3 id="file-decryption-tool">File Decryption Tool</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>You can the
 				<a href="/docs/game-services/file-decryption-tool">
@@ -655,7 +609,6 @@
 				easily and conveniently.</p>
 			<div>
 				<h3 id="usage-limitations">Usage Limitations</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Player Data Storage Interface enables developers using EOS to save encrypted, user-specific, game-specific data to cloud servers. Data that you store through this interface is accessible to the user on any device where they can log in. The Player Data Storage Interface supports any file format; typical use cases include saved games and replay data.</p>
 			<p>The service applies limits to both storage amounts and usage rates. Throttling enforces usage rate limitations, and the service can delete files to enforce storage space limitations. For general information about throttling, usage quotas, and best practices, see
@@ -701,7 +654,6 @@
 			</div>
 			<div>
 				<h2 id="playerdatastorage-vs-egs-cloud-saves">PlayerDataStorage vs EGS Cloud Saves</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Epic offers two different cloud save services: Launcher Cloud Saves and EOS Player Data Storage. The former is the most broadly used, and can be set up as part of your game configuration in the Epic Games Store. There are some differences between the services however, which would influence which service to use.</p>
 			<ol>
@@ -709,12 +661,6 @@
 				<li>Cloud Saves from the Launcher are handled entirely on the Epic side once configured</li>
 				<li>EOS Player Data Storage requires the player to be online, and is driven entirely game-side using EOS APIs. This allows for data to be shared across platforms, unlike Launcher Cloud Saves.</li>
 			</ol>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
 				<a href="/docs/en-US/site-map?tag=%20PDS">

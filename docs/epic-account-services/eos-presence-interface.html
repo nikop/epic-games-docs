@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Presence Interface" data-mui-internal-clone-element="true">Presence Interface</span>
+					<span aria-label="Presence Interface">Presence Interface</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Presence Interface" data-mui-internal-clone-element="true">Presence Interface</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Presence Interface</h1>
 			<h2>Interface that enables users to inform their friends of their current activities.</h2>
@@ -85,7 +52,6 @@
 			</div>
 			<div>
 				<h2 id="managing-presence-information">Managing Presence Information</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To use the
 				<strong>Presence Interface</strong>, you must acquire a handle of type
@@ -98,7 +64,6 @@
 				<code>EOS_Platform_GetPresenceInterface</code>. With this handle, you can download and cache presence information about other users on your friends list, or update your own presence.</p>
 			<div>
 				<h3 id="retrieving-and-caching-presence-information">Retrieving and Caching Presence Information</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To retrieve presence information about a user, call
 				<code>EOS_Presence_QueryPresence</code>
@@ -157,7 +122,6 @@
 				not matching a local, logged-in user, or the local user being offline.</p>
 			<div>
 				<h3 id="updating-presence-information">Updating Presence Information</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>There are two ways to update presence information in your local cache. The first is to call
 				<code>EOS_Presence_QueryPresence</code>
@@ -203,7 +167,6 @@
 			<p>There can be multiple callbacks registered at a time. In this case all the callbacks will be called once the event occurs.</p>
 			<div>
 				<h3 id="examining-presence-information">Examining Presence Information</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Once
 				<code>EOS_Presence_QueryPresence</code>
@@ -363,7 +326,6 @@
 			</div>
 			<div>
 				<h2 id="modifying-local-presence">Modifying Local Presence</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To modify a local user's presence, you must create an
 				<code>EOS_HPresenceModification</code>
@@ -394,7 +356,6 @@
 			</div>
 			<div>
 				<h3 id="creating-a-presencemodification-handle">Creating a PresenceModification Handle</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To modify a local user's presence, first create a
 				<strong>PresenceModification</strong>
@@ -445,14 +406,12 @@
 				method.</p>
 			<div>
 				<h3 id="making-changes-to-a-presencemodification">Making Changes to a PresenceModification</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>With a valid EOS_HPresenceModification, you can build the update for a user's presence by calling functions within the
 				<code>EOS_PresenceModification</code>
 				function namespace.</p>
 			<div>
 				<h4 id="modifying-presence-status">Modifying Presence Status</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To set a new status, invoke
 				<code>EOS_PresenceModification_SetStatus</code>
@@ -496,7 +455,6 @@
 				<code>EOS_EResult::EOS_Success</code>.</p>
 			<div>
 				<h3 id="modifying-a-rich-text-string">Modifying A Rich Text string</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To set a new rich text string, invoke
 				<code>EOS_PresenceModification_SetRawRichText</code>
@@ -539,7 +497,6 @@
 				<code>EOS_EResult::EOS_Success</code>.</p>
 			<div>
 				<h3 id="adding-or-replacing-presence-data">Adding or Replacing Presence Data</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To add or replace existing presence data to a user's presence, invoke
 				<code>EOS_PresenceModification_SetData</code>
@@ -634,7 +591,6 @@
 				<code>EOS_EResult::EOS_Success</code>.</p>
 			<div>
 				<h3 id="deleting-presence-data">Deleting Presence Data</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Similar to
 				<code>EOS_PresenceModification_SetData</code>,
@@ -714,7 +670,6 @@
 				<code>EOS_EResult::EOS_Success</code>.</p>
 			<div>
 				<h3 id="setting-the-presence-joininfo-data">Setting the Presence JoinInfo Data</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The helper function
 				<code>EOS_PresenceModification_SetJoinInfo</code>
@@ -758,7 +713,6 @@
 			</table>
 			<div>
 				<h3 id="applying-presencemodification-changes">Applying PresenceModification Changes</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Once all changes to an
 				<code>EOS_HPresenceHandle</code>
@@ -852,7 +806,6 @@
 				<code>ResultCode</code>. If there are conflicting modifications, such as a status being set twice across one (or multiple) modifications, the last-set field will overwrite previous changes.</p>
 			<div>
 				<h2 id="subscribing-to-social-overlay-notifications">Subscribing to Social Overlay Notifications</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>It is also possible to subscribe to notifications related to the
 				<strong>Social Overlay</strong>, such as
@@ -862,12 +815,6 @@
 				pair. For more information please refer to the
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
 				page.</p>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
 				<a href="/docs/en-US/site-map?tag=%20Presence">

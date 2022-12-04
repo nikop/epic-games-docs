@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Quick Start Guide" data-mui-internal-clone-element="true">Quick Start Guide</span>
+					<span aria-label="Quick Start Guide">Quick Start Guide</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Quick Start Guide" data-mui-internal-clone-element="true">Quick Start Guide</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Quick Start Guide</h1>
 			<h2>Supporting guide covering ecommerce capabilities, essential terminology, and common use cases for the Ecommerce API</h2>
@@ -61,7 +28,6 @@
 		<section>
 			<div>
 				<h2 id="ecommerce-overview">Ecommerce overview</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Epic Games Store offers an extensive set of ecommerce capabilities that enable you to manage purchasable or redeemable items related to your game, such as downloadable content (DLC) or virtual currency. The system is set up as a hierarchy, so you can optimize bundles within your product offerings. The information below expands upon this system, outlining essential terminology and providing common use cases of how you can use the Ecommerce API to support in-game and back-end functionality.</p>
 			<p>See the
@@ -69,7 +35,6 @@
 				for further guidance to the Ecommerce API.</p>
 			<div>
 				<h3 id="example-ecommerce-configuration-and-terminology">Example ecommerce configuration and terminology</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To help illustrate the Epic Games Store ecommerce capabilities, consider the example configuration below:</p>
 			<div>
@@ -175,12 +140,10 @@
 				Consumable items cannot be granted through purchase of another offer. In other words, if you want the Deluxe game offer to grant players 100 coins as part of the purchase, you will need to incorporate in-game logic that provides the coins to players, as the 100 coins offer will not be displayed in the "Included offers" section of the Deluxe game.</p>
 			<div>
 				<h2 id="ecommerce-api-use-cases">Ecommerce API use-cases</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The sections below outline common use cases for how the Ecommerce API can be used to support in-game or back-end functionality.</p>
 			<div>
 				<h3 id="display-catalog-offers-in-game-to-enable-purchasing">Display catalog offers in game to enable purchasing</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To display catalog offers in-game for users to purchase, the following flow is used in combination with the Epic Online Services SDK.</p>
 			<ol>
@@ -234,7 +197,6 @@
 				API can be for either durable or consumable purchases. To learn more, reference the following scenarios to verify the purchases as necessary.</p>
 			<div>
 				<h3 id="verify-purchases-securely-using-your-own-back-end-service">Verify purchases securely using your own back-end service</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The recommended approach to verify player purchases is from your own back-end service, as this is not susceptible to malicious behavior from users. If you do not have a custom back-end service to implement this verification, refer to the
 				<a href="/docs/epic-games-store/services/ecom/ecom-quick-start#verify-purchased-durable-content-eg-dlc">Verify purchased durable content</a>
@@ -245,7 +207,6 @@
 				<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>:</p>
 			<div>
 				<h4 id="direct-verification">Direct verification</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Direct verification refers to directly using an access token to make calls to the Ecom Web APIs from your back-end service.</p>
 			<ol>
@@ -262,7 +223,6 @@
 			</ol>
 			<div>
 				<h4 id="token-based-verification">Token-based verification</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Token-based verification refers to verifying the authenticity of a JSON Web Token (JWT) generated by the game client, which is then passed to your back-end service. With this method, your back-end service only needs to retrieve a public key once (or until the key is invalidated) to verify multiple tokens generated by the game client.</p>
 			<ul>
@@ -284,7 +244,6 @@
 				documentation to verify that the token is genuine.</p>
 			<div>
 				<h3 id="verify-purchased-durable-content-eg-dlc">Verify purchased durable content (e.g. DLC)</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The recommended approach to verify player purchases is from your own back-end service, as this is not susceptible to malicious behavior from users. Please refer to the
 				<a href="/docs/epic-games-store/services/ecom/ecom-quick-start#verify-purchases-securely-using-your-own-back-end-service">Verify purchases securely using your own back-end service</a>
@@ -358,7 +317,6 @@
 			</ol>
 			<div>
 				<h3 id="verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify and fulfill consumable purchases (e.g. in-game currency)</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Consumable purchases can be verified and consumed using the
 				<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">EOS_Ecom_QueryEntitlements</a>
@@ -420,12 +378,6 @@
 					<a href="/docs/api-ref/functions/eos-ecom-redeem-entitlements">EOS_Ecom_RedeemEntitlements</a>
 					API.</li>
 			</ol>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 		</section>
 		<aside>
 			<div>Contents</div>

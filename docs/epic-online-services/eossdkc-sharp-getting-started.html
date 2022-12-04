@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="EOS SDK in C#" data-mui-internal-clone-element="true">EOS SDK in C#</span>
+					<span aria-label="EOS SDK in C#">EOS SDK in C#</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="EOS SDK in C#" data-mui-internal-clone-element="true">EOS SDK in C#</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>EOS SDK in C#</h1>
 			<h2>Overview of the EOS SDK in C#.</h2>
@@ -82,7 +49,6 @@
 			</div>
 			<div>
 				<h2 id="c-sdk-dependencies">C# SDK Dependencies</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>For the C# SDK, you must have...</p>
 			<ul>
@@ -96,7 +62,6 @@
 			</ul>
 			<div>
 				<h2 id="getting-started">Getting Started</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Before you begin, you’ll need to
 				<a href="https://dev.epicgames.com/portal/sdk">download the C# SDK</a>
@@ -118,7 +83,6 @@
 				<a href="/docs/api-ref/interfaces">EOS SDK interfaces</a>. Once you have this information, you can proceed to integrate the SDK with your product.</p>
 			<div>
 				<h3 id="integration">Integration</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<ol>
 				<li>Include the C# SDK source files in your project.</li>
@@ -198,7 +162,6 @@
 			</ol>
 			<div>
 				<h2 id="implementing-the-sdk">Implementing the SDK</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Once you have set up your 
 				<!-- -->product
@@ -207,12 +170,10 @@
 				method regularly to ensure that the SDK can execute and that callbacks can run, and shut it down when your application finishes.</p>
 			<div>
 				<h3 id="managing-the-sdks-life-cycle">Managing the SDK's Life Cycle</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>There are three main parts of the SDK's life cycle: Initialization, Ticking (normal operation), and Shutdown.</p>
 			<div>
 				<h4 id="initialization">Initialization</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The
 				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
@@ -234,7 +195,6 @@
 			</div>
 			<div>
 				<h4 id="ticking">Ticking</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>In order for the SDK to operate, you must call
 				<code>Epic.OnlineServices.Platform.PlatformInterface.Tick</code>
@@ -242,7 +202,6 @@
 				<code>Tick</code>, so all of your asynchronous operations depend on it.</p>
 			<div>
 				<h4 id="shutdown">Shutdown</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>When you no longer need the SDK — generally, at application shutdown time — you can shut it down by calling
 				<code>Epic.OnlineServices.Platform.PlatformInterface.Release</code>
@@ -260,7 +219,6 @@
 			</div>
 			<div>
 				<h3 id="results">Results</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Most callback data structures and some return values use
 				<code>Epic.OnlineServices.Result</code>
@@ -269,7 +227,6 @@
 			<!-- -->
 			<div>
 				<h3 id="logging">Logging</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The SDK outputs useful debugging information through an internal interface. To enable this feature, set up
 				<code>Epic.OnlineServices.Logging.LoggingInterface</code>
@@ -280,7 +237,6 @@
 				with a callback function to receive log information. This feature can provide insight into internal operations and can help with identifying the causes of unexpected behaviors you may encounter.</p>
 			<div>
 				<h3 id="unmanaged-memory">Unmanaged Memory</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>In the C SDK, some APIs such as
 				<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex</code>
@@ -291,7 +247,6 @@
 				<code>Epic.OnlineServices.Handle</code>, and contain functions that let you set the unmanaged data. They also contain a Release function that you must manually call when you are finished with it.</p>
 			<div>
 				<h3 id="custom-memory-delegates">Custom memory delegates</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>On some platforms, such as consoles, the SDK requires you to implement your own allocate, reallocate, and release functions. Because the SDK will call these functions with very high frequency, it is highly performant for the SDK to be able to access them directly without being routed through delegates in managed code.</p>
 			<p>You have the option to pass these functions into the SDK when initializing the platform with
@@ -573,7 +528,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>And the following sample code demonstrates what the C# bindings may look like:</p>
@@ -646,12 +600,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="threading">Threading</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The SDK is not currently thread safe. We recommend that all calls to the SDK come from your application's main thread. At this time, we recommend against using
 				<code>async</code>,
@@ -660,7 +612,6 @@
 				<code>Task</code>, or similar patterns.</p>
 			<div>
 				<h3 id="the-eos-overlay">The EOS Overlay</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To use the
 				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">EOS Overlay</a>
@@ -695,7 +646,6 @@
 			<p>As a best practice for Unity users,  we recommend that your standalone build controls the lifetime of the SDK inside a low-level native rendering plugin, and your editor build should exclude the plugin to control the lifetime of the SDK inside a MonoBehaviour with dynamic bindings.</p>
 			<div>
 				<h3 id="dynamic-bindings">Dynamic bindings</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Typically, the C# SDK uses
 				<code>extern DllImport</code>
@@ -789,7 +739,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>Then to begin using the SDK, load the library and hook the dynamic bindings with:</p>
@@ -885,7 +834,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>When the application is finished, unhook the dynamic bindings and free the library with:</p>
@@ -912,7 +860,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
@@ -928,17 +875,14 @@
 				is provided below.</p>
 			<div>
 				<h2 id="sample-code-and-projects">Sample Code and Projects</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>There are a variety of C# SDK samples to show you different Epic Online Services (EOS) functionality implementations, such as authentication, presence, the purchasing flow, and voice. Additionally, we have sample code for setting up the platform, logging in, and implementing the Unity EOS SDK component.</p>
 			<div>
 				<h3 id="sample-code">Sample Code</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The sample code in this section is intended to demonstrate and help familiarize you with the C# SDK.</p>
 			<div>
 				<h4 id="setting-up-the-platform">Setting up the Platform</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1434,12 +1378,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h4 id="logging-in">Logging In</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1808,12 +1750,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h4 id="unity-eossdk-component">Unity EOSSDK Component</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>
 				<strong>Note:</strong>
@@ -3232,17 +3172,14 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="sample-projects">Sample Projects</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>These samples are in a folder of your C# SDK download containing the following libraries and applications.</p>
 			<div>
 				<h4 id="libraries">Libraries</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>
 				<strong>Common</strong>
@@ -3255,7 +3192,6 @@
 				contains functionality that is common to all of the voice samples.</p>
 			<div>
 				<h4 id="applications">Applications</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>
 				<a href="/docs/epic-online-services/eossdkc-sharp-getting-started#simpleauth">
@@ -3281,7 +3217,6 @@
 				is a WPF application that demonstrates how to connect to a voice room, switch audio devices, transmit audio, client mute, server mute, and kick.</p>
 			<div>
 				<h4 id="before-you-begin">Before You Begin</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To run the samples, you must install:</p>
 			<ul>
@@ -3324,14 +3259,12 @@
 			<p>The demonstrated SDK functionality can be used with any of the supported identity providers for user authentication.</p>
 			<div>
 				<h4 id="simpleauth">SimpleAuth</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>
 				<strong>SimpleAuth</strong>
 				is a sample application demonstrating how to perform authentication and presence related functions for a logged in user.</p>
 			<div>
 				<h5 id="logging-in-1">Logging in</h5>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To begin, you are presented with a login screen. You can select the type of login you want to use. We recommend using the Developer type to login with credentials assigned by the
 				<a href="/docs/epic-account-services/developer-authentication-tool">Developer Auth Tool</a>.</p>
@@ -3349,7 +3282,6 @@
 			</div>
 			<div>
 				<h5 id="viewing-your-presence">Viewing your presence</h5>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Once signed in, you are presented with a page showing your current presence, and a form that allows you to change it. It contains fields for the online status, rich text, and data entries associated with your current presence.</p>
 			<div>
@@ -3366,7 +3298,6 @@
 			</div>
 			<div>
 				<h4 id="simpleoverlaypurchasing">SimpleOverlayPurchasing</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>This feature is only available for products that are part of the Epic Games store. You must be a store partner, and you must have offers set up with the store.</p>
 			<p>In order for the overlay to work, you must have done one of the following:</p>
@@ -3378,7 +3309,6 @@
 			</ul>
 			<div>
 				<h5 id="initiating-the-purchasing-flow">Initiating the purchasing flow</h5>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The sample will automatically proceed with logging in and the necessary ecom functions in order to launch the overlay into the purchasing flow. Keep an eye on the output to ensure there are no problems.</p>
 			<div>
@@ -3392,12 +3322,6 @@
 						</span>
 					</div>
 				</div>
-			</div>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=CSharp">CSharp</a>

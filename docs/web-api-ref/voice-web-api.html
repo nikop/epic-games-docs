@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,9 +6,7 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
 					<span aria-label="Voice Web APIs">Voice Web APIs</span>
@@ -19,36 +16,6 @@
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Voice Web APIs">Voice Web APIs</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Voice Web APIs</h1>
 			<h2>Use the Voice Web APIs to use Voice interface features with RESTful services.</h2>
@@ -76,14 +43,12 @@
 				disabled.</p>
 			<div>
 				<h2 id="voice-web-api-endpoint">Voice Web API Endpoint</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>
 				<code>https://api.epicgames.dev/rtc/</code>
 			</p>
 			<div>
 				<h2 id="creating-room-tokens">Creating Room Tokens</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>In order to join a voice conference on a media server, users need to provide a room token.</p>
 			<p>The
@@ -96,24 +61,20 @@
 			<p>The result contains the players room tokens as well as the endpoint for the media server that hosts the voice session.</p>
 			<div>
 				<h3 id="policy">Policy</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The client must have the
 				<a href="/docs/game-services/voice#policy-configurations">Voice:createRoomToken policy</a>.</p>
 			<div>
 				<h3 id="room-tokens">Room Tokens</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The individual tokens contained in the response should only be shared with the corresponding player (ProductUserId) that requested them and not be made visible to the entire group as this would allow kicked players to potentially reuse another player’s token to rejoin.</p>
 			<div>
 				<h3 id="authorization">Authorization</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>This call requires Bearer Token authorization with an EOS Client Auth access token, obtained from the
 				<a href="/docs/web-api-ref/connect-web-api">Connect interface Web API</a>.</p>
 			<div>
 				<h3 id="request">Request</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table>
 				<thead>
@@ -269,7 +230,6 @@
 			</table>
 			<div>
 				<h4 id="example-request">Example Request</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<div>
 				<section>
@@ -355,12 +315,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="response">Response</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table style="width:100%">
 				<thead>
@@ -494,7 +452,6 @@
 			</table>
 			<div>
 				<h4 id="example-response">Example Response</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<div>
 				<section>
@@ -603,19 +560,16 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<div>
 				<h2 id="removing-a-participant">Removing a Participant</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>The
 				<code>removeParticipant</code>
 				request will remove a player from the voice room and revoke their room token, preventing them from reusing their existing token to join the same room again.</p>
 			<div>
 				<h3 id="request-1">Request</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table style="width:100%">
 				<thead>
@@ -703,7 +657,6 @@
 			</table>
 			<div>
 				<h4 id="example-request-1">Example Request</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<div>
 				<section>
@@ -733,12 +686,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="response-1">Response</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table>
 				<thead>
@@ -751,7 +702,6 @@
 			</table>
 			<div>
 				<h4 id="example-response-1">Example Response</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<div>
 				<section>
@@ -764,17 +714,14 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<div>
 				<h2 id="modifying-a-participant">Modifying a Participant</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<p>Room members can be remote-muted, i.e. be muted for everyone, independent of their local mute status.</p>
 			<div>
 				<h3 id="request-2">Request</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table>
 				<thead>
@@ -872,7 +819,6 @@
 			</table>
 			<div>
 				<h4 id="example-request-2">Example Request</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<div>
 				<section>
@@ -915,12 +861,10 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="response-2">Response</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<table>
 				<thead>
@@ -933,7 +877,6 @@
 			</table>
 			<div>
 				<h4 id="example-response-2">Example Response</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section"></button>
 			</div>
 			<div>
 				<section>
@@ -946,14 +889,7 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy"></button>
 				</section>
-			</div>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label=""></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print"></button>
 			</div>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Voice">Voice</a>

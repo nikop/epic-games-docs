@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Mods Overview" data-mui-internal-clone-element="true">Mods Overview</span>
+					<span aria-label="Mods Overview">Mods Overview</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Mods Overview" data-mui-internal-clone-element="true">Mods Overview</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Mods Overview</h1>
 			<h2>Explore the API for distributing and managing mods in the EOS ecosystem</h2>
@@ -71,11 +38,9 @@
 			</div>
 			<div>
 				<h2 id="mod-sdk-capabilities">Mod SDK Capabilities</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h3 id="installing-mods">Installing Mods</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>A game can request the Mod SDK to
 				<strong>install</strong>
@@ -84,49 +49,41 @@
 				<strong>Library</strong>, the mod will be added automatically. This is an asynchronous operation, and the game will be notified with a callback function when the mod is installed and ready.</p>
 			<div>
 				<h3 id="uninstalling-mods">Uninstalling Mods</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Mod
 				<strong>uninstallation</strong>
 				removes an installed mod from the user's local hard drive, but it does not remove the mod from the player's Library. This is an asynchronous operation, and the game will be notified with a callback function when mod files are removed.</p>
 			<div>
 				<h3 id="updating-mods">Updating Mods</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The
 				<strong>update</strong>
 				function requests that the Mod SDK update a mod to the latest version. This is an asynchronous operation, and the game will be notified via a callback function when the update is completed.</p>
 			<div>
 				<h3 id="enumerating-mods">Enumerating Mods</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The Mod SDK can provide a list of mods available for the game on the Mod Marketplace, as well as a list of the user's currently installed mods. A single Mod SDK API function returns both lists. The game specifies the requested list with a function argument. This is an asynchronous operation, and the game will be notified via callback when the data is available for retrieval.</p>
 			<div>
 				<h2 id="potential-use-cases">Potential Use Cases</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The following are examples of features that can make use of the Mod SDK:</p>
 			<div>
 				<h3 id="multiplayer-game-mod-reconciliation">Multiplayer Game Mod Reconciliation</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>When a client game instance connects to a server running mods, both the client and server use the Mod SDK to reconcile mods installed on both client and server machines and determine the list of missing mods.</p>
 			<p>The server calls the mod enumeration function to get a list of installed mods, then serializes the IDs of the installed mods and sends them to the client.</p>
 			<p>The client compares the server's list of mods with locally installed mods. If any required mods are missing, the client calls the mod install function to install the missing mods.</p>
 			<div>
 				<h3 id="in-game-mod-manager">In-game Mod Manager</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>The mod enumeration, installation, uninstallation, and update functions enable game developers to have an in-game mod manager.</p>
 			<p>Use the enumeration function to get lists of available and installed mods with titles and versions, then use install and uninstall functions to add or remove mods from a game, and use the update function to keep mods up-to-date with their latest versions.</p>
 			<div>
 				<h2 id="mod-sdk-api">Mod SDK API</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>This section documents data structures and functions of the Mod SDK.</p>
 			<div>
 				<h3 id="mod-sdk-initialization-and-shutdown">Mod SDK Initialization and Shutdown</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Initialize EOS SDK the usual way by calling the function
 				<code>EOS_Platform_Create</code>. Then call the function
@@ -174,16 +131,13 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
 				<h3 id="data-structures">Data Structures</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h4 id="eos_mod_identifier">EOS_Mod_Identifier</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -290,7 +244,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -302,7 +255,6 @@
 				<code>EOS_MOD_IDENTIFIER_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_installmodoptions">EOS_Mods_InstallModOptions</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -373,7 +325,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -387,7 +338,6 @@
 				<code>EOS_MODS_INSTALLMOD_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_installcallbackinfo">EOS_Mods_InstallCallbackInfo</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -461,7 +411,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -469,7 +418,6 @@
 				contains information about a requested mod and the result code of the installation.</p>
 			<div>
 				<h4 id="eos_mods_uninstallmodoptions">EOS_Mods_UninstallModOptions</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -528,7 +476,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The
@@ -540,7 +487,6 @@
 				<code>EOS_MODS_UNINSTALLMOD_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_uninstallmodcallbackinfo">EOS_Mods_UninstallModCallbackInfo</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -614,7 +560,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The
@@ -623,7 +568,6 @@
 				<code>EOS_Mods_OnUninstallModCallback</code>. The struct contains information about the uninstalled mod.</p>
 			<div>
 				<h4 id="eos_mods_enumeratemodsoptions">EOS_Mods_EnumerateModsOptions</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -679,7 +623,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -695,7 +638,6 @@
 				<code>EOS_MODS_ENUMERATEMODS_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_enumeratemodscallbackinfo">EOS_Mods_EnumerateModsCallbackInfo</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -766,7 +708,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -776,7 +717,6 @@
 				to get a copy of the mod list.</p>
 			<div>
 				<h4 id="eos_mods_copymodinfooptions">EOS_Mods_CopyModInfoOptions</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -832,7 +772,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -845,7 +784,6 @@
 				<code>EOS_MODS_COPYMODINFO_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_modinfo">EOS_Mods_ModInfo</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -916,7 +854,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -932,7 +869,6 @@
 				<code>EOS_MODS_MODINFO_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_updatemodoptions">EOS_Mods_UpdateModOptions</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -991,7 +927,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -1003,7 +938,6 @@
 				<code>EOS_MODS_UPDATEMOD_API_LATEST</code>.</p>
 			<div>
 				<h4 id="eos_mods_updatecallbackinfo">EOS_Mods_UpdateCallbackInfo</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1077,7 +1011,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The struct
@@ -1087,11 +1020,9 @@
 				when the Mod SDK finishes the mod update operation.</p>
 			<div>
 				<h3 id="enums">Enums</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h4 id="eos_emodenumerationtype">EOS_EModEnumerationType</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1138,7 +1069,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The Enum
@@ -1151,11 +1081,9 @@
 				means all mods available for installation from the game Mod Marketplace.</p>
 			<div>
 				<h4 id="functions">Functions</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h4 id="eos_mods_installmod">EOS_Mods_InstallMod</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1191,7 +1119,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>
@@ -1204,7 +1131,6 @@
 				is the callback type for the function.</p>
 			<div>
 				<h4 id="eos_mods_uninstallmod">EOS_Mods_UninstallMod</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1240,7 +1166,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>Function
@@ -1253,7 +1178,6 @@
 				is the callback type for the function.</p>
 			<div>
 				<h4 id="eos_mods_enumeratemods">EOS_Mods_EnumerateMods</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1289,7 +1213,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>A game calls the function
@@ -1300,7 +1223,6 @@
 				is the callback type for the function.</p>
 			<div>
 				<h4 id="eos_mods_copymodinfo">EOS_Mods_CopyModInfo</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1334,7 +1256,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The function
@@ -1345,7 +1266,6 @@
 				<code>EOS_Mods_EnumerateMods</code>.</p>
 			<div>
 				<h4 id="eos_mods_modinfo_release">EOS_Mods_ModInfo_Release</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1369,7 +1289,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>Call the function
@@ -1377,7 +1296,6 @@
 				to release memory used to store mod list data.</p>
 			<div>
 				<h4 id="eos_mods_updatemod">EOS_Mods_UpdateMod</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1413,7 +1331,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The function
@@ -1423,11 +1340,9 @@
 				when the update is finished.</p>
 			<div>
 				<h3 id="callbacks">Callbacks</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<h4 id="eos_mods_oninstallmodcallback">EOS_Mods_onInstallModCallback</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1448,7 +1363,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The callback
@@ -1457,7 +1371,6 @@
 				<code>EOS_Mods_InstallModCallbackInfo*</code>.</p>
 			<div>
 				<h4 id="eos_mods_onuninstallmodcallback">EOS_Mods_OnUninstallModCallback</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1478,7 +1391,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The callback
@@ -1487,7 +1399,6 @@
 				<code>EOS_Mods_UninstallModCallbackInfo*</code>.</p>
 			<div>
 				<h4 id="eos_mods_onenumeratemodscallback">EOS_Mods_OnEnumerateModsCallback</h4>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<div>
 				<section>
@@ -1508,7 +1419,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<p>The Mod SDK calls the callback
@@ -1518,12 +1428,6 @@
 				with information about the performed search. Call the function
 				<code>EOS_Mods_CopyModInfo</code>
 				to get a copy of the mod list data.</p>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 		</section>
 		<aside>
 			<div>Contents</div>

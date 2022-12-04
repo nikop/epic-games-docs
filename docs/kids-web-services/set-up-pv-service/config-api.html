@@ -1,4 +1,3 @@
-
 <section class="page">
 	<div style="left:0">
 		<nav>
@@ -7,48 +6,16 @@
 					<a href="/docs">Epic Developer Resources</a>
 				</li>
 				<li aria-hidden="true"></li>
-				<li>
-					<button tabindex="0" type="button" aria-haspopup="true"></button>
-				</li>
+				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="Integrate with the KWS API" data-mui-internal-clone-element="true">Integrate with the KWS API</span>
+					<span aria-label="Integrate with the KWS API">Integrate with the KWS API</span>
 				</li>
 			</ol>
 		</nav>
 		<div></div>
 	</div>
 	<section>
-		<div>
-			<div>
-				<nav>
-					<ol>
-						<li>
-							<a href="/docs">Epic Developer Resources</a>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<button tabindex="0" type="button" aria-haspopup="true"></button>
-						</li>
-						<li aria-hidden="true"></li>
-						<li>
-							<span aria-label="Integrate with the KWS API" data-mui-internal-clone-element="true">Integrate with the KWS API</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
-			<div>
-				<div>
-					<div id="search_container">
-						<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-							<input type="hidden" name="filter" value="Documentation">
-							<input type="text" name="keyword" placeholder="Search Documentation..." autocomplete="off">
-							<button type="submit" aria-label="Search"></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div>
 			<h1>Integrate with the KWS API</h1>
 			<h2>How to call the KWS API to trigger the parent verification flow for your product.</h2>
@@ -65,7 +32,6 @@
 				<a href="https://freekwslaunch.docs.apiary.io/#reference/verifications">send-parent-email API endpoint</a>.</p>
 			<div>
 				<h2 id="get-the-api-integration-details">Get the API integration details</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>To call the KWS API, you need certain data items to enable access and authentication.</p>
 			<p>In the
@@ -126,7 +92,6 @@
 			</div>
 			<div>
 				<h2 id="collect-the-user-details">Collect the user details</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>You must configure your product’s interface to collect the following:</p>
 			<ul>
@@ -143,24 +108,20 @@
 			</ul>
 			<div>
 				<h2 id="call-the-send-parent-email-endpoint">Call the send-parent-email endpoint</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Configure your product to send the collected parent's email address, child's location, and parent's language to KWS via an authenticated API call to the
 				<a href="https://freekwslaunch.docs.apiary.io/#reference/verifications">send-parent-email</a>
 				endpoint.</p>
 			<div>
 				<h3 id="rate-limiting">Rate limiting</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Rate limiting is fixed to 10 requests per hour per unique parent email address.</p>
 			<div>
 				<h3 id="user-agent-request-header">User agent request header</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>All requests to the KWS API must include a user-agent header containing a non-empty string that identifies your client and/or HTTP library. Failure to do so will result in a “Request blocked” 403 response.</p>
 			<div>
 				<h3 id="authentication-via-the-developer-access-token">Authentication via the Developer Access token</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>API calls must be authenticated via a Bearer token called the "Developer Access token".</p>
 			<p>Obtain a Developer Access token from the KWS authentication service via a
@@ -247,7 +208,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<div>
@@ -256,12 +216,10 @@
 			</div>
 			<div>
 				<h3 id="api-call-retry-behavior">API call retry behavior</h3>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>Any system integrating with the KWS API should implement a retry mechanism for API calls. If a retry mechanism is implemented, it must perform exponential backoff and conform to any rate-limiting headers sent from API calls.</p>
 			<div>
 				<h2 id="the-kws-managed-flow">The KWS-managed flow</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>After you call the KWS API, KWS manages the entire verification flow:</p>
 			<ol>
@@ -406,7 +364,6 @@
 							</div>
 						</div>
 					</pre>
-					<button tabindex="0" type="button" aria-label="Copy" data-mui-internal-clone-element="true"></button>
 				</section>
 			</div>
 			<ul>
@@ -427,16 +384,9 @@
 				for examples of the emails and webviews that KWS presents to the parent.</p>
 			<div>
 				<h2 id="next-step">Next step</h2>
-				<button tabindex="0" type="button" aria-label="Copy link to this section" data-mui-internal-clone-element="true"></button>
 			</div>
 			<p>
 				<a href="/docs/kids-web-services/set-up-pv-service/pv-branding">Apply your own custom branding to the PV service</a>.</p>
-			<div id="toolbox_panel">
-				<div>
-					<button tabindex="0" type="button" id="share__button" aria-controls="share__menu" aria-haspopup="true" aria-label="" data-mui-internal-clone-element="true"></button>
-				</div>
-				<button tabindex="0" type="button" aria-label="Print" data-mui-internal-clone-element="true"></button>
-			</div>
 		</section>
 		<aside>
 			<div>Contents</div>

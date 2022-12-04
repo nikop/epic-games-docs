@@ -30,6 +30,11 @@ while (linkQueue.TryDequeue(out var uri))
     {
         Console.WriteLine($"[{linkQueue.Done} / {linkQueue.Total}] Updating {uri}");
 
+        if (uri.PathAndQuery.Contains("sessioninvalidated", StringComparison.InvariantCultureIgnoreCase))
+        {
+            continue;
+        }
+
         var response = await httpClient.GetAsync(uri).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
 
@@ -51,7 +56,16 @@ while (linkQueue.TryDequeue(out var uri))
         {
             if (link.Attributes["href"]?.Value.StartsWith("/docs") == true)
             {
-                var fullUri = new Uri(baseUri, link.Attributes["href"].Value!);
+                var href = link.Attributes["href"]?.Value.Replace("/en-US/", "/");
+
+                if (href == null || href.Contains("site-map?tag=") || href.Contains("sessioninvalidated", StringComparison.InvariantCultureIgnoreCase))
+                    continue;
+
+                var fullUri = new Uri(baseUri, href);
+
+                if (fullUri.Query != "")
+                    continue;
+
                 linkQueue.Queue(fullUri);
             }
         }
@@ -64,14 +78,28 @@ while (linkQueue.TryDequeue(out var uri))
 
         if (path == "")
         {
-            path = "index.html";
+            path = "index";
         }
         else
         {
-            path += ".html";
+            //path += ".html";
         }
 
         var file = Path.Combine(dir.FullName, path);
+
+        if (Directory.Exists(file))
+        {
+            var oldFile = file + ".html";
+
+            file += "/index";
+
+            if (File.Exists(oldFile))
+            {
+                File.Delete(oldFile);
+            }
+        }
+
+        file += ".html";
 
         var dirName = Path.GetDirectoryName(file)!;
 

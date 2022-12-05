@@ -1,0 +1,200 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Design Guidelines">Design Guidelines</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Design Guidelines</h1>
+			<h2>Integrating with EOS Epic Account Services Authentication.</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
+						<a href="mailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
+						to coordinate a release plan.</p>
+				</div>
+			</div>
+			<p>Epic Account Services let players get started with your video game quickly and easily on any platform so they can enjoy more meaningful cross-platform experiences with their friends. In this document, we offer guidelines, tips, and considerations for creating a great sign-in experience with Epic Account Services.</p>
+			<div>
+				<h2 id="user-experience-guidelines">User Experience Guidelines</h2>
+			</div>
+			<div>
+				<h3 id="ask-for-sign-in-with-epic-games-in-context">Ask for "Sign in with Epic Games" in context</h3>
+			</div>
+			<p>When asking a user to sign in with their Epic Games account, provide the user with context on what that means and what the experience will offer once signed in.</p>
+			<p>As part of the sign-in process, the user may encounter a consent flow to grant Epic Games the right to share the user's account data with your application. When you configure your application on the Developer Portal, you can select different scopes of Epic Games account data for your application to request access to. Only request access to scopes of data that your application currently needs—don't attempt to future-proof. When the feature set in your application changes, you can at any time update the selected data scopes on the Developer Portal. It is important for people to understand why your application needs that account information and how that will provide them with a better experience.</p>
+			<p>Generally it is a good practice to position the sign-in process early in your application's start-up flow. If the user has played your video game before on another platform, they may already have progression data saved. Early sign-in flows avoid scenarios where multiple versions of saved data conflict and result in challenges around account merging.</p>
+			<div>
+				<h3 id="balance-your-different-authentication-options">Balance Your Different Authentication Options</h3>
+			</div>
+			<p>By using external account systems, you can make it easy for users to sign in to your application. Buttons to sign in with the different authentication options you provide shouldn't be hidden behind multiple steps. Epic Games sign-in option buttons and other third-party sign-in options should be displayed equally prominent. For example, buttons should be approximately the same size and have similar visual weight. The user should understand all sign-in options are equally valid.</p>
+			<p>After people have signed in with Epic Games, avoid immediately prompting your users to set up a new username and password combination for your application. It is okay to provide this as a flow later in the experience, but consider keeping it optional.</p>
+			<div>
+				<h3 id="importing-account-data-to-other-social-graphs">Importing Account Data to Other Social Graphs</h3>
+			</div>
+			<p>It is common and often expected by users to receive friend recommendations based on the relationships they may have in other social graphs. Before importing any Epic Account data into your or another third-party social graph, you must ask the user for consent and explain what will happen if the user consents. Users must give consent by taking specific, intentional action to import their Epic account data and friends into another ecosystem. Imports can be done in batches, but always need to happen at the time of consent and this consent cannot be durable beyond that one-time event.</p>
+			<p>In all cases, it must be optional for the user to import their social connections from their Epic Games account to your or any other third-party social graph.</p>
+			<div>
+				<h3 id="withdrawal-of-consent-and-deletion">Withdrawal of Consent and Deletion</h3>
+			</div>
+			<p>The sharing of account data from Epic Games to your application is based on explicit consent by the user. Users can withdraw this consent at any time at which point Epic Games will stop your access to the account data.</p>
+			<p>If you have imported any Epic Account data into your or another third-party social graph, you must provide a transparent and easily accessible mechanism for your users to withdraw their consent to that use of their Epic Account data.</p>
+			<p>You are required to promptly and securely delete all of that user's Epic Games account data when notified by Epic Games, or requested by the user</p>
+			<p>For more information on these and other obligations, refer to the
+				<a href="https://dev.epicgames.com/en-US/services/terms/agreements">Epic Account Services Addendum</a>.</p>
+			<div>
+				<h2 id="epic-games-brand-guidelines">Epic Games Brand Guidelines</h2>
+			</div>
+			<p>Epic Games provides two different "Sign in with Epic Games" buttons you can use to let people set up an account and sign in. If necessary, you can create a custom button to offer Sign in with Epic Games. Using the standard Epic Games Sign-In button is strongly recommended as it enables your users to identify the Epic Games option more quickly.</p>
+			<div>
+				<h3 id="default-sign-in-button">Default Sign-in Button</h3>
+			</div>
+			<p>The standard "Sign in with Epic Games" button comes with two options: a dark button for light backgrounds and a white button for dark backgrounds.</p>
+			<p>The size of both buttons is 210 x 50 pixels.</p>
+			<div>
+				<div>
+					<div>
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="image alt text" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="image alt text" sizes="100vw" srcset="null/epic-account-services/design-guidelines/image_-0.png 640w, null/epic-account-services/design-guidelines/image_-0.png 750w, null/epic-account-services/design-guidelines/image_-0.png 828w, null/epic-account-services/design-guidelines/image_-0.png 1080w, null/epic-account-services/design-guidelines/image_-0.png 1200w, null/epic-account-services/design-guidelines/image_-0.png 1920w, null/epic-account-services/design-guidelines/image_-0.png 2048w, null/epic-account-services/design-guidelines/image_-0.png 3840w" src="null/epic-account-services/design-guidelines/image_-0.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h3 id="custom-sign-in-button">Custom Sign-in Button</h3>
+			</div>
+			<p>Video games bring their own visual identity. We want to provide you with the freedom to design sign-in flows that fit the experience desired for each individual application. Below are a combination of strict rules that must be adhered to as well as general guidelines designed to result in the best user experience.</p>
+			<div>
+				<h4 id="epic-games-logo">Epic Games Logo</h4>
+			</div>
+			<p>The Epic Games logo is available in two styles: black and white.</p>
+			<p>
+				<a href="https://epicgames.box.com/s/82lsf9a2lfqyiwl6fra3y9cac2rm5cbd">Download Epic Games logo</a>
+			</p>
+			<p>To be in compliance with the design guidelines for Epic Account Services, you may not modify the Epic Games logo colors. You can scale the logo as needed for different devices and screen sizes, but you must preserve the logo aspect ratio so that the Epic Games logo is not stretched. Do not distort the dimensions of the Epic Games logo.</p>
+			<p>Respect the minimum padding as specified below and don't size the logo below the minimum size. For a logo size of 21 x 24 px, the padding to the left and right of the logo should be 11px. The top padding should be 10px, and there should be 9px between the logo and the bottom. When scaling up, these ratios should be preserved.</p>
+			<div>
+				<div>
+					<div>
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="image alt text" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="image alt text" sizes="100vw" srcset="null/epic-account-services/design-guidelines/image_-1.png 640w, null/epic-account-services/design-guidelines/image_-1.png 750w, null/epic-account-services/design-guidelines/image_-1.png 828w, null/epic-account-services/design-guidelines/image_-1.png 1080w, null/epic-account-services/design-guidelines/image_-1.png 1200w, null/epic-account-services/design-guidelines/image_-1.png 1920w, null/epic-account-services/design-guidelines/image_-1.png 2048w, null/epic-account-services/design-guidelines/image_-1.png 3840w" src="null/epic-account-services/design-guidelines/image_-1.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>The box encapsulating the logo and the copy can be any shape.</p>
+			<div>
+				<div>
+					<div style="max-width:512px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="image alt text" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="image alt text" sizes="100vw" srcset="null/epic-account-services/design-guidelines/image_-2.png 640w, null/epic-account-services/design-guidelines/image_-2.png 750w, null/epic-account-services/design-guidelines/image_-2.png 828w, null/epic-account-services/design-guidelines/image_-2.png 1080w, null/epic-account-services/design-guidelines/image_-2.png 1200w, null/epic-account-services/design-guidelines/image_-2.png 1920w, null/epic-account-services/design-guidelines/image_-2.png 2048w, null/epic-account-services/design-guidelines/image_-2.png 3840w" src="null/epic-account-services/design-guidelines/image_-2.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h4 id="background">Background</h4>
+			</div>
+			<p>The button background can be any color of your choosing. Like on the default button, lean to using the white logo on dark-colored button backgrounds and the black logo on light-colored button backgrounds.</p>
+			<div>
+				<div>
+					<div>
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="image alt text" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="image alt text" sizes="100vw" srcset="null/epic-account-services/design-guidelines/image_-3.png 640w, null/epic-account-services/design-guidelines/image_-3.png 750w, null/epic-account-services/design-guidelines/image_-3.png 828w, null/epic-account-services/design-guidelines/image_-3.png 1080w, null/epic-account-services/design-guidelines/image_-3.png 1200w, null/epic-account-services/design-guidelines/image_-3.png 1920w, null/epic-account-services/design-guidelines/image_-3.png 2048w, null/epic-account-services/design-guidelines/image_-3.png 3840w" src="null/epic-account-services/design-guidelines/image_-3.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h4 id="copy-and-font">Copy and Font</h4>
+			</div>
+			<p>Always include text in your sign in button. The recommended English version is "Sign in with Epic Games", "Log in with Epic Games", or "Continue with Epic Games". It's not recommended to have a sign in button that is solely the logo or solely some copy. Always wrap the copy and logo in a button box.</p>
+			<p>Choose the font and font style that looks best in the context of your video game, but optimize for easy legibility. Minimum recommended font size is 12pt, while the default font size is 14pt.</p>
+			<div>
+				<div>
+					<div>
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="image alt text" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="image alt text" sizes="100vw" srcset="null/epic-account-services/design-guidelines/image_-4.png 640w, null/epic-account-services/design-guidelines/image_-4.png 750w, null/epic-account-services/design-guidelines/image_-4.png 828w, null/epic-account-services/design-guidelines/image_-4.png 1080w, null/epic-account-services/design-guidelines/image_-4.png 1200w, null/epic-account-services/design-guidelines/image_-4.png 1920w, null/epic-account-services/design-guidelines/image_-4.png 2048w, null/epic-account-services/design-guidelines/image_-4.png 3840w" src="null/epic-account-services/design-guidelines/image_-4.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#user-experience-guidelines">User Experience Guidelines</a>
+					</li>
+					<li>
+						<a href="#ask-for-sign-in-with-epic-games-in-context">Ask for "Sign in with Epic Games" in context</a>
+					</li>
+					<li>
+						<a href="#balance-your-different-authentication-options">Balance Your Different Authentication Options</a>
+					</li>
+					<li>
+						<a href="#importing-account-data-to-other-social-graphs">Importing Account Data to Other Social Graphs</a>
+					</li>
+					<li>
+						<a href="#withdrawal-of-consent-and-deletion">Withdrawal of Consent and Deletion</a>
+					</li>
+					<li>
+						<a href="#epic-games-brand-guidelines">Epic Games Brand Guidelines</a>
+					</li>
+					<li>
+						<a href="#default-sign-in-button">Default Sign-in Button</a>
+					</li>
+					<li>
+						<a href="#custom-sign-in-button">Custom Sign-in Button</a>
+					</li>
+					<li>
+						<a href="#epic-games-logo">Epic Games Logo</a>
+					</li>
+					<li>
+						<a href="#background">Background</a>
+					</li>
+					<li>
+						<a href="#copy-and-font">Copy and Font</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

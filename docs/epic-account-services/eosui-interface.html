@@ -1,0 +1,480 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="UI Interface">UI Interface</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>UI Interface</h1>
+			<h2>Interface that accesses overlay features</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
+						<a href="mailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
+						to coordinate a release plan.</p>
+				</div>
+			</div>
+			<p>
+				<strong>Epic Online Services</strong>
+				(EOS) supports product-independent overlay windows through its
+				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">Overlay</a>
+				system; these overlays give users product-independent access to various features. The
+				<strong>UI Interface</strong>
+				manages interactions with the overlays by providing status updates, showing or hiding the overlays, and adjusting display and hotkey preferences.</p>
+			<div>
+				<p>As of SDK 1.5, country codes are deprecated values in all User Info calls.</p>
+			</div>
+			<p>To access the UI Interface, acquire an
+				<code>EOS_HUI</code>
+				handle through the
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+				function,
+				<code>EOS_Platform_GetUIInterface</code>. All UI Interface functions require this handle as their first parameter. You must ensure that the
+				<code>EOS_HPlatform</code>
+				handle is ticking for callbacks to trigger when operations complete.</p>
+			<p>Each overlay behaves independently of the product, and in a uniform manner with all other EOS products. The UI Interface does not directly control the overlays, and cannot read data from them or write data to them, but it can command them to show or hide themselves, detect whether a given overlay is currently visible, and get or set the user hotkey that shows or hides an overlay.</p>
+			<div>
+				<p>The UI Interface is a work in progress, and currently only supports the friends list page, which is part of the larger
+					<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>; future versions of the EOS SDK will expand support for other pages across multiple overlays.</p>
+			</div>
+			
+			<!-- -->
+			<div>
+				<h2 id="showing-or-hiding-an-overlay">Showing or Hiding an Overlay</h2>
+			</div>
+			<p>To show the friends list page, call
+				<code>EOS_UI_ShowFriends</code>
+				with an
+				<code>EOS_UI_ShowFriendsOptions</code>
+				data structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_SHOWFRIENDS_API_LATEST.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId LocalUserId</td>
+						<td>The Epic Account ID of the user whose friend list is being shown.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Upon completion, your callback function (of type
+				<code>EOS_UI_OnShowFriendsCallback</code>) will receive a call that includes an
+				<code>EOS_UI_ShowFriendsCallbackInfo</code>
+				data structure.</p>
+			<p>To hide the friends list page, call
+				<code>EOS_UI_HideFriends</code>
+				with an
+				<code>EOS_UI_HideFriendsOptions</code>
+				structure that contains the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_HIDEFRIENDS_API_LATEST.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId LocalUserId</td>
+						<td>The Epic Account ID of the user whose friend list is being shown.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation finishes, EOS will run your callback function (of type
+				<code>EOS_UI_OnHideFriendsCallback</code>), passing it a parameter of type
+				<code>EOS_UI_HideFriendsCallbackInfo</code>.</p>
+			<div>
+				<p>These operations could change the overall visibility status of the overlay system, but they will not necessarily do so every time. For example, showing the friends list page could make the Overlay system become visible if it was previously invisible, but the system could have been visible already if it was already displaying the friends list or another page. Similarly, hiding a page could result in the entire overlay system becoming invisible if that was the last page being displayed, but this will not always be the case. See the section on
+					<a href="/docs/epic-account-services/eosui-interface#detecting-visibility-status">Detecting the Overlay's Current Visibility Status</a>
+					for a reliable way to know whether the Overlay system is visible at any given time.</p>
+			</div>
+			<div>
+				<h2 id="blocking-and-reporting">Blocking and Reporting</h2>
+			</div>
+			<p>
+				<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-ui-show-block-player">
+					<code>EOS_UI_ShowBlockPlayer</code>
+				</a>
+				and
+				<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-ui-show-report-player">
+					<code>EOS_UI_ShowReportPlayer</code>
+				</a>
+				trigger your game to display the Overlay with a report-or-block dialog box. Players use the dialog box to confirm they want to report or block their target player or to cancel the report or block action.</p>
+			<p>Make sure that it's clear in your game to players that they are triggering a social function when using
+				<code>EOS_UI_ShowReportPlayer</code>
+				and it's not part of your game. For example: A "REPORT" button available to members in a RTCP voice chat room.</p>
+			<p>Configure the
+				<code>EOS_UI_ShowBlockPlayerOptions</code>
+				parameter as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_SHOWBLOCKPLAYER_API_LATEST.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId LocalUserId</td>
+						<td>The Epic Online Services Account ID of the player requesting to block another player.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId TargetUserId</td>
+						<td>The Epic Online Services Account ID of the player to be blocked.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Configure the
+				<code>EOS_UI_ShowReportPlayerOptions</code>
+				parameter as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_SHOWREPORTPLAYER_API_LATEST.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId LocalUserId</td>
+						<td>The Epic Online Services Account ID of the player requesting the report.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId TargetUserId</td>
+						<td>The Epic Online Services Account ID of the reported player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="detecting-visibility-status">Detecting Visibility Status</h2>
+			</div>
+			<p>The UI Interface provides two levels of visibility status information.</p>
+			<p>The first is for the overlay system itself. When at least one page in one overlay is showing, the system as a whole is considered visible. This information can be very useful when making certain high-level decisions, such as where to route input, or when to pause simulation.</p>
+			<p>The second level is for individual pages. This is helpful to know whether or not the code should issue commands to open or close pages, or to determine if players are able to see information that they might need.</p>
+			<div>
+				<h3 id="overlay-system-visibility-status">Overlay System Visibility Status</h3>
+			</div>
+			<p>The EOS SDK enables developers to register a callback function for reporting of the overlay system's overall visibility status. To register your callback (of type
+				<code>EOS_UI_OnDisplaySettingsUpdatedCallback</code>), call
+				<code>EOS_UI_AddNotifyDisplaySettingsUpdated</code>
+				when you load the EOS SDK, and pass in a properly-initialized
+				<code>EOS_UI_AddNotifyDisplaySettingsUpdatedOptions</code>
+				data structure:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_ADDNOTIFYDISPLAYSETTINGSUPDATED_API_LATEST.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<p>Your callback will run during either the current
+					<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+					tick or the next one. By tracking the values you receive during this callback, you can know the latest visibility status of the overlay system at all times.</p>
+			</div>
+			<p>During shutdown, remove your callback with the
+				<code>EOS_UI_RemoveNotifyDisplaySettingsUpdated</code>
+				and the
+				<code>EOS_NotificationId</code>
+				that was returned by
+				<code>EOS_UI_AddNotifyDisplaySettingsUpdated</code>
+				when you originally registered it.</p>
+			
+			<!-- -->
+			<div>
+				<h3 id="individual-page-visibility-status">Individual Page Visibility Status</h3>
+			</div>
+			<p>Each page that the UI Interface can show or hide has its own function to report its visibility status. For the friends list page, call
+				<code>EOS_UI_GetFriendsVisible</code>
+				with an
+				<code>EOS_UI_GetFriendsVisibleOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_GETFRIENDSVISIBLE_API_LATEST.</td>
+					</tr>
+					<tr>
+						<td>EOS_EpicAccountId LocalUserId</td>
+						<td>The Epic Account ID of the user whose overlay is being checked.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<code>EOS_UI_GetFriendsVisible</code>
+				returns an
+				<code>EOS_Bool</code>
+				indicating whether the page is visible or not.</p>
+			<div>
+				<h2 id="pausing-the-social-overlay">Pausing the Social Overlay</h2>
+			</div>
+			<p>The Social Overlay processes notifications as they arrive. To pause this behavior use
+				<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-ui-pause-social-overlay">
+					<code>EOS_UI_PauseSocialOverlay</code>
+				</a>.  This is useful during cutscenes or loading.
+				<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-ui-is-social-overlay-paused">
+					<code>EOS_UI_IsSocialOverlayPaused</code>
+				</a>
+				can be used to retrieve the previously set pause state.</p>
+			<p>Configure the
+				<code>EOS_UI_PauseSocialOverlayOptions</code>
+				parameter as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to
+							<code>EOS_UI_PAUSESOCIALOVERLAY_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>EOS_Bool bIsPaused</td>
+						<td>The desired bIsPaused state of the overlay.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="getting-and-setting-hotkeys">Getting and Setting Hotkeys</h2>
+			</div>
+			<p>Users can use hotkeys to show or hide overlay pages. Hotkeys act as toggles, so the hotkey that shows a page will also hide that page.</p>
+			<p>To define a hotkey, you must pick a main key and one or more modifier keys. The main key can be
+				<strong>F1</strong>
+				through
+				<strong>F12</strong>,
+				<strong>Space</strong>,
+				<strong>Backspace</strong>,
+				<strong>Escape</strong>, or
+				<strong>Tab</strong>. Modifier keys include
+				<strong>Shift</strong>,
+				<strong>Control</strong>, and
+				<strong>Alt</strong>.</p>
+			<p>To describe a hotkey, use an
+				<code>EOS_UI_EKeyCombination</code>. You can build a key combination with bitwise OR operations, and verify that it is acceptable as a hotkey with
+				<code>EOS_UI_IsValidKeyCombination</code>, as in the following sample code:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="color:#aeaeae">// Set ProposedHotKey to Alt-Shift-Tab.</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>EOS_UI_EKeyCombination ProposedHotKey
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+									EOS_UI_EKeyCombination</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span>EOS_UIK_Alt
+								</span>
+								<span style="color:#fff">|</span>
+								<span>
+									EOS_UI_EKeyCombination</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span>EOS_UIK_Shift
+								</span>
+								<span style="color:#fff">|</span>
+								<span>
+									EOS_UI_EKeyCombination</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span>EOS_UIK_Tab</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+							<div style="color:#fff">
+								<span></span>
+								<span style="color:#aeaeae">// Ask the UI Interface if ProposedHotKey is acceptable.</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span></span>
+								<span style="color:#f08a92">if</span>
+								<span>
+								</span>
+								<span style="color:#fff">(</span>
+								<span style="color:#89bdff">EOS_UI_IsValidKeyCombination</span>
+								<span style="color:#fff">(</span>
+								<span>ProposedHotKey</span>
+								<span style="color:#fff">)</span>
+								<span>
+								</span>
+								<span style="color:#fff">==</span>
+								<span>
+									EOS_TRUE</span>
+								<span style="color:#fff">)</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span></span>
+								<span style="color:#fff">{</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+								</span>
+								<span style="color:#aeaeae">// ProposedHotKey is valid.</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span></span>
+								<span style="color:#fff">}</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>The UI Interface provides functions to check the current hotkey for a given page, set it to a new value, or reset it to the system default (with
+				<code>EOS_UI_EKeyCombination::EOS_UIK_None</code>).</p>
+			
+			<!-- -->
+			<p>Call
+				<code>EOS_UI_GetToggleFriendsKey</code>
+				to get the current hotkey for the friends list page. Configure the
+				<code>EOS_UI_GetToggleFriendsKeyOptions</code>
+				parameter as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_GETTOGGLEFRIENDSKEY_API_LATEST.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>To set (or reset) the hotkey for the friends list page, use
+				<code>EOS_UI_SetToggleFriendsKeyOptions</code>
+				with an
+				<code>EOS_UI_SetToggleFriendsKeyOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>API Version: Set this to EOS_UI_SETTOGGLEFRIENDSKEY_API_LATEST.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/enums/eos-ui-e-key-combination">EOS_UI_EKeyCombination</a>
+							KeyCombination</td>
+						<td>The new key combination which will be used to toggle the friends overlay. The combination can be any set of modifiers and one key. A value of EOS_UIK_None will cause the key to revert to the default.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
+				<a href="/docs/en-US/site-map?tag=%20UI">
+					UI</a>
+				<a href="/docs/en-US/site-map?tag=%20Overlay">
+					Overlay</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#showing-or-hiding-an-overlay">Showing or Hiding an Overlay</a>
+					</li>
+					<li>
+						<a href="#blocking-and-reporting">Blocking and Reporting</a>
+					</li>
+					<li>
+						<a href="#detecting-visibility-status">Detecting Visibility Status</a>
+					</li>
+					<li>
+						<a href="#overlay-system-visibility-status">Overlay System Visibility Status</a>
+					</li>
+					<li>
+						<a href="#individual-page-visibility-status">Individual Page Visibility Status</a>
+					</li>
+					<li>
+						<a href="#pausing-the-social-overlay">Pausing the Social Overlay</a>
+					</li>
+					<li>
+						<a href="#getting-and-setting-hotkeys">Getting and Setting Hotkeys</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

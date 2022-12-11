@@ -11,7 +11,10 @@ using System.Globalization;
 var dir = new DirectoryInfo("docs");
 CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-var httpClient = new HttpClient();
+var httpClient = new HttpClient
+{
+    Timeout = TimeSpan.FromSeconds(5),
+};
 
 // Angle Sharp
 var config = Configuration.Default;
@@ -22,9 +25,16 @@ var baseUri = new Uri("https://dev.epicgames.com/docs");
 var linkQueue = new LinkQueue();
 linkQueue.Queue(baseUri);
 
+var errorCount = 0;
 
 while (linkQueue.TryDequeue(out var uri))
 {
+    if (errorCount >= 5)
+    {
+        Console.WriteLine("Aborting due to frequent server errors!");
+        break;
+    }
+
     try
     {
         Console.WriteLine($"[{linkQueue.Done} / {linkQueue.Total}] Updating {uri}");
@@ -35,10 +45,21 @@ while (linkQueue.TryDequeue(out var uri))
         }
 
         var response = await httpClient.GetAsync(uri).ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            if (response.StatusCode >= System.Net.HttpStatusCode.InternalServerError)
+            {
+                errorCount++;
+                continue;
+            }
+
+            continue;
+        }
+
+        errorCount = 0;
 
         var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
         var document = await context.OpenAsync(req => req.Content(content).Address(uri));
 
         var page = document.QuerySelector("section.page");
@@ -169,6 +190,7 @@ while (linkQueue.TryDequeue(out var uri))
     }
     catch (Exception ex)
     {
+        errorCount++;
         Console.WriteLine(ex);
     }   
 }

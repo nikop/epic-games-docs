@@ -13,7 +13,7 @@ CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
 var httpClient = new HttpClient
 {
-    Timeout = TimeSpan.FromSeconds(5),
+    Timeout = TimeSpan.FromSeconds(10),
 };
 
 // Angle Sharp
@@ -29,9 +29,9 @@ var errorCount = 0;
 
 while (linkQueue.TryDequeue(out var uri))
 {
-    if (errorCount >= 5)
+    if (errorCount >= 10)
     {
-        Console.WriteLine("Aborting due to frequent server errors!");
+        Console.WriteLine("::error::Aborting due to frequent server errors!");
         break;
     }
 
@@ -187,6 +187,10 @@ while (linkQueue.TryDequeue(out var uri))
         }
 
         await File.WriteAllTextAsync(file, str).ConfigureAwait(false);
+    }
+    catch (TaskCanceledException)
+    {
+        Console.WriteLine($"::warning::{uri} fetch timeout");
     }
     catch (Exception ex)
     {

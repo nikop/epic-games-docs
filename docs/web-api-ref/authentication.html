@@ -111,8 +111,10 @@
 						<td>
 							<code>deployment_id</code>
 						</td>
-						<td>The deployment ID that the client is trying to authenticate with. This will impact interactions with other services that require a deployment.   If the deployment is not public, only users who have been entitled will be able to log in. For more information on deployments and deployment IDs see
-							<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.   Note: You must use this unique identifier to use the Ecommerce APIs, and to request access tokens used by game clients.</td>
+						<td>The deployment ID that the client is trying to authenticate with. This will impact interactions with other services that require a deployment. If the deployment is not public, only users who have been entitled will be able to log in. For more information on deployments and deployment IDs see
+							<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.
+							<br>
+							<strong>Note</strong>: You must use this unique identifier to use the Ecommerce APIs, and to request access tokens used by game clients.</td>
 					</tr>
 					<tr>
 						<td>
@@ -310,7 +312,9 @@
 						<td>
 							<code>expires_at</code>
 						</td>
-						<td>The expire date in ISO 8601 format.</td>
+						<td>The expire date in
+							<a href="https://www.w3.org/TR/NOTE-datetime">ISO 8601</a>
+							format.</td>
 					</tr>
 					<tr>
 						<td>
@@ -972,7 +976,9 @@
 					<tr>
 						<td>sub</td>
 						<td>string</td>
-						<td>This claim will not be present when using the client_credentials grant type.</td>
+						<td>This claim will not be present when using the
+							<code>client_credentials</code>
+							grant type.</td>
 					</tr>
 					<tr>
 						<td>aud</td>
@@ -997,7 +1003,8 @@
 					<tr>
 						<td>t</td>
 						<td>string</td>
-						<td>The type of token. This should always be epic_id. This replaces the version prefix that we have with EG1 tokens.</td>
+						<td>The type of token. This should always be
+							<code>epic_id</code>. This replaces the version prefix that we have with EG1 tokens.</td>
 					</tr>
 					<tr>
 						<td>scope</td>

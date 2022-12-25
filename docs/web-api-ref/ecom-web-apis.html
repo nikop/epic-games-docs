@@ -70,7 +70,7 @@
 				</section>
 			</div>
 			<div>
-				<p>This endpoint applies to auth tokens obtained via SDK 1.5+ or via OAuth OpenID Connect exchange implemented using configuration '<a href="https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration">https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration</a>'</p>
+				<p>This endpoint applies to auth tokens obtained via SDK 1.5+ or via OAuth OpenID Connect exchange implemented using configuration '<a href="/docs/en-UShttps://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration">https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration</a>'</p>
 			</div>
 			<p>You need to pass an access token in the Authorization header using Bearer authorization.</p>
 			<p>This endpoint supports the following query parameters:</p>
@@ -232,7 +232,7 @@
 				<h2 id="token-based-ownership-verification">Token-based Ownership Verification</h2>
 			</div>
 			<p>An Ownership Verification Token is a signed
-				<a href="https://tools.ietf.org/html/rfc7519">JWT</a>
+				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7519">JWT</a>
 				with a five-minute expiration. It is signed using RS512 (RSA PKCS#1 signature with SHA-512, RSA key size 2048).</p>
 			<p>There are two steps to perform the token baesd ownership verification:</p>
 			<ol>
@@ -390,7 +390,7 @@
 					is the prefix to represent Epic Games Ownership Check. Please strip it when decoding the token.</p>
 			</div>
 			<p>The token includes three base64 encoded JSON objects that correspond to the JWT header, payload, and signature. Please refer to the
-				<a href="https://tools.ietf.org/html/rfc7519">JWT documentation</a>
+				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7519">JWT documentation</a>
 				for more information.</p>
 			<p>The following is a sample of the JWT header:</p>
 			<div>
@@ -566,7 +566,7 @@
 				<h3 id="verifying-the-ownership-verification-token">Verifying the Ownership Verification Token</h3>
 			</div>
 			<p>To verify the signature in the token, you will need to fetch a public key. To fetch the key, you will need the Key ID (kid claim in the JWT). The response will include a
-				<a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
+				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
 				that can be used to verify the signature in the JWT.</p>
 			<p>To request the Public Key, your client/service will make an HTTP request to the public keys endpoint.</p>
 			<p>The public keys endpoint is:</p>
@@ -1005,7 +1005,7 @@
 			</div>
 			<p>To request an entitlement verification token, the client will make an HTTP POST request to the entitlement token endpoint.</p>
 			<p>The endpoint to request an entitlement verification token is
-				<a href="https://api.epicgames.dev/epic/ecom/v1/platforms/%7Bplatform%7D/identities/%7BidentityId%7D/entitlementToken">https://api.epicgames.dev/epic/ecom/v1/platforms/{platform}/identities/{identityId}/entitlementToken</a>
+				<a href="/docs/en-UShttps://api.epicgames.dev/epic/ecom/v1/platforms/%7Bplatform%7D/identities/%7BidentityId%7D/entitlementToken">https://api.epicgames.dev/epic/ecom/v1/platforms/{platform}/identities/{identityId}/entitlementToken</a>
 			</p>
 			<p>You will need to pass an access token in the Authorization header using Bearer authorization.</p>
 			<p>This endpoint supports the following request parameters:</p>
@@ -1366,7 +1366,7 @@
 			<p>To verify the signature in the token, you will need to fetch a public key. To fetch the key, you will need the Key ID (kid claim in the JWT). The response will include a JSON Web Key (JWK) that can be used to verify the signature in the JWT.</p>
 			<p>To request the Public Key, your client/service will make an HTTP request to the public keys endpoint.</p>
 			<p>The public keys endpoint is
-				<a href="https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/%7Bkid%7D">https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</a>
+				<a href="/docs/en-UShttps://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/%7Bkid%7D">https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</a>
 			</p>
 			<p>The following snippet shows a sample request to get a public key:</p>
 			<div>

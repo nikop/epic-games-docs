@@ -42,7 +42,7 @@
 				handle is ticking for callbacks to trigger when requests are completed.</p>
 			<p>Please see the
 				<strong>
-					<a href="/docs/game-services/sessions#matchmaking-security-considerations">security documentation</a>
+					<a href="/docs/en-US#matchmaking-security-considerations">security documentation</a>
 				</strong>
 				for various considerations when using this interface.</p>
 			<div>
@@ -273,7 +273,7 @@
 				<code>EOS_HSessionModification</code>
 				you provided will contain a valid handle.</p>
 			<p>Second, continue to modify the session's initial setup (see the section on
-				<a href="/docs/game-services/sessions#modifying-a-session">modifying a session</a>
+				<a href="/docs/en-US#modifying-a-session">modifying a session</a>
 				until you have made all the modifications you need. You can then complete the creation process by calling
 				<code>EOS_Sessions_UpdateSession</code>
 				with an
@@ -379,7 +379,7 @@
 							<code>EOS_SessionModification_SetJoinInProgressAllowed</code>
 						</td>
 						<td>You can permit or forbid players to join games that have already begun (see the section on
-							<a href="/docs/game-services/sessions#starting-and-ending-play">starting and ending play</a>
+							<a href="/docs/en-US#starting-and-ending-play">starting and ending play</a>
 							for more details) with this function.</td>
 					</tr>
 					<tr>
@@ -403,7 +403,7 @@
 						</td>
 						<td>Adds a custom attribute (type
 							<code>EOS_SessionDetails_AttributeData</code>) to the session. See the
-							<a href="/docs/game-services/sessions#custom-attributes">Custom Attributes</a>
+							<a href="/docs/en-US#custom-attributes">Custom Attributes</a>
 							section for more information.</td>
 					</tr>
 					<tr>
@@ -411,7 +411,7 @@
 							<code>EOS_SessionModification_RemoveAttribute</code>
 						</td>
 						<td>Removes a custom attribute from the session. See the
-							<a href="/docs/game-services/sessions#custom-attributes">Custom Attributes</a>
+							<a href="/docs/en-US#custom-attributes">Custom Attributes</a>
 							section for more information.</td>
 					</tr>
 				</tbody>
@@ -689,7 +689,7 @@
 				<p>This function only sets up the attribute that you want to add or update. It does not actually add or update the attribute, or interact with the session in any way. You will still need to call
 					<code>EOS_Sessions_UpdateSession</code>
 					as described at the top of this
-					<a href="/docs/game-services/sessions#modifying-a-session">section</a>.</p>
+					<a href="/docs/en-US#modifying-a-session">section</a>.</p>
 			</div>
 			<div>
 				<h4 id="removing-an-attribute">Removing an Attribute</h4>
@@ -729,13 +729,13 @@
 				<p>This function only establishes that you want to remove a certain attribute. It does not actually remove the attribute, or interact with the session in any way. You will still need to call
 					<code>EOS_Sessions_UpdateSession</code>
 					as described at the top of this
-					<a href="/docs/game-services/sessions#modifying-a-session">section</a>.</p>
+					<a href="/docs/en-US#modifying-a-session">section</a>.</p>
 			</div>
 			<div>
 				<h2 id="inviting-players-to-a-session">Inviting Players to a Session</h2>
 			</div>
 			<p>To invite another player to join an active session, a
-				<a href="/docs/game-services/sessions#registering-a-player">registered</a>
+				<a href="/docs/en-US#registering-a-player">registered</a>
 				member of the session can call
 				<code>EOS_Sessions_SendInvite</code>
 				with an
@@ -791,7 +791,7 @@
 				to retrieve the
 				<code>EOS_HSessionDetails</code>
 				handle from the invitation. You can use this handle to gain access to the
-				<a href="/docs/game-services/sessions#session-details">session details</a>
+				<a href="/docs/en-US#session-details">session details</a>
 				data for the associated session, or to accept or reject the invitation. Once you are finished with the handle, call
 				<code>EOS_SessionDetails_Release</code>
 				to release it.</p>
@@ -803,7 +803,7 @@
 				<h3 id="accepting-an-invitation">Accepting an Invitation</h3>
 			</div>
 			<p>The Sessions Interface does not feature a dedicated function for accepting an invitation. You can
-				<a href="/docs/game-services/sessions#joining-a-session">join</a>
+				<a href="/docs/en-US#joining-a-session">join</a>
 				the session using the standard method with the
 				<code>EOS_HSessionDetails</code>
 				handle that you retrieved from the invitation. To request a list of all pending invitations, call
@@ -914,16 +914,16 @@
 					(currently 64).</p>
 			</div>
 			<p>As described
-				<a href="/docs/game-services/sessions#inviting-players-to-a-session">above</a>, the
+				<a href="/docs/en-US#inviting-players-to-a-session">above</a>, the
 				<code>EOS_Sessions_CopySessionHandleByInviteId</code>
 				function will provide an
 				<code>EOS_HSession</code>
 				handle which gives you access to the
-				<a href="/docs/game-services/sessions#session-details">session details</a>
+				<a href="/docs/en-US#session-details">session details</a>
 				data for the associated session. You can then choose to accept the invitation by
-				<a href="/docs/game-services/sessions#joining-a-session">joining</a>
+				<a href="/docs/en-US#joining-a-session">joining</a>
 				the session, ignore the invitation, or
-				<a href="/docs/game-services/sessions#rejecting-an-invitation">reject</a>
+				<a href="/docs/en-US#rejecting-an-invitation">reject</a>
 				it. Once you are finished with the
 				<code>EOS_HSession</code>
 				handle, call
@@ -1149,7 +1149,7 @@
 							<code>Parameter</code>
 						</td>
 						<td>A key and a value to compare to an
-							<a href="/docs/game-services/sessions#custom-attributes">attribute</a>
+							<a href="/docs/en-US#custom-attributes">attribute</a>
 							associated with the session</td>
 					</tr>
 					<tr>
@@ -1277,11 +1277,11 @@
 				to get a copy of the
 				<code>EOS_HSessionDetails</code>
 				handle associated with the
-				<a href="/docs/game-services/sessions#active-sessions">active session</a>
+				<a href="/docs/en-US#active-sessions">active session</a>
 				at that index. This handle provides access to
-				<a href="/docs/game-services/sessions#session-details">session details</a>
+				<a href="/docs/en-US#session-details">session details</a>
 				data, which you can use to display information about the session to the local user or determine whether or not to
-				<a href="/docs/game-services/sessions#joining-a-session">join</a>
+				<a href="/docs/en-US#joining-a-session">join</a>
 				the session using your own game logic. You must release the
 				<code>EOS_HSessionDetails</code>
 				handle with
@@ -1347,7 +1347,7 @@
 				<code>EOS_Sessions_OnJoinSessionCallback</code>, will receive an
 				<code>EOS_Sessions_JoinSessionCallbackInfo</code>
 				indicating success or failure. If the operation succeeds, EOS will create an active session on the joining client's system. As this new session is locally-owned, the joining user is responsible for
-				<a href="/docs/game-services/sessions#destroying-a-session">destroying</a>
+				<a href="/docs/en-US#destroying-a-session">destroying</a>
 				it once it is no longer needed.</p>
 			<div>
 				<h3 id="registering-a-player">Registering a Player</h3>
@@ -1444,7 +1444,7 @@
 				<em>the
 					<code>SanctionedPlayers</code>
 					list must be checked manually</em>. See
-				<a href="/docs/game-services/sessions#enforcing-sanctions">Enforcing Sanctions</a>
+				<a href="/docs/en-US#enforcing-sanctions">Enforcing Sanctions</a>
 				for more details. EOS does not provide notification when a player joins a session, so you must notify the owner when you join, or provide the owner with a way to detect when a player has successfully joined the session.</p>
 			<p>After a user registers with a publicly visible session (a session configured with
 				<code>EOS_OSPF_PublicAdvertised</code>
@@ -1461,7 +1461,7 @@
 				<h2 id="leaving-a-session">Leaving a Session</h2>
 			</div>
 			<p>The Sessions Interface does not feature a dedicated function for leaving a session. To leave a session,
-				<a href="/docs/game-services/sessions#destroying-a-session">destroy</a>
+				<a href="/docs/en-US#destroying-a-session">destroy</a>
 				your local session through the standard method, using its local name.</p>
 			<div>
 				<h3 id="unregistering-a-player">Unregistering a Player</h3>
@@ -1522,7 +1522,7 @@
 			<p>A player can declare that a match has started or ended for a local active session. If that session maps to a session on the back-end service that the local player owns, the back-end version will also start or end play. While playing, the back-end service will automatically reject attempts to join a session if that session has
 				<strong>Join in Progress</strong>
 				disabled (see the section on
-				<a href="/docs/game-services/sessions#modifying-a-session">Modifying a Session</a>
+				<a href="/docs/en-US#modifying-a-session">Modifying a Session</a>
 				for more information). Although starting a session typically implies that a match has begun, the specific usage of this functionality is up to the game's developers.</p>
 			<p>To start play, call
 				<code>EOS_Sessions_StartSession</code>
@@ -1635,7 +1635,7 @@
 			</div>
 			<p>Through the Sessions Interface, the session owner (the user who created the session) can manage the session's state as it exists on the back-end service. The life cycle of a session starts with its creation and ends with its destruction. Between those two events, the Sessions Interface can modify the session, change its privacy settings, send invitations, register and unregister players as they join and leave, and start, play, and end matches. A session's life cycle is not rigid; for example, sessions can modify their data at any time, and can start and end multiple matches.</p>
 			<p>In general, only the owner of the session can make modifications to session data on the back-end service. However, remote clients who
-				<a href="/docs/game-services/sessions#joining-a-session">join</a>
+				<a href="/docs/en-US#joining-a-session">join</a>
 				a session will have their own local view of the session, and this view does not automatically receive data updates about the back-end version. It is not required, but can be beneficial for remote clients to keep their local view in sync with the back-end session by mirroring the following function calls:</p>
 			<ul>
 				<li>
@@ -1676,7 +1676,7 @@
 				structure. If
 				<code>bSanctionsEnabled</code>
 				is true, then the created session enforces sanctions. See the
-				<a href="/docs/game-services/sessions#creating-a-session">Creating a Session</a>
+				<a href="/docs/en-US#creating-a-session">Creating a Session</a>
 				section for more information.</p>
 			<p>If a player has a
 				<code>RESTRICT_GAME_ACCESS</code>
@@ -1698,7 +1698,7 @@
 				<code>SanctionedPlayers</code>
 				member of the callback result struct
 				<code>EOS_Sessions_RegisterPlayersCallbackInfo</code>. See the
-				<a href="/docs/game-services/sessions#registering-a-player">Registering a Player</a>
+				<a href="/docs/en-US#registering-a-player">Registering a Player</a>
 				section for more details.</p>
 			<div>
 				<h2 id="usage-limitations">Usage Limitations</h2>

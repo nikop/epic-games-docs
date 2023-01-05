@@ -410,6 +410,11 @@
 				<p>ID Tokens can not be used to execute actions on behalf of a user. They are only intended for the use of user identity verification.</p>
 			</div>
 			<div>
+				<p>The ID token returned by your OpenId provider must have the
+					<code>kid</code>
+					parameter value set in its header.</p>
+			</div>
+			<div>
 				<h4 id="retrieving-an-id-token-for-user">Retrieving an ID Token for user</h4>
 			</div>
 			<p>Game clients can obtain ID Tokens for local users by calling the
@@ -488,7 +493,7 @@
 					<tr>
 						<td>kid</td>
 						<td>string</td>
-						<td>Identifier for the key that was used to sign the token.</td>
+						<td>This is required. Identifier for the key that was used to sign the token.</td>
 					</tr>
 				</tbody>
 			</table>

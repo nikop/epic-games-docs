@@ -20,7 +20,7 @@
 			<h1>Using the Anti-Cheat interfaces</h1>
 			<h2></h2>
 			<div>
-				<div>20 mins to read</div>
+				<div>21 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -748,6 +748,11 @@
 			<p>Debuggers will not work while the anti-cheat protection is active.</p>
 			<p>For normal game development tasks, we recommend that you simply run the game without the anti-cheat protection active by starting the game executable directly instead of using the anti-cheat bootstrapper executable.</p>
 			<p>When the game is started this way, the anti-cheat protection will not be active and will not interfere with debuggers. If the anti-cheat has been integrated correctly, it should not be possible to join a protected multiplayer session in this situation.</p>
+			<div>
+				<p>While a debugger won't work with anti-cheat fully running, you can pass a null client to anti-cheat for debugging purposes. This allows you to attach a debugger and debug most of the flow up until the anti-cheat handshake. To do this, start the game without the anti-cheat bootstrapper, and pass the additional command line argument
+					<code>-EOS_FORCE_ANTICHEATCLIENTNULL</code>
+					to the game.</p>
+			</div>
 			<div>
 				<h4 id="external-crash-dumpers">External Crash Dumpers</h4>
 			</div>

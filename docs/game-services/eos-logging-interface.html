@@ -36,7 +36,9 @@
 			<div>
 				<h2 id="receiving-log-data">Receiving Log Data</h2>
 			</div>
-			<p>To receive log output from the EOS SDK, register a callback function (of type
+			<p>To receive log output from the EOS SDK, you must first initialize the EOS SDK (See the
+				<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">Platform Interface documentation</a>
+				for more information). Then, register a callback function (of type
 				<code>EOS_LogMessageFunc</code>) by passing it to the
 				<code>EOS_Logging_SetCallback</code>
 				function. Whenever another Interface produces log output, your function will receive an

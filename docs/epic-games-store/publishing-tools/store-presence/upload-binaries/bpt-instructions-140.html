@@ -27,6 +27,10 @@
 	<section>
 		<section>
 			<div>
+				<strong>Important Note</strong>: For best results, we recommend using the most recent version of the BuildPatch Tool. To learn more, review
+				<a href="/docs/upload-biniaries/bpt-instructions-150">BuildPatch Tool Instructions (1.5.0)</a>
+			</div>
+			<div>
 				<h2 id="before-you-start">Before You Start</h2>
 			</div>
 			<div>
@@ -84,7 +88,7 @@
 			<p>To view your organization’s BuildPatch Tool credentials:</p>
 			<ol>
 				<li>Sign in to the
-					<a href="/docs/en-UShttps://dev.epicgames.com/portal">Dev Portal</a>.</li>
+					<a href="https://dev.epicgames.com/portal">Dev Portal</a>.</li>
 				<li>Select the product for which you want to view credentials.</li>
 				<li>Select
 					<strong>Product Settings</strong>.</li>
@@ -147,12 +151,12 @@
 				<h2 id="initial-setup">Initial Setup</h2>
 			</div>
 			<p>Extract the contents of the
-				<a href="/docs/en-UShttps://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP file</a>
+				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP file</a>
 				to a machine that has access to the build you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
 			<p>
 				<strong>Note:</strong>
 				The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file, please
-				<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/contactsupport">
+				<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/contactsupport">
 					<strong>create a case</strong>
 				</a>.</p>
 			<div>
@@ -409,7 +413,7 @@
 					<p>
 						<code>ClientId</code>
 						– See
-						<a href="/docs/en-US#authentication">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#authentication">
 							<em>Authentication</em>
 						</a>.</p>
 				</li>
@@ -418,7 +422,7 @@
 						<code>ClientSecretEnvVar
 						</code>
 						– See
-						<a href="/docs/en-US#authentication">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#authentication">
 							<em>Authentication</em>
 						</a>.</p>
 				</li>
@@ -462,7 +466,7 @@
 						<code>FileAttributeList</code>
 						<em>(Optional)</em>
 						– An absolute path to a text file containing a list of files and corresponding special attributes (e.g. executable bit) that should be set. See
-						<a href="/docs/en-US#setting-special-file-attributes">Setting Special File Attributes</a>
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#setting-special-file-attributes">Setting Special File Attributes</a>
 						for a description of the file contents.</p>
 					<ul>
 						<li>Note that the attributes file should not be inside your
@@ -879,7 +883,7 @@
 				folder does contain the main game or other DLC items, then a
 				<code>-FileIgnoreList</code>
 				parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary. See
-				<a href="/docs/en-US#how-to-process-a-build">How to Process a Build</a>
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#how-to-process-a-build">How to Process a Build</a>
 				for details.</p>
 			<p>When installed on end users’ machines, the main game and all items of related DLC will be installed into the same directory. This leads to the restriction that there must be no files within the main game or any item of DLC which share a common file path. The BuildPatchTool will perform checks on this and prevent the patch generation process from occurring if there are any files which violate this rule. This means that the Base game must be able to locate installed DLC by relative path from its install location.</p>
 			<div>
@@ -896,35 +900,35 @@
 			<ul>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---failed-to-retrieve-list-of-binaries-from-epic-services">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#error---failed-to-retrieve-list-of-binaries-from-epic-services">
 							<em>Error - Failed to retrieve list of binaries from Epic services</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---missing-parameters">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#error---missing-parameters">
 							<em>Error - Missing parameters</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---missing-credentials">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#error---missing-credentials">
 							<em>Error - Missing credentials</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---authentication-error">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#error---authentication-error">
 							<em>Error - Authentication error</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---unexpected-error">
+						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-140#error---unexpected-error">
 							<em>Error - Unexpected error</em>
 						</a>
 					</p>

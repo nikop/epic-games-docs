@@ -27,7 +27,7 @@
 	<section>
 		<section>
 			<p>Epic Online Services (EOS) uses the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
+				<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
 				protocol for authentication and authorization, supporting common-use cases for web servers and client-side applications. Epic has also introduced custom grant types for some specific use cases.</p>
 			<p>Before starting, you will need to obtain OAuth 2.0 client credentials from Epic. These will be in the form of a Client ID and Client Secret, and will be used when requesting an access token from the Epic authorization server. See our guide on
 				<a href="/docs/epic-account-services/getting-started">Getting Started with Epic Account Services</a>
@@ -77,7 +77,7 @@
 				<h2 id="authentication">Authentication</h2>
 			</div>
 			<p>As the first step in the authentication flow, the user must authenticate with Epic Account Services. We only support
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
+				<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
 				for authentication, with additional custom grant types.</p>
 			<p>Once the client has the necessary information to request a token (including the exchange code, authorization code, and user credentials), it begins by requesting an access token.</p>
 			<div>
@@ -87,7 +87,7 @@
 			<p>The Epic token endpoint is
 				<code>https://api.epicgames.dev/epic/oauth/v1/token</code>. If you want to indicate that an access token is no longer needed, use
 				<code>https://api.epicgames.dev/epic/oauth/v1/revoke</code>. This endpoint implements
-				<a href="/docs/en-UShttps://oauth.net/2/token-revocation/#:~:text=The%20Token%20Revocation%20extension%20defines,credentials%20associated%20with%20the%20authorization.">RFC 7009 - OAuth 2.0 Token Revocation</a>.</p>
+				<a href="https://oauth.net/2/token-revocation/#:~:text=The%20Token%20Revocation%20extension%20defines,credentials%20associated%20with%20the%20authorization.">RFC 7009 - OAuth 2.0 Token Revocation</a>.</p>
 			<p>The client credentials will be passed in the Authorization header using Basic authorization. This endpoint supports the following post parameters:</p>
 			<table>
 				<thead>
@@ -192,7 +192,7 @@
 							<strong>For the
 								<code>client_credentials</code>
 								grant type (see
-								<a href="/docs/en-US#web-applications">Web Authorization</a>
+								<a href="/docs/web-api-ref/authentication#web-applications">Web Authorization</a>
 								)</strong>
 						</td>
 					</tr>
@@ -313,7 +313,7 @@
 							<code>expires_at</code>
 						</td>
 						<td>The expire date in
-							<a href="/docs/en-UShttps://www.w3.org/TR/NOTE-datetime">ISO 8601</a>
+							<a href="https://www.w3.org/TR/NOTE-datetime">ISO 8601</a>
 							format.</td>
 					</tr>
 					<tr>
@@ -572,9 +572,9 @@
 			<p>After the user logs in, they will be redirected back to the configured redirect URL with an authorization code. Your application should use that code to get an Access Token using the
 				<code>authorization_code</code>
 				grant type as described in
-				<a href="/docs/en-US#requesting-an-access-token">Requesting an Access Token</a>.</p>
+				<a href="/docs/web-api-ref/authentication#requesting-an-access-token">Requesting an Access Token</a>.</p>
 			<p>We also support an optional state parameter that can be used to maintain state between the request and the callback, and that is used to prevent
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc6749#section-10.12">cross-site request forgery attacks</a>.</p>
+				<a href="https://tools.ietf.org/html/rfc6749#section-10.12">cross-site request forgery attacks</a>.</p>
 			<p>The following is an example redirect after the user is authenticated:</p>
 			<div>
 				<section>
@@ -601,9 +601,9 @@
 			</div>
 			<p>The access token is a JWT (JSON Web Token) that includes a header and signature used to validate the authenticity of the token.</p>
 			<p>Before validating the signature, you will need to fetch a public key published as a
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
+				<a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
 				from our service. We expose a single endpoint using the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7517#section-5">JWK Set</a>
+				<a href="https://tools.ietf.org/html/rfc7517#section-5">JWK Set</a>
 				format that includes all of the current public keys. While the keys are not changed frequently, it is possible that they are rotated at any time.</p>
 			<p>The JWK endpoint is
 				<code>https://api.epicgames.dev/epic/oauth/v1/.well-known/jwks.json</code>
@@ -701,7 +701,7 @@
 				<h4 id="online-verification">Online Verification</h4>
 			</div>
 			<p>If offline verification is not an option, you can perform an online verification by calling the token info endpoint with a valid access token. This endpoint implements the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7662#section-2.1">Token Introspection</a>
+				<a href="https://tools.ietf.org/html/rfc7662#section-2.1">Token Introspection</a>
 				specification.</p>
 			<p>The token info endpoint is
 				<code>https://api.epicgames.dev/epic/oauth/v1/tokenInfo</code>
@@ -957,7 +957,7 @@
 				<h3 id="from-the-access-token">From the Access Token</h3>
 			</div>
 			<p>You can retrieve some information directly from the access token. The token is encoded as a
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>, and its header includes information about the type of token and signature it uses, as well as a payload with information about the user, your client, the session, and a signature. We recommend using a library to handle decoding the JWT, but if this is not possible, refer to the JWT specification.</p>
+				<a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>, and its header includes information about the type of token and signature it uses, as well as a payload with information about the user, your client, the session, and a signature. We recommend using a library to handle decoding the JWT, but if this is not possible, refer to the JWT specification.</p>
 			<p>The payload will include the following information:</p>
 			<table>
 				<thead>

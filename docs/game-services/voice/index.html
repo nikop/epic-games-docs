@@ -45,7 +45,7 @@
 			<p>To use the Voice interface, you should:</p>
 			<ol>
 				<li>Review and determine the
-					<a href="/docs/en-US#voice-integration-methods">integration method</a>
+					<a href="/docs/game-services/voice#voice-integration-methods">integration method</a>
 					you want to use with your game.</li>
 				<li>Investigate the Voice sample (<a href="/docs/game-services/voice/voice-sample">C</a>
 					and
@@ -60,8 +60,8 @@
 					</ol>
 				</li>
 				<li>Review the
-					<a href="/docs/en-US#best-practices">best practices</a>,
-					<a href="/docs/en-US#voice-metrics">voice metrics</a>, and
+					<a href="/docs/game-services/voice#best-practices">best practices</a>,
+					<a href="/docs/game-services/voice#voice-metrics">voice metrics</a>, and
 					<a href="/docs/epic-online-services/services-overview#service-usage-limitations">usage limitations</a>
 					for the Voice interface.</li>
 			</ol>
@@ -72,7 +72,7 @@
 			<ul>
 				<li>
 					<p>
-						<a href="/docs/en-US#voice-with-lobbies">
+						<a href="/docs/game-services/voice#voice-with-lobbies">
 							<strong>Use Voice with Lobbies</strong>
 						</a>: Integrate the EOS SDK into your
 						<strong>Game Client</strong>
@@ -84,7 +84,7 @@
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#voice-with-a-trusted-server-application">
+						<a href="/docs/game-services/voice#voice-with-a-trusted-server-application">
 							<strong>Use a Trusted Server Application</strong>
 						</a>: Integrate the EOS SDK into your
 						<strong>Game Client</strong>
@@ -155,7 +155,7 @@
 				<code>mute</code>, and
 				<code>kick</code>
 				are intended for
-				<a href="/docs/en-US#voice-with-a-trusted-server-application">server use only</a>
+				<a href="/docs/game-services/voice#voice-with-a-trusted-server-application">server use only</a>
 				and should remain disabled. Otherwise, this would allow Game Clients access to any
 				<code>roomId</code>.</p>
 			<div>
@@ -405,6 +405,199 @@
 				</li>
 			</ul>
 			<div>
+				<h2 id="implementing-the-voice-interface-on-windows">Implementing the Voice Interface on Windows</h2>
+			</div>
+			<p>For Windows, you must pass the
+				<code>EOS_Windows_RTCOptions</code>
+				in the Platform Interface's
+				<code>RTCOptions</code>
+				before creating the platform.</p>
+			<p>The C SDK example (a code snippet is copied below, but see the
+				<a href="/docs/game-services/voice/voice-sample">Voice Interface - C SDK</a>
+				page for full details) does the following for windows:</p>
+			<ul>
+				<li>Creates an instance of the
+					<code>EOS_Windows_RTCOptions</code>
+					class called
+					<code>WindowsRtcOptions</code>.</li>
+				<li>Configures its attributes.</li>
+				<li>Points the value of
+					<code>RtcOptions.PlatformSpecificOptions</code>
+					to the address of
+					<code>WindowsRtcOptions</code>.</li>
+			</ul>
+			<p>The C SDK example code snippet for Windows:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span>#ifdef _WIN32</span>
+							</div>
+							<div style="color:#fff">
+								<span>
+								</span>
+								<span style="color:#aeaeae">// Get absolute path for xaudio2_9redist.dll file</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									wchar_t CurDir</span>
+								<span style="color:#fff">[</span>
+								<span>MAX_PATH
+								</span>
+								<span style="color:#fff">+</span>
+								<span>
+								</span>
+								<span style="color:#ffcb8f">1</span>
+								<span style="color:#fff">]</span>
+								<span>
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+								</span>
+								<span style="color:#fff">{</span>
+								<span style="color:#fff">}</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+								</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#89bdff">GetCurrentDirectoryW</span>
+								<span style="color:#fff">(</span>
+								<span>MAX_PATH
+								</span>
+								<span style="color:#fff">+</span>
+								<span>
+								</span>
+								<span style="color:#ffcb8f">1</span>
+								<span>u</span>
+								<span style="color:#fff">,</span>
+								<span>
+									CurDir</span>
+								<span style="color:#fff">)</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									std</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span>wstring BasePath
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+									std</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#89bdff">wstring</span>
+								<span style="color:#fff">(</span>
+								<span>CurDir</span>
+								<span style="color:#fff">)</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									std</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span>string XAudio29DllPath
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+									FStringUtils</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#fff">:</span>
+								<span style="color:#89bdff">Narrow</span>
+								<span style="color:#fff">(</span>
+								<span>BasePath</span>
+								<span style="color:#fff">)</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									XAudio29DllPath</span>
+								<span style="color:#fff">.</span>
+								<span style="color:#89bdff">append</span>
+								<span style="color:#fff">(</span>
+								<span style="color:#00bda0">"/xaudio2_9redist.dll"</span>
+								<span style="color:#fff">)</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									EOS_Windows_RTCOptions WindowsRtcOptions
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+								</span>
+								<span style="color:#fff">{</span>
+								<span>
+								</span>
+								<span style="color:#ffcb8f">0</span>
+								<span>
+								</span>
+								<span style="color:#fff">}</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									WindowsRtcOptions</span>
+								<span style="color:#fff">.</span>
+								<span>ApiVersion
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+									EOS_WINDOWS_RTCOPTIONS_API_LATEST</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									WindowsRtcOptions</span>
+								<span style="color:#fff">.</span>
+								<span>XAudio29DllPath
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+									XAudio29DllPath</span>
+								<span style="color:#fff">.</span>
+								<span style="color:#89bdff">c_str</span>
+								<span style="color:#fff">(</span>
+								<span style="color:#fff">)</span>
+								<span style="color:#fff">;</span>
+								<span></span>
+							</div>
+							<div style="color:#fff">
+								<span>
+									RtcOptions</span>
+								<span style="color:#fff">.</span>
+								<span>PlatformSpecificOptions
+								</span>
+								<span style="color:#fff">=</span>
+								<span>
+								</span>
+								<span style="color:#fff">&amp;</span>
+								<span>WindowsRtcOptions</span>
+								<span style="color:#fff">;</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
 				<h2 id="best-practices">Best Practices</h2>
 			</div>
 			<p>
@@ -504,6 +697,9 @@
 					</li>
 					<li>
 						<a href="#handles-to-the-rtc-interfaces">Handles to the RTC Interfaces</a>
+					</li>
+					<li>
+						<a href="#implementing-the-voice-interface-on-windows">Implementing the Voice Interface on Windows</a>
 					</li>
 					<li>
 						<a href="#best-practices">Best Practices</a>

@@ -9,7 +9,7 @@
 				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="BuildPatch Tool Instructions (1.5.0)">BuildPatch Tool Instructions (1.5.0)</span>
+					<span aria-label="BuildPatch Tool Instructions (1.5.0 - Recommended)">BuildPatch Tool Instructions (1.5.0 - Recommended)</span>
 				</li>
 			</ol>
 		</nav>
@@ -17,87 +17,79 @@
 	</div>
 	<section>
 		<div>
-			<h1>BuildPatch Tool Instructions (1.5.0)</h1>
+			<h1>BuildPatch Tool Instructions (1.5.0 - Recommended)</h1>
 			<h2>Setup and processing instructions for BPT 1.5.0</h2>
 			<div>
-				<div>19 mins to read</div>
+				<div>20 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section>
 			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely upload binary files for your product to the Dev 
+				<!-- -->sandbox
+				<!-- --> for your product. You can then use the Artifacts and Binaries section of the Dev Portal to attach binaries to the correct artifact for your product offer and conduct testing. Using the
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>
+				process, you can promote binaries uploaded via the BuildPatch tool between sandboxes.</p>
+			<div>
 				<h2 id="before-you-start">Before You Start</h2>
 			</div>
+			<p>Before you begin, review the sections below to gather the information needed in preparation for using the BuildPatch tool.</p>
 			<div>
-				<h3 id="how-to-find-credential-ids">How to Find Credential IDs</h3>
+				<h3 id="download-the-buildpatch-tool">Download the BuildPatch Tool</h3>
 			</div>
-			<p>There are a number of IDs you will need to locate in the Developer Portal.</p>
-			<p>
-				<strong>Client ID and Client Secret for the product</strong>
-			</p>
+			<p>You can download the BuildPatch tool (BPT) from the Artifacts and Binaries page of the Dev Portal.</p>
 			<ol>
-				<li>Go to
-					<strong>Developer Portal Dashboard &gt; Product &gt; Games Services &gt; Product Settings</strong>.</li>
-				<li>View the credentials in
-					<strong>Product Settings &gt; SDK Credentials &gt; BPT Credentials</strong>.</li>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>To the top right, click
+					<strong>Download Tool</strong>.</li>
+				<li>After the download finishes, install the tool on your local machine.</li>
+			</ol>
+			<div>
+				<h3 id="retrieve-credential-ids">Retrieve Credential IDs</h3>
+			</div>
+			<p>To ensure you have the information needed to use the BPT, retrieve the following IDs from the Dev Portal.</p>
+			<p>
+				<strong>Client ID and Client Secret for the Product</strong>
+			</p>
+			<p>Any user in your organization with Owner, Admin, or Store roles can retrieve the following credentials:</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Product Settings</strong>.</li>
+				<li>Select the
+					<strong>General</strong>
+					tab.</li>
+				<li>Locate the Build Patch Tool Credentials section and save the client ID and secret.</li>
 			</ol>
 			<p>
-				<strong>Artifact Name and ID for the offer</strong>
+				<strong>Artifact Name and ID for the Offer</strong>
 			</p>
-			<ul>
-				<li>
-					<p>Go to
-						<strong>Product &gt; Artifacts</strong>
-						page
-						<strong>&gt; Offer Artifact &gt; Edit Details</strong>
-						drop-down.</p>
-				</li>
-				<li>
-					<p>The Artifact Name and ID display on
-						<strong>Manage Artifact</strong>
-						modal
-						<strong>&gt; Edit Details</strong>
-						drop-down.</p>
-				</li>
-			</ul>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>From the list, click the name of the offer for which you wish to retrieve credentials.</li>
+				<li>On the Manage Artifact screen, click the
+					<strong>arrow icon</strong>
+					to the right of Edit Details.</li>
+				<li>Save the artifact name and ID.</li>
+				<li>Repeat as needed for additional offers.</li>
+			</ol>
 			<p>
 				<strong>Offer IDs for the Offer</strong>
 			</p>
-			<ul>
-				<li>
-					<p>Go to
-						<strong>Product &gt; Offers page &gt; Offer</strong>.</p>
-				</li>
-				<li>
-					<p>The Offer IDs are located at the bottom of the
-						<strong>Edit Offer</strong>
-						modal.</p>
-				</li>
-			</ul>
-			<div>
-				<h3 id="view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</h3>
-			</div>
-			<p>Any user in your Organization with Owner, Admin or Store
-				<a href="/docs/dev-portal/organization-management">roles</a>
-				can view your BuildPatch Tool credentials for a product. They can also copy the credentials to the clipboard.</p>
-			<p>To view your organization’s BuildPatch Tool credentials:</p>
 			<ol>
-				<li>Sign in to the
-					<a href="/docs/en-UShttps://dev.epicgames.com/portal">Dev Portal</a>.</li>
-				<li>Select the product for which you want to view credentials.</li>
-				<li>Select
-					<strong>Product Settings</strong>.</li>
-				<li>Scroll down to
-					<strong>SDK Credentials &gt; BPT Credentials</strong>.</li>
-				<li>To copy the credentials to the clipboard, click
-					<strong>Copy</strong>:</li>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>.</li>
+				<li>From the list, click the name of the offer for which you wish to retrieve credentials.</li>
+				<li>On the Offer Details screen, locate the IDs section and save the offer ID.</li>
+				<li>Repeat as needed for additional offers.</li>
 			</ol>
-			<p>
-				<img src="/docs/assets/epic-games-store/tech-features-config/bpt-instructions-spt-one-dot-five/copy.png" alt="">
-			</p>
 			<div>
-				<h3 id="paths-on-the-command-line">Paths on the Command Line</h3>
+				<h3 id="review-paths-on-the-command-line">Review Paths on the Command Line</h3>
 			</div>
 			<p>Due to the way the command prompt interprets
 				<code>\"</code>
@@ -108,9 +100,9 @@
 				<li>Do not enclose paths in quotes (this is not possible if your path contains one or more spaces).</li>
 				<li>Escape only the trailing backslash with another backslash if it is double-quote enclosed (not recommended, as is error prone)</li>
 			</ul>
-			<div>
-				<h4 id="examples-of-valid-path-syntax">Examples of Valid Path Syntax</h4>
-			</div>
+			<p>
+				<strong>Examples of Valid Path Syntax</strong>
+			</p>
 			<ul>
 				<li>
 					<code>-BuildRoot="D:/MyFolder/"
@@ -137,48 +129,53 @@
 					</code>
 				</li>
 			</ul>
-			<div>
-				<h4 id="invalid-path-syntax">Invalid Path Syntax</h4>
-			</div>
+			<p>
+				<strong>Invalid Path Syntax</strong>
+			</p>
 			<p>The following syntax
-				<strong>will not work</strong>
+				<strong>does not work</strong>
 				when defining a path on the Command Line:</p>
 			<p>
 				<code>-BuildRoot="D:\MyFolder\"</code>
 			</p>
 			<div>
-				<h2 id="initial-setup">Initial Setup</h2>
+				<h2 id="using-the-buildpatch-tool">Using the BuildPatch Tool</h2>
+			</div>
+			<div>
+				<h3 id="initial-setup">Initial Setup</h3>
 			</div>
 			<p>Extract the contents of the
-				<a href="/docs/en-UShttps://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP</a>
+				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP</a>
 				file to a machine that has access to the 
 				<!-- -->binary
 				<!-- --> you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
 			<div>
 				<p>The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file, please
-					<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/contactsupport">
+					<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/contactsupport">
 						<strong>create a case</strong>
 					</a>.</p>
 			</div>
 			<div>
-				<h2 id="authentication">Authentication</h2>
+				<h3 id="authentication">Authentication</h3>
 			</div>
 			<p>Authentication is carried out by supplying a
 				<code>Client ID</code>
 				and
 				<code>Client Secret</code>
-				to BuildPatchTool. These must be provided for every operation using command line arguments.  Epic will issue you this ID and secret to use as your credentials.</p>
+				to BuildPatchTool. These must be provided for every operation using command line arguments.  These credentials are available in the Dev Portal under Your Product &gt; Product Settings &gt; General tab &gt; Build Patch Tool Credentials.</p>
 			<div>
 				<p>BuildPatchTool uses a unique
 					<code>Client ID</code>
 					and
-					<code>Client Secret</code>, separate from any EOS Client IDs your game may use. EOS Client IDs (which typically begin with xyza*) cannot be used with the BuildPatchTool.</p>
+					<code>Client Secret</code>, separate from any EOS Client IDs your game may use. Ensure you use the Build Patch Tool Credentials available in the Product Settings section of the Dev Portal. Clients listed under SDK Credentials cannot be used with this tool.</p>
 			</div>
 			<p>The
 				<code>ClientId</code>
 				parameter must be provided with every operation that interacts with Epic's backend services. The client secret must be provided by using either of the
 				<code>ClientSecret</code>
-				or `ClientSecretEnvVar parameters.</p>
+				or
+				<code>ClientSecretEnvVar</code>
+				parameters.</p>
 			<p>If using the
 				<code>ClientSecret</code>
 				parameter, then your client secret should be passed verbatim as the value of the parameter:</p>
@@ -238,7 +235,8 @@
 								<span></span>
 							</div>
 							<div style="color:#fff">
-								<span>Engine</span>
+								<span>
+									Engine</span>
 								<span style="color:#fff">\</span>
 								<span>Binaries</span>
 								<span style="color:#fff">\</span>
@@ -371,7 +369,8 @@
 								</span>
 							</div>
 							<div style="color:#fff">
-								<span>Optional:</span>
+								<span>
+									Optional:</span>
 							</div>
 							<div style="color:#fff">
 								<span>
@@ -430,7 +429,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -438,7 +437,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -659,7 +658,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -667,7 +666,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -706,7 +705,7 @@
 				When you remove all labels from a binary, the binary is deleted automatically in seven days. If you want to prevent this deletion, locate the binary in the
 				<strong>Inactive binaries</strong>
 				section and
-				<a href="/docs/en-US#how-to-label-a-binary">add at least one label to it</a>.</p>
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#how-to-label-a-binary">add at least one label to it</a>.</p>
 			<p>To remove previously set label you can use
 				<em>UnlabelBinary</em>
 				Mode with the same parameters that were used for
@@ -832,7 +831,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -840,7 +839,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -937,7 +936,8 @@
 								</span>
 							</div>
 							<div style="color:#fff">
-								<span>Optional:</span>
+								<span>
+									Optional:</span>
 							</div>
 							<div style="color:#fff">
 								<span>
@@ -994,7 +994,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1002,7 +1002,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1029,7 +1029,7 @@
 				<h2 id="how-to-delete-a-binary">How to Delete a Binary</h2>
 			</div>
 			<p>To delete a binary,
-				<a href="/docs/en-US#how-to-unlabel-a-binary">remove all labels from the binary</a>. The binary is deleted automatically in seven days.</p>
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#how-to-unlabel-a-binary">remove all labels from the binary</a>. The binary is deleted automatically in seven days.</p>
 			<div>
 				<h4 id="description-of-parameters-3">Description of parameters:</h4>
 			</div>
@@ -1064,7 +1064,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1072,7 +1072,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1197,7 +1197,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1205,7 +1205,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1376,7 +1376,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1384,7 +1384,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1568,7 +1568,7 @@
 							<code>ClientId</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1576,7 +1576,7 @@
 							<code>ClientSecretEnvVar</code>
 						</td>
 						<td>See
-							<a href="/docs/en-US#authentication">Authentication</a>
+							<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150#authentication">Authentication</a>
 							section.</td>
 					</tr>
 					<tr>
@@ -1644,14 +1644,16 @@
 								</span>
 							</div>
 							<div style="color:#fff">
-								<span>** Chunk delta optimization already completed
+								<span>
+									** Chunk delta optimization already completed
 								</span>
 								<span style="color:#f08a92">for</span>
 								<span>
 									provided manifests. **</span>
 							</div>
 							<div style="color:#fff">
-								<span>Loaded- optimised delta
+								<span>
+									Loaded- optimised delta
 								</span>
 								<span style="color:#89bdff">file</span>
 								<span>
@@ -1703,13 +1705,15 @@
 								<span></span>
 							</div>
 							<div style="color:#fff">
-								<span>Original unknown compressed bytes
+								<span>
+									Original unknown compressed bytes
 								</span>
 								<span style="color:#ffcb8f">1000000</span>
 								<span></span>
 							</div>
 							<div style="color:#fff">
-								<span>Improvement:
+								<span>
+									Improvement:
 								</span>
 								<span style="color:#ffcb8f">60</span>
 								<span>%</span>
@@ -1729,8 +1733,9 @@
 				<h2 id="troubleshooting-common-errors">Troubleshooting Common Errors</h2>
 			</div>
 			<div>
-				<h3 id="check-these-first">Check these first</h3>
+				<h3 id="getting-started">Getting Started</h3>
 			</div>
+			<p>When troubleshooting an error, review the following potential issues first:</p>
 			<ul>
 				<li>Check Path syntax -
 					<code>BuildRoot="D:\MyFolder\"</code>
@@ -1760,7 +1765,8 @@
 									this artifact.</span>
 							</div>
 							<div style="color:#fff">
-								<span>Tool exited with:
+								<span>
+									Tool exited with:
 								</span>
 								<span style="color:#ffcb8f">6</span>
 							</div>
@@ -1782,7 +1788,8 @@
 								<span>CloudDir, BuildRoot, ArtifactId, BuildVersion, AppLaunch, and AppArgs are required parameters</span>
 							</div>
 							<div style="color:#fff">
-								<span>Tool exited with:
+								<span>
+									Tool exited with:
 								</span>
 								<span style="color:#ffcb8f">2</span>
 							</div>
@@ -1808,7 +1815,8 @@
 									variable is properly set.</span>
 							</div>
 							<div style="color:#fff">
-								<span>Tool exited with:
+								<span>
+									Tool exited with:
 								</span>
 								<span style="color:#ffcb8f">9</span>
 							</div>
@@ -1830,7 +1838,8 @@
 								<span>An authentication error occurred - Check you have specified ClientId, and either ClientSecret or ClientSecretEnvVar parameters correctly. Message: Sorry the client credentials you are using are invalid</span>
 							</div>
 							<div style="color:#fff">
-								<span>Tool exited with:
+								<span>
+									Tool exited with:
 								</span>
 								<span style="color:#ffcb8f">10</span>
 							</div>
@@ -1859,7 +1868,8 @@
 									needed to perform the requested operation</span>
 							</div>
 							<div style="color:#fff">
-								<span>Tool exited with:
+								<span>
+									Tool exited with:
 								</span>
 								<span style="color:#ffcb8f">5</span>
 							</div>
@@ -1871,10 +1881,11 @@
 				<strong>What it means</strong>
 				This means that the Client credentials you are using do not have access to the artifact you have specified. This is usually the result of an issue with the permissions granted to the Client, and can be addressed by Service Delivery.</p>
 			<div>
-				<h3 id="other-things-to-check">Other things to check</h3>
+				<h3 id="additional-considerations">Additional Considerations</h3>
 			</div>
 			<ul>
-				<li>The Client ID and Client Secret being used were provided by Epic specifically for BuildPatchTool use; EOS Client IDs (typically starting with xyza) cannot be used with the BuildPatchTool</li>
+				<li>Ensure you entered the specific BuildPatchTool Client ID and Client Secret; these credentials can be found in the Dev Portal under
+					<em>Your Product &gt; Product Settings &gt; General tab &gt; Build Patch Tool Credentials</em>. EOS SDK credentials cannot be used.</li>
 				<li>All required parameters are provided</li>
 				<li>Parameters are free of typos, including incorrect capitalization or spacing issues</li>
 				<li>Missing quotation marks for a parameter that includes spaces</li>
@@ -1888,22 +1899,22 @@
 			<div>
 				<ul>
 					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
 						<a href="#before-you-start">Before You Start</a>
 					</li>
 					<li>
-						<a href="#how-to-find-credential-ids">How to Find Credential IDs</a>
+						<a href="#download-the-buildpatch-tool">Download the BuildPatch Tool</a>
 					</li>
 					<li>
-						<a href="#view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</a>
+						<a href="#retrieve-credential-ids">Retrieve Credential IDs</a>
 					</li>
 					<li>
-						<a href="#paths-on-the-command-line">Paths on the Command Line</a>
+						<a href="#review-paths-on-the-command-line">Review Paths on the Command Line</a>
 					</li>
 					<li>
-						<a href="#examples-of-valid-path-syntax">Examples of Valid Path Syntax</a>
-					</li>
-					<li>
-						<a href="#invalid-path-syntax">Invalid Path Syntax</a>
+						<a href="#using-the-buildpatch-tool">Using the BuildPatch Tool</a>
 					</li>
 					<li>
 						<a href="#initial-setup">Initial Setup</a>
@@ -1978,7 +1989,7 @@
 						<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
 					</li>
 					<li>
-						<a href="#check-these-first">Check these first</a>
+						<a href="#getting-started">Getting Started</a>
 					</li>
 					<li>
 						<a href="#common-errors">Common errors</a>
@@ -1999,7 +2010,7 @@
 						<a href="#error---unexpected-error">Error - Unexpected error</a>
 					</li>
 					<li>
-						<a href="#other-things-to-check">Other things to check</a>
+						<a href="#additional-considerations">Additional Considerations</a>
 					</li>
 				</ul>
 			</div>

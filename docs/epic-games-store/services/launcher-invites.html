@@ -27,48 +27,51 @@
 	<section>
 		<section>
 			<div>
-				<h2 id="artifacts">Artifacts</h2>
+				<h2 id="overview">Overview</h2>
 			</div>
-			<p>
-				<strong>Artifacts</strong>
-				represent your downloadable, playable content such as game clients and DLC, and are a concept specific to the
-				<strong>Epic Games Store (EGStore)</strong>.</p>
-			<p>The Epic Games Store can receive game invites from EOS-integrated games via an explicit opt-in system. This allows users outside of the store ecosystem to invite EGStore users to their game session.</p>
-			<p>You must map your
+			<p>To promote an optimal player experience, the Epic Games Store supports session invites from Epic Online Services (EOS) integrated games via an explicit opt-in system. This allows users from outside the store ecosystem to invite Epic Games Store users to their game session.</p>
+			<p>This functionality is facilitated by mapping your
 				<a href="/docs/dev-portal/product-management#deployments">deployments</a>
-				to your Epic Games Store artifacts to route the EOS-initiated invites through the EGStore ecosystem to your users in the
-				<strong>Epic Games Launcher</strong>.</p>
-			<div>
-				<p>Leveraging your artifacts to expose game invites on the Epic Games Launcher requires the EOS SDK 1.11 or higher.</p>
-			</div>
-			<p>To map your artifacts to deployments:</p>
-			<ol>
-				<li>Go to the
-					<strong>Environments</strong>
-					tab of the
-					<strong>Product Settings</strong>
-					for your product in the
-					<strong>Developer Portal</strong>.</li>
-				<li>Click the
-					<strong>Deployments</strong>
-					button for the specific sandbox to work in and click
-					<strong>More Options</strong>
-					to
-					<strong>Link Artifacts</strong>.</li>
-				<li>Select your artifacts to link with that specific deployment and arrange them in order by priority.</li>
-			</ol>
-			<ul>
-				<li>When you have multiple artifacts mapped to a single deployment, the Launcher client routes the game invite to the first locally-installed artifact that it finds in the order you specify in the Developer Portal.</li>
-			</ul>
-			<div>
-				<p>Do not map your DLC artifacts to a deployment; only "base game" launchable artifacts should be mapped to deployments.</p>
-			</div>
-			<p>Having multiple artifacts is typically a scenario for you as a developer because your end users should only have the production 
+				to your Epic Games Store artifacts. In the context of the Epic Games Store, an 
 				<!-- -->artifact
-				<!-- --> installed. This allows multiple internal test artifacts that you can independently validate against the same EOS 
-				<!-- -->deployment
-				<!-- -->.</p>
-			<p>Your production artifact should always be mapped to your production deployment to ensure that invites deliver to your users in the EGStore.</p>
+				<!-- --> represents your product's downloadable content, such as game clients. By mapping deployments to your artifacts, EOS-initiated invites are routed through the Epic Games Store ecosystem to users in the Epic Games Launcher.</p>
+			<div>
+				<p>Leveraging your artifacts to expose game invites on the Epic Games Launcher requires use of the EOS SDK 1.11 or higher.</p>
+			</div>
+			<div>
+				<h2 id="mapping-artifacts-to-deployments">Mapping Artifacts to Deployments</h2>
+			</div>
+			<p>To map your artifacts to deployments, follow the steps below.</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Product Settings</strong>
+					and select the
+					<strong>Sandboxes</strong>
+					tab.</li>
+				<li>Locate the appropriate sandbox to work in and click
+					<strong>Deployments</strong>.</li>
+				<li>Next to the appropriate deployment, click the
+					<strong>menu (...) icon</strong>
+					and choose
+					<strong>Link Artifacts</strong>.</li>
+				<li>Select each artifact you wish to link with the specific deployment. Then, use the
+					<strong>grip icon</strong>
+					to arrange the artifacts in priority order.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: When multiple artifacts are mapped to a single deployment, the Launcher routes the game invite to the first locally-installed artifact it finds following the priority order specified.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>
+				<strong>Additional Notes</strong>
+			</p>
+			<ul>
+				<li>Your production artifact should always be mapped to your Live deployment to ensure that invites are deliverable to your users in the Epic Games Store.</li>
+				<li>Do not map DLC artifacts to a deployment. Only base game launchable artifacts should be mapped to deployments.</li>
+				<li>While numerous artifacts may be displayed in Dev Portal, enabling internal test artifacts along with the production artifact should not result in issues handling invites as users will only have the production artifact installed. This allows multiple internal test artifacts to be validated using the same deployment.</li>
+			</ul>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
 				<a href="/docs/en-US/site-map?tag=Deployments">
@@ -82,7 +85,10 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#artifacts">Artifacts</a>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#mapping-artifacts-to-deployments">Mapping Artifacts to Deployments</a>
 					</li>
 				</ul>
 			</div>

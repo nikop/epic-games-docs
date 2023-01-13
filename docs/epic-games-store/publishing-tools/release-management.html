@@ -25,7 +25,7 @@
 						<span>Epic Games Store Only</span>
 					</div>
 				</div>
-				<div>2 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -39,132 +39,140 @@
 						If you are not participating in the
 						<strong>Closed Beta</strong>
 						release, you can access documentation by using your Epic Games account to
-						<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>.</p>
+						<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>.</p>
 				</div>
 			</div>
 			<div>
-				<h2 id="release-management--how-it-works">Release Management — How It Works</h2>
+				<h2 id="overview">Overview</h2>
 			</div>
-			<p>You will work in the
-				<strong>Dev</strong>,
-				<strong>Stage</strong>, and
-				<strong>Live</strong>
-				sandboxes to publish your 
+			<p>The Epic Games Store publishing tools provide you with three 
+				<!-- -->sandbox
+				<!-- --> environments to work in when creating and managing entities associated with your 
 				<!-- -->product
-				<!-- --> on the Epic Games Store.</p>
-			<ul>
-				<li>Go to
-					<strong>Organization Dashboard &gt; Product &gt; Epic Games Store</strong>.</li>
-			</ul>
+				<!-- -->.</p>
+			<p>You can review and manage these entities throughout the publishing process through the Release Management section of the Dev Portal. This section is available via
+				<em>Your Product &gt; Epic Games Store &gt; Release Management</em>.</p>
 			<div>
-				<h3 id="sandboxes">Sandboxes</h3>
+				<h2 id="entities">Entities</h2>
 			</div>
-			<p>When a new product is created in the Developer Portal, a new
-				<strong>sandbox</strong>
-				is also created. A sandbox is a high-level distribution environment for a product. Sandboxes separate sensitive data (offers, artifacts, etc.) to prevent leaking to the public and to make sure the data can be promoted safely between sandboxes.</p>
-			<p>On the
-				<strong>Release Management</strong>
-				page, created entities move from
-				<strong>Dev</strong>
-				to
-				<strong>Stage</strong>
-				to
-				<strong>Live</strong>
-				sandbox.</p>
+			<p>In the publishing tools, entities refer to the various components that control and populate your product contents and store presence.</p>
+			<p>Entities for your product are grouped into the following categories:</p>
 			<ul>
 				<li>
-					<p>
-						<strong>Dev</strong>
-						– Where entities can be edited. Once configuration of an entity is complete, it will transition from the Drafted to Ready status. You can
-						<strong>PREVIEW ON STORE</strong>
-						any entities in Dev-Ready status or
-						<strong>PUSH TO STAGE</strong>.</p>
-				</li>
+					<a href="/docs/epic-games-store/publishing-tools/store-presence/store-config">Store Settings</a>: High-level details and other configurations shared across the entirety of your product, such as product specs, ratings, and distribution regions.</li>
 				<li>
-					<p>
-						<strong>Stage</strong>
-						– Where final configuration can be tested prior to submission. You can
-						<strong>PREVIEW ON STORE</strong>
-						any entities in Stage.</p>
+					<a href="/docs/epic-games-store/store-presence/manage-offers">Offers</a>: Saleable or downloadable content associated with your product, such as your base product or add-ons. Some specific product details are stored at the offer level, such as dates of availability and pricing.</li>
+				<li>
+					<a href="/docs/epic-games-store/store-presence/manage-artifacts">Artifacts and Binaries</a>: Builds and associated configurations that are used to fulfill user requests to download content associated with your product.</li>
+				<li>
+					<a href="/docs/epic-games-store/store-presence/manage-pages">Pages</a>: Individual pages that comprise your product’s presence on the Epic Games Store, including the Product Home page, offer pages, and an optional FAQ page.</li>
+			</ul>
+			<p>On Release Management screen, you can review the status and manage the progress of these entities through the publishing workflow.</p>
+			<div>
+				<h2 id="sandboxes">Sandboxes</h2>
+			</div>
+			<p>When you create a product in the Dev Portal, a set of sandboxes is also generated. These environments enable you to configure, test, and ultimately publish your product to the Epic Games Store.</p>
+			<p>The provided sandboxes include Dev, Stage, and Live environments. The Dev and Stage sandboxes are private environments, while the Live sandbox is public. Through the Release Management screen, you can orchestrate the promotion of your product’s entities between these sandboxes.</p>
+			<p>The purpose of each sandbox is outlined below, along with an overview of how entities transition from one environment to the next.</p>
+			<ul>
+				<li>
+					<strong>Dev sandbox</strong>: The environment where entities for your product are created and configured.
+					<!-- -->
 					<ul>
-						<li>
-							<p>Once your product's final configuration has been finalized, you can
-								<strong>SUBMIT FOR REVIEW</strong>. You can also select Rescind to remove the review request if you have additional changes to make. If there are any changes noted during the review, you can make the changes and re-submit.</p>
-						</li>
-						<li>
-							<p>When all entities have been approved, you can
-								<strong>PUBLISH</strong>
-								to the Live sandbox.</p>
-						</li>
+						<li>Entities begin in the
+							<em>Draft</em>
+							status. After you provide all required information for an entity, the status automatically updates to
+							<em>Ready for Stage</em>. You can then promote these entities to the Stage sandbox through the
+							<em>Push to Stage</em>
+							button.</li>
+						<li>The Dev sandbox is a
+							<em>private</em>
+							environment, meaning only members of your organization with the right permissions can access the entities within it. This allows you to configure and test your product securely with your team.</li>
 					</ul>
 				</li>
 				<li>
-					<p>
-						<strong>Live</strong>
-						– Accessed by end users.</p>
+					<strong>Stage sandbox</strong>: The environment where finalized configurations can be tested and submitted for review by the Epic Games Store team prior to entering the Live environment.
+					<!-- -->
+					<ul>
+						<li>After you have tested and are satisfied with your entity configurations, use the
+							<em>Submit to Review</em>
+							button to send your product to the Epic Games Store team for review.
+							<!-- -->
+							<ul>
+								<li>Before the review begins, you can use the
+									<em>Rescind</em>
+									button to remove your request for review. This allows you to make any necessary updates and resubmit your product for review when ready. Review requests cannot be rescinded once the review process has begun.</li>
+								<li>During review, the Epic Games Store team ensures you have properly configured your product and have met all the requirements for distribution. If any issues are found, feedback is provided to you. You must then complete those updates in the Dev sandbox, push the changes to the Stage sandbox, and submit your product for additional review.</li>
+							</ul>
+						</li>
+						<li>Like the Dev sandbox, the Stage sandbox is a
+							<strong>private</strong>
+							environment. Only members of your organization with the right permissions can access entities in the Stage sandbox, allowing you to review and test your product securely with your team.</li>
+					</ul>
 				</li>
 			</ul>
 			<div>
-				<h3 id="entities">Entities</h3>
+				<p>Dev and Stage sandboxes for your product separate sensitive data (offers, artifacts, etc.) from the public environment. These environments also ensure data can be promoted securely between sandboxes to support the configuration, testing, and review process for your product prior to its launch.</p>
 			</div>
-			<p>
-				<strong>Entities</strong>
-				for your product are grouped in four sections:</p>
 			<ul>
 				<li>
-					<p>
-						<a href="/docs/epic-games-store/publishing-tools/store-presence/store-config">Store Settings</a>
-						– Core configuration shared across the entirety of your product</p>
-				</li>
-				<li>
-					<p>
-						<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">Artifacts</a>– Builds and their associated configuration</p>
-				</li>
-				<li>
-					<p>
-						<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers">Offers</a>
-						– Offer metadata including descriptions, images and pricing</p>
-				</li>
-				<li>
-					<p>
-						<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-pages">Pages</a>
-						– Page metadata that exists outside any individual offer, including the required Product Home page and optional FAQ page</p>
+					<strong>Live sandbox</strong>: The Live sandbox represents the public Epic Games Store environment. Entities within this sandbox are accessible by end users on the storefront and indexable on the public web.
+					<!-- -->
+					<ul>
+						<li>Entities can only be pushed to the Live sandbox after they have been reviewed and approved by the Epic Games Store team. Once your entities have the
+							<em>Ready for Live</em>
+							status, you can push them to the Live environment by clicking the
+							<em>Push to Live</em>
+							button.</li>
+					</ul>
 				</li>
 			</ul>
 			<div>
-				<h3 id="status-definitions">Status Definitions</h3>
+				<h2 id="status-definitions">Status Definitions</h2>
 			</div>
-			<p>The
-				<strong>status</strong>
-				of all product entities will also be displayed in a sandbox using the following color-coded statuses:</p>
+			<p>Each entity associated with your product is assigned a status that represents its current position within the publishing workflow. The color-coded icon and definition of each possible status is listed below.</p>
+			<div>
+				<h3 id="dev-sandbox-statuses">Dev Sandbox Statuses</h3>
+			</div>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-drafted_-24.png" alt="Drafted status icon">
-				<strong>Drafted</strong>
-				– Entity is incomplete and requires additional configuration</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/draft-icon.png" alt="Draft icon">
+				<strong>Draft</strong>: Entity is incomplete and requires additional configuration.</p>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-ready_-24.png" alt="Ready status icon">
-				<strong>Ready</strong>
-				– Entity is complete and ready to be pushed to the Stage sandbox</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/ready-for-stage-icon.png" alt="Ready for Stage icon">
+				<strong>Ready for Stage</strong>: Entity is complete and ready to be pushed to the Stage sandbox.</p>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-processing_-24.png" alt="Processing status icon">
-				<strong>Processing</strong>
-				– Entity is actively being copied across sandboxes</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/pushed-to-stage-icon.png" alt="Pushed to Stage icon">
+				<strong>Pushed to Stage</strong>: Entity has been pushed to the Stage sandbox.</p>
+			<div>
+				<h3 id="stage-sandbox-statuses">Stage Sandbox Statuses</h3>
+			</div>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-staged_-24.png" alt="Staged status icon">
-				<strong>Staged</strong>
-				– Entity was pushed to the Stage sandbox</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/ready-for-review-icon.png" alt="Ready for Review icon">
+				<strong>Ready for Review</strong>: Entity can be submitted to the Epic Games Store team for review.</p>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-changes-needed_-24.png" alt="Changes Needed status icon">
-				<strong>Changes needed</strong>
-				– Entity has required changes identified requiring publisher attention</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/queued-icon.png" alt="Queued icon">
+				<strong>Queued for Review</strong>: Entity is awaiting review by the Epic Games Store team.</p>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-approved_-24.png" alt="Approved status icon">
-				<strong>Approved</strong>
-				– Entity was approved and is ready to be published to the Live sandbox</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/in-review-icon.png" alt="In Review icon">
+				<strong>In Review</strong>: Entity is currently under review by the Epic Games Store team.</p>
 			<p>
-				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/status-published_-24.png" alt="Published status icon">
-				<strong>Published</strong>
-				– Entity was published to the Live sandbox</p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/issues-found-icon.png" alt="Issues Found icon">
+				<strong>Issues Found</strong>: Entity contains one or more issues that must be resolved before it can be pushed to the Live sandbox.</p>
+			<p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/ready-for-live-icon.png" alt="Ready for Live icon">
+				<strong>Ready for Live</strong>: Entity does not contain any issues and is ready to be pushed to the Live sandbox.</p>
+			<p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/pushed-to-live-icon.png" alt="Pushed to Live icon">
+				<strong>Pushed to Live</strong>: Entity has been pushed to the Live sandbox.</p>
+			<p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/processing-icon.png" alt="Processing icon">
+				<strong>Processing</strong>: Entity is actively being copied across sandboxes.</p>
+			<div>
+				<h3 id="live-sandbox-statuses">Live Sandbox Statuses</h3>
+			</div>
+			<p>
+				<img src="/docs/assets/epic-games-store/publishing-tools/release-management/2023-status/live-icon.png" alt="Live status icon">
+				<strong>Live</strong>: Entity is currently within the Live sandbox.</p>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Getting%20Started">Getting Started</a>
 			</div>
@@ -174,16 +182,25 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#release-management--how-it-works">Release Management — How It Works</a>
-					</li>
-					<li>
-						<a href="#sandboxes">Sandboxes</a>
+						<a href="#overview">Overview</a>
 					</li>
 					<li>
 						<a href="#entities">Entities</a>
 					</li>
 					<li>
+						<a href="#sandboxes">Sandboxes</a>
+					</li>
+					<li>
 						<a href="#status-definitions">Status Definitions</a>
+					</li>
+					<li>
+						<a href="#dev-sandbox-statuses">Dev Sandbox Statuses</a>
+					</li>
+					<li>
+						<a href="#stage-sandbox-statuses">Stage Sandbox Statuses</a>
+					</li>
+					<li>
+						<a href="#live-sandbox-statuses">Live Sandbox Statuses</a>
 					</li>
 				</ul>
 			</div>

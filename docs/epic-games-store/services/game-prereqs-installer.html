@@ -34,17 +34,17 @@
 			<ul>
 				<li>
 					<p>
-						<a href="/docs/epic-games-store/services/game-prereqs-installer#app-localdeployment">App-local deployment</a>
+						<a href="/docs/en-US#app-localdeployment">App-local deployment</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/epic-games-store/services/game-prereqs-installer#epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool command line</a>
+						<a href="/docs/en-US#epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool command line</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/epic-games-store/services/game-prereqs-installer#batch-script">Batch script</a>
+						<a href="/docs/en-US#batch-script">Batch script</a>
 					</p>
 				</li>
 			</ul>
@@ -53,7 +53,7 @@
 			</div>
 			<p>When packaging your product for upload via the BuildPatchTool, you can include most redistributable files by copying the necessary DLLs into the same directory as your application executable. This method of distribution is recommended as best practice as it does not require elevated user access nor alter the system for all users.</p>
 			<p>If your product requires a more complicated installation or uses DLLs that cannot be distributed this way, other methods are available. If you cannot use app-local deployment, review the
-				<a href="/docs/epic-games-store/services/game-prereqs-installer#epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</a>
+				<a href="/docs/en-US#epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</a>
 				section for an alternative option.</p>
 			<div>
 				<h3 id="process">Process</h3>
@@ -62,17 +62,17 @@
 			<p>Review the following Microsoft documentation to identify the DLLs you must bundle with your application:</p>
 			<ul>
 				<li>
-					<a href="https://docs.microsoft.com/en-us/cpp/windows/determining-which-dlls-to-redistribute?view=msvc-160&amp;viewFallbackFrom=vs-2019">Determining Which DLLs to Redistribute</a>
+					<a href="/docs/en-UShttps://docs.microsoft.com/en-us/cpp/windows/determining-which-dlls-to-redistribute">Determining Which DLLs to Redistribute</a>
 				</li>
 				<li>
-					<a href="https://docs.microsoft.com/en-us/cpp/windows/walkthrough-deploying-a-visual-cpp-application-to-an-application-local-folder?view=msvc-160&amp;viewFallbackFrom=vs-2019">Walkthrough: Deploying a Visual C++ Application to an Application-local Folder</a>.</li>
+					<a href="/docs/en-UShttps://docs.microsoft.com/en-us/cpp/windows/walkthrough-deploying-a-visual-cpp-application-to-an-application-local-folder">Walkthrough: Deploying a Visual C++ Application to an Application-local Folder</a>.</li>
 			</ul>
 			<div>
 				<h2 id="epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</h2>
 			</div>
 			<p>If you cannot use app-local deployment, you can have the Epic Games launcher run an installer upon users' first launch of your product. As the Epic Games launcher records any installers that have already been completed for a product, users only see the installation process upon first access or when new dependencies are included.</p>
 			<p>While this option allows you to run a full installer, there are considerable disadvantages to using this method. Users may decline, overlook, or misunderstand the elevation prompt when offered, and any non-zero return code from the prerequisite installer, aside from 1638 and 3010, can cause issues. Additionally, installing Visual Studio DLLs through this method can lead to failures that prevent your application from running. For more information, review the Microsoft documentation on
-				<a href="https://docs.microsoft.com/en-us/cpp/windows/choosing-a-deployment-method?view=msvc-160">Choosing a Deployment Method</a>.</p>
+				<a href="/docs/en-UShttps://docs.microsoft.com/en-us/cpp/windows/choosing-a-deployment-method">Choosing a Deployment Method</a>.</p>
 			<div>
 				<h3 id="process-1">Process</h3>
 			</div>

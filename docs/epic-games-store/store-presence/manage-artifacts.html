@@ -20,7 +20,7 @@
 			<h1>Manage Artifacts</h1>
 			<h2>Create and manage product artifacts and binaries</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -37,85 +37,63 @@
 						<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>.</p>
 				</div>
 			</div>
-			<p>The
-				<strong>Artifacts</strong>
-				page allows users to view, edit, and add artifacts to their 
-				<!-- -->product
-				<!-- -->.</p>
-			<p>When your product was created, a product
-				<strong>Artifact</strong>
-				was also created. Artifacts are used to fulfill user requests to download content.</p>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>In the Epic Games Store publishing tools, an 
+				<!-- -->artifact
+				<!-- --> represents a group of binaries, metadata, and configurations used to fulfill user requests to download content. In the Dev Portal, the Artifacts and Binaries section allows you to review and upload binaries to your artifacts.</p>
+			<p>When you first create your product, an artifact for that product is automatically generated. Artifacts are also auto-generated for any additional offers you create that feature downloadable content, such as Demo type offers.</p>
+			<p>Note that artifacts are
+				<strong>not</strong>
+				automatically created for Add-On type offers as add-ons may or may not feature downloadable content. You can create artifacts for these offers as needed through the
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers#artifact-settings">Offers section</a>
+				of the Dev Portal.</p>
+			<p>
+				<strong>Notes about Offer Dates</strong>
+			</p>
+			<p>Depending on how the release date is configured for an offer determines when uploading a binary to that offer’s artifact is necessary.</p>
 			<ul>
-				<li>If an artifact's associated offer is configured with an estimated release date, no binary is required to push to Stage sandbox.</li>
-				<li>If the offer release date is exact, the associated artifact must have an attached binary before pushing to Stage sandbox.</li>
+				<li>
+					<strong>Estimated or Unknown Release Date</strong>: If an offer is configured with an estimated or unknown release date, uploading a binary is not required to push your offer to the Stage or Live sandbox. Binaries are only required when preparing for launch with an exact release date.</li>
+				<li>
+					<strong>Exact Release Date</strong>: If the offer has been assigned an exact release date, the associated artifact must have an attached binary before it can be pushed to the Stage sandbox.</li>
 			</ul>
-			<p>Learn more:
-				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers#dates">
-					<em>Manage Offers</em>
-				</a>.</p>
+			<p>To learn more, review the Dates section of
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers#dates">Manage Offers</a>.</p>
 			<div>
 				<h2 id="create-and-upload-your-build">Create and Upload Your Build</h2>
 			</div>
-			<p>You will add your 
-				<!-- -->binary
-				<!-- --> on the
-				<strong>Manage Artifact</strong>
-				modal page, which allows you to view and edit the 
-				<!-- -->artifact
-				<!-- --> details and active binaries.</p>
+			<div>
+				<h3 id="before-you-begin">Before You Begin</h3>
+			</div>
+			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely package and upload binary files for your product to the Dev 
+				<!-- -->sandbox
+				<!-- -->. You must use this tool in order to upload binaries to your artifacts in the Dev Portal.</p>
+			<p>To download the tool, follow the steps below:</p>
 			<ol>
-				<li>
-					<p>Go to
-						<strong>Product &gt; Epic Games Store &gt; Artifacts &gt; Offer Artifact &gt; Manage artifact</strong>
-					</p>
-				</li>
-				<li>
-					<p>
-						<a href="/docs/en-US#upload-the-binary">Upload the binary</a>
-						to the Artifact.</p>
-				</li>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>To the top right, click
+					<strong>Download Tool</strong>.</li>
+				<li>Refer to the
+					<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>
+					for more information.</li>
 			</ol>
 			<div>
-				<h2 id="create-a-new-artifact">Create a New Artifact</h2>
+				<h3 id="upload-the-binary">Upload the Binary</h3>
 			</div>
-			<p>You will create new Artifacts for all game offers and some other offer types.</p>
+			<p>Follow the steps below to attach binaries to your artifacts through the Manage Artifact screen. You can also review artifact details and active binaries from this screen.</p>
 			<ol>
-				<li>
-					<p>Go to
-						<strong>Product &gt; Epic Games Store &gt; Artifacts &gt; CREATE NEW ARTIFACT</strong>
-					</p>
-				</li>
-				<li>
-					<p>Enter the
-						<strong>Name</strong>
-						of the Artifact. You can use alphanumeric characters with NO spaces.</p>
-				</li>
-				<li>
-					<p>
-						<a href="/docs/en-US#upload-the-binary">Upload the binary</a>
-						to the Artifact.</p>
-				</li>
-			</ol>
-			<div>
-				<h2 id="upload-the-binary">Upload the Binary</h2>
-			</div>
-			<p>To make an Artifact promotable, you will upload a binary to the artifact via the BuildPatchTool.</p>
-			<ol>
-				<li>
-					<p>Go to
-						<strong>Offer Artifact &gt; Manage Artifact &gt; Instruction and credentials</strong>
-					</p>
-				</li>
-				<li>
-					<p>Go to
-						<strong>Instruction and credentials</strong>
-						to complete all steps and
-						<a href="/docs/en-UShttps://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">download the BuildPatchTool</a>.</p>
-				</li>
-				<li>
-					<p>
-						<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries">Refer to the BuildPatchTool Instructions</a>.</p>
-				</li>
+				<li>In Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>Select the artifact to edit by clicking its name or the corresponding
+					<strong>menu (...) icon</strong>.</li>
+				<li>On the Manage Artifact screen, click
+					<strong>Upload Binary</strong>.</li>
+				<li>Use the
+					<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>
+					to complete this process.</li>
 			</ol>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
@@ -126,10 +104,13 @@
 			<div>
 				<ul>
 					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
 						<a href="#create-and-upload-your-build">Create and Upload Your Build</a>
 					</li>
 					<li>
-						<a href="#create-a-new-artifact">Create a New Artifact</a>
+						<a href="#before-you-begin">Before You Begin</a>
 					</li>
 					<li>
 						<a href="#upload-the-binary">Upload the Binary</a>

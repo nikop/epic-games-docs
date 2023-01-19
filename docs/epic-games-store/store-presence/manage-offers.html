@@ -20,7 +20,7 @@
 			<h1>Manage Offers</h1>
 			<h2>Create and manage product offers</h2>
 			<div>
-				<div>11 mins to read</div>
+				<div>12 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -108,7 +108,7 @@
 									<em>Rocket League - Painted Prestige Bundle</em>
 									or
 									<em>Fall Guys - Season 2 Starter Pack</em>.</li>
-								<li>The offer name is used to create the URL for the item on the Epic Games Store. While the offer name can be updated at a later time, the URL cannot be modified once the offer has been created.</li>
+								<li>The provided name is used to create the URL for the offer on the Epic Games Store. While the offer name can be updated at a later time, the URL cannot be modified once the offer has been created.</li>
 							</ul>
 						</li>
 					</ul>
@@ -150,7 +150,7 @@
 			<div>
 				<h3 id="editing-existing-offers">Editing Existing Offers</h3>
 			</div>
-			<p>Through the Offers page of the Dev Portal, you can manage your product's existing offers. To do so, follow the steps below:</p>
+			<p>Through the Offers page, you can also edit existing offers associated with your product. To do so, follow the steps below:</p>
 			<ol>
 				<li>Navigate to
 					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>
@@ -158,7 +158,7 @@
 					<!-- -->sandbox
 					<!-- --> containing your offer.</li>
 				<li>In the table, click the name of the offer you wish to update.</li>
-				<li>On the Offer Details screen, update the different categories of information as needed. Note that some details require an offer to be in a specific sandbox in order to be edited. For full details, review the
+				<li>On the Offer Details screen, update different categories of information as needed. Note that some details can only be updated for offers within certain sandboxes. For full details, review the
 					<a href="/docs/en-US#understanding-offer-details">Understanding Offer Details</a>
 					section below.</li>
 			</ol>
@@ -187,6 +187,13 @@
 					<a href="/docs/epic-games-store/publishing-tools/store-presence/store-config">Store Settings</a>, select the
 					<em>Use Product Metadata</em>
 					button.</li>
+				<li>
+					<strong>NFT and Blockchain</strong>: This setting identifies your product in the storefront as containing NFT, cryptocurrency, or blockchain technology in any capacity. As a requirement for distributing this type of product, you must disclose this information to users by selecting
+					<em>Yes</em>
+					for this setting. For the full requirements, review
+					<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/blockchain">Blockchain Technology Guidelines</a>.</li>
+				<li>
+					<strong>Offer Content</strong>: Only available for Add-On type offers, this setting identifies the offer as containing virtual currency or other consumable items.</li>
 			</ul>
 			<div>
 				<h4 id="dates">Dates</h4>
@@ -229,8 +236,8 @@
 				<!-- --> (i.e., Dev or Live) the offer is currently in. To learn more, review the sections below.</p>
 			<p>
 				<strong>Note</strong>: Offer dates cannot be directly updated for offers in the Stage sandbox. To update an offer in Stage, complete the desired changes to the offer in Dev. Then, push those changes to Stage when appropriate. To learn more, review the
-				<em>Updating Dates for Offers in Dev Sandboxes</em>
-				section.</p>
+				<em>Offers in Dev Sandboxes</em>
+				section below.</p>
 			<p>
 				<strong>Offers in Dev Sandboxes</strong>
 			</p>
@@ -296,23 +303,35 @@
 			<div>
 				<h4 id="artifact-settings">Artifact Settings</h4>
 			</div>
-			<p>Through the Artifact Settings page, you can link uploaded artifacts with your offers.
-				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">Artifacts</a>
-				are used to fulfill user requests to download content.</p>
-			<p>Configuring Artifact Settings is required for your base product offer. However, it may be optional for other offer types, such as add-ons. Artifact Settings include the following:</p>
+			<p>In the publishing tools, artifacts are groups of binaries, metadata, and configurations that are used to fulfill user requests to download content.</p>
+			<p>When you first create your product, an artifact for that product is automatically generated. Artifacts are also auto-generated for any additional offers you create that feature downloadable content, such as demos or digital extras.</p>
+			<p>
+				<strong>Base Product Offer</strong>
+			</p>
+			<p>For your base product offer, the following Artifact Settings are available. Configuring these settings is required.</p>
 			<ul>
-				<li>
-					<strong>Linked Artifact</strong>: Select an existing artifact to associate with the offer. For some types of offers, an artifact may be pre-selected.</li>
 				<li>
 					<strong>Default Folder</strong>: If desired, update the name of the default folder where the artifact is installed on users' devices. The folder name must be alphanumeric, begin with a letter, and include 25 characters or less with no spaces.</li>
 				<li>
 					<strong>EAS Integration</strong>: If you are using an application through
 					<a href="/docs/epic-account-services">Epic Account Services</a>, enter the ID associated with this offer. This option may not be available for all offer types.</li>
 			</ul>
+			<p>To upload a binary and further manage this artifact, click the arrow icon in the Linked Artifact section to quickly navigate to the Artifacts and Binaries section of the Dev Portal. To learn more, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">Manage Artifacts</a>.</p>
+			<p>
+				<strong>Additional Offers</strong>
+			</p>
+			<p>When you create an offer that features downloadable content, such as a Demo type offer, an artifact is automatically generated and linked to that offer. To upload a binary for this artifact, click the arrow icon in the Linked Artifact section to quickly navigate to the Artifacts and Binaries section of the Dev Portal.</p>
+			<p>Artifacts are not automatically generated for Add-On type offers as they may or may not feature downloadable content. If an artifact is needed for one of your Add-On offers, click the
+				<em>Create Artifact</em>
+				button on the Artifact Settings page. (This button only displays if an artifact has not yet been created for the offer.) Once generated, click the arrow icon in the Linked Artifact section to further manage this artifact.</p>
+			<p>To learn more about uploading binaries to artifacts, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">
+					Manage Artifacts</a>.</p>
 			<div>
 				<h4 id="images">Images</h4>
 			</div>
-			<p>The Images section captures digital assets used to represent and market your product throughout the storefront. You can upload general offer images that depict the main promotional key art for your product. Optionally, you can also upload separate images that display in the Library section of the Epic Games launcher for users who purchase or download your offer.</p>
+			<p>The Images section captures digital assets used to represent and market your product throughout the storefront. You can upload general offer images that depict the main promotional key art for your product. You can also upload separate images that display in the Library section of the Epic Games launcher for users who purchase or download your offer.</p>
 			<p>To learn more, review the
 				<a href="/docs/epic-games-store/publishing-tools/store-presence/storefront-media-guide#offer-images">Offer Images</a>
 				section of the Storefront Media Guide.</p>
@@ -323,7 +342,9 @@
 			<div>
 				<h4 id="included-offers">Included Offers</h4>
 			</div>
-			<p>Certain types of offers, such as Editions and Season Passes, support the ability to include sub-offers. When a user purchases an offer that includes sub-offers, they receive entitlements for all included offers upon completing their purchase. For example, an Edition offer must have your base product offer (or another Edition-type offer) set as its base offer. You can then add up to five additional offers for items such as season passes, add-ons, or digital extras to the Edition as sub-offers. When a user purchases the Edition offer, they receive both your base product offer and your selected sub-offers.</p>
+			<p>Certain types of offers, such as Editions and Season Passes, support the ability to include sub-offers. When a user purchases an offer that includes one or more sub-offers, they receive entitlements for
+				<strong>all</strong>
+				included offers upon completing their purchase. For example, an Edition offer must have your base product offer (or another Edition-type offer) set as its base offer. You can then add up to five additional offers for items such as season passes, add-ons, or digital extras to the Edition as sub-offers. When a user purchases the Edition offer, they receive both your base product offer and your selected sub-offers.</p>
 			<div>
 				<h4 id="cloud-save">Cloud Save</h4>
 			</div>

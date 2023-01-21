@@ -20,7 +20,7 @@
 			<h1>Sessions Interface</h1>
 			<h2>Interface to handle session-based matchmaking</h2>
 			<div>
-				<div>28 mins to read</div>
+				<div>29 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -1818,6 +1818,10 @@
 				</li>
 			</ol>
 			<p>Matchmaking takes game data and creates a searchable index, so you should always be conscious of what data is being exposed when creating your sessions. For games with dedicated servers you are exposing the IP address of the server, and for Peer to Peer sessions you could be exposing the IP address of end users.</p>
+			<p>
+				<strong>Note</strong>: If you have security concerns about exposing the host IP address, you can use
+				<code>EOS_SessionModification_SetHostAddress</code>
+				to set the host address to something else, such as the P2P socket ID if you use the P2P Interface.</p>
 			<p>When you create a session you can specify a
 				<strong>permission level</strong>
 				for the session using
@@ -1834,7 +1838,7 @@
 						<td>
 							<code>EOS_OSPF_PublicAdvertised</code>
 						</td>
-						<td>Any client can get the session in search results without needing to know the session id and can read session information as long as the session is not started or session allows join in progress. Any client/player that has access to the unique session identifier can view session information even if the session is not joinable.</td>
+						<td>Any client can get the session in search results without needing to know the session id and can read session information as long as the session is not started or session allows join in progress. Any client/player that has access to the unique session identifier can view session information even if the session is not joinable. Players can also find the session using a registered player's ID, as long as the registered player is in a public session.</td>
 					</tr>
 					<tr>
 						<td>

@@ -20,7 +20,7 @@
 			<h1>Sessions Interface</h1>
 			<h2>Interface to handle session-based matchmaking</h2>
 			<div>
-				<div>29 mins to read</div>
+				<div>30 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -29,7 +29,9 @@
 			<p>
 				<strong>Epic Online Services</strong>
 				(EOS) gives players the ability to host, find, and interact with online gaming sessions through the
-				<strong>Sessions Interface</strong>. A session can be short, like filling a certain number of player slots before starting a game, then disbanding after the game ends, or it could be longer, like keeping track of a game that cycles through matches on multiple maps or levels. The Sessions Interface also manages game-specific data that supports the back-end service searching and matchmaking functionality.</p>
+				<strong>Sessions Interface</strong>. A session can be short, like filling a certain number of player slots before starting a game, then disbanding after the game ends, or it could be longer, like keeping track of a game that cycles through matches on multiple maps or levels. The Sessions Interface also manages game-specific data that supports the back-end service searching and matchmaking functionality. This document covers some of the definitions and headers for the Sessions Interface. See the
+				<a href="/docs/api-ref/interfaces/sessions">Sessions Interface API Reference</a>
+				documentation for a complete list.</p>
 			
 			<!-- -->
 			<p>To use the Sessions Interface, acquire an
@@ -39,7 +41,9 @@
 				function,
 				<code>EOS_Platform_GetSessionsInterface</code>. All Sessions Interface functions require this handle as their first parameter. You must ensure that the
 				<code>EOS_HPlatform</code>
-				handle is ticking for callbacks to trigger when requests are completed.</p>
+				handle is ticking for callbacks to trigger when requests are completed. See the
+				<a href="/docs/epic-online-services/eossdkc-sharp-getting-started#ticking">EOS SDK in C#</a>
+				documentation for more information on ticking.</p>
 			<p>Please see the
 				<strong>
 					<a href="/docs/en-US#matchmaking-security-considerations">security documentation</a>
@@ -1258,6 +1262,14 @@
 					<code>EOS_SessionSearch_Find</code>
 					operations in parallel.</p>
 			</div>
+			<p>
+				<strong>Tip</strong>: You can search by the attribute
+				<code>EOS_SESSIONS_SEARCH_MINSLOTSAVAILABLE</code>
+				to find sessions that are not full (still have slots available). Set the value type to
+				<code>int64_t</code>, and use the
+				<code>EOS_CO_GREATERTHANOREQUAL</code>
+				comparison operator to set the value to at least
+				<code>1</code>. This excludes full sessions from the results.</p>
 			<div>
 				<h3 id="examining-search-results">Examining Search Results</h3>
 			</div>
@@ -1871,6 +1883,29 @@
 					<p>If your game doesn’t support JoinInProgress, make sure your server starts the session with EOS_Sessions_StartSession to remove the session from future searches while the game is in progress.</p>
 				</li>
 			</ul>
+			<div>
+				<h2 id="faq">FAQ</h2>
+			</div>
+			<p>
+				<strong>Q: Why can't I find the server that I just created?</strong>
+				<br>
+				A: Indexing takes two seconds to refresh, so you might not be able to find your server immediately.</p>
+			<p>
+				<strong>Q: Why can't I see the same list of servers as my co-worker or friend?</strong>
+				<br>
+				A: Matchmaking has a two-second delay to ensure that no two people get the same list of servers at the same time. This deliberate jittering avoids race conditions that can affect the efficiency of the servers.</p>
+			<p>
+				<strong>Q: I want to see the sessions that are set up in my game. How can I see all the sessions in my game?</strong>
+				<br>
+				A: You can find the list of sessions in your game in the Developer Portal. Sign in to the Developer Portal (at
+				<a href="/docs/en-UShttps://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>), and select your product under the
+				<strong>Products</strong>
+				section in the left sidebar. Go to
+				<strong>Game Services</strong>
+				&gt;
+				<strong>MULTIPLAYER</strong>
+				&gt;
+				<strong>Matchmaking</strong>.</p>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
 				<a href="/docs/en-US/site-map?tag=Matchmaking">
@@ -1972,6 +2007,9 @@
 					</li>
 					<li>
 						<a href="#best-practices">Best Practices</a>
+					</li>
+					<li>
+						<a href="#faq">FAQ</a>
 					</li>
 				</ul>
 			</div>

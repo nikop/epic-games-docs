@@ -1,0 +1,811 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Auth and Friends Sample">Auth and Friends Sample</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Auth and Friends Sample</h1>
+			<h2>A tour of the Auth and Friends sample project.</h2>
+			<div>
+				<div>10 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>If you plan to integrate Epic Account Services with your game, and you want to target console platforms, please contact us at
+						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
+						to coordinate a release plan.</p>
+				</div>
+			</div>
+			<p>This overview provides a tour of the
+				<strong>Auth and Friends</strong>
+				sample project, which uses the
+				<strong>Epic Online Services</strong>
+				(EOS) SDK.</p>
+			<div>
+				<div>
+					<div>
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-0.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>The Auth and Friends sample uses
+				<strong>Epic Account Services</strong>
+				for user authentication. You will need to initialize the EOS SDK with
+				<a href="/docs/dev-portal/client-credentials">Client Credentials</a>
+				that correspond to a valid Application. For information about setting up your Application, consult the
+				<a href="/docs/dev-portal">Developer Portal</a>
+				documentation. The functionality that this sample demonstrates can be used with any of the supported
+				<a href="/docs/dev-portal/identity-provider-management">identity providers</a>.</p>
+			<div>
+				<h2 id="source-code-and-project">Source Code and Project</h2>
+			</div>
+			<p>You can find the Auth and Friends project inside the
+				<code>EOSSDK/Samples/AuthAndFriends/</code>
+				directory, which has the following subdirectories:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Subdirectory</th>
+						<th>Contents</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>/Bin/</code>
+						</td>
+						<td>The output location where you will find the game's executable. The exact subdirectory where the executable appears after building varies based on your configuration and platform.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/cmake/</code>
+						</td>
+						<td>Helper files for making builds with CMake on Mac and Linux.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/Intermediate/</code>
+						</td>
+						<td>Intermediate build files.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/Source/</code>
+						</td>
+						<td>Project source code.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>You can also find certain shared sample files inside the
+				<code>EOSSDK/Samples/Shared/</code>
+				directory. They are broken up into subdirectories as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Subdirectory</th>
+						<th>Contents</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>/Assets/</code>
+						</td>
+						<td>Shared game runtime texture and font assets.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/External/</code>
+						</td>
+						<td>Shared libraries.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/Source/</code>
+						</td>
+						<td>All shared source code.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The
+				<code>Shared/Source/Core/</code>
+				directory contains sample code using the EOS SDK to log in, authenticate users, and query friends. The source directories also contain code to manage the game itself.</p>
+			<div>
+				<h2 id="building-the-sample">Building the Sample</h2>
+			</div>
+			<div>
+				<h3 id="windows-directx">Windows DirectX</h3>
+			</div>
+			<p>To compile and build the Auth and Friends sample, open
+				<code>Samples.sln</code>
+				with Microsoft Visual Studio, and build the desired configuration (either
+				<strong>Debug_DX</strong>
+				or
+				<strong>Release_DX</strong>) for the target platform (either
+				<strong>Win32</strong>
+				or
+				<strong>Win64</strong>).</p>
+			<p>Following a successful build, the
+				<code>/Bin/</code>
+				directory will contain the executable (<code>AuthAndFriends.exe</code>) in a subdirectory based on your configuration and target platform. The subdirectory will also contain a copy of the data assets and SDK binaries.</p>
+			<div>
+				<h3 id="windows-sdl">Windows SDL</h3>
+			</div>
+			<p>To compile and build the Auth and Friends sample, open the solution,
+				<code>Samples.sln</code>
+				with Microsoft Visual Studio 2017 and build the desired configuration (either
+				<strong>Debug_SDL</strong>
+				or
+				<strong>Release_SDL</strong>) for the target platform (either
+				<strong>Win32</strong>
+				or
+				<strong>Win64</strong>).</p>
+			<p>Following a successful build, the
+				<code>/Bin/</code>
+				directory will contain the executable, (<code>AuthAndFriends.exe</code>), in a subdirectory based on your configuration and target platform. The subdirectory will also contain a copy of the data assets and SDK binaries.</p>
+			<div>
+				<h3 id="mac-osx">Mac OSX</h3>
+			</div>
+			<p>To build on a Mac, you will need to install the following dependencies:</p>
+			<ul>
+				<li>SDL2</li>
+				<li>SDL2_ttf</li>
+				<li>GLEW</li>
+				<li>cmake</li>
+				<li>gcc (through Command Line Tools for Xcode)</li>
+			</ul>
+			<p>To compile and build the Auth and Friends sample, you can use
+				<code>Build.sh</code>
+				or
+				<code>Install.sh</code>:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>For local use only</strong>: Using
+						<code>Build.sh</code>
+						or
+						<code>Build.command</code>
+						from the Terminal, builds the sample and only packages the minimum to run locally on the sample folder (/Build/AuthAndFriends.app).</p>
+				</li>
+				<li>
+					<p>Using
+						<code>Install.sh</code>
+						or
+						<code>Install.command</code>
+						from the Terminal, packages dependencies (e.g. EOS SDK dynamic lib, SDL2 lib etc.) in with the sample application package (/Install/AuthAndFriends.app) so it can be moved elsewhere and still run.</p>
+				</li>
+			</ul>
+			<p>To run the AuthAndFriends sample, execute
+				<code>Run.command</code>
+				or
+				<code>Run.sh</code>
+				from the Terminal.</p>
+			<div>
+				<h3 id="linux">Linux</h3>
+			</div>
+			<p>To build on Linux, you will need to install the following dependencies:</p>
+			<ul>
+				<li>SDL2 (runtime + headers)</li>
+				<li>SDL2_ttf (runtime + headers)</li>
+				<li>GLEW (runtime + headers)</li>
+				<li>cmake</li>
+				<li>gcc/g++</li>
+			</ul>
+			<p>To compile and build the Auth and Friends sample, execute
+				<code>Install.sh</code>
+				from the Terminal.</p>
+			<p>Following a successful build, the
+				<code>/Install/</code>
+				directory will contain the executable (<code>AuthAndFriends</code>). The subdirectory will also contain a copy of the data assets and makefile build files.</p>
+			<p>To run the AuthAndFriends sample, execute
+				<code>Run.sh</code>
+				from the Terminal.</p>
+			<div>
+				<h3 id="authenticating-with-steam-apis">Authenticating with Steam APIs</h3>
+			</div>
+			<p>To compile and build the Auth and Friends sample with Steam External Auth support, open
+				<code>Samples.sln</code>
+				with Microsoft Visual Studio, and build the desired configuration (either
+				<strong>Debug_DX_Steam</strong>,
+				<strong>Release_DX_Steam</strong>,
+				<strong>Debug_SDL_Steam</strong>,
+				<strong>Release_SDL_Steam</strong>) for the target platform (either
+				<strong>Win32</strong>
+				or
+				<strong>Win64</strong>).</p>
+			<p>The Sample references files from the Steam SDK which can be downloaded and extracted to the Sample shared folder (as shown below). The
+				<code>public</code>
+				folder contains the Steam include files and the
+				<code>redistributable_bin</code>
+				folder contains the Steam LIB and DLL files.</p>
+			<div>
+				<div>
+					<div style="max-width:550px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/projectrootfolder.png 640w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 750w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 828w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 1080w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 1200w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 1920w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 2048w, null/epic-account-services/auth/auth-sample/projectrootfolder.png 3840w" src="null/epic-account-services/auth/auth-sample/projectrootfolder.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>The
+				<code>Samples.props</code>
+				file contains a
+				<code>SteamSDK</code>
+				property with a default path for the Steam SDK files to be located at:
+				<code>..\Shared\External\SteamSDK</code>.</p>
+			<p>Change this path if you wish to reference the Steam SDK files from a different location.</p>
+			<p>For testing, create a
+				<code>steam_appid.txt</code>
+				in the AuthAndFriends project root folder (as shown below) and add your Steam App ID to this file. This file will be copied along with the required Steam DLL file pre-build.</p>
+			<div>
+				<div>
+					<div style="max-width:260px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 640w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 750w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 828w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 1080w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 1200w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 1920w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 2048w, null/epic-account-services/auth/auth-sample/projectrootfolder-2.png 3840w" src="null/epic-account-services/auth/auth-sample/projectrootfolder-2.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Following a successful build, the
+				<code>/Bin/</code>
+				directory will contain the executable (<code>AuthAndFriends.exe</code>) in a subdirectory based on your configuration and target platform. The subdirectory will also contain a copy of the data assets, SDK binaries, and the Steam DLL file.</p>
+			<p>To run the sample, you will need to have the Steam Client running.</p>
+			<p>The sample will attempt to log in with a Steam Session Ticket on startup. If your 
+				<!-- -->account
+				<!-- --> is not already linked to Steam, you will be taken to the Account Portal to log in, the Authentication will continue, and you will be logged in.</p>
+			<div>
+				<h2 id="exploring-the-sample">Exploring the Sample</h2>
+			</div>
+			<p>If you would like to explore the sample, keep reading to learn about the available command line parameters, console commands, and features.</p>
+			<div>
+				<h3 id="command-line-parameters">Command Line Parameters</h3>
+			</div>
+			<p>The Auth and Friends sample supports the following optional command line parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Command Line Parameter</th>
+						<th>Usage</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>userid</strong>
+						</td>
+						<td>
+							<code>-userid &lt;string&gt;</code>
+						</td>
+						<td>The user id box will be filled out with the &lt;userid&gt; text, and the user (specified by the id &lt;string&gt;) will be logged in when the "LOGIN" button is clicked (or via the autologin process). Additionally, &lt;userid&gt; can be an email, display name or Facebook ID.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>password</strong>
+						</td>
+						<td>
+							<code>-password &lt;string&gt;</code>
+						</td>
+						<td>The password box will be filled out with the &lt;password&gt; text and the user  (with password &lt;string&gt;) will logged in when the "LOGIN" button is clicked or via the autologin process.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>autologin</strong>
+						</td>
+						<td>
+							<code>-autologin 1</code>
+						</td>
+						<td>The user specified with "userid" and "password" will be logged in automatically when the game starts after the EOS SDK has been initialized.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>productid</strong>
+						</td>
+						<td>
+							<code>-productid &lt;string&gt;</code>
+						</td>
+						<td>Overrides the Product ID when creating the EOS SDK Platform Options. See
+							<code>SampleConstants.ProductId</code>
+							for the default value.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>sandboxid</strong>
+						</td>
+						<td>
+							<code>-sandboxId &lt;string&gt;</code>
+						</td>
+						<td>Overrides the Sandbox ID when creating the EOS SDK Platform Options. See
+							<code>SampleConstants.SandboxId</code>
+							for the default value.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>deploymentId</strong>
+						</td>
+						<td>
+							<code>-deploymentId &lt;string&gt;</code>
+						</td>
+						<td>This enables you to override the Deployment ID when creating the EOS SDK Platform Options. See
+							<code>SampleConstants.DeploymentId</code>
+							for the default value.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>clientid</strong>
+						</td>
+						<td>
+							<code>-clientid &lt;string&gt;</code>
+						</td>
+						<td>This allows you to override the Client Credentials Id when creating the EOS SDK Platform Options. Also, see
+							<code>SampleConstants.ClientCredentialsId</code>
+							for the default value.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>clientsecret</strong>
+						</td>
+						<td>
+							<code>clientsecret &lt;string&gt;</code>
+						</td>
+						<td>This enables you to override the Client Credentials Secret when creating the EOS SDK Platform Options. Also, see
+							<code>SampleConstants.ClientCredentialsSecret</code>
+							for the default value.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>fullscreen</strong>
+						</td>
+						<td>
+							<code>-fullscreen 1</code>
+						</td>
+						<td>If this is added to the command line, the game will start up in full screen mode (window mode is the default).</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>logfile</strong>
+						</td>
+						<td>
+							<code>-logfile &lt;string&gt;</code>
+						</td>
+						<td>The debug output log will be written out to the file name specified by &lt;string&gt;. Additionally, the default debug output log file is "DebugOuput.log", and it is saved in the same folder as the solution file.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>devhost</strong>
+						</td>
+						<td>
+							<code>-devhost &lt;string&gt;</code>
+						</td>
+						<td>The "Host" port box in the "Dev Auth" login options will contain the &lt;string&gt; parameter.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>devcred</strong>
+						</td>
+						<td>
+							<code>-devcred &lt;string&gt;</code>
+						</td>
+						<td>The "Credentials" box in the "Dev Auth" login options will contain the &lt;string&gt; parameter.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="console-commands">Console Commands</h3>
+			</div>
+			<p>The Auth and Friends sample supports the following console commands, which you can enter in-game:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Console Command</th>
+						<th>Usage</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>TEST</strong>
+						</td>
+						<td>
+							<code>TEST</code>
+						</td>
+						<td>Prints out a test message to the console.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>CLEAR</strong>
+						</td>
+						<td>
+							<code>CLEAR</code>
+						</td>
+						<td>Clears all the text lines in the console output window.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>EXIT</strong>
+						</td>
+						<td>
+							<code>EXIT</code>
+						</td>
+						<td>Exits and closes down the game.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>LOGIN</strong>
+						</td>
+						<td>
+							<code>LOGIN &lt;USER_ID&gt; &lt;PASSWORD&gt;</code>
+						</td>
+						<td>Attempts to login the user with user ID &lt;USER_ID&gt; and password &lt;PASSWORD&gt;.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>LOGOUT</strong>
+						</td>
+						<td>
+							<code>LOGOUT &lt;USER_NAME&gt;</code>
+						</td>
+						<td>Attempts to logout the user named &lt;USER_NAME&gt;.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>INVITE</strong>
+						</td>
+						<td>
+							<code>INVITE &lt;FRIEND_NAME&gt;</code>
+						</td>
+						<td>Send a friend invite to the user with display name &lt;FRIEND_NAME&gt;.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>PREV</strong>
+						</td>
+						<td>
+							<code>PREV</code>
+						</td>
+						<td>Shows info for the previous logged in user (if more than one user is logged in).</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>NEXT</strong>
+						</td>
+						<td>
+							<code>NEXT</code>
+						</td>
+						<td>Shows info for the next logged in user (if more than one user is logged in).</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>NEW</strong>
+						</td>
+						<td>
+							<code>NEW</code>
+						</td>
+						<td>Shows login dialog to allow logging in as an additional user.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>FRIENDS</strong>
+						</td>
+						<td>
+							<code>FRIENDS</code>
+						</td>
+						<td>Opens the Friends overlay.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>HELP</strong>
+						</td>
+						<td>
+							<code>HELP</code>
+						</td>
+						<td>Prints info to the console output about all the above console commands.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>To add more console commands, see the
+				<code>Game::CreateConsoleCommands</code>
+				function in
+				<code>Game.cpp</code>.</p>
+			<div>
+				<h3 id="features">Features</h3>
+			</div>
+			<p>The Simple Framework has a few features, including Login and Logout functionality, a Console Window, a Friends List, and Presence Information.</p>
+			<div>
+				<h4 id="login">Login</h4>
+			</div>
+			<p>The following image shows the
+				<strong>FRIENDS</strong>
+				section with several login methods. To log in, click on a method and enter the appropriate information. You can then click
+				<strong>LOG IN</strong>
+				to complete the process.</p>
+			<div>
+				<div>
+					<div style="max-width:350px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-1.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>The login panel, showing the supported login methods.</p>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<strong>Device Code:</strong>
+					Log in with a URL containing a code that Epic provides.</li>
+				<li>
+					<strong>Dev Auth:</strong>
+					Log in with
+					<a href="/docs/epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					credentials.</li>
+				<li>
+					<strong>Account Portal:</strong>
+					Log in by linking with your
+					<a href="/docs/epic-account-services">Epic Account</a>.</li>
+			</ul>
+			<p>The following image shows your user display name (in the top right) after you have successfully logged in:</p>
+			<div>
+				<div>
+					<div style="max-width:350px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-4.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>EOS supports multiple, simultaneous logins from a single system. In this sample, you can click the
+				<strong>NEW</strong>
+				button to log in with a new account. If multiple accounts are logged in at the same time, the left and right arrows will cycle through them.</p>
+			<div>
+				<h5 id="device-code-method">Device Code Method</h5>
+			</div>
+			<p>The Device Code method sends a URL containing a login code to the sample. You can find the URL in the sample's console log. After copying it into the
+				<strong>FRIENDS</strong>
+				section, you will be logged in. To cancel this process, click
+				<strong>Cancel</strong>
+				in the pop-up window.</p>
+			<div>
+				<h5 id="dev-auth-method">Dev Auth Method</h5>
+			</div>
+			<p>To log in with the Dev Auth method, enter the host port where you are running the
+				<a href="/docs/epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>, and supply the credentials that the tool provides. Click
+				<strong>LOG IN</strong>
+				after entering this information.</p>
+			
+			<!-- -->
+			<div>
+				<h5 id="account-portal-method">Account Portal Method</h5>
+			</div>
+			<p>With the Account Portal method, you will be taken to the
+				<a href="/docs/epic-account-services">Epic Account</a>
+				portal in your web browser, where you can log in to your application with an Epic Account. After completing the web flow, you will be returned to the sample.</p>
+			<div>
+				<h4 id="logging-out">Logging Out</h4>
+			</div>
+			<p>To log out, click the
+				<strong>LOG OUT</strong>
+				button.</p>
+			<div>
+				<h4 id="console-window">Console Window</h4>
+			</div>
+			<p>The Console logs relevant debug output from various EOS SDK operations. Additionally, the Console displays debug output from the following:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Text Color</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>FDebugLog::Log()</code>
+						</td>
+						<td>White</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FDebugLog::LogWarning()</code>
+						</td>
+						<td>Orange</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FDebugLog::LogError()</code>
+						</td>
+						<td>Red</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<p>
+					<strong>Note:</strong>
+					Errors from EOS SDK operations display red text, and warnings display orange text.</p>
+			</div>
+			<p>Refer to the following image to learn more about the Console Window:</p>
+			<div>
+				<div>
+					<div style="max-width:520px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-5.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>The console output (1) logs relevant debug information. Additionally, you can enter console commands (2) or clear all times from the console output (3). Finally, you can select and copy text highlighted in yellow from the console output by clicking, dragging, and then then using the Ctrl+C keyboard combination. If you want to select all text in the console ouput, use the Ctrl+A keyboard combination.</p>
+			<div>
+				<p>
+					<strong>Note:</strong>
+					Text is copied to the clipboard.</p>
+			</div>
+			<div>
+				<h4 id="friends-list">Friends List</h4>
+			</div>
+			<p>
+				<strong>Friends List</strong>
+				is a separate part of a window that shows friends and their statuses, friend invitations, and enables interaction. You have to be logged in to be able to use Friends List (see below).</p>
+			<div>
+				<div>
+					<div style="max-width:320px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-6.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Friends List also contains a text field that serves two purposes. First, it can filter friends by their display name. And second, it is possible to search for new friends by typing in a user display name and pressing the Enter key. If there are no friends with the entered display name in your list, a search operation is executed, and the user will be shown in the list with an option to add them (see below):</p>
+			<div>
+				<div>
+					<div style="max-width:345px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-7.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Pressing the
+				<strong>+</strong>
+				button sends a
+				<strong>friend invite</strong>
+				to the user. Invited friends are shown in Friends List until the user accepts or rejects the invitation.</p>
+			<div>
+				<p>Incoming friend invitations display buttons to accept or reject the invitation.</p>
+			</div>
+			<div>
+				<h4 id="presence-information">Presence Information</h4>
+			</div>
+			<p>After a user accepts an invitation, they become your Friend, enabling the display of additional information. For example, it is possible to see what a friend's status is (such as whether they are Online, Away or Offline). Additionally, 
+				<!-- -->presence
+				<!-- --> information is available for friends who are currently playing a game, and a green label next to their name shows the application name and platform they are currently using (see image below).</p>
+			<div>
+				<div>
+					<div style="max-width:340px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 640w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 750w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 828w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 1080w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 1200w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 1920w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 2048w, null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png 3840w" src="null/epic-account-services/auth/auth-sample/eossdk-simple-framework_-8.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Sample">Sample</a>
+				<a href="/docs/en-US/site-map?tag=Simple%20Framework">
+					Simple Framework</a>
+				<a href="/docs/en-US/site-map?tag=Getting%20Started">
+					Getting Started</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#source-code-and-project">Source Code and Project</a>
+					</li>
+					<li>
+						<a href="#building-the-sample">Building the Sample</a>
+					</li>
+					<li>
+						<a href="#windows-directx">Windows DirectX</a>
+					</li>
+					<li>
+						<a href="#windows-sdl">Windows SDL</a>
+					</li>
+					<li>
+						<a href="#mac-osx">Mac OSX</a>
+					</li>
+					<li>
+						<a href="#linux">Linux</a>
+					</li>
+					<li>
+						<a href="#authenticating-with-steam-apis">Authenticating with Steam APIs</a>
+					</li>
+					<li>
+						<a href="#exploring-the-sample">Exploring the Sample</a>
+					</li>
+					<li>
+						<a href="#command-line-parameters">Command Line Parameters</a>
+					</li>
+					<li>
+						<a href="#console-commands">Console Commands</a>
+					</li>
+					<li>
+						<a href="#features">Features</a>
+					</li>
+					<li>
+						<a href="#login">Login</a>
+					</li>
+					<li>
+						<a href="#device-code-method">Device Code Method</a>
+					</li>
+					<li>
+						<a href="#dev-auth-method">Dev Auth Method</a>
+					</li>
+					<li>
+						<a href="#account-portal-method">Account Portal Method</a>
+					</li>
+					<li>
+						<a href="#logging-out">Logging Out</a>
+					</li>
+					<li>
+						<a href="#console-window">Console Window</a>
+					</li>
+					<li>
+						<a href="#friends-list">Friends List</a>
+					</li>
+					<li>
+						<a href="#presence-information">Presence Information</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

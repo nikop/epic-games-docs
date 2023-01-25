@@ -38,7 +38,7 @@
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
-			<p>This guide aims to help partners promote an optimal experience for users while also ensuring compliance with Epic Games Store requirements. The sections below provide test cases and recommendations for cross-play multiplayer requirements, Epic Online Services (EOS), and a variety of player experience topics.</p>
+			<p>This guide aims to help partners promote an optimal experience for users while also ensuring compliance with Epic Games Store requirements. The sections below provide test cases and recommendations for crossplay multiplayer requirements, Epic Online Services (EOS), and a variety of player experience topics.</p>
 			<p>Before distributing your product or any updates on the Epic Games Store, it is
 				<strong>strongly recommended</strong>
 				that you review and verify these test cases to ensure a successful launch.</p>
@@ -49,7 +49,7 @@
 				<h3 id="epic-account-services-player-consent">Epic Account Services Player Consent</h3>
 			</div>
 			<p>Games using Epic Account Services require player consent to share data. As long as games use the correct
-				<a href="/docs/epic-account-services/auth-interface#preferred-login-types-for-epic-account">CredentialType</a>,  players should be directed to grant consent a single time when first launching the game. For games sold in the Epic Games Store, this consent may be granted automatically at time of purchase. Players have the ability to revoke consent at any time from their
+				<a href="/docs/epic-account-services/auth/auth-interface#preferred-login-types-for-epic-account">CredentialType</a>,  players should be directed to grant consent a single time when first launching the game. For games sold in the Epic Games Store, this consent may be granted automatically at time of purchase. Players have the ability to revoke consent at any time from their
 				<a href="/docs/en-UShttps://www.epicgames.com/account/connections">Account Connections</a>
 				page.</p>
 			<p>
@@ -69,7 +69,7 @@
 			</p>
 			<ul>
 				<li>The account proceeds into gameplay without seeing the consent flow after providing initial consent. Games on the Epic Games Store should use
-					<a href="/docs/epic-account-services/auth-interface#epic-games-launcher">ExchangeCode</a>
+					<a href="/docs/epic-account-services/auth/auth-interface#epic-games-launcher">ExchangeCode</a>
 					rather than AccountPortal to ensure correct behavior.</li>
 				<li>The Epic Account Services application has its Brand Settings in the
 					<em>Published</em>
@@ -595,7 +595,7 @@
 			<div>
 				<h2 id="crossplay">Crossplay</h2>
 			</div>
-			<p>At Epic Games, we want to ensure players can play with their friends, regardless of which store they use to purchase your game. As such, all titles coming to the Epic Games Store that offer online multiplayer must support cross-platform multiplayer with all other PC storefronts. Cross-play with other non-PC platforms (e.g., consoles) is optional but encouraged.</p>
+			<p>At Epic Games, we want to ensure players can play with their friends, regardless of which store they use to purchase your game. As such, all titles coming to the Epic Games Store that offer online multiplayer must support cross-platform multiplayer with all other PC storefronts. Crossplay with other non-PC platforms (e.g., consoles) is optional but encouraged.</p>
 			<p>The Epic Games Store does not require crossplay to be implemented via any particular service or account system.
 				<a href="/docs/en-UShttps://dev.epicgames.com/services">Epic Online Services</a>
 				and Epic Games accounts are offered free of charge as one potential solution. Publisher-based or other third-party solutions are supported and welcomed. Where supported, multiplayer functionality on Epic Games Store must be at parity with other PC storefronts.</p>
@@ -694,7 +694,7 @@
 			</div>
 			<p>If your game uses
 				<a href="/docs/epic-account-services">Epic Account Services</a>
-				to provide cross-play functionality, use the following checklist to validate the handling of all required scenarios. Note that while this is one of the ways you can implement cross-play, it is not required and you are welcome to implement any other solution of your choice.</p>
+				to provide crossplay functionality, use the following checklist to validate the handling of all required scenarios. Note that while this is one of the ways you can implement crossplay, it is not required and you are welcome to implement any other solution of your choice.</p>
 			<div>
 				<h4 id="steam-account-linking-and-epic-account-services-consent">Steam account linking and Epic Account Services consent</h4>
 			</div>
@@ -794,7 +794,7 @@
 			</div>
 			<p>Using Epic Online Services, you can integrate in-game user authentication through Epic Account Services and unify social experiences across any PC storefront. As an example of this implementation, users on Steam would be able to see and interact with both their Epic Games friends and Steam friends from a single list using the Epic Games overlay.</p>
 			<p>In order to enable the Epic Games overlay in your games on PC storefronts other than the Epic Games Store, the Epic Online Services redistributable must be installed by your game as part of its installation process. To learn more, review
-				<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer">Redistributable Installer</a>. Note that the redistributable installer is not needed for the Epic Games Store and should not be included with the Epic Games Store game build.</p>
+				<a href="/docs/epic-account-services/crossplay/redistributable-installer">Redistributable Installer</a>. Note that the redistributable installer is not needed for the Epic Games Store and should not be included with the Epic Games Store game build.</p>
 			<p>
 				<strong>Test Steps</strong>
 			</p>
@@ -805,10 +805,10 @@
 				<li>Ensure your game’s installation is configured to install, and uninstall, the
 					<code>EpicOnlineServicesInstaller.exe</code>
 					as part of your game’s redistributable dependencies (i.e., via
-					<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer#steam-installscript">a Steam installscript.vdf</a>
+					<a href="/docs/epic-account-services/crossplay/redistributable-installer#steam-installscript">a Steam installscript.vdf</a>
 					).</li>
 				<li>Ensure the game is launched via the
-					<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer#bootstrapper-application">EOSBootstrapper.exe process</a>.</li>
+					<a href="/docs/epic-account-services/crossplay/redistributable-installer#bootstrapper-application">EOSBootstrapper.exe process</a>.</li>
 				<li>Launch the game for the first time after installation.</li>
 				<li>Sign into an Epic Games account in the game.</li>
 				<li>Open the Epic Games overlay using the

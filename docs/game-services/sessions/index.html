@@ -20,7 +20,7 @@
 			<h1>Sessions Interface</h1>
 			<h2>Interface to handle session-based matchmaking</h2>
 			<div>
-				<div>30 mins to read</div>
+				<div>31 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -313,6 +313,75 @@
 				<code>EOS_Sessions_OnUpdateSessionCallback</code>) upon completion with an
 				<code>EOS_Sessions_UpdateSessionCallbackInfo</code>
 				data structure. On success, the local name that you provided will be paired with a searchable, unique ID string from the server.</p>
+			<div>
+				<h2 id="player-details">Player Details</h2>
+			</div>
+			<p>You can retrieve the following player data from the active session:</p>
+			<ul>
+				<li>The total number of registered players.</li>
+				<li>The product user ID (PUID) of each registered player.</li>
+			</ul>
+			<div>
+				<h3 id="accessing-the-total-number-of-registered-players">Accessing the Total Number of Registered Players</h3>
+			</div>
+			<p>You can call
+				<code>EOS_ActiveSession_GetRegisteredPlayerCount</code>
+				to get the total number of registered players associated with the active session. To do this, call
+				<code>EOS_ActiveSession_GetRegisteredPlayerCount</code>
+				with an
+				<code>ActiveSessionGetRegisteredPlayerCountOptions</code>
+				structure that contains the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_ACTIVESESSION_GETREGISTEREDPLAYERCOUNT_API_LATEST</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="accessing-the-product-user-id-of-each-registered-player">Accessing the Product User ID of Each Registered Player</h3>
+			</div>
+			<p>You can iterate through the registered players for the active session to get the product user ID (PUID) of each registered player. To do this, call
+				<code>EOS_ActiveSession_GetRegisteredPlayerByIndex</code>
+				with an
+				<code>ActiveSessionGetRegisteredPlayerByIndexOptions</code>
+				structure that contains the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_ACTIVESESSION_GETREGISTEREDPLAYERBYINDEX_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PlayerIndex</code>
+						</td>
+						<td>Index of the registered player to retrieve.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>On success, this returns the product user ID (PUID) of the player at the specified index for the active session.</p>
 			<div>
 				<h2 id="modifying-a-session">Modifying a Session</h2>
 			</div>
@@ -1929,6 +1998,15 @@
 					</li>
 					<li>
 						<a href="#creating-a-session">Creating a Session</a>
+					</li>
+					<li>
+						<a href="#player-details">Player Details</a>
+					</li>
+					<li>
+						<a href="#accessing-the-total-number-of-registered-players">Accessing the Total Number of Registered Players</a>
+					</li>
+					<li>
+						<a href="#accessing-the-product-user-id-of-each-registered-player">Accessing the Product User ID of Each Registered Player</a>
 					</li>
 					<li>
 						<a href="#modifying-a-session">Modifying a Session</a>

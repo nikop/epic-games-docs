@@ -1,0 +1,865 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Auth Interface">Auth Interface</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Auth Interface</h1>
+			<h2>Interface to handle verification of user accounts, including login and logout functionality.</h2>
+			<div>
+				<div>30 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>If you plan to integrate Epic Account Services with your game, and you want to target console platforms, please contact us at
+						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
+						to coordinate a release plan.</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="auth-interface">Auth Interface</h2>
+			</div>
+			<p>The Auth Interface lets players (users) log into their Epic Account from your game (product) so they can access the features provided by
+				<strong>Epic Account Services</strong>
+				(EAS), such as Friends, Presence, UserInfo and Ecom interfaces. The
+				<strong>Auth Interface</strong>
+				handles Epic account-related interactions with EOS, providing the ability to authenticate users and obtain access tokens.</p>
+			<div>
+				<p>If you have a userless client setup (i.e. your
+					<a href="/docs/dev-portal/client-credentials#policies">Client Policy doesn't require a user</a>), you can initialize the client using just the
+					<code>client_credentials</code>. You don't need any user information.</p>
+			</div>
+			<p>To use the Auth Interface, your game (product) must have
+				<strong>Epic Account Services</strong>
+				(EAS) active, and must obtain
+				<a href="/docs/epic-account-services/consent-management">user consent</a>
+				to access
+				<strong>Basic Profile</strong>
+				data. You can activate EAS on the
+				<a href="/docs/dev-portal">Developer Portal</a>, or learn more in
+				<a href="/docs/epic-account-services">Epic's documentation</a>. Without EAS and user consent, you will still be able to initialize the EOS SDK and the Auth Interface, but all Auth Interface function calls to the back-end service will fail.</p>
+			<div>
+				<h3 id="authentication-functions">Authentication Functions</h3>
+			</div>
+			<p>To access authentication functions, you need an
+				<code>EOS_HAuth</code>
+				handle, which you can acquire by calling the
+				<strong>
+					<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+				</strong>
+				function,
+				<code>EOS_Platform_GetAuthInterface</code>. Auth Interface functions require this handle to access user information.</p>
+			<div>
+				<h4 id="logging-in">Logging In</h4>
+			</div>
+			<p>To begin interacting with EAS�s online features, players must first log in with a valid Epic Account. To set this up so that players can do this, call the
+				<code>EOS_Auth_Login</code>
+				function with an
+				<code>EOS_Auth_LoginOptions</code>
+				structure containing a local player's 
+				<!-- -->account
+				<!-- --> credentials. Whether the login attempt succeeds or fails, your callback function, of type
+				<code>EOS_Auth_OnLoginCallback</code>, will run upon completion.</p>
+			<p>The brand review process verifies your game's brand with Epic Games. Once verified, players outside of your 
+				<!-- -->organization
+				<!-- --> can use your game's integration of Epic Account Services. Prior to brand review, players receive an error if they try to log into your game with an external account. See the documentation on the
+				<a href="/docs/epic-account-services/brand-review">Brand Review Application Process</a>
+				for more details.</p>
+			<p>The
+				<code>EOS_Auth_LoginOptions</code>
+				must be initialized with its
+				<code>ApiVersion</code>
+				variable set to
+				<code>EOS_AUTH_LOGIN_API_LATEST</code>, and its
+				<code>Credentials</code>
+				variable (of type
+				<code>EOS_Auth_Credentials</code>) containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ApiVersion</td>
+						<td>EOS_AUTH_CREDENTIALS_API_LATEST</td>
+					</tr>
+					<tr>
+						<td>Id</td>
+						<td>The identity of the user logging in. Unlike most other functions, this should be a user-readable identity, like an email address or display name.</td>
+					</tr>
+					<tr>
+						<td>Token</td>
+						<td>The user's login credentials or authentication token.</td>
+					</tr>
+					<tr>
+						<td>Type</td>
+						<td>The type of credential that this login attempt is using.
+							<a href="/docs/api-ref/enums/eos-e-login-credential-type">EOS_ELoginCredentialType</a>
+							lists the available kinds of credentials.</td>
+					</tr>
+					<tr>
+						<td>SystemAuthCredentialsOptions</td>
+						<td>This field is for system specific options, if any are needed.</td>
+					</tr>
+					<tr>
+						<td>ExternalType</td>
+						<td>If
+							<code>Type</code>
+							is set to
+							<code>EOS_LCT_ExternalAuth</code>, this field indicates which external authentication method to use. See
+							<a href="/docs/api-ref/enums/eos-e-external-credential-type">EOS_EExternalCredentialType</a>
+							for a list of all available methods.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Pass the Auth Interface handle, your
+				<code>EOS_Auth_LoginOptions</code>
+				structure, and your callback information to the function. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided will run when the operation finishes.</p>
+			<div>
+				<h4 id="preferred-login-types-for-epic-account">Preferred Login Types for Epic Account</h4>
+			</div>
+			<p>As of SDK 1.5 version, the preferred login types by platform are as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Platform</th>
+						<th>Login Type</th>
+						<th>Summary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Console</td>
+						<td>
+							<code>EOS_LCT_ExternalAuth</code>
+						</td>
+						<td>Platform access token used to automatically login the platform user to their associated Epic account.</td>
+					</tr>
+					<tr>
+						<td>Steam Client</td>
+						<td>
+							<code>EOS_LCT_ExternalAuth</code>
+						</td>
+						<td>Steam Session Ticket used to automatically login the local Steam user to their associated Epic account.</td>
+					</tr>
+					<tr>
+						<td>Epic Games Launcher</td>
+						<td>
+							<code>EOS_LCT_ExchangeCode</code>
+						</td>
+						<td>Exchange code received from the launcher and used to automatically login the user.</td>
+					</tr>
+					<tr>
+						<td>Other store platforms and standalone distributions on PC and Mobile Devices</td>
+						<td>
+							<code>EOS_LCT_AccountPortal</code>
+							with
+							<code>EOS_LCT_PersistentAuth</code>
+						</td>
+						<td>Users are prompted to login using their Epic account credentials, after which a long-lived refresh token is stored locally to enable automatic login across consecutive application runs.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h5 id="console">Console</h5>
+			</div>
+			<p>Your game retrieves an access token from the platform for the local user account. Using the
+				<code>EOS_LCT_ExternalAuth</code>
+				login type, the platform user is logged into their Epic account. See
+				<a href="/docs/en-US#external-account-authentication">External Account Authentication</a>
+				for the detailed login flow, and the console specific documentation for the platform code integration.</p>
+			<div>
+				<h5 id="pc-or-mobile-device">PC or Mobile Device</h5>
+			</div>
+			<p>PCs and mobile devices usually use persistent logins, enabled by long-lived refresh tokens granted by the authentication backend, and specific to the device and user account. On these platforms, the SDK automatically stores and retrieves these tokens as needed, and updates them following each login. See the section on
+				<a href="/docs/en-US#persisting-user-login-to-epic-account-outside-epic-games-launcher">persistent logins</a>
+				for more information.</p>
+			<div>
+				<h5 id="epic-games-launcher">Epic Games Launcher</h5>
+			</div>
+			<p>When an application associated with the Epic Games Launcher starts, the launcher will provide a command line with several parameters, which will take this format:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span>-AUTH_LOGIN</span>
+								<span style="color:#fff">=</span>
+								<span>unused -AUTH_PASSWORD</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>password</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-AUTH_TYPE</span>
+								<span style="color:#fff">=</span>
+								<span>exchangecode -epicapp</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>appid</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-epicenv</span>
+								<span style="color:#fff">=</span>
+								<span>Prod -EpicPortal  -epicusername</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>username</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-epicuserid</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>userid</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-epiclocale</span>
+								<span style="color:#fff">=</span>
+								<span>en-US</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>The important fields of this command line are as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>AUTH_LOGIN</td>
+						<td>This field may be the user ID, but it is presently unused.</td>
+					</tr>
+					<tr>
+						<td>AUTH_PASSWORD</td>
+						<td>This field will be the Exchange Code itself, which should be provided as the Token during login.</td>
+					</tr>
+					<tr>
+						<td>AUTH_TYPE</td>
+						<td>The type will read "exchangecode", indicating that
+							<code>EOS_Auth_LoginCredentials</code>
+							should use the type
+							<code>EOS_LCT_ExchangeCode</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The application must parse this information and pass it into
+				<code>EOS_Auth_Login</code>
+				through the
+				<code>EOS_Auth_Credentials</code>
+				structure.
+				<code>EOS_Auth_Credentials</code>
+				has three variables:
+				<code>Id</code>,
+				<code>Token</code>, and
+				<code>Type</code>. You may leave
+				<code>Id</code>
+				blank, as this login method does not require an ID. For
+				<code>Token</code>, provide the Exchange Code from the
+				<code>AUTH_PASSWORD</code>
+				command line parameter. Finally,
+				<code>Type</code>
+				should be
+				<code>EOS_LCT_ExchangeCode</code>.</p>
+			<div>
+				<h5 id="auth-scopes">Auth Scopes</h5>
+			</div>
+			<p>As of EOS SDK version 1.5,
+				<code>EOS_Auth_LoginOptions</code>
+				contains a new field named
+				<code>ScopeFlags</code>, of type
+				<code>EOS_EAuthScopeFlags</code>
+				(API LINK). Scopes are a set of permissions that are required for your application to function properly. For example, if your application needs to see the user�s friends list, then you must request the
+				<code>EOS_AS_FriendsList</code>
+				scope, and the user will be asked to give consent for it during the login flow. If the user does not consent to one of the requested scopes, then the login will fail. When requesting consent, your request must exactly match the scopes configured for the 
+				<!-- -->product
+				<!-- --> in the Developer Portal.</p>
+			<div>
+				<p>Multiple users can be logged in at the same time on a single local device and using the same shared EOS_HPlatform instance</p>
+			</div>
+			<div>
+				<h5 id="associating-with-the-epic-games-launcher">Associating With the Epic Games Launcher</h5>
+			</div>
+			<p>When an application associated with the Epic Games Launcher starts, the launcher will provide a command line with several parameters, which will take this format:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span>-AUTH_LOGIN</span>
+								<span style="color:#fff">=</span>
+								<span>unused -AUTH_PASSWORD</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>password</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-AUTH_TYPE</span>
+								<span style="color:#fff">=</span>
+								<span>exchangecode -epicapp</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>appid</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-epicenv</span>
+								<span style="color:#fff">=</span>
+								<span>Prod -EpicPortal -epicusername</span>
+								<span style="color:#fff">=</span>
+								<span style="color:#fff">&lt;</span>
+								<span>username</span>
+								<span style="color:#fff">&gt;</span>
+								<span>-epicuserid</span>
+								<span style="color:#fff">&lt;</span>
+								<span>userid</span>
+								<span style="color:#fff">&gt;</span>
+								<span>
+									-epiclocale</span>
+								<span style="color:#fff">=</span>
+								<span>en-US</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>The important fields of this command line are as follows:This information must be parsed by the application and provided to the
+				<code>EOS_Auth_Login</code>
+				through the
+				<code>EOS_Auth_Credentials</code>
+				structure.
+				<code>EOS_Auth_Credentials</code>
+				has three variables:
+				<code>Id</code>,
+				<code>Token</code>, and
+				<code>Type</code>. For the
+				<code>Type</code>, use
+				<code>EOS_LCT_ExchangeCode</code>.</p>
+			<p>You may leave
+				<code>Id</code>
+				blank, as this field is unused for this login type. Finally, provide the Exchange Code from
+				<code>AUTH_PASSWORD</code>
+				as the
+				<code>Token</code>.</p>
+			<div>
+				<h4 id="persisting-user-login-to-epic-account-outside-epic-games-launcher">Persisting user login to Epic Account outside Epic Games Launcher</h4>
+			</div>
+			<p>On PC and mobile platforms, to support persistent user login outside of the Epic Games Launcher, use the
+				<code>EOS_LCT_AccountPortal</code>
+				login type.</p>
+			<p>The SDK automatically receives a refresh token from the authentication backend after a successful login to the user's Epic Account and stores the refresh token in the local keychain of the locally logged-in user on the device. For the local keychain, the SDK uses the secure credentials store provided by the device's operating system.</p>
+			<p>When automatically logging in the local user, the game should first call
+				<code>EOS_Auth_Login</code>
+				with the
+				<code>EOS_LCT_PersistentAuth</code>
+				login type. The
+				<code>Id</code>
+				and
+				<code>Token</code>
+				input fields should be set to
+				<code>NULL</code>
+				since the SDK manages the long-lived access credentials. The SDK will check for a refresh token in the keychain of the local user, and will automatically use a token, if it finds one, to log the user into their Epic Account. Following a successful login on those platforms, the SDK will automatically update the refresh token in the local keychain.</p>
+			<p>If
+				<code>EOS_Auth_Login</code>
+				fails for any reason, proceed with the default login method for the platform. If
+				<code>EOS_Auth_Login</code>
+				found a refresh token but failed to log in because the server rejected the token � meaning the call failed for a reason other than not having a token, connection or service issues, or the operation canceling or waiting to retry � the application should delete the token, since it is obsolete and will continue to cause failures in all future sessions. Call
+				<code>EOS_Auth_DeletePersistentAuth</code>
+				to explicitly remove any stored credentials in the local keychain for the user. The application should then proceed to the platform's default login flow.</p>
+			<p>In the case that a logged-in user wants to disable automatic login, call
+				<code>EOS_Auth_Logout</code>
+				to log out, and
+				<code>EOS_Auth_DeletePersistentAuth</code>
+				to revoke the user's long-lived logon session on the authentication backend. This will also delete the long-lived refresh token from the keychain of the local user.</p>
+			<div>
+				<h4 id="logging-out">Logging Out</h4>
+			</div>
+			<p>To log out, call the
+				<code>EOS_Auth_Logout</code>
+				function with an
+				<code>EOS_Auth_LogoutOptions</code>
+				data structure. When the operation completes, your callback function, of type
+				<code>EOS_Auth_OnLogoutCallback</code>, will run. Initialize your
+				<code>EOS_Auth_LogoutOptions</code>
+				structure as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ApiVersion</td>
+						<td>EOS_AUTH_LOGOUT_API_LATEST</td>
+					</tr>
+					<tr>
+						<td>LocalUserId</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Pass the Auth Interface handle, your
+				<code>EOS_Auth_LogoutOptions</code>
+				structure, and your callback function to
+				<code>EOS_Auth_Logout</code>. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided will run when the operation finishes.</p>
+			<p>If the
+				<code>EOS_LCT_PersistentAuth</code>
+				login type has been used, be sure to also call the function
+				<code>EOS_Auth_DeletePersistentAuth</code>
+				to revoke the long-lived logon session on the authentication backend. This will also permanently forget the local user login on the local device.</p>
+			<div>
+				<h4 id="status-change-notification">Status Change Notification</h4>
+			</div>
+			<p>The EOS SDK periodically verifies local users' authentication status during the application�s lifetime. This helps to make sure that the user hasn�t signed in elsewhere or otherwise lost access for reasons external to the application itself. To assure that your application knows whenever a user's authentication status has changed, the Auth Interface invokes a callback of type
+				<code>EOS_Auth_OnLoginStatusChangedCallback</code>
+				upon any such change for any local player. You can attach your own callback function to this process with the
+				<code>EOS_Auth_AddNotifyLoginStatusChanged</code>
+				function.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>The
+						<code>EOS_Auth_OnLoginStatusChangedCallback</code>
+						callback function you provide will run whenever a local user's authentication status changes. This includes explicitly logging in and out with the Auth Interface, meaning that you will receive both the callback for the log in (or log out) event as well as this callback.</p>
+				</div>
+			</div>
+			<p>Connectivity loss during an application�s lifetime does not indicate that a user is logged out. The EOS backend will explicitly notify the Auth Interface when a logout event takes place, and this is the only case in which it is safe to assume that the user is officially considered offline. User connectivity problems such as service outages, or local hardware failure can cause various API features to fail. If the game can continue without these interactions, the recommended course of action is to continue playing with the assumption that connectivity may eventually resume without logging the user out.</p>
+			<div>
+				<h4 id="checking-current-authentication-status">Checking Current Authentication Status</h4>
+			</div>
+			<p>To check the player's current status on demand, use the
+				<code>EOS_Auth_GetLoginStatus</code>
+				function. This function determines authentication status based on the most recent communication with the online service, so the result is returned instantly, and does not use a callback function.</p>
+			<div>
+				<h4 id="external-account-authentication">External Account Authentication</h4>
+			</div>
+			<p>To log in with
+				<strong>
+					<code>EOS_Auth_Login</code>
+				</strong>
+				using an external account, set
+				<strong>
+					<code>Type</code>
+				</strong>
+				in
+				<strong>
+					<code>EOS_Auth_Credentials</code>
+				</strong>
+				to
+				<strong>
+					<code>EOS_LCT_ExternalAuth</code>
+				</strong>, set
+				<code>ExternalType</code>
+				to an external credential type (See
+				<a href="/docs/api-ref/enums/eos-e-external-credential-type">
+					<strong>EOS_EExternalCredentialType</strong>
+				</a>
+				for a list of all available methods), and set
+				<strong>
+					<code>Token</code>
+				</strong>
+				to the external authentication token. For example, if you want to log in with Steam, you would use
+				<strong>
+					<code>EOS_ECT_STEAM_SESSION_TICKET</code>
+				</strong>
+				as the
+				<strong>
+					<code>ExternalType</code>
+				</strong>, and the
+				<strong>
+					<code>Token</code>
+				</strong>
+				would be the Steam Session Ticket.</p>
+			<p>
+				<strong>EOS_InvalidUser</strong>
+				will be returned when the external auth login fails due to an external account not being linked. An
+				<strong>EOS_ContinuanceToken</strong>
+				will be set in the
+				<strong>EOS_Auth_LoginCallbackInfo</strong>
+				data.
+				<strong>EOS_Auth_LinkAccount</strong>
+				should be called with the
+				<strong>EOS_ContinuanceToken</strong>
+				and
+				<strong>LinkAccountFlags</strong>
+				set to
+				<strong>EOS_LA_NoFlags</strong>
+				(for most cases where consent is required via the Account Portal or PIN Grant) to continue the external account login and link the external account. Afterwards, the external account will be linked to the user�s Epic Account.</p>
+			<p>The
+				<strong>Identity Providers</strong>
+				on the Developer Portal will need to be configured for the Product to allow providers to be linked using external account authentication. See
+				<a href="/docs/dev-portal/identity-provider-management#configuring-identity-providers">
+					<strong>Configuring Identity Providers</strong>
+				</a>
+				for more information.</p>
+			<div>
+				<div>
+					<div>
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="EOS Authentication Flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="EOS Authentication Flow" sizes="100vw" srcset="null/epic-account-services/auth/eos-auth-flow.png 640w, null/epic-account-services/auth/eos-auth-flow.png 750w, null/epic-account-services/auth/eos-auth-flow.png 828w, null/epic-account-services/auth/eos-auth-flow.png 1080w, null/epic-account-services/auth/eos-auth-flow.png 1200w, null/epic-account-services/auth/eos-auth-flow.png 1920w, null/epic-account-services/auth/eos-auth-flow.png 2048w, null/epic-account-services/auth/eos-auth-flow.png 3840w" src="null/epic-account-services/auth/eos-auth-flow.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h4 id="integrating-a-game-launcher-with-epic-games-store">Integrating a Game Launcher with Epic Games Store</h4>
+			</div>
+			<p>If your game provides a launcher to include additional launch options, promotions or other news, then your launcher must manage the login flow.
+				<strong>Exchange codes</strong>
+				generated by the Epic Games Launcher expire after a short period of time, so care must be taken to prevent the exchange code from expiring. Use the following pattern when the Epic Games Launcher is not directly launching the game application:</p>
+			<ol>
+				<li>The Epic Games Launcher starts the third-party launcher, passing the exchange code on the command line as described above in the section
+					<code>Associating With the Epic Games Launcher</code>
+				</li>
+				<li>The third-party launcher uses the Exchange Code to login the player by using the
+					<code>EOS_Auth_Login</code>
+					API. Initialize
+					<code>EOS_Auth_LoginOptions</code>
+					by setting the
+					<code>Type</code>
+					and
+					<code>Token</code>
+					fields of the
+					<code>EOS_Auth_ClientCredentials</code>
+					struct to
+					<code>EOS_LCT_ExchangeCode</code>
+					and the exchange code from the command line respectively.</li>
+				<li>When the player chooses to launch the game, use the
+					<code>EOS_Auth_CopyUserAuthToken</code>
+					API to get a copy of the token details. Copy the
+					<code>RefreshToken</code>
+					from the
+					<code>EOS_Auth_Token</code>
+					and call the
+					<code>EOS_Auth_Token_Release</code>
+					API to free the memory allocated by the SDK.</li>
+				<li>Pass the refresh token to the game application by setting an environment variable that the game can read on startup. Do not log the player out in the third-party launcher when it exits as this will invalidate the refresh token.</li>
+				<li>When the game process starts up, the game can log the player in using the
+					<code>EOS_Auth_Login</code>
+					API. Initialize
+					<code>EOS_Auth_LoginOptions</code>
+					by setting the
+					<code>Type</code>
+					and
+					<code>Token</code>
+					fields of the
+					<code>EOS_Auth_ClientCredentials</code>
+					struct to
+					<code>EOS_LCT_RefreshToken</code>
+					and the refresh token from the environment variable respectively.</li>
+			</ol>
+			<div>
+				<h3 id="user-verification-using-an-id-token">User Verification Using an ID Token</h3>
+			</div>
+			<p>ID Tokens are part of the
+				<a href="/docs/en-UShttps://openid.net/specs/openid-connect-core-1_0.html#IDToken">OpenID Connect</a>
+				protocol and can be used to verify a user�s identity on server-side. An ID Token is a JSON Web Token (JWT) that contains information about the authenticated user, such as their account id. This allows backend services and game servers to securely verify user identifiers it receives from clients.</p>
+			<div>
+				<p>ID Tokens can not be used to execute actions on behalf of a user. They are only intended for the use of user identity verification.</p>
+			</div>
+			<div>
+				<h4 id="retrieving-an-id-token-for-user">Retrieving an ID Token For User</h4>
+			</div>
+			<p>Game clients can obtain ID Tokens for local users by calling the
+				<strong>EOS_Auth_CopyIdToken</strong>
+				SDK API after the user has been logged in, passing in a
+				<strong>EOS_Auth_CopyIdTokenOptions</strong>
+				structure containing the
+				<strong>EOS_EpicAccountId</strong>
+				of the user.</p>
+			<p>The outputted
+				<strong>EOS_Auth_IdToken</strong>
+				structure contains the
+				<strong>EOS_EpicAccountId</strong>
+				of the user, and a JWT representing the ID Token data. Note, you must call
+				<strong>EOS_Auth_IdToken_Release</strong>
+				to release the ID Token structure when you are done with it.</p>
+			<p>Once retrieved, the game client can then provide the ID Token to another party. An ID Token is always readily available for a logged in local user.</p>
+			<div>
+				<h4 id="validating-id-tokens-on-game-server-using-sdk">Validating ID Tokens on Game Server Using SDK</h4>
+			</div>
+			<p>The JSON Web Key Set (JWKS) endpoint for EOS Auth ID Tokens is:
+				<a href="/docs/en-UShttps://api.epicgames.dev/epic/oauth/v1/.well-known/jwks.json">https://api.epicgames.dev/epic/oauth/v1/.well-known/jwks.json</a>.</p>
+			<p>Game servers can validate ID Tokens by calling the
+				<em>
+					<strong>EOS_Auth_VerifyIdToken</strong>
+				</em>
+				SDK API, and passing in a
+				<strong>EOS_Auth_VerifyIdTokenOptions</strong>
+				containing the
+				<strong>EOS_Auth_IdToken</strong>. Note, game servers should use
+				<strong>EOS_EpicAccountId_FromString</strong>
+				to populate the
+				<strong>EOS_EpicAccountId</strong>
+				part of the
+				<strong>EOS_Auth_IdToken</strong>
+				structure before calling verify, because the server�s user handles will be different to the user handles on the client.</p>
+			<div>
+				<h4 id="validating-id-tokens-on-backend-without-sdk">Validating ID Tokens on Backend Without SDK</h4>
+			</div>
+			<p>Backend services can verify the validity of ID Tokens and extract the token claims using any of the publicly available standard JWT libraries. See
+				<a href="/docs/en-UShttps://jwt.io/">https://jwt.io/</a>
+				for a list of libraries for this purpose. The used library should allow automatic caching of the retrieved JWKS information for the best performance and to reduce networking overhead.</p>
+			<p>The EOS SDK and other support libraries take care of the needed steps for securely validating the ID Token before its containing claims can be securely trusted. The steps performed are as following:</p>
+			<ol>
+				<li>Verify that the token signature algorithm (�alg�) is present and is not set to �none�.</li>
+				<li>Verify the JWT signature against the expected public certificate using the JWKS endpoint hosted by Epic Online Services.</li>
+				<li>Verify that the token issuer (�iss�) is present and starts with the base URL of
+					<a href="/docs/en-UShttps://api.epicgames.dev">https://api.epicgames.dev</a>.</li>
+				<li>Verify that the token issue time (�iat�) is in the past.</li>
+				<li>Verify that the token expiration time (�exp�) is in the future.</li>
+				<li>Verify that the Client ID (�aud�) matches the Client ID that you are using to initialize the EOS SDK with game clients or otherwise to authenticate users with Epic Account Services.</li>
+			</ol>
+			<p>After successfully verifying the ID Token you can trust the Epic Account ID (�sub�) value.</p>
+			<div>
+				<h4 id="id-token-structure">ID Token Structure</h4>
+			</div>
+			<p>The ID Token contains the following JSON structures:</p>
+			<p>
+				<strong>Header</strong>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>alg</td>
+						<td>string</td>
+						<td>Signature algorithm.</td>
+					</tr>
+					<tr>
+						<td>kid</td>
+						<td>string</td>
+						<td>Identifier for the key that was used to sign the token.</td>
+					</tr>
+					<tr>
+						<td>t</td>
+						<td>string</td>
+						<td>Token type. Always set to
+							<code>id_token</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Payload</strong>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>appid</td>
+						<td>string</td>
+						<td>EAS Application ID.</td>
+					</tr>
+					<tr>
+						<td>aud</td>
+						<td>string</td>
+						<td>Client ID used to authenticate the user with Epic Account Services.</td>
+					</tr>
+					<tr>
+						<td>cty</td>
+						<td>string</td>
+						<td>Country code that the Epic Account has been registered with, in ISO 3166 2-letter format. This optional claim will be present if the application has requested the
+							<code>country</code>
+							scope.</td>
+					</tr>
+					<tr>
+						<td>dn</td>
+						<td>string</td>
+						<td>Epic Account display name.</td>
+					</tr>
+					<tr>
+						<td>exp</td>
+						<td>integer</td>
+						<td>Expiration time of the token, seconds since the epoch.</td>
+					</tr>
+					<tr>
+						<td>iat</td>
+						<td>integer</td>
+						<td>Issue time of the token, seconds since the epoch.</td>
+					</tr>
+					<tr>
+						<td>iss</td>
+						<td>string</td>
+						<td>Token issuer. Always starts with
+							<code>https://api.epicgames.dev</code>.</td>
+					</tr>
+					<tr>
+						<td>pfdid</td>
+						<td>string</td>
+						<td>EOS Deployment ID.</td>
+					</tr>
+					<tr>
+						<td>pfpid</td>
+						<td>string</td>
+						<td>EOS Product ID.</td>
+					</tr>
+					<tr>
+						<td>pfsid</td>
+						<td>string</td>
+						<td>EOS Sandbox ID.</td>
+					</tr>
+					<tr>
+						<td>sub</td>
+						<td>string</td>
+						<td>Epic Account ID of the authenticated user.</td>
+					</tr>
+					<tr>
+						<td>eat</td>
+						<td>string</td>
+						<td>External acccount type. This optional claim will be present if the user has logged in to their Epic Account using external account credentials, e.g. through local platform authentication.</td>
+					</tr>
+					<tr>
+						<td>eadn</td>
+						<td>string</td>
+						<td>External account display name. This claim might not be always present.</td>
+					</tr>
+					<tr>
+						<td>pltfm</td>
+						<td>string</td>
+						<td>Platform that the user is connected from. Included if the
+							<code>eat</code>
+							claim is present. Possible values include:
+							<ul>
+								<li>
+									<code>other</code>
+								</li>
+								<li>
+									<code>playstation</code>
+								</li>
+								<li>
+									<code>steam</code>
+								</li>
+								<li>
+									<code>switch</code>
+								</li>
+								<li>
+									<code>xbox</code>
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
+				<a href="/docs/en-US/site-map?tag=Auth">
+					Auth</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#auth-interface">Auth Interface</a>
+					</li>
+					<li>
+						<a href="#authentication-functions">Authentication Functions</a>
+					</li>
+					<li>
+						<a href="#logging-in">Logging In</a>
+					</li>
+					<li>
+						<a href="#preferred-login-types-for-epic-account">Preferred Login Types for Epic Account</a>
+					</li>
+					<li>
+						<a href="#console">Console</a>
+					</li>
+					<li>
+						<a href="#pc-or-mobile-device">PC or Mobile Device</a>
+					</li>
+					<li>
+						<a href="#epic-games-launcher">Epic Games Launcher</a>
+					</li>
+					<li>
+						<a href="#auth-scopes">Auth Scopes</a>
+					</li>
+					<li>
+						<a href="#associating-with-the-epic-games-launcher">Associating With the Epic Games Launcher</a>
+					</li>
+					<li>
+						<a href="#persisting-user-login-to-epic-account-outside-epic-games-launcher">Persisting user login to Epic Account outside Epic Games Launcher</a>
+					</li>
+					<li>
+						<a href="#logging-out">Logging Out</a>
+					</li>
+					<li>
+						<a href="#status-change-notification">Status Change Notification</a>
+					</li>
+					<li>
+						<a href="#checking-current-authentication-status">Checking Current Authentication Status</a>
+					</li>
+					<li>
+						<a href="#external-account-authentication">External Account Authentication</a>
+					</li>
+					<li>
+						<a href="#integrating-a-game-launcher-with-epic-games-store">Integrating a Game Launcher with Epic Games Store</a>
+					</li>
+					<li>
+						<a href="#user-verification-using-an-id-token">User Verification Using an ID Token</a>
+					</li>
+					<li>
+						<a href="#retrieving-an-id-token-for-user">Retrieving an ID Token For User</a>
+					</li>
+					<li>
+						<a href="#validating-id-tokens-on-game-server-using-sdk">Validating ID Tokens on Game Server Using SDK</a>
+					</li>
+					<li>
+						<a href="#validating-id-tokens-on-backend-without-sdk">Validating ID Tokens on Backend Without SDK</a>
+					</li>
+					<li>
+						<a href="#id-token-structure">ID Token Structure</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

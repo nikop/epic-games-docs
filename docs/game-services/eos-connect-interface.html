@@ -404,7 +404,7 @@
 				<h3 id="user-verification-using-an-id-token">User verification using an ID Token</h3>
 			</div>
 			<p>ID Tokens are part of the
-				<a href="/docs/en-UShttps://openid.net/specs/openid-connect-core-1_0.html#IDToken">OpenID Connect</a>
+				<a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">OpenID Connect</a>
 				protocol and can be used to verify a user's identity on server-side. An ID Token is a JSON Web Token (JWT) that contains information about the authenticated user, such as the product user ID. This allows backend services and game servers to securely verify user identifiers it receives from clients.</p>
 			<div>
 				<p>ID Tokens can not be used to execute actions on behalf of a user. They are only intended for the use of user identity verification.</p>
@@ -439,7 +439,7 @@
 				<h4 id="validating-id-tokens-on-game-server-using-sdk">Validating ID Tokens on game server using SDK</h4>
 			</div>
 			<p>The JSON Web Key Set (JWKS) endpoint for EOS Connect ID Tokens is:
-				<a href="/docs/en-UShttps://api.epicgames.dev/auth/v1/oauth/jwks">https://api.epicgames.dev/auth/v1/oauth/jwks</a>.</p>
+				<a href="https://api.epicgames.dev/auth/v1/oauth/jwks">https://api.epicgames.dev/auth/v1/oauth/jwks</a>.</p>
 			<p>Game servers can validate ID Tokens by calling the
 				<code>EOS_Connect_VerifyIdToken</code>
 				SDK API, and passing in a
@@ -456,14 +456,14 @@
 				<h4 id="validating-id-tokens-on-backend-without-sdk">Validating ID Tokens on backend without SDK</h4>
 			</div>
 			<p>Backend services can verify the validity of ID Tokens and extract the token claims using any of the publicly available standard JWT libraries. See
-				<a href="/docs/en-UShttps://jwt.io/">https://jwt.io/</a>
+				<a href="https://jwt.io/">https://jwt.io/</a>
 				for a list of libraries for this purpose. The used library should allow automatic caching of the retrieved JWKS information for the best performance and to reduce networking overhead.</p>
 			<p>The EOS SDK and other support libraries take care of the needed steps for securely validating the ID Token before its containing claims can be securely trusted. The steps performed are as following:</p>
 			<ol>
 				<li>Verify that the token signature algorithm ("alg") is present and is not set to "none".</li>
 				<li>Verify the JWT signature against the expected public certificate using the JWKS endpoint hosted by Epic Online Services.</li>
 				<li>Verify that the token issuer ("iss") is present and starts with the base URL of
-					<a href="/docs/en-UShttps://api.epicgames.dev">https://api.epicgames.dev</a>.</li>
+					<a href="https://api.epicgames.dev">https://api.epicgames.dev</a>.</li>
 				<li>Verify that the token issue time ("iat") is in the past.</li>
 				<li>Verify that the token expiration time ("exp") is in the future.</li>
 				<li>Verify that the Client ID ("aud") matches the Client ID that you are using to initialize the EOS SDK with game clients or otherwise to authenticate users with EOS Connect.</li>

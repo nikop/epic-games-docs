@@ -51,26 +51,15 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://api.epicgames.dev/epic/ecom/v1/platforms/EPIC/identities/</span>
-								<span style="color:#fff">{</span>
-								<span style="color:#fff">{</span>
-								<span>currentAccountId</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">}</span>
-								<span>/ownership?nsCatalogItemId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">{</span>
-								<span style="color:#fff">{</span>
-								<span>sandboxId:catalogItemId</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">}</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
 				</section>
 			</div>
 			<div>
-				<p>This endpoint applies to auth tokens obtained via SDK 1.5+ or via OAuth OpenID Connect exchange implemented using configuration '<a href="/docs/en-UShttps://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration">https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration</a>'</p>
+				<p>This endpoint applies to auth tokens obtained via SDK 1.5+ or via OAuth OpenID Connect exchange implemented using configuration '<a href="https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration">https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration</a>'</p>
 			</div>
 			<p>You need to pass an access token in the Authorization header using Bearer authorization.</p>
 			<p>This endpoint supports the following query parameters:</p>
@@ -109,120 +98,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>GET /epic/ecom/v1/platforms/EPIC/identities/12abc3de456f78901a2bc345dd6789e0/ownership HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">nsCatalogItemId</span>
-								<span style="color:#fff">=</span>
-								<span>fn:ff150af93c9a4fb99fee12f5db49fa5b</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">nsCatalogItemId</span>
-								<span style="color:#fff">=</span>
-								<span>fn:94egdb6df476d45199f6be940aa1337c0</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"namespace"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"fn"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"itemId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"94egdb6df476d45199f6be940aa1337c0"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"owned"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">false</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"namespace"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"fn"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"itemId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"ff150af93c9a4fb99fee12f5db49fa5b"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"owned"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">true</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">]</span>
 							</div>
 						</div>
 					</pre>
@@ -232,7 +109,7 @@
 				<h2 id="token-based-ownership-verification">Token-based Ownership Verification</h2>
 			</div>
 			<p>An Ownership Verification Token is a signed
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7519">JWT</a>
+				<a href="https://tools.ietf.org/html/rfc7519">JWT</a>
 				with a five-minute expiration. It is signed using RS512 (RSA PKCS#1 signature with SHA-512, RSA key size 2048).</p>
 			<p>There are two steps to perform the token baesd ownership verification:</p>
 			<ol>
@@ -289,15 +166,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://api.epicgames.dev/epic/ecom/v1/platforms/</span>
-								<span style="color:#fff">{</span>
-								<span>platform</span>
-								<span style="color:#fff">}</span>
-								<span>/identities/</span>
-								<span style="color:#fff">{</span>
-								<span>identityId</span>
-								<span style="color:#fff">}</span>
-								<span>/ownershipToken</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -333,52 +203,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>POST /epic/ecom/v1/platforms/EPIC/identities/</span>
-								<span style="color:#fff">{</span>
-								<span style="color:#fff">{</span>
-								<span>currentAccountId</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">}</span>
-								<span>/ownershipToken HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">nsCatalogItemId</span>
-								<span style="color:#fff">=</span>
-								<span>fn:c204662afac64acd8a2117590be477da</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"token"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"egoc1~eyJraWQiOiJWbWdpMDFoQ2V2dXVEbUtWZFZubXphWnhpT2lBa0dEZWdRQmdDdWc4dkRZIiwiYWxnIjoiUlM1MTIifQ.eyJzdWIiOiI5NGVkYjZkZjQ3NmQ0NTE5OWY2YmU5NDBhYTEzMzdjMCIsImlwIjoiNTAuOTguMjI2LjEwIiwiY2xpZCI6IjI5Y2VlNDJlNzExNzQ2ZTFiYmNhZmI2MjkyOWU0OGZkIiwiZW50IjpbeyJjYXRhbG9nSXRlbUlkIjoiYzIwNDY2MmFmYWM2NGFjZDhhMjExNzU5MGJlNDc3ZGEiLCJvd25lZCI6dHJ1ZSwibmFtZXNwYWNlIjoiY2F0bmlwIn1dLCJleHAiOjE1Njk5Nzg1NjUsImlhdCI6MTU2OTk3ODI2NSwianRpIjoiMzgzN2FjODhlNDJjNDE1OTlmMzI5OTNjMmViYzBhOWQifQ.CX4yEEsZph9qPaVvtpnS0sLe_9YGLic5jIOQhhk3tG88GfNLp10w5y9DbYXocDlMXdEoAsAt-33G1JOPIFzrktrOxpR_FNdQ_ozCbBCF1aTQFTYKtvrbYkpA5AIGHmy_J9jSKMq-jN4TQxoSbR0LnowiWoKp_ntibmx0titFQ0kOYBQMvwwTlLgTzUv55I6VlFl8gMBSEw1_oRIUbdNbdHJO4UwnHTeUbcUUvuAWm13BpI2P39vRjU1xx4t51kUj_yY9ISWFBSGsLgEAhH13Mm1CilaeiPsLanE1sA5B3mRMjq8KcLtkkp8JvlIrgD4e-xo_tnRSLkRyKuU0GoqNKw"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -390,7 +216,7 @@
 					is the prefix to represent Epic Games Ownership Check. Please strip it when decoding the token.</p>
 			</div>
 			<p>The token includes three base64 encoded JSON objects that correspond to the JWT header, payload, and signature. Please refer to the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7519">JWT documentation</a>
+				<a href="https://tools.ietf.org/html/rfc7519">JWT documentation</a>
 				for more information.</p>
 			<p>The following is a sample of the JWT header:</p>
 			<div>
@@ -398,33 +224,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"kid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tFC2UIhFpTM_Ea3qcOd_MqQT1cBBm9kFLSDfeJhsRG8"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"alg"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"RS512"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -436,127 +237,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"jti"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"a19c3f03edf84c0a9621ee44ff36566f"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sub"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"d144285abee343df98c4e84572c576bb"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"clid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"44c39619da304266855c9646e1081ab5"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"iat"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1547675438</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"exp"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1547704238</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"ent"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"catalogItemId"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"c204662afac64acd8a2117590be477da"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"owned"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">true</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"namespace"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"catnip"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -566,7 +248,7 @@
 				<h3 id="verifying-the-ownership-verification-token">Verifying the Ownership Verification Token</h3>
 			</div>
 			<p>To verify the signature in the token, you will need to fetch a public key. To fetch the key, you will need the Key ID (kid claim in the JWT). The response will include a
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
+				<a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
 				that can be used to verify the signature in the JWT.</p>
 			<p>To request the Public Key, your client/service will make an HTTP request to the public keys endpoint.</p>
 			<p>The public keys endpoint is:</p>
@@ -575,11 +257,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/</span>
-								<span style="color:#fff">{</span>
-								<span>kid</span>
-								<span style="color:#fff">}</span>
-								<span>.</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -591,63 +270,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>GET /ecommerceintegration/api/public/publickeys/Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"kty"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"RSA"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"e"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AQAB"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"kid"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"n"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"k-LHmLHW5bbiqYLmPxC77ciG4N7IuF1SUOSsnDBLneKH3ZAU9kXRkq5MYjmRjxt8g3HpXmmhi_sHe4_g-VnSrM7jP6ntMiJ5t0d5J9ERkSEUSY4w_LS_YECavTr76GiutV_xPT-9jpHJWdVYqk68tiqR42xPFHEFUkYYsb_t6gONhth85ICnVY8Mjg6F0hFvvaMvOJcDVYfQbdjWY8-mzvIF9DmvyVkWaZSQYBaVuNCNKkSiSnkyCtbrynneayugwW0R-rNP5lEcp8UwXpBnep6sRf8nQEsByCnR91RdRXjuvrCSl7fOxpFX82t2WjWTYEOkOgb6yGc_ft-sJidSIQ"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -662,11 +286,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://api.epicgames.dev/epic/ecom/v1/identities/</span>
-								<span style="color:#fff">{</span>
-								<span>identityId</span>
-								<span style="color:#fff">}</span>
-								<span>/entitlements</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -717,234 +338,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>GET /api.epicgames.dev/epic/ecom/v1/identities/12abc3de456f78901a2bc345dd6789e0/entitlements HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">[</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"id"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"8894469f1120432095eff043a4529433"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementName"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"942e8a7133464f0ea83179030536505e"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"namespace"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"buffalo"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"catalogItemId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"942e8a7133464f0ea83179030536505e"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementType"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AUDIENCE"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"grantDate"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2019-01-04T21:34:24.826Z"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"consumable"</span>
-								<span>:</span>
-								<span>
-									false,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"status"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"ACTIVE"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"useCount"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementSource"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AppEpicgamesCom"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"id"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"e21aa0b339ae4e778971058c9395b2b7"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementName"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"25ed76af7816430cbfc0f5e6d3195d56"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"namespace"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"badger"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"catalogItemId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"25ed76af7816430cbfc0f5e6d3195d56"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementType"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AUDIENCE"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"grantDate"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2019-01-16T04:42:06.270Z"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"consumable"</span>
-								<span>:</span>
-								<span>
-									false,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"status"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"ACTIVE"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"useCount"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementSource"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"LauncherWeb"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">]</span>
 							</div>
 						</div>
 					</pre>
@@ -1005,7 +400,7 @@
 			</div>
 			<p>To request an entitlement verification token, the client will make an HTTP POST request to the entitlement token endpoint.</p>
 			<p>The endpoint to request an entitlement verification token is
-				<a href="/docs/en-UShttps://api.epicgames.dev/epic/ecom/v1/platforms/%7Bplatform%7D/identities/%7BidentityId%7D/entitlementToken">https://api.epicgames.dev/epic/ecom/v1/platforms/{platform}/identities/{identityId}/entitlementToken</a>
+				<a href="https://api.epicgames.dev/epic/ecom/v1/platforms/%7Bplatform%7D/identities/%7BidentityId%7D/entitlementToken">https://api.epicgames.dev/epic/ecom/v1/platforms/{platform}/identities/{identityId}/entitlementToken</a>
 			</p>
 			<p>You will need to pass an access token in the Authorization header using Bearer authorization.</p>
 			<p>This endpoint supports the following request parameters:</p>
@@ -1039,49 +434,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>POST</span>
-							</div>
-							<div style="color:#fff">
-								<span>/epic/ecom/v1/platforms/EPIC/identities/12abc3de456f78901a2bc345dd6789e0/entitlementToken HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">sandboxId</span>
-								<span style="color:#fff">=</span>
-								<span>2bd59d629cda497b9f65dbdbee7d443s</span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"token"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"egoc1~eyJraWQiOiJ0RkMyVUloRnBUTV9FYTNxY09kX01xUVQxY0JCbTlrRkxTRGZlSmhzUkc4IiwiYWxnIjoiUlM1MTIifQ. eyJqdGkiOiJhMTljM2YwM2VkZjg0YzBhOTYyMWVlNDRmZjM2NTY2ZiIsInN1YiI6ImQxNDQyODVhYmVlMzQzZGY5OGM0ZTg0NTcyYzU3NmJiIiwiY2xpZCI6IjQ0YzM5NjE5ZGEzMDQyNjY4NTVjOTY0NmUxMDgxYWI1IiwiaWF0IjoxNTQ3Njc1NDM4LCJleHAiOjE1NDc3MDQyMzgsImVudCI6W3siaWF0IjoxNTQ3Njc1MDAwLCJuYmYiOjE1NDc2NzkwMDAsInNyYyI6IkVQSUMiLCJucyI6InNuYXBkcmFnb24iLCJpdGVtIjoiMTJmYjdkNTBiYmJhNGQwNTlkNWJhYzJlOGUyNzZkMmYiLCJ0eXBlIjoiRU5USVRMRU1FTlQiLCJuYW1lIjoiNDNlZDI4ZTU3N2FiNGMyYThjZWEyN2Q2YjQ0YmJhMTgiLCJjb25zIjoxLCJ1c2NudCI6MH1dfQ.JHFFCjxmcKQDBGWaas53PsvaqeobK_kLZDgw3Je9Btwx5AzmmnW8TGUQGgr-FdZEkpdP2N_TMYV2UBO91QG1ApvwCYrvW3IYBwtl3_9e3NA1QrNLqw2qxG9X8LPiowh0gRO7rpJJ4BwbrYBwImcyf0KPhmCEKkHI9XiDsZDkoD8"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1097,33 +451,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"kid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tFC2UIhFpTM_Ea3qcOd_MqQT1cBBm9kFLSDfeJhsRG8"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"alg"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"RS512"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1135,226 +464,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"jti"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"a19c3f03edf84c0a9621ee44ff36566f"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sub"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"d144285abee343df98c4e84572c576bb"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"clid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"44c39619da304266855c9646e1081ab5"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"iat"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1547675438</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"exp"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1547704238</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"ent"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"grantDate"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1547375000</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"startDate"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1547375000</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"endDate"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-									(timestamp</span>
-								<span style="color:#fff">,</span>
-								<span>
-									optional)</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"platformType"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"EPIC"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"namespace"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tbd"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"catalogItemId"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tbd"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"entitlementType"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AUDIENCE"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"entitlementName"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"43ed28e577ab4c2a8cea27d6b44bba18"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"consumable"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">false</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"useCount"</span>
-								<span>
-								</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1366,7 +477,7 @@
 			<p>To verify the signature in the token, you will need to fetch a public key. To fetch the key, you will need the Key ID (kid claim in the JWT). The response will include a JSON Web Key (JWK) that can be used to verify the signature in the JWT.</p>
 			<p>To request the Public Key, your client/service will make an HTTP request to the public keys endpoint.</p>
 			<p>The public keys endpoint is
-				<a href="/docs/en-UShttps://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/%7Bkid%7D">https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</a>
+				<a href="https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/%7Bkid%7D">https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</a>
 			</p>
 			<p>The following snippet shows a sample request to get a public key:</p>
 			<div>
@@ -1374,63 +485,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>GET /ecommerceintegration/api/public/publickeys/Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"kty"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"RSA"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"e"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AQAB"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"kid"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"n"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"k-LHmLHW5bbiqYLmPxC77ciG4N7IuF1SUOSsnDBLneKH3ZAU9kXRkq5MYjmRjxt8g3HpXmmhi_sHe4_g-VnSrM7jP6ntMiJ5t0d5J9ERkSEUSY4w_LS_YECavTr76GiutV_xPT-9jpHJWdVYqk68tiqR42xPFHEFUkYYsb_t6gONhth85ICnVY8Mjg6F0hFvvaMvOJcDVYfQbdjWY8-mzvIF9DmvyVkWaZSQYBaVuNCNKkSiSnkyCtbrynneayugwW0R-rNP5lEcp8UwXpBnep6sRf8nQEsByCnR91RdRXjuvrCSl7fOxpFX82t2WjWTYEOkOgb6yGc_ft-sJidSIQ"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1446,15 +502,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://api.epicgames.dev/epic/ecom/v1/identities/</span>
-								<span style="color:#fff">{</span>
-								<span>identityId</span>
-								<span style="color:#fff">}</span>
-								<span>/namespaces/</span>
-								<span style="color:#fff">{</span>
-								<span>sandboxID</span>
-								<span style="color:#fff">}</span>
-								<span>/offers/</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -1471,20 +520,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>GET</span>
-							</div>
-							<div style="color:#fff">
-								<span>/ecom/v1/identities/12abc3de456f78901a2bc345dd6789e0/namespaces/8894469f1120432095eff043a4529433/offers/</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</span>
 							</div>
 						</div>
 					</pre>
@@ -1496,560 +533,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"elements"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"id"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"123ca45c67a8487895811a1234567890"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"namespace"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tbd"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"title"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"1500 Coins"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"description"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"1500 Coins"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"longDescription"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">""</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"availableForPurchase"</span>
-								<span>:</span>
-								<span>
-									true,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"purchaseLimit"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"purchasedCount"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"priceInfo"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"currencyCode"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"USD"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"discountPrice"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"originalPrice"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"discountPercentage"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"decimals"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">2</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"releaseDate"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2099-02-01T08:00:00.000Z"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"effectiveDate"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2099-02-01T08:00:00.000Z"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"keyImages"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"type"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"OfferImage"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"url"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"https://offer/image/url"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"md5"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tbd"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"width"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1200</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"height"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1600</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"size"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">651591</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"uploadedDate"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2022-05-12T22:29:48.971Z"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"type"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"ProductLogo"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"url"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"https://product/logo/url"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"md5"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tbd"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"width"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">400</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"height"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">400</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"size"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">42030</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"uploadedDate"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2022-06-07T19:48:31.668Z"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"items"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"id"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"12c3f456f7bf89e0bbc1234c567d890d"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"namespace"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"tbd"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"title"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"1500 Coins Audience"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"itemType"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"CONSUMABLE"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementName"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"12c3f456f7bf89e0bbc1234c567d890d"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"description"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"1500 Coins Audience"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"developer"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Epic Games"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"keyImages"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span style="color:#fff">]</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"releaseInfo"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"offerType"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"VIRTUAL_CURRENCY"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"paging"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"count"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">100</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"start"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"total"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">17</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -2084,11 +569,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://api.epicgames.dev/epic/ecom/v1/identities/</span>
-								<span style="color:#fff">{</span>
-								<span>identityId</span>
-								<span style="color:#fff">}</span>
-								<span>/entitlements/redeem</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -2101,52 +583,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"entitlementIds"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"8894469f1134432095eff043a4529433"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"25ed76af9816430cbfc0f5e6d3195d56"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sandboxId"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"8894469f1120432095eff043a4529433"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -2158,73 +596,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>PUT</span>
-							</div>
-							<div style="color:#fff">
-								<span>/ecom/v1/identities/12abc3de456f78901a2bc345dd6789e0/entitlements/redeem</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</span>
-							</div>
-							<div style="color:#fff">
-								<span>Content-Type:  application/json</span>
-							</div>
-							<div style="color:#fff">
-								<span>Request body:</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"entitlementIds"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"8894469f1134432095eff043a4529433"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"25ed76af9816430cbfc0f5e6d3195d56"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"sandboxId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"8894469f1120432095eff043a4529433"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>

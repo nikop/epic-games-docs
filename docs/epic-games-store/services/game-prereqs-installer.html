@@ -62,17 +62,17 @@
 			<p>Review the following Microsoft documentation to identify the DLLs you must bundle with your application:</p>
 			<ul>
 				<li>
-					<a href="/docs/en-UShttps://docs.microsoft.com/en-us/cpp/windows/determining-which-dlls-to-redistribute">Determining Which DLLs to Redistribute</a>
+					<a href="https://docs.microsoft.com/en-us/cpp/windows/determining-which-dlls-to-redistribute?view=msvc-160&amp;viewFallbackFrom=vs-2019">Determining Which DLLs to Redistribute</a>
 				</li>
 				<li>
-					<a href="/docs/en-UShttps://docs.microsoft.com/en-us/cpp/windows/walkthrough-deploying-a-visual-cpp-application-to-an-application-local-folder">Walkthrough: Deploying a Visual C++ Application to an Application-local Folder</a>.</li>
+					<a href="https://docs.microsoft.com/en-us/cpp/windows/walkthrough-deploying-a-visual-cpp-application-to-an-application-local-folder?view=msvc-160&amp;viewFallbackFrom=vs-2019">Walkthrough: Deploying a Visual C++ Application to an Application-local Folder</a>.</li>
 			</ul>
 			<div>
 				<h2 id="epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</h2>
 			</div>
 			<p>If you cannot use app-local deployment, you can have the Epic Games launcher run an installer upon users' first launch of your product. As the Epic Games launcher records any installers that have already been completed for a product, users only see the installation process upon first access or when new dependencies are included.</p>
 			<p>While this option allows you to run a full installer, there are considerable disadvantages to using this method. Users may decline, overlook, or misunderstand the elevation prompt when offered, and any non-zero return code from the prerequisite installer, aside from 1638 and 3010, can cause issues. Additionally, installing Visual Studio DLLs through this method can lead to failures that prevent your application from running. For more information, review the Microsoft documentation on
-				<a href="/docs/en-UShttps://docs.microsoft.com/en-us/cpp/windows/choosing-a-deployment-method">Choosing a Deployment Method</a>.</p>
+				<a href="https://docs.microsoft.com/en-us/cpp/windows/choosing-a-deployment-method?view=msvc-160">Choosing a Deployment Method</a>.</p>
 			<div>
 				<h3 id="process-1">Process</h3>
 			</div>
@@ -83,65 +83,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>SET
-								</span>
-								<span style="color:#89bdff">UE3_PREREQ_IDS</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"UE3Redist,NotSharedReq,SharedReq2,SharedReq3"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SET
-								</span>
-								<span style="color:#89bdff">UE3_PREREQ_NAME</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"UE3 Redistributables"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SET
-								</span>
-								<span style="color:#89bdff">UE3_PREREQ_PATH</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"Binaries\Windows\UE3Redist.exe"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SET
-								</span>
-								<span style="color:#89bdff">UE3_PREREQ_ARGS</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">""</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									BuildPatchTool … -mode</span>
-								<span style="color:#fff">=</span>
-								<span>PatchGeneration -PrereqIds</span>
-								<span style="color:#fff">=</span>
-								<span>%UE3_PREREQ_IDS%</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-PrereqName</span>
-								<span style="color:#fff">=</span>
-								<span>%UE3_PREREQ_NAME% -PrereqPath</span>
-								<span style="color:#fff">=</span>
-								<span>%UE3_PREREQ_PATH%</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-PrereqArgs</span>
-								<span style="color:#fff">=</span>
-								<span>%UE3_PREREQ_ARGS%</span>
 							</div>
 						</div>
 					</pre>
@@ -177,52 +120,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>reg query HKEY_CLASSES_ROOT</span>
-								<span style="color:#fff">\</span>
-								<span>Installer</span>
-								<span style="color:#fff">\</span>
-								<span>Products</span>
-								<span style="color:#fff">\</span>
-								<span>70140BF22CB7C94419A535B0925B0EEF</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">if</span>
-								<span>
-									%ERRORLEVEL% EQU
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>
-									goto LAUNCH_UE3_GAME</span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									.</span>
-								<span style="color:#fff">\</span>
-								<span>Windows</span>
-								<span style="color:#fff">\</span>
-								<span>UE3Redist.exe</span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									:LAUNCH_UE3_GAME</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									UE3Game.com %*</span>
 							</div>
 						</div>
 					</pre>
@@ -234,15 +133,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>BuildPatchTool … -mode</span>
-								<span style="color:#fff">=</span>
-								<span>PatchGeneration -FeatureLevel</span>
-								<span style="color:#fff">=</span>
-								<span>Latest -AppLaunch</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"Binaries\UE3Game.bat"</span>
-								<span>
-									…</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>

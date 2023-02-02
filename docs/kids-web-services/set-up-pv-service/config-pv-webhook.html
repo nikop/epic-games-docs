@@ -98,106 +98,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>POST https://www.yourdomain.com/your-webhook-endpoint</span>
-							</div>
-							<div style="color:#fff">
-								<span>x-kws-signature:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">t</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#ffcb8f">1621535329</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span>f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8</span>
-							</div>
-							<div style="color:#fff">
-								<span>Body</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"name"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"webhook-name"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"time"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"ISO8601 timestamp"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"orgId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"uuid"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"productId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"uuid"</span>
-								<span>
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									null,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"environmentId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"uuid"</span>
-								<span>
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									null,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"payload"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#fff">..</span>
-								<span>. type-specific payload
-								</span>
-								<span style="color:#fff">..</span>
-								<span>.
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -209,25 +111,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>x-kws-signature:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">t</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>timestamp</span>
-								<span style="color:#fff">&gt;</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>signature</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">[</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>signature</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">]</span>
 							</div>
 						</div>
 					</pre>
@@ -243,85 +128,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#f08a92">const</span>
-								<span>
-									timestamp
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae">/* extracted value of 't=' from the header */</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">const</span>
-								<span>
-									body
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae">/* raw request body as UTF-8 string */</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">const</span>
-								<span>
-									secretKey
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae">/* secret key, as provided in the Developer Portal */</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">const</span>
-								<span>
-									signature
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									crypto</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">createHmac</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">'sha256'</span>
-								<span style="color:#fff">,</span>
-								<span>
-									secretKey</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">update</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">'${timestamp}.${body}'</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">digest</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">'hex'</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
 							</div>
 						</div>
 					</pre>
@@ -339,118 +147,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>POST https://www.yourdomain.com/your-webhook-endpoint</span>
-							</div>
-							<div style="color:#fff">
-								<span>x-kws-signature:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">t</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>timestamp</span>
-								<span style="color:#fff">&gt;</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>signature</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">[</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>signature</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>Body</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"name"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"webhook-name"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"time"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"ISO8601 timestamp"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"orgId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"uuid"</span>
-								<span>,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"productId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"uuid"</span>
-								<span>
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									null,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"environmentId"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"uuid"</span>
-								<span>
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									null,</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#00bda0">"payload"</span>
-								<span>:</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#fff">..</span>
-								<span>. type-specific payload
-								</span>
-								<span style="color:#fff">..</span>
-								<span>.
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -471,25 +169,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>x-kws-signature:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">t</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>timestamp</span>
-								<span style="color:#fff">&gt;</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>signature</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">[</span>
-								<span>,v1</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>signature</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">]</span>
 							</div>
 						</div>
 					</pre>
@@ -509,93 +190,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#f08a92">const</span>
-								<span>
-									timestamp
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae">/* extracted value of ‘t=' from the header */</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">const</span>
-								<span>
-									body
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae">/* raw request body as UTF-8 string */</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">const</span>
-								<span>
-									secretKey
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae">/* the webhook secret code from the %Parent Verification% tab. */</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">const</span>
-								<span>
-									signature
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									crypto</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">createHmac</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">'sha256'</span>
-								<span style="color:#fff">,</span>
-								<span>
-									secretKey</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">update</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">`</span>
-								<span style="color:#fff">${</span>
-								<span>timestamp</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#00bda0">.</span>
-								<span style="color:#fff">${</span>
-								<span>body</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#00bda0">`</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">digest</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">'hex'</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
 							</div>
 						</div>
 					</pre>

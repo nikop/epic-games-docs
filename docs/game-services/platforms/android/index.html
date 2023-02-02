@@ -38,12 +38,12 @@
 				<h2 id="1-required-setup">1. Required Setup</h2>
 			</div>
 			<p>This guide assumes that you already have an Android Studio project that can build C/C++ code with the Android NDK. If you do not have a project set up, follow the guides at
-				<a href="/docs/en-UShttps://developer.android.com/ndk/guides">https://developer.android.com/ndk/guides</a>
+				<a href="https://developer.android.com/ndk/guides">https://developer.android.com/ndk/guides</a>
 				to get started. This guide also assumes that you use Gradle to build your project. Other build tools should also work, but are not officially supported.</p>
 			<p>The EOS SDK requires
 				<code>libc++_shared</code>
 				to be bundled with your app. If it is your desired Standard Template Library (STL), refer to
-				<a href="/docs/en-UShttps://developer.android.com/ndk/guides/cpp-support#selecting_a_c_runtime">https://developer.android.com/ndk/guides/cpp-support#selecting_a_c_runtime</a>
+				<a href="https://developer.android.com/ndk/guides/cpp-support#selecting_a_c_runtime">https://developer.android.com/ndk/guides/cpp-support#selecting_a_c_runtime</a>
 				for information about how to bundle it in your .apk or .aab.</p>
 			<p>If you are using a different STL you will still need to bring in the associated
 				<code>libc++_shared</code>
@@ -154,45 +154,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>dependencies
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									implementation
-								</span>
-								<span style="color:#00bda0">'androidx.appcompat:appcompat:1.1.0'</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									implementation
-								</span>
-								<span style="color:#00bda0">'androidx.constraintlayout:constraintlayout:1.1.3'</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									implementation
-								</span>
-								<span style="color:#00bda0">'androidx.security:security-crypto:1.0.0-rc01'</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									implementation
-								</span>
-								<span style="color:#89bdff">project</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">':EOSSDK'</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -224,47 +187,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>add_library</span>
-								<span style="color:#fff">(</span>
-								<span>EOSSDK SHARED IMPORTED</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>set</span>
-								<span style="color:#fff">(</span>
-								<span>EOSSDKDIR PUT_PATH_TO_EXPANDED_ZIP_HERE</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>set_property</span>
-								<span style="color:#fff">(</span>
-								<span>TARGET EOSSDK PROPERTY IMPORTED_LOCATION
-								</span>
-								<span style="color:#89bdff">${EOSSDKDIR}</span>
-								<span>/lib/</span>
-								<span style="color:#89bdff">${ANDROID_ABI}</span>
-								<span>/libEOSSDK.so</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>set_property</span>
-								<span style="color:#fff">(</span>
-								<span>TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-								</span>
-								<span style="color:#89bdff">${EOSSDKDIR}</span>
-								<span>/include/</span>
-								<span style="color:#fff">)</span>
 							</div>
 						</div>
 					</pre>
@@ -280,49 +204,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>add_library</span>
-								<span style="color:#fff">(</span>
-								<span>EOSSDK SHARED IMPORTED</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>set</span>
-								<span style="color:#fff">(</span>
-								<span>EOSSDKDIR
-								</span>
-								<span style="color:#89bdff">${CMAKE_SOURCE_DIR}</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>set_property</span>
-								<span style="color:#fff">(</span>
-								<span>TARGET EOSSDK PROPERTY IMPORTED_LOCATION
-								</span>
-								<span style="color:#89bdff">${EOSSDKDIR}</span>
-								<span>/lib/</span>
-								<span style="color:#89bdff">${ANDROID_ABI}</span>
-								<span>/libEOSSDK.so</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>set_property</span>
-								<span style="color:#fff">(</span>
-								<span>TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-								</span>
-								<span style="color:#89bdff">${EOSSDKDIR}</span>
-								<span>/include/</span>
-								<span style="color:#fff">)</span>
 							</div>
 						</div>
 					</pre>
@@ -338,50 +221,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>target_link_libraries</span>
-								<span style="color:#fff">(</span>
-								<span>
-								</span>
-								<span style="color:#aeaeae"># Specifies the target library.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									native-lib</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">#Links the target library to the EOSSDK</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOSSDK</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae"># Links the target library to the log library</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae"># included in the NDK.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#89bdff">${log-lib}</span>
-								<span>
-								</span>
-								<span style="color:#fff">)</span>
 							</div>
 						</div>
 					</pre>
@@ -392,7 +233,7 @@
 				section.</p>
 			<div>
 				<p>For more information about using CMake, refer to
-					<a href="/docs/en-UShttps://developer.android.com/ndk/guides/cmake">https://developer.android.com/ndk/guides/cmake</a>.</p>
+					<a href="https://developer.android.com/ndk/guides/cmake">https://developer.android.com/ndk/guides/cmake</a>.</p>
 			</div>
 			<div>
 				<h3 id="using-eos-with-ndk-build">Using EOS With ndk-build</h3>
@@ -408,59 +249,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>LOCAL_PATH :</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">call my-dir</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">CLEAR_VARS</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_MODULE    :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									hello-jni</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SRC_FILES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									hello-jni.c</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_LDLIBS    :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									-llog -landroid</span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">BUILD_SHARED_LIBRARY</span>
-								<span style="color:#89bdff">)</span>
 							</div>
 						</div>
 					</pre>
@@ -479,49 +269,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>include
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">CLEAR_VARS</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_MODULE :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									eossdk</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SRC_FILES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">LOCAL_PATH</span>
-								<span style="color:#89bdff">)</span>
-								<span>/lib/</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">TARGET_ARCH_ABI</span>
-								<span style="color:#89bdff">)</span>
-								<span>/libEOSSDK.so</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_EXPORT_C_INCLUDES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">LOCAL_PATH</span>
-								<span style="color:#89bdff">)</span>
-								<span>/include</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">PREBUILT_SHARED_LIBRARY</span>
-								<span style="color:#89bdff">)</span>
 							</div>
 						</div>
 					</pre>
@@ -547,43 +296,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>include
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">CLEAR_VARS</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_MODULE    :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									hello-jni</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SRC_FILES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									hello-jni.c</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SHARED_LIBRARIES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									eossdk c++_shared</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_LDLIBS    :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									-llog -landroid</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">BUILD_SHARED_LIBRARY</span>
-								<span style="color:#89bdff">)</span>
 							</div>
 						</div>
 					</pre>
@@ -603,114 +317,15 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>LOCAL_PATH :</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">call my-dir</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">CLEAR_VARS</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_MODULE :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									eossdk</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SRC_FILES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">LOCAL_PATH</span>
-								<span style="color:#89bdff">)</span>
-								<span>/lib/</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">TARGET_ARCH_ABI</span>
-								<span style="color:#89bdff">)</span>
-								<span>/libEOSSDK.so</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_EXPORT_C_INCLUDES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">LOCAL_PATH</span>
-								<span style="color:#89bdff">)</span>
-								<span>/include</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">PREBUILT_SHARED_LIBRARY</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">CLEAR_VARS</span>
-								<span style="color:#89bdff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_MODULE    :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									hello-jni</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SRC_FILES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									hello-jni.c</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_SHARED_LIBRARIES :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									eossdk c++_shared</span>
-							</div>
-							<div style="color:#fff">
-								<span>LOCAL_LDLIBS    :</span>
-								<span style="color:#fff">=</span>
-								<span>
-									-llog -landroid</span>
-							</div>
-							<div style="color:#fff">
-								<span>include
-								</span>
-								<span style="color:#89bdff">$(</span>
-								<span style="color:#89bdff">BUILD_SHARED_LIBRARY</span>
-								<span style="color:#89bdff">)</span>
 							</div>
 						</div>
 					</pre>
 				</section>
 			</div>
 			<p>For more information about ndk-build, refer to
-				<a href="/docs/en-UShttps://developer.android.com/ndk/guides/ndk-build">https://developer.android.com/ndk/guides/ndk-build</a>.</p>
+				<a href="https://developer.android.com/ndk/guides/ndk-build">https://developer.android.com/ndk/guides/ndk-build</a>.</p>
 			<div>
 				<h2 id="4-android-specific-system-initialize-options">4. Android-Specific System Initialize Options</h2>
 			</div>
@@ -722,25 +337,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>static
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									System</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">loadLibrary</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"EOSSDK"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -752,15 +350,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>EOSSDK</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">init</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#89bdff">getApplicationContext</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -777,162 +368,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>extern
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"C"</span>
-								<span>
-									JNIEXPORT jstring JNICALL</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">Java_com_example_eossdk_Documentation_initializeSdk</span>
-								<span style="color:#fff">(</span>
-								<span>
-									JNIEnv</span>
-								<span style="color:#fff">*</span>
-								<span>
-									env</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>jobject
-								</span>
-								<span style="color:#aeaeae">/* this */</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_InitializeOptions SDKOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ApiVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									EOS_INITIALIZE_API_LATEST</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ProductName
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"EOSDocumentationExample"</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ProductVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"0.1"</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_EResult InitResult
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_Initialize</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>SDKOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">if</span>
-								<span style="color:#fff">(</span>
-								<span>InitResult
-								</span>
-								<span style="color:#fff">!=</span>
-								<span>
-									EOS_EResult</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_Success</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">NewStringUTF</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"Error when initializing"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">NewStringUTF</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"Initialized successfully"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -946,300 +383,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>extern
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"C"</span>
-								<span>
-									JNIEXPORT bool JNICALL</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">Java_com_epicgames_mobile_login_MainActivity_InitializeSDK</span>
-								<span style="color:#fff">(</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIEnv</span>
-								<span style="color:#fff">*</span>
-								<span>
-									env</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									jobject
-								</span>
-								<span style="color:#aeaeae">/* this */</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									jstring internalPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									jstring externalPath</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_InitializeOptions SDKOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ApiVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									EOS_INITIALIZE_API_LATEST</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ProductName
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"EOSDocumentationExample"</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ProductVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"0.1"</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const char</span>
-								<span style="color:#fff">*</span>
-								<span>
-									androidInternalPath
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">GetStringUTFChars</span>
-								<span style="color:#fff">(</span>
-								<span>internalPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const char</span>
-								<span style="color:#fff">*</span>
-								<span>
-									androidExternalPath
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">GetStringUTFChars</span>
-								<span style="color:#fff">(</span>
-								<span>externalPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									static EOS_Android_InitializeOptions JNIOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ApiVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									EOS_ANDROID_INITIALIZEOPTIONS_API_LATEST</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>Reserved
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>OptionalInternalDirectory
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									androidInternalPath</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>OptionalExternalDirectory
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									androidExternalPath</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>SystemInitializeOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;</span>
-								<span>JNIOptions</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_EResult InitResult
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_Initialize</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>SDKOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">if</span>
-								<span style="color:#fff">(</span>
-								<span>InitResult
-								</span>
-								<span style="color:#fff">!=</span>
-								<span>
-									EOS_EResult</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_Success</span>
-								<span style="color:#fff">)</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">NewStringUTF</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"Error when initializing"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">NewStringUTF</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"Initialized successfully"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1261,15 +406,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>EOSSDK</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">init</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#89bdff">getApplicationContext</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -1288,31 +426,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>JavaVM</span>
-								<span style="color:#fff">*</span>
-								<span>
-									VM
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">GetJavaVM</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>VM</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
 							</div>
 						</div>
 					</pre>
@@ -1324,338 +439,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>extern
-								</span>
-								<span style="color:#00bda0">"C"</span>
-								<span>
-									JNIEXPORT jstring JNICALL</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">Java_com_example_eossdk_Documentation_initializeSdk</span>
-								<span style="color:#fff">(</span>
-								<span>
-									JNIEnv</span>
-								<span style="color:#fff">*</span>
-								<span>
-									env</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									jobject
-								</span>
-								<span style="color:#aeaeae">/* this */</span>
-								<span style="color:#fff">,</span>
-								<span>
-									jstring internalPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									jstring externalPath</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_InitializeOptions SDKOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ApiVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									EOS_INITIALIZE_API_LATEST</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ProductName
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"EOSDocumentationExample"</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ProductVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"0.1"</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JavaVM</span>
-								<span style="color:#fff">*</span>
-								<span>
-									VM
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">GetJavaVM</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>VM</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const char</span>
-								<span style="color:#fff">*</span>
-								<span>
-									androidInternalPath
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">GetStringUTFChars</span>
-								<span style="color:#fff">(</span>
-								<span>internalPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const char</span>
-								<span style="color:#fff">*</span>
-								<span>
-									androidExternalPath
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">GetStringUTFChars</span>
-								<span style="color:#fff">(</span>
-								<span>externalPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									static EOS_Android_InitializeOptions JNIOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">0</span>
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>ApiVersion
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									EOS_ANDROID_INITIALIZEOPTIONS_API_LATEST</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>VM
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									VM</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>OptionalInternalDirectory
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									androidInternalPath</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									JNIOptions</span>
-								<span style="color:#fff">.</span>
-								<span>OptionalExternalDirectory
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									androidExternalPath</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									SDKOptions</span>
-								<span style="color:#fff">.</span>
-								<span>SystemInitializeOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;</span>
-								<span>JNIOptions</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_EResult InitResult
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_Initialize</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>SDKOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">if</span>
-								<span style="color:#fff">(</span>
-								<span>InitResult
-								</span>
-								<span style="color:#fff">!=</span>
-								<span>
-									EOS_EResult</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_Success</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">NewStringUTF</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"Error when initializing"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									env</span>
-								<span style="color:#fff">-</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#89bdff">NewStringUTF</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"Initialized successfully"</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1680,20 +465,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">&lt;</span>
-								<span style="color:#f08a92">string</span>
-								<span style="color:#f08a92">
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">name</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">"</span>
-								<span style="color:#00bda0">eos_login_protocol_scheme</span>
-								<span style="color:#fff">"</span>
-								<span style="color:#fff">&gt;</span>
-								<span>eos.yourclientidhere</span>
-								<span style="color:#fff">&lt;/</span>
-								<span style="color:#f08a92">string</span>
-								<span style="color:#fff">&gt;</span>
 							</div>
 						</div>
 					</pre>

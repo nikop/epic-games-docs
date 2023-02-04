@@ -44,7 +44,9 @@
 				<ul>
 					<li>
 						<p>
-							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to file-management functions from the Player Data Storage Interface will result in failure and will return the
+							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to
+							<code>EOS_Platform_GetPlayerDataStorageInterface</code>
+							return a null reference. If the key is not the correct length or format, file-management functions from the Player Data Storage Interface will result in failure and return the
 							<code>EOS_PlayerDataStorage_EncryptionKeyNotSet</code>
 							error code.</p>
 					</li>

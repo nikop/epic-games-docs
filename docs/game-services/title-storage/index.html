@@ -47,7 +47,9 @@
 				<ul>
 					<li>
 						<p>
-							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to file-management functions from the Title Storage Interface will result in failure and will return the
+							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to
+							<code>EOS_Platform_GetTitleStorageInterface</code>
+							return a null reference. If the key is not the correct length or format, file-management functions from the Title Storage Interface result in failure and will return the
 							<code>EOS_TitleStorage_EncryptionKeyNotSet</code>
 							error code.</p>
 					</li>

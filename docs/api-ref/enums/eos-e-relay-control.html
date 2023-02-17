@@ -43,7 +43,37 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Setting for controlling whether relay servers are used. Please see the following EOS_ERelayControl value compatibility-chart to better understand how changing this value can affect compatibility between clients with different settings. +------------------------------+---------------------+-------------------------------+---------------------+ |                              |   EOS_RC_NoRelays   |  EOS_RC_AllowRelays (Default) |  EOS_RC_ForceRelays | +------------------------------+---------------------+-------------------------------+---------------------+ | EOS_RC_NoRelays              |  Compatible         |  Compatible                   |  Connection Failure | | EOS_RC_AllowRelays (Default) |  Compatible         |  Compatible                   |  Compatible         | | EOS_RC_ForceRelays           |  Connection Failure |  Compatible                   |  Compatible         | +------------------------------+---------------------+-------------------------------+---------------------+</p>
+							<p>Setting for controlling whether relay servers are used. Please see the following EOS_ERelayControl value compatibility-chart to better understand how changing this value can affect compatibility between clients with different settings.</p>
+							<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th>EOS_RC_NoRelays</th>
+										<th>EOS_RC_AllowRelays (Default)</th>
+										<th>EOS_RC_ForceRelays</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_RC_NoRelays</td>
+										<td>Compatible</td>
+										<td>Compatible</td>
+										<td>Connection Failure</td>
+									</tr>
+									<tr>
+										<td>EOS_RC_AllowRelays (Default)</td>
+										<td>Compatible</td>
+										<td>Compatible</td>
+										<td>Compatible</td>
+									</tr>
+									<tr>
+										<td>EOS_RC_ForceRelays</td>
+										<td>Connection Failure</td>
+										<td>Compatible</td>
+										<td>Compatible</td>
+									</tr>
+								</tbody>
+							</table>
 							<div>
 								<h2 id="values">Values</h2>
 							</div>

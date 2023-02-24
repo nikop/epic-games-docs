@@ -52,7 +52,7 @@
 						<br>
 						To get access to the SDK downloads for consoles and associated documentation:</p>
 					<ul>
-						<li>See the Developer Portal (<a href="https://https:/dev.epicgames.com/portal">dev.epicgames.com/dev-portal</a>) for guidance on applying for console developer access from the platform holders.</li>
+						<li>See the Developer Portal (<a href="https://https://dev.epicgames.com/portal">dev.epicgames.com/dev-portal</a>) for guidance on applying for console developer access from the platform holders.</li>
 						<li>Once you have platform-holder approval, you can apply to Epic Games using the
 							<em>Console Developer Request for Epic Online Services</em>
 							form, which is at
@@ -60,18 +60,114 @@
 					</ul>
 				</li>
 			</ul>
+			<p>You can find out what’s in development on the EOS roadmap at
+				<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</p>
 			<div>
 				<h1 id="release-notes">Release Notes</h1>
 			</div>
+			<div>
+				<h1 id="2023">2023</h1>
+			</div>
+			<div>
+				<h2 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h2>
+			</div>
+			<div>
+				<h4 id="anti-cheat">Anti-cheat</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Improved the anti-cheat metric collection to keep track of the number of players kicked from your game when you have configured anti-cheat with peer-to-peer mode.</li>
+				<li>
+					<strong>New</strong>: Improved the anti-cheat bootstrapper to log anti-cheat module failures correctly.</li>
+				<li>
+					<strong>New</strong>: The anti-cheat bootstrapper now supports macOS versions 10.14, and higher. Before this update, the highest supported version was macOS 11.0.</li>
+				<li>
+					<strong>New</strong>: Improved the anti-cheat bootstrapper to display a dialog for you to test unpublished anti-cheat modules. The new dialog shows that a test module was downloaded which eliminates the need for you to look at the log files.</li>
+				<li>
+					<strong>New</strong>: Players with a local temporary ban can now see the remaining time of their ban in the kick message that is sent to the game server through the EOS SDK. Previously the kick message displayed the local temporary ban without the remaining time of their ban.</li>
+				<li>
+					<strong>New</strong>: The anti-cheat bootstrapper has been updated to use 64-bit architecture instead of 32-bit architecture.</li>
+				<li>
+					<strong>New</strong>: Following the anti-cheat bootstrapper architecture change, the anti-cheat service now supports Chromebooks.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed an issue where the player tracking functionality would stop sending client data.</li>
+				<li>
+					<strong>Deprecated</strong>: We deprecated the log file,
+					<code>loader.log</code>, and introduced a new log file,
+					<code>anticheatlauncher.log</code>, as the single log file for the anti-cheat bootstrapper.</li>
+			</ul>
+			<div>
+				<h4 id="sessions">Sessions</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>Deprecated</strong>: We deprecated the error value,
+					<code>EOS_LimitExceeded</code>
+					for
+					<code>EOS_Sessions_RegisterPlayers</code>. Now
+					<code>EOS_Sessions_RegisterPlayers</code>
+					returns the new error value
+					<code>EOS_Sessions_TooManyPlayers</code>. For games using EOS SDK version 1.15.5 and higher, make sure you set up your games to check for the new error value.</li>
+			</ul>
+			<div>
+				<h4 id="voice">Voice</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed an intermittent issue where a player's status change in the voice chat room did not call a callback that is set up with
+					<code>EOS_Lobby_AddNotifyRTCRoomConnectionChanged</code>.</li>
+			</ul>
+			<div>
+				<h3 id="upgrade-notes">UPGRADE NOTES</h3>
+			</div>
+			<div>
+				<h4 id="anti-cheat-1">Anti-cheat</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: For games using EOS SDK version 1.15.5 and higher, you must update your anti-cheat modules to the latest version to avoid issues for players.</li>
+			</ul>
+			<div>
+				<h4 id="sessions-1">Sessions</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: When you call
+					<code>EOS_Sessions_RegisterPlayers</code>
+					with the parameter
+					<code>EOS_SESSIONS_REGISTERPLAYERS_API_LATEST</code>, the return error value is now
+					<code>EOS_Sessions_TooManyPlayers</code>. If you are not using the parameter
+					<code>EOS_SESSIONS_REGISTERPLAYERS_API_LATEST</code>,
+					<code>EOS_Sessions_RegisterPlayers</code>
+					continues to return
+					<code>EOS_LimitExceeded</code>.</li>
+			</ul>
+			<div>
+				<h3 id="platform-specific">PLATFORM-SPECIFIC</h3>
+			</div>
+			<div>
+				<h4 id="microsoft-xbox">Microsoft Xbox</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Added version support for Microsoft’s Xbox GDK version October 2022 QFE1 (221001) as well as Microsoft’s Xbox GDK version June 2022 QFE4. (220604).</li>
+			</ul>
+			<div>
+				<h4 id="nintendo-switch">Nintendo Switch</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Added version support for Nintendo Switch SDK version 15.3.0 and retained support for Nintendo Switch SDK version 14.3.0.</li>
+			</ul>
 			<div>
 				<h1 id="2022">2022</h1>
 			</div>
 			<div>
 				<h2 id="1154---2022-nov-16">1.15.4 - 2022-nov-16</h2>
 			</div>
-			<div>
-				<h4 id="anti-cheat">Anti-cheat</h4>
-			</div>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Improved the
@@ -89,9 +185,9 @@
 					<strong>Bug fix:</strong>
 					Fixed a potential issue where, under high server load, the anti-cheat service might kick players from a game session inappropriately.</li>
 			</ul>
-			<div>
-				<h4 id="authentication">Authentication</h4>
-			</div>
+			<p>
+				<strong>Authentication8</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -105,16 +201,16 @@
 					now correctly waits for configuration and returns
 					<code>EOS_Success</code>.</li>
 			</ul>
-			<div>
-				<h4 id="eos-sdk-in-c">EOS SDK in C#</h4>
-			</div>
+			<p>
+				<strong>EOS SDK in C#</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: The EOS SDK in C# now supports pinning the same buffer multiple times. In addition to improving performance, this allows in-place encryption and decryption of network messages by the anti-cheat service.</li>
 			</ul>
-			<div>
-				<h4 id="connect">Connect</h4>
-			</div>
+			<p>
+				<strong>Connect</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -128,9 +224,9 @@
 					now correctly waits for configuration and returns
 					<code>EOS_Success</code>.</li>
 			</ul>
-			<div>
-				<h4 id="ecom">Ecom</h4>
-			</div>
+			<p>
+				<strong>Ecom</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added a new API,
@@ -138,9 +234,9 @@
 					<code>EcomInterface</code>
 					to query the entitlements token.</li>
 			</ul>
-			<div>
-				<h4 id="social-overlay">Social Overlay</h4>
-			</div>
+			<p>
+				<strong>Social Overlay</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -159,9 +255,9 @@
 					<code>EOS_UI_ShowReportPlayer</code>
 					failed. This issue happened when you disabled the Social Overlay with platform flags, which caused the SDK to incorrectly detect the network as disconnected.</li>
 			</ul>
-			<div>
-				<h4 id="lobbies">Lobbies</h4>
-			</div>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -169,9 +265,9 @@
 					<code>EOS_LimitExceeded</code>
 					error response.</li>
 			</ul>
-			<div>
-				<h4 id="peer-to-peer">Peer-to-peer</h4>
-			</div>
+			<p>
+				<strong>Peer-to-peer</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Peer-to-peer now uses the
@@ -189,9 +285,9 @@
 					<strong>Bug fix:</strong>
 					Fixed an issue where an established connection might timeout immediately after any interruptions.</li>
 			</ul>
-			<div>
-				<h4 id="sessions">Sessions</h4>
-			</div>
+			<p>
+				<strong>Sessions</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -199,9 +295,9 @@
 					<code>EOS_LimitExceeded</code>
 					error response.</li>
 			</ul>
-			<div>
-				<h4 id="stats">Stats</h4>
-			</div>
+			<p>
+				<strong>Stats</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -213,12 +309,12 @@
 					<code>EOS_Stats_IngestStat</code>. This means when you enable the Client Policy setting
 					<code>ingestForAnyUser</code>, a game client can now update player data for all players, for example those connecting through a peer-to-peer in game session: remote players and local players.</li>
 			</ul>
-			<div>
-				<h3 id="upgrade-notes">UPGRADE NOTES</h3>
-			</div>
-			<div>
-				<h4 id="lobbies-1">Lobbies</h4>
-			</div>
+			<p>
+				<strong>UPGRADE NOTES</strong>
+			</p>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -226,9 +322,9 @@
 					<code>EOS_LimitExceeded</code>
 					error response.</li>
 			</ul>
-			<div>
-				<h4 id="sessions-1">Sessions</h4>
-			</div>
+			<p>
+				<strong>Sessions</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix:</strong>
@@ -236,12 +332,12 @@
 					<code>EOS_LimitExceeded</code>
 					error response.</li>
 			</ul>
-			<div>
-				<h3 id="deprecations">DEPRECATIONS</h3>
-			</div>
-			<div>
-				<h4 id="anti-cheat-1">Anti-cheat</h4>
-			</div>
+			<p>
+				<strong>DEPRECATIONS</strong>
+			</p>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated the string
@@ -265,9 +361,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h4 id="eos-core">EOS Core</h4>
-			</div>
+			<p>
+				<strong>EOS Core</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated and replaced some macros to fit with the standard EOS SDK naming convention of
@@ -287,12 +383,12 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h3 id="platform-specific">PLATFORM-SPECIFIC</h3>
-			</div>
-			<div>
-				<h4 id="sony-playstation">Sony PlayStation</h4>
-			</div>
+			<p>
+				<strong>PLATFORM-SPECIFIC</strong>
+			</p>
+			<p>
+				<strong>Sony PlayStation</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added version support for Sony's PS4 Platform SDK version 10.008.001 and retained support for Sony’s PS4 Platform SDK version 9.508.001..</li>
@@ -302,9 +398,9 @@
 					<strong>Bug fix:</strong>
 					Fixed a bug where games running on PS5 crashed when players with voice chat enabled joined or left lobbies.</li>
 			</ul>
-			<div>
-				<h4 id="microsoft-xbox">Microsoft Xbox</h4>
-			</div>
+			<p>
+				<strong>Microsoft Xbox</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added version support for Microsoft GDK June 2022 QFE2 (220602) and retained support for March 2022 QFE1 (220301).</li>
@@ -1723,7 +1819,7 @@
 				<strong>CONSOLE SPECIFIC</strong>
 			</p>
 			<p>
-				<strong>Sony Playstation</strong>
+				<strong>Sony PlayStation</strong>
 			</p>
 			<ul>
 				<li>
@@ -2130,7 +2226,7 @@
 				<strong>Console Specific</strong>
 			</p>
 			<p>
-				<strong>Playstation®</strong>
+				<strong>PlayStation</strong>
 			</p>
 			<ul>
 				<li>
@@ -2280,67 +2376,43 @@
 						<a href="#release-notes">Release Notes</a>
 					</li>
 					<li>
-						<a href="#2022">2022</a>
+						<a href="#2023">2023</a>
 					</li>
 					<li>
-						<a href="#1154---2022-nov-16">1.15.4 - 2022-nov-16</a>
+						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>
 					</li>
 					<li>
 						<a href="#anti-cheat">Anti-cheat</a>
 					</li>
 					<li>
-						<a href="#authentication">Authentication</a>
-					</li>
-					<li>
-						<a href="#eos-sdk-in-c">EOS SDK in C#</a>
-					</li>
-					<li>
-						<a href="#connect">Connect</a>
-					</li>
-					<li>
-						<a href="#ecom">Ecom</a>
-					</li>
-					<li>
-						<a href="#social-overlay">Social Overlay</a>
-					</li>
-					<li>
-						<a href="#lobbies">Lobbies</a>
-					</li>
-					<li>
-						<a href="#peer-to-peer">Peer-to-peer</a>
-					</li>
-					<li>
 						<a href="#sessions">Sessions</a>
 					</li>
 					<li>
-						<a href="#stats">Stats</a>
+						<a href="#voice">Voice</a>
 					</li>
 					<li>
 						<a href="#upgrade-notes">UPGRADE NOTES</a>
 					</li>
 					<li>
-						<a href="#lobbies-1">Lobbies</a>
+						<a href="#anti-cheat-1">Anti-cheat</a>
 					</li>
 					<li>
 						<a href="#sessions-1">Sessions</a>
 					</li>
 					<li>
-						<a href="#deprecations">DEPRECATIONS</a>
-					</li>
-					<li>
-						<a href="#anti-cheat-1">Anti-cheat</a>
-					</li>
-					<li>
-						<a href="#eos-core">EOS Core</a>
-					</li>
-					<li>
 						<a href="#platform-specific">PLATFORM-SPECIFIC</a>
 					</li>
 					<li>
-						<a href="#sony-playstation">Sony PlayStation</a>
+						<a href="#microsoft-xbox">Microsoft Xbox</a>
 					</li>
 					<li>
-						<a href="#microsoft-xbox">Microsoft Xbox</a>
+						<a href="#nintendo-switch">Nintendo Switch</a>
+					</li>
+					<li>
+						<a href="#2022">2022</a>
+					</li>
+					<li>
+						<a href="#1154---2022-nov-16">1.15.4 - 2022-nov-16</a>
 					</li>
 					<li>
 						<a href="#1153---2022-oct-06">1.15.3 - 2022-oct-06</a>

@@ -26,66 +26,45 @@
 	</section>
 	<section>
 		<section>
-			<p>Epic Online Services (EOS) features a C# SDK in addition to the C SDK. This document will help you integrate EOS with your project using the C# SDK, and will cover some of the implementation differences between the two. While the core functionality remains the same regardless of which SDK you use, the C# SDK differs in design in the following ways:</p>
+			<p>The Epic Online Services (EOS) SDK has downloads in C# in addition to C. This page outlines some of the implementation differences between working with the EOS SDK in C# to working with the EOS SDK in C. While the core functionality remains the same regardless of the language you use, the SDK in C# differs in design in the following ways:</p>
 			<ul>
-				<li>
-					<p>The C# SDK adheres to C# best practices and follows an object-oriented approach, such as using handle objects rather than C-style handles to manage asynchronous operations.</p>
-				</li>
-				<li>
-					<p>Naming conventions match typical C# patterns. For example, the
-						<code>EOS_Auth_Login</code>
-						in the C SDK is accessible in the C# SDK as
-						<code>Epic.OnlineServices.Auth.AuthInterface.Login</code>.</p>
-				</li>
-				<li>
-					<p>Data structures in the C SDK require macro-based API version numbers to ensure compatibility; these values are pre-populated in the C# SDK.</p>
-				</li>
+				<li>The EOS SDK in C# adheres to C# best practices and follows an object-oriented approach. It uses handle objects rather than C-style handles to manage asynchronous operations.</li>
+				<li>Naming conventions match typical C# patterns. For example, the
+					<code>EOS_Auth_Login</code>
+					in the EOS SDK in C is accessible in the EOS SDK in C# as
+					<code>Epic.OnlineServices.Auth.AuthInterface.Login</code>.</li>
+				<li>Data structures in the EOS SDK in C require macro-based API version numbers to ensure compatibility. These values are pre-populated in the EOS SDK in C#.</li>
 			</ul>
 			<div>
-				<p>The EOS C# SDK includes libraries for desktop and mobile platforms, such as Windows, Linux, Mac, iOS, and Android. Additional versions of the C# SDK for restricted platforms, such as Xbox, Nintendo Switch, and PlayStation are available after approval. For access to the restricted SDKs and related documentation, you must
-					<a href="/docs/dev-portal/organization-management">configure your organization</a>
-					access and the documentation will be part of your SDK download after First Party approval.</p>
-				<p>Ask your technical account manager for more information and availability.</p>
+				<h2 id="eos-sdk-in-c-dependencies">EOS SDK in C# Dependencies</h2>
 			</div>
-			<div>
-				<h2 id="c-sdk-dependencies">C# SDK Dependencies</h2>
-			</div>
-			<p>For the C# SDK, you must have...</p>
+			<p>To work with the EOS SDK in C#, you need the following installed in your development environment.</p>
 			<ul>
-				<li>.NET Framework 3.5 or later, or API compatible equivalent</li>
-				<li>Previous versions may work, but have not been tested</li>
+				<li>
+					<p>.NET Framework 3.5 or higher (or an API-compatible equivalent)</p>
+					<p>
+						<strong>Note:</strong>
+						Previous versions might work, but we have not tested them.</p>
+				</li>
 			</ul>
-			<p>For the C# SDK Samples, you must have...</p>
+			<p>To work with the EOS SDK samples in C#, you need the following installed in your development environment.</p>
 			<ul>
 				<li>.NET Core 3.1</li>
 				<li>Visual Studio 2019 or higher</li>
 			</ul>
-			<div>
-				<h2 id="get-started">Get Started</h2>
-			</div>
-			<p>Before you begin, you’ll need to
-				<a href="https://dev.epicgames.com/portal/sdk">download the C# SDK</a>
-				and set up a product on Epic's
-				<a href="/docs/dev-portal">Developer Portal</a>. You should have the following product information from your
-				<strong>Product Settings</strong>
-				on the
-				<strong>Developer Portal</strong>
-				available for the SDK:</p>
-			<ul>
-				<li>Product ID</li>
-				<li>Sandbox ID</li>
-				<li>Deployment ID</li>
-				<li>Client ID</li>
-				<li>Client secret</li>
-			</ul>
-			<p>When you start integrating the EOS SDK, these values will enable you to create the
-				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>, which is required to access all other
-				<a href="/docs/api-ref/interfaces">EOS SDK interfaces</a>. Once you have this information, you can proceed to integrate the SDK with your product.</p>
+			<p>See the main
+				<a href="/docs/epic-online-services/eos-get-started/system-requirements">System Requirements</a>
+				page for full details of what your development environment needs.</p>
+			<p>See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start">EOS Get Started</a>
+				documentation for guidance on setting up your Epic Games account and working with the EOS SDK, before you follow the guidance below.</p>
+			<p>You can also follow the introduction blogs on the Online Services website, which focus on getting started in C#:
+				<a href="https://dev.epicgames.com/en-US/news/introduction-to-epic-online-services-eos">dev.epicgames.com/news/~</a>.</p>
 			<div>
 				<h3 id="integration">Integration</h3>
 			</div>
 			<ol>
-				<li>Include the C# SDK source files in your project.</li>
+				<li>Include the SDK in C# source files in your project.</li>
 			</ol>
 			<ul>
 				<li>
@@ -107,7 +86,7 @@
 					<code>EOSSDK-Win64-Shipping.dll</code>.</li>
 			</ul>
 			<ol start="3">
-				<li>The C# SDK determines the library binary name to target in
+				<li>The SDK in C# determines the library binary name to target in
 					<code>Epic.OnlineServices.Config</code>. Several platforms are preconfigured to point to the correct name for convenience.</li>
 			</ol>
 			<ul>
@@ -165,7 +144,7 @@
 			</div>
 			<p>Once you have set up your 
 				<!-- -->product
-				<!-- --> and integrated the C# SDK, you can begin writing code. You'll need to initialize the SDK, call its
+				<!-- --> and integrated the SDK in C#, you can begin writing code. You'll need to initialize the SDK, call its
 				<code>Tick</code>
 				method regularly to ensure that the SDK can execute and that callbacks can run, and shut it down when your application finishes.</p>
 			<div>
@@ -238,15 +217,15 @@
 			<div>
 				<h3 id="unmanaged-memory">Unmanaged Memory</h3>
 			</div>
-			<p>In the C SDK, some APIs such as
+			<p>In the SDK in C, some APIs such as
 				<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex</code>
-				pass out structs of data that must be manually released. In the C# SDK, you don’t need to concern yourself with releasing these structs as they are automatically handled by the wrapper’s marshaling code.</p>
-			<p>In the C SDK, some APIs such as
+				pass out structs of data that must be manually released. In the SDK in C#, you don’t need to concern yourself with releasing these structs as they are automatically handled by the wrapper’s marshaling code.</p>
+			<p>In the SDK in C, some APIs such as
 				<code>EOS_Presence_CreatePresenceModification</code>
-				pass out handles that let you set data in memory that is owned by the SDK library. These handles must be manually released. In the C# SDK, these handles are represented by objects with an underlying type of
+				pass out handles that let you set data in memory that is owned by the SDK library. These handles must be manually released. In the SDK in C#, these handles are represented by objects with an underlying type of
 				<code>Epic.OnlineServices.Handle</code>, and contain functions that let you set the unmanaged data. They also contain a Release function that you must manually call when you are finished with it.</p>
 			<div>
-				<h3 id="custom-memory-delegates">Custom memory delegates</h3>
+				<h3 id="custom-memory-delegates">Custom Memory Delegates</h3>
 			</div>
 			<p>On some platforms, such as consoles, the SDK requires you to implement your own allocate, reallocate, and release functions. Because the SDK will call these functions with very high frequency, it is highly performant for the SDK to be able to access them directly without being routed through delegates in managed code.</p>
 			<p>You have the option to pass these functions into the SDK when initializing the platform with
@@ -325,9 +304,9 @@
 			</div>
 			<p>As a best practice for Unity users,  we recommend that your standalone build controls the lifetime of the SDK inside a low-level native rendering plugin, and your editor build should exclude the plugin to control the lifetime of the SDK inside a MonoBehaviour with dynamic bindings.</p>
 			<div>
-				<h3 id="dynamic-bindings">Dynamic bindings</h3>
+				<h3 id="dynamic-bindings">Dynamic Bindings</h3>
 			</div>
-			<p>Typically, the C# SDK uses
+			<p>Typically, the SDK in C# uses
 				<code>extern DllImport</code>
 				bindings. However, you may need to use dynamic bindings.</p>
 			<p>To begin using dynamic bindings:</p>
@@ -390,17 +369,17 @@
 					<code>Epic.OnlineServices.Bindings</code>
 					class.</p>
 			</div>
-			<p>As of 1.12, the default behavior of the C# SDK is to require dynamic bindings for editor environments such as the Unity editor. This is to enable on-demand loading and unloading of the SDK library, and allow the SDK to be initialized each time the game is run in the editor. More detailed sample code for
+			<p>As of 1.12, the default behavior of the SDK in C# is to require dynamic bindings for editor environments such as the Unity editor. This is to enable on-demand loading and unloading of the SDK library, and allow the SDK to be initialized each time the game is run in the editor. More detailed sample code for
 				<a href="/docs/en-US#unity-eossdk-component">using dynamic bindings in Unity</a>
 				is provided below.</p>
 			<div>
 				<h2 id="sample-code-and-projects">Sample Code and Projects</h2>
 			</div>
-			<p>There are a variety of C# SDK samples to show you different Epic Online Services (EOS) functionality implementations, such as authentication, presence, the purchasing flow, and voice. Additionally, we have sample code for setting up the platform, logging in, and implementing the Unity EOS SDK component.</p>
+			<p>There are a variety of SDK in C# samples to show you different Epic Online Services (EOS) functionality implementations, such as authentication, presence, the purchasing flow, and voice. Additionally, we have sample code for setting up the platform, signing in, and implementing the Unity EOS SDK component.</p>
 			<div>
 				<h3 id="sample-code">Sample Code</h3>
 			</div>
-			<p>The sample code in this section is intended to demonstrate and help familiarize you with the C# SDK.</p>
+			<p>The sample code in this section is intended to demonstrate and help familiarize you with the SDK in C#.</p>
 			<div>
 				<h4 id="setting-up-the-platform">Setting up the Platform</h4>
 			</div>
@@ -417,7 +396,7 @@
 				</section>
 			</div>
 			<div>
-				<h4 id="logging-in">Logging In</h4>
+				<h4 id="signing-in">Signing In</h4>
 			</div>
 			<div>
 				<section>
@@ -452,7 +431,7 @@
 			<div>
 				<h3 id="sample-projects">Sample Projects</h3>
 			</div>
-			<p>These samples are in a folder of your C# SDK download containing the following libraries and applications.</p>
+			<p>These samples are in a folder of your SDK in C# download containing the following libraries and applications.</p>
 			<div>
 				<h4 id="libraries">Libraries</h4>
 			</div>
@@ -539,9 +518,9 @@
 				<strong>SimpleAuth</strong>
 				is a sample application demonstrating how to perform authentication and presence related functions for a logged in user.</p>
 			<div>
-				<h5 id="logging-in-1">Logging in</h5>
+				<h5 id="signing-in-1">Signing In</h5>
 			</div>
-			<p>To begin, you are presented with a login screen. You can select the type of login you want to use. We recommend using the Developer type to login with credentials assigned by the
+			<p>To begin, you are presented with a sign in screen. You can select the type of sign in you want to use. We recommend using the Developer type to login with credentials assigned by the
 				<a href="/docs/epic-account-services/developer-authentication-tool">Developer Auth Tool</a>.</p>
 			<div>
 				<div>
@@ -556,7 +535,7 @@
 				</div>
 			</div>
 			<div>
-				<h5 id="viewing-your-presence">Viewing your presence</h5>
+				<h5 id="viewing-your-presence">Viewing Your Presence</h5>
 			</div>
 			<p>Once signed in, you are presented with a page showing your current presence, and a form that allows you to change it. It contains fields for the online status, rich text, and data entries associated with your current presence.</p>
 			<div>
@@ -583,9 +562,9 @@
 					to the directory of where the dll resides.</li>
 			</ul>
 			<div>
-				<h5 id="initiating-the-purchasing-flow">Initiating the purchasing flow</h5>
+				<h5 id="initiating-the-purchasing-flow">Initiating the Purchasing Flow</h5>
 			</div>
-			<p>The sample will automatically proceed with logging in and the necessary ecom functions in order to launch the overlay into the purchasing flow. Keep an eye on the output to ensure there are no problems.</p>
+			<p>The sample will automatically proceed with signing in and the necessary ecom functions in order to launch the overlay into the purchasing flow. Keep an eye on the output to ensure there are no problems.</p>
 			<div>
 				<div>
 					<div style="max-width:650px">
@@ -613,10 +592,7 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#c-sdk-dependencies">C# SDK Dependencies</a>
-					</li>
-					<li>
-						<a href="#get-started">Get Started</a>
+						<a href="#eos-sdk-in-c-dependencies">EOS SDK in C# Dependencies</a>
 					</li>
 					<li>
 						<a href="#integration">Integration</a>
@@ -646,7 +622,7 @@
 						<a href="#unmanaged-memory">Unmanaged Memory</a>
 					</li>
 					<li>
-						<a href="#custom-memory-delegates">Custom memory delegates</a>
+						<a href="#custom-memory-delegates">Custom Memory Delegates</a>
 					</li>
 					<li>
 						<a href="#threading">Threading</a>
@@ -655,7 +631,7 @@
 						<a href="#the-eos-overlay">The EOS Overlay</a>
 					</li>
 					<li>
-						<a href="#dynamic-bindings">Dynamic bindings</a>
+						<a href="#dynamic-bindings">Dynamic Bindings</a>
 					</li>
 					<li>
 						<a href="#sample-code-and-projects">Sample Code and Projects</a>
@@ -667,7 +643,7 @@
 						<a href="#setting-up-the-platform">Setting up the Platform</a>
 					</li>
 					<li>
-						<a href="#logging-in">Logging In</a>
+						<a href="#signing-in">Signing In</a>
 					</li>
 					<li>
 						<a href="#unity-eossdk-component">Unity EOSSDK Component</a>
@@ -688,16 +664,16 @@
 						<a href="#simpleauth">SimpleAuth</a>
 					</li>
 					<li>
-						<a href="#logging-in-1">Logging in</a>
+						<a href="#signing-in-1">Signing In</a>
 					</li>
 					<li>
-						<a href="#viewing-your-presence">Viewing your presence</a>
+						<a href="#viewing-your-presence">Viewing Your Presence</a>
 					</li>
 					<li>
 						<a href="#simpleoverlaypurchasing">SimpleOverlayPurchasing</a>
 					</li>
 					<li>
-						<a href="#initiating-the-purchasing-flow">Initiating the purchasing flow</a>
+						<a href="#initiating-the-purchasing-flow">Initiating the Purchasing Flow</a>
 					</li>
 				</ul>
 			</div>

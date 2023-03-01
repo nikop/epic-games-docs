@@ -170,36 +170,40 @@
 				<li>On successful verification:
 					<!-- -->
 					<ul>
-						<li>KWS sends the 'parent-verified' event back to your system using the
-							<a href="/docs/kids-web-services/set-up-pv-service/config-pv-webhook">webhook that you configured</a>:</li>
+						<li>
+							<p>KWS sends the 'parent-verified' event back to your system using the
+								<a href="/docs/kids-web-services/set-up-pv-service/config-pv-webhook">webhook that you configured</a>:</p>
+							<div>
+								<section>
+									<pre>
+										<div>
+											<div style="color:#fff">
+												<span style="display:inline-block">
+												</span>
+											</div>
+										</div>
+									</pre>
+								</section>
+							</div>
+						</li>
+						<li>
+							<p>A hash of the parent’s email address is stored in the KWS ParentGraph. This enables KWS to determine if the parent is pre-verified the next time they encounter the PV service.</p>
+							<div>
+								<p>Pre-verified parents do not have to provide verification credentials. ‘Pre-verified’ means the parent’s hashed email address is included in the ParentGraph, and the parent has been previously verified by the KWS PV service using a verification method which is (or was, at the time of verification) enabled for the product being accessed.</p>
+							</div>
+						</li>
+						<li>
+							<p>KWS sends a confirmation email to the parent, informing them that they have been successfully verified and added to the ParentGraph. (The email also contains a link to opt out of the ParentGraph.) In the case of payment-based verification methods, the email includes details about authorization, capture, and refunds, depending on the requirements in the child's country.</p>
+						</li>
+						<li>
+							<p>If you
+								<a href="/docs/kids-web-services/set-up-pv-service/config-pv-settings#set-up-your-pv-service-redirect-url">provided a
+									<strong>Redirect URL</strong>
+									in the Developer Portal</a>, KWS redirects the parent to that URL. Otherwise, KWS displays a verification success message within the PV service web page.</p>
+						</li>
 					</ul>
 				</li>
 			</ol>
-			<div>
-				<section>
-					<pre>
-						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-						</div>
-					</pre>
-				</section>
-			</div>
-			<ul>
-				<li>A hash of the parent’s email address is stored in the KWS ParentGraph. This enables KWS to determine if the parent is pre-verified the next time they encounter the PV service.</li>
-			</ul>
-			<div>
-				<p>Pre-verified parents do not have to provide verification credentials. ‘Pre-verified’ means the parent’s hashed email address is included in the ParentGraph, and the parent has been previously verified by the KWS PV service using a verification method which is (or was, at the time of verification) enabled for the product being accessed.</p>
-			</div>
-			<ul>
-				<li>KWS sends a confirmation email to the parent, informing them that they have been successfully verified and added to the ParentGraph. (The email also contains a link to opt out of the ParentGraph.) In the case of payment-based verification methods, the email includes details about authorization, capture, and refunds, depending on the requirements in the child's country.</li>
-				<li>If you
-					<a href="/docs/kids-web-services/set-up-pv-service/config-pv-settings#set-up-your-pv-service-redirect-url">provided a
-						<strong>Redirect URL</strong>
-						in the Developer Portal</a>, KWS redirects the parent to that URL. Otherwise, KWS displays a verification success message within the PV service web page.</li>
-			</ul>
 			<p>See the
 				<a href="/docs/kids-web-services/pv-service/use-cases">PV service use case</a>
 				for examples of the emails and webviews that KWS presents to the parent.</p>

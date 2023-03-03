@@ -579,11 +579,15 @@
 				<li>
 					<strong>Lobby Owner</strong>: The current owner of the lobby</li>
 				<li>
+					<strong>Lobby Members</strong>: The current members of the lobby</li>
+				<li>
 					<strong>Permission level</strong>: Restrictions on who can find or join the lobby; see "Permission Levels" below</li>
 				<li>
 					<strong>Space Available</strong>: The number of open slots currently available</li>
 				<li>
 					<strong>Max Members</strong>: The maximum number of users who can be in the lobby at any time</li>
+				<li>
+					<strong>Member Count</strong>: The current number of members in the lobby</li>
 				<li>
 					<strong>Lobby Attributes</strong>: Key-value pairs associated with the lobby</li>
 				<li>
@@ -592,7 +596,10 @@
 					<strong>Lobby Member Platform</strong>: The hardware platform for an individual user as identified by the server. Note that this value is only provided for lobby members on console platforms; otherwise it returns a placeholder value. This placeholder value indicates it is not possible to reliably identify the hardware platform for the given user.</li>
 			</ul>
 			<p>To find the ID of the lobby's owner, call
-				<code>EOS_LobbyDetails_GetLobbyOwner</code>. Details about the lobby, in the form of an
+				<code>EOS_LobbyDetails_GetLobbyOwner</code>. To find the IDs of the lobby's members, first call
+				<code>EOS_LobbyDetails_GetMemberCount</code>
+				to retrieve the current member count, then iterate over the current member count and call
+				<code>EOS_LobbyDetails_GetMemberByIndex</code>. Details about the lobby, in the form of an
 				<code>EOS_LobbyDetails_Info</code>
 				data structure, are available through the
 				<code>EOS_LobbyDetails_CopyInfo</code>

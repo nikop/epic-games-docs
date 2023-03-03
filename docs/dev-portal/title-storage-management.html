@@ -1,0 +1,265 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Title Storage Management">Title Storage Management</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Title Storage Management</h1>
+			<h2>Manage Title Storage settings for your game through the Developer Portal.</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>You can use Epic Online Services (EOS) Title Storage service to do the following:</p>
+			<ul>
+				<li>Store data files relevant to your game on EOS cloud servers.</li>
+				<li>Upload alternate versions of your game's data files (called file overrides).</li>
+				<li>Query and download your game's data files through the EOS SDK's Title Storage Interface.</li>
+				<li>Apply tags to your game's data files in order to label them for easy querying through the EOS SDK.</li>
+			</ul>
+			<p>You manage your game's Title Storage files through the Title Storage page of the Developer Portal. The subsections below describe how to access and use the available options in the Title Storage page.</p>
+			<p>For more information on using the Title Storage Interface, see the
+				<a href="/docs/game-services/title-storage">Title Storage Interface</a>
+				documentation and the
+				<a href="/docs/api-ref/interfaces/title-storage">Title Storage API reference</a>
+				documentation.</p>
+			<p>The Title Storage service is different to the Player Data Storage service, which stores encrypted user-specific and game-specific data to EOS cloud servers. For information on this, see the documentation on the
+				<a href="/docs/game-services/player-data-storage">Player Data Storage Interface</a>
+				and the
+				<a href="/docs/game-services/title-storage#differences-from-player-data-storage">Differences from Player Data Storage</a>
+				section of the Title Storage Interface documentation.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Location of the default file</strong>
+					</p>
+					<p>You can provide the default file in either the Developer Portal or in your game-client code. You can use the EOS service through the Title Storage Interface to retrieve alternate files, whichever location you use for your default file.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Alternate file requests must be in your game-client code</strong>
+					</p>
+					<p>There are two steps to setting up file overriding; one step in the Developer Portal, the other in your game-client code.</p>
+					<ul>
+						<li>In the Developer Portal, you provide the alternate files and associate them with a game client (Client ID) or player (Product User ID (PUID)).</li>
+						<li>In your game-client code, you request the file, by file name, using the Title Storage Interface and specifying the relevant game client (Client ID) or player (Product User ID (PUID)). The EOS Service returns the alternate files, or the default file if your game client's request does not specify a Product User ID (PUID) or Client ID.</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>You must provide an encryption key</strong>
+					</p>
+					<p>This is a key the EOS service uses to encrypt and decrypt the default and alternate files.</p>
+					<ul>
+						<li>You must provide this key when you add a new file or edit an existing file through the Title Storage page on the Developer Portal, and when you query files through the Title Storage Interface.</li>
+						<li>The key is your choice, but it must be a 64 hexadecimal character key and contain only alpha-numeric characters "0-9" and "A-F".</li>
+						<li>Your file's encryption key is not stored on the EOS Service's servers. You are responsible for creating and storing this key. So, make sure you note it down somewhere for safekeeping.</li>
+						<li>
+							<strong>Tip</strong>:<br>
+							We recommend that you create one key per file and use that key every time you edit the file. While it is possible to change the key every time you edit a file, we do not recommend this because your game clients might encounter errors: game clients must use the latest key you entered when you edited a file, otherwise they can't read the file through the Title Storage Interface.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="file-overriding">File Overriding</h2>
+			</div>
+			<p>In some cases, you might want to provide different versions of a file. For example, you might have a default text file that contains a message of the day for most players, but you would like to have a different file to deliver a different message of the day for players using a specific type of game client (<strong>client</strong>
+				in the Developer Portal); for example, players using Nintendo Switch might get a Switch-specific message of the day, different to players using other platforms to play.</p>
+			<p>To do this, you must provide the alternate files you want to deliver to the players, and specify which players should receive these alternate files. You manage these details through the Title Storage page of the Developer Portal. Use the Title Storage page in the Developer Portal to upload an alternate file, and specify which game client (<strong>client</strong>
+				in the Developer Portal) or player should receive that file. You can provide as many alternate files for as many different game clients and players as you choose (see the
+				<em>Accessing the Title Storage Configuration</em>
+				section below).</p>
+			<div>
+				<h3 id="accessing-the-title-storage-configuration">Accessing the Title Storage Configuration</h3>
+			</div>
+			<p>Follow these steps to access the Title Storage page through the Developer Portal:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>On the home page, from the left-hand side of the page, select your game's product name under
+						<strong>PRODUCTS</strong>.</p>
+				</li>
+				<li>
+					<p>Go to
+						<strong>Game Services</strong>
+						&gt;
+						<strong>OPERATIONS</strong>
+						&gt;
+						<strong>Title Storage</strong>.</p>
+				</li>
+				<li>
+					<p>From here, you have two options (choose one):</p>
+					<ul>
+						<li>
+							<p>Add a new file override: Click
+								<strong>ADD FILE</strong>. This brings up the
+								<strong>Enter an encryption key</strong>
+								dialog.</p>
+						</li>
+						<li>
+							<p>Update an existing file override: Open the options menu (it looks like three dots (...) ) next to an existing file override in the table on the page and select
+								<strong>Edit</strong>. This brings up the
+								<strong>Enter an encryption key</strong>
+								dialog.</p>
+							<p>(<strong>Note</strong>: You can also select
+								<strong>Delete</strong>
+								here, to delete the file override.)</p>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the
+						<strong>Enter an encryption key</strong>
+						dialog:</p>
+					<ul>
+						<li>Enter the encryption key in the field.</li>
+						<li>Check
+							<strong>Save the encryption key on your device as a .txt file</strong>.</li>
+						<li>Click
+							<strong>NEXT</strong>.</li>
+					</ul>
+					<p>This displays the
+						<strong>Add New File</strong>
+						dialog or
+						<strong>Edit New File</strong>
+						dialog, depending on which option you followed in the step above.</p>
+				</li>
+				<li>
+					<p>You use the
+						<strong>Add New File</strong>
+						dialog or the
+						<strong>Edit New File</strong>
+						dialog to upload either or both:</p>
+					<ul>
+						<li>A default file.</li>
+						<li>Any number of alternate files with the file's override conditions.</li>
+					</ul>
+					<p>In the dialog, shown in the
+						<em>Configuration</em>
+						section below, you give each file you upload a file name and optional tags.</p>
+					<p>When you click
+						<strong>SAVE &amp; CLOSE</strong>, in this dialog, you are done.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="configuration">Configuration</h3>
+			</div>
+			<p>Use these configuration options through the Developer Portal's Title Storage page:
+				<strong>Add New File</strong>
+				dialog or the
+				<strong>Edit New File</strong>
+				dialog. Both dialogs have the same configuration options.</p>
+			<div>
+				<div>
+					<div style="max-width:300px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/game-services/title-storage/title-storage-file-overriding-dialog.png 640w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 750w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 828w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 1080w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 1200w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 1920w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 2048w, null/game-services/title-storage/title-storage-file-overriding-dialog.png 3840w" src="null/game-services/title-storage/title-storage-file-overriding-dialog.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>
+						<em>Title Storage file configuration dialog</em>
+					</p>
+				</div>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>UI element</strong>
+						</th>
+						<th>
+							<strong>Description</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>File name</strong>
+						</td>
+						<td>In this field, enter the file name to identify the file you want to upload.
+							<br>
+							<br>This is the file name that your game must query through the Title Storage Interface to retrieve the file.<br>
+							<br>
+							If this is an existing file that you ship with your game, it must include the file name and path to the file. For more information on this, see the
+							<a href="/docs/game-services/title-storage/#file-name-format">File Name Format</a>
+							section of the Title Storage Interface documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>ADD NEW TAG</strong>
+						</td>
+						<td>This is optional. You can use these tags to query the files that are tagged with them. For more information, see the
+							<a href="/docs/game-services/title-storage/#querying-multiple-files-by-tag">Querying Multiple Files by Tag</a>
+							section of the Title Storage Interface documentation.<br>
+							<br>
+							Enter a single tag that identifies the file. Repeat this for each new tag that you want to add.<br>
+							<br>
+							<strong>Note</strong>: Tags can only use alphanumeric ASCII characters and contain the symbols
+							<code>!-_*'()</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Tag dropdown</strong>
+						</td>
+						<td>This option is only available if a tag already exists.<br>
+							<br>
+							Select a tag from the dropdown and check it to add it to a file or uncheck it to remove it from a file.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=DevPortal">DevPortal</a>
+				<a href="/docs/en-US/site-map?tag=Title%20Storage%20Interface">
+					Title Storage Interface</a>
+				<a href="/docs/en-US/site-map?tag=File%20Overriding">
+					File Overriding</a>
+				<a href="/docs/en-US/site-map?tag=Configuration">
+					Configuration</a>
+				<a href="/docs/en-US/site-map?tag=UI">
+					UI</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#file-overriding">File Overriding</a>
+					</li>
+					<li>
+						<a href="#accessing-the-title-storage-configuration">Accessing the Title Storage Configuration</a>
+					</li>
+					<li>
+						<a href="#configuration">Configuration</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

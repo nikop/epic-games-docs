@@ -20,7 +20,7 @@
 			<h1>Title Storage Interface</h1>
 			<h2>Interface to download encrypted data shared by all players from the cloud</h2>
 			<div>
-				<div>10 mins to read</div>
+				<div>11 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -221,7 +221,8 @@
 			<p>The Title Storage Interface does not provide a specific API call to query all files. However, if you apply a certain tag to every file you upload, you could use
 				<code>EOS_TitleStorage_QueryFileListOptions</code>
 				with that tag to retrieve data about all of your files.</p>
-			<p>(#ExaminingCachedFileInformation)</p>
+			
+			<!-- -->
 			<div>
 				<h3 id="examining-cached-file-information">Examining Cached File Information</h3>
 			</div>
@@ -348,7 +349,8 @@
 				</div>
 			</div>
 			<p>When downloading multiple files in succession, you can improve performance by querying the file list first, caching the metadata, and then performing downloads. This avoids having to perform multiple queries and wait for the results between file downloads.</p>
-			<p>(#DataCachingAndEncryption)</p>
+			
+			<!-- -->
 			<div>
 				<h3 id="data-caching-and-encryption">Data Caching and Encryption</h3>
 			</div>
@@ -392,8 +394,12 @@
 			<div>
 				<h3 id="file-overriding">File Overriding</h3>
 			</div>
-			<p>In some cases, you may want to provide different versions of a file based various on conditions; for example, different game servers may have their own configuration settings. You can redirect requests for specific file names to alternate files at the Title Storage level. To do this, set up your file structure using the
-				<a href="/docs/dev-portal">Developer Portal</a>. The back-end service will determine which file to return based on the incoming query. The end result of  this setup is that the developers can request a single file name with the EOS SDK from within the application, but be provided with different file data according to the back-end system's criteria.</p>
+			<p>You can manage default files in your game code, but you might want to provide alternate versions of these files. For example, each game server may have its own configuration settings file that you want to use. You must manage these alternate files through the Developer Portal. There, you can configure settings for the files, including specifying who should receive the alternate files. When you query the file through the Title Storage Interface, the Title Storage Interface then returns the alternate file, if applicable.
+				<br>
+				
+				<!-- -->See the
+				<a href="/docs/dev-portal/title-storage-management">Title Storage Management</a>
+				documentation for more information.</p>
 			<div>
 				<h2 id="file-decryption-tool">File Decryption Tool</h2>
 			</div>

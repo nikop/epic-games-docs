@@ -284,12 +284,12 @@
 				as the
 				<code>EOS_ProductUserId</code>
 				that was returned by a previous call to
-				<code>EOS_Connect_Login</code>. When the operation completes successfully, the external account will no longer have associations to any keychains. This means that the next attempt to login with
+				<code>EOS_Connect_Login</code>. If the external account is not associated with any other product user IDs, the external account will be removed from the keychain. This means that the next attempt to login with
 				<code>EOS_Connect_Login</code>
 				using credentials associated with the same external account will return an
 				<code>EOS_InvalidUser</code>
 				result with an
-				<code>EOS_ContinuanceToken</code>.</p>
+				<code>EOS_ContinuanceToken</code>. If the external account is associated with other product user IDs, the operation removes the external account from the currently logged in product user ID but does not remove the external account from the keychain. This means that the external account is no longer returned in query APIs for the product, but the external account can still be used with the remaining product user IDs.</p>
 			<p>Similarly to the account linking creation operations, history of unlinking operations can be audited through the Accounts dashboard in the Developer Portal.</p>
 			<div>
 				<h4 id="external-account-unlinking-restrictions">External account unlinking restrictions</h4>

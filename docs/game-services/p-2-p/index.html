@@ -698,6 +698,30 @@
 							or
 							<code>EOS_P2P_CloseConnections</code>.</td>
 					</tr>
+					<tr>
+						<td>
+							<code>Reliability</code>
+						</td>
+						<td>Sets the reliability of the delivery of this packet. The reliability can be
+							<code>EOS_PR_UnreliableUnordered</code>,
+							<code>EOS_PR_ReliableUnordered</code>, or
+							<code>EOS_PR_ReliableOrdered</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bDisableAutoAcceptConnection</code>
+						</td>
+						<td>If this is
+							<code>true</code>,
+							<code>EOS_P2P_SendPacket</code>
+							does not automatically establish a connection with the
+							<code>RemoteUserId</code>, and therefore you must make explicit calls to
+							<code>EOS_P2P_AcceptConnection</code>
+							first, whenever the connection is closed. If this is
+							<code>false</code>,
+							<code>EOS_P2P_SendPacket</code>
+							automatically accepts and starts the connection any time it is called, as long as the connection is not already open.</td>
+					</tr>
 				</tbody>
 			</table>
 			<p>This function will return either

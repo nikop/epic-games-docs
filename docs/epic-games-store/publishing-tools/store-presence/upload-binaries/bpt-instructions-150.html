@@ -31,7 +31,8 @@
 			</div>
 			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely upload binary files for your product to the Dev 
 				<!-- -->sandbox
-				<!-- --> for your product. You can then use the Artifacts and Binaries section of the Dev Portal to attach binaries to the correct artifact for your product offer and conduct testing. Using the
+				<!-- --> for your product. You can then use the Artifacts and Binaries section of the Dev Portal to attach binaries to the correct artifact for your product offer and conduct testing. (For some organizations, this section may be labeled as
+				<em>Builds</em>.) Using the
 				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>
 				process, you can promote binaries uploaded via the BuildPatch tool between sandboxes.</p>
 			<div>
@@ -367,6 +368,14 @@
 			</ul>
 			<div>
 				<h2 id="how-to-label-a-binary">How to Label a Binary</h2>
+			</div>
+			<div>
+				If your organization is using the
+				<strong>self-service</strong>
+				Epic Games Store publishing tools, labeling your binary via the BuildPatch Tool is not currently supported. Instead, you can add the appropriate platforms to your artifacts through the Dev Portal. When a platform is assigned to an artifact, the artifact automatically receives the
+				<em>Live</em>
+				label. For more information, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts#upload-the-binary">Manage Artifacts</a>
 			</div>
 			<p>After the chunking and upload process has completed, you must apply a label to your binary to make it accessible from the Epic Games Launcher. Applying a label to a binary associates a label name (e.g. "Live") and a platform (e.g. "Win32") with a single binary version. Multiple labels can be assigned to the same binary.</p>
 			<p>The EpicGamesLauncher client will only ever query for binaries associated with the platform on which it is currently running. For example, the Win32 Launcher client will only ever query with a platform of Win32, so it will never receive binaries labeled with Windows or Mac. A Windows x64 client will only query for binaries using the Windows platform, and so on. If you do actually have a single binary that is compatible with multiple platforms (for example, one compatible with both Windows and Win32), then you can apply two labels (one for each platform) to the same binary to make it available for both platforms without having to re-upload it.</p>

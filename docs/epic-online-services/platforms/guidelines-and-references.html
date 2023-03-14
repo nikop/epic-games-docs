@@ -1,0 +1,333 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Guidelines and References">Guidelines and References</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Guidelines and References</h1>
+			<h2>Information on the different types of EOS SDK, specific to the game platform your game client runs on.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>There are different types of SDK downloads to use, depending on which game platform your game client runs on.</p>
+			<p>For an overview and guidance on how to get the EOS SDK downloads, see the documentation: Get Started Steps:
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#step-2---download-the-eos-sdk">Download the EOS SDK</a>.</p>
+			<p>To run the Epic Online Services (EOS) SDK, you must follow several prerequisite steps in your project's linking, packaging, and loading processes to ensure that your target platform loads and runs the EOS run-time. This page provides generic information about those processes, while the pages listed under
+				<a href="/docs/en-US#platform-specific-documentation">Platform-Specific Documentation</a>
+				provide more specific information about each platform's needs. This page also includes information about how to use the
+				<strong>Unreal Build System</strong>
+				with EOS SDK.</p>
+			<div>
+				<p>For documentation regarding the EOS SDK and consoles (PlayStation, Xbox, Nintendo Switch, etc), you must
+					<a href="https://dev.epicgames.com/portal/en-US/eos-web-dev-org/organization/settings?sessionInvalidated=true">configure your organization access</a>
+					and the documentation will be part of the SDK drop after First Party approval.</p>
+			</div>
+			<div>
+				<h2 id="console-platform-versions">Console Platform Versions</h2>
+			</div>
+			<p>The current EOS SDK supports the following console platform versions:</p>
+			<table>
+				<thead>
+					<tr>
+						<td>
+							<strong>Console Platform</strong>
+						</td>
+						<td>
+							<strong>Latest Version</strong>
+						</td>
+						<td>
+							<strong>Minimum Version</strong>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PlayStation 4</td>
+						<td>Orbis v10.008.001</td>
+						<td>Orbis v9.508.001</td>
+					</tr>
+					<tr>
+						<td>PlayStation 5</td>
+						<td>Prospero v6.00.00.38</td>
+						<td>Prospero v5.00.00.33</td>
+					</tr>
+					<tr>
+						<td>Xbox GDK</td>
+						<td>October 2022 QFE1 (221001)</td>
+						<td>June 2022 QFE4 (220604)</td>
+					</tr>
+					<tr>
+						<td>Nintendo Switch</td>
+						<td>15.3.0_4.6.7</td>
+						<td>14.3.0</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="thread-safety">Thread Safety</h2>
+			</div>
+			<p>The EOS SDK is not considered thread safe.</p>
+			<p>You should make all calls on the same thread. Some functions assert and crash if called from different threads.</p>
+			<div>
+				<h2 id="building">Building</h2>
+			</div>
+			<p>All EOS SDK headers include the
+				<code>eos_base.h</code>
+				header, but some platforms need additional setup before you can call
+				<code>eos_base.h</code>. Each platform needing additional setup mentions this within the
+				<a href="/docs/en-US#platform-specific-documentation">Platform-Specific Documentation</a>
+				and has a
+				<code>&lt;Platform&gt;/eos_&lt;Platform&gt;_base.h</code>
+				file for this additional setup.</p>
+			<div>
+				<h3 id="using-eos_platform_prereqsh">Using eos_platform_prereqs.h</h3>
+			</div>
+			<p>The EOS SDK provides the
+				<code>eos_platform_prereqs.h</code>
+				header to support cross-platform development. To use
+				<code>eos_platform_prereqs.h</code>, add the
+				<code>EOS_BUILD_PLATFORM_NAME</code>
+				macro when building applications that need to include a specific platform.</p>
+			<div>
+				<p>Include the
+					<code>eos_platform_prereqs.h</code>
+					header before any other EOS SDK headers.</p>
+			</div>
+			<p>For example, if you are using the Unreal Build System, add the following code to your
+				<code>&lt;Project&gt;.Build.cs</code>
+				file:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>Add the following
+				<code>#includes</code>
+				when using the different EOS interfaces:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>For
+				<code>eos_[interface]_types.h</code>, replace
+				<code>[interface]</code>
+				with the interface you are using:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="custom-cross-platform-example">Custom Cross-Platform Example</h3>
+			</div>
+			<p>If
+				<code>eos_platform_prereqs.h</code>
+				doesn't fit with the project's build system, it can reference macros provided by custom compilers. For example:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="single-platform-example">Single Platform Example</h3>
+			</div>
+			<p>When a single platform needs additional
+				<code>#includes</code>
+				for the EOS Friends Service, use the following:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>For
+				<code>eos_[interface]_types.h</code>, replace
+				<code>[interface]</code>
+				with the interface you are using:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="linking">Linking</h2>
+			</div>
+			<p>When linking your project, you need to add the link-time library for EOS SDK to the link command for your project. For most platforms, the run-time library will need to be loaded manually as well.</p>
+			<div>
+				<h3 id="linking-with-unreal-build-system">Linking with Unreal Build System</h3>
+			</div>
+			<p>If you are using
+				<strong>Unreal Engine</strong>, the
+				<strong>Unreal Build Tool</strong>
+				will manage the linking and packing of your library if you follow these steps in the
+				<code>&lt;Project&gt;.Build.cs</code>
+				file:</p>
+			<ol>
+				<li>Add the library link-time name to
+					<code>PublicAdditionalLibraries</code>.</li>
+				<li>Add the library link-time file to
+					<code>RuntimeDependencies</code>.</li>
+			</ol>
+			<p>As an example, your
+				<code>&lt;Project&gt;.Build.cs</code>
+				file should include code similar to the following:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="packaging">Packaging</h2>
+			</div>
+			<p>In most cases, placing the run-time library for EOS SDK in the same directory as the game executable will ensure that the game can find it at run-time. Some platforms have specific directories you need to place their libraries in. Review the platform-specific pages for more details.</p>
+			<div>
+				<h2 id="loading">Loading</h2>
+			</div>
+			<p>Some platforms require you to load the dynamic module for EOS SDK explicitly at runtime. Refer to the platform-specific pages for details on how to do this with each platform. If no process is noted, then explicit loading is not necessary.</p>
+			<div>
+				<h3 id="loading-with-unreal">Loading with Unreal</h3>
+			</div>
+			<p>As long as you use the Unreal Build Tool to set up the packaging of your game, the same process can be used on all platforms. Use
+				<code>FPlatformProcess::GetDllHandle</code>
+				to load the module and
+				<code>FPlatformProcess::FreeDllHandle</code>
+				to unload the module.</p>
+			<div>
+				<h2 id="memory-functions">Memory Functions</h2>
+			</div>
+			<p>The EOS SDK can use any memory management system you develop when you provide custom allocators through
+				<code>EOS_InitializeOptions</code>. If allocators are not provided, the EOS SDK uses standard allocators, such as
+				<code>malloc</code>,
+				<code>free</code>, and
+				<code>realloc</code>.</p>
+			<p>However, consoles are the exception and require custom allocators. Memory management on consoles is a complex and highly platform-dependent process. To prevent any unexpected behavior, consoles are required to provide these custom allocators to ensure all memory management is by the application. For a detailed explanation of how memory management works for your current platform, please refer to the first party SDK documentation.</p>
+			<div>
+				<h3 id="memory-functions-with-unreal">Memory Functions with Unreal</h3>
+			</div>
+			<p>When using Unreal Engine with the EOS SDK, the allocators provided to
+				<code>EOS_InitializeOptions</code>
+				can be mapped to
+				<code>FMemory::Malloc</code>,
+				<code>FMemory::Realloc</code>, and
+				<code>FMemory::Release</code>.</p>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Platforms">Platforms</a>
+				<a href="/docs/en-US/site-map?tag=Consoles">
+					Consoles</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#console-platform-versions">Console Platform Versions</a>
+					</li>
+					<li>
+						<a href="#thread-safety">Thread Safety</a>
+					</li>
+					<li>
+						<a href="#building">Building</a>
+					</li>
+					<li>
+						<a href="#using-eos_platform_prereqsh">Using eos_platform_prereqs.h</a>
+					</li>
+					<li>
+						<a href="#custom-cross-platform-example">Custom Cross-Platform Example</a>
+					</li>
+					<li>
+						<a href="#single-platform-example">Single Platform Example</a>
+					</li>
+					<li>
+						<a href="#linking">Linking</a>
+					</li>
+					<li>
+						<a href="#linking-with-unreal-build-system">Linking with Unreal Build System</a>
+					</li>
+					<li>
+						<a href="#packaging">Packaging</a>
+					</li>
+					<li>
+						<a href="#loading">Loading</a>
+					</li>
+					<li>
+						<a href="#loading-with-unreal">Loading with Unreal</a>
+					</li>
+					<li>
+						<a href="#memory-functions">Memory Functions</a>
+					</li>
+					<li>
+						<a href="#memory-functions-with-unreal">Memory Functions with Unreal</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

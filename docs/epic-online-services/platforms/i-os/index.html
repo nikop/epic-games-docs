@@ -1,0 +1,302 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="EOS SDK for iOS">EOS SDK for iOS</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK for iOS</h1>
+			<h2>How to implement EOS SDK in an iOS project using Xcode.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>The
+				<strong>Epic Online Services (EOS)</strong>
+				SDK is integrated into an iOS project as a framework. This document will review how to add the framework into a project, and assumes that you are using
+				<strong>Xcode 10.3.1</strong>.</p>
+			<p>Before implementing the SDK with iOS, be sure to review the
+				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
+				for platform implementation.</p>
+			<div>
+				<h2 id="1-project-setup">1. Project Setup</h2>
+			</div>
+			<p>This guide assumes that you already have an iOS project set up in Xcode to link the SDK with. Apple's guide on
+				<a href="https://developer.apple.com/documentation/xcode/creating_an_xcode_project_for_an_app">Creating an Xcode Project for an App</a>
+				will walk you through the process of starting a new project if you do not already have one.</p>
+			<p>There are two requirements for developing with the EOS SDK:</p>
+			<ul>
+				<li>You must disable
+					<strong>bitcode</strong>
+					for your project.</li>
+				<li>You need a connected device to run the project with the linked SDK.</li>
+			</ul>
+			<div>
+				<p>This guide uses the initial file structure from a new
+					<strong>Single View App</strong>
+					project in Xcode 10.3.1.</p>
+			</div>
+			<div>
+				<h3 id="sdk-framework">SDK Framework</h3>
+			</div>
+			<p>When you download the SDK from the
+				<strong>Developer Portal</strong>, you should find the following framework files and file structure inside the downloaded zip:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="2-adding-the-framework-to-the-file-structure">2. Adding the Framework to the File Structure</h2>
+			</div>
+			<p>Once you have downloaded the framework, we need to add it to the project. For this example, we have named our project "<strong>Test</strong>."</p>
+			<ol>
+				<li>Create a
+					<strong>Frameworks</strong>
+					directory in your project root folder in
+					<strong>Finder</strong>.</li>
+			</ol>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Frameworks Directory" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Frameworks Directory" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-frameworks-directory.png 640w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 750w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 828w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 1080w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 1200w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 1920w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 2048w, null/game-services/platforms/i-os/i-os-frameworks-directory.png 3840w" src="null/game-services/platforms/i-os/i-os-frameworks-directory.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<ol start="2">
+				<li>Copy the
+					<strong>EOSSDK.framework</strong>
+					file into
+					<strong>Frameworks</strong>
+					directory.</li>
+			</ol>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Adding the EOS SDK framework to the directory" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Adding the EOS SDK framework to the directory" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 640w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 750w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 828w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 1080w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 1200w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 1920w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 2048w, null/game-services/platforms/i-os/i-os-frameworks-directory-2.png 3840w" src="null/game-services/platforms/i-os/i-os-frameworks-directory-2.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<p>This will make the framework available to link to your project.</p>
+			<div>
+				<h2 id="3-linking-the-framework-to-your-project">3. Linking the Framework to Your Project</h2>
+			</div>
+			<ol>
+				<li>In Xcode, drag the framework from the
+					<strong>Frameworks</strong>
+					directory into
+					<strong>Target</strong>
+					&gt;
+					<strong>General</strong>
+					&gt;
+					<strong>Frameworks, Libraries and Embedded Content</strong>.</li>
+			</ol>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Adding the framework to Frameworks, Libraries, and Embedded Content" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Adding the framework to Frameworks, Libraries, and Embedded Content" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-linking-framework_-1.png 640w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 750w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 828w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 1080w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 1200w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 1920w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 2048w, null/game-services/platforms/i-os/i-os-linking-framework_-1.png 3840w" src="null/game-services/platforms/i-os/i-os-linking-framework_-1.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<ol start="2">
+				<li>Verify that the added framework's
+					<strong>Target Membership</strong>
+					is your app.</li>
+			</ol>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Verifying target membership for the framework." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Verifying target membership for the framework." sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-linking-framework_-2.png 640w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 750w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 828w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 1080w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 1200w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 1920w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 2048w, null/game-services/platforms/i-os/i-os-linking-framework_-2.png 3840w" src="null/game-services/platforms/i-os/i-os-linking-framework_-2.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="4-embed-binaries">4. Embed Binaries</h2>
+			</div>
+			<ol>
+				<li>
+					<p>Open the
+						<strong>Embed Binary Target</strong>
+						&gt;
+						<strong>General</strong>
+						&gt;
+						<strong>Embedded Binaries</strong>
+						dropdown menu, then select "<strong>+</strong>".</p>
+				</li>
+				<li>
+					<p>Select the added
+						<strong>EOSSDK</strong>
+						framework.</p>
+				</li>
+			</ol>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Frameworks Directory" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Frameworks Directory" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-embed-binary_-1.png 640w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 750w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 828w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 1080w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 1200w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 1920w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 2048w, null/game-services/platforms/i-os/i-os-embed-binary_-1.png 3840w" src="null/game-services/platforms/i-os/i-os-embed-binary_-1.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<p>The project will now have the
+				<code>EOSSDK.framework</code>
+				file embedded and linked.</p>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Frameworks Directory" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Frameworks Directory" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-embed-binary_-2.png 640w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 750w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 828w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 1080w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 1200w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 1920w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 2048w, null/game-services/platforms/i-os/i-os-embed-binary_-2.png 3840w" src="null/game-services/platforms/i-os/i-os-embed-binary_-2.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="5-embed-dependencies">5. Embed Dependencies</h2>
+			</div>
+			<ol>
+				<li>
+					<p>Open the
+						<strong>Embed Binary Target</strong>
+						&gt;
+						<strong>General</strong>
+						&gt;
+						<strong>Embedded Binaries</strong>
+						dropdown menu, then select "<strong>+</strong>".</p>
+				</li>
+				<li>
+					<p>Locate and add
+						<code>AuthenticationServices.framework</code>.</p>
+				</li>
+			</ol>
+			<div>
+				<div>
+					<div style="max-width:308px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="Frameworks Directory" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="Frameworks Directory" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 640w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 750w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 828w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 1080w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 1200w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 1920w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 2048w, null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png 3840w" src="null/game-services/platforms/i-os/i-os-embed-dependencies_-1.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div style="max-width:500px">
+						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+							<noscript>
+								<img alt="" sizes="100vw" srcset="null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 640w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 750w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 828w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 1080w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 1200w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 1920w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 2048w, null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png 3840w" src="null/game-services/platforms/i-os/i-os-embed-dependencies_-2.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+							</noscript>
+						</span>
+					</div>
+					<p>Click to enlarge image</p>
+				</div>
+			</div>
+			<div>
+				<h3 id="framework-dependencies">Framework Dependencies</h3>
+			</div>
+			<p>EOS SDK uses the
+				<code>AuthenticationServices.framework</code>
+				for iOS 12+ to support login flows and iOS 13+ for Sign in with Apple login.</p>
+			<p>For iOS 11 the login flows are supported by
+				<code>SafariServices.framework</code>, which is a deprecated API and may be removed by Apple in the future and is only supported for limited backwards compatibility.</p>
+			<div>
+				<h2 id="final-result">Final Result</h2>
+			</div>
+			<p>Build and run the app onto your device to ensure everything is working properly. At this point, the SDK can be integrated with the app as intended. You can refer to a the default iOS projects for illustrations of possible APIs using Objective-C, Objective-C++ and Swift.</p>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Platforms">Platforms</a>
+				<a href="/docs/en-US/site-map?tag=iOS">
+					iOS</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#1-project-setup">1. Project Setup</a>
+					</li>
+					<li>
+						<a href="#sdk-framework">SDK Framework</a>
+					</li>
+					<li>
+						<a href="#2-adding-the-framework-to-the-file-structure">2. Adding the Framework to the File Structure</a>
+					</li>
+					<li>
+						<a href="#3-linking-the-framework-to-your-project">3. Linking the Framework to Your Project</a>
+					</li>
+					<li>
+						<a href="#4-embed-binaries">4. Embed Binaries</a>
+					</li>
+					<li>
+						<a href="#5-embed-dependencies">5. Embed Dependencies</a>
+					</li>
+					<li>
+						<a href="#framework-dependencies">Framework Dependencies</a>
+					</li>
+					<li>
+						<a href="#final-result">Final Result</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

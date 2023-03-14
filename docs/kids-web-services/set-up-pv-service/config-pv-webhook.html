@@ -51,21 +51,23 @@
 				<h2 id="set-up-your-webhook-url">Set up your webhook URL</h2>
 			</div>
 			<ol>
-				<li>In the
-					<strong>Parent Verification</strong>
-					tab, enter the
-					<strong>Successful verification webhook URL</strong>. This is where KWS sends the webhook that confirms successful verification.</li>
-			</ol>
-			<div>
-				<p>IMPORTANT:</p>
-				<ul>
-					<li>Do not include information in the webhook URL that is sensitive to manipulation by an attacker (for example, numeric IDs that may be iterated over easily).</li>
-					<li>Do not include special characters in your URL.</li>
-				</ul>
-			</div>
-			<ol start="2">
-				<li>Click
-					<strong>Publish to Test</strong>.</li>
+				<li>
+					<p>In the
+						<strong>Parent Verification</strong>
+						tab, enter the
+						<strong>Successful verification webhook URL</strong>. This is where KWS sends the webhook that confirms successful verification.</p>
+					<div>
+						<p>IMPORTANT:</p>
+						<ul>
+							<li>Do not include information in the webhook URL that is sensitive to manipulation by an attacker (for example, numeric IDs that may be iterated over easily).</li>
+							<li>Do not include special characters in your URL.</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<p>Click
+						<strong>Publish to Test</strong>.</p>
+				</li>
 			</ol>
 			<div>
 				<h2 id="generate-your-signature-using-the-secret-code">Generate your signature using the secret code</h2>
@@ -138,7 +140,9 @@
 			<p>On your product side, you need to create the same signature using the above code and the timestamp, the
 				<strong>Webhook secret code</strong>, and the POST body. If the signature you created matches the v1 signature we passed to you in the header of our webhook call, you can confirm that the webhook was sent by us.</p>
 			<p>Surface a public endpoint via your webserver/web application (similar to how you build any other API endpoint). This endpoint takes the POST body described below, and validates the signature header.</p>
-			<p>NOTE: It is important that the raw POST body is used. Do not attempt to parse and re-stringify the JSON as this may result in mismatched signatures due to inconsistencies in JSON library implementations.</p>
+			<div>
+				<p>NOTE: It is important that the raw POST body is used. Do not attempt to parse and re-stringify the JSON as this may result in mismatched signatures due to inconsistencies in JSON library implementations.</p>
+			</div>
 			<div>
 				<h3 id="post-body-structure">POST body structure</h3>
 			</div>
@@ -239,11 +243,12 @@
 							</ul>
 						</td>
 					</tr>
+					<tr>
+						<td>400+</td>
+						<td>Final retry failed. The call is logged as failed.</td>
+					</tr>
 				</tbody>
 			</table>
-			
-			<!-- -->
-			<p>If the final retry fails (status code 400+), the call is logged as failed.</p>
 			<div>
 				<h2 id="next-step">Next step</h2>
 			</div>

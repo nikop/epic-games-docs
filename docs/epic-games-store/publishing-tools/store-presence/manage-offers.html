@@ -20,7 +20,7 @@
 			<h1>Manage Offers</h1>
 			<h2>Create and manage product offers</h2>
 			<div>
-				<div>12 mins to read</div>
+				<div>14 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -145,6 +145,32 @@
 			</p>
 			<p>When creating a consumable offer, you can choose to set the offer price as
 				<em>Not Available for Direct Purchase</em>. If this setting is enabled, the offer is not available for purchase in the Epic Games Store. Instead, users can only redeem this offer through an access key and must also already own the base product.</p>
+			<div>
+				<h4 id="editions">Editions</h4>
+			</div>
+			<p>Products can have up to 10 Edition-type offers available on the storefront at a given time. (Your base game offer is
+				<strong>not</strong>
+				counted towards this limit.) While you can create more than 10 editions for your product, only 10 can be active in the Live sandbox at one time. An active edition is an offer that has not yet expired nor been marked as
+				<em>Not Visible on Store</em>.</p>
+			<p>If you push an 11<sup>th</sup>
+				Edition-type offer to the Live sandbox, the oldest available edition automatically becomes hidden on the storefront. In the Dev Portal, this offer is tagged as
+				<em>Not Visible on Store</em>. To instead choose which edition is hidden, first add an
+				<a href="/docs/en-US#dates">Expiration Date</a>
+				to one of the editions currently in the Live sandbox. Then, push your new offer to the Live sandbox once that expiration date has occurred.</p>
+			<div>
+				<p>If you have more than 10 Edition-type offers in your Live sandbox, be aware that one of your hidden editions may automatically become available if an active edition expires. In this scenario, when an active edition expires, the hidden edition in the Live sandbox with the nearest Early Store Discovery date becomes active. (If an Early Store Discovery date is not specified, the Launch Date is used). Note that offers will
+					<strong>not</strong>
+					become visible to users prior to their Early Store Discovery date.</p>
+				<p>For example, consider the following scenario:</p>
+				<br>
+				<ul>
+					<li>Your Live sandbox contains 12 Edition-type offers. 10 of these offers are currently available on the storefront, while the remaining offers are marked as
+						<em>Not Visible on Store</em>.</li>
+					<li>One of the 10 active offers expires and is automatically removed from the storefront. In its place, the hidden offer with the nearest discovery date becomes active. The
+						<em>Not Visible on Store</em>
+						tag is removed from this offer, and it will become visible on the storefront when its discovery date occurs.</li>
+				</ul>
+			</div>
 			<div>
 				<h3 id="editing-existing-offers">Editing Existing Offers</h3>
 			</div>
@@ -380,6 +406,9 @@
 					</li>
 					<li>
 						<a href="#consumable-offers">Consumable Offers</a>
+					</li>
+					<li>
+						<a href="#editions">Editions</a>
 					</li>
 					<li>
 						<a href="#editing-existing-offers">Editing Existing Offers</a>

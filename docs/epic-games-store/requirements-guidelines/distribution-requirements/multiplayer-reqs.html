@@ -32,7 +32,7 @@
 			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts in order to be distributed on the Epic Games Store. This requirement ensures users who purchase a multiplayer 
 				<!-- -->product
 				<!-- --> on the Epic Games Store can easily connect with friends and other players, regardless of where purchases were made.</p>
-			<p>You may use your preferred solution for crossplay, such as the free Epic One Services Crossplay functionality, your own method, or any third-party system that works across PC storefronts. Crossplay with other non-PC platforms (i.e., consoles) is optional but encouraged.</p>
+			<p>You may use your preferred solution for crossplay, such as the free Epic Online Services (EOS) crossplay functionality, your own method, or any third-party system that works across PC storefronts. Crossplay with other non-PC platforms (i.e., consoles) is optional but encouraged.</p>
 			<p>The sections below provide guidelines, additional details, and test cases to help you meet this requirement and prepare your product for release on the Epic Games Store.</p>
 			<div>
 				<p>To allow sufficient time for testing and verification, partners must provide a crossplay enabled build at least
@@ -56,9 +56,9 @@
 			</div>
 			<p>For products that support matchmaking, players must be able to match-make across storefront boundaries by default. Specifically:</p>
 			<ul>
-				<li>All Steam and Epic Games Store products should be listed together.</li>
-				<li>An Epic Games Store player can join a Steam or Epic Games Store product listed in the multiplayer menu.</li>
-				<li>A Steam player can join a Steam or Epic Games Store product listed in the multiplayer menu.</li>
+				<li>All Steam and Epic Games Store sessions must be listed together.</li>
+				<li>An Epic Games Store player can join a Steam or Epic Games Store session listed in the multiplayer menu.</li>
+				<li>A Steam player can join a Steam or Epic Games Store session listed in the multiplayer menu.</li>
 			</ul>
 			<div>
 				<h3 id="friends-based-multiplayer">Friends-Based Multiplayer</h3>
@@ -115,7 +115,7 @@
 					<!-- -->
 					<ul>
 						<li>
-							<strong>Alternative</strong>: Provide separate options to send Steam friend inivites (through the Steam API/overlay) and Epic Games friend invites (through the EOS API/overlay).</li>
+							<strong>Alternative</strong>: Provide separate options to send Steam friend invites (through the Steam API/overlay) and Epic Games friend invites (through the EOS API/overlay).</li>
 					</ul>
 				</li>
 			</ol>
@@ -143,9 +143,8 @@
 			</div>
 			<p>Epic Account Services are designed to work across platforms to provide a consistent developer and user experience. Learn more about
 				<a href="https://dev.epicgames.com/services">Epic Online Services and Epic Account Services</a>.</p>
-			<div>
-				<h5 id="pros">Pros</h5>
-			</div>
+			<p>
+				<strong>Pros</strong>:</p>
 			<ul>
 				<li>
 					<strong>Large social graph</strong>: The Epic Account Services have more than 350 million accounts and over 2.2 billion friend connections</li>
@@ -154,17 +153,17 @@
 				<li>
 					<strong>No blockers</strong>: Epic Account Services are supported on all major platforms, storefronts, engines, etc.</li>
 			</ul>
-			<div>
-				<h5 id="cons">Cons</h5>
-			</div>
 			<p>
-				<strong>A change for existing users</strong>: for titles that have previously ​shipped using other social graphs as their primary, updating to Epic Account Services as the primary social graph may be disruptive. In these cases, we recommend using
-				<a href="/docs/en-US#bifurcated-social-graph">
-					<strong>bifurcated social graphs</strong>
-				</a>.</p>
-			<div>
-				<h5 id="additional-options">Additional Options</h5>
-			</div>
+				<strong>Cons</strong>:</p>
+			<ul>
+				<li>
+					<strong>A change for existing users</strong>: for titles that have previously ​shipped using other social graphs as their primary, updating to Epic Account Services as the primary social graph may be disruptive. In these cases, we recommend using
+					<a href="/docs/en-US#bifurcated-social-graph">
+						<strong>bifurcated social graphs</strong>
+					</a>.</li>
+			</ul>
+			<p>
+				<strong>Additional Options</strong>:</p>
 			<ul>
 				<li>
 					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publishers or platform-based social graphs where applicable, to display additional friends lists in-game</li>
@@ -225,18 +224,18 @@
 				<h3 id="publisher-social-graph">Publisher Social Graph</h3>
 			</div>
 			<p>Some developers or publishers have the capability of supporting their own social graph. These solutions are welcome on the Epic Games Store.</p>
-			<div>
-				<h5 id="pros-1">Pros</h5>
-			</div>
+			<p>
+				<strong>Pros</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Storefront equality</strong>: By default, when using a publisher social graph as the primary social graph, PC storefronts are treated equally</li>
 				<li>
 					<strong>Single identity on all platforms</strong>: Makes development and support easier across platforms for developers. Users maintain a single online identity, no matter where they play</li>
 			</ul>
-			<div>
-				<h5 id="cons-1">Cons</h5>
-			</div>
+			<p>
+				<strong>Cons</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Expensive</strong>: Not all developers/publishers have the capability to implement, maintain, and constantly draw users to their own social graphs</li>
@@ -245,9 +244,9 @@
 				<li>
 					<strong>Account linking requirements</strong>: Users may get confused if they purchase a product with one identity, but then play that product with a separate identity and have a friends list that does not match the platform/storefront’s friends list</li>
 			</ul>
-			<div>
-				<h5 id="additional-options-1">Additional Options</h5>
-			</div>
+			<p>
+				<strong>Additional Options</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publisher or platform social graphs where and when available, to display additional friends lists in-game</li>
@@ -312,11 +311,9 @@
 			<p>In a bifurcated social graph, the primary social graph is the one provided by the storefront the game client was purchased on. However, a bifurcated social graph allows a user to be signed in on more than one social graph at the same time. In-game UI or SDK-based overlays provide the UX for the
 				<em>Away</em>
 				social graph to present itself in-game.</p>
+			<div>Bifurcated social graphs must feature a single matchmaking pool across all platforms, by default.</div>
 			<p>
-				<strong>Note</strong>: Bifurcated social graphs should feature a single matchmaking pool across all platforms, by default.</p>
-			<div>
-				<h5 id="pros-2">Pros</h5>
-			</div>
+				<strong>Pros</strong>:</p>
 			<ul>
 				<li>
 					<strong>Best UX</strong>: For users, combines the simplicity of the
@@ -327,9 +324,8 @@
 				<li>
 					<strong>Largest social graphs</strong>: Allow users to target the union of the large platform-based social graphs all at once.</li>
 			</ul>
-			<div>
-				<h5 id="cons-2">Cons</h5>
-			</div>
+			<p>
+				<strong>Cons</strong>:</p>
 			<ul>
 				<li>
 					<strong>Non-trivial to implement</strong>: Less expensive than building and maintaining a publisher social graph; requires some care in UX design and implementation across multiple client versions of the title</li>
@@ -344,9 +340,8 @@
 				<li>
 					<strong>Steam blockers</strong>: Steam does not, as of this writing, allow for account linking to a Steam ID outside the Steam ecosystem. This necessitates signing in to a Steam account directly every time the game client wants to update the Steam social graph, for example. We encourage developers to request that Steam open up their social graph and services from outside the Steam launcher and Steam clients.</li>
 			</ul>
-			<div>
-				<h5 id="additional-options-2">Additional Options</h5>
-			</div>
+			<p>
+				<strong>Additional Options</strong>:</p>
 			<ul>
 				<li>
 					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publisher- or platform-based social graphs where and when available, to display additional friends lists in-game</li>
@@ -355,7 +350,7 @@
 				<li>
 					<strong>Reciprocal friends</strong>: Optionally link to another account to have Epic Account Services receive friend suggestions from another social graph</li>
 				<li>
-					<strong>Remove crossplay</strong>: Because bifurcated social graphs should include crossplay ​by default​ in matchmaking, and because situations can arise around abusive players when the user has not linked to the other social graph, the product ​may ​present an option to the user to remove themselves from cross-platform matchmaking. Epic Games instead prefers the product to present options for dealing with potentially abusive crossplay players versus limiting a user’s matchmaking pool.</li>
+					<strong>Remove crossplay</strong>: Because bifurcated social graphs must include crossplay ​by default​ in matchmaking, and because situations can arise around abusive players when the user has not linked to the other social graph, the product ​may ​present an option to the user to remove themselves from cross-platform matchmaking. Epic Games instead prefers the product to present options for dealing with potentially abusive crossplay players versus limiting a user’s matchmaking pool.</li>
 			</ul>
 			<div>
 				<h4 id="typical-tech-stack-2">Typical Tech Stack</h4>
@@ -408,9 +403,6 @@
 			<div>
 				<h2 id="crossplay-test-cases">Crossplay Test Cases</h2>
 			</div>
-			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts in order to be distributed on the Epic Games Store. However, crossplay does not need to be implemented through any particular service or account system.
-				<a href="https://dev.epicgames.com/services">Epic Online Services</a>
-				and Epic Games accounts are offered free of charge as one potential solution. Publisher-based or other third-party solutions are supported and welcomed. Where supported, multiplayer functionality on Epic Games Store must be at parity with other PC storefronts. Crossplay with other non-PC platforms (e.g., consoles) is optional but encouraged.</p>
 			<p>To help ensure a successful launch of your product, we strongly encourage you to review the following test cases for your crossplay-enabled build. These test cases help ensure your product meets the Epic Games Store crossplay requirement and offers an optimal multiplayer experience to users.</p>
 			<div>
 				<p>A crossplay-enabled build must be provided
@@ -452,7 +444,7 @@
 				<strong>Expected Results</strong>
 			</p>
 			<ul>
-				<li>All Epic Games Store and other PC store games should be listed together.</li>
+				<li>All Epic Games Store and other PC store games must be listed together.</li>
 				<li>An Epic Games Store player can join a product hosted via Epic Games Store or another PC platform via server browser/matchmaking.</li>
 				<li>A player on another PC platform can join a product hosted via Epic Games Store or another PC platform via server browser/matchmaking.</li>
 			</ul>
@@ -701,43 +693,16 @@
 						<a href="#epic-social-graph">Epic Social Graph</a>
 					</li>
 					<li>
-						<a href="#pros">Pros</a>
-					</li>
-					<li>
-						<a href="#cons">Cons</a>
-					</li>
-					<li>
-						<a href="#additional-options">Additional Options</a>
-					</li>
-					<li>
 						<a href="#typical-tech-stack">Typical Tech Stack</a>
 					</li>
 					<li>
 						<a href="#publisher-social-graph">Publisher Social Graph</a>
 					</li>
 					<li>
-						<a href="#pros-1">Pros</a>
-					</li>
-					<li>
-						<a href="#cons-1">Cons</a>
-					</li>
-					<li>
-						<a href="#additional-options-1">Additional Options</a>
-					</li>
-					<li>
 						<a href="#typical-tech-stack-1">Typical Tech Stack</a>
 					</li>
 					<li>
 						<a href="#bifurcated-social-graph">Bifurcated Social Graph</a>
-					</li>
-					<li>
-						<a href="#pros-2">Pros</a>
-					</li>
-					<li>
-						<a href="#cons-2">Cons</a>
-					</li>
-					<li>
-						<a href="#additional-options-2">Additional Options</a>
 					</li>
 					<li>
 						<a href="#typical-tech-stack-2">Typical Tech Stack</a>

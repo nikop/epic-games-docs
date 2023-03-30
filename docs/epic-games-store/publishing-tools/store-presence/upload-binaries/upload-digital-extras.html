@@ -1,0 +1,301 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Upload Digital Extras">Upload Digital Extras</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Upload Digital Extras</h1>
+			<h2>Implementation workflow for uploading digital extras</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>You can distribute digital extras, such as artbooks and soundtracks, on the Epic Games Store. However, the process for uploading them using the BuildPatch Tool varies from typical applications.</p>
+			<p>While digital extras may not be launchable like a standard application, the Epic Games launcher still expects something to open when a user selects an item in their library. For an optimal user experience, you can implement a workflow that enables the launcher to open the installation area for your digital extras when a user accesses the item in their library.</p>
+			<p>This guide outlines the process for uploading digital extras for Windows and MacOS, as well as how to properly test your builds to confirm they are working as expected.</p>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>Before you can upload your digital extra, first create an offer for that item by selecting
+				<em>Digital Extra</em>
+				as the offer type during creation. Once the offer has been created, an artifact for that offer is automatically generated.</p>
+			<p>This step is required, as this guide provides steps for uploading your digital extra to that artifact. To learn more about creating offers, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers">Manage Offers</a>.</p>
+			<div>
+				If you are not using the self-service Epic Games Store publishing tools, reach out to your Service Delivery contact for assistance with setting up the necessary prerequisites.
+			</div>
+			<div>
+				<h2 id="uploading-digital-extras">Uploading Digital Extras</h2>
+			</div>
+			<div>
+				<h3 id="digital-extras-for-windows">Digital Extras for Windows</h3>
+			</div>
+			<p>To achieve the desired behavior for digital extras on Windows, you will leverage a batch (.bat) file that serves as the
+				<em>AppLaunch</em>
+				variable in the BuildPatch Tool.</p>
+			<p>When a user clicks on the respective item in their library, the launcher runs the .bat file and opens the installation directory for the digital extra.</p>
+			<div>
+				<h4 id="create-the-batch-file">Create the Batch File</h4>
+			</div>
+			<p>To create the .bat file, follow the steps below:</p>
+			<ol>
+				<li>Open your preferred text editor.</li>
+				<li>Enter the following:
+					<!-- -->
+					<div>
+						<section>
+							<pre>
+								<div>
+									<div style="color:#fff">
+										<span style="display:inline-block">
+										</span>
+									</div>
+								</div>
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>Save the file as
+					<code>digitalextras.bat</code>
+					and place it in the root directory of your digital extras build.</li>
+			</ol>
+			<div>
+				<h4 id="upload-your-windows-digital-extras-build">Upload Your Windows Digital Extras Build</h4>
+			</div>
+			<p>Once you have created your
+				<code>digitalextras.bat</code>
+				file, you can upload your digital extras build using the BuildPatch Tool.</p>
+			<p>The process for uploading digital extras is similar to uploading applications with a few key differences. To successfully upload a digital extra, ensure you provide the following information:</p>
+			<ul>
+				<li>Set the
+					<em>AppLaunch</em>
+					parameter to your
+					<code>digitalextras.bat</code>
+					file.</li>
+				<li>Use the artifact ID of the digital extra instead of your base game’s artifact ID.</li>
+			</ul>
+			<p>These configurations enable the batch file to run when a user selects the digital extra in their library, which opens the installation directory containing the appropriate content.</p>
+			<p>To learn more about using the BuildPatch Tool, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>.</p>
+			<div>
+				<h3 id="digital-extras-for-macos">Digital Extras for MacOS</h3>
+			</div>
+			<p>To achieve the desired behavior for digital extras on MacOS, you will leverage a combination of command (.command) and shell script (.sh) files.</p>
+			<p>The command file serves as the
+				<em>AppLaunch</em>
+				variable in the BuildPatch Tool. When a user clicks on the digital extra in their library, the launcher runs the command file, which in turn runs the shell script file. The shell script file then opens the installation directory for the digital extra.</p>
+			<div>
+				<h4 id="create-the-command-file">Create the Command File</h4>
+			</div>
+			<p>To create the .command file, follow the steps below:</p>
+			<ol>
+				<li>Open your preferred text editor.</li>
+				<li>Enter the following:
+					<!-- -->
+					<div>
+						<section>
+							<pre>
+								<div>
+									<div style="color:#fff">
+										<span style="display:inline-block">
+										</span>
+									</div>
+								</div>
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>Save the file as
+					<code>digitalextras.command</code>
+					and place it in the root directory of your digital extras build.</li>
+			</ol>
+			<p>
+				<strong>Note</strong>: Ensure the command file has Unix line endings. This can be done by opening the file in Vim and first running
+				<code>:set ff=unix</code>, followed by
+				<code>:wq</code>.</p>
+			<div>
+				<h4 id="create-the-shell-script-file">Create the Shell Script File</h4>
+			</div>
+			<p>To create the .sh file, follow the steps below:</p>
+			<ol>
+				<li>Open your preferred text editor.</li>
+				<li>Enter the following:
+					<!-- -->
+					<div>
+						<section>
+							<pre>
+								<div>
+									<div style="color:#fff">
+										<span style="display:inline-block">
+										</span>
+									</div>
+								</div>
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>Save the file as
+					<code>digitalextras.sh</code>
+					and place it in the root directory of your digital extras build.</li>
+			</ol>
+			<p>
+				<strong>Note</strong>: Ensure the command file has Unix line endings. This can be done by opening the file in Vim and first running
+				<code>:set ff=unix</code>, followed by
+				<code>:wq</code>.</p>
+			<div>
+				<h4 id="upload-your-macos-digital-extras-build">Upload Your MacOS Digital Extras Build</h4>
+			</div>
+			<p>Once you have created your
+				<code>digitalextras.command</code>
+				and
+				<code>digitalextras.sh files</code>, you can upload your digital extras build using the BuildPatch Tool.</p>
+			<p>The process for uploading digital extras is similar to uploading applications with a few key differences. To successfully upload a digital extra, ensure you provide the following information:</p>
+			<ul>
+				<li>Set the
+					<em>AppLaunch</em>
+					parameter to your
+					<code>digitalextras.command</code>
+					file.</li>
+				<li>Use the artifact ID of the digital extra instead of your base game’s artifact ID.</li>
+			</ul>
+			<p>With this configuration, the command file runs when a user selects the digital extras in their library. The shell script file then runs and opens the installation directory containing the appropriate content.</p>
+			<p>To learn more about using the BuildPatch Tool, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>.</p>
+			<div>
+				<h2 id="testing-your-digital-extras-windows--macos">Testing Your Digital Extras (Windows &amp; MacOS)</h2>
+			</div>
+			<p>Complete the test case below to ensure your digital extras have been successfully implemented.</p>
+			<p>To get started, first redeem a key that grants access to the relevant offer for your digital extras:</p>
+			<ul>
+				<li>
+					<strong>If you are using the self-service Epic Games Store publishing tools</strong>, generate and redeem a Testing Key in the Dev Portal. To learn more, review
+					<a href="/docs/epic-games-store/publishing-tools/publishing-process/access-keys">Access Keys</a>.</li>
+				<li>
+					<strong>If you are using an alternate method of distribution</strong>, redeem one of the Dev Keys that your Service Delivery contact has generated for you.</li>
+			</ul>
+			<p>After redeeming the appropriate key, follow the steps below:</p>
+			<ol>
+				<li>Open the Epic Games launcher.</li>
+				<li>Navigate to your Library.</li>
+				<li>Install your digital extras.</li>
+				<li>Launch the digital extras by clicking the Library item. The installation folder for the digital extras should then open.</li>
+			</ol>
+			<p>If the installation folder does not successfully open, refer to the table below.</p>
+			<div>
+				<h3 id="troubleshooting-common-issues">Troubleshooting Common Issues</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Issue</strong>
+						</th>
+						<th>
+							<strong>Solution</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<em>LS-0014 Launch Failed</em>
+							error displays in the Launcher</td>
+						<td>
+							<a href="/docs/en-US#digital-extras-for-windows">Windows</a>: Validate that your batch file matches the content outlined in this guide. If the contents are correct, verify that the
+							<em>AppLaunch</em>
+							parameter was properly set.
+							<br>
+							<br>
+							<a href="/docs/en-US#digital-extras-for-macos">MacOS</a>: Validate that your command file and shell script match the content outlined in this guide. If the contents are correct, verify that the
+							<em>AppLaunch</em>
+							parameter was properly set.
+							<br>
+							<br>
+							<strong>Issue unresolved</strong>: If the error persists after following these steps, reach out to your Service Delivery contact.</td>
+					</tr>
+					<tr>
+						<td>(MacOS Only) Nothing happens when the library item is clicked</td>
+						<td>1. Ensure the contents of your command and shell script files are correct.<br>
+							2. Verify that the
+							<em>AppLaunch</em>
+							parameter has been properly set.
+							<br>
+							3. Confirm the line endings for both files is Unix-type. DOS line endings are not supported.</td>
+					</tr>
+					<tr>
+						<td>
+							<em>OS Unsupported</em>
+							error displays in the Launcher</td>
+						<td>Reach out to your Service Delivery contact and provide both the error message and the operating system where it occurred.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="tag_list">
+				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#before-you-begin">Before You Begin</a>
+					</li>
+					<li>
+						<a href="#uploading-digital-extras">Uploading Digital Extras</a>
+					</li>
+					<li>
+						<a href="#digital-extras-for-windows">Digital Extras for Windows</a>
+					</li>
+					<li>
+						<a href="#create-the-batch-file">Create the Batch File</a>
+					</li>
+					<li>
+						<a href="#upload-your-windows-digital-extras-build">Upload Your Windows Digital Extras Build</a>
+					</li>
+					<li>
+						<a href="#digital-extras-for-macos">Digital Extras for MacOS</a>
+					</li>
+					<li>
+						<a href="#create-the-command-file">Create the Command File</a>
+					</li>
+					<li>
+						<a href="#create-the-shell-script-file">Create the Shell Script File</a>
+					</li>
+					<li>
+						<a href="#upload-your-macos-digital-extras-build">Upload Your MacOS Digital Extras Build</a>
+					</li>
+					<li>
+						<a href="#testing-your-digital-extras-windows--macos">Testing Your Digital Extras (Windows &amp; MacOS)</a>
+					</li>
+					<li>
+						<a href="#troubleshooting-common-issues">Troubleshooting Common Issues</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

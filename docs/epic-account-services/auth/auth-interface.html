@@ -190,7 +190,7 @@
 			<div>
 				<h4 id="preferred-login-types-for-epic-account">Preferred Login Types for Epic Account</h4>
 			</div>
-			<p>As of SDK 1.5 version, the preferred login types by platform are as follows:</p>
+			<p>The preferred login types by platform are as follows:</p>
 			<table>
 				<thead>
 					<tr>
@@ -201,7 +201,23 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>Console</td>
+						<td>Epic Games Launcher</td>
+						<td>
+							<code>EOS_LCT_ExchangeCode</code>
+						</td>
+						<td>Exchange code received from the launcher and used to automatically login the user.</td>
+					</tr>
+					<tr>
+						<td>Nintendo Switch</td>
+						<td>
+							<code>EOS_LCT_AccountPortal</code>
+							with
+							<code>EOS_LCT_PersistentAuth</code>
+						</td>
+						<td>Users are prompted to login using their Epic account credentials, after which a long-lived refresh token is stored locally to enable automatic login across consecutive application runs.</td>
+					</tr>
+					<tr>
+						<td>PlayStation and Xbox</td>
 						<td>
 							<code>EOS_LCT_ExternalAuth</code>
 						</td>
@@ -212,14 +228,7 @@
 						<td>
 							<code>EOS_LCT_ExternalAuth</code>
 						</td>
-						<td>Steam Session Ticket used to automatically login the local Steam user to their associated Epic account.</td>
-					</tr>
-					<tr>
-						<td>Epic Games Launcher</td>
-						<td>
-							<code>EOS_LCT_ExchangeCode</code>
-						</td>
-						<td>Exchange code received from the launcher and used to automatically login the user.</td>
+						<td>Steam Session Ticket used to automatically login the Steam user to their associated Epic account.</td>
 					</tr>
 					<tr>
 						<td>Other store platforms and standalone distributions on PC and Mobile Devices</td>
@@ -232,20 +241,6 @@
 					</tr>
 				</tbody>
 			</table>
-			<div>
-				<h5 id="console">Console</h5>
-			</div>
-			<p>Your game retrieves an access token from the platform for the local user account. Using the
-				<code>EOS_LCT_ExternalAuth</code>
-				login type, the platform user is logged into their Epic account. See
-				<a href="/docs/en-US#external-account-authentication">External Account Authentication</a>
-				for the detailed login flow, and the console specific documentation for the platform code integration.</p>
-			<div>
-				<h5 id="pc-or-mobile-device">PC or Mobile Device</h5>
-			</div>
-			<p>PCs and mobile devices usually use persistent logins, enabled by long-lived refresh tokens granted by the authentication backend, and specific to the device and user account. On these platforms, the SDK automatically stores and retrieves these tokens as needed, and updates them following each login. See the section on
-				<a href="/docs/en-US#persisting-user-login-to-epic-account-outside-epic-games-launcher">persistent logins</a>
-				for more information.</p>
 			<div>
 				<h5 id="epic-games-launcher">Epic Games Launcher</h5>
 			</div>
@@ -306,6 +301,26 @@
 				<code>Type</code>
 				should be
 				<code>EOS_LCT_ExchangeCode</code>.</p>
+			<div>
+				<h5 id="nintendo-switch">Nintendo Switch</h5>
+			</div>
+			<p>Your game stores a long-lived Epic refresh token on the local device for automatic login across game sessions. See the section on
+				<a href="/docs/en-US#persisting-user-login-to-epic-account-outside-epic-games-launcher">persistent logins</a>
+				for more information.</p>
+			<div>
+				<h5 id="playstation-steam-and-xbox">PlayStation, Steam, and Xbox</h5>
+			</div>
+			<p>Your game retrieves an access token from the platform for the local user account. Using the
+				<code>EOS_LCT_ExternalAuth</code>
+				login type, the platform user is logged into their Epic account. See
+				<a href="/docs/en-US#external-account-authentication">External Account Authentication</a>
+				for the detailed login flow, and the console specific documentation for the platform code integration.</p>
+			<div>
+				<h5 id="pc-and-mobile-devices">PC and Mobile Devices</h5>
+			</div>
+			<p>PCs and mobile devices usually use persistent logins, enabled by long-lived refresh tokens granted by the authentication backend, and specific to the device and user account. On these platforms, the SDK automatically stores and retrieves these tokens as needed, and updates them following each login. See the section on
+				<a href="/docs/en-US#persisting-user-login-to-epic-account-outside-epic-games-launcher">persistent logins</a>
+				for more information.</p>
 			<div>
 				<h5 id="auth-scopes">Auth Scopes</h5>
 			</div>
@@ -862,13 +877,16 @@
 						<a href="#preferred-login-types-for-epic-account">Preferred Login Types for Epic Account</a>
 					</li>
 					<li>
-						<a href="#console">Console</a>
-					</li>
-					<li>
-						<a href="#pc-or-mobile-device">PC or Mobile Device</a>
-					</li>
-					<li>
 						<a href="#epic-games-launcher">Epic Games Launcher</a>
+					</li>
+					<li>
+						<a href="#nintendo-switch">Nintendo Switch</a>
+					</li>
+					<li>
+						<a href="#playstation-steam-and-xbox">PlayStation, Steam, and Xbox</a>
+					</li>
+					<li>
+						<a href="#pc-and-mobile-devices">PC and Mobile Devices</a>
 					</li>
 					<li>
 						<a href="#auth-scopes">Auth Scopes</a>

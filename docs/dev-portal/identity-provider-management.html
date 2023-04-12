@@ -14,7 +14,7 @@
 			<h1>Identity Provider Management</h1>
 			<h2>Overview of player identity management in the Developer Portal.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -170,7 +170,22 @@
 			<div>
 				<h4 id="steam">Steam</h4>
 			</div>
-			<p>For user authentication across different SteamAppIDs, use the same Steam Encryption Key for all of the SteamAppIDs in the Steamworks web dashboard configuration. This allows using a single EOS credentials entry across your different Steam game builds.</p>
+			<p>Epic Account Services require using Steam Session Tickets as the login credentials type for the
+				<a href="/docs/api-ref/functions/eos-auth-login">
+					<code>EOS_Auth_Login</code>
+				</a>
+				SDK API. When acquiring new Steam Session Tickets, your game client must specify a valid non-empty string as the
+				<code>SteamNetworkingIdentity</code>
+				input parameter for the
+				<a href="https://partner.steamgames.com/doc/api/ISteamUser#GetAuthSessionTicket">ISteamUser::GetAuthSessionTicket</a>
+				Steamworks SDK API.</p>
+			<p>Game Services support the following methods for Steam user authentication:</p>
+			<ul>
+				<li>Steam Session Tickets and Steam Encrypted App Tickets through the Steamworks SDK.</li>
+				<li>Steam OAuth via web-based login flows.</li>
+			</ul>
+			<p>
+				<strong>Tip</strong>: If your game is using Steam Encrypted App Tickets, use the same Encryption Key for all of the SteamAppIDs in your Steamworks web dashboard configuration. This allows you to use a single EOS credentials entry across your different Steam game builds.</p>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=DevPortal">DevPortal</a>
 				<a href="/docs/en-US/site-map?tag=Identity">

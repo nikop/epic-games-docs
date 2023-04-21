@@ -14,7 +14,7 @@
 			<h1>Epic Games Store Testing Guide</h1>
 			<h2>Test cases to help you ensure a great player experience</h2>
 			<div>
-				<div>11 mins to read</div>
+				<div>12 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -188,6 +188,7 @@
 				<li>Sign in to an account that owns the game in both the Dev and Stage sandboxes.</li>
 				<li>Launch the game in the Dev sandbox and ensure any implemented EOS features behave as expected.</li>
 				<li>Exit the game and relaunch in the Stage sandbox, testing the same features.</li>
+				<li>When pushing the game to the Live sandbox, perform the same test but use a fresh account that is not a member of the dev organization.</li>
 			</ol>
 			<p>
 				<strong>Expected Results</strong>
@@ -204,6 +205,7 @@
 					<code>epicsandboxid</code>
 					launch argument and dynamically sets the correct Sandbox ID and Deployment ID.</li>
 				<li>Game dependencies require hard-coding Sandbox ID and Deployment ID values, and Live values are used for each.</li>
+				<li>An account not associated with a Player Group or added as a member to the developer organization can play the Live sandbox build without issues.</li>
 			</ul>
 			<p>
 				<strong>Fail Scenarios</strong>
@@ -230,7 +232,7 @@
 				to authenticate the player and record their achievement progress and unlocks.</p>
 			<p>To optimize the player experience, we recommend enabling the
 				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">Epic Games overlay</a>
-				to display achievements and achievement progress in game.</p>
+				to display achievements and achievement progress in game. We also recommend performing a similar test with a fresh account, not assocaited with the developer organization, once you push to the live Sandbox</p>
 			<p>
 				<strong>Test Steps</strong>
 			</p>

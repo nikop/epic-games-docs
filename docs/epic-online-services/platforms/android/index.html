@@ -20,16 +20,59 @@
 	</section>
 	<section>
 		<section>
-			<p>This guide explains how to add the
-				<strong>Epic Online Services (EOS) SDK</strong>
-				to an
-				<strong>Android Studio</strong>
-				project,  ensure that your build system recognizes the SDK, and handle Android-specific initialization of the SDK.</p>
-			<p>Before implementing the SDK with Android, be sure to review the
-				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
-				for platform implementation.</p>
 			<div>
-				<h2 id="1-required-setup">1. Required Setup</h2>
+				<h2 id="supported-android-release-versions">Supported Android Release Versions</h2>
+			</div>
+			
+			<!-- -->
+			<p>The table below lists the Android release version which each EOS SDK release version supports:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>EOS SDK Release Version</th>
+						<th></th>
+						<th>Android Release Version</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>EOS SDK 1.10.2 - 1.15.5</td>
+						<td>supports</td>
+						<td>6.0 (API level 23)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The table below lists the minimum Android release version which each EOS SDK release version supports for Unity:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>EOS SDK Release Version</th>
+						<th></th>
+						<th>Android Release Version</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>EOS SDK 1.15.2 - 1.15.5</td>
+						<td>supports</td>
+						<td>6.0 (API level 23)</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="set-up-the-eos-sdk-for-android">Set up the EOS SDK for Android</h2>
+			</div>
+			<p>This guide describes how to do the following:</p>
+			<ul>
+				<li>Add the EOS SDK to an Android Studio project.</li>
+				<li>Ensure that your build system recognizes the EOS SDK.</li>
+				<li>Handle Android-specific initialization of the EOS SDK.</li>
+			</ul>
+			<p>Before implementing the EOS SDK with Android, see the documentation on
+				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
+				for information on platform implementation.</p>
+			<div>
+				<h3 id="1-prerequisites">1. Prerequisites</h3>
 			</div>
 			<p>This guide assumes that you already have an Android Studio project that can build C/C++ code with the Android NDK. If you do not have a project set up, follow the guides at
 				<a href="https://developer.android.com/ndk/guides">https://developer.android.com/ndk/guides</a>
@@ -42,34 +85,31 @@
 			<p>If you are using a different STL you will still need to bring in the associated
 				<code>libc++_shared</code>
 				library for your NDK release. You can find the
-				<strong>.so</strong>
+				<code>.so</code>
 				files in your
-				<strong>ndk</strong>
+				<code>ndk</code>
 				folder at
 				<code>sources\cxx-stl\llvm-libc++\libs\{arch}\</code>. These will need to be included in the final build through your build tool.</p>
 			<div>
-				<h2 id="2-adding-eos-sdk-to-your-android-studio-project">2. Adding EOS SDK to Your Android Studio Project</h2>
+				<h3 id="2-add-the-eos-sdk-to-your-android-studio-project">2. Add the EOS SDK to Your Android Studio Project</h3>
 			</div>
-			<p>The SDK download from the
-				<strong>Developer Portal</strong>
-				provides a zip file containing the following artifacts:</p>
+			<p>The SDK download from the Developer Portal provides a zip file containing the following artifacts:</p>
 			<ul>
 				<li>An
-					<strong>include</strong>
+					<code>include</code>
 					folder containing all headers exposed from the EOS SDK.</li>
 				<li>A lib folder containing EOS SDK
-					<strong>.so</strong>
+					<code>.so</code>
 					files built for
-					<strong>arm64-v8a</strong>
+					<code>arm64-v8a</code>
 					and
-					<strong>armeabi-v7a</strong>
-					that can be used when building your app.</li>
+					<code>armeabi-v7a</code>that can be used when building your app.</li>
 				<li>The
-					<strong>EOSSDK.aar</strong>
+					<code>EOSSDK.aar</code>
 					file, which will automatically bundle the correct library with your app and add both required permissions and accompanying java code into your project.</li>
 			</ul>
 			<p>Regardless of which build system you use, you will need to bring
-				<strong>EOSSDK.aar</strong>
+				<code>EOSSDK.aar</code>
 				into your project as a module. To do that, complete the following steps:</p>
 			<ol>
 				<li>
@@ -118,14 +158,17 @@
 						<strong>.aar</strong>
 						file from the extracted zip file. The
 						<strong>Subproject Name</strong>
-						should automatically fill in to say "<strong>EOSSDK</strong>". If not, set it manually or choose an alternate name.
+						should automatically fill in to say
+						<code>EOSSDK</code>. If not, set it manually or choose an alternate name.
 						<strong>EOSSDK</strong>
 						should now show up as an imported module in your project.</p>
 				</li>
 				<li>
-					<p>Open your app’s
+					<p>Open your game's
 						<strong>build.gradle</strong>
-						file, which will be located inside the EOSSDK folder.</p>
+						file, which is located inside the
+						<code>EOSSDK</code>
+						folder.</p>
 					
 					<!--$-->
 					<div>
@@ -158,23 +201,29 @@
 					</pre>
 				</section>
 			</div>
-			<p>The SDK is now imported into your project and will be included in your builds! The .aar file will automatically handle bringing the correct .so file into the .apk/.aab during the build process.</p>
-			<p>The following sections will explain how to directly integrate the C libraries within the SDK.</p>
+			<p>The SDK is now imported into your project and will be included in your builds. The
+				<code>.aar</code>
+				file automatically handles bringing the correct
+				<code>.so</code>
+				file into the
+				<code>.apk/.aab</code>
+				during the build process.</p>
+			<p>The following sections describe how to directly integrate the C libraries within the SDK.</p>
 			<div>
-				<h2 id="3-including-the-sdk-with-your-build-system">3. Including the SDK With Your Build System</h2>
+				<h3 id="3-include-the-eos-sdk-with-your-build-system">3. Include the EOS SDK With Your Build System</h3>
 			</div>
 			<p>You can add the EOS SDK to your project using either
 				<strong>CMake</strong>
 				or
 				<strong>ndk-build</strong>, which are both officially supported build systems that can be used with the NDK. This section will provide information about how to bring the SDK into your project using these build systems.</p>
 			<div>
-				<h3 id="using-eos-with-cmake">Using EOS With CMake</h3>
+				<h4 id="how-to-use-eos-with-cmake">How to use EOS With CMake</h4>
 			</div>
 			<p>If you are using CMake in your project, you should have a
-				<strong>CMakeLists.txt</strong>
-				file in your project. To bring the EOS SDK into your NDK project you will need to let CMake know where the library is located.</p>
+				<code>CMakeLists.txt</code>
+				file in your project. To bring the EOS SDK into your NDK project you must let CMake know where the library is located.</p>
 			<p>To do this, edit the
-				<strong>CMakeLists.txt</strong>
+				<code>CMakeLists.txt</code>
 				file and add the following commands:</p>
 			<p>
 				<strong>CMakeLists.txt</strong>
@@ -192,7 +241,7 @@
 				</section>
 			</div>
 			<p>If you expanded the zip in the same directory as the
-				<strong>CMakeLists.txt</strong>, it would look like this:</p>
+				<code>CMakeLists.txt</code>, it would look like this:</p>
 			<p>
 				<strong>CMakeLists.txt</strong>
 			</p>
@@ -208,8 +257,7 @@
 					</pre>
 				</section>
 			</div>
-			<p>Finally, make sure the EOS SDK is linked with the appropriate library in your project. In an Android Studio C++ project created in the
-				<strong>New Project Wizard</strong>, that would look like this:</p>
+			<p>Finally, make sure the EOS SDK is linked with the appropriate library in your project. In an Android Studio C++ project created in the New Project Wizard, that would look like this:</p>
 			<p>
 				<strong>CMakeLists.txt</strong>
 			</p>
@@ -226,17 +274,17 @@
 				</section>
 			</div>
 			<p>At this point, sync gradle and you should be able to import EOS SDK symbols into your C++ project and move to the
-				<strong>Android-Specific Initialize Options</strong>
+				<code>Android-Specific Initialize Options</code>
 				section.</p>
 			<div>
 				<p>For more information about using CMake, refer to
 					<a href="https://developer.android.com/ndk/guides/cmake">https://developer.android.com/ndk/guides/cmake</a>.</p>
 			</div>
 			<div>
-				<h3 id="using-eos-with-ndk-build">Using EOS With ndk-build</h3>
+				<h4 id="how-to-use-eos-with-ndk-build">How to use EOS With ndk-build</h4>
 			</div>
 			<p>If you are using ndk-build for your project, you will need to add EOS SDK as a module to your
-				<strong>Android.mk</strong>
+				<code>Android.mk</code>
 				file. A basic Android.mk file would look like this:</p>
 			<p>
 				<strong>Android.mk</strong>
@@ -274,7 +322,7 @@
 				</section>
 			</div>
 			<p>In this example, the zip file was inflated in the same folder as the
-				<strong>Android.mk</strong>
+				<code>Android.mk</code>
 				file. If you prefer the files elsewhere you can replace the
 				<code>LOCAL_PATH</code>
 				with the correct path instead.</p>
@@ -282,7 +330,7 @@
 				<code>hello-jni</code>
 				module, you will need to link them. You can do this by adding the sdk as a
 				<code>LOCAL_SHARED_LIBRARIES</code>
-				entry. Additionally, we need to make sure
+				entry. Additionally, make sure
 				<code>c++_shared</code>
 				is also referenced.</p>
 			<p>
@@ -304,7 +352,7 @@
 				<code>hello-jni</code>
 				module should have access to the exported symbols from the EOS SDK!</p>
 			<p>The full demo
-				<strong>Android.mk</strong>
+				<code>Android.mk</code>
 				file is provided below. This will need to be adapted for your specific use case.</p>
 			<p>
 				<strong>Android.mk</strong>
@@ -324,7 +372,7 @@
 			<p>For more information about ndk-build, refer to
 				<a href="https://developer.android.com/ndk/guides/ndk-build">https://developer.android.com/ndk/guides/ndk-build</a>.</p>
 			<div>
-				<h2 id="4-android-specific-system-initialize-options">4. Android-Specific System Initialize Options</h2>
+				<h3 id="4-android-specific-system-initialize-options">4. Android-Specific System Initialize Options</h3>
 			</div>
 			<p>For the EOS SDK to function, you must load native library with
 				<code>System.loadLibrary</code>
@@ -373,7 +421,7 @@
 				</section>
 			</div>
 			<p>To setup optional directory paths for disk access, the EOS SDK has platform-specific
-				<strong>System Initialize Options</strong>
+				<code>System Initialize Options</code>
 				for Android:</p>
 			<div>
 				<section>
@@ -391,11 +439,11 @@
 				<p>The following method is for SDK versions 1.10 and older. For SDK versions 1.11 and above, use the above method.</p>
 			</div>
 			<p>For EOS SDK versions 1.10 and older, the
-				<strong>System Initialize Options</strong>
+				<code>System Initialize Options</code>
 				are defined as
 				<code>EOS_Android_InitializeOptions</code>
 				and require a reference to the
-				<strong>JavaVM</strong>
+				<code>JavaVM</code>
 				with optional directory paths for disk access.</p>
 			<p>For EOS SDK Java-side to function, you need to pass the application context to it as follows:</p>
 			<div>
@@ -444,7 +492,7 @@
 				</section>
 			</div>
 			<div>
-				<h2 id="5-receiving-login-intent">5. Receiving Login Intent</h2>
+				<h3 id="5-how-to-receive-login-intent">5. How to receive Login Intent</h3>
 			</div>
 			<p>For the EOS SDK to receive the correct login intent, you must supply your client ID in
 				<code>Strings.xml</code>.</p>
@@ -480,25 +528,31 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#1-required-setup">1. Required Setup</a>
+						<a href="#supported-android-release-versions">Supported Android Release Versions</a>
 					</li>
 					<li>
-						<a href="#2-adding-eos-sdk-to-your-android-studio-project">2. Adding EOS SDK to Your Android Studio Project</a>
+						<a href="#set-up-the-eos-sdk-for-android">Set up the EOS SDK for Android</a>
 					</li>
 					<li>
-						<a href="#3-including-the-sdk-with-your-build-system">3. Including the SDK With Your Build System</a>
+						<a href="#1-prerequisites">1. Prerequisites</a>
 					</li>
 					<li>
-						<a href="#using-eos-with-cmake">Using EOS With CMake</a>
+						<a href="#2-add-the-eos-sdk-to-your-android-studio-project">2. Add the EOS SDK to Your Android Studio Project</a>
 					</li>
 					<li>
-						<a href="#using-eos-with-ndk-build">Using EOS With ndk-build</a>
+						<a href="#3-include-the-eos-sdk-with-your-build-system">3. Include the EOS SDK With Your Build System</a>
+					</li>
+					<li>
+						<a href="#how-to-use-eos-with-cmake">How to use EOS With CMake</a>
+					</li>
+					<li>
+						<a href="#how-to-use-eos-with-ndk-build">How to use EOS With ndk-build</a>
 					</li>
 					<li>
 						<a href="#4-android-specific-system-initialize-options">4. Android-Specific System Initialize Options</a>
 					</li>
 					<li>
-						<a href="#5-receiving-login-intent">5. Receiving Login Intent</a>
+						<a href="#5-how-to-receive-login-intent">5. How to receive Login Intent</a>
 					</li>
 				</ul>
 			</div>

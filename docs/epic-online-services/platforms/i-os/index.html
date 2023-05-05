@@ -20,20 +20,62 @@
 	</section>
 	<section>
 		<section>
-			<p>To use Epic Online Services (EOS) SDK in your project, you must use the EOS SDK framework for iOS (the framework). These instructions assume that you have an existing iOS project in Xcode.</p>
-			<p>Before implementing the SDK with iOS, be sure to review the
-				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
-				for platform implementation.</p>
 			<div>
-				<h2 id="objective-c-and-swift-ios-projects">Objective-C and Swift iOS Projects</h2>
+				<h2 id="supported-ios-release-versions">Supported iOS Release Versions</h2>
 			</div>
+			
+			<!-- -->
+			<p>The table below lists the iOS release version which each EOS SDK release version supports:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>EOS SDK Release Version</th>
+						<th></th>
+						<th>iOS Release Version</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>EOS SDK 1.10.2 - 1.11</td>
+						<td>supports</td>
+						<td>iOS 11 or higher</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The table below lists the minimum iOS release version which each EOS SDK release version supports for Unity:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>EOS SDK Release Version</th>
+						<th></th>
+						<th>iOS Release Version</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>EOS SDK 1.10.2 - 1.15.5</td>
+						<td>supports</td>
+						<td>iOS 11 or higher</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="set-up-the-eos-sdk-for-ios">Set up the EOS SDK for iOS</h2>
+			</div>
+			<p>To use Epic Online Services (EOS) SDK in your project, you must use the EOS SDK framework for iOS (the framework). These instructions assume that you have an existing iOS project in Xcode.</p>
+			<p>Before you implement the SDK with iOS, see the documentation on
+				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
+				for information on platform implementation.</p>
+			<p>
+				<strong>Objective-C and Swift iOS Projects</strong>
+			</p>
 			<p>The EOS SDK for iOS is written in C. If your game's code is written in Objective-C (ObjC) or Swift, we recommend writing an ObjC wrapper around the EOS SDK, as the EOS SDK is not a Swift module. The Login Sample, included in the EOS SDK download for iOS, uses an ObjC wrapper. See the Login Sample's
 				<code>/Login/EOS/EOSWrapper.h</code>
 				file for an example implementation. See
 				<a href="/docs/epic-online-services/platforms/i-os/eo-si-os-sample">Using the iOS Samples documentation</a>
 				for more information on using the Login Sample app.</p>
 			<div>
-				<h2 id="download-the-eos-sdk-framework-for-ios">Download the EOS SDK Framework for iOS</h2>
+				<h3 id="1-download-the-eos-sdk-framework-for-ios">1. Download the EOS SDK Framework for iOS</h3>
 			</div>
 			<p>Follow these steps to download the EOS SDK framework for iOS (the framework):</p>
 			<ol>
@@ -52,7 +94,7 @@
 					<strong>DOWNLOAD</strong>.</li>
 			</ol>
 			<div>
-				<h2 id="add-the-eos-sdk-framework-to-your-project">Add the EOS SDK Framework to Your Project</h2>
+				<h3 id="2--add-the-eos-sdk-framework-to-your-project">2.  Add the EOS SDK Framework to Your Project</h3>
 			</div>
 			<p>After you have downloaded the EOS SDK framework, you must add it to your project. The example below references a sample game project called EOSGame. If you know how to link and embed an iOS framework, you can skip to the
 				<a href="/docs/en-US#add-framework-dependencies">Framework Dependencies</a>
@@ -155,7 +197,7 @@
 				</li>
 			</ol>
 			<div>
-				<h2 id="add-framework-dependencies">Add Framework Dependencies</h2>
+				<h3 id="3--add-framework-dependencies">3.  Add Framework Dependencies</h3>
 			</div>
 			<p>The EOS SDK requires the
 				<code>AuthenticationServices.framework</code>
@@ -214,7 +256,7 @@
 				</li>
 			</ol>
 			<div>
-				<h2 id="next-steps">Next Steps</h2>
+				<h3 id="next-steps">Next Steps</h3>
 			</div>
 			<p>Build and run the app on your device to ensure that it builds properly. Simulator support in Xcode is currently not available to test the EOS SDK. To run the EOS SDK framework in your project, you must have a physical, connected, device with iOS 11 or higher.</p>
 			<p>
@@ -236,16 +278,19 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#objective-c-and-swift-ios-projects">Objective-C and Swift iOS Projects</a>
+						<a href="#supported-ios-release-versions">Supported iOS Release Versions</a>
 					</li>
 					<li>
-						<a href="#download-the-eos-sdk-framework-for-ios">Download the EOS SDK Framework for iOS</a>
+						<a href="#set-up-the-eos-sdk-for-ios">Set up the EOS SDK for iOS</a>
 					</li>
 					<li>
-						<a href="#add-the-eos-sdk-framework-to-your-project">Add the EOS SDK Framework to Your Project</a>
+						<a href="#1-download-the-eos-sdk-framework-for-ios">1. Download the EOS SDK Framework for iOS</a>
 					</li>
 					<li>
-						<a href="#add-framework-dependencies">Add Framework Dependencies</a>
+						<a href="#2--add-the-eos-sdk-framework-to-your-project">2.  Add the EOS SDK Framework to Your Project</a>
+					</li>
+					<li>
+						<a href="#3--add-framework-dependencies">3.  Add Framework Dependencies</a>
 					</li>
 					<li>
 						<a href="#next-steps">Next Steps</a>

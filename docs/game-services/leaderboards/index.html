@@ -14,7 +14,7 @@
 			<h1>Leaderboards Interface</h1>
 			<h2>Interface to handle online leaderboards</h2>
 			<div>
-				<div>10 mins to read</div>
+				<div>8 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -51,9 +51,6 @@
 			<ul>
 				<li>
 					<p>The stat (or score) that the leaderboard tracks</p>
-				</li>
-				<li>
-					<p>The method the leaderboard uses to rank players</p>
 				</li>
 				<li>
 					<p>The starting and ending time for the leaderboard's overall lifespan</p>
@@ -120,62 +117,6 @@
 					<p>Total Global Leaderboard entries: 1000 (+1000 overflow)</p>
 				</li>
 			</ul>
-			<div>
-				<h3 id="scoring-methods">Scoring Methods</h3>
-			</div>
-			<p>The Leaderboards Interface features multiple scoring methods to accommodate different kinds of games or ranking systems. Your leaderboard can calculate and rank scores according to a
-				<strong>score aggregation type</strong>. You must use the same aggregation type for your leaderboard as is used by the stat that is assigned to it. The available score aggregation types are as follows:</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Score Aggregation Type</th>
-						<th>Leaderboard Behavior</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<code>EOS_LSA_Min</code>
-						</td>
-						<td>The leaderboard uses the player's lowest reported score. The player with the lowest score holds the number one position.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_LSA_Max</code>
-						</td>
-						<td>The leaderboard uses the player's highest reported score. The player with the highest score holds the number one position.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_LSA_Sum</code>
-						</td>
-						<td>The leaderboard adds up every score each player reports. The player with the highest total score holds the number one position.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_LSA_Latest</code>
-						</td>
-						<td>The leaderboard uses the player's most recent reported score. The player with the highest score holds the number one position.</td>
-					</tr>
-				</tbody>
-			</table>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>Usage of
-						<code>EOS_LSA_Latest</code>
-						for leaderboards can result in volatile leaderboard entries. For example, consider a
-						<code>Latest</code>
-						stat which tracks the number of objects collected for a level. While on a previous run, a player can perform well enough to be placed on a leaderboard for this stat. A subsequent play through of the level could result in worse performance and result in the player being removed from the leaderboard. In general, we do not encourage leaderboard usage with status defined with
-						<code>EOS_LSA_Latest</code>
-						unless using it to control their stat values/aggregations directly.  For example, a leaderboard containing a custom computed ELO by player. When using LATEST leaderboards it is important note that:</p>
-					<ol>
-						<li>Leaderboards only retain aggregations for the top 2000 entries and only allow the top 1000 rankings to be viewable.  Values associated with players ranked 2001 and up are not retained by the system.  In order for such a player to be ranked onto a leaderboard, a stat must be emitted (or remitted) for that user.</li>
-						<li>LATEST stat values which vary wildly between emissions result in poor player experiences relative to (1).  The ideal stat is one whose value is monotonic per player over time.</li>
-					</ol>
-				</div>
-			</div>
-			<p>In addition, you will need to provide the name of the stat that the leaderboard will use as the score value.</p>
 			<div>
 				<h2 id="accessing-leaderboard-information">Accessing Leaderboard Information</h2>
 			</div>
@@ -501,9 +442,6 @@
 					</li>
 					<li>
 						<a href="#stats-and-milestones">Stats and Milestones</a>
-					</li>
-					<li>
-						<a href="#scoring-methods">Scoring Methods</a>
 					</li>
 					<li>
 						<a href="#accessing-leaderboard-information">Accessing Leaderboard Information</a>

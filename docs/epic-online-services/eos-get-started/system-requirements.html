@@ -20,192 +20,207 @@
 	</section>
 	<section>
 		<section>
+			<p>Each platform you develop your game for has specific system requirements.</p>
+			<p>There are two sets of system requirements:</p>
+			<ul>
+				<li>Development environment</li>
+				<li>Game client</li>
+			</ul>
+			<p>Additional information:</p>
+			<ul>
+				<li>For details of the platforms and platform versions which the Epic Online Services (EOS) SDK supports, see the
+					<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+					documentation.</li>
+				<li>For information on how to use the EOS SDK in C#, see the
+					<a href="/docs/epic-online-services/eos-get-started/eossdkc-sharp-getting-started">EOS SDK in C#</a>
+					documentation.</li>
+				<li>For information on the hosts EOS APIs must connect to, see the
+					<a href="/docs/epic-online-services/eos-get-started/firewall-considerations">Firewall Considerations</a>
+					documentation.</li>
+			</ul>
 			<div>
-				<h2 id="eos-sdk-dependencies">EOS SDK Dependencies</h2>
+				<h2 id="development-environment">Development Environment</h2>
 			</div>
-			<p>These subsections describe the operating systems and supporting software required to develop and ship your game on each platform supported. For a list of the platforms and platform versions which the Epic Online Services (EOS) SDK supports, see the
-				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
-				documentation.</p>
+			<p>To integrate Epic Online Services (EOS) into your game with the EOS SDK, your PC, mobile, or console device must meet the minimum hardware and software requirements listed below.</p>
 			<div>
-				<h3 id="sdk-samples">SDK Samples</h3>
+				<h3 id="pc">PC</h3>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development (Samples)</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Installed Software</td>
-						<td>Visual Studio 2017 or higher</td>
-					</tr>
-				</tbody>
-			</table>
+			<ul>
+				<li>Windows
+					<!-- -->
+					<ul>
+						<li>Windows 7 and higher</li>
+					</ul>
+				</li>
+				<li>macOS
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>Intel development: macOS Catalina (10.15.4) or later</li>
+							</ul>
+						</li>
+						<li>Installed Software
+							<!-- -->
+							<ul>
+								<li>Xcode 12.4 or later</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Linux
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>Any modern Linux distribution that supports glibc version 2.17 or higher.</li>
+							</ul>
+						</li>
+						<li>Installed Software
+							<!-- -->
+							<ul>
+								<li>gcc or Clang compilers (other compilers may work, but have not been tested)</li>
+								<li>cmake 2.6 or higher</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
 			<div>
-				<h3 id="windows">Windows</h3>
+				<h3 id="mobile">Mobile</h3>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Shipping</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>Windows 7 or higher</td>
-					</tr>
-					<tr>
-						<td>EOS SDK</td>
-						<td>EOS SDK binary (DLL)</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>The latest
-							<a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">Microsoft Visual C++ Redistributable</a>; the application requires
-							<code>MSVCP140.dll</code>.</td>
-					</tr>
-				</tbody>
-			</table>
+			<ul>
+				<li>iOS
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>iOS 11 or higher (12 or higher recommended)</li>
+							</ul>
+						</li>
+						<li>Installed Software
+							<!-- -->
+							<ul>
+								<li>For iOS 11: SafariServices framework</li>
+								<li>For iOS 12 or higher: AuthenticationServices framework</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Android
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>Android OS 6.0 or higher (SDK level 23)</li>
+							</ul>
+						</li>
+						<li>Installed Software
+							<!-- -->
+							<ul>
+								<li>ARM v7 or ARM v8-a</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
 			<div>
-				<h3 id="linux">Linux</h3>
+				<h3 id="console">Console</h3>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>Any recent x86 or x64 distribution</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>gcc or Clang compilers
-							<div>Other compilers may work, but have not been tested.</div>
-						</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>cmake 2.6 or higher</td>
-					</tr>
-				</tbody>
-			</table>
+			<p>See the EOS SDK Development Requirements section of each console's documentation for more information.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			<div>
-				<h3 id="mac">Mac</h3>
+				<h2 id="game-client">Game Client</h2>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development (Recommended)</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>macOS Catalina (10.15.4) or higher</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>Xcode 12.4 or higher</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th>Shipping</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>macOS Sierra (10.12) or higher (Intel-based Macs)  macOS Big Sur (11.0) or higher (Apple silicon Macs)</td>
-					</tr>
-				</tbody>
-			</table>
+			<p>Your game client requires the minimum hardware and software settings listed below to run on the corresponding platform. These are the base requirements for running the EOS SDK. Ultimately, the requirements depend on the requirements of your game.</p>
 			<div>
-				<h3 id="ios">iOS</h3>
+				<h3 id="pc-1">PC</h3>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>iOS 11 or higher - 12 or higher recommended</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>AuthenticationServices framework for iOS 12 and higher</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>SafariServices framework for iOS 11</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th>Shipping</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>iOS 11 or higher - 12 or higher recommended</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>AuthenticationServices framework for iOS 12 or higher</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>SafariServices framework for iOS 11</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<!-- -->
+			<ul>
+				<li>Windows
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>Windows 7 and higher</li>
+							</ul>
+						</li>
+						<li>EOS SDK
+							<!-- -->
+							<ul>
+								<li>EOS SDK binary (DLL)</li>
+							</ul>
+						</li>
+						<li>Installed Software
+							<!-- -->
+							<ul>
+								<li>The latest Microsoft Visual C++ Redistributable; the application requires MSVCP140.dll.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>macOS
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>Intel: macOS Sierra (10.12) or higher</li>
+								<li>Apple Silicon: macOS Big Sur (11.0) or higher</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Linux
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>Any modern Linux distribution that supports glibc version 2.17 or higher.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
 			<div>
-				<h3 id="android">Android</h3>
+				<h3 id="mobile-1">Mobile</h3>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>Android OS 6.0 or higher (SDK level 23)</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>ARM v7 or ARM v8-a
-							<div>ARM v7 has not been tested with the latest versions</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<!-- -->
+			<ul>
+				<li>iOS
+					<!-- -->
+					<ul>
+						<li>Operating System
+							<!-- -->
+							<ul>
+								<li>OS 11 or higher (12 or higher recommended)</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Android
+					<!-- -->
+					<ul>
+						<li>See the
+							<a href="/docs/epic-online-services/platforms/android#supported-android-release-versions">supported Android Release Versions</a>
+							section of the EOS SDK for Android documentation.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="console-1">Console</h3>
+			</div>
+			<p>See the supported release versions table in each console's documentation for more information.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			<div id="tag_list">
 				<a href="/docs/site-map">System Requirements</a>
 				<a href="/docs/site-map">
@@ -217,25 +232,28 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#eos-sdk-dependencies">EOS SDK Dependencies</a>
+						<a href="#development-environment">Development Environment</a>
 					</li>
 					<li>
-						<a href="#sdk-samples">SDK Samples</a>
+						<a href="#pc">PC</a>
 					</li>
 					<li>
-						<a href="#windows">Windows</a>
+						<a href="#mobile">Mobile</a>
 					</li>
 					<li>
-						<a href="#linux">Linux</a>
+						<a href="#console">Console</a>
 					</li>
 					<li>
-						<a href="#mac">Mac</a>
+						<a href="#game-client">Game Client</a>
 					</li>
 					<li>
-						<a href="#ios">iOS</a>
+						<a href="#pc-1">PC</a>
 					</li>
 					<li>
-						<a href="#android">Android</a>
+						<a href="#mobile-1">Mobile</a>
+					</li>
+					<li>
+						<a href="#console-1">Console</a>
 					</li>
 				</ul>
 			</div>

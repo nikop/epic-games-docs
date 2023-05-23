@@ -90,7 +90,14 @@
 			<p>2. Start the game without the anti-cheat bootstrapper.</p>
 			<p>Success criteria:</p>
 			<ul>
-				<li>Your game may function normally, or may display a warning/error message if you prefer.</li>
+				<li>Your game may function normally, or may display a warning/error message if you prefer.
+					<!-- -->
+					<div>
+						<p>
+							<code>EOS_Platform_GetAntiCheatClientInterface</code>
+							returns a nullptr if someone starts the game without the anti-cheat bootstrapper. You can use this to determine when to display a warning/error message.</p>
+					</div>
+				</li>
 				<li>However, the player should not be able to join protected multiplayer game sessions with other players. Anti-cheat authentication should fail and an appropriate message should display.</li>
 			</ul>
 			<p>3. Start the game with the anti-cheat bootstrapper.</p>

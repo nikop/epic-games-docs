@@ -14,7 +14,7 @@
 			<h1>Manage Offers</h1>
 			<h2>Create and manage product offers</h2>
 			<div>
-				<div>16 mins to read</div>
+				<div>18 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -105,17 +105,17 @@
 						</li>
 					</ul>
 				</li>
-				<li>In the Offer Type section, select the appropriate category for your offer. This category cannot be changed once the offer has been created.</li>
-				<li>Review your offer information, then click
-					<strong>Create</strong>.
+				<li>In the Offer Type section, select the appropriate category for your offer. This category cannot be changed once the offer has been created.
 					<!-- -->
 					<ul>
 						<li>
-							<strong>Note</strong>: Before you can create an
-							<em>Edition</em>
-							type offer, you are prompted to select a base offer to associate with the Edition.</li>
+							<strong>Note</strong>: If you select
+							<em>Edition</em>, you must then select a base offer for that edition. The base offer can be your base product offer or another edition.  For more information, review
+							<a href="/docs/en-US#included-offers">Included Offers</a>.</li>
 					</ul>
 				</li>
+				<li>Review your offer information, then click
+					<strong>Create</strong>.</li>
 				<li>On the Offer Details screen, complete the offer by providing relevant
 					<a href="/docs/en-US#understanding-offer-details">required and optional information</a>.</li>
 			</ol>
@@ -426,7 +426,38 @@
 			</div>
 			<p>Certain types of offers, such as Editions and Season Passes, support the ability to include sub-offers. When a user purchases an offer that includes one or more sub-offers, they receive entitlements for
 				<strong>all</strong>
-				included offers upon completing their purchase. For example, an Edition offer must have your base product offer (or another Edition-type offer) set as its base offer. You can then add up to five additional offers for items such as season passes, add-ons, or digital extras to the Edition as sub-offers. When a user purchases the Edition offer, they receive both your base product offer and your selected sub-offers.</p>
+				included offers upon completing their purchase. The Included Offers section is required for Edition-type offers.</p>
+			<p>For example, when you create an Edition-type offer, you first select a base offer. This base offer can be your base product offer or another edition you previously created. Up to five sub-offers can also be added to that edition for items such as season passes, add-ons, or digital extras. When a user purchases your edition, they receive both the base offer and any selected sub-offers.</p>
+			<p>
+				<strong>Editions - Additional Information</strong>
+			</p>
+			<p>The primary component of an Edition-type offer is the base offer. The base offer can be your base product offer, which grants users access to your primary product. It can also be another edition you have previously created, which grants users access to all offers included in that edition.</p>
+			<p>At times, you may need to make changes to an offer being used as the base offer for an edition. For example, you want to update the artifact for your base product or add additional sub-offers to a base edition. If you push the updated base offer to the Stage sandbox along with the associated edition, those updates are reflected in both offers.</p>
+			<p>However, there may be scenarios where you need to push updates to your base offer but are not yet ready to promote your edition to the Stage sandbox. For example, you need to update your base product, which is already available for purchase on the storefront, but your edition has not yet been released.</p>
+			<p>In these situations, you must unlink the base offer from your edition prior to making any updates. Once you update the base offer and push it to the Stage sandbox, you can relink the base offer to your edition. This process ensures updates to the base offer are also reflected in the edition. Otherwise, the associated edition may be linked to an outdated version of the base offer. Note that this process is only necessary for editions within the Dev sandbox.</p>
+			<p>To unlink a base offer from an edition, follow the steps below. You must unlink the base offer prior to making updates to that offer.</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>
+					and select the
+					<strong>Dev</strong>
+					sandbox.</li>
+				<li>In the table, click the name of an edition that includes the base offer you wish to update.</li>
+				<li>On the Offer Details screen, click
+					<strong>Included Offers</strong>.</li>
+				<li>In the Base Offer section, click the
+					<strong>Unlink (chainlink) icon</strong>
+					to the left of the offer name. Then, click
+					<strong>Save</strong>.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: If the base offer has already been unlinked, the chainlink icon displays with a line through it. Clicking this icon relinks the base offer to the edition.</li>
+					</ul>
+				</li>
+				<li>Repeat this process as needed for each edition associated with the base offer requiring an update.</li>
+			</ol>
+			<p>After the base offer is unlinked, you can update the base offer as needed and push those changes to the Stage sandbox. Once complete, relink the base offer to your editions through the same process outlined above.</p>
 			<div>
 				<h4 id="cloud-save">Cloud Save</h4>
 			</div>

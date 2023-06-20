@@ -14,7 +14,7 @@
 			<h1>Identity Provider Management</h1>
 			<h2>Overview of player identity management in the Developer Portal.</h2>
 			<div>
-				<div>5 mins to read</div>
+				<div>6 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -50,7 +50,7 @@
 					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
 						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
 						<noscript>
-							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" sizes="100vw" srcset="null/game-services/connect/connect-account-flow.png 640w, null/game-services/connect/connect-account-flow.png 750w, null/game-services/connect/connect-account-flow.png 828w, null/game-services/connect/connect-account-flow.png 1080w, null/game-services/connect/connect-account-flow.png 1200w, null/game-services/connect/connect-account-flow.png 1920w, null/game-services/connect/connect-account-flow.png 2048w, null/game-services/connect/connect-account-flow.png 3840w" src="null/game-services/connect/connect-account-flow.png">
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" sizes="100vw" srcset=" 640w,  750w,  828w,  1080w,  1200w,  1920w,  2048w,  3840w" src="">
 						</noscript>
 					</span>
 				</div>
@@ -69,6 +69,54 @@
 				<!-- -->account
 				<!-- --> on the current platform, create a new account for that game on that platform, or log in using another account that they have previously used to play the product.</p>
 			<p>If the user chooses to log in with an existing account from another identity provider, your product can ask the user if they want to link the two accounts. After this initial event, EOS remembers which account to use when the user plays this product, and does not prompt the user again.</p>
+			<div>
+				<h3 id="user-data">User Data</h3>
+			</div>
+			<p>The EOS Connect authentication backend of Game Services stores the following data about your players:</p>
+			<p>
+				<strong>Data collected about external user identities</strong>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Usage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Identity Provider ID</td>
+						<td>Identifies the external user identity provider uniquely by name.</td>
+						<td>A unique string. For example, this could be epicgames, steam, uplay, psn, nintendo, or xbl.</td>
+					</tr>
+					<tr>
+						<td>Identity Provider Environment</td>
+						<td>Identifies the environment to which the account is scoped for, if applicable.</td>
+						<td>A unique string within the scope of an identity provider.</td>
+					</tr>
+					<tr>
+						<td>Account ID</td>
+						<td>Identifies a user uniquely within the external user account system.</td>
+						<td>An arbitrary string. For example, this could be the user's Epic Account ID or Steam ID.</td>
+					</tr>
+					<tr>
+						<td>Display Name</td>
+						<td>The user's last seen platform display name that is shown to other players in-game. This is updated each time the user authenticates with EOS Connect.</td>
+						<td>This is the name that is used for player leaderboards. For example, the top 10 best scorers for EOS Leaderboards game service and potentially other future EOS game services.</td>
+					</tr>
+					<tr>
+						<td>Time Last Seen</td>
+						<td>Timestamp of when the user last authenticated with EOS Connect.</td>
+						<td>This is useful for informational purposes and to determine the user's current connected platform.</td>
+					</tr>
+					<tr>
+						<td>Device Model</td>
+						<td>Used only with EOS Device ID feature. This is an application-defined freeform text description intended to identify the device type and model.</td>
+						<td>It can be used to help customer support distinguish between different devices that the user may have linked with.</td>
+					</tr>
+				</tbody>
+			</table>
 			<div>
 				<h3 id="configuring-identity-providers">Configuring Identity Providers</h3>
 			</div>
@@ -195,6 +243,9 @@
 			<div>Contents</div>
 			<div>
 				<ul>
+					<li>
+						<a href="#user-data">User Data</a>
+					</li>
 					<li>
 						<a href="#configuring-identity-providers">Configuring Identity Providers</a>
 					</li>

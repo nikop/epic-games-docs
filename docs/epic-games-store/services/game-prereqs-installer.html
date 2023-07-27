@@ -64,7 +64,7 @@
 			<div>
 				<h2 id="epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</h2>
 			</div>
-			<p>If you cannot use app-local deployment, you can have the Epic Games launcher run an installer upon users' first launch of your product. As the Epic Games launcher records any installers that have already been completed for a product, users only see the installation process upon first access or when new dependencies are included.</p>
+			<p>If you cannot use app-local deployment, you can have the Epic Games launcher run an installer upon users' first launch of your product. As the Epic Games launcher records whether the installer has already been completed for a product, users only see the installation process upon first access or when new updates have been made.</p>
 			<p>While this option allows you to run a full installer, there are considerable disadvantages to using this method. Users may decline, overlook, or misunderstand the elevation prompt when offered, and any non-zero return code from the prerequisite installer, aside from 1638 and 3010, can cause issues. Additionally, installing Visual Studio DLLs through this method can lead to failures that prevent your application from running. For more information, review the Microsoft documentation on
 				<a href="https://docs.microsoft.com/en-us/cpp/windows/choosing-a-deployment-method?view=msvc-160">Choosing a Deployment Method</a>.</p>
 			<div>
@@ -84,14 +84,8 @@
 					</pre>
 				</section>
 			</div>
-			<p>This configuration assumes the following:</p>
-			<ul>
-				<li>Your prerequisite installer lives in a Binaries\Windows subdirectory.</li>
-				<li>The prerequisites have a human-readable name.</li>
-				<li>The prerequisite IDs determine whether or not the installer launches.</li>
-			</ul>
-			<p>This method can also trigger another install if a subsequent update to your game adds new prerequisites. In this case, add a new unique ID to the list of prerequisites. Each ID is unique for each prerequisite within a comma-delimited list (no spaces) as a way to share prerequisites across multiple games.</p>
-			<p>When a prerequisite is added, the launcher recognizes the new ID is not installed and relaunches your installer. Once the installer completes successfully, the launcher marks those IDs as installed on the local machine and will not run the installer again.</p>
+			<p>The prerequisite ID is an optional parameter, it is used to control if a prerequisite installer is to run again. Without the prerequisite ID, the installer will always run again if the file has changed. Using the prerequisite ID, the installer will only get called again for an update if the prerequisite ID set changes. This can be triggered by adding, removing, or changing an existing ID.</p>
+			<p>The launcher can only be assigned a single prereq installer. That installer could be as simple as a batch script exe to run additional installers, but with the same disadvantages mentioned previously.</p>
 			<div>
 				<h2 id="batch-script">Batch Script</h2>
 			</div>

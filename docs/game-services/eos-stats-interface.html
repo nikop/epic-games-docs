@@ -50,7 +50,9 @@
 				to ingest stats inside the application, which will submit them to the
 				<strong>EOS backend</strong>.</p>
 			<div>
-				<p>Once a stat has been ingested the update on the backend may not take effect immediately, as it takes time to both submit and process the stat. As such, achievements using stats may also take a while to unlock.</p>
+				<p>After a stat has been ingested, the update on the backend may not take effect immediately, as it takes time to both submit and process the stat. As such, achievements using stats may also take a while to unlock. Moreover, ingesting does not guarantee successful processing. For example, if an incorrect
+					<code>StatName</code>
+					value is provided in the ingest call, processing may still fail.</p>
 			</div>
 			<p>The parameters taken by the
 				<code>EOS_Stats_IngestStat</code>

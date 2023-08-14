@@ -32,9 +32,9 @@
 					and
 					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#client-credentials-and-policy-configuration">client policy type</a>.</li>
 				<li>Configure your
-					<a href="/docs/en-US#client-module-setup-and-updates">client module</a>,
-					<a href="/docs/en-US#anti-cheat-integrity-tool-configuration">anti-cheat integrity tool</a>, and
-					<a href="/docs/en-US#configure-the-anti-cheat-bootstrapper-executable">Anti-Cheat Bootstrapper executable</a>.</li>
+					<a href="#client-module-setup-and-updates">client module</a>,
+					<a href="#anti-cheat-integrity-tool-configuration">anti-cheat integrity tool</a>, and
+					<a href="#configure-the-anti-cheat-bootstrapper-executable">Anti-Cheat Bootstrapper executable</a>.</li>
 				<li>(<em>Windows Only</em>) Configure the
 					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#windows-service-installer">Windows Service Installer</a>.</li>
 				<li>Integrate the Anti-Cheat interfaces with your game code:
@@ -43,12 +43,12 @@
 						<li>Establish user identity with the
 							<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>.</li>
 						<li>Register callbacks for
-							<a href="/docs/en-US#client-server-mode">Client-Server</a>
+							<a href="#client-server-mode">Client-Server</a>
 							or
-							<a href="/docs/en-US#peer-to-peer-mode">Peer-to-Peer</a>
+							<a href="#peer-to-peer-mode">Peer-to-Peer</a>
 							mode.</li>
 						<li>Set up
-							<a href="/docs/en-US#protected-game-session-notifications">session notifications</a>.</li>
+							<a href="#protected-game-session-notifications">session notifications</a>.</li>
 					</ol>
 				</li>
 				<li>Confirm the Anti-Cheat interfaces are working properly by going through the
@@ -72,7 +72,7 @@
 					<strong>System</strong>
 					(Windows, Linux, or macOS) from the dropdown menu.</li>
 				<li>(<em>For updating and reverting</em>)
-					<a href="/docs/en-US#testing-a-module">Test</a>
+					<a href="#testing-a-module">Test</a>
 					that the module works with your game as expected.</li>
 				<li>Select
 					<strong>Activate Build</strong>
@@ -116,7 +116,7 @@
 				</li>
 				<li>Start your game as normal with the anti-cheat bootstrapper.</li>
 				<li>Locate the anti-cheat bootstrapper’s
-					<a href="/docs/en-US#logs">log file</a>.</li>
+					<a href="#logs">log file</a>.</li>
 				<li>Verify that the anti-cheat bootstrapper’s log file shows the expected timestamp and indicates that the URL in the configuration file was used.</li>
 				<li>Run the game through an appropriate testing procedure selected for your game. At minimum, you should be able to successfully connect to a protected multiplayer game session and use any critical functionality like in-game purchasing overlays.</li>
 				<li>Remove the .eac configuration file when finished so that your test system aligns with your live environment. This .eac file should never be shipped as part of your game distribution.</li>
@@ -128,7 +128,7 @@
 			</div>
 			<p>You may need to revert to a previous anti-cheat module if you suspect a recent update is causing problems in your game.</p>
 			<p>Follow the same instructions as you would for an
-				<a href="/docs/en-US#set-up-update-and-revert-your-client-module">update</a>, but select a previous version instead of the most recent.</p>
+				<a href="#set-up-update-and-revert-your-client-module">update</a>, but select a previous version instead of the most recent.</p>
 			<div role="alert">
 				<div></div>
 				<div>
@@ -143,7 +143,7 @@
 				indicates whether the anti-cheat client module and protection are being delivered through the anti-cheat bootstrapper when each player starts the game.
 				<strong>Server Kicks</strong>
 				indicates whether the anti-cheat protection is being enforced in protected game sessions and players who are not running the anti-cheat or have a violation will be marked for removal through the appropriate
-				<a href="/docs/en-US#launch-configuration">SDK callback</a>.</p>
+				<a href="#launch-configuration">SDK callback</a>.</p>
 			<p>Clicking the Configure button will allow you to choose between three different configuration options.</p>
 			<ul>
 				<li>
@@ -162,7 +162,7 @@
 					<p>Disable all</p>
 					<ul>
 						<li>This configuration may be used temporarily in case of emergency such as a crash related to anti-cheat affecting many players that cannot be solved by
-							<a href="/docs/en-US#set-up-update-and-revert-your-client-module">reverting</a>
+							<a href="#set-up-update-and-revert-your-client-module">reverting</a>
 							to an earlier anti-cheat client module. The anti-cheat client module will not be delivered at game start and its presence will not be enforced during protected game sessions. Reverting to an earlier anti-cheat client module is always preferable instead if possible. If you use this configuration setting you must enable the Client Protection only for a transition period of several hours before returning to the Enable all state to avoid large numbers of players being suddenly removed from protected game sessions.</li>
 					</ul>
 				</li>
@@ -380,7 +380,7 @@
 				</li>
 			</ol>
 			<p>Should you encounter any issues with either required or optional configuration the bootstrapper’s
-				<a href="/docs/en-US#logs">log file</a>
+				<a href="#logs">log file</a>
 				is always the best reference.</p>
 			<div>
 				<h3 id="using-multiple-bootstrapper-configuration-files">Using Multiple Bootstrapper Configuration Files</h3>
@@ -404,7 +404,7 @@
 			</div>
 			<p>The Anti-Cheat Client has a mode-agnostic callback that informs the game process on any anti-cheat client integrity violations which have occurred.</p>
 			<p>To register a callback when the anti-cheat has violation information to provide for the game process, use
-				<code>EOS_AntiCheatClient_AddNotifyPeerAuthStatusChanged</code>.</p>
+				<code>EOS_AntiCheatClient_AddNotifyClientIntegrityViolated</code>.</p>
 			<p>The messages provided to the callback must be displayed to the player in the provided format. This helps them in understanding why they may be unable to join online multiplayer sessions. The provided message is always provided in a localized format.</p>
 			<p>The functionality does not expose information to the users that they could leverage to gain advantage in these protected sessions.</p>
 			<div>
@@ -604,10 +604,10 @@
 				<h4 id="operational-issues">Operational Issues</h4>
 			</div>
 			<p>If a new anti-cheat client module was activated and issues appeared around the same time,
-				<a href="/docs/en-US#set-up-update-and-revert-your-client-module">revert</a>
+				<a href="#set-up-update-and-revert-your-client-module">revert</a>
 				to the previously used client module.</p>
 			<p>If excessive numbers of players are suddenly being removed from protected game sessions due to anti-cheat violations, change the
-				<a href="/docs/en-US#anti-cheat-service-configuration-in-developer-portal">Anti-Cheat Service Configuration</a>
+				<a href="#anti-cheat-service-configuration-in-developer-portal">Anti-Cheat Service Configuration</a>
 				to “Enable Client protection while Server kicks is disabled” to unblock players and provide more time for troubleshooting.</p>
 			<div>
 				<h4 id="logs">Logs</h4>
@@ -706,7 +706,7 @@
 				<h5 id="nullclient">NullClient</h5>
 			</div>
 			<p>This error means that the Anti-Cheat Bootstrapper was unable to load the anti-cheat module and started in failsafe “null client” mode instead. See
-				<a href="/docs/en-US#anti-cheat-bootstrapper">Anti-Cheat Bootstrapper logs</a>
+				<a href="#anti-cheat-bootstrapper">Anti-Cheat Bootstrapper logs</a>
 				on the affected machine for more details. The most common causes for this are:</p>
 			<ul>
 				<li>The Anti-Cheat Bootstrapper was unable to download the anti-cheat module at game start because of an internet connection problem or firewall.</li>
@@ -721,7 +721,7 @@
 			<p>This error means that an anti-cheat client violation error occurred on the corresponding game client. Full details are provided by either the
 				<code>ClientIntegrityViolated`` callback or the EOS_AntiCheatClient_PollStatus</code>
 				function.  See
-				<a href="/docs/en-US#during-a-protected-game-session">Protected Game Session Notifications</a>.</p>
+				<a href="#during-a-protected-game-session">Protected Game Session Notifications</a>.</p>
 			<div>
 				<h5 id="temporarycooldown">TemporaryCooldown</h5>
 			</div>

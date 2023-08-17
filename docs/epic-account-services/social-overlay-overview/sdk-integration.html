@@ -14,20 +14,12 @@
 			<h1>SDK Integration</h1>
 			<h2>Accessing the EOS social overlay and friends list from in-game</h2>
 			<div>
-				<div>9 mins to read</div>
+				<div>11 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>If you plan to integrate Epic Account Services with your game, and you want to target console platforms, please contact us at
-						<a href="mailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
-						to coordinate a release plan.</p>
-				</div>
-			</div>
 			<div>
 				<h1 id="overview">Overview</h1>
 			</div>
@@ -87,6 +79,12 @@
 					<code>EOS_PF_DISABLE_SOCIAL_OVERLAY</code>
 					- This flag should be set whenever you want to explicitly disable only the social features of the overlay functionality.</li>
 			</ol>
+			<div>
+				<h3 id="use-the-social-overlay-with-the-eos-sdk-for-xbox">Use the Social Overlay with the EOS SDK for Xbox</h3>
+			</div>
+			<p>If you want to use the Social Overlay in conjunction with the EOS SDK for Xbox GDK or the EOS SDK for Xbox XDK, then your application must provide the graphics context to the overlay renderer. For more information, see the
+				<a href="/docs/epic-online-services/platforms/xbox">EOS SDK for Xbox</a>
+				documentation.</p>
 			<div>
 				<h2 id="compatible-rendering-apis-and-operating-systems">Compatible Rendering APIs and Operating Systems</h2>
 			</div>
@@ -276,6 +274,21 @@
 				should provide some game context to other players. The string provided to
 				<code>EOS_PresenceModification_SetRawRichText</code>
 				will be shared as is.  It will be displayed as part of a friends status within the Friends Page.</p>
+			<p>For more console-specific game presence information, see the console documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/platforms/switch#game-presence-and-the-social-overlay">Nintendo Switch</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-4#game-presence-and-the-social-overlay">PlayStation 4</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-5#game-presence-and-the-social-overlay">PlayStation 5</a>
+				</li>
+			</ul>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			<div>
 				<h2 id="using-game-management-in-the-friends-list">Using Game Management in the Friends List</h2>
 			</div>
@@ -429,6 +442,49 @@
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay Overview</a>.</p>
 			<p>If an achievement is marked as hidden then the locked icon will be used but the displayed text will be provided by the
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay page</a>.  If an icon is not provided within the dev portal, then a default icon will be provided by the Social Overlay page.</p>
+			<div>
+				<h2 id="faq">FAQ</h2>
+			</div>
+			<p>
+				<strong>Q: Does it matter where I place the EOS SDK's dynamic library binaries?</strong>
+			</p>
+			<p>You must place all of the EOS SDK's dynamic library binaries in the same directory. The EOS SDK automatically loads these binaries. See the
+				<a href="/docs/epic-online-services/platforms/ps-4#linking-eos-on-playstation-4">EOS SDK for PlayStation 4</a>
+				and
+				<a href="/docs/epic-online-services/platforms/ps-5#linking-eos-on-playstation-5">EOS SDK for PlayStation 5</a>
+				documentation for guidance on PlayStation.</p>
+			<p>
+				<strong>Q: What logging level of EOS SDK do you recommend I use during integration?</strong>
+			</p>
+			<p>Use the Verbose logging level of the EOS SDK during early integration to catch all details that can help troubleshoot any errors. Include a full log file when reporting issues.</p>
+			<p>
+				<strong>Q: How do I handle game input while the EOS Overlay is open?</strong>
+			</p>
+			<p>The game forwards controller input events to the EOS SDK through the
+				<code>EOS_UI_ReportInputState</code>
+				API. Your game must let the EOS SDK handle input exclusively when the Overlay is visible. This prevents controller input navigating simultaneously within the Overlay and the game's own menus. Your game should translate analog stick movement to corresponding D-Pad Up/Down/Left/Right buttons. The button state should be determined as an union. See the example code snippet below:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>Q: Does the GPU fully process command buffers data returned via
+					<code>SubmitGraphicsCommands</code>
+					callbacks before it gets reclaimed?</strong>
+			</p>
+			<p>Yes, there is a lifetime guarantee on the command buffers returned via
+				<code>SubmitGraphicsCommands</code>
+				callbacks. The command buffers stay around until the GPU processes them. The SDK injects synchronization primitives into the command buffers and manages their lifetime internally. The only pitfall is if you continue to call
+				<code>EOS_UI_PrePresent</code>
+				and don't send the synchronization primitives to the GPU. If you do this, at some point the process can run out of buffers.</p>
 			<div id="tag_list">
 				<a href="/docs/site-map">Overlay</a>
 				<a href="/docs/site-map">
@@ -451,6 +507,9 @@
 					</li>
 					<li>
 						<a href="#sdk-initialization">SDK Initialization</a>
+					</li>
+					<li>
+						<a href="#use-the-social-overlay-with-the-eos-sdk-for-xbox">Use the Social Overlay with the EOS SDK for Xbox</a>
 					</li>
 					<li>
 						<a href="#compatible-rendering-apis-and-operating-systems">Compatible Rendering APIs and Operating Systems</a>
@@ -523,6 +582,9 @@
 					</li>
 					<li>
 						<a href="#supporting-achievements">Supporting Achievements</a>
+					</li>
+					<li>
+						<a href="#faq">FAQ</a>
 					</li>
 				</ul>
 			</div>

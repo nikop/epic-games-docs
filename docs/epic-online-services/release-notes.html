@@ -241,8 +241,8 @@
 				<li>
 					<p>
 						<strong>New</strong>: Added a new API,
-						<code>QueryOwnershipBySandboxIds</code>, to request ownership by sandbox id. Developers can now use the
-						<code>QueryOwnershipBySandboxIds</code>
+						<code>EOS_Ecom_QueryOwnershipBySandboxIds</code>, to request ownership by sandbox id. Developers can now use the
+						<code>EOS_Ecom_QueryOwnershipBySandboxIds</code>
 						API to query all owned items for a given set of sandbox IDs.</p>
 				</li>
 				<li>
@@ -273,10 +273,6 @@
 						<strong>New</strong>: Added additional logging to functions in the API in C when the invalid parameters, that are
 						<code>null</code>
 						or empty, are passed in.</p>
-				</li>
-				<li>
-					<p>
-						<strong>New</strong>: Previously, when an HTTP request without retry domains failed because connection unavailability, jitter was applied which resulted in long retry intervals. This meant that callback handlers received notification of connection loss more than a minute after the actual connection loss. This is no longer the case and callbacks should receive connection loss notifications within a minute of actual connection loss.</p>
 				</li>
 				<li>
 					<p>
@@ -322,7 +318,10 @@
 				</li>
 				<li>
 					<p>
-						<strong>New</strong>: Added support for application events for mobile and desktop platforms.</p>
+						<strong>New</strong>: You can now specify how the SDK handles RTC rooms when the application switches between background and foreground states by using the
+						<code>BackgroundMode</code>
+						field of
+						<code>EOS_Platform_RTCOptions</code>.</p>
 				</li>
 				<li>
 					<p>
@@ -379,6 +378,10 @@
 						<code>EOS_Platform_Options::IntegratedPlatformOptionsContainerHandle</code>
 						to correctly describe the behavior when null.</p>
 				</li>
+				<li>
+					<p>
+						<strong>Bug fix</strong>: Fixed an issue where some internal HTTP requests were misconfigured, and could take much longer to retry than intended. The affected delegates now report connection related issues results much sooner.</p>
+				</li>
 			</ul>
 			<div>
 				<h5 id="eos-sdk-in-c">EOS SDK in C#</h5>
@@ -406,8 +409,8 @@
 			</div>
 			<ul>
 				<li>
-					<strong>New</strong>: We have added the following functions to the Friends Interface to query for blocked players:
-					<!-- -->
+					<p>
+						<strong>New</strong>: We have added the following functions to the Friends Interface to query for blocked players:</p>
 					<ul>
 						<li>
 							<code>EOS_Friends_GetBlockedUsersCount</code>
@@ -422,6 +425,10 @@
 							<code>EOS_Friends_RemoveNotifyBlockedUsersUpdate</code>
 						</li>
 					</ul>
+					<p>
+						<strong>Note</strong>: Calling
+						<code>EOS_Friends_QueryFriends</code>
+						will now additionally retrieve the list of EOS blocked players.</p>
 				</li>
 			</ul>
 			<div>
@@ -651,7 +658,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed an intermittent crash that could happen when the system cannot allocate resources to manage audio devices.</li>
 				<li>
-					<strong>Bug fix</strong>: Fixed incorrect local AudioStatus when a player enters a room where everyone else is blocked.</li>
+					<strong>Bug fix</strong>: Fixed incorrect local
+					<code>AudioStatus</code>
+					when a player enters a room where everyone else is blocked.</li>
 				<li>
 					<strong>Bug Fix</strong>: Fixed a resource leak when a player leaves the room through internal methods.</li>
 			</ul>
@@ -726,6 +735,117 @@
 				<li>
 					<strong>Deprecated</strong>: We deprecated the unused define
 					<code>EOS_PLAYERDATASTORAGE_FILE_MAX_SIZE_BYTES</code>.</li>
+			</ul>
+			<div>
+				<h5 id="voice-1">Voice</h5>
+			</div>
+			<ul>
+				<li>
+					<p>
+						<strong>Deprecated</strong>: We deprecated and replaced the following methods and structs:</p>
+					<ul>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-devices-count">
+								<code>EOS_RTCAudio_GetAudioInputDevicesCount</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-query-input-devices-information">
+								<code>EOS_RTCAudio_QueryInputDevicesInformation</code>
+							</a>
+							and
+							<a href="/docs/api-ref/functions/eos-rtc-audio-get-input-devices-count">
+								<code>EOS_RTCAudio_GetInputDevicesCount</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-device-by-index">
+								<code>EOS_RTCAudio_GetAudioInputDeviceByIndex</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-query-input-devices-information">
+								<code>EOS_RTCAudio_QueryInputDevicesInformation</code>
+							</a>,
+							<a href="/docs/api-ref/functions/eos-rtc-audio-copy-input-device-information-by-index">
+								<code>EOS_RTCAudio_CopyInputDeviceInformationByIndex</code>
+							</a>
+							and
+							<a href="/docs/api-ref/functions/eos-rtc-audio-input-device-information-release">
+								<code>EOS_RTCAudio_InputDeviceInformation_Release</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-set-audio-input-settings">
+								<code>EOS_RTCAudio_SetAudioInputSettings</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-set-input-device-settings">
+								<code>EOS_RTCAudio_SetInputDeviceSettings</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-devices-count">
+								<code>EOS_RTCAudio_GetAudioOutputDevicesCount</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-query-output-devices-information">
+								<code>EOS_RTCAudio_QueryOutputDevicesInformation</code>
+							</a>
+							and
+							<a href="/docs/en-USapi-ref/functions/eos-rtc-audio-get-output-devices-count">
+								<code>EOS_RTCAudio_GetOutputDevicesCount</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-output-device-by-index">
+								<code>EOS_RTC_GetAudioOutputDeviceByIndex</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-query-output-devices-information">
+								<code>EOS_RTCAudio_QueryOutputDevicesInformation</code>
+							</a>,
+							<a href="/docs/api-ref/functions/eos-rtc-audio-copy-output-device-information-by-index">
+								<code>EOS_RTCAudio_CopyOutputDeviceInformationByIndex</code>
+							</a>
+							and
+							<a href="/docs/api-ref/functions/eos-rtc-audio-output-device-information-release">
+								<code>EOS_RTCAudio_OutputDeviceInformation_Release</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-set-audio-output-settings">
+								<code>EOS_RTCAudio_SetAudioOutputSettings</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-set-output-device-settings">
+								<code>EOS_RTCAudio_SetOutputDeviceSettings</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-register-platform-audio-user">
+								<code>EOS_RTCAudio_RegisterPlatformAudioUser</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-register-platform-user">
+								<code>EOS_RTCAudio_RegisterPlatformUser</code>
+							</a>.</li>
+						<li>Deprecated method
+							<a href="/docs/api-ref/functions/eos-rtc-audio-unregister-platform-audio-user">
+								<code>EOS_RTCAudio_UnregisterPlatformAudioUser</code>
+							</a>
+							and replaced with
+							<a href="/docs/api-ref/functions/eos-rtc-audio-unregister-platform-user">
+								<code>EOS_RTCAudio_UnregisterPlatformUser</code>
+							</a>.</li>
+						<li>Deprecated struct
+							<code>EOS_RTCAudio_AudioInputDeviceInfo</code>
+							and replaced with
+							<a href="/docs/api-ref/structs/eos-rtc-audio-input-device-information">
+								<code>EOS_RTCAudio_InputDeviceInformation</code>
+							</a>.</li>
+						<li>Deprecated struct
+							<code>EOS_RTCAudio_AudioOutputDeviceInfo</code>
+							and replaced with
+							<a href="/docs/api-ref/structs/eos-rtc-audio-output-device-information">
+								<code>EOS_RTCAudio_OutputDeviceInformation</code>
+							</a>.</li>
+					</ul>
+					<p>
+						<strong>Note</strong>: We recommend you read the API references to these and replace to the newer methods and structs as soon as possible.</p>
+				</li>
 			</ul>
 			<div>
 				<h4 id="upgrade-notes">UPGRADE NOTES</h4>
@@ -804,9 +924,11 @@
 					respectively. In the case of applications that do not have default initialization, for instance C applications, these fields must be explicitly initialized.</li>
 				<li>
 					<strong>New</strong>: Platform IDs are located in
-					<code>eos.h</code>
-					as well as platform specific variants of
-					<code>eos.h</code>. A lobby created with platform restrictions will only show up in searches that originate from a platform allowed by the lobby or session.</li>
+					<code>eos_common.h</code>
+					as well variants of
+					<code>eos_&lt;platform&gt;.h</code>, where
+					<code>&lt;platform&gt;</code>
+					is your specific platform. A lobby created with platform restrictions will only show up in searches that originate from a platform allowed by the lobby or session.</li>
 				<li>
 					<strong>New</strong>: You now need to determine the
 					<code>bCrossplayOptOut</code>
@@ -927,6 +1049,66 @@
 					to
 					<code>-Oz</code>
 					(aggressive size).</li>
+			</ul>
+			<div>
+				<h4 id="known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</h4>
+			</div>
+			<div>
+				<h5 id="android-login-sample-116">Android Login Sample 1.16</h5>
+			</div>
+			<ul>
+				<li>In EOS SDK version 1.16 the Android login sample has incorrect gradle files. To fix this, please follow these steps:
+					<!-- -->
+					<ol>
+						<li>Delete the following files:</li>
+					</ol>
+					<ul>
+						<li>
+							<code>Samples\Android\Login\settings.gradle</code>
+						</li>
+						<li>
+							<code>Samples\Android\Login\app\build.gradle</code>
+						</li>
+						<li>
+							<code>Samples\Android\Login\app\src\main\cpp\CMakeLists.txt</code>
+						</li>
+					</ul>
+					<ol start="2">
+						<li>Rename the following:</li>
+					</ol>
+					<ul>
+						<li>
+							<p>
+								<code>build.gradle.out</code>
+								to
+								<code>build.gradle</code>
+							</p>
+						</li>
+						<li>
+							<p>
+								<code>CMakeLists.txt.out</code>
+								to
+								<code>CMakeLists.txt</code>
+							</p>
+						</li>
+						<li>
+							<p>
+								<code>settings.gradle.out</code>
+								to
+								<code>settings.gradle</code>
+							</p>
+							<p>
+								<strong>Note</strong>: Keep these files in the same directories.</p>
+						</li>
+					</ul>
+					<ol start="3">
+						<li>Open
+							<code>Samples\Android\Login\app\src\main\cpp\CMakeLists.txt and replace the line set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${BASE_PROJECT_DIR}/SDK/Bin/Android/include)</code>
+							to
+							<code>set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${BASE_PROJECT_DIR}/SDK/Include)</code>
+						</li>
+					</ol>
+				</li>
 			</ul>
 			<div>
 				<h3 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h3>
@@ -3334,6 +3516,9 @@
 						<a href="#player-data-storage-1">Player Data Storage</a>
 					</li>
 					<li>
+						<a href="#voice-1">Voice</a>
+					</li>
+					<li>
 						<a href="#upgrade-notes">UPGRADE NOTES</a>
 					</li>
 					<li>
@@ -3359,6 +3544,12 @@
 					</li>
 					<li>
 						<a href="#nintendo-switch-1">Nintendo Switch</a>
+					</li>
+					<li>
+						<a href="#known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</a>
+					</li>
+					<li>
+						<a href="#android-login-sample-116">Android Login Sample 1.16</a>
 					</li>
 					<li>
 						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>

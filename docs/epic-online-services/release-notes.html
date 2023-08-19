@@ -388,7 +388,7 @@
 			</div>
 			<ul>
 				<li>
-					<strong>Bug fix</strong>: Fixed an issue that occured when you pinned the same buffer multiple times in a multi-threaded environment while using the C# wrapper.
+					<strong>Bug fix</strong>: Fixed an issue that occurred when you pinned the same buffer multiple times in a multi-threaded environment while using the C# wrapper.
 					<!-- -->
 					<ul>
 						<li>For instance, if you used the
@@ -788,7 +788,7 @@
 								<code>EOS_RTCAudio_QueryOutputDevicesInformation</code>
 							</a>
 							and
-							<a href="/docs/en-USapi-ref/functions/eos-rtc-audio-get-output-devices-count">
+							<a href="/docs/api-ref/functions/eos-rtc-audio-get-output-devices-count">
 								<code>EOS_RTCAudio_GetOutputDevicesCount</code>
 							</a>.</li>
 						<li>Deprecated method
@@ -844,7 +844,7 @@
 							</a>.</li>
 					</ul>
 					<p>
-						<strong>Note</strong>: We recommend you read the API references to these and replace to the newer methods and structs as soon as possible.</p>
+						<strong>Note</strong>: We recommend you read the API references to these and replace them with the newer methods and structs as soon as possible.</p>
 				</li>
 			</ul>
 			<div>
@@ -962,8 +962,8 @@
 					<strong>Bug fix</strong>: Fixed an issue in
 					<code>IntegratedSteamSessions</code>, where it was trying to process invites before a login. It now caches the invite.</li>
 				<li>
-					<strong>Bug fix</strong>: Fixed a WebRTC vulnerability as disclosed by Google for versions M102 and earlier.
-					<strong>Note</strong>: We recommend everyone using prior EOS SDK versions to update to version 1.16 as soon as possible. Impacts can be found
+					<strong>Bug fix</strong>: Fixed a WebRTC vulnerability as disclosed by Google for versions M102 and earlier. We are currently on M109.
+					<strong>Note</strong>: We recommend everyone using prior EOS SDK versions to update to version 1.16 as soon as possible to include this fix. Impacts can be found
 					<a href="https://eoshelp.epicgames.com/s/news/eos-news-article-MCVDBTZSVM7VAJHF4ZGJVXZM52I4?language=en_US">here</a>.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue where building the EOS SDK on Microsoft Xbox GDK printed false warnings about closing sockets during their shutdown.</li>
@@ -1103,7 +1103,9 @@
 					</ul>
 					<ol start="3">
 						<li>Open
-							<code>Samples\Android\Login\app\src\main\cpp\CMakeLists.txt and replace the line set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${BASE_PROJECT_DIR}/SDK/Bin/Android/include)</code>
+							<code>Samples\Android\Login\app\src\main\cpp\CMakeLists.txt</code>
+							and replace the line
+							<code>set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${BASE_PROJECT_DIR}/SDK/Bin/Android/include)</code>
 							to
 							<code>set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${BASE_PROJECT_DIR}/SDK/Include)</code>
 						</li>
@@ -1753,8 +1755,8 @@
 							field always has a value of
 							<code>0</code>.</li>
 						<li>
-							<strong>Previously</strong>: In pre-SDK 1.15.2, the EOS service sends<code>
-								PurchasedCount</code>
+							<strong>Previously</strong>: In pre-SDK 1.15.2, the EOS service sends
+							<code>PurchasedCount</code>
 							with a value of
 							<code>0</code>
 							unless you have configured

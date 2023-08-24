@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_AntiCheatClient_BeginSession</h1>
-			<h2>EOS API reference page for EOS_AntiCheatClient_BeginSession</h2>
+			<h1>EOS_RTCAudio_SetInputDeviceSettings</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_SetInputDeviceSettings</h2>
 			<div>
 				<div>1 min to read</div>
 			</div>
@@ -32,30 +32,25 @@
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
 					<div>
 						<div>
-							<p>This function is part of the
-								<a href="/docs/api-ref/interfaces/anti-cheat-client">AntiCheatClient Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Begins a multiplayer game session. After this call returns successfully, the client is ready to exchange anti-cheat messages with a game server or peer(s). When leaving one game session and connecting to a different one, a new anti-cheat session must be created by calling EOS_AntiCheatClient_EndSession and EOS_AntiCheatClient_BeginSession again. Mode: All</p>
+							<p>Use this function to set audio input device settings, such as the active input device, or platform AEC.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
 							<ul>
 								<li>
-									<p>EOS_Success - If the session was started successfully</p>
+									<p>EOS_Success if the setting was successful</p>
 								</li>
 								<li>
-									<p>EOS_InvalidParameters - If input data was invalid</p>
-								</li>
-								<li>
-									<p>EOS_AntiCheat_InvalidMode - If the current mode does not support this function</p>
+									<p>EOS_InvalidParameters if any of the parameters are incorrect</p>
 								</li>
 							</ul>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_AntiCheatClient_BeginSession</p>
+							<p>EOS_RTCAudio_SetInputDeviceSettings</p>
 							<table>
 								<thead>
 									<tr>
@@ -65,13 +60,23 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HAntiCheatClient Handle</td>
+										<td>EOS_HRTCAudio Handle</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-anti-cheat-client-begin-session-options">EOS_AntiCheatClient_BeginSessionOptions</a>* Options</td>
-										<td>Structure containing input data.</td>
+											<a href="/docs/api-ref/structs/eos-rtc-audio-set-input-device-settings-options">EOS_RTCAudio_SetInputDeviceSettingsOptions</a>* Options</td>
+										<td>structure containing the parameters for the operation</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Arbitrary data that is passed back in the CompletionDelegate</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-set-input-device-settings-callback">EOS_RTCAudio_OnSetInputDeviceSettingsCallback</a>
+											CompletionDelegate</td>
+										<td>The callback to be fired when the operation completes, either successfully or in error</td>
 									</tr>
 								</tbody>
 							</table>
@@ -80,9 +85,11 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/structs/eos-anti-cheat-client-begin-session-options">EOS_AntiCheatClient_BeginSessionOptions</a>
+									<a href="/docs/api-ref/structs/eos-rtc-audio-set-input-device-settings-options">EOS_RTCAudio_SetInputDeviceSettingsOptions</a>
 								</li>
-								<li>EOS_EResult</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-set-input-device-settings-callback">EOS_RTCAudio_OnSetInputDeviceSettingsCallback</a>
+								</li>
 							</ul>
 						</div>
 					</div>

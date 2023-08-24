@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_AntiCheatClient_BeginSession</h1>
-			<h2>EOS API reference page for EOS_AntiCheatClient_BeginSession</h2>
+			<h1>EOS_RTCAudio_GetOutputDevicesCount</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_GetOutputDevicesCount</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>Under 1 min to read</div>
 			</div>
 		</div>
 	</section>
@@ -32,30 +32,25 @@
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
 					<div>
 						<div>
-							<p>This function is part of the
-								<a href="/docs/api-ref/interfaces/anti-cheat-client">AntiCheatClient Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Begins a multiplayer game session. After this call returns successfully, the client is ready to exchange anti-cheat messages with a game server or peer(s). When leaving one game session and connecting to a different one, a new anti-cheat session must be created by calling EOS_AntiCheatClient_EndSession and EOS_AntiCheatClient_BeginSession again. Mode: All</p>
+							<p>Fetch the number of audio output devices available in the system that are cached locally. The returned value should not be cached and should instead be used immediately with the EOS_RTCAudio_CopyOutputDeviceInformationByIndex function.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
-							<ul>
-								<li>
-									<p>EOS_Success - If the session was started successfully</p>
-								</li>
-								<li>
-									<p>EOS_InvalidParameters - If input data was invalid</p>
-								</li>
-								<li>
-									<p>EOS_AntiCheat_InvalidMode - If the current mode does not support this function</p>
-								</li>
-							</ul>
+							<p>The number of audio output devices available in the system or 0 if there is an error</p>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>
+								<a href="/docs/api-ref/functions/eos-rtc-audio-copy-output-device-information-by-index">EOS_RTCAudio_CopyOutputDeviceInformationByIndex</a>,
+								<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-devices-changed">EOS_RTCAudio_AddNotifyAudioDevicesChanged</a>
+							</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_AntiCheatClient_BeginSession</p>
+							<p>EOS_RTCAudio_GetOutputDevicesCount</p>
 							<table>
 								<thead>
 									<tr>
@@ -65,13 +60,13 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HAntiCheatClient Handle</td>
+										<td>EOS_HRTCAudio Handle</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-anti-cheat-client-begin-session-options">EOS_AntiCheatClient_BeginSessionOptions</a>* Options</td>
-										<td>Structure containing input data.</td>
+											<a href="/docs/api-ref/structs/eos-rtc-audio-get-output-devices-count-options">EOS_RTCAudio_GetOutputDevicesCountOptions</a>* Options</td>
+										<td>structure containing the parameters for the operation</td>
 									</tr>
 								</tbody>
 							</table>
@@ -80,9 +75,8 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/structs/eos-anti-cheat-client-begin-session-options">EOS_AntiCheatClient_BeginSessionOptions</a>
+									<a href="/docs/api-ref/structs/eos-rtc-audio-get-output-devices-count-options">EOS_RTCAudio_GetOutputDevicesCountOptions</a>
 								</li>
-								<li>EOS_EResult</li>
 							</ul>
 						</div>
 					</div>
@@ -99,6 +93,9 @@
 					</li>
 					<li>
 						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>

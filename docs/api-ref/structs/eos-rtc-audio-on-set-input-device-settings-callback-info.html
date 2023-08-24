@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_RTCAudio_SetAudioInputSettings</h1>
-			<h2>EOS API reference page for EOS_RTCAudio_SetAudioInputSettings</h2>
+			<h1>EOS_RTCAudio_OnSetInputDeviceSettingsCallbackInfo</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_OnSetInputDeviceSettingsCallbackInfo</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -35,40 +35,41 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>DEPRECATED! Use EOS_RTCAudio_SetInputDeviceSettings instead. Use this function to set audio input settings, such as the active input device, volume, or platform AEC.</p>
+							<p>This struct is passed in with a call to EOS_RTCAudio_OnSetInputDeviceSettingsCallback.</p>
 							<div>
-								<h2 id="return-value">Return Value</h2>
+								<h2 id="properties">Properties</h2>
 							</div>
-							<ul>
-								<li>
-									<p>EOS_Success if the setting was successful</p>
-								</li>
-								<li>
-									<p>EOS_InvalidParameters if any of the parameters are incorrect</p>
-								</li>
-							</ul>
-							<div>
-								<h2 id="parameters">Parameters</h2>
-							</div>
-							<p>EOS_RTCAudio_SetAudioInputSettings</p>
+							<p>EOS_RTCAudio_OnSetInputDeviceSettingsCallbackInfo</p>
 							<table>
 								<thead>
 									<tr>
-										<th>Parameter Type And Name</th>
-										<th>Usage Information</th>
+										<th>Property</th>
+										<th>Value</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HRTCAudio Handle</td>
-										<td></td>
+										<td>EOS_EResult ResultCode</td>
+										<td>This returns: EOS_Success if the operation succeeded. EOS_InvalidParameters if any of the parameters are incorrect.</td>
 									</tr>
 									<tr>
-										<td>const EOS_RTCAudio_SetAudioInputSettingsOptions* Options</td>
-										<td>structure containing the parameters for the operation.</td>
+										<td>void* ClientData</td>
+										<td>Client-specified data passed into EOS_RTCAudio_SetInputDeviceSettings.</td>
+									</tr>
+									<tr>
+										<td>const char* RealDeviceId</td>
+										<td>Associated audio input device Id.</td>
 									</tr>
 								</tbody>
 							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-set-input-device-settings-callback">EOS_RTCAudio_OnSetInputDeviceSettingsCallback</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -83,10 +84,10 @@
 						<a href="#remarks">Remarks</a>
 					</li>
 					<li>
-						<a href="#return-value">Return Value</a>
+						<a href="#properties">Properties</a>
 					</li>
 					<li>
-						<a href="#parameters">Parameters</a>
+						<a href="#related-api-members">Related API Members</a>
 					</li>
 				</ul>
 			</div>

@@ -1,0 +1,150 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Manage Epic and Platform Friends</h1>
+			<h2>How to manage your Epic Games friends and your friends on other platforms.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<h2 id="summary">Summary</h2>
+			</div>
+			<p>The EOS SDK doesn't expose external account IDs of the local player or other players to your game. For example, your game cannot identify whether another Epic Games player is the same as the local player's platform friend.</p>
+			<p>We don't suggest you use EOS Connect for platform account information for games that use Epic Account Services (EAS). This is because, at each sign-in, you must ensure that your game verifies that the Epic user's linked platform account has not changed compared to the linked EOS Connect account. Handling these de-synced scenarios, merging player data, and so on becomes complicated from an integration perspective. See the table in the next section for a list of example scenarios.</p>
+			<div>
+				<h2 id="examples">Examples</h2>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Scenario</th>
+						<th>Solution</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>You want to merge Epic friends and local native friends into a unified game UX.
+							<ul>
+								<li>The local player is an Epic friend of Player B.</li>
+								<li>The local player is a platform friend of Player B.</li>
+							</ul>
+						</td>
+						<td>You can get whether a player is an Epic friend by platform account ID using
+							<code>EOS_UserInfo_QueryUserInfoByExternalAccount</code>.<br>
+							<br>You must enumerate all local platform friends in the game UX and call
+							<code>EOS_UserInfo_QueryUserInfoByExternalAccount</code>
+							on each platform friend. This returns success if the platform friend is the local player's Epic friend with their Epic Account ID.</td>
+					</tr>
+					<tr>
+						<td>You want to merge Epic friends and local native friends into a unified game UX.
+							<ul>
+								<li>The local player is not an Epic friend of Player B.</li>
+								<li>The local player is a platform friend of Player B.</li>
+							</ul>
+						</td>
+						<td>No solution is needed. EOS SDK is not involved.</td>
+					</tr>
+					<tr>
+						<td>You want to merge Epic friends and local native friends into a unified game UX.
+							<ul>
+								<li>The local player is an Epic friend of Player B.</li>
+								<li>The local player is not a platform friend of Player B.</li>
+							</ul>
+						</td>
+						<td>SDK returns all Epic friends via
+							<code>EOS_Friends_QueryFriends</code>.<br>
+							<br>For example, say that I am in the game menu and see my Epic friend online. We are both on PlayStation, but how can I open the PlayStation user profile of my Epic friend? I need their PSN ID somehow.<br>
+							<br>I can see their PSN display name, though. PSN Web provides an ID mapper to translate a PSN Online ID (Display Name) to their PSN Account ID at
+							<a href="https://p.siedev.net/resources/documents/WebAPI/1/ID_Mapper_WebAPI-Reference/0005.html">https://p.siedev.net/resources/documents/WebAPI/1/ID_Mapper_WebAPI-Reference/0005.html</a>.<br>
+							<br>Xbox provides a similar tool at
+							<a href="https://developer.microsoft.com/en-us/games/xbox/docs/gdk/uri-usersowneridpeopletargetidget">https://developer.microsoft.com/en-us/games/xbox/docs/gdk/uri-usersowneridpeopletargetidget</a>.<br>
+							<br>Add a new EOS SDK API to help with this use case. You don't need to integrate your game with various platform APIs.<br>For example, you can add
+							<code>EOS_UI_OpenNativeProfile</code>:<br>
+							<ul>
+								<li>to block</li>
+								<li>to add friends</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>You want to find out which players are blocked within Epic Game's ecosystem to show a blocked players list in the game UX for the local player.</td>
+						<td>For Epic Games players, use these APIs:<br>
+							<ul>
+								<li>
+									<code>EOS_Friends_QueryFriends</code>
+								</li>
+								<li>
+									<code>EOS_Friends_AddNotifyBlockedUsersUpdate</code>
+								</li>
+								<li>
+									<code>EOS_Friends_GetBlockedUsersCount</code>
+								</li>
+								<li>
+									<code>EOS_Friends_GetBlockedUserAtIndex</code>
+								</li>
+							</ul>
+							<br>
+							<br>Platform users:<br>
+							<ul>
+								<li>Use the platform's SDK</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>You want to view another Epic Games player's native console profile, if they have linked it with their console account.</td>
+						<td>For existing Epic friends:<br>
+							<ul>
+								<li>The game enumerates all local platform friends and calls
+									<code>EOS_UserInfo_QueryUserInfoByExternalAccount</code>
+									for each.</li>
+								<li>
+									Through this, it knows which Epic friend is which local platform friend.</li>
+							</ul>
+							<br>
+							<br>For any Epic Games players that play in the same match:<ul>
+								<li>Game clients send both their Epic Games account ID and local platform account ID to the game servers, which replicate this information through the active game session to other game clients.</li>
+								<li>This allows other players on the same platform to open another random player's same platform profile and, for example, report them.</li>
+								<li>This is outside EOS SDK's responsibility</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>You want to search with an ID for a party for direct game lobby joining.</td>
+						<td>If the
+							<code>JoinViaPresence</code>
+							flag is set for the lobby to join, then the data is shared in the friend's presence, and they can search for that Lobby ID directly. There is no need to have the other friend's actual platform account ID.<br>
+							<br>If the two platform friends are not Epic friends, the Epic Lobby ID must be replicated into the platform matchmaking data structures. Basically, you must mirror Epic Game's presence with the platform presence.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#summary">Summary</a>
+					</li>
+					<li>
+						<a href="#examples">Examples</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

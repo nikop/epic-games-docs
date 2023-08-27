@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_RTCAudio_GetAudioInputDevicesCount</h1>
-			<h2>EOS API reference page for EOS_RTCAudio_GetAudioInputDevicesCount</h2>
+			<h1>EOS_Lobby_RemoveNotifyLeaveLobbyRequested</h1>
+			<h2>EOS API reference page for EOS_Lobby_RemoveNotifyLeaveLobbyRequested</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -32,25 +32,16 @@
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
 					<div>
 						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/lobby">Lobby Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>DEPRECATED! Use EOS_RTCAudio_QueryInputDevicesInformation, EOS_RTCAudio_GetInputDevicesCount instead. Returns the number of audio input devices available in the system. The returned value should not be cached and should instead be used immediately with the EOS_RTCAudio_GetAudioInputDeviceByIndex function.</p>
-							<div>
-								<h2 id="return-value">Return Value</h2>
-							</div>
-							<p>The number of audio input devices</p>
-							<div>
-								<h2 id="see-also">See Also</h2>
-							</div>
-							<p>
-								<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-device-by-index">EOS_RTCAudio_GetAudioInputDeviceByIndex</a>,
-								<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-devices-changed">EOS_RTCAudio_AddNotifyAudioDevicesChanged</a>
-							</p>
+							<p>Unregister from receiving notifications when a user performs a leave lobby action via the overlay.</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_RTCAudio_GetAudioInputDevicesCount</p>
+							<p>EOS_Lobby_RemoveNotifyLeaveLobbyRequested</p>
 							<table>
 								<thead>
 									<tr>
@@ -60,12 +51,12 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HRTCAudio Handle</td>
+										<td>EOS_HLobby Handle</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td>const EOS_RTCAudio_GetAudioInputDevicesCountOptions* Options</td>
-										<td>structure containing the parameters for the operation</td>
+										<td>EOS_NotificationId InId</td>
+										<td>Handle representing the registered callback</td>
 									</tr>
 								</tbody>
 							</table>
@@ -81,12 +72,6 @@
 				<ul>
 					<li>
 						<a href="#remarks">Remarks</a>
-					</li>
-					<li>
-						<a href="#return-value">Return Value</a>
-					</li>
-					<li>
-						<a href="#see-also">See Also</a>
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>

@@ -14,7 +14,7 @@
 			<h1>EOS_Sessions_CreateSessionModificationOptions</h1>
 			<h2>EOS API reference page for EOS_Sessions_CreateSessionModificationOptions</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -72,7 +72,7 @@
 									</tr>
 									<tr>
 										<td>EOS_Bool bPresenceEnabled</td>
-										<td>If true, this session will be associated with presence. Only one session at a time can have this flag true. This affects the ability of the Social Overlay to show game related actions to take in the user's social graph. * using the bPresenceEnabled flags within the Sessions interface * using the bPresenceEnabled flags within the Lobby interface * using EOS_PresenceModification_SetJoinInfo</td>
+										<td>Determines whether or not this session should be the one associated with the local user's presence information. If true, this session will be associated with presence. Only one session at a time can have this flag true. This affects the ability of the Social Overlay to show game related actions to take in the user's social graph. * using the bPresenceEnabled flags within the Sessions interface * using the bPresenceEnabled flags within the Lobby interface * using EOS_PresenceModification_SetJoinInfo</td>
 									</tr>
 									<tr>
 										<td>const char* SessionId</td>
@@ -80,7 +80,15 @@
 									</tr>
 									<tr>
 										<td>EOS_Bool bSanctionsEnabled</td>
-										<td>If true, sanctioned players can neither join nor register with this session and, in the case of join,  will return EOS_EResult code EOS_Sessions_PlayerSanctioned</td>
+										<td>If true, sanctioned players can neither join nor register with this session and, in the case of join, will return EOS_EResult code EOS_Sessions_PlayerSanctioned</td>
+									</tr>
+									<tr>
+										<td>const uint32_t* AllowedPlatformIds</td>
+										<td>Array of platform IDs indicating the player platforms allowed to register with the session. Platform IDs are found in the EOS header file, e.g. EOS_OPT_Epic. For some platforms, the value will be in the EOS Platform specific header file. If null, the session will be unrestricted.</td>
+									</tr>
+									<tr>
+										<td>uint32_t AllowedPlatformIdsCount</td>
+										<td>Number of platform IDs in the array</td>
 									</tr>
 								</tbody>
 							</table>

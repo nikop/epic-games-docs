@@ -64,11 +64,15 @@
 									</tr>
 									<tr>
 										<td>EOS_Bool bPresenceEnabled</td>
-										<td>If true, this lobby will be associated with the user's presence information. A user can only associate one lobby at a time with their presence information. This affects the ability of the Social Overlay to show game related actions to take in the user's social graph. * using the bPresenceEnabled flags within the Sessions interface * using the bPresenceEnabled flags within the Lobby interface * using EOS_PresenceModification_SetJoinInfo</td>
+										<td>If true, this lobby will be associated with the local user's presence information. A user can only associate one lobby at a time with their presence information. This affects the ability of the Social Overlay to show game related actions to take in the user's social graph. * using the bPresenceEnabled flags within the Sessions interface * using the bPresenceEnabled flags within the Lobby interface * using EOS_PresenceModification_SetJoinInfo</td>
 									</tr>
 									<tr>
 										<td>const EOS_Lobby_LocalRTCOptions* LocalRTCOptions</td>
 										<td>(Optional) Set this value to override the default local options for the RTC Room, if it is enabled for this lobby. Set this to NULL if your application does not use the Lobby RTC Rooms feature, or if you would like to use the default settings. This option is ignored if the specified lobby does not have an RTC Room enabled and will not cause errors.</td>
+									</tr>
+									<tr>
+										<td>EOS_Bool bCrossplayOptOut</td>
+										<td>This value indicates whether or not the local user allows crossplay interactions. If it is false, the local user  will be treated as allowing crossplay.</td>
 									</tr>
 								</tbody>
 							</table>

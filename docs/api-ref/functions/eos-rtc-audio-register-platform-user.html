@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_RTCAudio_GetAudioInputDevicesCount</h1>
-			<h2>EOS API reference page for EOS_RTCAudio_GetAudioInputDevicesCount</h2>
+			<h1>EOS_RTCAudio_RegisterPlatformUser</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_RegisterPlatformUser</h2>
 			<div>
-				<div>Under 1 min to read</div>
+				<div>1 min to read</div>
 			</div>
 		</div>
 	</section>
@@ -35,22 +35,31 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>DEPRECATED! Use EOS_RTCAudio_QueryInputDevicesInformation, EOS_RTCAudio_GetInputDevicesCount instead. Returns the number of audio input devices available in the system. The returned value should not be cached and should instead be used immediately with the EOS_RTCAudio_GetAudioInputDeviceByIndex function.</p>
+							<p>Use this function to inform the audio system of a user. This function is only necessary for some platforms.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
-							<p>The number of audio input devices</p>
+							<ul>
+								<li>
+									<p>EOS_Success if the user was successfully registered</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if any of the parameters are incorrect</p>
+								</li>
+								<li>
+									<p>EOS_UnexpectedError otherwise</p>
+								</li>
+							</ul>
 							<div>
 								<h2 id="see-also">See Also</h2>
 							</div>
 							<p>
-								<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-device-by-index">EOS_RTCAudio_GetAudioInputDeviceByIndex</a>,
-								<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-devices-changed">EOS_RTCAudio_AddNotifyAudioDevicesChanged</a>
+								<a href="/docs/api-ref/functions/eos-rtc-audio-unregister-platform-user">EOS_RTCAudio_UnregisterPlatformUser</a>
 							</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_RTCAudio_GetAudioInputDevicesCount</p>
+							<p>EOS_RTCAudio_RegisterPlatformUser</p>
 							<table>
 								<thead>
 									<tr>
@@ -64,11 +73,33 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td>const EOS_RTCAudio_GetAudioInputDevicesCountOptions* Options</td>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-rtc-audio-register-platform-user-options">EOS_RTCAudio_RegisterPlatformUserOptions</a>* Options</td>
 										<td>structure containing the parameters for the operation</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Arbitrary data that is passed back in the CompletionDelegate</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-register-platform-user-callback">EOS_RTCAudio_OnRegisterPlatformUserCallback</a>
+											CompletionDelegate</td>
+										<td>The callback to be fired when the operation completes, either successfully or in error</td>
 									</tr>
 								</tbody>
 							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-rtc-audio-register-platform-user-options">EOS_RTCAudio_RegisterPlatformUserOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-register-platform-user-callback">EOS_RTCAudio_OnRegisterPlatformUserCallback</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -90,6 +121,9 @@
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
 					</li>
 				</ul>
 			</div>

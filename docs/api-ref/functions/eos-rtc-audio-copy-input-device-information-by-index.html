@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_RTCAudio_GetAudioInputDeviceByIndex</h1>
-			<h2>EOS API reference page for EOS_RTCAudio_GetAudioInputDeviceByIndex</h2>
+			<h1>EOS_RTCAudio_CopyInputDeviceInformationByIndex</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_CopyInputDeviceInformationByIndex</h2>
 			<div>
-				<div>Under 1 min to read</div>
+				<div>1 min to read</div>
 			</div>
 		</div>
 	</section>
@@ -35,22 +35,33 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>DEPRECATED! Use EOS_RTCAudio_QueryInputDevicesInformation, EOS_RTCAudio_CopyInputDeviceInformationByIndex instead. Fetches an audio input device's info from then given index. The returned value should not be cached and important information should be copied off of the result object immediately.</p>
+							<p>Fetches an audio input device's information from then given index that are cached locally.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
-							<p>A pointer to the device information, or NULL on error. You should NOT keep hold of this pointer.</p>
+							<ul>
+								<li>
+									<p>EOS_Success if the information is available and passed out in OutInputDeviceInformation</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if you pass a null pointer for the out parameter</p>
+								</li>
+								<li>
+									<p>EOS_NotFound if the audio input device's information is not found</p>
+								</li>
+							</ul>
 							<div>
 								<h2 id="see-also">See Also</h2>
 							</div>
 							<p>
+								<a href="/docs/api-ref/functions/eos-rtc-audio-input-device-information-release">EOS_RTCAudio_InputDeviceInformation_Release</a>,
 								<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-devices-count">EOS_RTCAudio_GetAudioInputDevicesCount</a>,
 								<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-devices-changed">EOS_RTCAudio_AddNotifyAudioDevicesChanged</a>
 							</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_RTCAudio_GetAudioInputDeviceByIndex</p>
+							<p>EOS_RTCAudio_CopyInputDeviceInformationByIndex</p>
 							<table>
 								<thead>
 									<tr>
@@ -64,11 +75,31 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td>const EOS_RTCAudio_GetAudioInputDeviceByIndexOptions* Options</td>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-rtc-audio-copy-input-device-information-by-index-options">EOS_RTCAudio_CopyInputDeviceInformationByIndexOptions</a>* Options</td>
 										<td>structure containing the index being accessed</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/structs/eos-rtc-audio-input-device-information">EOS_RTCAudio_InputDeviceInformation</a>** OutInputDeviceInformation</td>
+										<td>The audio input device's information for the given index, if it exists and is valid, use EOS_RTCAudio_InputDeviceInformation_Release when finished</td>
 									</tr>
 								</tbody>
 							</table>
+							<div>
+								<p>If successful, this function provides data to the caller through an output parameter. Once you are finished with the data, you must release it by making the appropriate call into the EOS SDK.</p>
+							</div>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-rtc-audio-copy-input-device-information-by-index-options">EOS_RTCAudio_CopyInputDeviceInformationByIndexOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/structs/eos-rtc-audio-input-device-information">EOS_RTCAudio_InputDeviceInformation</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -90,6 +121,9 @@
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
 					</li>
 				</ul>
 			</div>

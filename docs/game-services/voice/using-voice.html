@@ -1,0 +1,569 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Using the Voice Interface</h1>
+			<h2></h2>
+			<div>
+				<div>
+					<div>
+						<span>Preview</span>
+					</div>
+				</div>
+				<div>9 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>The following calls use Voice Real Time Communications (RTC) APIs that you can use for your implementation. For Voice Web APIs, see our
+				<a href="/docs/web-api-ref">Web API Overview</a>
+				and
+				<a href="/docs/web-api-ref/voice-web-api">Voice Web API</a>
+				documentation.</p>
+			<p>To use the Voice interface, you should:</p>
+			<ol>
+				<li>Review and determine the
+					<a href="/docs/game-services/voice#voice-integration-methods">integration method</a>
+					you want to use with your game.</li>
+				<li>Investigate the Voice sample (<a href="/docs/game-services/voice/voice-sample">C</a>
+					and
+					<a href="/docs/game-services/voice/voice-sample-c-sharp">C#</a>) and learn how to use the Voice interface with your product.</li>
+				<li>Integrate the Voice interface into your applications:
+					<!-- -->
+					<ol>
+						<li>Configure your
+							<a href="/docs/dev-portal/client-credentials#policies">client policies</a>
+						</li>
+						<li>Integrate the Voice interface based on your chosen integration method.</li>
+					</ol>
+				</li>
+				<li>Review the
+					<a href="/docs/game-services/voice#best-practices">best practices</a>,
+					<a href="/docs/game-services/voice#voice-metrics">voice metrics</a>, and
+					<a href="/docs/game-services/voice#usage-limitations">usage limitations</a>
+					for the Voice interface.</li>
+			</ol>
+			<p>When using
+				<a href="/docs/game-services/voice#voice-with-lobbies">
+					<strong>Voice with Lobbies</strong>
+				</a>, the Lobbies interface automatically take care of:</p>
+			<ul>
+				<li>Requesting and refreshing room tokens</li>
+				<li>Joining and leaving the voice room as the user enters or leaves the lobby</li>
+			</ul>
+			<p>When using
+				<a href="/docs/game-services/voice#voice-with-a-trusted-server-application">
+					<strong>Voice with a Trusted Server</strong>
+				</a>, you need to:</p>
+			<ul>
+				<li>Request tokens on behalf of users on their server</li>
+				<li>Have the game client make calls to refresh tokens</li>
+				<li>Have the game client make calls to join and leave the voice room</li>
+			</ul>
+			<div>
+				<h2 id="requesting-a-token-to-join-a-room-trusted-server-method">Requesting a Token to Join a Room (Trusted Server Method)</h2>
+			</div>
+			<div>
+				<p>The lobbies interface will automatically return room tokens for its members.</p>
+			</div>
+			<p>When using a custom implementation for a trusted server, you are responsible for managing room access and requesting tokens for players to allow them to join that room on a media server. You can do this with
+				<a href="/docs/api-ref/functions/eos-rtc-admin-query-join-room-token">
+					<code>EOS_RTCAdmin_QueryJoinRoomToken</code>
+				</a>, which requires the
+				<a href="/docs/game-services/voice#policy-configurations">
+					<code>Voice:createRoomToken</code>
+					policy action</a>
+				enabled in the
+				<strong>Developer Portal</strong>.</p>
+			<p>
+				<a href="/docs/api-ref/functions/eos-rtc-admin-query-join-room-token">
+					<code>EOS_RTCAdminQueryJoinRoomToken</code>
+				</a>
+				is an asynchronous operation and upon completion (see
+				<a href="/docs/api-ref/structs/eos-rtc-admin-query-join-room-token-complete-callback-info">
+					<code>EOS_RTCAdmin_QueryJoinRoomTokenCompleteCallbackInfo</code>
+				</a>), provides you with the media server URL and a
+				<code>QueryId</code>
+				to retrieve the tokens.</p>
+			<div>
+				<p>A given
+					<code>QueryId</code>
+					is only valid for the duration of the callback, so you need to retrieve the tokens from inside the callback.</p>
+			</div>
+			<p>From inside the callback, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-admin-copy-user-token-by-index">
+					<code>EOS_RTCAdmin_CopyUserTokenByIndex</code>
+				</a>
+				and
+				<a href="/docs/api-ref/functions/eos-rtc-admin-copy-user-token-by-user-id">
+					<code>EOS_RTCAdmin_CopyUserTokenByUserId</code>
+				</a>
+				to retrieve the tokens.</p>
+			<p>Once you no longer need a
+				<a href="/docs/api-ref/structs/eos-rtc-admin-user-token">
+					<code>EOS_RTCAdmin_UserToken</code>
+				</a>, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-admin-user-token-release">
+					<code>EOS_RTCAdmin_UserToken_Release</code>
+				</a>
+				to release its resources.</p>
+			<div>
+				<p>
+					<a href="/docs/api-ref/functions/eos-rtc-admin-query-join-room-token">
+						<code>EOS_RTCAdmin_QueryJoinRoomToken</code>
+					</a>
+					allows you to request tokens for several users with one call (see
+					<a href="/docs/api-ref/structs/eos-rtc-admin-query-join-room-token-options">
+						<code>EOS_RTCAdmin_QueryJoinRoomTokenOptions</code>
+					</a>)</p>
+			</div>
+			<div>
+				<h2 id="token-expiration-trusted-server-method">Token Expiration (Trusted Server Method)</h2>
+			</div>
+			<div>
+				<p>The Lobby integration will automatically refresh tokens for you.</p>
+			</div>
+			<p>Tokens expire, so the client will need to request a new token.</p>
+			<p>You must use
+				<a href="/docs/api-ref/functions/eos-rtc-add-notify-disconnected">
+					<code>EOS_RTC_AddNotifyDisconnected</code>
+				</a>
+				to detect token expiration and to ask for another token. The error notification provided at disconnect is
+				<code>EOS_EResult::InvalidAuth</code>.</p>
+			<div>
+				<h2 id="joining-and-leaving-the-room-trusted-server-method">Joining and Leaving the Room (Trusted Server Method)</h2>
+			</div>
+			<p>Once your client has the token and media server URL to join a room, you can call
+				<a href="/docs/api-ref/functions/eos-rtc-join-room">
+					<code>EOS_RTC_JoinRoom</code>
+				</a>
+				to join the room and
+				<a href="/docs/api-ref/functions/eos-rtc-leave-room">
+					<code>EOS_RTC_LeaveRoom</code>
+				</a>
+				to leave it.</p>
+			<p>The SDK assumes default output and input audio devices if you do not explicitly
+				<a href="#audio-device-selection">specify the devices</a>
+				to use.</p>
+			<div>
+				<p>For testing purposes, you can enable echo by adding the
+					<code>EOS_RTC_JOINROOMFLAGS_ENABLE_ECHO</code>
+					flag to the
+					<code>EOS_RTC_JoinRoomOptions.Flags</code>
+					field. This makes the media server send back your own audio.</p>
+			</div>
+			<p>By default, audio is enabled when joining a room. You can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-update-sending">
+					<code>EOS_RTCAudio_UpdateSending</code>
+				</a>
+				to enter a room muted. This sets your state before actually joining the room. However, you first need to register a notification for the room.</p>
+			<p>For example:</p>
+			<ul>
+				<li>Call
+					<code>EOS_RTCAudio_AddNotifyParticipantStatusChanged</code>
+					to satisfy required SDK internal needs.</li>
+				<li>Call
+					<a href="/docs/api-ref/functions/eos-rtc-audio-update-sending">
+						<code>EOS_RTCAudio_UpdateSending</code>
+					</a>
+					and set the
+					<code>AudioStatus</code>
+					field to
+					<code>EOS_RTCAS_Disabled</code>
+					to be muted upon entry.</li>
+				<li>Call
+					<a href="/docs/api-ref/functions/eos-rtc-join-room">
+						<code>EOS_RTC_JoinRoom</code>
+					</a>
+					to join the room.</li>
+			</ul>
+			<div>
+				<h2 id="detecting-when-a-participant-joins-or-leaves-a-room">Detecting When a Participant Joins or Leaves a Room</h2>
+			</div>
+			<p>To detect when a player joins or leaves a room, use
+				<a href="/docs/api-ref/functions/eos-rtc-add-notify-participant-status-changed">
+					<code>EOS_RTC_AddNotifyParticipantStatusChanged</code>
+				</a>
+				or
+				<a href="/docs/api-ref/functions/eos-rtc-remove-notify-participant-status-changed">
+					<code>EOS_RTC_RemoveNotifyParticipantStatusChanged</code>
+				</a>, respectively.</p>
+			<p>Setting this notification before your players join a room, gives your players a notification for every member in the room. This allows your players to know who is already in the room even if they joined after them.</p>
+			<p>Your players also get a notification when they join the room, but not when they leave. Use
+				<a href="/docs/api-ref/functions/eos-rtc-add-notify-disconnected">
+					<code>EOS_RTC_AddNotifyDisconnected</code>
+				</a>
+				and
+				<a href="/docs/api-ref/functions/eos-rtc-remove-notify-disconnected">
+					<code>EOS_RTC_RemoveNotifyDisconnected</code>
+				</a>
+				to notify your players when they leave/disconnect from a room (for example, if they are kicked).</p>
+			<p>
+				<a href="/docs/api-ref/functions/eos-rtc-add-notify-disconnected">
+					<code>EOS_RTC_AddNotifyDisconnected</code>
+				</a>
+				is also used to detect
+				<a href="/docs/game-services/voice/using-voice#token-expiration-trusted-server-method">token expiration</a>
+				and required.</p>
+			<div>
+				<h2 id="audio-device-selection">Audio Device Selection</h2>
+			</div>
+			<p>If not explicitly changed, the SDK uses the operating system’s default input and output audio devices. However, you can request the list of available input devices (microphones) and output devices (speakers) to select alternatives.</p>
+			<p>For input devices, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-devices-count">
+					<code>EOS_RTCAudio_GetAudioInputDevicesCount</code>
+				</a>
+				to know how many input devices are available and call
+				<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-device-by-index">
+					<code>EOS_RTCAudio_GetAudioInputDeviceByIndex</code>
+				</a>
+				to iterate through the list. As a response,
+				<a href="/docs/api-ref/structs/eos-rtc-audio-input-device-information">
+					<code>EOS_RTCAudio_InputDeviceInformation</code>
+				</a>
+				provides a
+				<code>DeviceId</code>
+				that uniquely identifies the device. You can then pass this
+				<code>DeviceId</code>
+				to
+				<a href="/docs/api-ref/functions/eos-rtc-audio-set-audio-input-settings">
+					<code>EOS_RTCAudio_SetAudioInputSettings</code>
+				</a>
+				to select the device to use.</p>
+			<p>Similarly, for output devices, you use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-output-devices-count">
+					<code>EOS_RTCAudio_GetAudioOutputDevicesCount</code>
+				</a>
+				to know how many output devices are available and call
+				<code>EOS_RTC_GetAudioOutputDeviceByIndex</code>
+				to iterate through the list. As a response,
+				<a href="/docs/api-ref/structs/eos-rtc-audio-output-device-information">
+					<code>EOS_RTCAudio_AudioOutputDeviceInformation</code>
+				</a>
+				provides a
+				<code>DeviceId</code>
+				to uniquely identify the device. You can then pass this
+				<code>DeviceId</code>
+				to
+				<a href="/docs/api-ref/functions/eos-rtc-audio-set-audio-output-settings">
+					<code>EOS_RTCAudio_SetAudioOutputSettings</code>
+				</a>
+				to select the device to use.</p>
+			<p>Available input and output audio devices may change during a session. For example, your user may plug in or remove a new headset while your 
+				<!-- -->product
+				<!-- --> is running. You can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-devices-changed">
+					<code>EOS_RTCAudio_AddNotifyAudioDevicesChanged</code>
+				</a>
+				to notify you whenever available devices change.</p>
+			<div>
+				<p>This notification does not differentiate between input or output devices. You have to iterate the input and output devices list again and update your product state accordingly.</p>
+			</div>
+			<p>If you no longer wish to be notified of audio device changes, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-remove-notify-audio-devices-changed">
+					<code>EOS_RTCAudio_RemoveNotifyAudioDevicesChanged</code>
+				</a>.</p>
+			<div>
+				<h2 id="changing-the-volume">Changing the Volume</h2>
+			</div>
+			<p>You can change the input and output volumes with the same functions used for Audio Device Selection with the Volume field in
+				<code>EOS_RTCAudio_SetAudioOutputSettingsOptions</code>
+				and
+				<code>EOS_RTCAudio_SetAudioInputSettingsOptions</code>.</p>
+			<p>This volume field can be set within a range of 0 to 100:</p>
+			<ul>
+				<li>For output volume, 0 means silence, 50 means unmodified, and 100 means 2x gain.</li>
+				<li>For input volume, the only value that produces an effect is 0 (silence). Any value other than 0 causes no change to the volume.</li>
+			</ul>
+			<div>
+				<h2 id="mute">Mute</h2>
+			</div>
+			<p>You can mute someone in relation to yourself or even yourself.</p>
+			<div>
+				<p>In the source code headers, you might also see this mentioned as “local mute”.</p>
+			</div>
+			<p>To mute yourself, use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-update-sending">
+					<code>EOS_RTCAudio_UpdateSending</code>
+				</a>.</p>
+			<p>To mute other people, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-update-receiving">
+					<code>EOS_RTCAudio_UpdateReceiving</code>
+				</a>. You can mute a single participant by filling in the
+				<code>ParticipantId</code>
+				field, or you can leave it empty to mute the entire room.</p>
+			<p>This kind of mute only affects your own session. When you use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-update-receiving">
+					<code>EOS_RTCAudio_UpdateReceiving</code>
+				</a>
+				to mute someone else, you will stop receiving audio from that player, but you are not muting that player for other players in that room.</p>
+			<p>To completely block communication with another participant in a room (no sending or receiving), you can use
+				<a href="/docs/api-ref/functions/eos-rtc-block-participant">
+					<code>EOS_RTC_BlockParticipant</code>
+				</a>. This is different from
+				<a href="/docs/api-ref/functions/eos-rtc-audio-update-sending">
+					<code>EOS_RTCAudio_UpdateSending</code>
+				</a>. The former blocks communication both ways (fully ignores/blocks someone), while the latter mutes YOU in the room.</p>
+			<div>
+				<p>Both
+					<a href="/docs/api-ref/functions/eos-rtc-audio-update-sending">
+						<code>EOS_RTCAudio_UpdateSending</code>
+					</a>
+					and
+					<a href="/docs/api-ref/functions/eos-rtc-audio-update-receiving">
+						<code>EOS_RTCAudio_UpdateReceiving</code>
+					</a>
+					require you to first register for a notification for that room.</p>
+			</div>
+			<p>Use
+				<a href="/docs/game-services/voice/using-voice#remote-mute-trusted-server-method">remote mute</a>
+				to mute that player for everyone (currently only supported with the trusted server integration).</p>
+			<div>
+				<h2 id="remote-mute-trusted-server-method">Remote Mute (Trusted Server Method)</h2>
+			</div>
+			<div>
+				<p>The Lobbies interface integration does not currently support remote mute (hard-muting).</p>
+			</div>
+			<p>When using a trusted server integration, you can enable the
+				<a href="/docs/game-services/voice#policy-configurations">
+					<code>Voice:mute policy action</code>
+				</a>
+				and call
+				<a href="/docs/api-ref/functions/eos-rtc-admin-set-participant-hard-mute">
+					<code>EOS_RTCAdmin_SetParticipantHardMute</code>
+				</a>
+				with the
+				<code>RoomId</code>,
+				<code>ProductUserId</code>, and
+				<code>mute</code>
+				status. This toggles the audibility of a player in a room for everyone, regardless of their local mute status.</p>
+			<div>
+				<h2 id="kick-a-participant">Kick a Participant</h2>
+			</div>
+			<p>When using a trusted server integration, you can enable the
+				<a href="/docs/game-services/voice#policy-configurations">
+					<code>Voice:kick policy action</code>
+				</a>
+				and remove individual players from a room using
+				<code>EOS_RTCAdmin_Kick</code>. This also invalidates the user's previously issued room token, preventing them from rejoining the room with that same token.</p>
+			<p>When using the Lobbies interface integration, the lobby owner can call
+				<a href="/docs/api-ref/functions/eos-lobby-kick-member">
+					<code>EOS_Lobby_KickMember</code>
+				</a>
+				to kick a member from the lobby and the voice room.</p>
+			<div>
+				<h2 id="speaking-status-changes">Speaking Status Changes</h2>
+			</div>
+			<p>To visually indicate when an individual player is currently speaking or not, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-participant-updated">
+					<code>EOS_RTCAudio_AddNotifyParticipantUpdated</code>
+				</a>
+				and
+				<a href="/docs/api-ref/functions/eos-rtc-audio-remove-notify-participant-updated">
+					<code>EOS_RTCAudio_RemoveNotifyParticipantUpdated</code>
+				</a>. The callback for this notification contains the participant, the state of that participant’s audio stream (unsupported, enabled, disabled, and so on), and if the participant is currently speaking or not.</p>
+			<div>
+				<h2 id="injecting-your-own-audio">Injecting Your Own Audio</h2>
+			</div>
+			<p>You can specify your own audio source by instructing the SDK to not capture audio on its own.</p>
+			<p>First, you need to set the
+				<code>bManualAudioInputEnabled</code>
+				field to true when calling
+				<a href="/docs/api-ref/functions/eos-rtc-join-room">
+					<code>EOS_RTC_JoinRoom</code>
+				</a>.</p>
+			<p>Next, you can inject your own audio with
+				<a href="/docs/api-ref/functions/eos-rtc-audio-send-audio">
+					<code>EOS_RTCAudio_SendAudio</code>
+				</a>. This requires you to set up a
+				<a href="/docs/api-ref/structs/eos-rtc-audio-audio-buffer">
+					<code>EOS_RTCAudio_AudioBuffer</code>
+				</a>
+				struct with the audio data to send, which must have a duration of
+				<em>10 milliseconds</em>.</p>
+			<p>The SDK makes a copy of the buffer.</p>
+			<div>
+				<h2 id="modifying-audio">Modifying Audio</h2>
+			</div>
+			<p>You can implement voice effects by intercepting both the outgoing and incoming audio.</p>
+			<p>To intercept outgoing audio, you can use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-before-send">
+					<code>EOS_RTCAudio_AddNotifyAudioBeforeSend</code>
+				</a>.</p>
+			<p>To intercept incoming audio, you use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-before-render">
+					<code>EOS_RTCAudio_AddNotifyAudioBeforeRender</code>
+				</a>, which allows you to either get a full mix of all the participants in the room or individual streams per participant for uses such as spatial audio. You can pick what behavior you want by setting the
+				<code>bUnmixedAudio</code>
+				field of the
+				<code>EOS_RTCAudio_AddNotifyAudioBeforeRenderOptions</code>
+				struct.</p>
+			<div>
+				<p>Only the actual audio frames can be modified (the data pointed to by the Frames field). The other fields of the
+					<a href="/docs/api-ref/structs/eos-rtc-audio-audio-buffer">
+						<code>EOS_RTCAudio_AudioBuffer</code>
+					</a>
+					should not be modified.</p>
+			</div>
+			<div>
+				<h2 id="speech-to-text">Speech-to-Text</h2>
+			</div>
+			<p>Although Voice itself does not currently offer Speech-To-Text, you can grab the audio buffer and send it to a transcription service of your choice.</p>
+			<p>Use
+				<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-before-render">
+					<code>EOS_RTCAudio_AddNotifyAudioBeforeRender</code>
+				</a>
+				to receive audio buffers before they are rendered on the audio device. You can then choose to either convert the mixed audio channels of all speakers or of individual ones, using the
+				<code>bUnmixedAudio</code>
+				flag in
+				<code>EOS_RTCAudio_AddNotifyAudioBeforeRenderOptions</code>.</p>
+			<p>
+				<code>EOS_RTCAudio_AudioBeforeRenderCallbackInfo</code>
+				contains the
+				<strong>RoomId</strong>,
+				<strong>ProductUserId</strong>, and
+				<code>EOS_RTCAudio_AudioBuffer</code>
+				for each speaker.</p>
+			<p>The audio buffer itself contains the interleaved 16-Bit samples and defines the number of channels, sample rate and sample count it contains. This buffer can then be submitted to speech-to-text services in order to receive and display the matching text representation.</p>
+			<div>
+				<h2 id="application-status-and-network-status">Application Status and Network Status</h2>
+			</div>
+			<p>You must set your players' application (game) status and network status when you change either status. This notifies the EOS SDK of the current status, which makes sure that RTC transitions properly for your game. By default, for safety reasons, voice chat disconnects in background mode. For more information on statuses, see the
+				<a href="/docs/game-services/eos-platform-interface#application-and-network-status">Application and Network Status</a>
+				section of the Platform Interface documentation. Some of these status changes require you to remove the player from the room, mute them, or even block them. For a list of the available methods that you can use to remove, mute, and block players for your voice chat, see the
+				<a href="/docs/game-services/voice/status-transition-tools">Status Transition Tools</a>
+				documentation.</p>
+			<p>Each platform has their own specific network status and application status requirements to consider. See the Application and Network Status section of each platform's documentation for more information:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/platforms/switch#application-and-network-status">Nintendo Switch</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/xbox#application-and-network-status">Xbox</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-4#application-and-network-status">PlayStation 4</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-4#application-and-network-status">PlayStation 5</a>
+				</li>
+			</ul>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>
+				<strong>Note</strong>: RTC requires that
+				<code>ApplicationStatus</code>
+				and
+				<code>NetworkStatus</code>
+				events are triggered in a game thread context.</p>
+			<div>
+				<h3 id="background-mode">Background Mode</h3>
+			</div>
+			<p>What your game does for RTC rooms when your game transitions between states is up to you. The common practice is for all platforms to leave all RTC rooms and disallow joining back while in a suspended state (background mode). You can control this default behavior with the
+				<code>BackgroundMode</code>
+				option.</p>
+			<p>To set the default background behavior, set
+				<code>BackgroundMode</code>
+				with an
+				<code>EOS_Platform_RTCOptions</code>
+				structure initialized with the following information:</p>
+			<p>
+				<strong>Note</strong>: If you choose option 1 (for the ApplicationStatus to have no effect on RTC rooms), you should obtain consent from your players and make them aware that their audio is still active when the game is suspended (paused).</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>BackgroundMode</code>
+						</td>
+						<td>Sets whether players are removed from rooms when you place your game in background mode (<code>EOS_AS_BackgroundSuspended</code>). Possible values are
+							<code>0</code>: The default behavior as described above, in which players are removed from the room when your game enters a suspended state; or
+							<code>1</code>: ApplicationStatus does not affect RTC rooms.<br>
+							<br>
+							For some platforms, it is technically not possible to have Voice Chat working in the background because the platform freezes your game in the background. In those cases, option
+							<code>1</code>
+							does not have any effect. Contact your platform's support to verify whether it freezes applications in the background.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="tag_list">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
+					Voice</a>
+				<a href="/docs/site-map">
+					Lobbies</a>
+				<a href="/docs/site-map">
+					Chat</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#requesting-a-token-to-join-a-room-trusted-server-method">Requesting a Token to Join a Room (Trusted Server Method)</a>
+					</li>
+					<li>
+						<a href="#token-expiration-trusted-server-method">Token Expiration (Trusted Server Method)</a>
+					</li>
+					<li>
+						<a href="#joining-and-leaving-the-room-trusted-server-method">Joining and Leaving the Room (Trusted Server Method)</a>
+					</li>
+					<li>
+						<a href="#detecting-when-a-participant-joins-or-leaves-a-room">Detecting When a Participant Joins or Leaves a Room</a>
+					</li>
+					<li>
+						<a href="#audio-device-selection">Audio Device Selection</a>
+					</li>
+					<li>
+						<a href="#changing-the-volume">Changing the Volume</a>
+					</li>
+					<li>
+						<a href="#mute">Mute</a>
+					</li>
+					<li>
+						<a href="#remote-mute-trusted-server-method">Remote Mute (Trusted Server Method)</a>
+					</li>
+					<li>
+						<a href="#kick-a-participant">Kick a Participant</a>
+					</li>
+					<li>
+						<a href="#speaking-status-changes">Speaking Status Changes</a>
+					</li>
+					<li>
+						<a href="#injecting-your-own-audio">Injecting Your Own Audio</a>
+					</li>
+					<li>
+						<a href="#modifying-audio">Modifying Audio</a>
+					</li>
+					<li>
+						<a href="#speech-to-text">Speech-to-Text</a>
+					</li>
+					<li>
+						<a href="#application-status-and-network-status">Application Status and Network Status</a>
+					</li>
+					<li>
+						<a href="#background-mode">Background Mode</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

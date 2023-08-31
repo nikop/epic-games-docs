@@ -63,10 +63,62 @@
 				<h2 id="2023">2023</h2>
 			</div>
 			<div>
-				<h3 id="116---2023-aug-16">1.16 - 2023-aug-16</h3>
+				<h3 id="1161---2023-aug-30">1.16.1 - 2023-aug-30</h3>
 			</div>
 			<div>
 				<h5 id="anti-cheat">Anti-cheat</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed an issue with the Easy Anti-Cheat (EAC) service setup that resulted in launch error
+					<code>20006</code>
+					on Windows operating systems.</li>
+			</ul>
+			<div>
+				<h5 id="auth">Auth</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed the expiration of auth tokens after the application is suspended and then resumed for over 2 hours. This included Epic Account ID auth tokens and the Connect auth refresh notification not firing from
+					<code>EOS_Connect_AddNotifyAuthExpiration</code>.</li>
+			</ul>
+			<div>
+				<h5 id="lobbies">Lobbies</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed Lobby connection timeouts after the application is suspended and then resumed.</li>
+			</ul>
+			<div>
+				<h5 id="mobile">Mobile</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: We have added the correct Gradle files to the Android login sample, and Android headers are now in the new
+					<code>/SDK/Include</code>
+					directory that matches other platforms.
+					<!-- -->
+					<ul>
+						<li>See the
+							<a href="/docs/epic-online-services/platforms/android">EOS SDK for Android</a>
+							documentation for more information.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h5 id="sony-playstation">Sony PlayStation</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Improved performance of
+					<code>EOS_P2P_SendPacket</code>
+					in high latency situations when targeting PS5 7.00. This bug was introduced in EOS SDK version 1.16.</li>
+			</ul>
+			<div>
+				<h3 id="116---2023-aug-16">1.16 - 2023-aug-16</h3>
+			</div>
+			<div>
+				<h5 id="anti-cheat-1">Anti-cheat</h5>
 			</div>
 			<ul>
 				<li>
@@ -145,7 +197,7 @@
 				<h5 id="console-specific">Console Specific</h5>
 			</div>
 			<div>
-				<h6 id="sony-playstation">Sony PlayStation</h6>
+				<h6 id="sony-playstation-1">Sony PlayStation</h6>
 			</div>
 			<ul>
 				<li>
@@ -432,7 +484,7 @@
 				</li>
 			</ul>
 			<div>
-				<h5 id="lobbies">Lobbies</h5>
+				<h5 id="lobbies-1">Lobbies</h5>
 			</div>
 			<ul>
 				<li>
@@ -486,7 +538,7 @@
 					<strong>Bug fix</strong>: Fixed a few crashes related to log output using the wrong type of specifiers.</li>
 			</ul>
 			<div>
-				<h5 id="mobile">Mobile</h5>
+				<h5 id="mobile-1">Mobile</h5>
 			</div>
 			<div>
 				<h6 id="ios">iOS</h6>
@@ -851,7 +903,7 @@
 				<h4 id="upgrade-notes">UPGRADE NOTES</h4>
 			</div>
 			<div>
-				<h5 id="anti-cheat-1">Anti-Cheat</h5>
+				<h5 id="anti-cheat-2">Anti-cheat</h5>
 			</div>
 			<ul>
 				<li>
@@ -969,7 +1021,7 @@
 					<strong>Bug fix</strong>: Fixed an issue where building the EOS SDK on Microsoft Xbox GDK printed false warnings about closing sockets during their shutdown.</li>
 			</ul>
 			<div>
-				<h5 id="lobbies-1">Lobbies</h5>
+				<h5 id="lobbies-2">Lobbies</h5>
 			</div>
 			<ul>
 				<li>
@@ -1111,6 +1163,12 @@
 						</li>
 					</ol>
 				</li>
+			</ul>
+			<div>
+				<h5 id="anti-cheat-service-installer">Anti-cheat Service Installer</h5>
+			</div>
+			<ul>
+				<li>The Service Installer (<code>EasyAntiCheat_EOS_Setup.exe</code>) provided in EOS SDK version 1.16 has a bug that causes games to fail the launch with the error "StartService failed: 1053". This issue will be fixed in the next release.</li>
 			</ul>
 			<div>
 				<h3 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h3>
@@ -3428,10 +3486,28 @@
 						<a href="#2023">2023</a>
 					</li>
 					<li>
-						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
+						<a href="#1161---2023-aug-30">1.16.1 - 2023-aug-30</a>
 					</li>
 					<li>
 						<a href="#anti-cheat">Anti-cheat</a>
+					</li>
+					<li>
+						<a href="#auth">Auth</a>
+					</li>
+					<li>
+						<a href="#lobbies">Lobbies</a>
+					</li>
+					<li>
+						<a href="#mobile">Mobile</a>
+					</li>
+					<li>
+						<a href="#sony-playstation">Sony PlayStation</a>
+					</li>
+					<li>
+						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
+					</li>
+					<li>
+						<a href="#anti-cheat-1">Anti-cheat</a>
 					</li>
 					<li>
 						<a href="#authentication">Authentication</a>
@@ -3443,7 +3519,7 @@
 						<a href="#console-specific">Console Specific</a>
 					</li>
 					<li>
-						<a href="#sony-playstation">Sony PlayStation</a>
+						<a href="#sony-playstation-1">Sony PlayStation</a>
 					</li>
 					<li>
 						<a href="#nintendo-switch">Nintendo Switch</a>
@@ -3467,10 +3543,10 @@
 						<a href="#friends">Friends</a>
 					</li>
 					<li>
-						<a href="#lobbies">Lobbies</a>
+						<a href="#lobbies-1">Lobbies</a>
 					</li>
 					<li>
-						<a href="#mobile">Mobile</a>
+						<a href="#mobile-1">Mobile</a>
 					</li>
 					<li>
 						<a href="#ios">iOS</a>
@@ -3524,7 +3600,7 @@
 						<a href="#upgrade-notes">UPGRADE NOTES</a>
 					</li>
 					<li>
-						<a href="#anti-cheat-1">Anti-Cheat</a>
+						<a href="#anti-cheat-2">Anti-cheat</a>
 					</li>
 					<li>
 						<a href="#authentication-2">Authentication</a>
@@ -3536,7 +3612,7 @@
 						<a href="#eos-core-2">EOS Core</a>
 					</li>
 					<li>
-						<a href="#lobbies-1">Lobbies</a>
+						<a href="#lobbies-2">Lobbies</a>
 					</li>
 					<li>
 						<a href="#session-based-matchmaking-1">Session Based Matchmaking</a>
@@ -3552,6 +3628,9 @@
 					</li>
 					<li>
 						<a href="#android-login-sample-116">Android Login Sample 1.16</a>
+					</li>
+					<li>
+						<a href="#anti-cheat-service-installer">Anti-cheat Service Installer</a>
 					</li>
 					<li>
 						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>

@@ -1,0 +1,469 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Crossplay Introduction</h1>
+			<h2>An introduction to crossplay and the EOS SDK services for it.</h2>
+			<div>
+				<div>10 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>The Epic Online Services SDK (EOS SDK) provides services to launch, operate, and scale your game across multiple platforms and stores. All the services are built to work across multiple platforms and the EOS SDK unifies player's social information to provide a consistent user experience.  See the
+				<a href="/docs/epic-online-services">Epic Online Services (EOS) Overview</a>
+				documentation for more information about EOS. Below is an overview of the services that the EOS SDK provides for crossplay. For more information on the required integration steps to use crossplay in your game, see the
+				<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview">Crossplay Technical Overview</a>
+				documentation.</p>
+			<p>EOS provides four subsets of services for crossplay:</p>
+			<ul>
+				<li>Cross store support</li>
+				<li>Epic Online Services (crossplay with the Social Overlay and Epic Games account)</li>
+				<li>Support for Native APIs</li>
+				<li>Platform agnostic multiplayer services</li>
+			</ul>
+			<div>
+				<div style="max-width:800px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="An overview of the subsets of services available for crossplay." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="An overview of the subsets of services available for crossplay." loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" sizes="100vw" srcset="null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 640w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 750w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 828w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 1080w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 1200w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 1920w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 2048w, null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png 3840w" src="null/epic-account-services/crossplay/crossplay-overview/crossplay-overview-services-diagram.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<p>The EOS SDK provides
+						<strong>cross store support</strong>
+						that allows you to unify player's social information so that players can reach their friends across multiple platforms and storefronts.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Epic Online Services</strong>
+						enable you to use crossplay on multiple platforms with the Social Overlay and Epic Games accounts. You can allow players to invite Epic friends to join multiplayer games from the Social Overlay. The Social Overlay handles all social interactions between your players, for example, sending invites to join a lobby or joining a session via presence. This allows you to enable crossplay with simplified code integration of EOS while still providing programmatic access where needed.<br>
+						<br>(See the
+						<a href="#epic-online-services-and-the-social-overlay">Epic Account Services and the Social Overlay</a>
+						section below for more information.)</p>
+				</li>
+				<li>
+					<p>
+						<strong>Support for Native APIs</strong>
+						that enable native invites to reach native friends on multiple platforms. If you use the Social Overlay to allow players to invite their friends, for many platforms you need to also send a native invite which then allows players to view them on the dashboard of that platform.<br>
+						<br>(See the
+						<a href="#support-for-native-apis">Support for Native APIs</a>
+						section below for more information.)</p>
+				</li>
+				<li>
+					<p>Use
+						<strong>platform agnostic multiplayer services</strong>
+						that do not include social systems but are needed for your multiplayer game, for example, Epic Online Services achievements. You can use these services with your own social system or combine them with the Social Overlay and Epic Games accounts to handle the social interaction between players.<br>
+						<br>(See
+						<a href="#platform-agnostic-multiplayer-services">Platform Agnostic Multiplayer Services</a>
+						section below for more information.)</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="cross-store-support">Cross Store Support</h3>
+			</div>
+			<p>Follow these steps to get started with crossplay and implement cross-store support:</p>
+			<ol>
+				<li>
+					<p>
+						<strong>Choose Your Authentication Method</strong>
+					</p>
+					<p>We recommend that you choose how your players can authenticate and sign in to your game first before continuing to develop EOS Game Services. You can allow players to connect with your multiplayer services by using the Connect Interface to allow players to sign into your game from a supported identity provider. You can also allow players to sign in with their Epic Games account directly into your game.</p>
+					<ul>
+						<li>
+							<p>
+								<strong>Epic Online Services</strong>
+							</p>
+							<p>Use the Connect Interface for game features like Lobbies, Voice, Achievements, and Leaderboards.</p>
+							<p>For more information on how to allow players to sign in from a supported identity provider, see the
+								<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>
+								documentation.</p>
+						</li>
+						<li>
+							<p>
+								<strong>Epic Account Services</strong>
+							</p>
+							<p>Use the Auth Interface for a social graph, presence, Epic friends, and user information.</p>
+							<p>For more information on how to allow players to sign in with their Epic Games account, see the
+								<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+								documentation.</p>
+						</li>
+					</ul>
+					<p>
+						<strong>Note</strong>: When you choose a sign in method, you must continue to use that method throughout the following steps.</p>
+				</li>
+				<li>
+					<p>
+						<strong>EOS Game Services</strong>
+					</p>
+					<p>We recommend that you build your game and integrate EOS Game Services before progressing with the development of the Social Overlay. The social overlay will be able to interface with this in later steps.  You can choose from a number of services, including:</p>
+					<ul>
+						<li>
+							<a href="/docs/game-services/achievements">Achievements</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/anti-cheat">Anti-Cheat</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/leaderboards">Leaderboards</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/lobbies">Lobbies</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/eos-metrics-interface">Metrics</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/p-2-p">P2P</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/sessions">Sessions</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/voice">Voice</a>
+						</li>
+						<li>and more (see
+							<a href="/docs/game-services">EOS Game Services</a>
+							for more information).</li>
+					</ul>
+					<p>
+						<strong>Note</strong>: EOS Game Services are platform agnostic by default. For more information on the platforms that EOS Game Services support, see the
+						<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Social Overlay</strong>
+					</p>
+					<p>You can integrate the Social Overlay into your game across multiple platforms. This allows you to use simple game code integration to enable players to use their Epic Games accounts to invite their Epic friends to join lobbies and sessions as well as their party. A player can also join a lobby or session via presence.</p>
+					<p>(See the
+						<a href="#epic-online-services-and-the-social-overlay">Epic Account Services and the Social Overlay</a>
+						section below for more information.)</p>
+					<p>
+						<strong>Note</strong>: You must use Epic Account Services in your game to have access to the Social Overlay. See the
+						<a href="/docs/epic-account-services">Epic Account Services</a>
+						documentation for more information.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Integrate with Native APIs</strong>
+					</p>
+					<p>You can set up the native platform to allow players to send, receive and accept native invites for the lobby and/or session you implemented in Step 1, or use custom invites to integrate your own invite system. You need to work in combination with native platform APIs and the EOS Integrated Platform API to send native invites or provide native presence. You also need to do this to reach native friends and show them on the native dashboard.</p>
+					<p>(See
+						<a href="#platform-agnostic-multiplayer-services">Platform Agnostic Multiplayer Services</a>
+						section below for more information.)</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="epic-account-services-and-the-social-overlay">Epic Account Services and the Social Overlay</h3>
+			</div>
+			<p>You can use Epic Account Services to allow players to sign directly into your game with an Epic Games account and open the Social Overlay in your game to invite their friends or join a game via presence or request to join it.</p>
+			<p>
+				<strong>Note</strong>: When you integrate the EOS SDK with your game and with the following services, you do not need to do any additional game code to manage social interactions between players because the EOS SDK and the Social Overlay do this for you. However, you do need to mirror all information for the native platforms.</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Authentication</strong>
+					</p>
+					<p>Use the Auth Interface to allow players to sign into their Epic Games account directly from your game. The user first interacts with the Account Portal to sign in, authenticate and get an access token, if they haven't already signed in or linked their account. After the user has authenticated, the Social Overlay leverages their Epic Games account and its social graph to send and receive game invites, join a game via presence, and request to join a lobby or session.<br>
+						<br>For more information, see the
+						<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Friends</strong>
+					</p>
+					<p>Use the Friends Interface to retrieve a list of friends for a player that is signed in. The Friends Interface creates a local cache that you can use with other interface functions, for example, retrieve account IDs and metadata. You can also subscribe to presence updates, described below.<br>
+						<br>
+						<strong>Note</strong>: The Social Overlay manages a list of Epic friends for a player with an Epic Games account. This list includes platform friends. See the
+						<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview#social-overlay-and-friends">Social Overlay and Friends</a>
+						section of the Crossplay Technical Overview documentation for more information. For more information on the Friends tab of the Social Overlay, see the
+						<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/friends">Social Overlay Tabs: Friends</a>
+						documentation.<br>
+						<br>For more information, see the
+						<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Presence</strong>
+					</p>
+					<p>Use the Presence Interface to query the presence of players online and share more detailed information about the player. If you integrate the Social Overlay with your game then players can use their Epic Games account to join a lobby or session via presence.<br>
+						<br>For more information, see the following documentation:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/eos-presence-interface">Presence Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Social Overlay</strong>
+					</p>
+					<p>Integrate the Social Overlay with your game to allow players to:</p>
+					<ul>
+						<li>Manage their friends:
+							<!-- -->
+							<ul>
+								<li>See a list of their friends.</li>
+								<li>Send invitations to make new friends.</li>
+								<li>Block nuisance players.</li>
+							</ul>
+						</li>
+						<li>See a friend's profile for details about them (for example, what game they are playing).<br>
+							<strong>Note</strong>: The Social Overlay integrates with the native platform to provide profile information.</li>
+						<li>Send invitations to friends to join their game lobby, session, or your custom solution.</li>
+						<li>See a list of achievements in your game and their progress to complete each one.</li>
+					</ul>
+					<p>For more information on:</p>
+					<ul>
+						<li>How to include the overlay technology during EOS SDK initialization for rendering and input considerations, see
+							<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">SDK Integration: SDK Initialization</a>
+						</li>
+						<li>For full information on how to use the Social Overlay with your game, see the
+							<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration#social-overlay">SDK Integration: Social Overlay</a>
+							documentation.</li>
+						<li>What a player can do from the Social Overlay, see the
+							<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
+							documentation.</li>
+						<li>How to allow players to use the Social Overlay with lobbies or sessions, see the
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+							documentation.<br>
+							<br>
+							<strong>Note</strong>: If you allow a player to invite their Epic friend to your lobby or session from the Social Overlay and they are also friends on a platform you integrated into your game, then you must comply with native platform requirements including sending a native invite.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="support-for-native-apis">Support for Native APIs</h3>
+			</div>
+			<p>If you want to release your game with EOS multiplayer services like lobbies or sessions, the Social Overlay and the native platform social system must work together to allow players to invite other players, request to join a game, or join via presence. To do this you need to work in combination with native platform APIs and the EOS Integrated Platform API to send native invites or provide native presence. You also need to do this to reach native friends and show them on the native dashboard.</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Initialize the EOS SDK</strong>
+					</p>
+					<p>When you develop a game with the EOS SDK on multiple platforms, you need to initialize the EOS SDK. The order that you do so is determined by the platform on which you develop your game, either before or after you initialize the graphics layer of your game.<br>
+						<br>
+					</p>
+					<p>For more information on how to initialize the overlay for each platform, see
+						<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">SDK Initialization: SDK Integration</a>.</p>
+					<p>For more information on how to initialize the EOS SDK for each platform, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Register Callbacks for Game Services</strong>
+					</p>
+					<p>When you develop a game with the EOS SDK on multiple platforms and you want to allow players to use the Social Overlay to join a lobby or session, then you need to register a number of callbacks so that the EOS service can notify you.<br>
+						<br>
+					</p>
+					<p>For more information on how to register the callbacks, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Register Callbacks for Integrated Platforms</strong>
+					</p>
+					<p>When you develop a game with the EOS SDK on multiple platforms you need to register a number of callbacks so that the EOS service can notify you when players with accounts on these platforms join a lobby or session or want to use your custom invitation system.<br>
+						<br>
+					</p>
+					<p>For more information on how to register the callbacks, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Set Flags and Permissions for a Lobby or Session</strong>
+					</p>
+					<p>When you create a lobby or session, you need to set a number of flags and permissions to allow players to join or request to join them. You can also choose to not allow players on certain platforms to join through crossplay restrictions.<br>
+						<br>
+					</p>
+					<p>For more information on how to set the flags, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+						<li>
+							<a href="/docs/epic-account-services/crossplay/crossplay-restrictions">Crossplay restrictions</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Allow Friends to Join from an Integrated Platform</strong>
+					</p>
+					<p>To allow friends on a native platform to send invitations on that platform and accept them, you need to make calls for some actions taken by the players:</p>
+					<ul>
+						<li>When a player invites another player to a lobby or session or sends a custom invite.</li>
+						<li>When a player accepts the invitation.</li>
+					</ul>
+					<p>You also need to manage the joinability state of the session across platforms.</p>
+					<ul>
+						<li>The game needs to mark the native session as "full" or "private" to emulate the fullness and block friends from joining the game during this period.</li>
+					</ul>
+					<p>For more information on the calls you need to make, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Shut Down Your Game</strong>
+					</p>
+					<p>When you shut down your game, it is good practice to remove all callbacks you use to handle notifications for players with Epic Games accounts and players with accounts on platforms that you have integrated with your game (for example Steam accounts).<br>
+						<br>
+					</p>
+					<p>The game should also make sure to tear down lobbies and sessions to prevent stale information with backend services.</p>
+					<p>For more information on the calls you need to remove, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="platform-agnostic-multiplayer-services">Platform Agnostic Multiplayer Services</h3>
+			</div>
+			<p>Epic Online Services are platform agnostic by default, which means you can integrate the services with your game on the platforms supported by EOS, and use each service across those platforms. For example, if you integrate EOS lobbies or sessions then the matchmaking pools are platform agnostic by default. This means that you can choose to use a service and then combine that service with Epic Account services, the platform's native social systems, or your own social systems.</p>
+			<p>The following are examples of services provided by the EOS SDK that are platform agnostic and do not necessarily need social interaction:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Authentication</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/epic-account-services/auth">Authentication Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Epic Online Services achievements</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/achievements">Achievements Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Lobbies</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/lobbies">Lobby Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Sessions</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/sessions">Sessions Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>P2P</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/p-2-p">Nat P2P Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Easy Anti-Cheat</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/anti-cheat">Anti-Cheat Interfaces</a>
+						documentation.</p>
+					<p>
+						<strong>Note</strong>: The Easy Anti-Cheat only supports Windows, macOS, ChromeOS, and Linux 64-bit operating systems.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Player Reports</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/reports-interface">Reports Interface</a>
+						documentation.</p>
+				</li>
+			</ul>
+			<p>The following services are also platform agnostic and support social interaction:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Voice Chat</strong>
+					</p>
+					<p>For more information, see the
+						<a href="/docs/game-services/voice">Voice Interface
+						</a>documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Social Overlay</strong>
+					</p>
+					<p>For more information see the
+						<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay Overview</a>
+						documentation.</p>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#cross-store-support">Cross Store Support</a>
+					</li>
+					<li>
+						<a href="#epic-account-services-and-the-social-overlay">Epic Account Services and the Social Overlay</a>
+					</li>
+					<li>
+						<a href="#support-for-native-apis">Support for Native APIs</a>
+					</li>
+					<li>
+						<a href="#platform-agnostic-multiplayer-services">Platform Agnostic Multiplayer Services</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

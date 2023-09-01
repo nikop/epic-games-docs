@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Sessions_AddNotifyJoinSessionAccepted</h1>
-			<h2>EOS API reference page for EOS_Sessions_AddNotifyJoinSessionAccepted</h2>
+			<h1>EOS_Sessions_AddNotifySendSessionNativeInviteRequested</h1>
+			<h2>EOS API reference page for EOS_Sessions_AddNotifySendSessionNativeInviteRequested</h2>
 			<div>
 				<div>2 mins to read</div>
 			</div>
@@ -37,18 +37,22 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Register to receive notifications when a user accepts a session join game via the social overlay.</p>
+							<p>Register to receive notifications about a session "INVITE" performed by a local user via the overlay. This is only needed when a configured integrated platform has EOS_IPMF_DisableSDKManagedSessions set.  The EOS SDK will then use the state of EOS_IPMF_PreferEOSIdentity and EOS_IPMF_PreferIntegratedIdentity to determine when the NotificationFn is called.</p>
 							<div>
-								<p>must call RemoveNotifyJoinSessionAccepted to remove the notification</p>
+								<p>must call EOS_Sessions_RemoveNotifySendSessionNativeInviteRequested to remove the notification.</p>
 							</div>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
 							<p>handle representing the registered callback</p>
 							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>EOS_IPMF_DisableSDKManagedSessions, EOS_IPMF_PreferEOSIdentity, EOS_IPMF_PreferIntegratedIdentity</p>
+							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_Sessions_AddNotifyJoinSessionAccepted</p>
+							<p>EOS_Sessions_AddNotifySendSessionNativeInviteRequested</p>
 							<table>
 								<thead>
 									<tr>
@@ -63,7 +67,7 @@
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-sessions-add-notify-join-session-accepted-options">EOS_Sessions_AddNotifyJoinSessionAcceptedOptions</a>* Options</td>
+											<a href="/docs/api-ref/structs/eos-sessions-add-notify-send-session-native-invite-requested-option">EOS_Sessions_AddNotifySendSessionNativeInviteRequestedOptions</a>* Options</td>
 										<td>Structure containing information about the request.</td>
 									</tr>
 									<tr>
@@ -72,7 +76,7 @@
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/callbacks/eos-sessions-on-join-session-accepted-callback">EOS_Sessions_OnJoinSessionAcceptedCallback</a>
+											<a href="/docs/api-ref/callbacks/eos-sessions-on-send-session-native-invite-requested-callback">EOS_Sessions_OnSendSessionNativeInviteRequestedCallback</a>
 											NotificationFn</td>
 										<td>A callback that is fired when a notification is received.</td>
 									</tr>
@@ -89,15 +93,15 @@
 							<div>
 								<h2 id="callback-function-information">Callback Function Information</h2>
 							</div>
-							<p>Because this function is asynchronous, it employs a callback of type EOS_Sessions_OnJoinSessionAcceptedCallback to report the results of its operation.</p>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_Sessions_OnSendSessionNativeInviteRequestedCallback to report the results of its operation.</p>
 							<div>
 								<h3 id="callback-remarks">Callback Remarks</h3>
 							</div>
-							<p>Function prototype definition for notifications that come from EOS_Sessions_AddNotifyJoinSessionAccepted</p>
+							<p>Function prototype definition for notifications that comes from EOS_Sessions_AddNotifySendSessionNativeInviteRequested</p>
 							<div>
 								<h3 id="callback-parameters">Callback Parameters</h3>
 							</div>
-							<p>EOS_Sessions_OnJoinSessionAcceptedCallback</p>
+							<p>EOS_Sessions_OnSendSessionNativeInviteRequestedCallback</p>
 							<table>
 								<thead>
 									<tr>
@@ -108,8 +112,8 @@
 								<tbody>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-sessions-join-session-accepted-callback-info">EOS_Sessions_JoinSessionAcceptedCallbackInfo</a>* Data</td>
-										<td>A EOS_Sessions_JoinSessionAcceptedCallbackInfo containing the output information and result</td>
+											<a href="/docs/api-ref/structs/eos-sessions-send-session-native-invite-requested-callback-info">EOS_Sessions_SendSessionNativeInviteRequestedCallbackInfo</a>* Data</td>
+										<td>A EOS_Sessions_SendSessionNativeInviteRequestedCallbackInfo containing the output information and result</td>
 									</tr>
 								</tbody>
 							</table>
@@ -118,10 +122,10 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/structs/eos-sessions-add-notify-join-session-accepted-options">EOS_Sessions_AddNotifyJoinSessionAcceptedOptions</a>
+									<a href="/docs/api-ref/structs/eos-sessions-add-notify-send-session-native-invite-requested-option">EOS_Sessions_AddNotifySendSessionNativeInviteRequestedOptions</a>
 								</li>
 								<li>
-									<a href="/docs/api-ref/callbacks/eos-sessions-on-join-session-accepted-callback">EOS_Sessions_OnJoinSessionAcceptedCallback</a>
+									<a href="/docs/api-ref/callbacks/eos-sessions-on-send-session-native-invite-requested-callback">EOS_Sessions_OnSendSessionNativeInviteRequestedCallback</a>
 								</li>
 							</ul>
 						</div>
@@ -139,6 +143,9 @@
 					</li>
 					<li>
 						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>

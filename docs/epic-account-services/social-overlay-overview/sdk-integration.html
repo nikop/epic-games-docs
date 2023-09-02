@@ -12,7 +12,7 @@
 	<section>
 		<div>
 			<h1>SDK Integration</h1>
-			<h2>Accessing the EOS social overlay and friends list from in-game</h2>
+			<h2>Accessing the EOS social overlay and friends list from in-game.</h2>
 			<div>
 				<div>11 mins to read</div>
 			</div>
@@ -26,7 +26,9 @@
 			<div>
 				<h2 id="installation">Installation</h2>
 			</div>
-			<p>The EOS Overlay is installed by the Epic Games Launcher. Game applications can also install it as part of their prerequisites using the EOS service
+			<p>The 
+				<!-- -->EOS Overlay
+				<!-- --> is installed by the Epic Games Launcher. Game applications can also install it as part of their prerequisites using the EOS service
 				<a href="/docs/epic-account-services/crossplay/redistributable-installer">redistributable installer</a>.</p>
 			<div>
 				<h2 id="sdk-initialization">SDK Initialization</h2>
@@ -485,6 +487,21 @@
 				callbacks. The command buffers stay around until the GPU processes them. The SDK injects synchronization primitives into the command buffers and manages their lifetime internally. The only pitfall is if you continue to call
 				<code>EOS_UI_PrePresent</code>
 				and don't send the synchronization primitives to the GPU. If you do this, at some point the process can run out of buffers.</p>
+			<p>
+				<strong>Q: Do I need to override the VM (Virtual Memory) interface for the console platforms?</strong>
+			</p>
+			<p>Normally you don't have to override the VM for console platforms, but if the game engine already provides an abstraction for the platform VM  interfaces, it might be beneficial to hook it in. For example, you should override the VM interface if the game engine attempts to control all of the memory available. This is the case for Unreal Engine when
+				<code>USE_PAGE_CACHE</code>
+				is on, which is the default for the PlayStation 5 and Nintendo Switch. See the
+				<em>Unreal Engine Notes</em>
+				in the
+				<a href="/docs/epic-online-services/platforms/ps-5#memory-functions">PlayStation 5</a>
+				and
+				<a href="/docs/epic-online-services/platforms/switch#virtual-address-space-requirements">Nintendo Switch</a>
+				documentation for more information.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			<div id="tag_list">
 				<a href="/docs/site-map">Overlay</a>
 				<a href="/docs/site-map">

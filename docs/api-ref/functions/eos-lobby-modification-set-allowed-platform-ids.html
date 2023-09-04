@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_P2P_RemoveNotifyPeerConnectionInterrupted</h1>
-			<h2>EOS API reference page for EOS_P2P_RemoveNotifyPeerConnectionInterrupted</h2>
+			<h1>EOS_LobbyModification_SetAllowedPlatformIds</h1>
+			<h2>EOS API reference page for EOS_LobbyModification_SetAllowedPlatformIds</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -33,21 +33,29 @@
 					<div>
 						<div>
 							<p>This function is part of the
-								<a href="/docs/api-ref/interfaces/p-2-p">P2P Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/lobby">Lobby Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Stop notifications for connections being interrupted on a previously bound handler.</p>
+							<p>Set the Allowed Platform IDs for the lobby</p>
 							<div>
-								<h2 id="see-also">See Also</h2>
+								<h2 id="return-value">Return Value</h2>
 							</div>
-							<p>
-								<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-interrupted">EOS_P2P_AddNotifyPeerConnectionInterrupted</a>
-							</p>
+							<ul>
+								<li>
+									<p>EOS_Success if setting this parameter was successful</p>
+								</li>
+								<li>
+									<p>EOS_IncompatibleVersion if the API version passed in is incorrect</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if the AllowedPlatformIds array is null but the count is 0 or if the count is greater than 0 and the array is null.</p>
+								</li>
+							</ul>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_P2P_RemoveNotifyPeerConnectionInterrupted</p>
+							<p>EOS_LobbyModification_SetAllowedPlatformIds</p>
 							<table>
 								<thead>
 									<tr>
@@ -57,15 +65,24 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HP2P Handle</td>
+										<td>EOS_HLobbyModification Handle</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td>EOS_NotificationId NotificationId</td>
-										<td>The previously bound notification ID</td>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-lobby-modification-set-allowed-platform-ids-options">EOS_LobbyModification_SetAllowedPlatformIdsOptions</a>* Options</td>
+										<td>Options associated with allowed Platform IDs for this lobby</td>
 									</tr>
 								</tbody>
 							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-lobby-modification-set-allowed-platform-ids-options">EOS_LobbyModification_SetAllowedPlatformIdsOptions</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -80,10 +97,13 @@
 						<a href="#remarks">Remarks</a>
 					</li>
 					<li>
-						<a href="#see-also">See Also</a>
+						<a href="#return-value">Return Value</a>
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
 					</li>
 				</ul>
 			</div>

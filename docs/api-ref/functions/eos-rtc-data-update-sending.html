@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Platform_SetNetworkStatus</h1>
-			<h2>EOS API reference page for EOS_Platform_SetNetworkStatus</h2>
+			<h1>EOS_RTCData_UpdateSending</h1>
+			<h2>EOS API reference page for EOS_RTCData_UpdateSending</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -35,25 +35,25 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Notify a change in network state.</p>
+							<p>Use this function to tweak outgoing data options for a room.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
 							<ul>
 								<li>
-									<p>An EOS_EResult that indicates whether we changed the network status successfully.</p>
+									<p>EOS_Success if the operation succeeded</p>
 								</li>
 								<li>
-									<p>EOS_Success if the network was changed successfully.</p>
+									<p>EOS_InvalidParameters if any of the parameters are incorrect</p>
 								</li>
 								<li>
-									<p>EOS_InvalidParameters if the value of NewStatus is invalid.</p>
+									<p>EOS_NotFound if the local user is not in the room</p>
 								</li>
 							</ul>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_Platform_SetNetworkStatus</p>
+							<p>EOS_RTCData_UpdateSending</p>
 							<table>
 								<thead>
 									<tr>
@@ -63,14 +63,23 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HPlatform Handle</td>
+										<td>EOS_HRTCData Handle</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/enums/eos-e-network-status">EOS_ENetworkStatus</a>
-											NewStatus</td>
-										<td>The new network status.</td>
+											<a href="/docs/api-ref/structs/eos-rtc-data-update-sending-options">EOS_RTCData_UpdateSendingOptions</a>* Options</td>
+										<td>structure containing the parameters for the operation.</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Arbitrary data that is passed back in the CompletionDelegate</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-rtc-data-on-update-sending-callback">EOS_RTCData_OnUpdateSendingCallback</a>
+											CompletionDelegate</td>
+										<td>The callback to be fired when the operation completes, either successfully or in error</td>
 									</tr>
 								</tbody>
 							</table>
@@ -79,7 +88,10 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/enums/eos-e-network-status">EOS_ENetworkStatus</a>
+									<a href="/docs/api-ref/structs/eos-rtc-data-update-sending-options">EOS_RTCData_UpdateSendingOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-rtc-data-on-update-sending-callback">EOS_RTCData_OnUpdateSendingCallback</a>
 								</li>
 							</ul>
 						</div>

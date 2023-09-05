@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Connect_LoginOptions</h1>
-			<h2>EOS API reference page for EOS_Connect_LoginOptions</h2>
+			<h1>EOS_CustomInvites_AcceptRequestToJoinCallbackInfo</h1>
+			<h2>EOS API reference page for EOS_CustomInvites_AcceptRequestToJoinCallbackInfo</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>Under 1 min to read</div>
 			</div>
 		</div>
 	</section>
@@ -33,15 +33,15 @@
 					<div>
 						<div>
 							<p>This data structure is part of the
-								<a href="/docs/api-ref/interfaces/connect">Connect Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/custom-invites">CustomInvites Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Input parameters for the EOS_Connect_Login function.</p>
+							<p>Output parameters for the EOS_CustomInvites_AcceptRequestToJoin Function. These parameters are received through the callback provided to EOS_CustomInvites_AcceptRequestToJoin</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
-							<p>EOS_Connect_LoginOptions</p>
+							<p>EOS_CustomInvites_AcceptRequestToJoinCallbackInfo</p>
 							<table>
 								<thead>
 									<tr>
@@ -51,16 +51,20 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>int32_t ApiVersion</td>
-										<td>API Version: Set this to EOS_CONNECT_LOGIN_API_LATEST.</td>
+										<td>EOS_EResult ResultCode</td>
+										<td>The EOS_EResult code for the operation. EOS_Success indicates that the operation succeeded; other codes indicate errors.</td>
 									</tr>
 									<tr>
-										<td>const EOS_Connect_Credentials* Credentials</td>
-										<td>Credentials specified for a given login method</td>
+										<td>void* ClientData</td>
+										<td>Context that was passed into EOS_CustomInvites_AcceptRequestToJoin</td>
 									</tr>
 									<tr>
-										<td>const EOS_Connect_UserLoginInfo* UserLoginInfo</td>
-										<td>Additional information about the local user. This field is required to be set and used when authenticating the user using Amazon, Apple, Google, Nintendo Account, Nintendo Service Account, Oculus or the Device ID feature login. It is also required for using the Lobbies and Sessions interfaces when running on the Nintendo Switch device, and using any other credential type than EOS_ECT_NINTENDO_NSA_ID_TOKEN. In all other cases, set this field to NULL.</td>
+										<td>EOS_ProductUserId LocalUserId</td>
+										<td>Local user accepting an invite request</td>
+									</tr>
+									<tr>
+										<td>EOS_ProductUserId TargetUserId</td>
+										<td>Target user that sent original invite request</td>
 									</tr>
 								</tbody>
 							</table>
@@ -69,7 +73,7 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/functions/eos-connect-login">EOS_Connect_Login</a>
+									<a href="/docs/api-ref/callbacks/eos-custom-invites-on-accept-request-to-join-callback">EOS_CustomInvites_OnAcceptRequestToJoinCallback</a>
 								</li>
 							</ul>
 						</div>

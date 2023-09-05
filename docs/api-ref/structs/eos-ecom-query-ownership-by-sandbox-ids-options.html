@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Connect_LoginOptions</h1>
-			<h2>EOS API reference page for EOS_Connect_LoginOptions</h2>
+			<h1>EOS_Ecom_QueryOwnershipBySandboxIdsOptions</h1>
+			<h2>EOS API reference page for EOS_Ecom_QueryOwnershipBySandboxIdsOptions</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>Under 1 min to read</div>
 			</div>
 		</div>
 	</section>
@@ -33,15 +33,15 @@
 					<div>
 						<div>
 							<p>This data structure is part of the
-								<a href="/docs/api-ref/interfaces/connect">Connect Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/ecom">Ecom Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Input parameters for the EOS_Connect_Login function.</p>
+							<p>Input parameters for the EOS_Ecom_QueryOwnershipBySandboxIds function.</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
-							<p>EOS_Connect_LoginOptions</p>
+							<p>EOS_Ecom_QueryOwnershipBySandboxIdsOptions</p>
 							<table>
 								<thead>
 									<tr>
@@ -52,15 +52,19 @@
 								<tbody>
 									<tr>
 										<td>int32_t ApiVersion</td>
-										<td>API Version: Set this to EOS_CONNECT_LOGIN_API_LATEST.</td>
+										<td>API Version: Set this to EOS_ECOM_QUERYOWNERSHIPBYSANDBOXIDSOPTIONS_API_LATEST.</td>
 									</tr>
 									<tr>
-										<td>const EOS_Connect_Credentials* Credentials</td>
-										<td>Credentials specified for a given login method</td>
+										<td>EOS_EpicAccountId LocalUserId</td>
+										<td>The Epic Account ID of the local user whose ownership to query.</td>
 									</tr>
 									<tr>
-										<td>const EOS_Connect_UserLoginInfo* UserLoginInfo</td>
-										<td>Additional information about the local user. This field is required to be set and used when authenticating the user using Amazon, Apple, Google, Nintendo Account, Nintendo Service Account, Oculus or the Device ID feature login. It is also required for using the Lobbies and Sessions interfaces when running on the Nintendo Switch device, and using any other credential type than EOS_ECT_NINTENDO_NSA_ID_TOKEN. In all other cases, set this field to NULL.</td>
+										<td>EOS_Ecom_SandboxId* SandboxIds</td>
+										<td>The array of Sandbox IDs to check for ownership.</td>
+									</tr>
+									<tr>
+										<td>uint32_t SandboxIdsCount</td>
+										<td>The number of Sandbox IDs in the query.</td>
 									</tr>
 								</tbody>
 							</table>
@@ -69,7 +73,7 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/functions/eos-connect-login">EOS_Connect_Login</a>
+									<a href="/docs/api-ref/functions/eos-ecom-query-ownership-by-sandbox-ids">EOS_Ecom_QueryOwnershipBySandboxIds</a>
 								</li>
 							</ul>
 						</div>

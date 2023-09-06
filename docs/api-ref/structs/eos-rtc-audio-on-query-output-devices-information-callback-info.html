@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Platform_ClientCredentials</h1>
-			<h2>EOS API reference page for EOS_Platform_ClientCredentials</h2>
+			<h1>EOS_RTCAudio_OnQueryOutputDevicesInformationCallbackInfo</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_OnQueryOutputDevicesInformationCallbackInfo</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -35,11 +35,11 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Client credentials.</p>
+							<p>This struct is passed in with a call to EOS_RTCAudio_OnQueryOutputDevicesInformationCallback.</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
-							<p>EOS_Platform_ClientCredentials</p>
+							<p>EOS_RTCAudio_OnQueryOutputDevicesInformationCallbackInfo</p>
 							<table>
 								<thead>
 									<tr>
@@ -49,15 +49,23 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>const char* ClientId</td>
-										<td>Client ID of the service permissions entry. Set to NULL if no service permissions are used. Max length is EOS_PLATFORM_CLIENTCREDENTIALS_CLIENTID_MAX_LENGTH.</td>
+										<td>EOS_EResult ResultCode</td>
+										<td>This returns: EOS_Success if the operation succeeded. EOS_InvalidParameters if any of the parameters are incorrect.</td>
 									</tr>
 									<tr>
-										<td>const char* ClientSecret</td>
-										<td>Client secret for accessing the set of permissions. Set to NULL if no service permissions are used. Max length is EOS_PLATFORM_CLIENTCREDENTIALS_CLIENTSECRET_MAX_LENGTH.</td>
+										<td>void* ClientData</td>
+										<td>Client-specified data passed into EOS_RTCAudio_QueryOutputDevicesInformation.</td>
 									</tr>
 								</tbody>
 							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-query-output-devices-information-callback">EOS_RTCAudio_OnQueryOutputDevicesInformationCallback</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -73,6 +81,9 @@
 					</li>
 					<li>
 						<a href="#properties">Properties</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
 					</li>
 				</ul>
 			</div>

@@ -80,7 +80,9 @@
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed the expiration of auth tokens after the application is suspended and then resumed for over 2 hours. This included Epic Account ID auth tokens and the Connect auth refresh notification not firing from
-					<code>EOS_Connect_AddNotifyAuthExpiration</code>.</li>
+					<a href="/docs/api-ref/functions/eos-connect-add-notify-auth-expiration">
+						<code>EOS_Connect_AddNotifyAuthExpiration</code>
+					</a>.</li>
 			</ul>
 			<div>
 				<h5 id="connect">Connect</h5>
@@ -88,7 +90,9 @@
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed the expiration of auth tokens after the application is suspended and then resumed for over 2 hours. This included Epic Account ID auth tokens and the Connect auth refresh notification not firing from
-					<code>EOS_Connect_AddNotifyAuthExpiration</code>.</li>
+					<a href="/docs/api-ref/functions/eos-connect-add-notify-auth-expiration">
+						<code>EOS_Connect_AddNotifyAuthExpiration</code>
+					</a>.</li>
 			</ul>
 			<div>
 				<h5 id="lobbies">Lobbies</h5>
@@ -119,7 +123,9 @@
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Improved performance of
-					<code>EOS_P2P_SendPacket</code>
+					<a href="/docs/api-ref/functions/eos-p-2-p-send-packet">
+						<code>EOS_P2P_SendPacket</code>
+					</a>
 					in high latency situations when targeting PS5 7.00. This bug was introduced in EOS SDK version 1.16.</li>
 			</ul>
 			<div>
@@ -135,7 +141,9 @@
 					<strong>New</strong>: We removed a recommendation of what value to use for
 					<code>AuthenticationTimeout</code>
 					in the
-					<code>EOS_AntiCheatClient_RegisterPeerOptions</code>. We no longer recommend a specific timeout value because authentication timeouts are game-specific.</li>
+					<a href="/docs/api-ref/structs/eos-anti-cheat-client-register-peer-options">
+						<code>EOS_AntiCheatClient_RegisterPeerOptions</code>
+					</a>. We no longer recommend a specific timeout value because authentication timeouts are game-specific.</li>
 				<li>
 					<strong>New</strong>: Updated the anti-cheat
 					<code>LogPlayerTakeDamage</code>
@@ -171,7 +179,9 @@
 					<strong>New</strong>: Added a
 					<code>EOS_LF_NO_USER_INTERFACE</code>
 					input flag for
-					<code>EOS_Auth_Login</code>
+					<a href="/docs/api-ref/functions/eos-auth-login">
+						<code>EOS_Auth_Login</code>
+					</a>
 					API. You can use this flag to attempt automatic player login that silently fails without prompting the player.</li>
 				<li>
 					<strong>New</strong>: Added command-line arguments to the Developer Authentication Tool (Dev Auth Tool):
@@ -190,7 +200,9 @@
 				<li>
 					<strong>Bug fix</strong>: We fixed a potential crash during authentication, which could occur moments before a device authorization expires.</li>
 				<li>
-					<strong>Bug fix</strong>: We fixed an issue so all external accounts are now included regardless of whether or not the account ID is set. Previously, the external accounts for a user (<code>EOS_UserInfo_ExternalUserInfo</code>) did not include external accounts that existed with an unset account ID. This was unexpected because the account ID is not guaranteed to be available for all users across all external accounts.</li>
+					<strong>Bug fix</strong>: We fixed an issue so all external accounts are now included regardless of whether or not the account ID is set. Previously, the external accounts for a user (<a href="/docs/api-ref/structs/eos-user-info-external-user-info">
+						<code>EOS_UserInfo_ExternalUserInfo</code>
+					</a>) did not include external accounts that existed with an unset account ID. This was unexpected because the account ID is not guaranteed to be available for all users across all external accounts.</li>
 			</ul>
 			<div>
 				<h5 id="connect-1">Connect</h5>
@@ -199,7 +211,9 @@
 				<li>
 					<strong>New</strong>: Added an input parameter,
 					<code>NSAIdToken</code>, so that you can provide an NSA (Nintendo Service Account) ID token for a local user (player) with
-					<code>EOS_Connect_Login</code>. The token is a check to see if the local user has permission to play online. If the local user has a token, the EOS service allows the local user to use the Lobbies Interface and Sessions Interface. If they do not have a token, they can't play online or use either the Lobbies Interface or Sessions Interface.</li>
+					<a href="/docs/api-ref/functions/eos-connect-login">
+						<code>EOS_Connect_Login</code>
+					</a>. The token is a check to see if the local user has permission to play online. If the local user has a token, the EOS service allows the local user to use the Lobbies Interface and Sessions Interface. If they do not have a token, they can't play online or use either the Lobbies Interface or Sessions Interface.</li>
 			</ul>
 			<div>
 				<h5 id="console-specific">Console Specific</h5>
@@ -233,9 +247,13 @@
 				<li>
 					<p>
 						<strong>New</strong>: Added
-						<code>EOS_UserInfo_CopyBestDisplayName</code>
+						<a href="/docs/api-ref/functions/eos-user-info-copy-best-display-name">
+							<code>EOS_UserInfo_CopyBestDisplayName</code>
+						</a>
 						and
-						<code>EOS_UserInfo_CopyBestDisplayNameWithPlatform</code>. See Crossplay:
+						<a href="/docs/api-ref/functions/eos-user-info-copy-best-display-name-with-platform">
+							<code>EOS_UserInfo_CopyBestDisplayNameWithPlatform</code>
+						</a>. See Crossplay:
 						<a href="/docs/epic-account-services/crossplay/best-display-name">Best Display Name</a>
 						for more information.</p>
 				</li>
@@ -244,9 +262,13 @@
 						<strong>New</strong>: Added an
 						<code>AllowedPlatformIds</code>
 						field to
-						<code>EOS_Lobby_CreateLobbyOptions</code>
+						<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">
+							<code>EOS_Lobby_CreateLobbyOptions</code>
+						</a>
 						and
-						<code>EOS_Sessions_CreateSessionModificationOptions</code>. See the API references below for more information:</p>
+						<a href="/docs/api-ref/structs/eos-sessions-create-session-modification-options">
+							<code>EOS_Sessions_CreateSessionModificationOptions</code>
+						</a>. See the API references below for more information:</p>
 					<ul>
 						<li>
 							<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">
@@ -266,14 +288,22 @@
 						field
 						<code>bCrossplayOptOut</code>
 						to
-						<code>EOS_Lobby_CreateLobbyOptions</code>,
-						<code>EOS_Lobby_JoinLobbyOptions</code>, and
-						<code>EOS_Lobby_JoinLobbyByIdOptions</code>.</p>
+						<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">
+							<code>EOS_Lobby_CreateLobbyOptions</code>
+						</a>,
+						<a href="/docs/api-ref/structs/eos-lobby-join-lobby-options">
+							<code>EOS_Lobby_JoinLobbyOptions</code>
+						</a>, and
+						<a href="/docs/api-ref/structs/eos-lobby-join-lobby-by-id-options">
+							<code>EOS_Lobby_JoinLobbyByIdOptions</code>
+						</a>.</p>
 					<p>When
 						<code>bCrossplayOptOut</code>
 						is set to
 						<code>EOS_TRUE</code>, it indicates to the SDK that the local player creating or joining the lobby is not eligible to engage in crossplay. The SDK will replicate this information to all other members of the lobby. This replicated value is available in
-						<code>EOS_LobbyDetails_MemberInfo</code>.</p>
+						<a href="/docs/api-ref/structs/eos-lobby-details-member-info">
+							<code>EOS_LobbyDetails_MemberInfo</code>
+						</a>.</p>
 				</li>
 				<li>
 					<p>
@@ -287,7 +317,9 @@
 				<li>
 					<p>
 						<strong>New</strong>:
-						<code>EOS_Ecom_Checkout</code>
+						<a href="/docs/api-ref/functions/eos-ecom-checkout">
+							<code>EOS_Ecom_Checkout</code>
+						</a>
 						returns
 						<code>EOS_Ecom_PurchaseProcessing</code>
 						under the following conditions:</p>
@@ -301,26 +333,34 @@
 				<li>
 					<p>
 						<strong>New</strong>: Added a new API,
-						<code>EOS_Ecom_QueryOwnershipBySandboxIds</code>, to request ownership by sandbox id. Developers can now use the
+						<a href="/docs/api-ref/functions/eos-ecom-query-ownership-by-sandbox-ids">
+							<code>EOS_Ecom_QueryOwnershipBySandboxIds</code>
+						</a>, to request ownership by sandbox id. Developers can now use the
 						<code>EOS_Ecom_QueryOwnershipBySandboxIds</code>
 						API to query all owned items for a given set of sandbox IDs.</p>
 				</li>
 				<li>
 					<p>
 						<strong>New</strong>: The
-						<code>EOS_Ecom_QueryOwnership</code>
+						<a href="/docs/api-ref/functions/eos-ecom-query-ownership">
+							<code>EOS_Ecom_QueryOwnership</code>
+						</a>
 						method can now accept a maximum of 400 catalog Ids in a single API call. The API is also improved to send multiple batched requests to the backend and aggregate the responses.</p>
 				</li>
 				<li>
 					<p>
 						<strong>New</strong>: The
-						<code>EOS_Ecom_QueryEntitlements</code>
+						<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">
+							<code>EOS_Ecom_QueryEntitlements</code>
+						</a>
 						method can now accept a maximum of 256 entitlements in a single API call. The API is also improved to send multiple batched requests to the backend and aggregate the responses.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Bug fix</strong>: Fixed an intermittent issue where
-						<code>EOS_Ecom_RedeemEntitlements</code>
+						<a href="/docs/api-ref/functions/eos-ecom-redeem-entitlements">
+							<code>EOS_Ecom_RedeemEntitlements</code>
+						</a>
 						failed.</p>
 				</li>
 			</ul>
@@ -381,7 +421,9 @@
 						<strong>New</strong>: You can now specify how the SDK handles RTC rooms when the application switches between background and foreground states by using the
 						<code>BackgroundMode</code>
 						field of
-						<code>EOS_Platform_RTCOptions</code>.</p>
+						<a href="/docs/api-ref/structs/eos-platform-rtc-options">
+							<code>EOS_Platform_RTCOptions</code>
+						</a>.</p>
 				</li>
 				<li>
 					<p>
@@ -422,7 +464,9 @@
 				<li>
 					<p>
 						<strong>Bug fix</strong>: Fixed an issue so
-						<code>EOS_Platform_CheckForLauncherAndRestart</code>
+						<a href="/docs/api-ref/functions/eos-platform-check-for-launcher-and-restart">
+							<code>EOS_Platform_CheckForLauncherAndRestart</code>
+						</a>
 						now correctly detects if the game was launched by the Epic Games Launcher. See Platform Interface:
 						<a href="/docs/game-services/eos-platform-interface#restarting-the-app-with-the-launcher">Restarting the App with the Launcher</a>.</p>
 				</li>
@@ -473,21 +517,31 @@
 						<strong>New</strong>: We have added the following functions to the Friends Interface to query for blocked players:</p>
 					<ul>
 						<li>
-							<code>EOS_Friends_GetBlockedUsersCount</code>
+							<a href="/docs/api-ref/functions/eos-friends-get-blocked-users-count">
+								<code>EOS_Friends_GetBlockedUsersCount</code>
+							</a>
 						</li>
 						<li>
-							<code>EOS_Friends_GetBlockedUserAtIndex</code>
+							<a href="/docs/api-ref/functions/eos-friends-get-blocked-user-at-index">
+								<code>EOS_Friends_GetBlockedUserAtIndex</code>
+							</a>
 						</li>
 						<li>
-							<code>EOS_Friends_AddNotifyBlockedUsersUpdate</code>
+							<a href="/docs/api-ref/functions/eos-friends-add-notify-blocked-users-update">
+								<code>EOS_Friends_AddNotifyBlockedUsersUpdate</code>
+							</a>
 						</li>
 						<li>
-							<code>EOS_Friends_RemoveNotifyBlockedUsersUpdate</code>
+							<a href="/docs/api-ref/functions/eos-friends-remove-notify-blocked-users-update">
+								<code>EOS_Friends_RemoveNotifyBlockedUsersUpdate</code>
+							</a>
 						</li>
 					</ul>
 					<p>
 						<strong>Note</strong>: Calling
-						<code>EOS_Friends_QueryFriends</code>
+						<a href="/docs/api-ref/functions/eos-friends-query-friends">
+							<code>EOS_Friends_QueryFriends</code>
+						</a>
 						will now additionally retrieve the list of EOS blocked players.</p>
 				</li>
 			</ul>
@@ -512,7 +566,9 @@
 					is now set in
 					<code>EOS_LobbyDetails_Info</code>
 					by
-					<code>EOS_LobbyDetails_CopyInfo</code>
+					<a href="/docs/api-ref/functions/eos-lobby-details-copy-info">
+						<code>EOS_LobbyDetails_CopyInfo</code>
+					</a>
 					based on whether the Lobby is created with
 					<code>bPresenceEnabled</code>.</li>
 				<li>
@@ -525,19 +581,29 @@
 					documentation for more information.</li>
 				<li>
 					<strong>New</strong>: Added
-					<code>EOS_Sessions_AddNotifySendSessionNativeInviteRequested</code>
+					<a href="/docs/api-ref/functions/eos-sessions-add-notify-send-session-native-invite-requested">
+						<code>EOS_Sessions_AddNotifySendSessionNativeInviteRequested</code>
+					</a>
 					and
-					<code>EOS_Sessions_RemoveNotifySendSessionNativeInviteRequested</code>. The associated callback to these APIs will be used with the Sessions service when the Social Overlay determines that a native invite needs to be sent by the game.</li>
+					<a href="/docs/api-ref/functions/eos-sessions-remove-notify-send-session-native-invite-requested">
+						<code>EOS_Sessions_RemoveNotifySendSessionNativeInviteRequested</code>
+					</a>. The associated callback to these APIs will be used with the Sessions service when the Social Overlay determines that a native invite needs to be sent by the game.</li>
 				<li>
 					<strong>New</strong>: Added
-					<code>EOS_CustomInvites_AddNotifySendCustomNativeInviteRequested</code>
+					<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-send-custom-native-invite-requested">
+						<code>EOS_CustomInvites_AddNotifySendCustomNativeInviteRequested</code>
+					</a>
 					and
-					<code>EOS_CustomInvites_RemoveNotifySendCustomNativeInviteRequested</code>. The associated callback to these APIs will be used with the Custom Invite system when the Social Overlay determines that a native invite needs to be sent by the game.</li>
+					<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-send-custom-native-invite-requeste">
+						<code>EOS_CustomInvites_RemoveNotifySendCustomNativeInviteRequested</code>
+					</a>. The associated callback to these APIs will be used with the Custom Invite system when the Social Overlay determines that a native invite needs to be sent by the game.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed the incorrect audio player mute state after voice reconnects.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed an intermittent issue where a player's status change in the voice chat room did not call a callback set up with
-					<code>EOS_Lobby_AddNotifyRTCRoomConnectionChanged</code>.</li>
+					<a href="/docs/api-ref/functions/eos-lobby-add-notify-rtc-room-connection-changed">
+						<code>EOS_Lobby_AddNotifyRTCRoomConnectionChanged</code>
+					</a>.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed a lobby issue to stop attempting to reconnect while the network is disconnected.</li>
 				<li>
@@ -563,9 +629,13 @@
 			<ul>
 				<li>
 					<strong>New</strong>:
-					<code>EOS_P2P_SendPacket</code>
+					<a href="/docs/api-ref/functions/eos-p-2-p-send-packet">
+						<code>EOS_P2P_SendPacket</code>
+					</a>
 					allows players to send data to themselves locally without sending the data over a network. Packets sent this way are immediately added to the player's local received packet queue and you can retrieve these using the
-					<code>EOS_P2P_ReceivePacket</code>
+					<a href="/docs/api-ref/functions/eos-p-2-p-receive-packet">
+						<code>EOS_P2P_ReceivePacket</code>
+					</a>
 					function.</li>
 				<li>
 					<strong>Bug fix</strong>: Improved packet sending throughput under poor network conditions.</li>
@@ -601,7 +671,9 @@
 					<strong>Bug fix</strong>: Fixed an issue where you could not download or upload game data to the backend service using Player Data Storage due to network instability or unavailability. The EOS SDK retries to download or upload the files to keep Player Data Storage in sync between the SDK and backend service.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed an intermittent issue that would cause a crash when you use Player Data Storage's
-					<code>EOS_PlayerDataStorage_WriteFile</code>.</li>
+					<a href="/docs/api-ref/functions/eos-player-data-storage-write-file">
+						<code>EOS_PlayerDataStorage_WriteFile</code>
+					</a>.</li>
 			</ul>
 			<div>
 				<h5 id="samples">Samples</h5>
@@ -646,7 +718,9 @@
 				</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue where calls to
-					<code>EOS_Sessions_UpdateSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-update-session">
+						<code>EOS_Sessions_UpdateSession</code>
+					</a>
 					failed. This happened when the
 					<code>LocalUserId</code>
 					for the session modifications was unavailable during
@@ -659,9 +733,13 @@
 					<code>eos_sessions_types.h</code>.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue with
-					<code>EOS_Sessions_RegisterPlayers</code>
+					<a href="/docs/api-ref/functions/eos-sessions-register-players">
+						<code>EOS_Sessions_RegisterPlayers</code>
+					</a>
 					and
-					<code>EOS_Sessions_UnregisterPlayers</code>
+					<a href="/docs/api-ref/functions/eos-sessions-unregister-players">
+						<code>EOS_Sessions_UnregisterPlayers</code>
+					</a>
 					not returning the updated player list in callback when called on a non session owner.</li>
 			</ul>
 			<div>
@@ -709,9 +787,13 @@
 					<strong>Bug fix</strong>: When a Lobby's WebSocket connection is lost, the RTC connection stays up while we attempt to re-establish the WebSocket connection.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed a bug where a block request would not work despite the
-					<code>EOS_RTC_BlockParticipant</code>
+					<a href="/docs/api-ref/functions/eos-rtc-block-participant">
+						<code>EOS_RTC_BlockParticipant</code>
+					</a>
 					call succeeding if
-					<code>EOS_RTC_BlockParticipant</code>
+					<a href="/docs/api-ref/functions/eos-rtc-block-participant">
+						<code>EOS_RTC_BlockParticipant</code>
+					</a>
 					was called for a participant immediately after that participant joined the lobby.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed a crash that could occur when a second participant joined a lobby.</li>
@@ -739,7 +821,9 @@
 						<li>We recommend you stop using
 							<code>EOS_LCT_DeviceCode</code>
 							in the
-							<code>EOS_Auth_Login</code>
+							<a href="/docs/api-ref/functions/eos-auth-login">
+								<code>EOS_Auth_Login</code>
+							</a>
 							function or use another authentication method.</li>
 					</ul>
 				</li>
@@ -941,18 +1025,24 @@
 						<strong>Bug fix</strong>: Linked Account messages received from the backend are not guaranteed to have an Account ID. This is an expected state, so the
 						<code>AccountId</code>
 						field on
-						<code>EOS_UserInfo_ExternalUserInfo</code>
+						<a href="/docs/api-ref/structs/eos-user-info-external-user-info">
+							<code>EOS_UserInfo_ExternalUserInfo</code>
+						</a>
 						is Optional.</p>
 					<p>
 						<strong>Note</strong>:</p>
 					<ul>
 						<li>You should revisit any handling that assumes a specific number of external accounts. For instance,
-							<code>EOS_UserInfo_GetExternalUserInfoCount</code>
+							<a href="/docs/api-ref/functions/eos-user-info-get-external-user-info-count">
+								<code>EOS_UserInfo_GetExternalUserInfoCount</code>
+							</a>
 							may return a higher count than previously depending on the external account types in question.</li>
 						<li>The
 							<code>AccountId</code>
 							field of
-							<code>EOS_UserInfo_ExternalUserInfo</code>
+							<a href="/docs/api-ref/structs/eos-user-info-external-user-info">
+								<code>EOS_UserInfo_ExternalUserInfo</code>
+							</a>
 							was nullable before this bug fix. The API has not changed, but the behavior has changed, so if you have code that interacts with the
 							<code>AccountId</code>
 							field of
@@ -974,9 +1064,13 @@
 					and
 					<code>AllowedPlatformIdsCount</code>
 					fields on
-					<code>EOS_Lobby_CreateLobbyOptions</code>
+					<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">
+						<code>EOS_Lobby_CreateLobbyOptions</code>
+					</a>
 					and
-					<code>EOS_Sessions_CreateSessionModificationOptions</code>
+					<a href="/docs/api-ref/structs/eos-sessions-create-session-modification-options">
+						<code>EOS_Sessions_CreateSessionModificationOptions</code>
+					</a>
 					must be initialized; if the lobby is not intended to have restrictions the field should be set to
 					<code>nullptr</code>
 					and
@@ -1046,7 +1140,9 @@
 					<code>EOS_LobbyDetails_GetMemberCount</code>
 					is now accurate in all contexts including lobby search results.
 					<strong>Note</strong>: We recommend you review the usage of
-					<code>EOS_LobbyDetails_GetMemberCount</code>
+					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-count">
+						<code>EOS_LobbyDetails_GetMemberCount</code>
+					</a>
 					if used with a lobby search result.</li>
 			</ul>
 			<div>
@@ -1055,39 +1151,55 @@
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed
-					<code>EOS_Sessions_UpdateSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-update-session">
+						<code>EOS_Sessions_UpdateSession</code>
+					</a>
 					to return
 					<code>EOS_LimitExceeded</code>
 					if a new session cannot be created because doing so would exceed the maximum allowed concurrent session count.
 					<strong>Note</strong>: We recommend you update the usage of
-					<code>EOS_Sessions_UpdateSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-update-session">
+						<code>EOS_Sessions_UpdateSession</code>
+					</a>
 					to handle the
 					<code>EOS_LimitExceeded</code>
 					return code.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed
-					<code>EOS_Sessions_UpdateSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-update-session">
+						<code>EOS_Sessions_UpdateSession</code>
+					</a>
 					and
-					<code>EOS_Sessions_JoinSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-join-session">
+						<code>EOS_Sessions_JoinSession</code>
+					</a>
 					to return
 					<code>EOS_InvalidUser</code>
 					if the local user associated with the session does not exist or is not authenticated.
 					<strong>Note</strong>: We recommend you update the usage of
-					<code>EOS_Sessions_UpdateSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-update-session">
+						<code>EOS_Sessions_UpdateSession</code>
+					</a>
 					and
-					<code>EOS_Sessions_JoinSession</code>
+					<a href="/docs/api-ref/functions/eos-sessions-join-session">
+						<code>EOS_Sessions_JoinSession</code>
+					</a>
 					to handle
 					<code>EOS_InvalidUser</code>
 					return codes.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed
-					<code>EOS_Sessions_RegisterPlayers</code>
+					<a href="/docs/api-ref/functions/eos-sessions-register-players">
+						<code>EOS_Sessions_RegisterPlayers</code>
+					</a>
 					to return
 					<code>EOS_Sessions_TooManyPlayers</code>
 					when registering the requested number of players would exceed the maximum capacity of the session. This was previously
 					<code>EOS_LimitExceeded</code>.
 					<strong>Note</strong>: We recommend you update the usage of
-					<code>EOS_Sessions_RegisterPlayers</code>
+					<a href="/docs/api-ref/functions/eos-sessions-register-players">
+						<code>EOS_Sessions_RegisterPlayers</code>
+					</a>
 					to look for
 					<code>EOS_Sessions_TooManyPlayers</code>
 					instead of

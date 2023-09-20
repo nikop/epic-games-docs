@@ -129,6 +129,39 @@
 					in high latency situations when targeting PS5 7.00. This bug was introduced in EOS SDK version 1.16.</li>
 			</ul>
 			<div>
+				<h4 id="known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</h4>
+			</div>
+			<div>
+				<h5 id="lobbies-1">Lobbies</h5>
+			</div>
+			<ul>
+				<li>
+					<p>In EOS SDK version 1.16, if you add an attribute to a lobby using
+						<a href="/docs/api-ref/functions/eos-lobby-modification-add-attribute">
+							<code>EOS_LobbyModification_AddAttribute</code>
+						</a>
+						without modifying any lobby owner member attributes, the lobby owner member attributes set previously with
+						<a href="/docs/api-ref/functions/eos-lobby-modification-add-member-attribute">
+							<code>EOS_LobbyModification_AddMemberAttribute</code>
+						</a>
+						are removed. To address this issue, you must modify, add or remove a member attribute for the lobby owner any time a lobby attribute is modified.</p>
+					<p>The attribute value can be anything, as it only matters that one of the member attributes for the lobby owner is changed. You must modify, add or remove the lobby owner attribute as part of the lobby update modification used to change the lobby attribute.</p>
+					<p>Example code:</p>
+				</li>
+			</ul>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
 				<h3 id="116---2023-aug-16">1.16 - 2023-aug-16</h3>
 			</div>
 			<div>
@@ -546,7 +579,7 @@
 				</li>
 			</ul>
 			<div>
-				<h5 id="lobbies-1">Lobbies</h5>
+				<h5 id="lobbies-2">Lobbies</h5>
 			</div>
 			<ul>
 				<li>
@@ -1123,7 +1156,7 @@
 					<strong>Bug fix</strong>: Fixed an issue where building the EOS SDK on Microsoft Xbox GDK printed false warnings about closing sockets during their shutdown.</li>
 			</ul>
 			<div>
-				<h5 id="lobbies-2">Lobbies</h5>
+				<h5 id="lobbies-3">Lobbies</h5>
 			</div>
 			<ul>
 				<li>
@@ -1139,11 +1172,30 @@
 					<strong>Bug fix</strong>:
 					<code>EOS_LobbyDetails_GetMemberCount</code>
 					is now accurate in all contexts including lobby search results.
-					<strong>Note</strong>: We recommend you review the usage of
-					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-count">
-						<code>EOS_LobbyDetails_GetMemberCount</code>
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: We recommend that you review the usage of
+							<a href="/docs/api-ref/functions/eos-lobby-details-get-member-count">
+								<code>EOS_LobbyDetails_GetMemberCount</code>
+							</a>
+							if you use it with a lobby search result.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Bug fix</strong>:
+					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-by-index">
+						<code>EOS_LobbyDetails_GetMemberByIndex</code>
 					</a>
-					if used with a lobby search result.</li>
+					now matches previously documented behavior, as it does not return lobby members from a lobby search result.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: The information
+							<code>EOS_LobbyDetails_GetMemberByIndex</code>
+							returns is only available if you are actively in the lobby. It is not available for search results.</li>
+					</ul>
+				</li>
 			</ul>
 			<div>
 				<h5 id="session-based-matchmaking-1">Session Based Matchmaking</h5>
@@ -1223,7 +1275,7 @@
 					(aggressive size).</li>
 			</ul>
 			<div>
-				<h4 id="known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</h4>
+				<h4 id="known-issues-and-workarounds-1">KNOWN ISSUES AND WORKAROUNDS</h4>
 			</div>
 			<div>
 				<h5 id="android-login-sample-116">Android Login Sample 1.16</h5>
@@ -1290,6 +1342,36 @@
 			<ul>
 				<li>The Service Installer (<code>EasyAntiCheat_EOS_Setup.exe</code>) provided in EOS SDK version 1.16 has a bug that causes games to fail the launch with the error "StartService failed: 1053". This issue will be fixed in the next release.</li>
 			</ul>
+			<div>
+				<h5 id="lobbies-4">Lobbies</h5>
+			</div>
+			<ul>
+				<li>
+					<p>In EOS SDK version 1.16, if you add an attribute to a lobby using
+						<a href="/docs/api-ref/functions/eos-lobby-modification-add-attribute">
+							<code>EOS_LobbyModification_AddAttribute</code>
+						</a>
+						without modifying any lobby owner member attributes, the lobby owner member attributes set previously with
+						<a href="/docs/api-ref/functions/eos-lobby-modification-add-member-attribute">
+							<code>EOS_LobbyModification_AddMemberAttribute</code>
+						</a>
+						are removed. To address this issue, you must modify, add or remove a member attribute for the lobby owner any time a lobby attribute is modified.</p>
+					<p>The attribute value can be anything, as it only matters that one of the member attributes for the lobby owner is changed. You must modify, add or remove the lobby owner attribute as part of the lobby update modification used to change the lobby attribute.</p>
+					<p>Example code:</p>
+				</li>
+			</ul>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
 			<div>
 				<h3 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h3>
 			</div>
@@ -3627,6 +3709,12 @@
 						<a href="#sony-playstation">Sony PlayStation</a>
 					</li>
 					<li>
+						<a href="#known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</a>
+					</li>
+					<li>
+						<a href="#lobbies-1">Lobbies</a>
+					</li>
+					<li>
 						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
 					</li>
 					<li>
@@ -3666,7 +3754,7 @@
 						<a href="#friends">Friends</a>
 					</li>
 					<li>
-						<a href="#lobbies-1">Lobbies</a>
+						<a href="#lobbies-2">Lobbies</a>
 					</li>
 					<li>
 						<a href="#mobile-1">Mobile</a>
@@ -3735,7 +3823,7 @@
 						<a href="#eos-core-2">EOS Core</a>
 					</li>
 					<li>
-						<a href="#lobbies-2">Lobbies</a>
+						<a href="#lobbies-3">Lobbies</a>
 					</li>
 					<li>
 						<a href="#session-based-matchmaking-1">Session Based Matchmaking</a>
@@ -3747,13 +3835,16 @@
 						<a href="#nintendo-switch-1">Nintendo Switch</a>
 					</li>
 					<li>
-						<a href="#known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</a>
+						<a href="#known-issues-and-workarounds-1">KNOWN ISSUES AND WORKAROUNDS</a>
 					</li>
 					<li>
 						<a href="#android-login-sample-116">Android Login Sample 1.16</a>
 					</li>
 					<li>
 						<a href="#anti-cheat-service-installer">Anti-cheat Service Installer</a>
+					</li>
+					<li>
+						<a href="#lobbies-4">Lobbies</a>
 					</li>
 					<li>
 						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>

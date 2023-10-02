@@ -14,7 +14,7 @@
 			<h1>Lobby Interface</h1>
 			<h2>Use this to add lobbies to your game so players can create, join, leave, and manage lobbies.</h2>
 			<div>
-				<div>19 mins to read</div>
+				<div>18 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -91,7 +91,7 @@
 						<td>
 							<code>bAllowInvites</code>
 						</td>
-						<td>Whether members of the lobby are allowed to invite others.</td>
+						<td>Whether members of the lobby allowed to invite others.</td>
 					</tr>
 					<tr>
 						<td>
@@ -104,31 +104,6 @@
 							<code>bEnableRTCRoom</code>
 						</td>
 						<td>Creates a real-time communication (RTC) room for all members of this lobby. All members of the lobby will automatically join the RTC room when they connect to the lobby and they will automatically leave the RTC room when they leave or are removed from the lobby. While the joining and leaving of the RTC room is automatic, applications will still need to use the EOS RTC interfaces to handle all other functionality for the room.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>AllowedPlatformIdsCount</code>
-						</td>
-						<td>The number of platform IDs in the
-							<code>AllowedPlatformIds</code>
-							array.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>AllowedPlatformIds</code>
-						</td>
-						<td>An array of platform IDs that specify the player platforms that are allowed to register with the session. Platform IDs are found in the EOS header file, e.g.
-							<code>EOS_OPT_Epic</code>. For some platforms, the value is in the EOS Platform specific header file. If null, the lobby is unrestricted.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>bCrossplayOptOut</code>
-						</td>
-						<td>Whether the lobby owner does not allow crossplay interactions. If
-							<code>false</code>, crossplay interactions are allowed. If
-							<code>true</code>,
-							<code>AllowedPlatformIds</code>
-							must have a single entry that matches the platform of the lobby owner.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -589,7 +564,7 @@
 					<code>EOS_LobbySearch_CopySearchResultByIndex</code>
 					works with lobbies that a local user found in a search.</li>
 			</ul>
-			<p>After successfully completing any of the preceding operations, you will receive an
+			<p>After successfully completing any of the the preceding operations, you will receive an
 				<code>EOS_HLobbyDetails</code>
 				handle, which gives access to the following information:</p>
 			<ul>
@@ -614,9 +589,6 @@
 				<li>
 					<strong>Lobby Member Platform</strong>: The hardware platform for an individual user as identified by the server. Note that this value is only provided for lobby members on console platforms; otherwise it returns a placeholder value. This placeholder value indicates it is not possible to reliably identify the hardware platform for the given user.</li>
 			</ul>
-			<div>
-				<h3 id="working-with-data-while-in-an-active-lobby">Working With Data While in an Active Lobby</h3>
-			</div>
 			<p>To find the ID of the lobby's owner, call
 				<code>EOS_LobbyDetails_GetLobbyOwner</code>. To find the IDs of the lobby's members, first call
 				<code>EOS_LobbyDetails_GetMemberCount</code>
@@ -627,37 +599,9 @@
 				<code>EOS_LobbyDetails_CopyInfo</code>
 				function. The
 				<code>EOS_LobbyDetails_Info</code>
-				that you receive will be a copy of the EOS SDK's cached information. You own this data and must release it with the
+				that you receive will be a copy of the EOS SDK's cached information. You own this data and must release it with
 				<code>EOS_LobbyDetails_Info_Release</code>
 				function to avoid leaking memory. The data is a snapshot and will not update if any information about the lobby changes after you receive it.</p>
-			<div>
-				<h3 id="search-result-limitations">Search Result Limitations</h3>
-			</div>
-			<p>You can use the same functionality in the section
-				<a href="#working-with-data-while-in-an-active-lobby">Working With Data While in an Active Lobby</a>
-				except when you use the functions below. These functions are not available for search results and will only be available if you are actively in the lobby:</p>
-			<ul>
-				<li>
-					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-by-index">
-						<code>EOS_LobbyDetails_GetMemberByIndex</code>
-					</a>
-				</li>
-				<li>
-					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-attribute-count">
-						<code>EOS_LobbyDetails_GetMemberAttributeCount</code>
-					</a>
-				</li>
-				<li>
-					<a href="/docs/api-ref/functions/eos-lobby-details-copy-member-attribute-by-index">
-						<code>EOS_LobbyDetails_CopyMemberAttributeByIndex</code>
-					</a>
-				</li>
-				<li>
-					<a href="/docs/api-ref/functions/eos-lobby-details-copy-member-attribute-by-key">
-						<code>EOS_LobbyDetails_CopyMemberAttributeByKey</code>
-					</a>
-				</li>
-			</ul>
 			<div>
 				<h3 id="permission-levels">Permission Levels</h3>
 			</div>
@@ -712,9 +656,7 @@
 					<code>EOS_LobbyModification_AddAttribute</code>
 					without modifying any lobby owner member attributes, the lobby owner member attributes set previously with
 					<code>EOS_LobbyModification_AddMemberAttribute</code>
-					are removed.</p>
-				<br>
-				<p>See the Release Notes:
+					are removed. See the Release Notes:
 					<a href="/docs/epic-online-services/release-notes#lobbies-4">Known Issues and Workarounds</a>
 					for more information.</p>
 			</div>
@@ -1213,12 +1155,6 @@
 					</li>
 					<li>
 						<a href="#getting-information-about-a-lobby">Getting Information about a Lobby</a>
-					</li>
-					<li>
-						<a href="#working-with-data-while-in-an-active-lobby">Working With Data While in an Active Lobby</a>
-					</li>
-					<li>
-						<a href="#search-result-limitations">Search Result Limitations</a>
 					</li>
 					<li>
 						<a href="#permission-levels">Permission Levels</a>

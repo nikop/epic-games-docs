@@ -14,7 +14,7 @@
 			<h1>Custom Invites Interface</h1>
 			<h2>Interface for handling invites where Epic matchmaking is not being used.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -94,23 +94,60 @@
 					documentation.</p>
 			</div>
 			<div>
-				<h4 id="callback---custom-invite-received">Callback - Custom Invite Received</h4>
+				<h4 id="custom-invite-callback-functions">Custom Invite Callback Functions</h4>
 			</div>
-			<p>Using the
-				<strong>
-					<code>EOS_CustomInvites_AddNotifyCustomInviteReceived</code>
-				</strong>
-				and
-				<strong>
-					<code>EOS_CustomInvites_RemoveNotifyCustomInviteReceived</code>
-				</strong>
-				functions will allow you to perform your own detection, custom UI indication, and processing of custom invites. These should be called prior to Logging in, as the act of logging in and initializing can discover pending custom invites which will generate immediate notifications.</p>
-			<p>Once a custom invite has been handled (accepted or rejected by the user), you must call</p>
-			<p>
-				<strong>
+			<p>You can register to these functions to receive notifications for custom invite events. This lets you detect and process custom invites, and create custom UI to respond to them. You should call these functions prior to login, as the act of logging in and initializing can discover pending custom invites that generate immediate notifications. The table below lists the available callback functions that you can register to for custom invite notifications:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Notification</th>
+						<th>Callback Function</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Invite Received</td>
+						<td>Call
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-custom-invite-received">
+								<code>EOS_CustomInvites_AddNotifyCustomInviteReceived</code>
+							</a>
+							to receive notifications when any logged in local user receives a custom invite. You must call
+							<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-custom-invite-received">
+								<code>EOS_CustomInvites_RemoveNotifyCustomInviteReceived</code>
+							</a>
+							to remove the notification.</td>
+					</tr>
+					<tr>
+						<td>Invited Accepted</td>
+						<td>Call
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-custom-invite-accepted">
+								<code>EOS_CustomInvites_AddNotifyCustomInviteAccepted</code>
+							</a>
+							to receive notifications when any logged in local user accepts a custom invite. You must call
+							<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-custom-invite-accepted">
+								<code>EOS_CustomInvites_RemoveNotifyCustomInviteAccepted</code>
+							</a>
+							to remove the notification.</td>
+					</tr>
+					<tr>
+						<td>Invite Rejected</td>
+						<td>Call
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-custom-invite-rejected">
+								<code>EOS_CustomInvites_AddNotifyCustomInviteRejected</code>
+							</a>
+							to receive notifications when any logged in local user rejects a custom invite. You must call
+							<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-custom-invite-rejected">
+								<code>EOS_CustomInvites_RemoveNotifyCustomInviteRejected</code>
+							</a>
+							to remove the notification.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>After you've handled the custom invite (accepted or rejected by the user), you must call
+				<a href="/docs/api-ref/functions/eos-custom-invites-finalize-invite">
 					<code>EOS_CustomInvites_FinalizeInvite</code>
-				</strong>
-				to remove it from both the internal SDK and the Social Overlay’s awareness.</p>
+				</a>
+				to remove it from both the internal SDK and the Social Overlay's awareness.</p>
 			<div>
 				<h3 id="policy-configuration">Policy Configuration</h3>
 			</div>
@@ -154,7 +191,7 @@
 						<a href="#processing-a-custom-invite">Processing a Custom Invite</a>
 					</li>
 					<li>
-						<a href="#callback---custom-invite-received">Callback - Custom Invite Received</a>
+						<a href="#custom-invite-callback-functions">Custom Invite Callback Functions</a>
 					</li>
 					<li>
 						<a href="#policy-configuration">Policy Configuration</a>

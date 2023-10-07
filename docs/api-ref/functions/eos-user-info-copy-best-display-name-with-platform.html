@@ -1,0 +1,150 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_UserInfo_CopyBestDisplayNameWithPlatform</h1>
+			<h2>EOS API reference page for EOS_UserInfo_CopyBestDisplayNameWithPlatform</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow:hidden;margin-bottom:0">
+						<div aria-label="Content Tabs" role="tablist">
+							<button tabindex="0" type="button" role="tab" aria-selected="true" id="simple-tab-0" aria-controls="simple-tabpanel-0">C<span></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/user-info">UserInfo Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>EOS_UserInfo_CopyBestDisplayNameWithPlatform is used to immediately retrieve a copy of user's best display name based on an Epic Account ID. This uses data cached by a previous call to EOS_UserInfo_QueryUserInfo, EOS_UserInfo_QueryUserInfoByDisplayName or EOS_UserInfo_QueryUserInfoByExternalAccount. If the call returns an EOS_Success result, the out parameter, OutBestDisplayName, must be passed to EOS_UserInfo_BestDisplayName_Release to release the memory associated with it.</p>
+							<ol>
+								<li>If platform is non-epic, then use platform display name (if the platform is linked to the account)</li>
+								<li>If platform is epic and user has epic display name, then use epic display name</li>
+								<li>If platform is epic and user has no epic display name, then use linked external account display name</li>
+							</ol>
+							<p>The current priority for picking display name is as follows:</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success if the information is available and passed out in OutBestDisplayName</p>
+								</li>
+								<li>
+									<p>EOS_UserInfo_BestDisplayNameIndeterminate unable to determine a cert friendly display name for user</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if you pass a null pointer for the out parameter</p>
+								</li>
+								<li>
+									<p>EOS_IncompatibleVersion if the API version passed in is incorrect</p>
+								</li>
+								<li>
+									<p>EOS_NotFound if the user info is not locally cached</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>
+								<a href="/docs/api-ref/functions/eos-user-info-query-user-info">EOS_UserInfo_QueryUserInfo</a>,
+								<a href="/docs/api-ref/functions/eos-user-info-query-user-info-by-display-name">EOS_UserInfo_QueryUserInfoByDisplayName</a>,
+								<a href="/docs/api-ref/functions/eos-user-info-query-user-info-by-external-account">EOS_UserInfo_QueryUserInfoByExternalAccount</a>,
+								<a href="/docs/api-ref/structs/eos-user-info-copy-best-display-name-with-platform-options">EOS_UserInfo_CopyBestDisplayNameWithPlatformOptions</a>,
+								<a href="/docs/api-ref/structs/eos-user-info-best-display-name">EOS_UserInfo_BestDisplayName</a>,
+								<a href="/docs/api-ref/functions/eos-user-info-best-display-name-release">EOS_UserInfo_BestDisplayName_Release</a>
+							</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_UserInfo_CopyBestDisplayNameWithPlatform</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HUserInfo Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-user-info-copy-best-display-name-with-platform-options">EOS_UserInfo_CopyBestDisplayNameWithPlatformOptions</a>* Options</td>
+										<td>structure containing the input parameters</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/structs/eos-user-info-best-display-name">EOS_UserInfo_BestDisplayName</a>** OutBestDisplayName</td>
+										<td>out parameter used to receive the EOS_UserInfo_BestDisplayName structure.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<p>If successful, this function provides data to the caller through an output parameter. Once you are finished with the data, you must release it by making the appropriate call into the EOS SDK.</p>
+							</div>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-user-info-copy-best-display-name-with-platform-options">EOS_UserInfo_CopyBestDisplayNameWithPlatformOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/structs/eos-user-info-best-display-name">EOS_UserInfo_BestDisplayName</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

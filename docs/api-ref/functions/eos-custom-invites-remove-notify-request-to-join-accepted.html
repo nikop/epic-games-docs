@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Ecom_Transaction_Release</h1>
-			<h2>EOS API reference page for EOS_Ecom_Transaction_Release</h2>
+			<h1>EOS_CustomInvites_RemoveNotifyRequestToJoinAccepted</h1>
+			<h2>EOS API reference page for EOS_CustomInvites_RemoveNotifyRequestToJoinAccepted</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -33,23 +33,15 @@
 					<div>
 						<div>
 							<p>This function is part of the
-								<a href="/docs/api-ref/interfaces/ecom">Ecom Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/custom-invites">CustomInvites Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Release the memory associated with an EOS_Ecom_HTransaction.  Is expected to be called after being received from a EOS_Ecom_CheckoutCallbackInfo.</p>
-							<div>
-								<h2 id="see-also">See Also</h2>
-							</div>
-							<p>
-								<a href="/docs/api-ref/structs/eos-ecom-checkout-callback-info">EOS_Ecom_CheckoutCallbackInfo</a>,
-								<a href="/docs/api-ref/functions/eos-ecom-get-transaction-count">EOS_Ecom_GetTransactionCount</a>,
-								<a href="/docs/api-ref/functions/eos-ecom-copy-transaction-by-index">EOS_Ecom_CopyTransactionByIndex</a>
-							</p>
+							<p>Unregister from receiving notifications when a Request to Join for any logged in local user is accepted via the Social Overlay</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_Ecom_Transaction_Release</p>
+							<p>EOS_CustomInvites_RemoveNotifyRequestToJoinAccepted</p>
 							<table>
 								<thead>
 									<tr>
@@ -59,8 +51,12 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_Ecom_HTransaction Transaction</td>
-										<td>A handle to a transaction.</td>
+										<td>EOS_HCustomInvites Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>EOS_NotificationId InId</td>
+										<td>Handle representing the registered callback</td>
 									</tr>
 								</tbody>
 							</table>
@@ -76,9 +72,6 @@
 				<ul>
 					<li>
 						<a href="#remarks">Remarks</a>
-					</li>
-					<li>
-						<a href="#see-also">See Also</a>
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>

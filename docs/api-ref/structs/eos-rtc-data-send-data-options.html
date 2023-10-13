@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</h1>
-			<h2>EOS API reference page for EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</h2>
+			<h1>EOS_RTCData_SendDataOptions</h1>
+			<h2>EOS API reference page for EOS_RTCData_SendDataOptions</h2>
 			<div>
 				<div>Under 1 min to read</div>
 			</div>
@@ -32,16 +32,14 @@
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
 					<div>
 						<div>
-							<p>This data structure is part of the
-								<a href="/docs/api-ref/interfaces/achievements">Achievements Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Data containing the result information for querying a player's achievements request.</p>
+							<p>This struct is used to call EOS_RTCData_SendData.</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
-							<p>EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</p>
+							<p>EOS_RTCData_SendDataOptions</p>
 							<table>
 								<thead>
 									<tr>
@@ -51,16 +49,24 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_EResult ResultCode</td>
-										<td>The EOS_EResult code for the operation. EOS_Success indicates that the operation succeeded; other codes indicate errors.</td>
+										<td>int32_t ApiVersion</td>
+										<td>API Version: Set this to EOS_RTCDATA_SENDDATA_API_LATEST.</td>
 									</tr>
 									<tr>
-										<td>void* ClientData</td>
-										<td>Context that was passed into EOS_Achievements_QueryPlayerAchievements.</td>
+										<td>EOS_ProductUserId LocalUserId</td>
+										<td>The Product User ID of the user trying to request this operation.</td>
 									</tr>
 									<tr>
-										<td>EOS_ProductUserId UserId</td>
-										<td>The Product User ID of the user who initiated this request.</td>
+										<td>const char* RoomName</td>
+										<td>The  room this event is registered on.</td>
+									</tr>
+									<tr>
+										<td>uint32_t DataLengthBytes</td>
+										<td>The size of the data to be sent to the other participants. Max value is EOS_RTCDATA_MAX_PACKET_SIZE.</td>
+									</tr>
+									<tr>
+										<td>const void* Data</td>
+										<td>The data to be sent to the other participants</td>
 									</tr>
 								</tbody>
 							</table>
@@ -69,7 +75,7 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/callbacks/eos-achievements-on-query-player-achievements-complete-callback">EOS_Achievements_OnQueryPlayerAchievementsCompleteCallback</a>
+									<a href="/docs/api-ref/functions/eos-rtc-data-send-data">EOS_RTCData_SendData</a>
 								</li>
 							</ul>
 						</div>

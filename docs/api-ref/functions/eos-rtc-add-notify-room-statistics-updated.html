@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Lobby_AddNotifyLobbyInviteRejected</h1>
-			<h2>EOS API reference page for EOS_Lobby_AddNotifyLobbyInviteRejected</h2>
+			<h1>EOS_RTC_AddNotifyRoomStatisticsUpdated</h1>
+			<h2>EOS API reference page for EOS_RTC_AddNotifyRoomStatisticsUpdated</h2>
 			<div>
 				<div>2 mins to read</div>
 			</div>
@@ -33,22 +33,25 @@
 					<div>
 						<div>
 							<p>This function is part of the
-								<a href="/docs/api-ref/interfaces/lobby">Lobby Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/rtc">RTC Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Register to receive notifications about lobby invites rejected by local user.</p>
-							<div>
-								<p>must call RemoveNotifyLobbyInviteRejected to remove the notification</p>
-							</div>
+							<p>Register to receive notifications to receiving periodical statistics update. If the returned NotificationId is valid, you must call EOS_RTC_RemoveNotifyRoomStatisticsUpdated when you no longer wish to have your StatisticsUpdateHandler called.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
-							<p>handle representing the registered callback</p>
+							<p>Notification ID representing the registered callback if successful, an invalid NotificationId if not</p>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>EOS_INVALID_NOTIFICATIONID,
+								<a href="/docs/api-ref/functions/eos-rtc-remove-notify-room-statistics-updated">EOS_RTC_RemoveNotifyRoomStatisticsUpdated</a>
+							</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_Lobby_AddNotifyLobbyInviteRejected</p>
+							<p>EOS_RTC_AddNotifyRoomStatisticsUpdated</p>
 							<table>
 								<thead>
 									<tr>
@@ -58,23 +61,23 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HLobby Handle</td>
+										<td>EOS_HRTC Handle</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-lobby-add-notify-lobby-invite-rejected-options">EOS_Lobby_AddNotifyLobbyInviteRejectedOptions</a>* Options</td>
-										<td>Structure containing information about the request.</td>
+											<a href="/docs/api-ref/structs/eos-rtc-add-notify-room-statistics-updated-options">EOS_RTC_AddNotifyRoomStatisticsUpdatedOptions</a>* Options</td>
+										<td></td>
 									</tr>
 									<tr>
 										<td>void* ClientData</td>
-										<td>Arbitrary data that is passed back to you in the CompletionDelegate.</td>
+										<td>Arbitrary data that is passed back in the StatisticsUpdateHandler</td>
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/callbacks/eos-lobby-on-lobby-invite-rejected-callback">EOS_Lobby_OnLobbyInviteRejectedCallback</a>
-											NotificationFn</td>
-										<td>A callback that is fired when a a notification is received.</td>
+											<a href="/docs/api-ref/callbacks/eos-rtc-on-room-statistics-updated-callback">EOS_RTC_OnRoomStatisticsUpdatedCallback</a>
+											StatisticsUpdateHandler</td>
+										<td></td>
 									</tr>
 								</tbody>
 							</table>
@@ -82,22 +85,18 @@
 								<div></div>
 								<div>
 									<p>This function enables your callback (the
-										<code>NotificationFn</code>
+										<code>StatisticsUpdateHandler</code>
 										parameter) to respond to events that happen on the back-end service. Remember to remove your callback function when it is no longer needed.</p>
 								</div>
 							</div>
 							<div>
 								<h2 id="callback-function-information">Callback Function Information</h2>
 							</div>
-							<p>Because this function is asynchronous, it employs a callback of type EOS_Lobby_OnLobbyInviteRejectedCallback to report the results of its operation.</p>
-							<div>
-								<h3 id="callback-remarks">Callback Remarks</h3>
-							</div>
-							<p>Function prototype definition for notifications that comes from EOS_Lobby_AddNotifyLobbyInviteRejected</p>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_RTC_OnRoomStatisticsUpdatedCallback to report the results of its operation.</p>
 							<div>
 								<h3 id="callback-parameters">Callback Parameters</h3>
 							</div>
-							<p>EOS_Lobby_OnLobbyInviteRejectedCallback</p>
+							<p>EOS_RTC_OnRoomStatisticsUpdatedCallback</p>
 							<table>
 								<thead>
 									<tr>
@@ -108,8 +107,8 @@
 								<tbody>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-lobby-lobby-invite-rejected-callback-info">EOS_Lobby_LobbyInviteRejectedCallbackInfo</a>* Data</td>
-										<td>A EOS_Lobby_LobbyInviteRejectedCallbackInfo containing the output information and result</td>
+											<a href="/docs/api-ref/structs/eos-rtc-room-statistics-updated-info">EOS_RTC_RoomStatisticsUpdatedInfo</a>* Data</td>
+										<td>This struct is passed in with a call to EOS_RTC_AddNotifyRoomStatisticsUpdated registered event.</td>
 									</tr>
 								</tbody>
 							</table>
@@ -118,10 +117,10 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/structs/eos-lobby-add-notify-lobby-invite-rejected-options">EOS_Lobby_AddNotifyLobbyInviteRejectedOptions</a>
+									<a href="/docs/api-ref/structs/eos-rtc-add-notify-room-statistics-updated-options">EOS_RTC_AddNotifyRoomStatisticsUpdatedOptions</a>
 								</li>
 								<li>
-									<a href="/docs/api-ref/callbacks/eos-lobby-on-lobby-invite-rejected-callback">EOS_Lobby_OnLobbyInviteRejectedCallback</a>
+									<a href="/docs/api-ref/callbacks/eos-rtc-on-room-statistics-updated-callback">EOS_RTC_OnRoomStatisticsUpdatedCallback</a>
 								</li>
 							</ul>
 						</div>
@@ -141,13 +140,13 @@
 						<a href="#return-value">Return Value</a>
 					</li>
 					<li>
+						<a href="#see-also">See Also</a>
+					</li>
+					<li>
 						<a href="#parameters">Parameters</a>
 					</li>
 					<li>
 						<a href="#callback-function-information">Callback Function Information</a>
-					</li>
-					<li>
-						<a href="#callback-remarks">Callback Remarks</a>
 					</li>
 					<li>
 						<a href="#callback-parameters">Callback Parameters</a>

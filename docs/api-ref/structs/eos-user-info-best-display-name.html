@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</h1>
-			<h2>EOS API reference page for EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</h2>
+			<h1>EOS_UserInfo_BestDisplayName</h1>
+			<h2>EOS API reference page for EOS_UserInfo_BestDisplayName</h2>
 			<div>
-				<div>Under 1 min to read</div>
+				<div>1 min to read</div>
 			</div>
 		</div>
 	</section>
@@ -33,15 +33,15 @@
 					<div>
 						<div>
 							<p>This data structure is part of the
-								<a href="/docs/api-ref/interfaces/achievements">Achievements Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/user-info">UserInfo Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Data containing the result information for querying a player's achievements request.</p>
+							<p>A structure that contains the user information. These structures are created by EOS_UserInfo_CopyBestDisplayName or EOS_UserInfo_CopyBestDisplayNameWithPlatform and must be passed to EOS_UserInfo_BestDisplayName_Release.</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
-							<p>EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</p>
+							<p>EOS_UserInfo_BestDisplayName</p>
 							<table>
 								<thead>
 									<tr>
@@ -51,16 +51,28 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_EResult ResultCode</td>
-										<td>The EOS_EResult code for the operation. EOS_Success indicates that the operation succeeded; other codes indicate errors.</td>
+										<td>int32_t ApiVersion</td>
+										<td>API Version: Set this to EOS_USERINFO_BESTDISPLAYNAME_API_LATEST.</td>
 									</tr>
 									<tr>
-										<td>void* ClientData</td>
-										<td>Context that was passed into EOS_Achievements_QueryPlayerAchievements.</td>
+										<td>EOS_EpicAccountId UserId</td>
+										<td>The Epic Account ID of the user</td>
 									</tr>
 									<tr>
-										<td>EOS_ProductUserId UserId</td>
-										<td>The Product User ID of the user who initiated this request.</td>
+										<td>const char* DisplayName</td>
+										<td>The display name (un-sanitized). This may be null</td>
+									</tr>
+									<tr>
+										<td>const char* DisplayNameSanitized</td>
+										<td>The raw display name (sanitized). This may be null</td>
+									</tr>
+									<tr>
+										<td>const char* Nickname</td>
+										<td>A nickname/alias for the target user assigned by the local user. This may be null</td>
+									</tr>
+									<tr>
+										<td>EOS_OnlinePlatformType PlatformType</td>
+										<td>The platform type for the user which corresponds to the display name</td>
 									</tr>
 								</tbody>
 							</table>
@@ -69,7 +81,13 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/callbacks/eos-achievements-on-query-player-achievements-complete-callback">EOS_Achievements_OnQueryPlayerAchievementsCompleteCallback</a>
+									<a href="/docs/api-ref/functions/eos-user-info-copy-best-display-name">EOS_UserInfo_CopyBestDisplayName</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-user-info-copy-best-display-name-with-platform">EOS_UserInfo_CopyBestDisplayNameWithPlatform</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-user-info-best-display-name-release">EOS_UserInfo_BestDisplayName_Release</a>
 								</li>
 							</ul>
 						</div>

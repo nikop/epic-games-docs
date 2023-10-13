@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_Lobby_AddNotifyLobbyInviteRejected</h1>
-			<h2>EOS API reference page for EOS_Lobby_AddNotifyLobbyInviteRejected</h2>
+			<h1>EOS_CustomInvites_AddNotifyRequestToJoinReceived</h1>
+			<h2>EOS API reference page for EOS_CustomInvites_AddNotifyRequestToJoinReceived</h2>
 			<div>
 				<div>2 mins to read</div>
 			</div>
@@ -33,13 +33,13 @@
 					<div>
 						<div>
 							<p>This function is part of the
-								<a href="/docs/api-ref/interfaces/lobby">Lobby Interface</a>.</p>
+								<a href="/docs/api-ref/interfaces/custom-invites">CustomInvites Interface</a>.</p>
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Register to receive notifications about lobby invites rejected by local user.</p>
+							<p>Register to receive notifications when a request to join is received for a local user</p>
 							<div>
-								<p>must call RemoveNotifyLobbyInviteRejected to remove the notification</p>
+								<p>must call EOS_CustomInvites_RemoveNotifyRequestToJoinReceived to remove the notification</p>
 							</div>
 							<div>
 								<h2 id="return-value">Return Value</h2>
@@ -48,7 +48,7 @@
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_Lobby_AddNotifyLobbyInviteRejected</p>
+							<p>EOS_CustomInvites_AddNotifyRequestToJoinReceived</p>
 							<table>
 								<thead>
 									<tr>
@@ -58,12 +58,12 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>EOS_HLobby Handle</td>
+										<td>EOS_HCustomInvites Handle</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-lobby-add-notify-lobby-invite-rejected-options">EOS_Lobby_AddNotifyLobbyInviteRejectedOptions</a>* Options</td>
+											<a href="/docs/api-ref/structs/eos-custom-invites-add-notify-request-to-join-received-options">EOS_CustomInvites_AddNotifyRequestToJoinReceivedOptions</a>* Options</td>
 										<td>Structure containing information about the request.</td>
 									</tr>
 									<tr>
@@ -72,9 +72,9 @@
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/callbacks/eos-lobby-on-lobby-invite-rejected-callback">EOS_Lobby_OnLobbyInviteRejectedCallback</a>
+											<a href="/docs/api-ref/callbacks/eos-custom-invites-on-request-to-join-received-callback">EOS_CustomInvites_OnRequestToJoinReceivedCallback</a>
 											NotificationFn</td>
-										<td>A callback that is fired when a a notification is received.</td>
+										<td>A callback that is fired when a response is received for an invite request.</td>
 									</tr>
 								</tbody>
 							</table>
@@ -89,15 +89,15 @@
 							<div>
 								<h2 id="callback-function-information">Callback Function Information</h2>
 							</div>
-							<p>Because this function is asynchronous, it employs a callback of type EOS_Lobby_OnLobbyInviteRejectedCallback to report the results of its operation.</p>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_CustomInvites_OnRequestToJoinReceivedCallback to report the results of its operation.</p>
 							<div>
 								<h3 id="callback-remarks">Callback Remarks</h3>
 							</div>
-							<p>Function prototype definition for notifications that comes from EOS_Lobby_AddNotifyLobbyInviteRejected</p>
+							<p>Function prototype definition for notifications that comes from EOS_CustomInvites_AddNotifyRequestToJoinReceived</p>
 							<div>
 								<h3 id="callback-parameters">Callback Parameters</h3>
 							</div>
-							<p>EOS_Lobby_OnLobbyInviteRejectedCallback</p>
+							<p>EOS_CustomInvites_OnRequestToJoinReceivedCallback</p>
 							<table>
 								<thead>
 									<tr>
@@ -108,8 +108,8 @@
 								<tbody>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-lobby-lobby-invite-rejected-callback-info">EOS_Lobby_LobbyInviteRejectedCallbackInfo</a>* Data</td>
-										<td>A EOS_Lobby_LobbyInviteRejectedCallbackInfo containing the output information and result</td>
+											<a href="/docs/api-ref/structs/eos-custom-invites-request-to-join-received-callback-info">EOS_CustomInvites_RequestToJoinReceivedCallbackInfo</a>* Data</td>
+										<td>A EOS_CustomInvites_RequestToJoinReceivedCallbackInfo containing the output information and result</td>
 									</tr>
 								</tbody>
 							</table>
@@ -118,10 +118,10 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/structs/eos-lobby-add-notify-lobby-invite-rejected-options">EOS_Lobby_AddNotifyLobbyInviteRejectedOptions</a>
+									<a href="/docs/api-ref/structs/eos-custom-invites-add-notify-request-to-join-received-options">EOS_CustomInvites_AddNotifyRequestToJoinReceivedOptions</a>
 								</li>
 								<li>
-									<a href="/docs/api-ref/callbacks/eos-lobby-on-lobby-invite-rejected-callback">EOS_Lobby_OnLobbyInviteRejectedCallback</a>
+									<a href="/docs/api-ref/callbacks/eos-custom-invites-on-request-to-join-received-callback">EOS_CustomInvites_OnRequestToJoinReceivedCallback</a>
 								</li>
 							</ul>
 						</div>

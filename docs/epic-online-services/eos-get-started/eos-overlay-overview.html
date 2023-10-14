@@ -1,0 +1,225 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS Overlay Overview</h1>
+			<h2>An overview of the Epic Online Services (EOS) Overlay and how to use it in your game.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<p>
+					<strong>Note</strong>: The EOS Overlay supports Windows, PlayStation 4, PlayStation 5, Nintendo Switch, and Xbox console platforms. Support for macOS, Linux, iOS, and Android is planned.</p>
+			</div>
+			<p>Use the EOS Overlay (also known as "the overlay") to add the following features to your game. All of the features are available  through this single in-game overlay.</p>
+			<ul>
+				<li>
+					<strong>Social Overlay</strong>: Players can manage social features while they play your game, including a friends list. For more information, see the
+					<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay Overview</a>
+					documentation.</li>
+				<li>
+					<strong>Account Portal</strong>: Players can sign in to their Epic Games account or authenticate with an external account. For more information, see the
+					<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview#log-in">Crossplay: Crossplay Technical Overview</a>
+					documentation.</li>
+				<li>
+					<strong>Commerce</strong>: Players can make in-game purchases (on desktop). For more information, see the
+					<a href="/docs/epic-games-store/services/ecom/ecom-overview">Ecom Interface Overview</a>
+					documentation.</li>
+			</ul>
+			<div>
+				<h2 id="installation">Installation</h2>
+			</div>
+			<p>The installation requirements for the 
+				<!-- -->EOS Overlay
+				<!-- --> depend on how you distribute your game:</p>
+			<ul>
+				<li>
+					<strong>Epic Games Store</strong>: The Epic Games launcher automatically installs the EOS Overlay. No further action is required.</li>
+				<li>
+					<strong>Outside of the Epic Games Store (Windows and console)</strong>: The EOS Overlay is not included in your game by default. In this case, to make the EOS Overlay available in your game, you must include the EOS redistributable installer as part of your game's prerequisites. For more information, see the [Redistributable Installer]((/epic-account-services/crossplay/redistributable-installer) documentation. General Integration Requirements</li>
+			</ul>
+			<div>
+				<h2 id="general-integration-requirements">General Integration Requirements</h2>
+			</div>
+			<p>It is important to initialize the EOS SDK and call
+				<a href="/docs/api-ref/functions/eos-platform-create">
+					<code>EOS_Platform_Create</code>
+				</a>
+				before initializing Direct3D.  This gives the EOS Overlay a chance to install graphics API hooks necessary to render the overlay with each game frame presented to the user.</p>
+			<div>
+				<p>On Windows, the EOS Overlay has experimental support for Direct3D9, Direct3D10, and OpenGL. To opt-in to the experimental functionality, initialize the
+					<code>Flags</code>
+					field in
+					<a href="/docs/api-ref/structs/eos-platform-options">
+						<code>EOS_Platform_Options</code>
+					</a>
+					with the appropriate values before calling
+					<a href="/docs/api-ref/functions/eos-platform-create">
+						<code>EOS_Platform_Create</code>
+					</a>.</p>
+				<ul>
+					<li>Direct3D9 -
+						<code>EOS_PF_WINDOWS_ENABLE_OVERLAY_D3D9</code>
+					</li>
+					<li>Direct3D10 -
+						<code>EOS_PF_WINDOWS_ENABLE_OVERLAY_D3D10</code>
+					</li>
+					<li>OpenGL -
+						<code>EOS_PF_WINDOWS_ENABLE_OVERLAY_OPENGL</code>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h2 id="console-platform-integration-requirements">Console Platform Integration Requirements</h2>
+			</div>
+			<p>To integrate the EOS Overlay into your game on console platforms, you must do the following:</p>
+			<ul>
+				<li>Support the UI rendering for the EOS Overlay.</li>
+				<li>Pass user input to the EOS Overlay.</li>
+			</ul>
+			<p>Some platforms also require further modifications to ensure the EOS Overlay is rendered properly. See the EOS SDK documentation for more information on how to integrate the EOS Overlay on your platform:</p>
+			<ul>
+				<li>To integrate the EOS Overlay on Xbox, see the
+					<a href="/docs/epic-online-services/platforms/xbox#the-eos-overlay">EOS SDK for Xbox</a>
+					documentation.</li>
+				<li>To integrate the EOS Overlay on PlayStation 4, see the
+					<a href="/docs/epic-online-services/platforms/ps-4#the-eos-overlay">EOS SDK for PlayStation 4</a>
+					documentation.</li>
+				<li>To integrate the EOS Overlay on PlayStation 5, see the
+					<a href="/docs/epic-online-services/platforms/ps-5#the-eos-overlay">EOS SDK for PlayStation 5</a>
+					documentation.</li>
+				<li>To integrate the EOS Overlay on Nintendo Switch, see the
+					<a href="/docs/epic-online-services/platforms/switch#the-eos-overlay">EOS SDK for Nintendo Switch</a>
+					documentation.</li>
+			</ul>
+			<div>
+				<h2 id="flags-to-disable-the-eos-overlay">Flags to Disable the EOS Overlay</h2>
+			</div>
+			<p>You can disable the overlay functionality entirely if you need to during development. For example, when you are running your game in an editor, and testing using the graphics API of the editor. The
+				<a href="/docs/api-ref/structs/eos-platform-options">
+					<code>EOS_Platform_Options</code>
+				</a>
+				passed to
+				<a href="/docs/api-ref/functions/eos-platform-create">
+					<code>EOS_Platform_Create</code>
+				</a>
+				takes a
+				<code>Flags</code>
+				member. This member is a bit-field with room for 64 flags. There are three flags that disable the overlay:</p>
+			<ol>
+				<li>
+					<code>EOS_PF_LOADING_IN_EDITOR</code>
+					- Set this flag to disable the overlay when you are using the EOS SDK in an editor, such as the UE4 Play-in-Editor (PIE) or the Unity Editor. The overlay remains disabled, including outside of an editor, until you turn this flag off.</li>
+				<li>
+					<code>EOS_PF_DISABLE_OVERLAY</code>
+					- Set this flag to disable the overlay in all situations. Note that when this flag is set, purchase-related functionality in the Ecom Interface fails.</li>
+				<li>
+					<code>EOS_PF_DISABLE_SOCIAL_OVERLAY</code>
+					- Set this flag to disable only the Social Overlay feature.</li>
+			</ol>
+			<div>
+				<h2 id="compatible-rendering-apis-and-operating-systems">Compatible Rendering APIs and Operating Systems</h2>
+			</div>
+			<div>
+				<h3 id="windows">Windows</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Availability</th>
+						<th>API</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>Available Now</code>
+						</td>
+						<td>
+							<ul>
+								<li>Direct3D 12</li>
+								<li>Direct3D 11</li>
+								<li>Vulkan</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Experimental</code>
+						</td>
+						<td>
+							<ul>
+								<li>Direct3D 10</li>
+								<li>Direct3D 9</li>
+								<li>OpenGL</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note</strong>: Support for macOS and Linux is planned.</p>
+			
+			<!-- -->
+			<div>
+				<h2 id="localization">Localization</h2>
+			</div>
+			<p>The EOS Overlay uses a locale code for localization of text in the Social Overlay, Account Portal, and commerce UI. The locale code comes from one of two sources:</p>
+			<ul>
+				<li>The language that the player selected when they created their Epic Games account.</li>
+				<li>An override value that your game provides. You can set an override value for the locale with
+					<code>EOS_Platform_SetOverrideLocaleCode</code>.</li>
+			</ul>
+			<p>If your game uses an override value, the EOS Overlay uses the override, regardless of what the player selected in their Epic Games account.</p>
+			<div id="tag_list">
+				<a href="/docs/site-map">overlay</a>
+				<a href="/docs/site-map">
+					eos overlay</a>
+				<a href="/docs/site-map">
+					social overlay</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#installation">Installation</a>
+					</li>
+					<li>
+						<a href="#general-integration-requirements">General Integration Requirements</a>
+					</li>
+					<li>
+						<a href="#console-platform-integration-requirements">Console Platform Integration Requirements</a>
+					</li>
+					<li>
+						<a href="#flags-to-disable-the-eos-overlay">Flags to Disable the EOS Overlay</a>
+					</li>
+					<li>
+						<a href="#compatible-rendering-apis-and-operating-systems">Compatible Rendering APIs and Operating Systems</a>
+					</li>
+					<li>
+						<a href="#windows">Windows</a>
+					</li>
+					<li>
+						<a href="#localization">Localization</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

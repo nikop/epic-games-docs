@@ -1,0 +1,233 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Technical Overview</h1>
+			<h2>A technical overview of the Social Overlay, including how to define shortcuts and localization.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>The Social Overlay supports Windows PC, Nintendo Switch, PlayStation, and Xbox console platforms. Support for macOS, Linux, Android, and iOS is planned.</p>
+				</div>
+			</div>
+			<div>
+				<h4 id="web-browser-engine">Web Browser Engine</h4>
+			</div>
+			<p>The Social Overlay uses a web browser engine to render the panels and notification pop-ups that the player sees in your game. The web browser engine is a recent fork of WebKit and supports HTML5, JavaScript, CSS3, and Web APIs.</p>
+			<p>For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/platforms">Platform Implementation for EOS</a>: for details on the platforms that EOS SDK supports.</li>
+				<li>
+					<a href="https://webkit.org/">WebKit at webkit.org</a>: the open source organization that provides the WebKit web browser engine.</li>
+			</ul>
+			<div>
+				<h4 id="content-delivery-network-cdn">Content Delivery Network (CDN)</h4>
+			</div>
+			<p>The Social Overlay uses a Content Delivery Network (CDN) so the player sees the latest update to their social information (for example their friends list) and your games' achievements when the EOS SDK initializes the Social Overlay. This also means we can update the Social Overlay with new features and bug fixes at any time.</p>
+			<p>You can choose to disable some features of the Social Overlay, so that when the EOS SDK initializes the Social Overlay the player cannot see or use those features.</p>
+			<p>
+				<strong>Note:</strong>
+				Epic Games may disable or hide a feature when there are issues that affect the player's experience while playing your game.</p>
+			<div>
+				<h4 id="social-overlay-from-the-epic-games-launcher">Social Overlay from the Epic Games Launcher</h4>
+			</div>
+			<p>A player can open the Social Overlay from the Epic Games Launcher if they select the following icon:</p>
+			<div>
+				<div style="max-width:50px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Social Overlay icon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Social Overlay icon" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/social-overlay-overview/social-overlay-button.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<p>When a player uses the Social Overlay from the Epic Games Launcher, they can view their friends, see which friends are online and accept an invitation to join another player's game. However, they cannot do the following (unless they use the Social Overlay in your game):</p>
+			<ul>
+				<li>Request to join another player's game or party.</li>
+				<li>See their own party.</li>
+				<li>Join a public lobby.</li>
+			</ul>
+			<div>
+				<h4 id="presence">Presence</h4>
+			</div>
+			<p>The Social Overlay automatically displays a player's 
+				<!-- -->presence
+				<!-- --> information while they play your game. This includes basic details, such as their online status and the name of your game. If you include rich presence strings in your game, the Social Overlay automatically displays this information. Rich presence strings are rich text strings that specify the current action or location of the player, such as “In the Main Menu”.</p>
+			<p>The Social Overlay automatically displays rich presence strings for the following items:</p>
+			<ul>
+				<li>Rich presence strings that you set for the native platform with the native platform's APIs.</li>
+				<li>Rich presence strings that you set for EOS with the EOS SDK.</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				If you want to display rich presence strings on the native platform (for example, PlayStation 4), you must call the native platform's APIs to set them.</p>
+			<p>For more information on how to set rich presence strings for EOS, see the
+				<a href="/docs/epic-account-services/eos-presence-interface#modifying-a-rich-text-string">Modifying a Rich Text String</a>
+				section of the Presence Interface documentation. For more information on how to set rich presence strings for the native platform, see the native platform's official documentation.</p>
+			<div>
+				<h4 id="localization">Localization</h4>
+			</div>
+			<p>The Social Overlay supports the following locales:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Locale Code</th>
+						<th>Language</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ar</td>
+						<td>Arabic</td>
+					</tr>
+					<tr>
+						<td>de</td>
+						<td>German</td>
+					</tr>
+					<tr>
+						<td>en-US</td>
+						<td>English (United States)</td>
+					</tr>
+					<tr>
+						<td>es-ES</td>
+						<td>Spanish (Spain)</td>
+					</tr>
+					<tr>
+						<td>es-419</td>
+						<td>Spanish (Mexico)</td>
+					</tr>
+					<tr>
+						<td>fr</td>
+						<td>French</td>
+					</tr>
+					<tr>
+						<td>it</td>
+						<td>Italian</td>
+					</tr>
+					<tr>
+						<td>ja</td>
+						<td>Japanese</td>
+					</tr>
+					<tr>
+						<td>ko</td>
+						<td>Korean</td>
+					</tr>
+					<tr>
+						<td>pl</td>
+						<td>Polish</td>
+					</tr>
+					<tr>
+						<td>pt-BR</td>
+						<td>Portrugese (Brazil)</td>
+					</tr>
+					<tr>
+						<td>ru</td>
+						<td>Russian</td>
+					</tr>
+					<tr>
+						<td>th</td>
+						<td>Thai</td>
+					</tr>
+					<tr>
+						<td>tr</td>
+						<td>Turkish</td>
+					</tr>
+					<tr>
+						<td>zh-Hans</td>
+						<td>Chinese [Simplified]</td>
+					</tr>
+					<tr>
+						<td>zh-Hant</td>
+						<td>Chinese [Traditional]</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When a player creates their Epic Games account, the language they choose is also the language they see in the Social Overlay. However, you can set the locale for your game, which overrides the language used by the player. See the
+				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration#localization">Localization section</a>
+				of the SDK Integration documentation for more information.</p>
+			<p>If the player chooses a language that the Social Overlay does not support, then the Social Overlay uses the next best locale that is supported.</p>
+			<div>
+				<h4 id="how-to-set-the-shortcut">How to Set the Shortcut</h4>
+			</div>
+			<p>Players can open the Social Overlay in your game if they press a shortcut:</p>
+			<ul>
+				<li>Windows PC (default): SHIFT+F3</li>
+				<li>Nintendo Switch (recommended): Minus button</li>
+				<li>PlayStation 4, PlayStation 5 (recommended): Touchpad</li>
+				<li>Xbox One, Xbox Series (recommended): View button</li>
+			</ul>
+			<p>Players can use the default Windows PC shortcut (SHIFT+F3) or you can change this shortcut to a different one. If you release your game on console, you must set up the shortcut. We recommend the shortcuts listed above.</p>
+			<p>To set up a shortcut on Windows PC or console:</p>
+			<ul>
+				<li>Call
+					<code>EOS_UI_SetToggleFriendsKey</code>
+					and set the key combination in the
+					<code>EOS_UI_SetToggleFriendsKeyOptions</code>
+					parameter. On Windows PC, you can use any set of modifiers (for example SHIFT) and one other key. On console you can use any button.</li>
+			</ul>
+			<p>For more details on how to set up the shortcut, see the following documentation:</p>
+			<ul>
+				<li>Values and parameters for the API:
+					<a href="/docs/api-ref/functions/eos-ui-set-toggle-friends-key">
+						<code>EOS_UI_SetToggleFriendsKey</code>
+					</a>
+				</li>
+				<li>Details on how to set each key combination:
+					<a href="/docs/api-ref/enums/eos-ui-e-key-combination">
+						<code>EOS_UI_EKeyCombination</code>
+					</a>.</li>
+			</ul>
+			<div id="tag_list">
+				<a href="/docs/site-map">Overlay</a>
+				<a href="/docs/site-map">
+					Social</a>
+				<a href="/docs/site-map">
+					Featured</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#web-browser-engine">Web Browser Engine</a>
+					</li>
+					<li>
+						<a href="#content-delivery-network-cdn">Content Delivery Network (CDN)</a>
+					</li>
+					<li>
+						<a href="#social-overlay-from-the-epic-games-launcher">Social Overlay from the Epic Games Launcher</a>
+					</li>
+					<li>
+						<a href="#presence">Presence</a>
+					</li>
+					<li>
+						<a href="#localization">Localization</a>
+					</li>
+					<li>
+						<a href="#how-to-set-the-shortcut">How to Set the Shortcut</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

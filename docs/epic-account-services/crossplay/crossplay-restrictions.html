@@ -1,0 +1,175 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Crossplay Restrictions</h1>
+			<h2>How to handle crossplay restrictions in your game.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>Players may opt out of crossplay interactions for various reasons:</p>
+			<ul>
+				<li>Some console platform providers offer settings to disable crossplay.
+					<!-- -->
+					<ul>
+						<li>In this case, you must follow those settings as part of the certification requirements.</li>
+					</ul>
+				</li>
+				<li>Your game may have crossplay opt-out requirements as part of the design.</li>
+				<li>You may have compelling technical or business reasons for restricting crossplay.</li>
+			</ul>
+			<p>In all the above cases, when a player opts out of crossplay, you must ensure that they only join lobbies or sessions where members share the same platform. For example, you must make sure that a PC player who opts out of crossplay can join a lobby or session with only other PC players.</p>
+			<p>For purposes of crossplay restriction, "platform" refers to the online service the player has authenticated with. For example:</p>
+			<ul>
+				<li>Xbox players are all considered to be on the Xbox Live (XBL) platform.</li>
+				<li>PlayStation players are all considered to be on the PlayStation Network (PSN) platform.</li>
+			</ul>
+			<div>
+				<h2 id="platform-definitions">Platform Definitions</h2>
+			</div>
+			<p>The SDK recognizes different platforms using the platform definition found in its header file. Platform-specific header files are in the format
+				<code>eos_THE_PLATFORM_NAME.h</code>. Each platform has a numeric ID used to interact with the SDK, which is defined in the platform-specific headers where necessary.</p>
+			<div>
+				<h2 id="disable-crossplay">Disable Crossplay</h2>
+			</div>
+			<p>You or the player might disable crossplay for many reasons, most notably respecting first-party requirements. The SDK supports disabling crossplay per player and makes it easier for game developers to manage the related workflows.</p>
+			<p>There are multiple ways of enforcing crossplay; therefore, the SDK hands over control to you. You must provide enough context to the backend to make crossplay restriction-related decisions within the lobby and session services.</p>
+			<p>Epic Services and game clients split the responsibility for enforcing crossplay restrictions. The SDK sends information between the parties. Specifically:</p>
+			<ul>
+				<li>The backend lobby or session service uses authentication tokens to identify a player's platform where possible.
+					<!-- -->
+					<ul>
+						<li>In the case of lobbies, the backend lobby service returns the backend-identified platform for each lobby member, and the SDK exposes this value in
+							<code>EOS_LobbyDetails_MemberInfo</code>
+							as Platform (which is
+							<code>EOS_OnlinePlatformType</code>.)</li>
+					</ul>
+				</li>
+				<li>When a player creates a lobby or session, the SDK informs the player's newly created lobby or session which platforms can join it.
+					<!-- -->
+					<ul>
+						<li>
+							<p>If that player's platform is not allowed to join the lobby or session, the backend lobby or session service will prevent any player from joining via
+								<code>EOS_Lobby_JoinLobby</code>.</p>
+							<p>
+								<br>
+								<strong>Note</strong>: Your game should always add additional validation or enforcement on the host or server when players connect, to make sure they are crossplay compatible.</p>
+						</li>
+						<li>
+							<p>Additionally, a game client will not see lobbies with incompatible crossplay restrictions in search results because the backend doesn't send the results to the SDK.</p>
+						</li>
+					</ul>
+				</li>
+				<li>When players create or join a lobby, you must specify whether or not they opt-out from crossplay in the lobby service. The backend does not act on this value but replicates it to all other lobby members. This ensures all lobby members know each other's platform and crossplay opt-out status. The host or game must use this information to enforce the crossplay rules of your game.</li>
+			</ul>
+			<div>
+				<h2 id="restricted-and-unrestricted-lobby-workflow-examples">Restricted and Unrestricted Lobby Workflow Examples</h2>
+			</div>
+			<div>
+				<h3 id="platform-mismatch-player-b-wants-to-join-player-as-restricted-lobby-on-a-different-platform">Platform Mismatch: Player B Wants to Join Player A's Restricted Lobby on A Different Platform</h3>
+			</div>
+			<ul>
+				<li>Player A is the Lobby Owner.</li>
+				<li>Player A sets
+					<code>AllowedPlatforms</code>
+					on their created lobby to a specific platform. For example, PSN.</li>
+				<li>Player B is on a different platform than Player A. For example, Player A is on PSN, and Player B is on XBL.</li>
+				<li>Player B attempts to join Player A's lobby.</li>
+				<li>Behaviors:
+					<!-- -->
+					<ul>
+						<li>Player B cannot find Player A's lobby in a search.</li>
+						<li>If Player B attempts to join Player A's lobby via invite or via presence join, they receive an error,
+							<code>EOS_Lobby_PlatformNotAllowed</code>, from the backend.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="platform-mismatch-player-b-wants-to-join-player-as-unrestricted-lobby-on-a-different-platform">Platform Mismatch: Player B Wants to Join Player A's Unrestricted Lobby on A Different Platform</h3>
+			</div>
+			<ul>
+				<li>Player A is the Lobby Owner.</li>
+				<li>Player A set
+					<code>AllowedPlatforms</code>
+					to an empty array, indicating unrestricted.</li>
+				<li>Player B is on a different platform than Player A. For example, Player A is on PSN, and Player B is on XBL.</li>
+				<li>Player B has opted out of crossplay.</li>
+				<li>Player B attempts to join Player A's lobby</li>
+				<li>Behaviors:
+					<!-- -->
+					<ul>
+						<li>In this case, the backend will allow Player B to join Player A's lobby even though Player B has opted out of crossplay; this arrangement will violate that opt-out.</li>
+						<li>The backend cannot enforce the crossplay restrictions, so you are responsible for enforcing crossplay restrictions in cases where the lobby is unrestricted.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="how-to-enforce-crossplay-restrictions-in-unrestricted-lobbies">How to Enforce Crossplay Restrictions in Unrestricted Lobbies</h3>
+			</div>
+			<p>There are multiple strategies for enforcing crossplay restrictions when a lobby does not contain crossplay restrictions. Two suggestions are to:</p>
+			<ol>
+				<li>
+					<p>Disallow players that have opted out of crossplay from participating in crossplay lobbies.</p>
+					<p>
+						<br>The above strategy is effective, but it creates fragmented matchmaking pools that cannot interact. For example, XSX/XboxOneGDK players that opt out of crossplay may only match with other XSX/XboxOneGDK players that have opted out of crossplay.</p>
+				</li>
+				<li>
+					<p>As new members are added, adjust which platforms can join a crossplay lobby.</p>
+					<p>
+						<br>The above strategy provides more flexibility. For example, an XSX/XboxOneGDK player that owns an unrestricted lobby can play with other XSX/XboxOneGDK players regardless of opt-out status. The downside to this flexibility is that players who have opted out of crossplay necessarily narrow the platform restrictions of an unrestricted lobby upon joining. For example, if an XSX/XboxOneGDK player who opts out of crossplay joins the lobby of another XSX/XboxOneGDK player who opts in, that lobby can no longer accept, say, PS5 players until the opt-out member leaves or is kicked.</p>
+				</li>
+			</ol>
+			<p>We recommend that you implement strategy two (As new members are added, adjust which platforms can join a crossplay lobby), since it encourages inclusivity and enabling crossplay. The workflow for this strategy is captured here:</p>
+			<div>
+				<div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Crossplay restrictions workflow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Crossplay restrictions workflow" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/crossplay/crossplay-restrictions/crossplay-restrictions-workflow.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<p>For example, you can implement an algorithm that kicks any player who, upon joining, causes a crossplay violation. In such a scenario, the offending player is kicked and the lobby is guaranteed to remain crossplay consistent.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#platform-definitions">Platform Definitions</a>
+					</li>
+					<li>
+						<a href="#disable-crossplay">Disable Crossplay</a>
+					</li>
+					<li>
+						<a href="#restricted-and-unrestricted-lobby-workflow-examples">Restricted and Unrestricted Lobby Workflow Examples</a>
+					</li>
+					<li>
+						<a href="#platform-mismatch-player-b-wants-to-join-player-as-restricted-lobby-on-a-different-platform">Platform Mismatch: Player B Wants to Join Player A's Restricted Lobby on A Different Platform</a>
+					</li>
+					<li>
+						<a href="#platform-mismatch-player-b-wants-to-join-player-as-unrestricted-lobby-on-a-different-platform">Platform Mismatch: Player B Wants to Join Player A's Unrestricted Lobby on A Different Platform</a>
+					</li>
+					<li>
+						<a href="#how-to-enforce-crossplay-restrictions-in-unrestricted-lobbies">How to Enforce Crossplay Restrictions in Unrestricted Lobbies</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

@@ -1,0 +1,167 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK for Windows</h1>
+			<h2>Reference information for implementing EOS SDK for Windows.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<h2 id="supported-windows-release-versions">Supported Windows Release Versions</h2>
+			</div>
+			
+			<!-- -->
+			<p>The table below lists the Windows release version which each EOS SDK release version supports:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>EOS SDK Release Version</th>
+						<th></th>
+						<th>Windows Release Version</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Any release version</td>
+						<td>supports</td>
+						<td>Windows 7 or higher</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="set-up-the-eos-sdk-for-windows">Set up the EOS SDK for Windows</h2>
+			</div>
+			<p>Before you implement the EOS SDK with Windows, see the documentation on
+				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
+				for information on platform implementation.</p>
+			<div>
+				<h3 id="building-on-windows">Building on Windows</h3>
+			</div>
+			<p>Windows does not require the use of
+				<code>Windows/eos_Windows_base.h</code>. It is provided to ease implementation of a cross-platform 
+				<!-- -->product
+				<!-- -->.</p>
+			<div>
+				<h3 id="linking-on-windows">Linking on Windows</h3>
+			</div>
+			<p>
+				<strong>Windows</strong>
+				requires you to add both the link-time library and load-time library to the link command for your project.</p>
+			<ul>
+				<li>The link-time library is
+					<code>EOSSDK-Win64-Shipping.lib</code>
+					for a 64-bit application, and
+					<code>EOSSDK-Win32-Shipping.lib</code>
+					for a 32-bit application.</li>
+				<li>The run-time library is
+					<code>EOSSDK-Win64-Shipping.dll</code>
+					for a 64-bit application, and
+					<code>EOSSDK-Win32-Shipping.dll</code>
+					for a 32-bit application.</li>
+			</ul>
+			<p>Use
+				<code>/DELAYDLL</code>
+				during linking to prevent the library from automatically loading at startup. Read the
+				<strong>
+					<a href="#loading-on-windows">Loading</a>
+				</strong>
+				section below for more information.</p>
+			<div>
+				<h3 id="loading-on-windows">Loading on Windows</h3>
+			</div>
+			<p>If you do not link using
+				<code>/DELAYDLL</code>
+				then the EOS SDK will load automatically at the start of the application. When using
+				<code>/DELAYDLL</code>
+				then there are two ways that you can load the DLL.</p>
+			<p>The standard use is a fully implemented
+				<code>__delayLoadHelper2</code>
+				function.  This will allow the first call to the EOS SDK to automatically load the DLL.  Microsoft provides an implementation with the MSVC Toolchain in the file
+				<code>delayhlp.cpp</code>. You can prevent the automatic loading of the DLL by providing a completely blank implementation, similar to:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>Alternatively, you can explicitly load the module with the following:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>Where
+				<code>Filename</code>
+				is the path to the EOS SDK DLL file. If the DLL is in the working directory of the game then the filename does not need to be a full path. This will most likely be something similar to
+				<code>EOSSDK-Win64-Shipping.dll</code>
+				for 64-bit Windows.</p>
+			<div>
+				<h4 id="unloading-the-module">Unloading the Module</h4>
+			</div>
+			<p>To unload the module you can use:</p>
+			<p>
+				<code>::FreeLibrary(Module);</code>
+			</p>
+			<p>Where Module is the value returned by
+				<code>::LoadLibrary</code>.</p>
+			<div id="tag_list">
+				<a href="/docs/site-map">Platforms</a>
+				<a href="/docs/site-map">
+					Windows</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#supported-windows-release-versions">Supported Windows Release Versions</a>
+					</li>
+					<li>
+						<a href="#set-up-the-eos-sdk-for-windows">Set up the EOS SDK for Windows</a>
+					</li>
+					<li>
+						<a href="#building-on-windows">Building on Windows</a>
+					</li>
+					<li>
+						<a href="#linking-on-windows">Linking on Windows</a>
+					</li>
+					<li>
+						<a href="#loading-on-windows">Loading on Windows</a>
+					</li>
+					<li>
+						<a href="#unloading-the-module">Unloading the Module</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

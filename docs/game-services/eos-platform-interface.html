@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Platform Interface">Platform Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -20,7 +14,7 @@
 			<h1>Platform Interface</h1>
 			<h2>Interface that grants access to all other interfaces.</h2>
 			<div>
-				<div>9 mins to read</div>
+				<div>10 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -163,13 +157,13 @@
 			</div>
 			<p>The
 				<a href="/docs/dev-portal">Developer Portal</a>
-				supports console developers who want to use the EOS SDK, including the ability to authenticate users on the Playstation Network and XBox Live online services. However, developers must first confirm their status with the console platform holders. Each platform holder offers their own procedures for confirmation.</p>
+				supports console developers who want to use the EOS SDK, including the ability to authenticate users on the PlayStation Network and XBox Live online services. However, developers must first confirm their status with the console platform holders. Each platform holder offers their own procedures for confirmation.</p>
 			<ul>
 				<li>
 					<p>
 						<strong>Nintendo Switch:</strong>
 						Sign into your account on the
-						<a href="/docs/en-UShttps://developer.nintendo.com/">Nintendo Developer Portal</a>
+						<a href="https://developer.nintendo.com/">Nintendo Developer Portal</a>
 						and click through
 						<strong>Getting Started</strong>
 						&gt;
@@ -179,25 +173,25 @@
 				</li>
 				<li>
 					<p>
-						<strong>Playstation 4:</strong>
+						<strong>PlayStation 4, PlayStation 5:</strong>
 						Sign into your account on the
-						<a href="/docs/en-UShttps://partners.playstation.net/">Playstation Partners Portal</a>, go to the
-						<strong>Playstation 4 DevNet</strong>, and click through
+						<a href="https://partners.playstation.net/">PlayStation Partners Portal</a>, go to the
+						<strong>PlayStation 4 DevNet</strong>, and click through
 						<strong>Development</strong>
 						&gt;
 						<strong>Tools &amp; Middleware</strong>
 						&gt;
 						<strong>Tools &amp; Middleware directory</strong>
 						&gt;
-						<strong>Unreal Engine 4</strong>. Click the
+						<strong>Epic Online Services</strong>. Click the
 						<strong>Confirm Status</strong>
 						button.</p>
 				</li>
 				<li>
 					<p>
-						<strong>Xbox One:</strong>
+						<strong>Xbox One and Series X:</strong>
 						Contact your Microsoft account representative and ask them to send an email to
-						<a href="/docs/en-USmailto:consoles@unrealengine.com">consoles@unrealengine.com</a>, confirming your status and referencing your email address.</p>
+						<a href="mailto:consoles@unrealengine.com">consoles@unrealengine.com</a>, confirming your status and referencing your email address.</p>
 				</li>
 			</ul>
 			<p>Once you have confirmed your status, you are eligible to receive access to, and support for, the console SDK. Eligibility includes Unreal Engine partners, either under EULA or under a custom license, and non-Unreal Engine partners.</p>
@@ -347,13 +341,13 @@
 						</td>
 						<td>Pointer to
 							<code>EOS_Platform_RTCOptions</code>
-							structure for using Real Time Communication features. Use NULL to disable the RTC features, such as Voice.</td>
+							structure for using Real Time Communication features. Use NULL to disable the Real Time Communications (RTC) features, such as Voice.</td>
 					</tr>
 					<tr>
 						<td>
 							<code>IntegratedPlatformOptionsContainerHandle</code>
 						</td>
-						<td>A handle that contains all the options for setting up integrated platforms. When set to NULL, the default integrated platform behavior for the host platform will be used.</td>
+						<td>A handle that contains all the options for setting up integrated platforms. When set to NULL, the EOS Integrated Platform behavior for the host platform will be disabled.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -402,7 +396,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a href="/docs/epic-account-services/auth-interface">Authentication</a>
+							<a href="/docs/epic-account-services/auth/auth-interface">Authentication</a>
 						</td>
 						<td>
 							<code>EOS_Platform_GetAuthInterface</code>
@@ -572,21 +566,52 @@
 			<div>
 				<h3 id="restarting-the-app-with-the-launcher">Restarting the App with the Launcher</h3>
 			</div>
-			<p>By passing an
-				<code>EOS_HPlatform</code>
-				handle into
-				<code>EOS_Platform_CheckForLauncherAndRestart</code>, EOS will check whether the app was launched through the Launcher. If it wasn't, it will restart the app through the Launcher. This returns an
+			<p>When you pass an
+				<code>EOS_HPlatform handle</code>
+				into
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>, EOS checks whether the Epic Games Launcher launches the app. If the Epic Games Launcher doesn't launch the app,
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>
+				restarts the app with the Epic Games Launcher.</p>
+			<p>
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>
+				is only relevant for apps that are published on the store and, therefore, are already accessible through the Launcher.</p>
+			<p>
+				<strong>Note</strong>: During the call to
+				<code>EOS_Platform_Create</code>, the command line used to launch the app is inspected. If it is recognized as coming from the Epic Games Launcher, the environment variable,
+				<code>EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR</code>, is set to
+				<code>1</code>.</p>
+			<p>You can force the
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>
+				API to relaunch the app by explicitly unsetting
+				<code>EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR</code>
+				before calling
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>.</p>
+			<p>
+				<strong>Note</strong>: The APIs you use to interact with the environment variable,
+				<code>EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR</code>, are dependent on the operating system:</p>
+			<ul>
+				<li>On Windows, you must use
+					<code>SetEnvironmentVariable</code>
+					and
+					<code>GetEnvironmentVariable</code>.</li>
+				<li>On other platforms, you must use
+					<code>setenv</code>
+					and
+					<code>getenv</code>.</li>
+			</ul>
+			<p>This returns an
 				<code>EOS_EResult</code>
 				with the following codes:</p>
 			<ul>
 				<li>
-					<code>EOS_Success</code>: The app is being relaunched with the Launcher. The current app process must be terminated as soon as possible to make way for the newly launched process.</li>
+					<code>EOS_Success</code>: The Epic Games Launcher is relaunching the app. You must terminate the current app process as soon as possible to make way for the newly launched process.</li>
 				<li>
-					<code>EOS_NoChange</code>: If the app was already launched through the Launcher, no additional action needs to be taken.</li>
+					<code>EOS_NoChange</code>: The Epic Games Launcher has already launched the app. You don't need to do anything.</li>
 				<li>
-					<code>EOS_UnexpectedError</code>: The LauncherCheck module failed to initialize, or the module tried and failed to restart the app.</li>
+					<code>EOS_UnexpectedError</code>: The
+					<code>LauncherCheck</code>
+					module failed to initialize, or the module tried and failed to restart the app.</li>
 			</ul>
-			<p>This function is only relevant for apps that are published on the store and therefore are already accessible through the Launcher.</p>
 			<div>
 				<h2 id="shutting-down-the-sdk">Shutting Down the SDK</h2>
 			</div>
@@ -603,6 +628,11 @@
 			<div>
 				<h2 id="application-and-network-status">Application and Network Status</h2>
 			</div>
+			<p>You must set your players' application (game) status and network status when you change either status. Setting these will prompt the EOS SDK, ensuring that RTC transitions properly for your game.</p>
+			<div>
+				<h3 id="application-status">Application Status</h3>
+			</div>
+			<p>The application status notifies the EOS SDK whether the game is currently suspended.</p>
 			<p>
 				<code>EOS_Platform_SetApplicationStatus</code>
 				must be called when the application status changes. The application status can be set using the
@@ -621,37 +651,38 @@
 				<tbody>
 					<tr>
 						<td>
-							<code>EOS_AS_BackgroundConstrained</code>
-						</td>
-						<td>Background constrained.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_AS_BackgroundUnconstrained</code>
-						</td>
-						<td>Background unconstrained.</td>
-					</tr>
-					<tr>
-						<td>
 							<code>EOS_AS_BackgroundSuspended</code>
 						</td>
-						<td>Background suspended.</td>
+						<td>Notifies the SDK that the application has been put into a suspended state by the platform. This is sometimes called "background mode."</td>
 					</tr>
 					<tr>
 						<td>
 							<code>EOS_AS_Foreground</code>
 						</td>
-						<td>Foreground</td>
+						<td>Notifies the SDK that the application has been resumed from a suspended state. This is the default active state on all platforms.</td>
 					</tr>
 				</tbody>
 			</table>
 			<p>
 				<code>EOS_Platform_GetApplicationStatus</code>
 				can also be used to get the current application status.</p>
-			<p>The nature of these application changes will depend on the platform (see the platforms-specific documentation for more information).</p>
-			<p>
+			<p>The nature of these application status changes depends on the platform (see the platforms-specific documentation for more information).</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>What your game does for RTC rooms when your game transitions between states is up to you. The common practice is for all platforms to leave all RTC rooms and disallow joining back while in a suspended state (background mode). You can control this default behavior with the
+				<code>BackgroundMode</code>
+				option. See the
+				<a href="/docs/game-services/voice/using-voice#background-mode">Background Mode</a>
+				section of the Using the Voice Interface documentation for more information on how to set
+				<code>BackgroundMode</code>.</p>
+			<div>
+				<h3 id="network-status">Network Status</h3>
+			</div>
+			<p>The network status sets the status of the player's network connection.</p>
+			<p>You must call
 				<code>EOS_Platform_SetNetworkStatus</code>
-				must be called when the network status changes. The network status can be set using the
+				when the network status changes. The network status can be set using the
 				<code>NewStatus</code>
 				parameter.</p>
 			<p>The following network states are defined with the
@@ -675,28 +706,34 @@
 						<td>
 							<code>EOS_NS_Offline</code>
 						</td>
-						<td>We may not be connected to the internet. The network can still be used, but is expected to probably fail.</td>
+						<td>The player may not be connected to the internet. The network can still be used, but is likely to fail.</td>
 					</tr>
 					<tr>
 						<td>
 							<code>EOS_NS_Online</code>
 						</td>
-						<td>We think we're connected to the internet.</td>
+						<td>The player thinks they are connected to the internet.</td>
 					</tr>
 				</tbody>
 			</table>
 			<p>
 				<code>EOS_Platform_GetNetworkStatus</code>
 				can also be used to get the current network status.</p>
-			<p>The nature of these network changes will depend on the platform (see the platforms-specific documents for more information).</p>
+			<p>The nature of these network status changes depends on the platform (see the platforms-specific documents for more information).</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>The common pattern is to clear resources and prevent further room joins when you change the network status to disabled (<code>EOS_NS_Disabled</code>) or offline (<code>EOS_NS_Offline</code>). The EOS SDK does this by default. This is the same for each platform. Lobby RTC restarts any paused RTC rooms when foregrounded and online. It does not try to reconnect otherwise.</p>
+			<p>
+				<strong>Note</strong>: When you turn the network on and off, RTC can run into network interruptions, as it has to reconfigure its webRTC threads.</p>
 			<div>
-				<p>
-					<strong>Note:</strong>
-					On certain platforms the default network state is
-					<code>EOS_NS_Disabled</code>
-					and
-					<code>EOS_Platform_SetNetworkStatus</code>
-					needs to be called when the network is available (see the platform-specific documentation for more information).</p>
+				<p>For PlayStation 4, PlayStation 5, Nintendo Switch and Xbox, the network status defaults to
+					<code>EOS_NS_Disabled</code>. When the network is online, you must update the network status to
+					<code>EOS_NS_Online</code>
+					with
+					<code>EOS_Platform_SetNetworkStatus</code>. See the relevant
+					<a href="/docs/epic-online-services/platforms">platform-specific documentation</a>
+					for more information.</p>
 			</div>
 			<div>
 				<h2 id="native-platform-integration">Native Platform Integration</h2>
@@ -716,7 +753,9 @@
 					<p>enable join-via-presence to the local user’s EOS lobby or session for platform friends</p>
 				</li>
 				<li>
-					<p>control system used to show game invite notifications (Game UI, Platform UI, EOS Overlay)</p>
+					<p>control system used to show game invite notifications (Game UI, Platform UI, 
+						<!-- -->EOS Overlay
+						<!-- -->)</p>
 				</li>
 			</ul>
 			<p>To configure the platform integrations to use:</p>
@@ -729,7 +768,9 @@
 				<li>
 					<p>Create the platform specific
 						<code>EOS_IntegratedPlatform_&lt;Platform&gt;_Options</code>
-						struct to specify desired options to use.</p>
+						struct to specify the desired options to use. You can find the available options in the EOS SDK download for your platform in the
+						<code>/SDK/Include/PLATFORM_NAME/eos_PLATFORM_NAME.h</code>
+						file.</p>
 				</li>
 				<li>
 					<p>Call
@@ -742,461 +783,45 @@
 						<code>EOS_IntegratedPlatformOptionsContainer_Release</code>.</p>
 				</li>
 			</ol>
+			<p>See the documentation for more information:</p>
+			<ul>
+				<li>To find the file that contains your platform's options, see your platform's documentation for the filename and location. To do this, go to the Native Platform Integration section of your platform in
+					<a href="/docs/epic-online-services/platforms">EOS SDK for Platforms</a>.</li>
+				<li>How to download the EOS SDK for your platform, see the
+					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#step-2---download-the-eos-sdk">Get Started Steps: Download the EOS SDK</a>
+					documentation.</li>
+				<li>How to integrate the EOS SDK with the platform, see the
+					<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+					documentation.</li>
+			</ul>
+			<p>
+				<strong>Note</strong>:</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p></p>
 			<div>
-				<h2 id="sample-code">Sample Code</h2>
+				<h3 id="sample-code">Sample Code</h3>
 			</div>
 			<div>
 				<section>
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>static EOS_EResult
-								</span>
-								<span style="color:#89bdff">CreateIntegratedPlatform</span>
-								<span style="color:#fff">(</span>
-								<span>EOS_Platform_Options</span>
-								<span style="color:#fff">&amp;</span>
-								<span>
-									PlatformOptions</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">// Create the generic container.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainerOptions CreateOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_INTEGRATEDPLATFORM_CREATEINTEGRATEDPLATFORMOPTIONSCONTAINER_API_LATEST</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const EOS_EResult Result
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>CreateOptions</span>
-								<span style="color:#fff">,</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">.</span>
-								<span>IntegratedPlatformOptionsContainerHandle</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">if</span>
-								<span>
-								</span>
-								<span style="color:#fff">(</span>
-								<span>Result
-								</span>
-								<span style="color:#fff">!=</span>
-								<span>
-									EOS_EResult</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_Success</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-									Result</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">// Configure platform-specific options.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const EOS_IntegratedPlatform_Steam_Options PlatformSpecificOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_INTEGRATEDPLATFORM_STEAM_OPTIONS_API_LATEST</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									nullptr</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">// Add the configuration to the SDK initialization options.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const EOS_IntegratedPlatform_Options Options
-								</span>
-								<span style="color:#fff">=</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_INTEGRATEDPLATFORM_OPTIONS_API_LATEST</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_IPT_Steam</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_EIntegratedPlatformManagementFlags</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_IPMF_LibraryManagedByApplication
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									EOS_EIntegratedPlatformManagementFlags</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_IPMF_DisableSDKManagedSessions</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">&amp;</span>
-								<span>PlatformSpecificOptions</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									const EOS_IntegratedPlatformOptionsContainer_AddOptions AddOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_INTEGRATEDPLATFORMOPTIONSCONTAINER_ADD_API_LATEST</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">&amp;</span>
-								<span>Options</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">return</span>
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_IntegratedPlatformOptionsContainer_Add</span>
-								<span style="color:#fff">(</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">.</span>
-								<span>IntegratedPlatformOptionsContainerHandle</span>
-								<span style="color:#fff">,</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;</span>
-								<span>AddOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>static void
-								</span>
-								<span style="color:#89bdff">FreeIntegratedPlatform</span>
-								<span style="color:#fff">(</span>
-								<span>EOS_Platform_Options</span>
-								<span style="color:#fff">&amp;</span>
-								<span>
-									PlatformOptions</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">// Free the created container after SDK initialization.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#f08a92">if</span>
-								<span>
-								</span>
-								<span style="color:#fff">(</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">.</span>
-								<span>IntegratedPlatformOptionsContainerHandle</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_IntegratedPlatformOptionsContainer_Release</span>
-								<span style="color:#fff">(</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">.</span>
-								<span>
-									IntegratedPlatformOptionsContainerHandle</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									PlatformOptions</span>
-								<span style="color:#fff">.</span>
-								<span>IntegratedPlatformOptionsContainerHandle
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									nullptr</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>void
-								</span>
-								<span style="color:#89bdff">InitializeEosSdk</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									EOS_Platform_Options PlatformOptions
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#89bdff">CreateIntegratedPlatform</span>
-								<span style="color:#fff">(</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">// ...</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#89bdff">EOS_Platform_Create</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">&amp;</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
-								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#89bdff">FreeIntegratedPlatform</span>
-								<span style="color:#fff">(</span>
-								<span>PlatformOptions</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
 				</section>
 			</div>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Platform">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Platform</a>
-				<a href="/docs/en-US/site-map?tag=Startup">
+				<a href="/docs/site-map">
 					Startup</a>
-				<a href="/docs/en-US/site-map?tag=Initialize">
+				<a href="/docs/site-map">
 					Initialize</a>
 			</div>
 		</section>
@@ -1233,6 +858,12 @@
 					</li>
 					<li>
 						<a href="#application-and-network-status">Application and Network Status</a>
+					</li>
+					<li>
+						<a href="#application-status">Application Status</a>
+					</li>
+					<li>
+						<a href="#network-status">Network Status</a>
 					</li>
 					<li>
 						<a href="#native-platform-integration">Native Platform Integration</a>

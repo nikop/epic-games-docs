@@ -1,0 +1,325 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Redistributable installer</h1>
+			<h2>Redistributable used to integrate and unify the user authentication and social experience.</h2>
+			<div>
+				<div>8 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						The EOS redistributables are currently available for Windows. See the
+						<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">EOS public roadmap</a>
+						for information on Linux and macOS support.</p>
+				</div>
+			</div>
+			<p>If your game is distributed on multiple PC storefronts, or independently of any storefront, you can use Epic Online Services (EOS) to integrate and unify the user authentication and social experience across each of your distributions. For example on Steam, using the in-game overlay of EOS, users will be able to see and interact with all of their Epic friends and Steam friends in a single list.</p>
+			<p>Read more about crossplay social features for PC on Epic Games Store and Steam in this page:
+				<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview">Crossplay using Epic Account Services</a>.</p>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						Games using Epic Accounts Services login on Windows, outside of the Epic Games Store, are recommended to use the 
+						<!-- -->EOS Overlay
+						<!-- -->. The overlay embeds the Epic Account login experience in-game, and without it, players would be taken to the default web browser for login outside the game window. See the
+						<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">SDK Integration</a>
+						documentation for more information on how to integrate the EOS Overlay into your game.</p>
+					<p>Games distributed on the Epic Games Store do not integrate with the EOS service redistributable or the EOS bootstrapper, as the functionality provided by these components is built into the Epic Games Launcher.</p>
+				</div>
+			</div>
+			<p>The Social Overlay, in-game purchasing on desktop, and Epic Accounts login experience, provided through the EOS SDK integration for games, uses an in-game overlay that is distributed separately to players. For distributing the overlay technology component, a separate EOS service redistributable is provided for games to install as part of the game installation prerequisites.</p>
+			<p>This allows the overlay to be kept automatically up-to-date by Epic through backend-controlled updates, decoupled from the game’s own update cycle. Automatic updates delivered through this mechanism adds new cross-platform social features, even for games that are no longer actively updated for new content.</p>
+			<div>
+				<h3 id="game-client-startup-flow">Game client startup flow</h3>
+			</div>
+			<div>
+				<div style="max-width:900px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Game client startup flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Game client startup flow" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/crossplay/redistributable-installer/gameclientstartupflow.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click to enlarge image.</p>
+			</div>
+			<p>Adding EOS overlay to your game, when distributed outside Epic Games Store, includes the following steps:</p>
+			<ul>
+				<li>Adding the EOS service redistributable
+					<code>EpicOnlineServicesInstaller.exe</code>
+					to be installed as part of your game installation, or whenever the game files are validated, and uninstalling it when the game is uninstalled.</li>
+				<li>Adding the EOS bootstrapper application as the main executable to launch the game. This application is responsible for initializing the local installed EOS service, and then starting the game client application.</li>
+				<li>Updating the game client to call the
+					<code>EOS_Platform_GetDesktopCrossplayStatus</code>
+					SDK API at startup.</li>
+			</ul>
+			<p>Calling the
+				<code>EOS_Platform_GetDesktopCrossplayStatus</code>
+				SDK API during the game client initialization verifies that the following prerequisites have been met:</p>
+			<ul>
+				<li>The game was started through the EOS Boostrapper.</li>
+				<li>The EOS redistributable service was found installed as expected.</li>
+				<li>The EOS Overlay was loaded successfully by the EOS SDK.</li>
+			</ul>
+			<p>This check allows you to perform any necessary error handling before the user attempts to log in to your game. For example, you can inform the player that the game was started incorrectly, or you can ask them to verify that the game installation is valid and all required game files are present. This ensures that the player has the best experience possible.</p>
+			<div>
+				<h2 id="service-redistributable-installer">Service redistributable installer</h2>
+			</div>
+			<p>The EOS service redistributable is responsible for downloading and installing the EOS overlay, and keeping it automatically up-to-date. The service is run when the game is started by the user, and automatically exits when the game is terminated. The service is only running when the game is running. The check for overlay updates is performed at the game start up time.</p>
+			<p>This component is distributed to end-users as part of the game files, and installed as a prerequisite as part of the game installation. When the game is installed or uninstalled, the EOS service redistributable is also installed or uninstalled respectively. It is also important to note that if the distribution platform client provides users ability to verify and fix their game installation, the EOS service redistributable installer should be invoked to ensure that it is fixed if needed.</p>
+			<div>
+				<h3 id="steam-installscript">Steam installscript</h3>
+			</div>
+			<p>This is a template
+				<code>installscript.vdf</code>
+				file that you can use when distributing your game on the Steam platform. You will only need to change the
+				<code>YOUR_EOS_PRODUCT_ID</code>
+				and
+				<code>YOUR_STEAM_APP_ID</code>
+				to match your game’s identifiers. The template assumes that your game distributes the
+				<code>EpicOnlineServicesInstaller.exe</code>
+				under a
+				<code>EpicOnlineServices</code>
+				folder in the game root directory.</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="running-the-service-for-local-development">Running the service for local development</h2>
+			</div>
+			<p>Applications using Epic accounts login (<code>EOS_Auth_Login</code>), with either the
+				<code>EOS_LCT_AccountPortal</code>
+				or
+				<code>EOS_LCT_ExternalAuth</code>
+				login types, require the EOS service to be running in the background. During local development, for example when running your game within the Unreal Engine or Unity, you do not need to use the bootstrapper application.</p>
+			<p>To run the service for local development purposes, navigate to the service installation directory in
+				<code>Program Files (x86)\Epic Games\Epic Online Services\</code>
+				and start it via the
+				<code>EpicOnlineServices - Development.cmd</code>
+				shortcut. You can stop the service by right clicking its system tray icon in the Windows taskbar. Note that you may need to restart your code development environment for the service to take effect.</p>
+			<div>
+				<h2 id="bootstrapper-application">Bootstrapper application</h2>
+			</div>
+			<p>The EOS bootstrapper is an executable that is used as a transient launcher application to run the actual game client executable. It is intended to be used as the target executable to run when users launch the game.</p>
+			<p>The EOS bootstrapper is responsible for starting the EOS service that has already been installed as part of the game installation. The EOS service will perform an automatic update check on its own software version and for the EOS overlay component, and automatically install any available software updates.</p>
+			<p>Once the EOS service has been initialized, the EOS bootstrapper automatically proceeds to run the target game client executable. This flow ensures that when the game is started, the EOS overlay is readily available for the game application and EOS SDK to use. The EOS overlay is a requirement for the in-game Epic Accounts login experience, the in-game purchasing on desktop, and the Social Overlay to work.</p>
+			<div>
+				<h3 id="bootstrapper-application-usage">Bootstrapper application usage</h3>
+			</div>
+			<p>The EOS bootstrapper executable is distributed as part of the game files. It is typically placed next to the main game executable, but can also be located in another folder within the game installation directory. The EOS bootstrapper executable is paired with a config file that is named identically to the EOS bootstrapper executable. For example,
+				<code>LaunchGame.exe</code>
+				with
+				<code>LaunchGame.ini</code>.</p>
+			<p>To generate the config file, and optionally change the program icon of the EOS bootstrapper executable, see the next section for
+				<a href="#bootstrapper-tool">EOS bootstrapper tool</a>.</p>
+			<div>
+				<h3 id="troubleshooting">Troubleshooting</h3>
+			</div>
+			<p>For each run, the EOS bootstrapper will write a log file into
+				<code>%LOCALAPPDATA%\Epic Games\Epic Online Services\Bootstrapper\Logs\EOSBootstrapper.log</code>. If the game client process does not get started, or the EOS SDK returns unexpected errors related to Epic Accounts login or the EOS overlay, check the bootstrapper log for any errors.</p>
+			<div>
+				<h2 id="bootstrapper-tool">Bootstrapper tool</h2>
+			</div>
+			<p>The EOS bootstrapper tool is a command-line tool that is used to generate a config file to be used by the EOS bootstrapper application. It allows you to optionally also update the EOS bootstrapper executable with your own program icon, for example to match the program icon of the game client executable.</p>
+			<p>The EOS bootstrapper tool is a development tool, and is not distributed to end-users as part of the game files. It is typically added into the end of the game client build pipeline, but can also be used as a one-time standalone tool to create the EOS bootstrapper config file.</p>
+			<div>
+				<h3 id="bootstrapper-tool-usage">Bootstrapper tool usage</h3>
+			</div>
+			<p>When run, the tool performs the following operations:</p>
+			<ol>
+				<li>Creates a new Boostrapper executable in the output file path (<code>--output-path</code>).</li>
+				<li>If set, updates the program icon and version info of the created Bootstrapper executable, using the target application executable to run (<code>--app-path</code>).</li>
+				<li>Creates a new config
+					<code>.ini</code>
+					file next to the created output Bootstrapper executable.</li>
+			</ol>
+			<p>Run
+				<code>EOSBootstrapperTool.exe --help</code>
+				via command-line prompt to see full usage information and all available options.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						When changing the program icon, remember to digitally code sign the copied output EOS bootstrapper executable.</p>
+				</div>
+			</div>
+			<div>
+				<h4 id="example-usage">Example usage</h4>
+			</div>
+			<p>Let’s say your development directory tree looks as following:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>Then you would run the EOS bootstrapper tool using the following command-line:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>This will create a new Bootstrapper executable called
+				<code>LaunchGame.exe</code>, with an associated config file, into the game build directory, next to the target game client executable.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						Older Bootstrapper Tool versions prior to EOS SDK 1.16 require the
+						<code>EOSBootstrapper.exe</code>
+						file to be present in the same directory as the
+						<code>EOSBootstrapperTool.exe</code>
+						to run the tool. This limitation has been removed in the newer SDK releases.</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="bootstrapper-config">Bootstrapper config</h2>
+			</div>
+			<p>The config file is used and required by the EOS bootstrapper application to work. It can be generated using the EOS bootstrapper tool, or manually created by hand for convenience.</p>
+			<p>The config file specifies the following runtime options for the EOS bootstrapper application:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Option</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ApplicationPath</td>
+						<td>String</td>
+						<td>Points to the target application executable to run. If the bootstrapper executable and the game client executable both are located in the same folder, then this is the game client executable name. For example,
+							<code>Game.exe</code>. If they are located in different folders, then this is the relative path from the bootstrapper executable’s location to the game client executable, including the executable name itself. For example,
+							<code>Bin\\Game.exe</code>.</td>
+					</tr>
+					<tr>
+						<td>WorkingDirectory</td>
+						<td>String</td>
+						<td>(Optional). Relative working directory to set when running the target application.</td>
+					</tr>
+					<tr>
+						<td>NoOperation</td>
+						<td>Boolean[True, False], Integer[0, 1]</td>
+						<td>Optional, false by default. If set, the target application will be started directly without initializing the EOS service. This setting can be used to run the game without the EOS service, for example, if you have not fully integrated the service redistributable installer to be run in your development environment for other developers and game testers.</td>
+					</tr>
+					<tr>
+						<td>WaitForExit</td>
+						<td>Boolean[True, False], Integer[0, 1]</td>
+						<td>(Optional, false by default.) If set, the bootstrapper will exit only after the launched target application has exited. This setting can be used in scenarios where for example the platform launcher would mark the game as not running when its target executable exited. As the bootstrapper will be the target executable to launch for the platform client, you can configure the bootstrapper to remain silently running in the background until the game client itself has exited.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="example-config">Example config</h3>
+			</div>
+			
+			<!-- -->
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#game-client-startup-flow">Game client startup flow</a>
+					</li>
+					<li>
+						<a href="#service-redistributable-installer">Service redistributable installer</a>
+					</li>
+					<li>
+						<a href="#steam-installscript">Steam installscript</a>
+					</li>
+					<li>
+						<a href="#running-the-service-for-local-development">Running the service for local development</a>
+					</li>
+					<li>
+						<a href="#bootstrapper-application">Bootstrapper application</a>
+					</li>
+					<li>
+						<a href="#bootstrapper-application-usage">Bootstrapper application usage</a>
+					</li>
+					<li>
+						<a href="#troubleshooting">Troubleshooting</a>
+					</li>
+					<li>
+						<a href="#bootstrapper-tool">Bootstrapper tool</a>
+					</li>
+					<li>
+						<a href="#bootstrapper-tool-usage">Bootstrapper tool usage</a>
+					</li>
+					<li>
+						<a href="#example-usage">Example usage</a>
+					</li>
+					<li>
+						<a href="#bootstrapper-config">Bootstrapper config</a>
+					</li>
+					<li>
+						<a href="#example-config">Example config</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

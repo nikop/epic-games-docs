@@ -1,0 +1,676 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK in C#</h1>
+			<h2>Overview of the EOS SDK in C#.</h2>
+			<div>
+				<div>15 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>The Epic Online Services (EOS) SDK has downloads in C# in addition to C. This page outlines some of the implementation differences between working with the EOS SDK in C# to working with the EOS SDK in C. While the core functionality remains the same regardless of the language you use, the SDK in C# differs in design in the following ways:</p>
+			<ul>
+				<li>The EOS SDK in C# adheres to C# best practices and follows an object-oriented approach. It uses handle objects rather than C-style handles to manage asynchronous operations.</li>
+				<li>Naming conventions match typical C# patterns. For example, the
+					<code>EOS_Auth_Login</code>
+					in the EOS SDK in C is accessible in the EOS SDK in C# as
+					<code>Epic.OnlineServices.Auth.AuthInterface.Login</code>.</li>
+				<li>Data structures in the EOS SDK in C require macro-based API version numbers to ensure compatibility. These values are pre-populated in the EOS SDK in C#.</li>
+			</ul>
+			<div>
+				<h2 id="eos-sdk-in-c-dependencies">EOS SDK in C# Dependencies</h2>
+			</div>
+			<p>To work with the EOS SDK in C#, you need the following installed in your development environment.</p>
+			<ul>
+				<li>
+					<p>.NET Framework 3.5 or higher (or an API-compatible equivalent)</p>
+					<p>
+						<strong>Note:</strong>
+						Previous versions might work, but we have not tested them.</p>
+				</li>
+			</ul>
+			<p>To work with the EOS SDK samples in C#, you need the following installed in your development environment.</p>
+			<ul>
+				<li>.NET Core 3.1</li>
+				<li>Visual Studio 2019 or higher</li>
+			</ul>
+			<p>See the main
+				<a href="/docs/epic-online-services/eos-get-started/system-requirements">System Requirements</a>
+				page for full details of what your development environment needs.</p>
+			<p>See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start">EOS Get Started</a>
+				documentation for guidance on setting up your Epic Games account and working with the EOS SDK, before you follow the guidance below.</p>
+			<p>You can also follow the introduction blogs on the Online Services website, which focus on getting started in C#:
+				<em>Introduction to Epic Online Services (EOS)</em>
+				(at
+				<a href="https://dev.epicgames.com/en-US/news/introduction-to-epic-online-services-eos">dev.epicgames.com/news</a>).</p>
+			<div>
+				<h3 id="integration">Integration</h3>
+			</div>
+			<ol>
+				<li>Include the SDK in C# source files in your project.</li>
+			</ol>
+			<ul>
+				<li>
+					<strong>(Unity users)</strong>
+					Place these files (including Core and Generated folders) into your
+					<strong>Assets</strong>
+					folder.</li>
+			</ul>
+			<ol start="2">
+				<li>Ensure that the appropriate library binary file for your target platform is accessible by your application.</li>
+			</ol>
+			<ul>
+				<li>
+					<strong>(Unity users)</strong>
+					copy the appropriate library binary file into your
+					<strong>Assets</strong>
+					folder for your target platform.</li>
+				<li>For example, a Windows x64 integration would use
+					<code>EOSSDK-Win64-Shipping.dll</code>.</li>
+			</ul>
+			<ol start="3">
+				<li>The SDK in C# determines the library binary name to target in
+					<code>Epic.OnlineServices.Config</code>. Several platforms are preconfigured to point to the correct name for convenience.</li>
+			</ol>
+			<ul>
+				<li>If your target platform has not been preconfigured, make the appropriate changes to the configuration and your project symbols to avoid a build error. For example, you may need to set
+					<code>EOS_PLATFORM_WINDOWS_64</code>
+					if targeting Windows x64 or
+					<code>EOS_PLATFORM_WINDOWS_32</code>
+					if targeting Windows x86.</li>
+			</ul>
+			<ol start="4">
+				<li>
+					<strong>(Unity users)</strong>
+					Create a new script to control the SDK. For this example, we used the name
+					<code>EOSSDKComponent</code>.</li>
+			</ol>
+			<div>
+				<div style="max-width:402px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="New script Component" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="New script Component" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/c-sharp-getting-started/unity_-2.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<ol start="5">
+				<li>
+					<strong>(Unity users)</strong>
+					To create a component when needed, select
+					<strong>Add Component</strong>
+					to assign it to an entity.For demonstration purposes, we added it to the
+					<strong>Main Camera</strong>.</li>
+			</ol>
+			<div>
+				<div style="max-width:380px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Add Component" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Add Component" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/c-sharp-getting-started/unity_-3.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<ol start="6">
+				<li>Write your EOS SDK code in this component. See our
+					<a href="#sample-code">sample code</a>
+					for examples.</li>
+			</ol>
+			<div>
+				<h2 id="implementing-the-sdk">Implementing the SDK</h2>
+			</div>
+			<p>Once you have set up your 
+				<!-- -->product
+				<!-- --> and integrated the SDK in C#, you can begin writing code. You'll need to initialize the SDK, call its
+				<code>Tick</code>
+				method regularly to ensure that the SDK can execute and that callbacks can run, and shut it down when your application finishes.</p>
+			<div>
+				<h3 id="managing-the-sdks-life-cycle">Managing the SDK's Life Cycle</h3>
+			</div>
+			<p>There are three main parts of the SDK's life cycle: Initialization, Ticking (normal operation), and Shutdown.</p>
+			<div>
+				<h4 id="initialization">Initialization</h4>
+			</div>
+			<p>The
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+				is the entry point to the SDK, and you will need an instance of this interface to use EOS. To create one, call
+				<code>Epic.OnlineServices.Platform.PlatformInterface.Initialize</code>
+				with some basic information about your application, then call
+				<code>Epic.OnlineServices.Platform.PlatformInterface.Create</code>
+				with the values you have obtained from the Developer Portal to get an
+				<code>Epic.OnlineServices.Platform.PlatformInterface</code>
+				instance. Store this instance; you will need it to interact with the SDK. For example, to perform authentication, you first need an instance of
+				<code>Epic.OnlineServices.Auth.AuthInterface</code>, and you can retrieve this by calling GetAuthInterface() on your
+				<code>Epic.OnlineServices.Platform.PlatformInterfac</code>e instance.</p>
+			<div>
+				<p>You can only initialize the SDK once; subsequent calls to
+					<code>Epic.OnlineServices.Platform.PlatformInterface.Initialize</code>
+					will return the
+					<code>AlreadyInitialized</code>
+					failure code. We recommend initializing the SDK when your application starts up and not releasing it until the application shuts down.</p>
+			</div>
+			<div>
+				<h4 id="ticking">Ticking</h4>
+			</div>
+			<p>In order for the SDK to operate, you must call
+				<code>Epic.OnlineServices.Platform.PlatformInterface.Tick</code>
+				on your Platform Interface instance regularly. These calls do not need to happen every frame, but should happen fairly often; one call every 100 milliseconds is considered reasonable, but you can adjust the exact frequency to your needs. SDK callbacks can only run when you call
+				<code>Tick</code>, so all of your asynchronous operations depend on it.</p>
+			<div>
+				<h4 id="shutdown">Shutdown</h4>
+			</div>
+			<p>When you no longer need the SDK — generally, at application shutdown time — you can shut it down by calling
+				<code>Epic.OnlineServices.Platform.PlatformInterface.Release</code>
+				to release your Platform Interface instance, and then
+				<code>Epic.OnlineServices.Platform.PlatformInterface.Shutdown</code>
+				to complete the shutdown process. This process is final;
+				<code>Epic.OnlineServices.Platform.PlatformInterface.Release</code>
+				puts the SDK into a finalized state, and you cannot acquire another Platform Interface handle or reinitialize the SDK after that point. For this reason, we advise against shutting down the EOS SDK until application shutdown.</p>
+			<div>
+				<p>Some editor environments, including Unity, load external libraries like EOS during editor startup and do not unload them until the editor shuts down. In these cases, you should not call
+					<code>Epic.OnlineServices.Platform.PlatformInterface.Release</code>
+					or
+					<code>Epic.OnlineServices.Platform.PlatformInterface.Shutdown</code>
+					at the end of an in-editor play session, because you will be unable to initialize the SDK successfully in any future session without restarting the editor. In addition, because these editor environments use one continuous instance of the SDK, operations that began right before the end of a play session could finish and trigger callbacks in the following session.</p>
+			</div>
+			<div>
+				<h3 id="results">Results</h3>
+			</div>
+			<p>Most callback data structures and some return values use
+				<code>Epic.OnlineServices.Result</code>
+				to convey the results of SDK operations. Make sure to use this to handle errors and ensure operations are performing as expected.</p>
+			
+			<!-- -->
+			<div>
+				<h3 id="logging">Logging</h3>
+			</div>
+			<p>The SDK outputs useful debugging information through an internal interface. To enable this feature, set up
+				<code>Epic.OnlineServices.Logging.LoggingInterface</code>
+				as early as possible, preferably immediately after initializing the SDK, by calling
+				<code>Epic.OnlineServices.Logging.LoggingInterface.SetLogLevel</code>
+				with parameters indicating the level of detail you require, followed by
+				<code>Epic.OnlineServices.Logging.LoggingInterface.SetCallback</code>
+				with a callback function to receive log information. This feature can provide insight into internal operations and can help with identifying the causes of unexpected behaviors you may encounter.</p>
+			<div>
+				<h3 id="unmanaged-memory">Unmanaged Memory</h3>
+			</div>
+			<p>In the SDK in C, some APIs such as
+				<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex</code>
+				pass out structs of data that must be manually released. In the SDK in C#, you don’t need to concern yourself with releasing these structs as they are automatically handled by the wrapper’s marshaling code.</p>
+			<p>In the SDK in C, some APIs such as
+				<code>EOS_Presence_CreatePresenceModification</code>
+				pass out handles that let you set data in memory that is owned by the SDK library. These handles must be manually released. In the SDK in C#, these handles are represented by objects with an underlying type of
+				<code>Epic.OnlineServices.Handle</code>, and contain functions that let you set the unmanaged data. They also contain a Release function that you must manually call when you are finished with it.</p>
+			<div>
+				<h3 id="custom-memory-delegates">Custom Memory Delegates</h3>
+			</div>
+			<p>On some platforms, such as consoles, the SDK requires you to implement your own allocate, reallocate, and release functions. Because the SDK will call these functions with very high frequency, it is highly performant for the SDK to be able to access them directly without being routed through delegates in managed code.</p>
+			<p>You have the option to pass these functions into the SDK when initializing the platform with
+				<code>Epic.OnlineServices.Platform.InitializeOptions</code>. It is recommended that you:</p>
+			<ol>
+				<li>Create a native library and implement the 3 memory functions,</li>
+				<li>For each of the 3 memory functions, implement an export function that returns a pointer to the memory function,</li>
+				<li>Before initializing the platform in C#, call the export functions, and set the returned IntPtr values to the options struct.</li>
+			</ol>
+			<p>The following sample code demonstrates the structure of what your native library may look like:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>And the following sample code demonstrates what the C# bindings may look like:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="threading">Threading</h3>
+			</div>
+			<p>The SDK is not currently thread safe. We recommend that all calls to the SDK come from your application's main thread. At this time, we recommend against using
+				<code>async</code>,
+				<code>await</code>,
+				<code>Thread</code>,
+				<code>Task</code>, or similar patterns.</p>
+			<div>
+				<h3 id="the-eos-overlay">The EOS Overlay</h3>
+			</div>
+			<p>To use the 
+				<!-- -->EOS Overlay
+				<!-- --> in your game, complete the following before any graphics devices are created:</p>
+			<ol>
+				<li>Load the SDK library into memory</li>
+				<li>Initialize with
+					<a href="/docs/api-ref/functions/eos-initialize">EOS_Initialize</a>
+				</li>
+				<li>Create your platform with
+					<a href="/docs/api-ref/functions/eos-platform-create">EOS_Platform_Create</a>
+				</li>
+			</ol>
+			<p>In Unity, one way you can achieve this is by creating a
+				<a href="https://docs.unity3d.com/Manual/LowLevelNativePluginRenderingExtensions.html">low-level native rendering plugin</a>. At a minimum, you will need to:</p>
+			<ol>
+				<li>Create a native library with a name prefixed with
+					<code>GfxPlugin</code>,</li>
+				<li>Add an export function named
+					<code>UnityPluginLoad(void*)</code>
+					that loads the SDK library and invokes
+					<a href="/docs/api-ref/functions/eos-initialize">EOS_Initialize</a>
+					and
+					<a href="/docs/api-ref/functions/eos-platform-create">EOS_Platform_Create</a>
+					successfully,</li>
+				<li>Add an export function to return the created platform interface handle back to C# when needed, where it can be used to construct a new instance of
+					<code>Epic.OnlineServices.Platform.PlatformInterface</code>.</li>
+			</ol>
+			<div>
+				<p>The EOS overlay is not supported in editor environments such as the Unity editor. It is recommended that you explicitly disable the overlay in editor environments to prevent unintended behavior.</p>
+			</div>
+			<p>As a best practice for Unity users,  we recommend that your standalone build controls the lifetime of the SDK inside a low-level native rendering plugin, and your editor build should exclude the plugin to control the lifetime of the SDK inside a MonoBehaviour with dynamic bindings.</p>
+			<p>
+				<strong>Social Features, Authorization, and Purchasing (on Desktop)</strong>
+				<br>
+				
+				<!-- -->You must integrate the EOS Overlay with your game to use these features. For more information, see the
+				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">SDK Integration</a>
+				documentation.</p>
+			<div>
+				<h3 id="dynamic-bindings">Dynamic Bindings</h3>
+			</div>
+			<p>Typically, the SDK in C# uses
+				<code>extern DllImport</code>
+				bindings. However, you may need to use dynamic bindings.</p>
+			<p>To begin using dynamic bindings:</p>
+			<ol>
+				<li>Define
+					<code>EOS_DYNAMIC_BINDINGS</code>
+				</li>
+				<li>Dynamically load the SDK library and retrieve a library handle</li>
+				<li>When the application session begins, call
+					<code>Epic.OnlineServices.Bindings.Hook</code>
+					to  pass in the library handle and function pointer loader delegate.</li>
+				<li>When the application session ends, call
+					<code>Epic.OnlineServices.Bindings.Unhook</code>
+					and free the library to clean up.</li>
+			</ol>
+			<p>For example, you may have the following extern functions defined on Windows:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>Then to begin using the SDK, load the library and hook the dynamic bindings with:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>When the application is finished, unhook the dynamic bindings and free the library with:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<p>Some platforms have platform specific APIs. These platforms have their own bindings class.</p>
+				<p>To use platform specific APIs, you must hook the corresponding platform-specific bindings class,
+					<strong>in addition to</strong>
+					the base
+					<code>Epic.OnlineServices.Bindings</code>
+					class.</p>
+			</div>
+			<p>As of 1.12, the default behavior of the SDK in C# is to require dynamic bindings for editor environments such as the Unity editor. This is to enable on-demand loading and unloading of the SDK library, and allow the SDK to be initialized each time the game is run in the editor. More detailed sample code for
+				<a href="#unity-eossdk-component">using dynamic bindings in Unity</a>
+				is provided below.</p>
+			<div>
+				<h2 id="sample-code-and-projects">Sample Code and Projects</h2>
+			</div>
+			<p>There are a variety of SDK in C# samples to show you different Epic Online Services (EOS) functionality implementations, such as authentication, presence, the purchasing flow, and voice. Additionally, we have sample code for setting up the platform, signing in, and implementing the Unity EOS SDK component.</p>
+			<div>
+				<h3 id="sample-code">Sample Code</h3>
+			</div>
+			<p>The sample code in this section is intended to demonstrate and help familiarize you with the SDK in C#.</p>
+			<div>
+				<h4 id="setting-up-the-platform">Setting up the Platform</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="signing-in">Signing In</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="unity-eossdk-component">Unity EOSSDK Component</h4>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				The code below requires SDK 1.15 or above.</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="sample-projects">Sample Projects</h3>
+			</div>
+			<p>These samples are in a folder of your SDK in C# download containing the following libraries and applications.</p>
+			<div>
+				<h4 id="libraries">Libraries</h4>
+			</div>
+			<p>
+				<strong>Common</strong>
+				contains the SDK code and other useful shared functionality.</p>
+			<p>
+				<strong>WpfCommon</strong>
+				contains functionality that is common to all of the WPF samples.</p>
+			<p>
+				<strong>VoiceCommon</strong>
+				contains functionality that is common to all of the voice samples.</p>
+			<div>
+				<h4 id="applications">Applications</h4>
+			</div>
+			<p>
+				<a href="#simpleauth">
+					<strong>SimpleAuth</strong>
+				</a>
+				is a WPF application that demonstrates how to perform authentication and 
+				<!-- -->presence
+				<!-- --> related functions for the logged in user.</p>
+			<p>
+				<a href="#simpleoverlaypurchasing">
+					<strong>SimpleOverlayPurchasing</strong>
+				</a>
+				is a managed DirectX11 application that demonstrates how to initiate and complete the purchasing flow by utilising the in-game overlay.</p>
+			<p>
+				<a href="/docs/game-services/voice/voice-sample-c-sharp#voiceserver">
+					<strong>VoiceServer</strong>
+				</a>
+				is an application that demonstrates how to implement a RESTful API service that acts as a trusted voice server between voice clients and EOS.</p>
+			<p>
+				<a href="/docs/game-services/voice/voice-sample-c-sharp#voiceclient">
+					<strong>VoiceClient</strong>
+				</a>
+				is a WPF application that demonstrates how to connect to a voice room, switch audio devices, transmit audio, client mute, server mute, and kick.</p>
+			<div>
+				<h4 id="before-you-begin">Before You Begin</h4>
+			</div>
+			<p>To run the samples, you must install:</p>
+			<ul>
+				<li>.NET Core 3.1</li>
+				<li>Visual Studio 2019 or higher</li>
+			</ul>
+			<p>You must also set the following values associated with your application in
+				<code>Samples/CSharp/Common/Settings.cs</code>:</p>
+			<ul>
+				<li>
+					<strong>ProductId</strong>
+				</li>
+				<li>
+					<strong>SandboxId</strong>
+				</li>
+				<li>
+					<strong>DeploymentId</strong>
+				</li>
+				<li>
+					<strong>ClientId</strong>
+				</li>
+				<li>
+					<strong>ClientSecret</strong>
+				</li>
+			</ul>
+			<p>You can also set the
+				<strong>LoginType</strong>. Use of the
+				<strong>Id</strong>
+				and
+				<strong>Token</strong>
+				fields differs based on the login type. For more information, see
+				<a href="/docs/api-ref/structs/eos-auth-credentials">Auth.Credentials</a>
+				and
+				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>.</p>
+			<div>
+				<p>The sample application uses
+					<strong>Epic Account Services</strong>
+					to authenticate the local user for demonstration purposes. This requires that the Client Credentials used to initialize the SDK have been assigned to an Application used for Epic Account Services.</p>
+			</div>
+			<p>The demonstrated SDK functionality can be used with any of the supported identity providers for user authentication.</p>
+			<div>
+				<h4 id="simpleauth">SimpleAuth</h4>
+			</div>
+			<p>
+				<strong>SimpleAuth</strong>
+				is a sample application demonstrating how to perform authentication and presence related functions for a logged in user.</p>
+			<div>
+				<h5 id="signing-in-1">Signing In</h5>
+			</div>
+			<p>To begin, you are presented with a sign in screen. You can select the type of sign in you want to use. We recommend using the Developer type to login with credentials assigned by the
+				<a href="/docs/epic-account-services/developer-authentication-tool">Developer Auth Tool</a>.</p>
+			<div>
+				<div style="max-width:650px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/c-sharp-getting-started/simple-auth-log-in.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<div>
+				<h5 id="viewing-your-presence">Viewing Your Presence</h5>
+			</div>
+			<p>Once signed in, you are presented with a page showing your current presence, and a form that allows you to change it. It contains fields for the online status, rich text, and data entries associated with your current presence.</p>
+			<div>
+				<div style="max-width:650px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/c-sharp-getting-started/simple-auth-view-presence.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<div>
+				<h4 id="simpleoverlaypurchasing">SimpleOverlayPurchasing</h4>
+			</div>
+			<p>This feature is only available for products that are part of the Epic Games store. You must be a store partner, and you must have offers set up with the store.</p>
+			<p>In order for the overlay to work, you must have done one of the following:</p>
+			<ul>
+				<li>Installed the Epic Games Launcher and ran it for the first time.</li>
+				<li>Downloaded the EOSOVH dll file and set the registry key
+					<code>HKEY_CURRENT_USER\Software\Epic Games\EOS\OverlayPath</code>
+					to the directory of where the dll resides.</li>
+			</ul>
+			<div>
+				<h5 id="initiating-the-purchasing-flow">Initiating the Purchasing Flow</h5>
+			</div>
+			<p>The sample will automatically proceed with signing in and the necessary ecom functions in order to launch the overlay into the purchasing flow. Keep an eye on the output to ensure there are no problems.</p>
+			<div>
+				<div style="max-width:650px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/c-sharp-getting-started/overlay-purchase-initiate-flow.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<div id="tag_list">
+				<a href="/docs/site-map">CSharp</a>
+				<a href="/docs/site-map">
+					Getting Started</a>
+				<a href="/docs/site-map">
+					Unity</a>
+				<a href="/docs/site-map">
+					Featured</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#eos-sdk-in-c-dependencies">EOS SDK in C# Dependencies</a>
+					</li>
+					<li>
+						<a href="#integration">Integration</a>
+					</li>
+					<li>
+						<a href="#implementing-the-sdk">Implementing the SDK</a>
+					</li>
+					<li>
+						<a href="#managing-the-sdks-life-cycle">Managing the SDK's Life Cycle</a>
+					</li>
+					<li>
+						<a href="#initialization">Initialization</a>
+					</li>
+					<li>
+						<a href="#ticking">Ticking</a>
+					</li>
+					<li>
+						<a href="#shutdown">Shutdown</a>
+					</li>
+					<li>
+						<a href="#results">Results</a>
+					</li>
+					<li>
+						<a href="#logging">Logging</a>
+					</li>
+					<li>
+						<a href="#unmanaged-memory">Unmanaged Memory</a>
+					</li>
+					<li>
+						<a href="#custom-memory-delegates">Custom Memory Delegates</a>
+					</li>
+					<li>
+						<a href="#threading">Threading</a>
+					</li>
+					<li>
+						<a href="#the-eos-overlay">The EOS Overlay</a>
+					</li>
+					<li>
+						<a href="#dynamic-bindings">Dynamic Bindings</a>
+					</li>
+					<li>
+						<a href="#sample-code-and-projects">Sample Code and Projects</a>
+					</li>
+					<li>
+						<a href="#sample-code">Sample Code</a>
+					</li>
+					<li>
+						<a href="#setting-up-the-platform">Setting up the Platform</a>
+					</li>
+					<li>
+						<a href="#signing-in">Signing In</a>
+					</li>
+					<li>
+						<a href="#unity-eossdk-component">Unity EOSSDK Component</a>
+					</li>
+					<li>
+						<a href="#sample-projects">Sample Projects</a>
+					</li>
+					<li>
+						<a href="#libraries">Libraries</a>
+					</li>
+					<li>
+						<a href="#applications">Applications</a>
+					</li>
+					<li>
+						<a href="#before-you-begin">Before You Begin</a>
+					</li>
+					<li>
+						<a href="#simpleauth">SimpleAuth</a>
+					</li>
+					<li>
+						<a href="#signing-in-1">Signing In</a>
+					</li>
+					<li>
+						<a href="#viewing-your-presence">Viewing Your Presence</a>
+					</li>
+					<li>
+						<a href="#simpleoverlaypurchasing">SimpleOverlayPurchasing</a>
+					</li>
+					<li>
+						<a href="#initiating-the-purchasing-flow">Initiating the Purchasing Flow</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

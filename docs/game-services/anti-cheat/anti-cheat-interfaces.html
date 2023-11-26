@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Anti-Cheat Interface">Anti-Cheat Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -17,7 +11,7 @@
 	</div>
 	<section>
 		<div>
-			<h1>Anti-Cheat Interface</h1>
+			<h1>Anti-Cheat Interfaces</h1>
 			<h2>Understand the prerequisites, network architecture, platform components, and more involved in implementing Anti-Cheat in your EOS product.</h2>
 			<div>
 				<div>9 mins to read</div>
@@ -27,14 +21,15 @@
 	<section>
 		<section>
 			<div>
-				<p>The
-					<strong>Anti-Cheat Interfaces</strong>
-					require using SDK 1.12 or higher. The Anti-Cheat Client interfaces supports Windows, Mac, and Linux platforms, and requires a 64-bit operating system installation.</p>
+				<p>The Anti-Cheat Interfaces require EOS SDK 1.12 or higher.</p>
+				<p>There are two interfaces: the Anti-Cheat Client Interface and the Anti-Cheat Server Interface.</p>
+				<ul>
+					<li>The Anti-Cheat Client Interface only supports Windows, macOS, ChromeOS, and Linux 64-bit operating systems. It does not support virtual machines (VM).</li>
+					<li>The Anti-Cheat Server Interface supports all platforms, including VM.</li>
+				</ul>
 			</div>
-			<p>You can use the
-				<strong>Anti-Cheat interfaces</strong>
-				(also known as
-				<strong>Easy Anti-Cheat</strong>) to help reduce cheating in online multiplayer play. They provide tools to start your game client in an anti-cheat protected mode which can be validated by a game server or another game client. These interfaces are not digital rights management (DRM) or code obfuscation tools and are not useful for offline or solo play.</p>
+			<p>(The Anti-Cheat Interfaces are also known as Easy Anti-Cheat.)</p>
+			<p>You can use the Anti-Cheat Interfaces to help reduce cheating in online multiplayer play. They provide tools to start your game client in an anti-cheat protected mode which is then validated by either a game server (using the Anti-Cheat Server Interface) or another game client (using the Anti-Cheat Client Interface). These interfaces are not digital rights management (DRM) or code obfuscation tools and are not useful for offline or solo play.</p>
 			<p>The anti-cheat interfaces provide two kinds of protection:</p>
 			<ul>
 				<li>
@@ -47,18 +42,18 @@
 			<p>To use the Anti-Cheat interface(s), you must:</p>
 			<ol>
 				<li>Review and adhere to the
-					<a href="/docs/en-US#development-prerequisites">Development Prerequisites</a>.</li>
+					<a href="#development-prerequisites">Development Prerequisites</a>.</li>
 				<li>Determine your
-					<a href="/docs/en-US#game-network-architecture">network architecture</a>
+					<a href="#game-network-architecture">network architecture</a>
 					and
-					<a href="/docs/en-US#client-credentials-and-policy-configuration">client policy</a>
+					<a href="#client-credentials-and-policy-configuration">client policy</a>
 					type.</li>
 				<li>Configure your
 					<a href="/docs/game-services/anti-cheat/using-anti-cheat#client-module-setup-and-updates">client module</a>,
 					<a href="/docs/game-services/anti-cheat/using-anti-cheat#anti-cheat-integrity-tool-configuration">anti-cheat integrity tool</a>, and
 					<a href="/docs/game-services/anti-cheat/using-anti-cheat#configure-the-anti-cheat-bootstrapper-executable">Anti-Cheat Bootstrapper executable</a>.</li>
 				<li>(<em>Windows Only</em>) Configure the
-					<a href="/docs/en-US#windows-service-installer">Windows Service Installer</a>.</li>
+					<a href="#windows-service-installer">Windows Service Installer</a>.</li>
 				<li>Integrate the Anti-Cheat interfaces with your game code:
 					<!-- -->
 					<ol>
@@ -99,6 +94,13 @@
 			<p>It is critical to implement the
 				<a href="/docs/game-services/reports-interface">Reports Interface</a>
 				to allow players to submit reports when they believe another player in the same game session is cheating. This provides valuable context and feedback on the effectiveness of the anti-cheat protection in each game.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Note that to generate sanctions with the Anti-Cheat service, you must first implement the
+						<a href="/docs/game-services/reports-interface">Reports Interface</a>.</p>
+				</div>
+			</div>
 			<div>
 				<h3 id="player-progression-management">Player progression management</h3>
 			</div>
@@ -113,14 +115,12 @@
 			<p>Use this mode with an authoritative game server, and implement both the Anti-Cheat Client and Server interfaces.</p>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Communication flow of the Client-Server mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Communication flow of the Client-Server mode of network architecture" sizes="100vw" srcset="null/game-services/anti-cheat/anti-cheat-client-server-mode.png 640w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 750w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 828w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 1080w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 1200w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 1920w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 2048w, null/game-services/anti-cheat/anti-cheat-client-server-mode.png 3840w" src="null/game-services/anti-cheat/anti-cheat-client-server-mode.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Communication flow of the Client-Server mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Communication flow of the Client-Server mode of network architecture" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/anti-cheat/anti-cheat-client-server-mode.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>The operator of an individual game server can intentionally disable or disconnect the anti-cheat within their server by manipulating network connections or through other methods. This is an accepted risk for games that support community operated servers. To mitigate this risk, the user interface may differentiate between “official” and “unofficial” game servers.</p>
@@ -138,14 +138,12 @@
 			<p>Use this mode with a full-mesh layout where each game client exchanges network messages with every other game client, but none of them has full authority over the game session.</p>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Communication flow of the Peer-to-Peer mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Communication flow of the Peer-to-Peer mode of network architecture" sizes="100vw" srcset="null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 640w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 750w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 828w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 1080w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 1200w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 1920w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 2048w, null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png 3840w" src="null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Communication flow of the Peer-to-Peer mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Communication flow of the Peer-to-Peer mode of network architecture" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/anti-cheat/anti-cheat-peerto-peer-mode.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>In this mode, the Anti-Cheat Server interface is not used. Instead, each player uses the Anti-Cheat Client interface to verify that the others have anti-cheat protection active.</p>
@@ -160,14 +158,12 @@
 			<p>When a single player acts as an authoritative game host for a game session, you must use either Peer-to-Peer or Client-Server mode.</p>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Communication flow of the Listen Server mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Communication flow of the Listen Server mode of network architecture" sizes="100vw" srcset="null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 640w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 750w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 828w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 1080w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 1200w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 1920w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 2048w, null/game-services/anti-cheat/anti-cheat-listen-server-mode.png 3840w" src="null/game-services/anti-cheat/anti-cheat-listen-server-mode.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Communication flow of the Listen Server mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Communication flow of the Listen Server mode of network architecture" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/anti-cheat/anti-cheat-listen-server-mode.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>With Peer-to-Peer mode:</p>
@@ -199,7 +195,7 @@
 			<p>When configuring your
 				<a href="/docs/dev-portal/client-credentials">client credentials</a>
 				for the Anti-Cheat interfaces, consider your
-				<a href="/docs/en-US#game-network-architecture">network architecture</a>
+				<a href="#game-network-architecture">network architecture</a>
 				and use case.</p>
 			<p>For the Anti-Cheat Client interface, you should use the predefined
 				<em>GameClient</em>
@@ -281,51 +277,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>start_protected_game.exe</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat_EOS_Setup.exe</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>Settings.json</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>SplashScreen.png</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>Localization</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -366,7 +319,7 @@
 				<h6 id="steam">Steam</h6>
 			</div>
 			<p>Refer to the
-				<a href="/docs/en-UShttps://partner.steamgames.com/doc/sdk/installscripts">Steamworks Installscript documentation</a>. Typically, you define a “<a href="/docs/en-UShttps://partner.steamgames.com/doc/sdk/installscripts#run_process">Run Process</a>” block to trigger the service install operation and a “<a href="/docs/en-UShttps://partner.steamgames.com/doc/sdk/installscripts#runOnUninstall">Run Process On Uninstall</a>” block to trigger the service uninstall operation.</p>
+				<a href="https://partner.steamgames.com/doc/sdk/installscripts">Steamworks Installscript documentation</a>. Typically, you define a “<a href="https://partner.steamgames.com/doc/sdk/installscripts#run_process">Run Process</a>” block to trigger the service install operation and a “<a href="https://partner.steamgames.com/doc/sdk/installscripts#runOnUninstall">Run Process On Uninstall</a>” block to trigger the service uninstall operation.</p>
 			<div>
 				<p>Steam Installscript functionality may not be available on platforms other than Windows.</p>
 			</div>
@@ -401,41 +354,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>start_protected_game.app</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>Settings.json</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>SplashScreen.png</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>Localization</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -472,41 +392,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>start_protected_game</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>Settings.json</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>SplashScreen.png</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">&lt;</span>
-								<span>GameRoot</span>
-								<span style="color:#fff">&gt;</span>
-								<span style="color:#fff">\</span>
-								<span>EasyAntiCheat</span>
-								<span style="color:#fff">\</span>
-								<span>Localization</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -522,7 +409,7 @@
 			<div>
 				<h3 id="console-support">Console support</h3>
 			</div>
-			<p>Console platforms generally rely on hardware security features to prevent arbitrary code execution, which is a prerequisite for most types of cheats. Because these platform-specific security features cover most needs, anti-cheat client protection is not offered for consoles. However, a subset of anti-cheat client APIs is available to support cross-platform play.</p>
+			<p>Console platforms generally rely on hardware security features to prevent arbitrary code execution, which is a prerequisite for most types of cheats. Because these platform-specific security features cover most needs, anti-cheat client protection is not offered for consoles. The Anti-Cheat Client interface in Peer-to-Peer mode can be used to support cross-platform play.</p>
 			<p>To support cross-platform play between PC and console users, you must first determine whether a player is using a platform that does not require client protection when they join a protected game session. This check must not rely on the player’s game client being untampered. Having the game client send a message indicating the platform it is using is not enough since a malicious user could manipulate the value to avoid anti-cheat enforcement.</p>
 			<p>The EOS Connect interface provides
 				<a href="/docs/game-services/eos-connect-interface#user-verification-using-an-id-token">EOS ID Tokens</a>
@@ -532,14 +419,14 @@
 			<p>For more information about ID Tokens, please refer to
 				<a href="/docs/game-services/eos-connect-interface#user-verification-using-an-id-token">EOS ID Tokens</a>
 				or, for Epic Accounts,
-				<a href="/docs/epic-account-services/auth-interface#user-verification-using-an-id-token">EAS ID Tokens</a>.</p>
+				<a href="/docs/epic-account-services/auth/auth-interface#user-verification-using-an-id-token">EAS ID Tokens</a>.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Anti-Cheat">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Anti-Cheat</a>
-				<a href="/docs/en-US/site-map?tag=Easy%20Anti-Cheat">
+				<a href="/docs/site-map">
 					Easy Anti-Cheat</a>
-				<a href="/docs/en-US/site-map?tag=Player%20Moderation">
+				<a href="/docs/site-map">
 					Player Moderation</a>
 			</div>
 		</section>

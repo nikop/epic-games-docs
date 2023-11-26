@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="UI Interface">UI Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,7 +12,7 @@
 	<section>
 		<div>
 			<h1>UI Interface</h1>
-			<h2>Interface that accesses overlay features</h2>
+			<h2>Interface that accesses overlay features.</h2>
 			<div>
 				<div>6 mins to read</div>
 			</div>
@@ -26,14 +20,6 @@
 	</section>
 	<section>
 		<section>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
-						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
-						to coordinate a release plan.</p>
-				</div>
-			</div>
 			<p>
 				<strong>Epic Online Services</strong>
 				(EOS) supports product-independent overlay windows through its
@@ -117,18 +103,18 @@
 				<code>EOS_UI_HideFriendsCallbackInfo</code>.</p>
 			<div>
 				<p>These operations could change the overall visibility status of the overlay system, but they will not necessarily do so every time. For example, showing the friends list page could make the Overlay system become visible if it was previously invisible, but the system could have been visible already if it was already displaying the friends list or another page. Similarly, hiding a page could result in the entire overlay system becoming invisible if that was the last page being displayed, but this will not always be the case. See the section on
-					<a href="/docs/en-US#detecting-visibility-status">Detecting the Overlay's Current Visibility Status</a>
+					<a href="#detecting-visibility-status">Detecting the Overlay's Current Visibility Status</a>
 					for a reliable way to know whether the Overlay system is visible at any given time.</p>
 			</div>
 			<div>
 				<h2 id="blocking-and-reporting">Blocking and Reporting</h2>
 			</div>
 			<p>
-				<a href="/docs/en-UShttps://dev.epicgames.com/docs/api-ref/functions/eos-ui-show-block-player">
+				<a href="/docs/api-ref/functions/eos-ui-show-block-player">
 					<code>EOS_UI_ShowBlockPlayer</code>
 				</a>
 				and
-				<a href="/docs/en-UShttps://dev.epicgames.com/docs/api-ref/functions/eos-ui-show-report-player">
+				<a href="/docs/api-ref/functions/eos-ui-show-report-player">
 					<code>EOS_UI_ShowReportPlayer</code>
 				</a>
 				trigger your game to display the Overlay with a report-or-block dialog box. Players use the dialog box to confirm they want to report or block their target player or to cancel the report or block action.</p>
@@ -263,10 +249,10 @@
 				<h2 id="pausing-the-social-overlay">Pausing the Social Overlay</h2>
 			</div>
 			<p>The Social Overlay processes notifications as they arrive. To pause this behavior use
-				<a href="/docs/en-UShttps://dev.epicgames.com/docs/api-ref/functions/eos-ui-pause-social-overlay">
+				<a href="/docs/api-ref/functions/eos-ui-pause-social-overlay">
 					<code>EOS_UI_PauseSocialOverlay</code>
 				</a>.  This is useful during cutscenes or loading.
-				<a href="/docs/en-UShttps://dev.epicgames.com/docs/api-ref/functions/eos-ui-is-social-overlay-paused">
+				<a href="/docs/api-ref/functions/eos-ui-is-social-overlay-paused">
 					<code>EOS_UI_IsSocialOverlayPaused</code>
 				</a>
 				can be used to retrieve the previously set pause state.</p>
@@ -316,76 +302,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#aeaeae">// Set ProposedHotKey to Alt-Shift-Tab.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>EOS_UI_EKeyCombination ProposedHotKey
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									EOS_UI_EKeyCombination</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_UIK_Alt
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									EOS_UI_EKeyCombination</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_UIK_Shift
-								</span>
-								<span style="color:#fff">|</span>
-								<span>
-									EOS_UI_EKeyCombination</span>
-								<span style="color:#fff">:</span>
-								<span style="color:#fff">:</span>
-								<span>EOS_UIK_Tab</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#aeaeae">// Ask the UI Interface if ProposedHotKey is acceptable.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#f08a92">if</span>
-								<span>
-								</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#89bdff">EOS_UI_IsValidKeyCombination</span>
-								<span style="color:#fff">(</span>
-								<span>ProposedHotKey</span>
-								<span style="color:#fff">)</span>
-								<span>
-								</span>
-								<span style="color:#fff">==</span>
-								<span>
-									EOS_TRUE</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">// ProposedHotKey is valid.</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -440,10 +358,10 @@
 				</tbody>
 			</table>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=UI">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					UI</a>
-				<a href="/docs/en-US/site-map?tag=Overlay">
+				<a href="/docs/site-map">
 					Overlay</a>
 			</div>
 		</section>

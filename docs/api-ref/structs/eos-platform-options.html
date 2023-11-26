@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_Platform_Options">EOS_Platform_Options</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -64,11 +58,11 @@
 									</tr>
 									<tr>
 										<td>const char* ProductId</td>
-										<td>The product ID for the running application, found on the dev portal</td>
+										<td>The product ID for the running application, found on the dev portal. Max length is EOS_PLATFORM_OPTIONS_PRODUCTID_MAX_LENGTH.</td>
 									</tr>
 									<tr>
 										<td>const char* SandboxId</td>
-										<td>The sandbox ID for the running application, found on the dev portal</td>
+										<td>The sandbox ID for the running application, found on the dev portal. Max length is EOS_PLATFORM_OPTIONS_SANDBOXID_MAX_LENGTH.</td>
 									</tr>
 									<tr>
 										<td>EOS_Platform_ClientCredentials ClientCredentials</td>
@@ -80,7 +74,7 @@
 									</tr>
 									<tr>
 										<td>const char* EncryptionKey</td>
-										<td>Used by Player Data Storage and Title Storage. Must be null initialized if unused. 256-bit Encryption Key for file encryption in hexadecimal format (64 hex chars)</td>
+										<td>Used by Player Data Storage and Title Storage. Must be null initialized if unused. 256-bit Encryption Key for file encryption in hexadecimal format; EOS_PLATFORM_OPTIONS_ENCRYPTIONKEY_LENGTH hex chars.</td>
 									</tr>
 									<tr>
 										<td>const char* OverrideCountryCode</td>
@@ -92,7 +86,7 @@
 									</tr>
 									<tr>
 										<td>const char* DeploymentId</td>
-										<td>The deployment ID for the running application, found on the dev portal</td>
+										<td>The deployment ID for the running application, found on the dev portal. Max length is EOS_PLATFORM_OPTIONS_DEPLOYMENTID_MAX_LENGTH.</td>
 									</tr>
 									<tr>
 										<td>uint64_t Flags</td>
@@ -112,7 +106,11 @@
 									</tr>
 									<tr>
 										<td>EOS_HIntegratedPlatformOptionsContainer IntegratedPlatformOptionsContainerHandle</td>
-										<td>A handle that contains all the options for setting up integrated platforms. When set to NULL, the default integrated platform behavior for the host platform will be used.</td>
+										<td>A handle that contains all the options for setting up integrated platforms. When set to NULL, the EOS Integrated Platform behavior for the host platform will be disabled.</td>
+									</tr>
+									<tr>
+										<td>const void* SystemSpecificOptions</td>
+										<td>Pointer to EOS_&lt;Platform&gt;<em>SystemSpecificOptions. This structure will be located in &lt;Platform&gt;/eos</em>&lt;Platform&gt;.h</td>
 									</tr>
 								</tbody>
 							</table>

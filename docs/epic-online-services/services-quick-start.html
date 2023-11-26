@@ -9,7 +9,7 @@
 				<li></li>
 				<li aria-hidden="true"></li>
 				<li>
-					<span aria-label="EOS Quick Start">EOS Quick Start</span>
+					<span aria-label="Get Started Steps">Get Started Steps</span>
 				</li>
 			</ol>
 		</nav>
@@ -17,107 +17,140 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS Quick Start</h1>
-			<h2>Quickly get your game up and running using the Epic Online Services (EOS) SDK.</h2>
+			<h1>Get Started Steps</h1>
+			<h2>Integrate Epic Online Services (EOS) into your game.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section>
-			<p>To get up and running with the Epic Online Services (EOS), you need to download the EOS SDK. To do this you need to:</p>
+			<p>To get up and running with the Epic Online Services (EOS), integrate the EOS SDK with your game, so your game can access EOS services. To do this, you:</p>
 			<ul>
-				<li>Set up an Epic Games developer account.</li>
-				<li>Download the EOS SDK.</li>
+				<li>Set up an Epic Games account and organization in the Developer Portal.</li>
+				<li>Download the EOS SDK (available in C and C#).</li>
+				<li>Integrate the Platform Interface into your game.</li>
 			</ul>
-			<p>Epic Games also provides a project to show how EOS can fit into your game.</p>
+			<p>This document gives guidance on how to do this together with information on the sample code which comes with the SDK download.</p>
+			<p>There are also introduction resources, including introduction blogs, FAQs, and some information on the EOS game engine plugins for Unreal Engine and Unity. For more information on these see the
+				<a href="/docs/epic-online-services/eos-get-started/introduction-resources">Introduction Resources</a>
+				page.</p>
 			<div>
-				<h2 id="setting-up-an-account">Setting up an Account</h2>
+				<h2 id="get-started-steps">Get Started Steps</h2>
 			</div>
-			<p>You use the Developer Portal (<a href="/docs/en-UShttps://dev.epicgames.com/portal">dev.epicgames.com/portal</a>) to set up your game to use EOS services, and to configure the services.
-				<br>In the Developer Portal, each game is known as a "product"; it has a 
-				<!-- -->ProductId
-				<!-- -->, 
-				<!-- -->SandboxId
-				<!-- -->, and 
-				<!-- -->DeploymentId
-				<!-- -->. The EOS SDK uses these to identify your game with the EOS services.</p>
-			<p>For more information about how to use product management tools when setting up an account, see the documentation on the Developer Portal and
+			<div>
+				<h3 id="before-you-begin---system-requirements">Before You Begin - System Requirements</h3>
+			</div>
+			<p>Check the system requirements for your development environment and your game-client's runtime environment in the
+				<a href="/docs/epic-online-services/eos-get-started/system-requirements">System Requirements</a>
+				page.</p>
+			<div>
+				<h3 id="step-1---set-up-an-epic-games-account-and-organization">Step 1 - Set up an Epic Games Account and Organization</h3>
+			</div>
+			<p>You use the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>) to set up your game to use EOS services, to configure the services, and to access the SDK download.</p>
+			<p>In the Developer Portal, you associate your Epic Games account with an "organization", which is your company or business. Each game is known as a "product". An organization can have multiple products.</p>
+			<p>Every game (<strong>product</strong>
+				in the Developer Portal) has:</p>
+			<ul>
+				<li>
+					<strong>A product ID</strong>
+					- a unique identifier for your game.</li>
+				<li>
+					<strong>One or more sandbox IDs</strong>
+					- different named environments for your game's implementation. Example use: you have three different sandboxes to separate the development, testing, and production versions of a game's implementation.</li>
+			</ul>
+			<p>Every sandbox has:</p>
+			<ul>
+				<li>
+					<strong>One or more deployment IDs</strong>
+					- different iterations of your game's implementation within a sandbox. Example use: every deployment in your testing sandbox is either a beta test version or a release candidate, and every deployment in your production sandbox is a release version.</li>
+			</ul>
+			<p>The EOS SDK uses these to identify your game with the EOS services.</p>
+			<p>For more information about how to use product management tools when setting up an account, see the documentation on
 				<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.</p>
 			<div>
-				<h2 id="downloading-the-eos-sdk">Downloading the EOS SDK</h2>
+				<h3 id="step-2---download-the-eos-sdk">Step 2 - Download the EOS SDK</h3>
 			</div>
-			<p>Once you have set up your organization and products, you can download the EOS SDK FROM the Developer Portal. The SDK gives you access to EOS features and services, such as metrics collection and user authentication. Inside the SDK download, you will find the following directories:</p>
+			<p>Once you have set up your organization and products in the Developer Portal, you can download the EOS SDK from the Developer Portal.</p>
+			<p>To get the SDK download, on the Developer Portal home page, click
+				<strong>Download SDK</strong>.</p>
+			<div>
+				<h4 id="eos-sdk-download-types">EOS SDK Download Types</h4>
+			</div>
+			<p>There are different types of SDK downloads to use, depending on which platform your game client runs on:</p>
+			<ul>
+				<li>
+					<strong>Windows, macOS, Linux</strong>
+					- the EOS SDK in C, and the EOS SDK in C#.</li>
+				<li>
+					<strong>Mobile</strong>
+					- the EOS SDK for iOS, and the EOS SDK for Android.</li>
+				<li>
+					<strong>Consoles</strong>
+					- there are EOS SDK downloads for game consoles in C, and in C#.
+					<br>
+					
+					<!-- -->The SDK downloads for consoles are only available to developers approved by the platform holders and approved by Epic Games.
+					<br>
+					
+					<!-- -->The platform holders are: Microsoft (Xbox One, Xbox Series X), Sony (PlayStation 4, PlayStation 5), and Nintendo (Switch).
+					<br>
+					
+					<!-- -->To get access to the SDK downloads for consoles and associated documentation:
+					<!-- -->
+					<ul>
+						<li>See the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>) for guidance on applying for console developer access from the platform holders.</li>
+						<li>Once you have platform-holder approval, you can apply to Epic Games using the
+							<em>Console Developer Request for Epic Online Services</em>
+							form, which is at
+							<a href="https://eoshelp.epicgames.com/s/console-access-request">eoshelp.epicgames.com</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="whats-in-the-eos-sdk-download">What's in the EOS SDK Download</h4>
+			</div>
+			<p>The EOS SDK download has the following directories:</p>
 			<table>
 				<thead>
 					<tr>
-						<th>Directory</th>
-						<th>Content</th>
+						<td>
+							<strong>Directory</strong>
+						</td>
+						<td colspan="3">
+							<strong>Content</strong>
+						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>
-							<code>/SDK/</code>
+							<code>/Samples</code>
 						</td>
-						<td>The libraries and header files necessary to integrate the EOS SDK with your product</td>
+						<td colspan="3">Sample implementations demonstrating how the EOS SDK works.</td>
 					</tr>
 					<tr>
 						<td>
-							<code>/Samples/</code>
+							<code>/SDK</code>
 						</td>
-						<td>Sample applications demonstrating how the SDK works</td>
+						<td colspan="3">The libraries and header files you use in your game code to integrate the EOS SDK with your game so your game can use EOS services.</td>
 					</tr>
 					<tr>
 						<td>
-							<code>/Third Party Notices/</code>
+							<code>/ThirdPartyNotices</code>
 						</td>
-						<td>Legal information about various supporting libraries</td>
+						<td colspan="3">Legal information about supporting libraries.</td>
 					</tr>
 				</tbody>
 			</table>
-			<p>There are different types of SDK downloads to use, depending on which platform your game client runs on:</p>
-			<ul>
-				<li>
-					<strong>Windows, macOS, Linux</strong>
-					-  the EOS SDK in C, and the EOS SDK in C#.</li>
-				<li>
-					<strong>Mobile</strong>
-					-  the EOS SDK for iOS, and the EOS SDK for Android.</li>
-				<li>
-					<strong>Consoles</strong>
-					- there are EOS SDK downloads for game consoles in C, and in C#.
-					<br>
-					The SDK downloads for consoles are only available to developers approved by the platform holders and approved by Epic Games.
-					<br>
-					The platform holders are: Microsoft (Xbox One, Xbox Series X), Sony (PlayStation 4, PlayStation 5), Nintendo (Switch).
-					<br>
-					To get access to the SDK downloads for consoles and associated documentation:
-					<!-- -->
-					<ul>
-						<li>See the Developer Portal (<a href="/docs/en-UShttps://https://dev.epicgames.com/portal">dev.epicgames.com/dev-portal</a>) for guidance on applying for console developer access from the platform holders.</li>
-						<li>Once you have platform-holder approval, you can apply to  Epic Games using the
-							<em>Console Developer Request for Epic Online Services</em>
-							form, which is at
-							<a href="/docs/en-UShttps://eoshelp.epicgames.com/s/console-access-request">eoshelp.epicgames.com</a>.</li>
-					</ul>
-				</li>
-			</ul>
-			<p>
-				<strong>Tip</strong>: You can use the
-				<a href="/docs/en-UShttps://dev.epicgames.com/support">developer forums</a>
-				to ask questions, get support, and become part of the EOS developer community.</p>
 			<div>
-				<h2 id="trying-out-the-samples">Trying out the Samples</h2>
+				<h4 id="samples">Samples</h4>
 			</div>
-			<p>After downloading the SDK, you will find various samples demonstrating individual features of the platform. For more detailed information about samples, please see the following documentation:</p>
+			<p>We recommend looking at the samples directory, which demonstrates some of the platform's features. For more detailed information about the samples, see the following documentation:</p>
 			<ul>
 				<li>
-					<a href="/docs/epic-account-services/auth-interface/sample-overview">Auth And Friends Sample</a>
-				</li>
-				<li>
-					<a href="/docs/game-services/achievements/eos-achievements-sample">Achievements Sample</a>
+					<a href="/docs/epic-account-services/auth/sample-overview">Auth And Friends Sample</a>
 				</li>
 				<li>
 					<a href="/docs/game-services/sessions/eos-session-matchmaking-sample">Session Matchmaking Sample</a>
@@ -144,199 +177,63 @@
 					<a href="/docs/epic-games-store/services/mods/eos-mods-sample">Mods Sample</a>
 				</li>
 				<li>
-					<a href="/docs/game-services/platforms/android/eos-android-sample">Using the Android SDK Samples</a>
+					<a href="/docs/epic-online-services/platforms/android/eos-android-sample">Using the Android SDK Samples</a>
 				</li>
 				<li>
-					<a href="/docs/epic-online-services/eossdkc-sharp-getting-started#sample-code-and-projects">Using the C# SDK Samples</a>
+					<a href="/docs/epic-online-services/eos-get-started/eossdkc-sharp-getting-started#sample-code-and-projects">Using the C# SDK Samples</a>
 				</li>
 				<li>
-					<a href="/docs/game-services/platforms/i-os/eo-si-os-sample">Using the iOS SDK Samples</a>
+					<a href="/docs/epic-online-services/platforms/i-os/eo-si-os-sample">Using the iOS SDK Samples</a>
 				</li>
 			</ul>
 			<div>
-				<h2 id="eos-sdk-dependencies">EOS SDK Dependencies</h2>
+				<h4 id="eos-sdk-further-information">EOS SDK Further Information</h4>
 			</div>
-			<p>These subsections describe the operating systems and supporting software required to develop and ship your application on each supported platform.</p>
+			<p>Find further information on using the EOS SDK in the following documentation:</p>
+			<ul>
+				<li>For interface handles, naming conventions, and error handling and other key information, see:
+					<a href="/docs/epic-online-services/eos-get-started/services-overview">EOS SDK Key Information</a>.</li>
+				<li>The EOS SDK in C# has some implementation differences to the EOS SDK in C. If you are using C# and if you are using Unity for games development, also see:
+					<a href="/docs/epic-online-services/eos-get-started/eossdkc-sharp-getting-started">EOS SDK in C#</a>.</li>
+			</ul>
 			<div>
-				<h3 id="sdk-samples">SDK Samples</h3>
+				<h3 id="step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface</h3>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development (Samples)</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Installed Software</td>
-						<td>Visual Studio 2017 or higher</td>
-					</tr>
-				</tbody>
-			</table>
+			<p>To use EOS services in your game, you integrate interfaces. There is an interface for each service.</p>
+			<p>The first interface you integrate into your game is the Platform Interface. It holds the handles you need to access every other interface and keep them running: when your game starts up, you initialize the SDK and get a handle to the Platform Interface.</p>
+			<p>Find out more about this in the
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+				documentation.</p>
+			<p>
+				<strong>Note:</strong>
+				The Platform Interface is not the same as the games platforms your game clients run on. The documentation refers to these game platforms as “EOS SDK on Platforms”.</p>
 			<div>
-				<h3 id="windows">Windows</h3>
+				<h2 id="support">Support</h2>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Shipping</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>Windows 7 and newer</td>
-					</tr>
-					<tr>
-						<td>EOS SDK</td>
-						<td>EOS SDK binary (DLL)</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>The latest
-							<a href="/docs/en-UShttps://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">Microsoft Visual C++ Redistributable</a>; the application requires
-							<code>MSVCP140.dll</code>.</td>
-					</tr>
-				</tbody>
-			</table>
+			<p>You can use the Epic developer resources support community at
+				<a href="https://eoshelp.epicgames.com/">eoshelp.epicgames.com</a>
+				to ask questions, get support, and become part of the Epic developer resources community.</p>
+			<p>Support covers:</p>
+			<ul>
+				<li>Developer Portal</li>
+				<li>Epic Games Store</li>
+				<li>Epic Online Services (EOS)</li>
+				<li>Kids Web Services (KWS)</li>
+			</ul>
 			<div>
-				<h3 id="linux">Linux</h3>
+				<h2 id="new-features">New Features</h2>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>Any recent x86 or x64 distribution</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>gcc or Clang compilers
-							<div>Other compilers may work, but have not been tested.</div>
-						</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>cmake 2.6 or higher</td>
-					</tr>
-				</tbody>
-			</table>
-			<div>
-				<h3 id="mac">Mac</h3>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development (Recommended)</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>macOS Catalina (10.15.4) or higher</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>Xcode 12.4 or higher</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th>Shipping</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>macOS Sierra (10.12) or higher (Intel-based Macs)  macOS Big Sur (11.0) or higher (Apple silicon Macs)</td>
-					</tr>
-				</tbody>
-			</table>
-			<div>
-				<h3 id="ios">iOS</h3>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>iOS 11 or higher — 12 or higher recommended</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>AuthenticationServices framework for iOS 12 and higher</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>SafariServices framework for iOS 11</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th>Shipping</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>iOS 11 or higher — 12 or higher recommended</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>AuthenticationServices framework for iOS 12 or higher</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>SafariServices framework for iOS 11</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<!-- -->
-			<div>
-				<h3 id="android">Android</h3>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Development</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Operating System</td>
-						<td>Android OS 6.0 or higher (SDK level 23)</td>
-					</tr>
-					<tr>
-						<td>Installed Software</td>
-						<td>ARM v7 or ARM v8-a
-							<div>ARM v7 has not been tested with the latest versions</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<!-- -->
+			<p>Keep up to date with new features in the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/whats-new">What's New</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
+				</li>
+			</ul>
+			<p>You can find out what's in development on the EOS roadmap at
+				<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</p>
 			<div id="tag_list">
 				<a href="/docs/en-US/site-map?tag=Getting%20Started">Getting Started</a>
 			</div>
@@ -346,34 +243,37 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#setting-up-an-account">Setting up an Account</a>
+						<a href="#get-started-steps">Get Started Steps</a>
 					</li>
 					<li>
-						<a href="#downloading-the-eos-sdk">Downloading the EOS SDK</a>
+						<a href="#before-you-begin---system-requirements">Before You Begin - System Requirements</a>
 					</li>
 					<li>
-						<a href="#trying-out-the-samples">Trying out the Samples</a>
+						<a href="#step-1---set-up-an-epic-games-account-and-organization">Step 1 - Set up an Epic Games Account and Organization</a>
 					</li>
 					<li>
-						<a href="#eos-sdk-dependencies">EOS SDK Dependencies</a>
+						<a href="#step-2---download-the-eos-sdk">Step 2 - Download the EOS SDK</a>
 					</li>
 					<li>
-						<a href="#sdk-samples">SDK Samples</a>
+						<a href="#eos-sdk-download-types">EOS SDK Download Types</a>
 					</li>
 					<li>
-						<a href="#windows">Windows</a>
+						<a href="#whats-in-the-eos-sdk-download">What's in the EOS SDK Download</a>
 					</li>
 					<li>
-						<a href="#linux">Linux</a>
+						<a href="#samples">Samples</a>
 					</li>
 					<li>
-						<a href="#mac">Mac</a>
+						<a href="#eos-sdk-further-information">EOS SDK Further Information</a>
 					</li>
 					<li>
-						<a href="#ios">iOS</a>
+						<a href="#step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface</a>
 					</li>
 					<li>
-						<a href="#android">Android</a>
+						<a href="#support">Support</a>
+					</li>
+					<li>
+						<a href="#new-features">New Features</a>
 					</li>
 				</ul>
 			</div>

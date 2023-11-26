@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Stats Interface">Stats Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -56,7 +50,9 @@
 				to ingest stats inside the application, which will submit them to the
 				<strong>EOS backend</strong>.</p>
 			<div>
-				<p>Once a stat has been ingested the update on the backend may not take effect immediately, as it takes time to both submit and process the stat. As such, achievements using stats may also take a while to unlock.</p>
+				<p>After a stat has been ingested, the update on the backend may not take effect immediately, as it takes time to both submit and process the stat. As such, achievements using stats may also take a while to unlock. Moreover, ingesting does not guarantee successful processing. For example, if an incorrect
+					<code>StatName</code>
+					value is provided in the ingest call, processing may still fail.</p>
 			</div>
 			<p>The parameters taken by the
 				<code>EOS_Stats_IngestStat</code>
@@ -247,7 +243,7 @@
 			<p>The function
 				<code>EOS_Stats_QueryStats</code>
 				can be used to request a list of a user's stats from the EOS backend. When the operation completes, the stats are cached locally rather than returned through the function itself. See the
-				<a href="/docs/en-US#copying-stats">Copying Stats</a>
+				<a href="#copying-stats">Copying Stats</a>
 				section for more info.</p>
 			<p>The
 				<code>EOS_Stats_QueryStats</code>
@@ -706,7 +702,7 @@
 				<h2 id="usage-limitations">Usage Limitations</h2>
 			</div>
 			<p>The Stats Interface manages users' stats for an application, which can include any statistical data that a developer wishes to track, such as the number of items collected, the player's fastest completion time for a level, the total number of victories or losses, or the number of times that a user has performed a certain action. You can use stats to determine when to unlock achievements and how to use rank users in leaderboards. For general information about throttling, usage quotas, and best practices, see
-				<a href="/docs/epic-online-services/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
+				<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
 			<p>The following limits apply to the overall Stats system:</p>
 			<table>
 				<thead>
@@ -735,7 +731,7 @@
 				</tbody>
 			</table>
 			<p>
-				<a href="/docs/en-US#ingesting-stats">Stats Ingestion</a>
+				<a href="#ingesting-stats">Stats Ingestion</a>
 				is the endpoint for submitting stat changes to the service, and has a per-user rate limit. When a dedicated server submits stats on behalf of users, the per-user limits do not apply; in these cases, limits are based on the number of concurrent users (CCU) per 
 				<!-- -->deployment
 				<!-- --> at that time.</p>
@@ -782,10 +778,10 @@
 			<p>For more information on creating a test sandbox for your game, see the documentation on
 				<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Player%20Data">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Player Data</a>
-				<a href="/docs/en-US/site-map?tag=Stats">
+				<a href="/docs/site-map">
 					Stats</a>
 			</div>
 		</section>

@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Epic Games Store Requirements">Epic Games Store Requirements</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -17,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>Epic Games Store Requirements</h1>
-			<h2>Requirements for distributing products on the Epic Games Store</h2>
+			<h1>Store Requirements Overview</h1>
+			<h2>Requirements for distributing products on the Epic Games Store.</h2>
 			<div>
-				<div>3 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -53,17 +47,53 @@
 			</div>
 			<p>In order to distribute your product on the Epic Games Store, you must adhere to the following requirements and guidelines:</p>
 			<div>
-				<h3 id="multiplayer-crossplay-for-pc">Multiplayer Crossplay for PC</h3>
+				<h3 id="cross-platform-multiplayer-for-pc">Cross-Platform Multiplayer for PC</h3>
 			</div>
-			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts. This ensures that players who purchase a multiplayer product on the Epic Games Store can easily connect with other players, regardless of where the product was purchased. You may use your preferred solution for crossplay, such as the free Epic One Services Crossplay functionality, your own method, or any third-party system that works across PC storefronts.</p>
+			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts where the product is distributed. This ensures that players who purchase a multiplayer product on the Epic Games Store can easily connect with other players, regardless of where the product was purchased. You may use your preferred solution for crossplay, such as the free Epic One Services Crossplay functionality, your own method, or any third-party system that works across PC storefronts.</p>
 			<p>
 				<strong>Learn more</strong>:
 				<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/multiplayer-reqs">Cross-Platform Multiplayer Guidelines</a>
 			</p>
 			<div>
+				<h3 id="early-access-requirements">Early Access Requirements</h3>
+			</div>
+			<p>The Epic Games Store welcomes developers to release their products for Early Access. This allows you to make your product available to users while it is still in development.</p>
+			<p>Some studios leverage Early Access to collect and incorporate user feedback, evolving their product by focusing on the features and functionality that most interest their users. While it is up to you to define what Early Access means for your product, releasing for Early Access can offer an iterative approach to building, testing, improving, and ultimately launching a complete, high-quality game to users.</p>
+			<p>
+				<strong>Learn more</strong>:
+				<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/early-access">Early Access Requirements</a>
+			</p>
+			<div>
+				<h3 id="blockchain-technology">Blockchain Technology</h3>
+			</div>
+			<p>Products that support blockchain, NFT, or cryptocurrency may be distributed on the Epic Games Store as long as these products adhere to specific policies regarding blockchain technology. If a product leverages blockchain technology in any capacity, these guidelines and requirements must be followed or the product cannot be published to the storefront.</p>
+			<p>
+				<strong>Learn more</strong>:
+				<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/blockchain">Blockchain Technology Guidelines</a>
+			</p>
+			<div>
+				<h3 id="epic-games-store-achievements">Epic Games Store Achievements</h3>
+			</div>
+			<p>If a product supports achievements through other PC storefronts that sell third-party products, that product must also support Epic Games Store achievements. The achievements available to users on the Epic Games Store must be substantially similar to those offered through other storefronts.</p>
+			<ul>
+				<li>Web-based and HTML products are currently exempt from this requirement as they are not currently supported by the Epic Online Services (EOS) SDK.</li>
+				<li>If a product in Early Access does not yet have a finalized set of base game achievements defined, you only need to implement
+					<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
+					at the time of early release. Once ready for full release, Epic Games Store achievements must enabled.</li>
+			</ul>
+			<p>
+				<strong>Learn more</strong>:
+				<a href="/docs/epic-games-store/services/epic-achievements">Epic Games Store Achievements</a>
+			</p>
+			<div>
+				This requirement does
+				<strong>not</strong>
+				retroactively apply to any existing products available on the Epic Games Store or any products that were onboarded in the Dev Portal prior to March 9, 2023. However, enabling achievements is recommended to promote an optimal user experience.
+			</div>
+			<div>
 				<h3 id="in-app-purchases">In-App Purchases</h3>
 			</div>
-			<p>If a product contains in-app or in-game purchases, this information must clearly be shared with users through the product’s storefront presence. This helps foster a transparent and trustworthy store experience for our users.</p>
+			<p>If a product contains in-app purchases, this information must be clearly shared with users on the product’s store presence. This helps foster a transparent and trustworthy store experience for our users.</p>
 			<p>To provide users with awareness of in-app purchases, you must include the following questions (and answers) in your product’s
 				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-pages#createanfaqpage">FAQ page</a>:</p>
 			<ul>
@@ -80,25 +110,27 @@
 					<!-- -->
 					<ul>
 						<li>
-							<strong>Note</strong>: Epic Games maintains no responsibility for providing payment details or facilitating refunds for any transactions made outside of our payment platform.</li>
+							<strong>Notes</strong>:
+							<!-- -->
+							<ul>
+								<li>Epic Games maintains no responsibility for providing payment details or facilitating refunds for any transactions made outside of our payment platform.</li>
+								<li>This question is not required for blockchain technology. Products leveraging blockchain technology cannot use the Epic Games Store payment mechanism for any offers, including base game offers and associated non-blockchain-related transactions.
+									<br>
+									<strong>Learn more</strong>:
+									<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/blockchain">Blockchain Technology Guidelines</a>
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h3 id="blockchain-technology">Blockchain Technology</h3>
-			</div>
-			<p>Products that support blockchain, NFT, or cryptocurrency may be distributed on the Epic Games Store as long as these products adhere to specific policies regarding blockchain technology. If a product leverages blockchain technology in any capacity, these guidelines and requirements must be followed or the product cannot be published to the storefront.</p>
-			<p>
-				<strong>Learn more</strong>:
-				<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/blockchain">Blockchain Technology Guidelines</a>
-			</p>
 			<div>
 				<h2 id="epic-online-services-recommendations">Epic Online Services Recommendations</h2>
 			</div>
 			<div>
 				<h3 id="testing-guide">Testing Guide</h3>
 			</div>
-			<p>For developers leveraging Epic Online Services in combination with the Epic Games Store, a testing guide is available to help you successfully implement these services. This guide provides test cases and recommendations for topics such as the multiplayer cross-play requirement,  Epic Account Services, offline mode support, and player experience recommendations. We strongly encourage you to review this guide to help ensure a successful launch.</p>
+			<p>For developers leveraging Epic Online Services in combination with the Epic Games Store, a testing guide is available to help you successfully implement these services. This guide provides test cases and recommendations for topics such as the multiplayer crossplay requirement,  Epic Account Services, offline mode support, and player experience recommendations. We strongly encourage you to review this guide to help ensure a successful launch.</p>
 			<p>
 				<strong>Learn More</strong>:
 				<a href="/docs/epic-games-store/testing-guide">Epic Games Store Testing Guide</a>
@@ -117,7 +149,7 @@
 				</li>
 			</ul>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
+				<a href="/docs/site-map">Epic Games Store Only</a>
 			</div>
 		</section>
 		<aside>
@@ -134,13 +166,19 @@
 						<a href="#technical-requirements">Technical Requirements</a>
 					</li>
 					<li>
-						<a href="#multiplayer-crossplay-for-pc">Multiplayer Crossplay for PC</a>
+						<a href="#cross-platform-multiplayer-for-pc">Cross-Platform Multiplayer for PC</a>
 					</li>
 					<li>
-						<a href="#in-app-purchases">In-App Purchases</a>
+						<a href="#early-access-requirements">Early Access Requirements</a>
 					</li>
 					<li>
 						<a href="#blockchain-technology">Blockchain Technology</a>
+					</li>
+					<li>
+						<a href="#epic-games-store-achievements">Epic Games Store Achievements</a>
+					</li>
+					<li>
+						<a href="#in-app-purchases">In-App Purchases</a>
 					</li>
 					<li>
 						<a href="#epic-online-services-recommendations">Epic Online Services Recommendations</a>

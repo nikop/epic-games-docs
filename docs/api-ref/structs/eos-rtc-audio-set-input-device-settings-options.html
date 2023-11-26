@@ -1,0 +1,101 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_RTCAudio_SetInputDeviceSettingsOptions</h1>
+			<h2>EOS API reference page for EOS_RTCAudio_SetInputDeviceSettingsOptions</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow:hidden;margin-bottom:0">
+						<div aria-label="Content Tabs" role="tablist">
+							<button tabindex="0" type="button" role="tab" aria-selected="true" id="simple-tab-0" aria-controls="simple-tabpanel-0">C<span></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>This struct is used to call EOS_RTCAudio_SetInputDeviceSettings.</p>
+							<div>
+								<h2 id="properties">Properties</h2>
+							</div>
+							<p>EOS_RTCAudio_SetInputDeviceSettingsOptions</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Property</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>int32_t ApiVersion</td>
+										<td>API Version: Set this to EOS_RTCAUDIO_SETINPUTDEVICESETTINGS_API_LATEST.</td>
+									</tr>
+									<tr>
+										<td>EOS_ProductUserId LocalUserId</td>
+										<td>The Product User ID of the user trying to request this operation.</td>
+									</tr>
+									<tr>
+										<td>const char* RealDeviceId</td>
+										<td>The device Id to be used for this user. Pass NULL or empty string to use a default input device. If the device ID is invalid, the default device will be used instead. Despite this fact, that device ID will be stored and the library will try to move on it when an audio device pool is being changed. The actual hardware audio input device usage depends on the current payload and optimized not to use it when generated audio frames cannot be processed by someone else based on a scope of rules (For instance, when a client is alone in a room).</td>
+									</tr>
+									<tr>
+										<td>EOS_Bool bPlatformAEC</td>
+										<td>Enable or disable Platform AEC (Acoustic Echo Cancellation) if available.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-rtc-audio-set-input-device-settings">EOS_RTCAudio_SetInputDeviceSettings</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#properties">Properties</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

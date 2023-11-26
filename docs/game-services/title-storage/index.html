@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Title Storage Interface">Title Storage Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,26 +12,28 @@
 	<section>
 		<div>
 			<h1>Title Storage Interface</h1>
-			<h2>Interface to download encrypted data shared by all players from the cloud</h2>
+			<h2>Interface to download encrypted data shared by all players from the cloud.</h2>
 			<div>
-				<div>10 mins to read</div>
+				<div>11 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section>
+			
+			<!-- -->
 			<p>The
 				<strong>Title Storage Interface</strong>
 				enables developers using
 				<strong>Epic Online Services</strong>
 				(EOS) to retrieve encrypted data from cloud servers. Data that you store through this interface is accessible to any user on any device where they can log in. While similar to the
 				<a href="/docs/game-services/player-data-storage">Player Data Storage Interface</a>, this interface is specialized to handle game-specific data rather than user-specific data, and can provide different versions of files based on the user's platform, region, or other conditions. For more specific information about the differences between the Title Storage Interface and the Player Data Storage Interface, see the
-				<a href="/docs/en-US#differences-from-player-data-storage">Differences from Player Data Storage</a>
+				<a href="#differences-from-player-data-storage">Differences from Player Data Storage</a>
 				section at the bottom of this document.</p>
 			<p>To access the Title Storage Interface, acquire an
 				<code>EOS_HTitleStorage</code>
 				handle through the
-				<a href="/docs/game-services/platforms">Platform Interface</a>
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
 				function,
 				<code>EOS_Platform_GetTitleStorageInterface</code>. All Title Storage Interface functions require this handle as their first parameter. You must ensure that the
 				<code>EOS_HPlatform</code>
@@ -47,7 +43,9 @@
 				<ul>
 					<li>
 						<p>
-							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to file-management functions from the Title Storage Interface will result in failure and will return the
+							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to
+							<code>EOS_Platform_GetTitleStorageInterface</code>
+							return a null reference. If the key is not the correct length or format, file-management functions from the Title Storage Interface result in failure and will return the
 							<code>EOS_TitleStorage_EncryptionKeyNotSet</code>
 							error code.</p>
 					</li>
@@ -58,7 +56,7 @@
 							or
 							<code>EOS_CacheDirectoryInvalid</code>
 							error codes. Please refer to the
-							<a href="/docs/game-services/platforms">EOS Platform documentation</a>
+							<a href="/docs/epic-online-services/platforms">EOS Platform documentation</a>
 							for platform-specific limitations on what folders can be used.</p>
 					</li>
 				</ul>
@@ -109,7 +107,7 @@
 				<a href="/docs/dev-portal">Dev Portal</a>.</p>
 			<div>
 				<p>Be sure to
-					<a href="/docs/en-US#ExaminingCachedFileInformation">copy any information you may need from the cache</a>
+					<a href="#ExaminingCachedFileInformation">copy any information you may need from the cache</a>
 					during your query's callback function. This data's lifetime is not guaranteed to last beyond the duration of the callback function. This is especially important when running multiple queries, as each successful query can alter the contents of the cache.</p>
 				<p>Most functions contain an optional Product User ID parameter for better tracking. You can query data with no Product User ID (by passing nullptr instead), but the User ID overrides you set up on the Dev Portal will not be available. Callbacks contain the same User Product ID value you pass</p>
 			</div>
@@ -217,7 +215,8 @@
 			<p>The Title Storage Interface does not provide a specific API call to query all files. However, if you apply a certain tag to every file you upload, you could use
 				<code>EOS_TitleStorage_QueryFileListOptions</code>
 				with that tag to retrieve data about all of your files.</p>
-			<p>(#ExaminingCachedFileInformation)</p>
+			
+			<!-- -->
 			<div>
 				<h3 id="examining-cached-file-information">Examining Cached File Information</h3>
 			</div>
@@ -332,19 +331,18 @@
 				function will not be encrypted.</p>
 			<p>The following timeline diagram shows a hypothetical read operation in action:</p>
 			<div>
-				<div>
-					<div style="max-width:500px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img sizes="100vw" srcset="null/game-services/title-storage/read-operation-diagram.png 640w, null/game-services/title-storage/read-operation-diagram.png 750w, null/game-services/title-storage/read-operation-diagram.png 828w, null/game-services/title-storage/read-operation-diagram.png 1080w, null/game-services/title-storage/read-operation-diagram.png 1200w, null/game-services/title-storage/read-operation-diagram.png 1920w, null/game-services/title-storage/read-operation-diagram.png 2048w, null/game-services/title-storage/read-operation-diagram.png 3840w" src="null/game-services/title-storage/read-operation-diagram.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+				<div style="max-width:500px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/title-storage/read-operation-diagram.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>When downloading multiple files in succession, you can improve performance by querying the file list first, caching the metadata, and then performing downloads. This avoids having to perform multiple queries and wait for the results between file downloads.</p>
-			<p>(#DataCachingAndEncryption)</p>
+			
+			<!-- -->
 			<div>
 				<h3 id="data-caching-and-encryption">Data Caching and Encryption</h3>
 			</div>
@@ -388,12 +386,16 @@
 			<div>
 				<h3 id="file-overriding">File Overriding</h3>
 			</div>
-			<p>In some cases, you may want to provide different versions of a file based various on conditions; for example, different game servers may have their own configuration settings. You can redirect requests for specific file names to alternate files at the Title Storage level. To do this, set up your file structure using the
-				<a href="/docs/dev-portal">Developer Portal</a>. The back-end service will determine which file to return based on the incoming query. The end result of  this setup is that the developers can request a single file name with the EOS SDK from within the application, but be provided with different file data according to the back-end system's criteria.</p>
+			<p>You can manage default files in your game code, but you might want to provide alternate versions of these files. For example, each game server may have its own configuration settings file that you want to use. You must manage these alternate files through the Developer Portal. There, you can configure settings for the files, including specifying who should receive the alternate files. When you query the file through the Title Storage Interface, the Title Storage Interface then returns the alternate file, if applicable.
+				<br>
+				
+				<!-- -->See the
+				<a href="/docs/dev-portal/title-storage-management">Title Storage Management</a>
+				documentation for more information.</p>
 			<div>
 				<h2 id="file-decryption-tool">File Decryption Tool</h2>
 			</div>
-			<p>You can the
+			<p>You can use the
 				<a href="/docs/game-services/file-decryption-tool">
 					<strong>File Decryption Tool</strong>
 				</a>
@@ -408,8 +410,8 @@
 				<h2 id="usage-limitations">Usage Limitations</h2>
 			</div>
 			<p>Title Storage enables developers using Epic Online Services (EOS) to distribute game-specific encrypted data from cloud servers. Data can be grouped via tags and is available to all users across all platforms. For general information about throttling, usage quotas, and best practices, see
-				<a href="/docs/epic-online-services/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
-			<p>Presently, there are no individual file size limits for Title Storage, but see below for other limitations:</p>
+				<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
+			<p>There are no individual file size limits for Title Storage (up to the total storage capacity limitation). See the table below for other limitations:</p>
 			<table>
 				<thead>
 					<tr>
@@ -419,7 +421,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>Folder size limit</td>
+						<td>Total storage capacity</td>
 						<td>10 GB</td>
 					</tr>
 					<tr>
@@ -443,12 +445,12 @@
 				</li>
 				<li>
 					<p>The two interfaces implement file encryption differently. See the
-						<a href="/docs/en-US#DataCachingAndEncryption">Data Caching and Encryption</a>
+						<a href="#DataCachingAndEncryption">Data Caching and Encryption</a>
 						section for more details.</p>
 				</li>
 				<li>
 					<p>The Title Storage Interface supports conditional file overriding, enabling developers to provide different versions of files based on various conditions. See the
-						<a href="/docs/en-US#FileOverriding">File Overriding</a>
+						<a href="#FileOverriding">File Overriding</a>
 						section for more details.</p>
 				</li>
 				<li>
@@ -459,12 +461,12 @@
 				</li>
 			</ol>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Title%20Storage">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Title Storage</a>
-				<a href="/docs/en-US/site-map?tag=Cloud">
+				<a href="/docs/site-map">
 					Cloud</a>
-				<a href="/docs/en-US/site-map?tag=Files">
+				<a href="/docs/site-map">
 					Files</a>
 			</div>
 		</section>

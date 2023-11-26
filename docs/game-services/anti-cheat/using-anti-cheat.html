@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Using the Anti-Cheat interfaces">Using the Anti-Cheat interfaces</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -27,34 +21,34 @@
 	<section>
 		<section>
 			<div>
-				<p>The Anti-Cheat Client interface supports the Windows, Mac, and Linux platforms and requires a 64-bit operating system installation.</p>
+				<p>The Anti-Cheat Client interface supports the Windows, Mac, and Linux platforms and requires a 64-bit operating system installation. The Anti-Cheat Client interface isn't supported on Mac ARM64.</p>
 			</div>
 			<p>To use the Anti-Cheat interface(s), you must:</p>
 			<ol>
 				<li>Review and adhere to the
-					<a href="/docs/game-services/anti-cheat#development-prerequisites">Development Prerequisites</a>.</li>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#development-prerequisites">Development Prerequisites</a>.</li>
 				<li>Determine your
-					<a href="/docs/game-services/anti-cheat#game-architecture">network architecture</a>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#game-architecture">network architecture</a>
 					and
-					<a href="/docs/game-services/anti-cheat#client-credentials-and-policy-configuration">client policy type</a>.</li>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#client-credentials-and-policy-configuration">client policy type</a>.</li>
 				<li>Configure your
-					<a href="/docs/en-US#client-module-setup-and-updates">client module</a>,
-					<a href="/docs/en-US#anti-cheat-integrity-tool-configuration">anti-cheat integrity tool</a>, and
-					<a href="/docs/en-US#configure-the-anti-cheat-bootstrapper-executable">Anti-Cheat Bootstrapper executable</a>.</li>
+					<a href="#client-module-setup-and-updates">client module</a>,
+					<a href="#anti-cheat-integrity-tool-configuration">anti-cheat integrity tool</a>, and
+					<a href="#configure-the-anti-cheat-bootstrapper-executable">Anti-Cheat Bootstrapper executable</a>.</li>
 				<li>(<em>Windows Only</em>) Configure the
-					<a href="/docs/game-services/anti-cheat#windows-service-installer">Windows Service Installer</a>.</li>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#windows-service-installer">Windows Service Installer</a>.</li>
 				<li>Integrate the Anti-Cheat interfaces with your game code:
 					<!-- -->
 					<ol>
 						<li>Establish user identity with the
 							<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>.</li>
 						<li>Register callbacks for
-							<a href="/docs/en-US#client-server-mode">Client-Server</a>
+							<a href="#client-server-mode">Client-Server</a>
 							or
-							<a href="/docs/en-US#peer-to-peer-mode">Peer-to-Peer</a>
+							<a href="#peer-to-peer-mode">Peer-to-Peer</a>
 							mode.</li>
 						<li>Set up
-							<a href="/docs/en-US#protected-game-session-notifications">session notifications</a>.</li>
+							<a href="#protected-game-session-notifications">session notifications</a>.</li>
 					</ol>
 				</li>
 				<li>Confirm the Anti-Cheat interfaces are working properly by going through the
@@ -78,7 +72,7 @@
 					<strong>System</strong>
 					(Windows, Linux, or macOS) from the dropdown menu.</li>
 				<li>(<em>For updating and reverting</em>)
-					<a href="/docs/en-US#testing-a-module">Test</a>
+					<a href="#testing-a-module">Test</a>
 					that the module works with your game as expected.</li>
 				<li>Select
 					<strong>Activate Build</strong>
@@ -122,7 +116,7 @@
 				</li>
 				<li>Start your game as normal with the anti-cheat bootstrapper.</li>
 				<li>Locate the anti-cheat bootstrapper’s
-					<a href="/docs/en-US#logs">log file</a>.</li>
+					<a href="#logs">log file</a>.</li>
 				<li>Verify that the anti-cheat bootstrapper’s log file shows the expected timestamp and indicates that the URL in the configuration file was used.</li>
 				<li>Run the game through an appropriate testing procedure selected for your game. At minimum, you should be able to successfully connect to a protected multiplayer game session and use any critical functionality like in-game purchasing overlays.</li>
 				<li>Remove the .eac configuration file when finished so that your test system aligns with your live environment. This .eac file should never be shipped as part of your game distribution.</li>
@@ -134,7 +128,7 @@
 			</div>
 			<p>You may need to revert to a previous anti-cheat module if you suspect a recent update is causing problems in your game.</p>
 			<p>Follow the same instructions as you would for an
-				<a href="/docs/en-US#set-up-update-and-revert-your-client-module">update</a>, but select a previous version instead of the most recent.</p>
+				<a href="#set-up-update-and-revert-your-client-module">update</a>, but select a previous version instead of the most recent.</p>
 			<div role="alert">
 				<div></div>
 				<div>
@@ -149,7 +143,7 @@
 				indicates whether the anti-cheat client module and protection are being delivered through the anti-cheat bootstrapper when each player starts the game.
 				<strong>Server Kicks</strong>
 				indicates whether the anti-cheat protection is being enforced in protected game sessions and players who are not running the anti-cheat or have a violation will be marked for removal through the appropriate
-				<a href="/docs/en-US#launch-configuration">SDK callback</a>.</p>
+				<a href="#launch-configuration">SDK callback</a>.</p>
 			<p>Clicking the Configure button will allow you to choose between three different configuration options.</p>
 			<ul>
 				<li>
@@ -168,7 +162,7 @@
 					<p>Disable all</p>
 					<ul>
 						<li>This configuration may be used temporarily in case of emergency such as a crash related to anti-cheat affecting many players that cannot be solved by
-							<a href="/docs/en-US#set-up-update-and-revert-your-client-module">reverting</a>
+							<a href="#set-up-update-and-revert-your-client-module">reverting</a>
 							to an earlier anti-cheat client module. The anti-cheat client module will not be delivered at game start and its presence will not be enforced during protected game sessions. Reverting to an earlier anti-cheat client module is always preferable instead if possible. If you use this configuration setting you must enable the Client Protection only for a transition period of several hours before returning to the Enable all state to avoid large numbers of players being suddenly removed from protected game sessions.</li>
 					</ul>
 				</li>
@@ -180,7 +174,7 @@
 				<code>anticheat_integritytool</code>
 				included with the SDK’s
 				<em>
-					<a href="/docs/game-services/anti-cheat#platform-components">EOS_AntiCheatTools</a>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#platform-components">EOS_AntiCheatTools</a>
 				</em>
 				package to configure file integrity checks.</p>
 			<p>The
@@ -263,7 +257,7 @@
 							<ol>
 								<li>
 									<p>
-										<code>max_active_game_instances</code>: Configures the maximum amount of active game instances that can be run on a single PC. Leaving this undefined or setting it to zero will result in unlimited instance count.</p>
+										<code>max_active_game_instances</code>: Configures the maximum amount of active game instances that can be run on a single PC. Leaving this undefined will default to one maximum client while setting it to zero will result in an unlimited instance count.</p>
 								</li>
 								<li>
 									<p>
@@ -292,7 +286,7 @@
 			</div>
 			<p>You must launch your game with the
 				<em>
-					<a href="/docs/game-services/anti-cheat#platform-components">Anti-Cheat Bootstrapper helper executable</a>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#platform-components">Anti-Cheat Bootstrapper helper executable</a>
 				</em>
 				to ensure that anti-cheat protection components can load immediately when the game process is created. Any command line arguments you pass to the  Anti-Cheat Bootstrapper will be automatically forwarded to your game executable.</p>
 			<div>
@@ -386,7 +380,7 @@
 				</li>
 			</ol>
 			<p>Should you encounter any issues with either required or optional configuration the bootstrapper’s
-				<a href="/docs/en-US#logs">log file</a>
+				<a href="#logs">log file</a>
 				is always the best reference.</p>
 			<div>
 				<h3 id="using-multiple-bootstrapper-configuration-files">Using Multiple Bootstrapper Configuration Files</h3>
@@ -410,7 +404,7 @@
 			</div>
 			<p>The Anti-Cheat Client has a mode-agnostic callback that informs the game process on any anti-cheat client integrity violations which have occurred.</p>
 			<p>To register a callback when the anti-cheat has violation information to provide for the game process, use
-				<code>EOS_AntiCheatClient_AddNotifyPeerAuthStatusChanged</code>.</p>
+				<code>EOS_AntiCheatClient_AddNotifyClientIntegrityViolated</code>.</p>
 			<p>The messages provided to the callback must be displayed to the player in the provided format. This helps them in understanding why they may be unable to join online multiplayer sessions. The provided message is always provided in a localized format.</p>
 			<p>The functionality does not expose information to the users that they could leverage to gain advantage in these protected sessions.</p>
 			<div>
@@ -610,10 +604,10 @@
 				<h4 id="operational-issues">Operational Issues</h4>
 			</div>
 			<p>If a new anti-cheat client module was activated and issues appeared around the same time,
-				<a href="/docs/en-US#set-up-update-and-revert-your-client-module">revert</a>
+				<a href="#set-up-update-and-revert-your-client-module">revert</a>
 				to the previously used client module.</p>
 			<p>If excessive numbers of players are suddenly being removed from protected game sessions due to anti-cheat violations, change the
-				<a href="/docs/en-US#anti-cheat-service-configuration-in-developer-portal">Anti-Cheat Service Configuration</a>
+				<a href="#anti-cheat-service-configuration-in-developer-portal">Anti-Cheat Service Configuration</a>
 				to “Enable Client protection while Server kicks is disabled” to unblock players and provide more time for troubleshooting.</p>
 			<div>
 				<h4 id="logs">Logs</h4>
@@ -621,7 +615,7 @@
 			<p>For most anti-cheat issues, the best place to start is with log data.</p>
 			<p>The Anti-Cheat interfaces are components of the EOS SDK that generate log output programmatically instead of creating a direct log file by using the
 				<a href="/docs/game-services/eos-logging-interface">Logging Interface</a>. Your game code must write this log data to a useful location for troubleshooting use.</p>
-			<p>To troubleshoot issues during development, we recommend setting the log level for anti-cheat to
+			<p>To troubleshoot issues during development, we recommend setting the log level for anti-cheat (<code>EOS_LC_AntiCheat</code>) to
 				<code>VeryVerbose</code>.</p>
 			<p>The Service and Anti-Cheat Bootstrapper create their own log files automatically.</p>
 			<div>
@@ -669,6 +663,14 @@
 						</li>
 					</ul>
 				</li>
+				<li>Steam Deck:
+					<!-- -->
+					<ul>
+						<li>Bootstrapper log:
+							<code>/home/deck/.local/share/Steam/steamapps/compatdata/&lt;Steam AppID&gt;/pfx/drive_c/users/steamuser/AppData/Roaming/EasyAntiCheat/&lt;Your ProductId&gt;/&lt;Your DeploymentId&gt;/anticheatlauncher.log</code>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<div>
 				<h3 id="common-errors">Common Errors</h3>
@@ -704,12 +706,12 @@
 				<h5 id="nullclient">NullClient</h5>
 			</div>
 			<p>This error means that the Anti-Cheat Bootstrapper was unable to load the anti-cheat module and started in failsafe “null client” mode instead. See
-				<a href="/docs/en-US#anti-cheat-bootstrapper">Anti-Cheat Bootstrapper logs</a>
+				<a href="#anti-cheat-bootstrapper">Anti-Cheat Bootstrapper logs</a>
 				on the affected machine for more details. The most common causes for this are:</p>
 			<ul>
 				<li>The Anti-Cheat Bootstrapper was unable to download the anti-cheat module at game start because of an internet connection problem or firewall.</li>
 				<li>The player is launching the game on a platform where no client module has been activated, for example using
-					<a href="/docs/game-services/anti-cheat#linux-wineproton-support">Wine/Proton</a>
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#linux-wineproton-support">Wine/Proton</a>
 					when no Linux module has been activated.</li>
 				<li>The Client Protection setting in your Developer Portal was disabled, then the service was fully re-enabled without waiting for the recommended transition period.</li>
 			</ul>
@@ -719,7 +721,7 @@
 			<p>This error means that an anti-cheat client violation error occurred on the corresponding game client. Full details are provided by either the
 				<code>ClientIntegrityViolated`` callback or the EOS_AntiCheatClient_PollStatus</code>
 				function.  See
-				<a href="/docs/en-US#during-a-protected-game-session">Protected Game Session Notifications</a>.</p>
+				<a href="#during-a-protected-game-session">Protected Game Session Notifications</a>.</p>
 			<div>
 				<h5 id="temporarycooldown">TemporaryCooldown</h5>
 			</div>
@@ -749,9 +751,10 @@
 			<p>For normal game development tasks, we recommend that you simply run the game without the anti-cheat protection active by starting the game executable directly instead of using the anti-cheat bootstrapper executable.</p>
 			<p>When the game is started this way, the anti-cheat protection will not be active and will not interfere with debuggers. If the anti-cheat has been integrated correctly, it should not be possible to join a protected multiplayer session in this situation.</p>
 			<div>
-				<p>While a debugger won't work with anti-cheat fully running, you can pass a null client to anti-cheat for debugging purposes. This allows you to attach a debugger and debug most of the flow up until the anti-cheat handshake. To do this, start the game without the anti-cheat bootstrapper, and pass the additional command line argument
-					<code>-EOS_FORCE_ANTICHEATCLIENTNULL</code>
-					to the game.</p>
+				<p>While a debugger won't work with anti-cheat fully running, you can pass a null client to anti-cheat for debugging purposes. This allows you to attach a debugger and debug most of the flow up until the anti-cheat handshake. To do this, set the environment variable
+					<code>EOS_USE_ANTICHEATCLIENTNULL</code>
+					to a value of
+					<code>1</code>, and start the game without the anti-cheat bootstrapper. Remember to remove the environment variable after you're done debugging.</p>
 			</div>
 			<div>
 				<h4 id="external-crash-dumpers">External Crash Dumpers</h4>
@@ -761,12 +764,12 @@
 			<p>The anti-cheat protection will automatically recognize the Windows WerFault and Unreal Engine CrashReportClient dumpers which are known to meet these requirements. If your crash dumper also meets the requirements, then setting the executable’s file name to anything that begins with “CrashReport” will allow it to operate in the same way.</p>
 			<p>Note that some crash dumper tools which are not compatible will immediately open a full access handle to the game process every time it starts. Attempting to use one of these tools will cause the game to hang then terminate soon after starting because of the logic described earlier.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Anti-Cheat">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Anti-Cheat</a>
-				<a href="/docs/en-US/site-map?tag=Easy%20Anti-Cheat">
+				<a href="/docs/site-map">
 					Easy Anti-Cheat</a>
-				<a href="/docs/en-US/site-map?tag=Player%20Moderation">
+				<a href="/docs/site-map">
 					Player Moderation</a>
 			</div>
 		</section>

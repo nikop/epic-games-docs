@@ -1,0 +1,143 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Best Display Name</h1>
+			<h2>How to use the EOS SDK to display the best display name in your game with crossplay.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>A player can have many display names when using crossplay across platforms (for example, across Nintendo Switch and Xbox) and game clients (for instance, across Epic Games Store and Steam). We have a simple, consistent way to determine which display name you should use within Epic's SDK.</p>
+			<p>Two APIs handle which display name is considered the source of truth and ensure that games answer this question similarly. If a player is online, we use the display name for the online platform, and if they are offline, we use their Epic Games account display name.</p>
+			<p>The two APIs:</p>
+			<ul>
+				<li>
+					<code>EOS_UserInfo_CopyBestDisplayName</code>
+					determines the display name while inferring the platform by collating the available data sources.</li>
+				<li>
+					<code>EOS_UserInfo_CopyBestDisplayNameWithPlatform</code>
+					determines the display name when you specify the platform.</li>
+			</ul>
+			<p>
+				<strong>Note</strong>: If your crossplay game needs support for a brand new online service that isn't supported in the version of the SDK you currently use, you must patch all platforms of the game with the latest SDK version which does support it.</p>
+			<p>For more information on how to use crossplay in your game, see the
+				<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview">Crossplay Technical Overview</a>
+				documentation.</p>
+			<div>
+				<h2 id="eos_userinfo_copybestdisplayname">EOS_UserInfo_CopyBestDisplayName</h2>
+			</div>
+			<p>Use
+				<code>EOS_UserInfo_CopyBestDisplayName</code>
+				to determine the display name for a player. The SDK searches through cached data looking for the player to figure out which online platform they are on, and then matches that to a display name.</p>
+			<p>If
+				<code>EOS_UserInfo_CopyBestDisplayName</code>
+				returns
+				<code>EOS_UserInfo_BestDisplayNameIndeterminate</code>, the SDK cannot determine a display name that satisfies most cert requirements. This can happen for several reasons, including:</p>
+			<ul>
+				<li>The player is offline.</li>
+				<li>The game service is not fully supported yet (for example, if game invites are not supported).</li>
+				<li>The player doesn't have a matching account for the platform.</li>
+			</ul>
+			<p>If
+				<code>EOS_UserInfo_CopyBestDisplayName</code>
+				returns
+				<code>EOS_UserInfo_BestDisplayNameIndeterminate</code>, it is up to you to figure out an appropriate solution that works for you. One solution we recommend is for you to call
+				<code>EOS_UserInfo_CopyBestDisplayNameWithPlatform</code>
+				with the platform set to
+				<code>EOS_OPT_Epic</code>.</p>
+			<p>If
+				<code>EOS_UserInfo_CopyBestDisplayName</code>
+				returns
+				<code>EOS_NotFound</code>, the expected cached data does not exist. You must call one of the following:</p>
+			<ul>
+				<li>
+					<code>EOS_UserInfo_QueryUserInfo</code>
+				</li>
+				<li>
+					<code>EOS_UserInfo_QueryUserInfoByDisplayName</code>
+				</li>
+				<li>
+					<code>EOS_UserInfo_QueryUserInfoByExternalAccount</code>
+				</li>
+			</ul>
+			<p>Then you must call
+				<code>EOS_Connect_QueryExternalAccountMappings</code>.</p>
+			<div>
+				<h2 id="eos_userinfo_copybestdisplaynamewithplatform">EOS_UserInfo_CopyBestDisplayNameWithPlatform</h2>
+			</div>
+			<p>You should use
+				<code>EOS_UserInfo_CopyBestDisplayNameWithPlatform</code>
+				when either:</p>
+			<ul>
+				<li>
+					<code>EOS_UserInfo_CopyBestDisplayName</code>
+					returns
+					<code>EOS_UserInfo_BestDisplayNameIndeterminate</code>
+				</li>
+				<li>You have your own source of truth for a player's online platform type</li>
+				<li>Your player's online platform type (<code>EOS_OnlinePlatformType</code>) is a known fixed value, for example:
+					<!-- -->
+					<ul>
+						<li>
+							<code>EOS_OPT_Epic</code>. You may use this in the following cases:
+							<!-- -->
+							<ul>
+								<li>List of offline epic friends</li>
+								<li>List of epic blocks</li>
+								<li>Received epic friend request</li>
+								<li>Looking at leaderboard</li>
+							</ul>
+						</li>
+						<li>
+							<code>EOS_UserInfo_GetLocalPlatformType</code>
+							(this function returns the online platform type value for the local platform). You may use this in the following cases:
+							<!-- -->
+							<ul>
+								<li>List of platform friends</li>
+								<li>List of platform blocks</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p>The diagram below demonstrates what the best display name is with certain criteria:</p>
+			<div>
+				<div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Crossplay restrictions workflow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Crossplay restrictions workflow" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/crossplay/best-display-name/best-display-name-flow-chart.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#eos_userinfo_copybestdisplayname">EOS_UserInfo_CopyBestDisplayName</a>
+					</li>
+					<li>
+						<a href="#eos_userinfo_copybestdisplaynamewithplatform">EOS_UserInfo_CopyBestDisplayNameWithPlatform</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

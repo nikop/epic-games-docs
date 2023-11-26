@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_Lobby_CreateLobbyOptions">EOS_Lobby_CreateLobbyOptions</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -20,7 +14,7 @@
 			<h1>EOS_Lobby_CreateLobbyOptions</h1>
 			<h2>EOS API reference page for EOS_Lobby_CreateLobbyOptions</h2>
 			<div>
-				<div>5 mins to read</div>
+				<div>6 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -76,7 +70,7 @@
 									</tr>
 									<tr>
 										<td>EOS_Bool bPresenceEnabled</td>
-										<td>If true, this lobby will be associated with presence information. A user's presence can only be associated with one lobby at a time. This affects the ability of the Social Overlay to show game related actions to take in the user's social graph. * using the bPresenceEnabled flags within the Sessions interface * using the bPresenceEnabled flags within the Lobby interface * using EOS_PresenceModification_SetJoinInfo</td>
+										<td>If true, this lobby will be associated with the local user's presence information. A user's presence can only be associated with one lobby at a time. This affects the ability of the Social Overlay to show game related actions to take in the user's social graph. * using the bPresenceEnabled flags within the Sessions interface * using the bPresenceEnabled flags within the Lobby interface * using EOS_PresenceModification_SetJoinInfo</td>
 									</tr>
 									<tr>
 										<td>EOS_Bool bAllowInvites</td>
@@ -88,7 +82,7 @@
 									</tr>
 									<tr>
 										<td>EOS_Bool bDisableHostMigration</td>
-										<td>Is host migration allowed (will the lobby stay open if the original host leaves?)  NOTE: EOS_Lobby_PromoteMember is still allowed regardless of this setting</td>
+										<td>Is host migration allowed (will the lobby stay open if the original host leaves?) NOTE: EOS_Lobby_PromoteMember is still allowed regardless of this setting</td>
 									</tr>
 									<tr>
 										<td>EOS_Bool bEnableRTCRoom</td>
@@ -108,7 +102,19 @@
 									</tr>
 									<tr>
 										<td>EOS_Bool bRejoinAfterKickRequiresInvite</td>
-										<td>Does rejoining after being kicked require an invite? When this is set, a kicked player cannot return to the session even if the session was set with  EOS_LPL_PUBLICADVERTISED.  When this is set, a player with invite privileges must use EOS_Lobby_SendInvite to allow the kicked player to return to the session.</td>
+										<td>Does rejoining after being kicked require an invite? When this is set, a kicked player cannot return to the session even if the session was set with EOS_LPL_PUBLICADVERTISED.  When this is set, a player with invite privileges must use EOS_Lobby_SendInvite to allow the kicked player to return to the session.</td>
+									</tr>
+									<tr>
+										<td>const uint32_t* AllowedPlatformIds</td>
+										<td>Array of platform IDs indicating the player platforms allowed to register with the session. Platform IDs are found in the EOS header file, e.g. EOS_OPT_Epic. For some platforms, the value will be in the EOS Platform specific header file. If null, the lobby will be unrestricted.</td>
+									</tr>
+									<tr>
+										<td>uint32_t AllowedPlatformIdsCount</td>
+										<td>Number of platform IDs in the array</td>
+									</tr>
+									<tr>
+										<td>EOS_Bool bCrossplayOptOut</td>
+										<td>This value indicates whether or not the lobby owner allows crossplay interactions. If false, the lobby owner will be treated as allowing crossplay. If it is set to true, AllowedPlatformIds must have a single entry that matches  the platform of the lobby owner.</td>
 									</tr>
 								</tbody>
 							</table>

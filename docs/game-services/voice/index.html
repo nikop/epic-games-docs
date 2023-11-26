@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Voice Interface">Voice Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -25,7 +19,7 @@
 						<span>Preview</span>
 					</div>
 				</div>
-				<div>7 mins to read</div>
+				<div>8 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -35,17 +29,26 @@
 				<strong>Epic Online Services (EOS) Voice</strong>
 				helps you create and manage voice chat rooms for your users. You can host EOS Voice chat rooms on Epic's server(s) using
 				<a href="/docs/game-services/lobbies">EOS Lobbies</a>, or on your back-end server(s). Also, a user can communicate one-on-one or in groups across multiple platforms, during a match, and in your product's lobby.</p>
+			<div>
+				<p>The Voice interface requires EOS SDK release 1.13 or higher.</p>
+				<p>Voice will be fully supported by the Online Subsystem (OSS) and the VoiceChat plugins with the Unreal Engine 4.27 release.</p>
+				<p>Linux is currently not supported for EOS Voice.</p>
+			</div>
 			<p>The connections made with EOS Voice establish only between authenticated users and go through Voice servers without exposing personal information (PI) about the users. EOS handles all the scaling, quality of service, maintenance, multi-region 
 				<!-- -->presence
 				<!-- -->, and other machinery of the voice servers.</p>
 			<div>
-				<p>The Voice interface requires EOS SDK release 1.13 or higher.</p>
-				<p>Voice will be fully supported by the Online Subsystem (OSS) and the VoiceChat plugins with the Unreal Engine 4.27 release.</p>
+				<p>Nintendo Switch games can't link a Nintendo Switch account to an Epic Games account. This restriction means that blocked Nintendo Switch accounts are not blocked in EOS Voice chat. Therefore, players can still hear blocked Nintendo Switch account players in EOS Voice chat. See the
+					<a href="/docs/epic-online-services/platforms/switch#logging-into-eos-auth-epic-account-services">Nintendo Switch: Logging into EOS Auth (Epic Account Services)</a>
+					documentation for more information on the authentication method used for Nintendo Switch.</p>
+				<p>You can only access console documentation if you have the appropriate permissions. See the
+					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+					documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			</div>
 			<p>To use the Voice interface, you should:</p>
 			<ol>
 				<li>Review and determine the
-					<a href="/docs/en-US#voice-integration-methods">integration method</a>
+					<a href="#voice-integration-methods">integration method</a>
 					you want to use with your game.</li>
 				<li>Investigate the Voice sample (<a href="/docs/game-services/voice/voice-sample">C</a>
 					and
@@ -60,9 +63,9 @@
 					</ol>
 				</li>
 				<li>Review the
-					<a href="/docs/en-US#best-practices">best practices</a>,
-					<a href="/docs/en-US#voice-metrics">voice metrics</a>, and
-					<a href="/docs/epic-online-services/services-overview#service-usage-limitations">usage limitations</a>
+					<a href="#best-practices">best practices</a>,
+					<a href="#voice-metrics">voice metrics</a>, and
+					<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">usage limitations</a>
 					for the Voice interface.</li>
 			</ol>
 			<div>
@@ -72,7 +75,7 @@
 			<ul>
 				<li>
 					<p>
-						<a href="/docs/en-US#voice-with-lobbies">
+						<a href="#voice-with-lobbies">
 							<strong>Use Voice with Lobbies</strong>
 						</a>: Integrate the EOS SDK into your
 						<strong>Game Client</strong>
@@ -84,7 +87,7 @@
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#voice-with-a-trusted-server-application">
+						<a href="#voice-with-a-trusted-server-application">
 							<strong>Use a Trusted Server Application</strong>
 						</a>: Integrate the EOS SDK into your
 						<strong>Game Client</strong>
@@ -98,14 +101,12 @@
 			</div>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/game-services/voice/voice-lobbies.png 640w, null/game-services/voice/voice-lobbies.png 750w, null/game-services/voice/voice-lobbies.png 828w, null/game-services/voice/voice-lobbies.png 1080w, null/game-services/voice/voice-lobbies.png 1200w, null/game-services/voice/voice-lobbies.png 1920w, null/game-services/voice/voice-lobbies.png 2048w, null/game-services/voice/voice-lobbies.png 3840w" src="null/game-services/voice/voice-lobbies.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/voice/voice-lobbies.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>When using Voice with Lobbies, integrate the EOS SDK into your Game Client and let Lobbies take on the role of the trusted server application. The lobby generates
@@ -123,14 +124,12 @@
 			</div>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/game-services/voice/voice-lobbies-config.png 640w, null/game-services/voice/voice-lobbies-config.png 750w, null/game-services/voice/voice-lobbies-config.png 828w, null/game-services/voice/voice-lobbies-config.png 1080w, null/game-services/voice/voice-lobbies-config.png 1200w, null/game-services/voice/voice-lobbies-config.png 1920w, null/game-services/voice/voice-lobbies-config.png 2048w, null/game-services/voice/voice-lobbies-config.png 3840w" src="null/game-services/voice/voice-lobbies-config.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/voice/voice-lobbies-config.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>Configure your
@@ -155,7 +154,7 @@
 				<code>mute</code>, and
 				<code>kick</code>
 				are intended for
-				<a href="/docs/en-US#voice-with-a-trusted-server-application">server use only</a>
+				<a href="#voice-with-a-trusted-server-application">server use only</a>
 				and should remain disabled. Otherwise, this would allow Game Clients access to any
 				<code>roomId</code>.</p>
 			<div>
@@ -204,14 +203,12 @@
 			</div>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/game-services/voice/voice-trusted-server.png 640w, null/game-services/voice/voice-trusted-server.png 750w, null/game-services/voice/voice-trusted-server.png 828w, null/game-services/voice/voice-trusted-server.png 1080w, null/game-services/voice/voice-trusted-server.png 1200w, null/game-services/voice/voice-trusted-server.png 1920w, null/game-services/voice/voice-trusted-server.png 2048w, null/game-services/voice/voice-trusted-server.png 3840w" src="null/game-services/voice/voice-trusted-server.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/voice/voice-trusted-server.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<div>
@@ -219,14 +216,12 @@
 			</div>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/game-services/voice/voice-trusted-server-config.png 640w, null/game-services/voice/voice-trusted-server-config.png 750w, null/game-services/voice/voice-trusted-server-config.png 828w, null/game-services/voice/voice-trusted-server-config.png 1080w, null/game-services/voice/voice-trusted-server-config.png 1200w, null/game-services/voice/voice-trusted-server-config.png 1920w, null/game-services/voice/voice-trusted-server-config.png 2048w, null/game-services/voice/voice-trusted-server-config.png 3840w" src="null/game-services/voice/voice-trusted-server-config.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/voice/voice-trusted-server-config.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>Configure your
@@ -405,6 +400,41 @@
 				</li>
 			</ul>
 			<div>
+				<h2 id="implementing-the-voice-interface-on-windows">Implementing the Voice Interface on Windows</h2>
+			</div>
+			<p>For Windows, you must pass the
+				<code>EOS_Windows_RTCOptions</code>
+				in the Platform Interface's
+				<code>RTCOptions</code>
+				before creating the platform.</p>
+			<p>The C SDK example (a code snippet is copied below, but see the
+				<a href="/docs/game-services/voice/voice-sample">Voice Interface - C SDK</a>
+				page for full details) does the following for windows:</p>
+			<ul>
+				<li>Creates an instance of the
+					<code>EOS_Windows_RTCOptions</code>
+					class called
+					<code>WindowsRtcOptions</code>.</li>
+				<li>Configures its attributes.</li>
+				<li>Points the value of
+					<code>RtcOptions.PlatformSpecificOptions</code>
+					to the address of
+					<code>WindowsRtcOptions</code>.</li>
+			</ul>
+			<p>The C SDK example code snippet for Windows:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color:#fff">
+								<span style="display:inline-block">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
 				<h2 id="best-practices">Best Practices</h2>
 			</div>
 			<p>
@@ -423,7 +453,7 @@
 				<h2 id="usage-limitations">Usage Limitations</h2>
 			</div>
 			<p>Voice has interface-specific usage rate limitations. For general information about throttling, usage quotas, and best practices, see
-				<a href="/docs/epic-online-services/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
+				<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
 			<table>
 				<thead>
 					<tr>
@@ -468,12 +498,12 @@
 					<strong>Errors</strong>: Detailed information about errors and their rates.</li>
 			</ul>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Voice">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Voice</a>
-				<a href="/docs/en-US/site-map?tag=Lobbies">
+				<a href="/docs/site-map">
 					Lobbies</a>
-				<a href="/docs/en-US/site-map?tag=Chat">
+				<a href="/docs/site-map">
 					Chat</a>
 			</div>
 		</section>
@@ -504,6 +534,9 @@
 					</li>
 					<li>
 						<a href="#handles-to-the-rtc-interfaces">Handles to the RTC Interfaces</a>
+					</li>
+					<li>
+						<a href="#implementing-the-voice-interface-on-windows">Implementing the Voice Interface on Windows</a>
 					</li>
 					<li>
 						<a href="#best-practices">Best Practices</a>

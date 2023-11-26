@@ -35,7 +35,7 @@
 				with EOS SDK.</p>
 			<div>
 				<p>For documentation regarding the EOS SDK and consoles (PlayStation, Xbox, Nintendo Switch, etc), you must
-					<a href="/docs/en-UShttps://dev.epicgames.com/portal/eos-web-dev-org/organization/settings">configure your organization access</a>
+					<a href="https://dev.epicgames.com/portal/en-US/eos-web-dev-org/organization/settings?sessionInvalidated=true">configure your organization access</a>
 					and the documentation will be part of the SDK drop after First Party approval.</p>
 			</div>
 			<div>
@@ -69,13 +69,13 @@
 					</tr>
 					<tr>
 						<td>Xbox GDK</td>
-						<td>June 2022 QFE2 (220602)</td>
-						<td>March 2022 QFE1 (220301)</td>
+						<td>October 2022 QFE1 (221001)</td>
+						<td>June 2022 QFE4 (220604)</td>
 					</tr>
 					<tr>
 						<td>Nintendo Switch</td>
+						<td>15.3.0_4.6.7</td>
 						<td>14.3.0</td>
-						<td>13.3.2_4.6.6</td>
 					</tr>
 				</tbody>
 			</table>
@@ -117,103 +117,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#f08a92">if</span>
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">!</span>
-								<span>Target</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">IsInPlatformGroup</span>
-								<span style="color:#fff">(</span>
-								<span>UnrealPlatformGroup</span>
-								<span style="color:#fff">.</span>
-								<span>Windows</span>
-								<span style="color:#fff">)</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">!</span>
-								<span>Target</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">IsInPlatformGroup</span>
-								<span style="color:#fff">(</span>
-								<span>UnrealPlatformGroup</span>
-								<span style="color:#fff">.</span>
-								<span>Unix</span>
-								<span style="color:#fff">)</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">!</span>
-								<span>Target</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">IsInPlatformGroup</span>
-								<span style="color:#fff">(</span>
-								<span>UnrealPlatformGroup</span>
-								<span style="color:#fff">.</span>
-								<span>Apple</span>
-								<span style="color:#fff">)</span>
-								<span>
-								</span>
-								<span style="color:#fff">&amp;&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">!</span>
-								<span>Target</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">IsInPlatformGroup</span>
-								<span style="color:#fff">(</span>
-								<span>UnrealPlatformGroup</span>
-								<span style="color:#fff">.</span>
-								<span>Android</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#89bdff">AppendStringToPublicDefinition</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#00bda0">"EOS_BUILD_PLATFORM_NAME"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									Target</span>
-								<span style="color:#fff">.</span>
-								<span>Platform</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">ToString</span>
-								<span style="color:#fff">(</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -227,21 +132,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>#include
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"eos_platform_prereqs.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_sdk.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_[interface]_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -256,21 +148,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>#include
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"eos_friends_types.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_auth_types.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_lobby_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -287,50 +166,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>#</span>
-								<span style="color:#f08a92">if</span>
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">defined</span>
-								<span style="color:#fff">(</span>
-								<span>__THECOMPILER__</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"ThePlatform/eos_ThePlatform_base.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#elif
-								</span>
-								<span style="color:#89bdff">defined</span>
-								<span style="color:#fff">(</span>
-								<span>__SOMECOMPILER__</span>
-								<span style="color:#fff">)</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"SomePlatform/eos_SomePlatform_base.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#endif</span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_sdk.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_friends_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -347,21 +184,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>#include
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"ThePlatform/eos_ThePlatform_base.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_sdk.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_[interface]_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -376,21 +200,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>#include
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#00bda0">"eos_friends_types.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_auth_types.h"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>#include
-								</span>
-								<span style="color:#00bda0">"eos_lobby_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -423,65 +234,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>PublicAdditionalLibraries</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">Add</span>
-								<span style="color:#fff">(</span>
-								<span>LibraryLinkName</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>string RuntimeLibrarySourcePath
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									Path</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">Combine</span>
-								<span style="color:#fff">(</span>
-								<span>SDKBinariesDir</span>
-								<span style="color:#fff">,</span>
-								<span>
-									RuntimeLibraryFileName</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>string RuntimeLibraryTargetPath
-								</span>
-								<span style="color:#fff">=</span>
-								<span>
-									Path</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">Combine</span>
-								<span style="color:#fff">(</span>
-								<span>ProjectBinariesDir</span>
-								<span style="color:#fff">,</span>
-								<span>
-									RuntimeLibraryFileName</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>RuntimeDependencies</span>
-								<span style="color:#fff">.</span>
-								<span style="color:#89bdff">Add</span>
-								<span style="color:#fff">(</span>
-								<span>RuntimeLibraryTargetPath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									RuntimeLibrarySourcePath</span>
-								<span style="color:#fff">,</span>
-								<span>
-									StagedFileType</span>
-								<span style="color:#fff">.</span>
-								<span>NonUFS</span>
-								<span style="color:#fff">)</span>
-								<span style="color:#fff">;</span>
 							</div>
 						</div>
 					</pre>
@@ -583,9 +337,9 @@
 			</a>
 			<a href="/docs/game-services/platforms/ps-4">
 				<dl>
-					<dt>Using EOS SDK on Playstation 4</dt>
+					<dt>Using EOS SDK on PlayStation 4</dt>
 					<dd>
-						<p>Reference information for implementing EOS on Playstation 4</p>
+						<p>Reference information for implementing EOS on PlayStation 4</p>
 					</dd>
 				</dl>
 			</a>
@@ -605,19 +359,11 @@
 					</dd>
 				</dl>
 			</a>
-			<a href="/docs/game-services/platforms/xbox-one">
+			<a href="/docs/game-services/platforms/xbox">
 				<dl>
-					<dt>Using Epic Online Services (EOS) with the Xbox XDK</dt>
+					<dt>Using EOS SDK on Xbox</dt>
 					<dd>
-						<p>Reference information for implementing EOS on Xbox One</p>
-					</dd>
-				</dl>
-			</a>
-			<a href="/docs/game-services/platforms/xbox-series-x">
-				<dl>
-					<dt>Using EOS SDK on Xbox GDK</dt>
-					<dd>
-						<p>Reference information for implementing EOS with the Xbox GDK</p>
+						<p>Reference information for implementing EOS on Xbox One and Series X</p>
 					</dd>
 				</dl>
 			</a>

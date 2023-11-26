@@ -1,0 +1,119 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_IntegratedPlatform_SetUserLoginStatus</h1>
+			<h2>EOS API reference page for EOS_IntegratedPlatform_SetUserLoginStatus</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow:hidden;margin-bottom:0">
+						<div aria-label="Content Tabs" role="tablist">
+							<button tabindex="0" type="button" role="tab" aria-selected="true" id="simple-tab-0" aria-controls="simple-tabpanel-0">C<span></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/integrated-platform">IntegratedPlatform Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Sets the current login status of a specific local platform user to a new value. This function may only be used with an Integrated Platform initialized with the EOS_IPMF_ApplicationManagedIdentityLogin flag, otherwise calls will return EOS_InvalidState and a platform user's login status will be controlled by OS events. If the login status of a user changes, a Integrated Platform User Login Status Changed notification will fire, and depending on the state of the user's login and the platform, the EOS SDK might start fetching data for the user, it may clear cached data, or it may do nothing. If the login status of a user is not different from a previous call to this function, the function will do nothing and return EOS_Success. This will not trigger a call to the Integrated Platform User Login Status Changed.</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success if the call was successful</p>
+								</li>
+								<li>
+									<p>EOS_NotConfigured if the Integrated Platform was not initialized on platform creation</p>
+								</li>
+								<li>
+									<p>EOS_InvalidState if the Integrated Platform was not initialized with the EOS_IPMF_ApplicationManagedIdentityLogin flag</p>
+								</li>
+								<li>
+									<p>EOS_InvalidUser if the LocalPlatformUserId is not a valid user id for the provided Integrated Platform</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if any other input was invalid</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_IntegratedPlatform_SetUserLoginStatus</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HIntegratedPlatform Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-integrated-platform-set-user-login-status-options">EOS_IntegratedPlatform_SetUserLoginStatusOptions</a>* Options</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-integrated-platform-set-user-login-status-options">EOS_IntegratedPlatform_SetUserLoginStatusOptions</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

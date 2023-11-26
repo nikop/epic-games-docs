@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Setup Guide">Setup Guide</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,7 +12,7 @@
 	<section>
 		<div>
 			<h1>Setup Guide</h1>
-			<h2>Implement Epic Games Store achievements for your product</h2>
+			<h2>Implement Epic Games Store achievements for your product.</h2>
 			<div>
 				<div>15 mins to read</div>
 			</div>
@@ -35,21 +29,37 @@
 			<p>The process for implementing Epic Games Store achievements for your product is outlined below. For general information about Epic Games Store achievements, review
 				<a href="/docs/epic-games-store/services/epic-achievements/overview">Achievements Overview</a>.</p>
 			<div>
+				<p>Products that support achievements through other PC storefronts that sell third-party products must also support Epic Games Store achievements. The achievements available to users on the Epic Games Store must be substantially similar to those offered through other storefronts.</p>
+				<br>
+				<ul>
+					<li>Web-based and HTML products are currently exempt from this requirement as they are not currently supported by the Epic Online Services (EOS) SDK.</li>
+					<li>If a product in Early Access does not yet have a finalized set of base game achievements defined, you only need to implement
+						<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
+						at the time of early release. Once ready for full release, Epic Games Store achievements must enabled.</li>
+				</ul>
+				<p>
+					<strong>Note</strong>: This requirement does
+					<strong>not</strong>
+					retroactively apply to any existing products available on the Epic Games Store or any products that were onboarded in the Dev Portal prior to March 9, 2023. However, enabling achievements is recommended to promote an optimal user experience.</p>
+				<p>To learn more about our distribution requirements, review the
+					<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview">Store Requirements Overview</a>.</p>
+			</div>
+			<div>
 				<h2 id="getting-started">Getting Started</h2>
 			</div>
 			<p>To begin, follow the steps below to prepare your product for Epic Games Store achievements:</p>
 			<ol>
 				<li>
-					<a href="/docs/en-US#step-1-sign-the-epic-online-services-developer-agreement">Sign the Epic Online Services Developer Agreement</a>.
+					<a href="#step-1-sign-the-epic-online-services-developer-agreement">Sign the Epic Online Services Developer Agreement</a>.
 					<!-- -->
 					<ul>
 						<li>Note: This step is only required once for your organization.</li>
 					</ul>
 				</li>
 				<li>
-					<a href="/docs/en-US#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Generate Dev and Stage sandboxes and deployments</a>.</li>
+					<a href="#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Generate Dev and Stage sandboxes and deployments</a>.</li>
 				<li>
-					<a href="/docs/en-US#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Choose a deployment in each sandbox to use with Epic Games Store achievements</a>.</li>
+					<a href="#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Choose a deployment in each sandbox to use with Epic Games Store achievements</a>.</li>
 			</ol>
 			<div>
 				<h3 id="step-1-sign-the-epic-online-services-developer-agreement">Step 1: Sign the Epic Online Services Developer Agreement</h3>
@@ -109,7 +119,7 @@
 			<p>There are two ways to create Epic Games Store achievements for your product, as follows:</p>
 			<ul>
 				<li>
-					<a href="/docs/en-US#upload-epic-games-store-achievements-in-bulk">Define multiple Epic Games Store achievements at once using bulk import</a>.
+					<a href="#upload-epic-games-store-achievements-in-bulk">Define multiple Epic Games Store achievements at once using bulk import</a>.
 					<!-- -->
 					<ul>
 						<li>
@@ -117,7 +127,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="/docs/en-US#create-and-link-a-single-epic-games-store-achievement">Define Epic Games Store achievements one at a time using the Dev Portal interface</a>.</li>
+					<a href="#create-and-link-a-single-epic-games-store-achievement">Define Epic Games Store achievements one at a time using the Dev Portal interface</a>.</li>
 			</ul>
 			<p>The sections below further describe each of these methods.</p>
 			<div>
@@ -129,12 +139,12 @@
 			<p>To begin this process, select one of the following methods to retrieve your starting file:</p>
 			<ul>
 				<li>
-					<a href="/docs/en-US#method-1-export-your-current-epic-online-services-achievements">Method 1</a>: Export your current Epic Online Services achievements from your Live deployment to a zip file. This option is recommended if you already have achievements defined for your product.</li>
+					<a href="#method-1-export-your-current-epic-online-services-achievements">Method 1</a>: Export your current Epic Online Services achievements from your Live deployment to a zip file. This option is recommended if you already have achievements defined for your product.</li>
 				<li>
-					<a href="/docs/en-US#method-2-download-the-epic-games-store-achievements-template">Method 2</a>: Download the Epic Games Store achievements template to create new achievements.</li>
+					<a href="#method-2-download-the-epic-games-store-achievements-template">Method 2</a>: Download the Epic Games Store achievements template to create new achievements.</li>
 			</ul>
 			<p>Once you have your file, you can
-				<a href="/docs/en-US#define-and-upload-your-achievements">define and upload and upload your achievements</a>.</p>
+				<a href="#define-and-upload-your-achievements">define and upload and upload your achievements</a>.</p>
 			<div>
 				<h4 id="method-1-export-your-current-epic-online-services-achievements">Method 1: Export your Current Epic Online Services Achievements</h4>
 			</div>
@@ -150,7 +160,7 @@
 					to download your file. Then, close the form.</li>
 			</ol>
 			<p>Once you have your zip file, review the
-				<a href="/docs/en-US#define-and-upload-your-achievements">Define and Upload your Achievements</a>
+				<a href="#define-and-upload-your-achievements">Define and Upload your Achievements</a>
 				section below for next steps.</p>
 			<div>
 				<h4 id="method-2-download-the-epic-games-store-achievements-template">Method 2: Download the Epic Games Store Achievements Template</h4>
@@ -171,12 +181,12 @@
 					<ul>
 						<li>
 							<strong>Note</strong>: If the Epic Games Store Achievements option is not available, ensure you have fully completed the
-							<a href="/docs/en-US#getting-started">setup process</a>.</li>
+							<a href="#getting-started">setup process</a>.</li>
 					</ul>
 				</li>
 			</ol>
 			<p>Once you have your zip file, review the
-				<a href="/docs/en-US#define-and-upload-your-achievements">Define and Upload your Achievements</a>
+				<a href="#define-and-upload-your-achievements">Define and Upload your Achievements</a>
 				section below for next steps.</p>
 			<div>
 				<h4 id="define-and-upload-your-achievements">Define and upload your achievements</h4>
@@ -193,7 +203,7 @@
 					<!-- -->
 					<ul>
 						<li>Ensure that you include any live Epic Online Services achievements in the file. If you
-							<a href="/docs/en-US#method-1-export-your-current-epic-online-services-achievements">exported your achievements from the Live sandbox</a>, these achievements should already be included.</li>
+							<a href="#method-1-export-your-current-epic-online-services-achievements">exported your achievements from the Live sandbox</a>, these achievements should already be included.</li>
 						<li>
 							<a href="/docs/game-services/achievements">Learn more about usage limitations for achievements</a>.</li>
 					</ul>
@@ -205,21 +215,19 @@
 					<ul>
 						<li>
 							<strong>Note</strong>: When defining XP values, ensure the appropriate
-							<a href="/docs/en-US#xp-requirements-for-epic-games-store-achievements">XP requirements</a>
+							<a href="#xp-requirements-for-epic-games-store-achievements">XP requirements</a>
 							are followed.</li>
 					</ul>
 				</li>
 			</ol>
 			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Example achievement definition in the CSV file" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Example achievement definition in the CSV file" sizes="100vw" srcset="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 640w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 750w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 828w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 1080w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 1200w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 1920w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 2048w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png 3840w" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+				<div style="max-width:650px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Example achievement definition in the CSV file" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Example achievement definition in the CSV file" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/csv_-1.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>
@@ -258,7 +266,7 @@
 				<h3 id="review-your-achievements-import">Review your Achievements Import</h3>
 			</div>
 			<p>After you import your achievements, ensure they satisfy the criteria specified in the
-				<a href="/docs/en-US#xp-requirements-for-epic-games-store-achievements">XP (Experience Points) requirements for achievements</a>.</p>
+				<a href="#xp-requirements-for-epic-games-store-achievements">XP (Experience Points) requirements for achievements</a>.</p>
 			<p>To review your achievements import, follow the steps below:</p>
 			<ol>
 				<li>In the Dev Portal, navigate to
@@ -278,7 +286,7 @@
 			<p>You can validate your Epic Games Store achievements in your product before you push them to Stage. To do so, create a build of your product using the Dev sandbox and deployment associated with your achievements during
 				<a href="/docs/game-services/eos-platform-interface#platform-interface">SDK initialization</a>.</p>
 			<p>If you push your achievements to Live, you can preview them on the Product Detail Page and Achievement Details Page. To do so, first push your achievements to Stage for
-				<a href="/docs/en-US#understand-the-publishing-review-and-approval-process">review and approval</a>.</p>
+				<a href="#understand-the-publishing-review-and-approval-process">review and approval</a>.</p>
 			<div>
 				<h3 id="create-and-link-a-single-epic-games-store-achievement">Create and Link a Single Epic Games Store Achievement</h3>
 			</div>
@@ -286,7 +294,7 @@
 			<p>
 				<strong>Note:</strong>
 				This section explains how to create and link a single Epic Games Store achievement. If you already have Epic Online Services achievements in your product or wish to create multiple achievements, following the process for
-				<a href="/docs/en-US#upload-epic-games-store-achievements-in-bulk">bulk uploading Epic Games Store achievements</a>
+				<a href="#upload-epic-games-store-achievements-in-bulk">bulk uploading Epic Games Store achievements</a>
 				is strongly recommended.</p>
 			<div>
 				<h4 id="create-a-corresponding-epic-online-services-achievement">Create a Corresponding Epic Online Services Achievement</h4>
@@ -319,7 +327,7 @@
 						<li>
 							<strong>Visibility</strong>: Determines whether the achievement is displayed to product users before they unlock it.</li>
 						<li>
-							<strong>Unlocked Icon</strong>: The image the Epic Games social overlay or your product displays to users after they unlock the achievement.</li>
+							<strong>Unlocked Icon</strong>: The image the Social Overlay or your product displays to users after they unlock the achievement.</li>
 						<li>
 							<strong>Locked Icon</strong>: The image displayed to users before they unlock the achievement. Note that this icon is
 							<strong>not</strong>
@@ -359,7 +367,7 @@
 					<ul>
 						<li>
 							<strong>Tip</strong>: For guidelines, review
-							<a href="/docs/en-US#xp-requirements-for-epic-games-store-achievements">XP (Experience Points) requirements for achievements</a>.</li>
+							<a href="#xp-requirements-for-epic-games-store-achievements">XP (Experience Points) requirements for achievements</a>.</li>
 					</ul>
 				</li>
 				<li>Select
@@ -394,7 +402,8 @@
 				delete the Epic Online Services achievement.</p>
 			<div>
 				<p>If an Epic Games Store achievement has been pushed to Live, you cannot unlink the achievement in the Dev Portal. To delete an Epic Games Store achievement in this situation,
-					<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/my-cases">contact support</a>.</p>
+					<a href="https://eoshelp.epicgames.com/">create a private discussion</a>
+					on our Developer Support site for assistance.</p>
 			</div>
 			<p>To unlink and delete an Epic Games Store achievement, follow the steps below:</p>
 			<ol>
@@ -425,15 +434,13 @@
 				<code>/store/en-US/achievements/&lt;product-name&gt;</code>
 			</p>
 			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 640w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 750w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 828w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 1080w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 1200w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 1920w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 2048w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png 3840w" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+				<div style="max-width:650px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pa_-0.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>
@@ -445,7 +452,7 @@
 			<p>To make your Epic Games Store achievements available to users, the following workflow should be followed:</p>
 			<ol>
 				<li>In your Dev sandbox,
-					<a href="/docs/en-US#create-epic-games-store-achievements-for-your-product">create your achievements</a>.</li>
+					<a href="#create-epic-games-store-achievements-for-your-product">create your achievements</a>.</li>
 				<li>Push your achievements to your Stage sandbox and submit them for review by the Epic Games Store team.</li>
 				<li>Once approved, push your achievements to the Live sandbox.</li>
 			</ol>
@@ -453,8 +460,9 @@
 				<strong>Notes</strong>:</p>
 			<ul>
 				<li>When you push Epic Games Store achievements from one sandbox to another, they replace any achievements in the deployment linked to the destination sandbox.</li>
-				<li>After an Epic Games Store achievement is live, you cannot adjust its XP value or remove the achievement through the Dev Portal. To delete a published achievement,
-					<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/my-cases">contact support</a>.</li>
+				<li>After an Epic Games Store achievement is live, you cannot adjust its XP value or remove the achievement through the Dev Portal. To delete a published achievement, contact support by
+					<a href="https://eoshelp.epicgames.com/">creating a private discussion</a>
+					on our Developer Support site.</li>
 				<li>To update any text or images associated with your achievements, follow the normal publishing flow as described in this section.</li>
 			</ul>
 			<div>
@@ -478,29 +486,25 @@
 			<p>If the Epic Games Store team approves your achievements, a message displays at the top of the screen along with a button to push your achievements live.</p>
 			<p>If the Epic Games Store team rejects any of your Epic Games Store achievements during the review process, a rejection message displays in the Stage sandbox, as shown in the example below:</p>
 			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 640w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 750w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 828w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 1080w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 1200w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 1920w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 2048w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png 3840w" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+				<div style="max-width:650px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-a.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>To view more information about the rejection, click
 				<strong>See Details</strong>.</p>
 			<div>
-				<div>
-					<div style="max-width:518px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 640w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 750w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 828w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 1080w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 1200w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 1920w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 2048w, null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png 3840w" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+				<div style="max-width:518px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-games-store/tech-features-config/epic-achievements/using-epic-achievements/uea-pma_-2-c.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<p>To fix the identified issues, switch to your Dev sandbox and complete any necessary updates. Then, resubmit your achievements to Stage for approval.</p>
@@ -525,8 +529,13 @@
 					<strong>Push to Live</strong>.</li>
 			</ol>
 			<p>
-				<strong>Note</strong>: After an Epic Games Store achievement is live, you cannot adjust its XP value or remove the achievement through the Dev Portal. To delete a published achievement,
-				<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/my-cases">contact support</a>. To update any text or images associated with your achievements, follow the normal publishing flow.</p>
+				<strong>Note</strong>: After an Epic Games Store achievement is live, you cannot adjust its XP value or remove the achievement through the Dev Portal.</p>
+			<ul>
+				<li>To delete a published achievement, contact support by
+					<a href="https://eoshelp.epicgames.com/">creating a private discussion</a>
+					on our Developer Support site.</li>
+				<li>To update any text or images associated with your achievements, follow the normal publishing flow.</li>
+			</ul>
 			<div>
 				<h2 id="xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</h2>
 			</div>
@@ -556,14 +565,14 @@
 			</ul>
 			<div>
 				<p>*If you plan to add DLC with achievements or require more than 1,000 total XP across your achievements, contact your Technical Account Manager or
-					<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/my-cases">contact support</a>
-					for assistance.</p>
+					<a href="https://eoshelp.epicgames.com/">create a private discussion</a>
+					on our Developer Support site for assistance.</p>
 			</div>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20achievements">
+				<a href="/docs/site-map">Epic Games Store Only</a>
+				<a href="/docs/site-map">
 					Epic Games Store achievements</a>
-				<a href="/docs/en-US/site-map?tag=Launcher">
+				<a href="/docs/site-map">
 					Launcher</a>
 			</div>
 		</section>

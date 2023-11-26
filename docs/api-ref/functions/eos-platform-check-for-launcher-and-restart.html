@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_Platform_CheckForLauncherAndRestart">EOS_Platform_CheckForLauncherAndRestart</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -20,7 +14,7 @@
 			<h1>EOS_Platform_CheckForLauncherAndRestart</h1>
 			<h2>EOS API reference page for EOS_Platform_CheckForLauncherAndRestart</h2>
 			<div>
-				<div>Under 1 min to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -41,7 +35,7 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Checks if the app was launched through the Epic Launcher, and relaunches it through the Epic Launcher if it wasn't. EOS_Success is returned if the app is being restarted. You should quit your process as soon as possible. EOS_NoChange is returned if the app was already launched through the Epic Launcher, and no action needs to be taken. EOS_UnexpectedError is returned if the LauncherCheck module failed to initialize, or the module tried and failed to restart the app.</p>
+							<p>Checks if the app was launched through the Epic Games Launcher, and relaunches it through the Epic Games Launcher if it wasn't. NOTE: During the call to EOS_Platform_Create, the command line that was used to launch the app is inspected, and if it is recognized as coming from the Epic Games Launcher, an environment variable is set to 1. The name of the environment variable is defined by EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR. You can force the EOS_Platform_CheckForLauncherAndRestart API to relaunch the title by explicitly unsetting this environment variable before calling EOS_Platform_CheckForLauncherAndRestart. EOS_Success is returned if the app is being restarted. You should quit your process as soon as possible. EOS_NoChange is returned if the app was already launched through the Epic Launcher, and no action needs to be taken. EOS_UnexpectedError is returned if the LauncherCheck module failed to initialize, or the module tried and failed to restart the app.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>

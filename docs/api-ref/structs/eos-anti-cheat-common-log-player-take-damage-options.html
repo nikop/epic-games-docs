@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_AntiCheatCommon_LogPlayerTakeDamageOptions">EOS_AntiCheatCommon_LogPlayerTakeDamageOptions</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -20,7 +14,7 @@
 			<h1>EOS_AntiCheatCommon_LogPlayerTakeDamageOptions</h1>
 			<h2>EOS API reference page for EOS_AntiCheatCommon_LogPlayerTakeDamageOptions</h2>
 			<div>
-				<div>3 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -68,15 +62,15 @@
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_ClientHandle AttackerPlayerHandle</td>
-										<td>Locally unique value used in RegisterClient/RegisterPeer</td>
+										<td>Locally unique value used in RegisterClient/RegisterPeer if applicable, otherwise 0.</td>
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_Vec3f* AttackerPlayerPosition</td>
-										<td>Attacker player's current world position as a 3D vector</td>
+										<td>Attacker player's current world position as a 3D vector if applicable, otherwise NULL.</td>
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_Quat* AttackerPlayerViewRotation</td>
-										<td>Attacker player's view rotation as a quaternion</td>
+										<td>Attacker player's view rotation as a quaternion if applicable, otherwise NULL.</td>
 									</tr>
 									<tr>
 										<td>EOS_Bool bIsHitscanAttack</td>
@@ -106,7 +100,11 @@
 										<td>
 											<a href="/docs/api-ref/enums/eos-e-anti-cheat-common-player-take-damage-source">EOS_EAntiCheatCommonPlayerTakeDamageSource</a>
 											DamageSource</td>
-										<td>Source of the damage event</td>
+										<td>Source of the damage</td>
+									</tr>
+									<tr>
+										<td>event</td>
+										<td></td>
 									</tr>
 									<tr>
 										<td>

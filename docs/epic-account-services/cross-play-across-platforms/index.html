@@ -18,7 +18,7 @@
 	<section>
 		<div>
 			<h1>Crossplay across platforms</h1>
-			<h2>Using Epic Accounts to enable crossplay for titles on Epic Games Store, Steam, and stand-alone PC distributions</h2>
+			<h2>Using Epic Accounts to enable crossplay for titles on Epic Games Store, Steam, and stand-alone PC distributions.</h2>
 			<div>
 				<div>6 mins to read</div>
 			</div>
@@ -29,10 +29,10 @@
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
-			<p>Traditionally, publishing your game on multiple storefronts and platforms divides your player base between distribution platforms. Using Epic Account Services, games can access a larger ecosystem with powerful social crossplay features and the ability to unify your game’s matchmaking pools.</p>
+			<p>Traditionally, publishing your game on multiple storefronts and platforms divides your player base between distribution platforms. Using Epic Account Services, games can access a larger ecosystem with powerful social crossplay features and the ability to unify your game's matchmaking pools.</p>
 			<p>The Epic Online Services SDK provides an out-of-box integration that takes care of the complexities and details that connect your players across all of its supported platforms.</p>
 			<div>
-				<p>Crossplay is currently available for games on Windows PC. Support for Nintendo Switch, PlayStation®, and Xbox console platforms is planned. Support for macOS, Linux, Android and iOS is planned.</p>
+				<p>Crossplay is currently available for games on Windows PC. Support for Nintendo Switch, PlayStation�, and Xbox console platforms is planned. Support for macOS, Linux, Android and iOS is planned.</p>
 			</div>
 			<p>Game integration Using crossplay requires the following integration steps:</p>
 			<ol>
@@ -43,7 +43,7 @@
 					<p>Integrate the SDK with your game client.</p>
 				</li>
 				<li>
-					<p>For builds that publish outside the Epic Games Store, add the Epic Online Services local service redistributable installer and its associated Bootstrapper application as part of your game’s prerequisites.</p>
+					<p>For builds that publish outside the Epic Games Store, add the Epic Online Services local service redistributable installer and its associated Bootstrapper application as part of your game's prerequisites.</p>
 				</li>
 			</ol>
 			<p>The following sections outline each of the integration steps.</p>
@@ -81,15 +81,15 @@
 				<!-- --> credentials as part of the log-in process.</p>
 			<p>The SDK takes full control of the log-in flow by walking the user through any necessary steps using the in-game overlay. Once the user completes the login flow, either successfully or by canceling it, the SDK returns control to the game application via completion callback of the
 				<code>EOS_Auth_Login</code>
-				SDK API. On Steam, the user’s Steam account is implicitly linked to their logged-in Epic Account as part of the log-in flow managed by the SDK.</p>
+				SDK API. On Steam, the user's Steam account is implicitly linked to their logged-in Epic Account as part of the log-in flow managed by the SDK.</p>
 			<p>See the
-				<a href="/docs/epic-account-services/auth-interface">Auth interface</a>
+				<a href="/docs/epic-account-services/auth/auth-interface">Auth interface</a>
 				documentation for SDK API integration details.</p>
 			<div>
 				<h2 id="step-3-bootstrapper-and-service-redistributable-installer">Step 3: Bootstrapper and service redistributable installer</h2>
 			</div>
 			<p>See the
-				<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer">redistributable installer</a>
+				<a href="/docs/epic-account-services/crossplay/redistributable-installer">redistributable installer</a>
 				and bootstrapper documentation for guidance on how to  include the bootstrapper application and the local service redistributable installer as part of the prerequisites of your game.</p>
 			<div>
 				<h2 id="player-experience">Player experience</h2>
@@ -113,8 +113,8 @@
 				SDK API to verify that the Epic account login can use the overlay. If the game runs into errors (e.g. the Bootstrapper or redistributable service is missing), ask the player to verify the game files in the Steam library to repair the issues. Then ask the player to restart the game to apply the fixes.</p>
 			<p>The game logs the local Steam user into their Epic account using a Steam
 				<code>AuthSessionTicket</code>
-				acquired via the Steamworks SDK. The user is walked through the built-in user onboarding experience to link the local user’s Steam account with an Epic Account. Linking the Steam account with an Epic  Account enables automatic user log in across consecutive application runs and across any game titles using Epic Account Services.</p>
-			<p>New users without an existing Epic Account have the option to create a new frictionless proxy Epic  Account. This links the user’s Steam account to a newly-created Epic Account, allowing an automatic log in on consecutive application runs and without requiring users to register any additional details such as their email address or password.</p>
+				acquired via the Steamworks SDK. The user is walked through the built-in user onboarding experience to link the local user's Steam account with an Epic Account. Linking the Steam account with an Epic  Account enables automatic user log in across consecutive application runs and across any game titles using Epic Account Services.</p>
+			<p>New users without an existing Epic Account have the option to create a new frictionless proxy Epic  Account. This links the user's Steam account to a newly-created Epic Account, allowing an automatic log in on consecutive application runs and without requiring users to register any additional details such as their email address or password.</p>
 			<p>Proxy Epic Accounts can be used in the same way as regular Epic Accounts that have an associated email address and password. For example, if the user later installs the Epic Games Launcher they will be able to login to their Epic Account using their Steam account login credentials. At that time, the user will be asked to register an email address and set a password for their account.</p>
 			<div>
 				<div>
@@ -122,7 +122,7 @@
 						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
 							<img alt="Welcome" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
 							<noscript>
-								<img alt="Welcome" sizes="100vw" srcset="null/epic-account-services/cross-play-across-platforms/welcome.png 640w, null/epic-account-services/cross-play-across-platforms/welcome.png 750w, null/epic-account-services/cross-play-across-platforms/welcome.png 828w, null/epic-account-services/cross-play-across-platforms/welcome.png 1080w, null/epic-account-services/cross-play-across-platforms/welcome.png 1200w, null/epic-account-services/cross-play-across-platforms/welcome.png 1920w, null/epic-account-services/cross-play-across-platforms/welcome.png 2048w, null/epic-account-services/cross-play-across-platforms/welcome.png 3840w" src="null/epic-account-services/cross-play-across-platforms/welcome.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
+								<img alt="Welcome" sizes="100vw" srcset="null/epic-account-services/crossplay/welcome.png 640w, null/epic-account-services/crossplay/welcome.png 750w, null/epic-account-services/crossplay/welcome.png 828w, null/epic-account-services/crossplay/welcome.png 1080w, null/epic-account-services/crossplay/welcome.png 1200w, null/epic-account-services/crossplay/welcome.png 1920w, null/epic-account-services/crossplay/welcome.png 2048w, null/epic-account-services/crossplay/welcome.png 3840w" src="null/epic-account-services/crossplay/welcome.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
 							</noscript>
 						</span>
 					</div>
@@ -151,7 +151,7 @@
 				<h2 id="overlay">Overlay</h2>
 			</div>
 			<p>The SDK provides an in-game overlay that lets players access their Epic friends across games and platforms. Players can search and add friends, see who is online, and send game invites across all of the supported platforms.</p>
-			<p>You can also integrate some of the Epic friends functionality into the game’s own UI, for example to add another player as an Epic friend programmatically, you can use the
+			<p>You can also integrate some of the Epic friends functionality into the game's own UI, for example to add another player as an Epic friend programmatically, you can use the
 				<code>EOS_Friends_SendInvite</code>
 				SDK API.</p>
 			<p>The overlay requires minimal SDK code integration from the game. See the
@@ -164,7 +164,7 @@
 				<a href="/docs/game-services/lobbies">Lobbies</a>
 				or
 				<a href="/docs/game-services/sessions">Sessions</a>
-				SDK interfaces to unify your game’s matchmaking pool across all platforms. Both interfaces provide an out-of-box integration with the
+				SDK interfaces to unify your game's matchmaking pool across all platforms. Both interfaces provide an out-of-box integration with the
 				<a href="/docs/epic-account-services/social-overlay-overview">overlay</a>, making it easy for the game to add support for cross-platform game invites.</p>
 			<p>Additionally, specifying the
 				<a href="/docs/game-services/eos-platform-interface#native-platform-integration">integrated platforms</a>

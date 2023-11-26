@@ -3,14 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label=" Developer Authentication">
-						Developer Authentication</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,8 +11,7 @@
 	</div>
 	<section>
 		<div>
-			<h1>
-				Developer Authentication</h1>
+			<h1>Tool: Developer Authentication</h1>
 			<h2>A tool to manage login status during development.</h2>
 			<div>
 				<div>2 mins to read</div>
@@ -28,14 +20,6 @@
 	</section>
 	<section>
 		<section>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
-						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
-						to coordinate a release plan.</p>
-				</div>
-			</div>
 			<p>The
 				<strong>Developer Authentication Tool</strong>
 				acts as a stand-in for the Epic Games Store launcher during game development. It improves iteration time by enabling developers to log in once and remain logged in, even after closing and relaunching the game. Additionally, the Developer Authentication Tool can store credentials for multiple users, so developers can run multiple instances of a game to test multiplayer scenarios.</p>
@@ -49,10 +33,15 @@
 			<div>
 				<p>You can find the Developer Authentication Tool in the
 					<code>SDK/Tools</code>
-					folder within the Epic Online Services SDK download archive. See our
-					<a href="/docs/epic-online-services/services-quick-start#downloading-the-sdk">Quick Start Guide</a>
-					for information about downloading and setting up the SDK.</p>
+					folder within the Epic Online Services SDK download archive. See the
+					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#downloading-the-sdk">EOS Get Started</a>
+					documentation for information about downloading and setting up the SDK.</p>
 			</div>
+			<p>
+				<strong>Note:</strong>
+				To use Epic Online Services (EOS) SDK, your local network, router, and firewall must allow access to specific host addresses. For a complete list of these host addresses, see the
+				<a href="/docs/epic-online-services/eos-get-started/firewall-considerations">Firewall Considerations</a>
+				documentation.</p>
 			<div>
 				<h2 id="tool-and-sdk-interaction">Tool and SDK Interaction</h2>
 			</div>
@@ -64,18 +53,22 @@
 					<code>EOS_Auth_Login</code>
 					using the
 					<code>EOS_LCT_Developer</code>
-					login credential type.</li>
+					login credential type.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: You can map only one named credential to an Epic Games account. Therefore, you must have at least two different Epic Games accounts if you want to test multiplayer features locally on the same system.</li>
+					</ul>
+				</li>
 			</ol>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 640w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 750w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 828w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 1080w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 1200w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 1920w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 2048w, null/epic-account-services/developer-authentication-tool/dev-auth-flow.png 3840w" src="null/epic-account-services/developer-authentication-tool/dev-auth-flow.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/developer-authentication-tool/dev-auth-flow.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<div>
@@ -127,16 +120,16 @@
 				</tbody>
 			</table>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Developer">Developer</a>
-				<a href="/docs/en-US/site-map?tag=Tools">
+				<a href="/docs/site-map">Developer</a>
+				<a href="/docs/site-map">
 					Tools</a>
-				<a href="/docs/en-US/site-map?tag=Authentication">
+				<a href="/docs/site-map">
 					Authentication</a>
-				<a href="/docs/en-US/site-map?tag=Auth">
+				<a href="/docs/site-map">
 					Auth</a>
-				<a href="/docs/en-US/site-map?tag=Login">
+				<a href="/docs/site-map">
 					Login</a>
-				<a href="/docs/en-US/site-map?tag=Getting%20Started">
+				<a href="/docs/site-map">
 					Getting Started</a>
 			</div>
 		</section>

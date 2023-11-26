@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Player Data Storage Interface">Player Data Storage Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,7 +12,7 @@
 	<section>
 		<div>
 			<h1>Player Data Storage Interface</h1>
-			<h2>Interface to handle cloud-based data management</h2>
+			<h2>Interface to handle cloud-based data management.</h2>
 			<div>
 				<div>14 mins to read</div>
 			</div>
@@ -44,7 +38,9 @@
 				<ul>
 					<li>
 						<p>
-							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to file-management functions from the Player Data Storage Interface will result in failure and will return the
+							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to
+							<code>EOS_Platform_GetPlayerDataStorageInterface</code>
+							return a null reference. If the key is not the correct length or format, file-management functions from the Player Data Storage Interface will result in failure and return the
 							<code>EOS_PlayerDataStorage_EncryptionKeyNotSet</code>
 							error code.</p>
 					</li>
@@ -55,7 +51,7 @@
 							or
 							<code>EOS_CacheDirectoryInvalid</code>
 							error codes. Please refer to the
-							<a href="/docs/game-services/platforms">EOS Platform documentation</a>
+							<a href="/docs/epic-online-services/platforms">EOS Platform documentation</a>
 							for platform-specific limitations on what folders can be used.</p>
 					</li>
 				</ul>
@@ -108,7 +104,7 @@
 			<p>You can get information about one or all files stored on the cloud by querying EOS. Either query type will return metadata about the file or files it discovers, including the file's name, data size (in bytes, unencrypted), and MD5 hash. You can then cache a copy of this information before accessing or modifying files. Note that since files are stored in an encrypted form on the backend, some metadata (such as file size and hash) is provided for the encrypted file. The metadata won’t exactly match values that correspond to the file you pass to the API.</p>
 			<div>
 				<p>Be sure to
-					<a href="/docs/en-US#examining-cached-file-information">copy any information you may need from the cache</a>
+					<a href="#examining-cached-file-information">copy any information you may need from the cache</a>
 					during your query's callback function. This data's lifetime is not guaranteed to last beyond the duration of the callback function. This is especially important when running multiple queries, as each successful query can alter the contents of the cache.</p>
 			</div>
 			<div>
@@ -371,14 +367,12 @@
 			<p>The following timeline diagram shows a hypothetical read operation in action:</p>
 			<div>
 				<div>
-					<div>
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="" sizes="100vw" srcset="null/game-services/player-data-storage/pds-chart.png 640w, null/game-services/player-data-storage/pds-chart.png 750w, null/game-services/player-data-storage/pds-chart.png 828w, null/game-services/player-data-storage/pds-chart.png 1080w, null/game-services/player-data-storage/pds-chart.png 1200w, null/game-services/player-data-storage/pds-chart.png 1920w, null/game-services/player-data-storage/pds-chart.png 2048w, null/game-services/player-data-storage/pds-chart.png 3840w" src="null/game-services/player-data-storage/pds-chart.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/player-data-storage/pds-chart.png">
+						</noscript>
+					</span>
 				</div>
 			</div>
 			<div role="alert">
@@ -612,7 +606,7 @@
 			</div>
 			<p>The Player Data Storage Interface enables developers using EOS to save encrypted, user-specific, game-specific data to cloud servers. Data that you store through this interface is accessible to the user on any device where they can log in. The Player Data Storage Interface supports any file format; typical use cases include saved games and replay data.</p>
 			<p>The service applies limits to both storage amounts and usage rates. Throttling enforces usage rate limitations, and the service can delete files to enforce storage space limitations. For general information about throttling, usage quotas, and best practices, see
-				<a href="/docs/epic-online-services/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
+				<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
 			<table>
 				<thead>
 					<tr>
@@ -662,16 +656,16 @@
 				<li>EOS Player Data Storage requires the player to be online, and is driven entirely game-side using EOS APIs. This allows for data to be shared across platforms, unlike Launcher Cloud Saves.</li>
 			</ol>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=PDS">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					PDS</a>
-				<a href="/docs/en-US/site-map?tag=Player%20Data%20Storage">
+				<a href="/docs/site-map">
 					Player Data Storage</a>
-				<a href="/docs/en-US/site-map?tag=Cloud">
+				<a href="/docs/site-map">
 					Cloud</a>
-				<a href="/docs/en-US/site-map?tag=Saved">
+				<a href="/docs/site-map">
 					Saved</a>
-				<a href="/docs/en-US/site-map?tag=Files">
+				<a href="/docs/site-map">
 					Files</a>
 			</div>
 		</section>

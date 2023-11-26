@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="BuildPatch Tool Instructions (1.4.0)">BuildPatch Tool Instructions (1.4.0)</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,7 +12,7 @@
 	<section>
 		<div>
 			<h1>BuildPatch Tool Instructions (1.4.0)</h1>
-			<h2>Setup and processing instructions for BPT 1.4.0</h2>
+			<h2>Setup and processing instructions for BPT 1.4.0.</h2>
 			<div>
 				<div>12 mins to read</div>
 			</div>
@@ -26,6 +20,10 @@
 	</section>
 	<section>
 		<section>
+			<div>
+				<strong>Important Note</strong>: For best results, we recommend using the most recent version of the BuildPatch Tool. To learn more, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions (1.5.0)</a>
+			</div>
 			<div>
 				<h2 id="before-you-start">Before You Start</h2>
 			</div>
@@ -84,7 +82,7 @@
 			<p>To view your organization’s BuildPatch Tool credentials:</p>
 			<ol>
 				<li>Sign in to the
-					<a href="/docs/en-UShttps://dev.epicgames.com/portal">Dev Portal</a>.</li>
+					<a href="https://dev.epicgames.com/portal">Dev Portal</a>.</li>
 				<li>Select the product for which you want to view credentials.</li>
 				<li>Select
 					<strong>Product Settings</strong>.</li>
@@ -94,7 +92,7 @@
 					<strong>Copy</strong>:</li>
 			</ol>
 			<p>
-				<img src="/docs/assets/epic-games-store/tech-features-config/bpt-instructions-spt/copy-14.png" alt="">
+				<img src="null/docs/epic-games-store/tech-features-config/bpt-instructions-spt/copy-14.png" alt="">
 			</p>
 			<div>
 				<h3 id="paths-on-the-command-line">Paths on the Command Line</h3>
@@ -147,14 +145,13 @@
 				<h2 id="initial-setup">Initial Setup</h2>
 			</div>
 			<p>Extract the contents of the
-				<a href="/docs/en-UShttps://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP file</a>
+				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP file</a>
 				to a machine that has access to the build you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
 			<p>
 				<strong>Note:</strong>
-				The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file, please
-				<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/contactsupport">
-					<strong>create a case</strong>
-				</a>.</p>
+				The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file,
+				<a href="https://eoshelp.epicgames.com/">create a private discussion</a>
+				on our Developer Support site for assistance.</p>
 			<div>
 				<h2 id="authentication">Authentication</h2>
 			</div>
@@ -184,27 +181,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Engine</span>
-								<span style="color:#fff">\</span>
-								<span>Binaries</span>
-								<span style="color:#fff">\</span>
-								<span>Win6</span>
-								<span style="color:#fff">4</span>
-								<span style="color:#fff">&gt;</span>
-								<span>BuildPatchTool.exe</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourClientId&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientSecret</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourClientSecret&gt;"</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -218,46 +196,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Engine</span>
-								<span style="color:#fff">\</span>
-								<span>Binaries</span>
-								<span style="color:#fff">\</span>
-								<span>Win6</span>
-								<span style="color:#fff">4</span>
-								<span style="color:#fff">&gt;</span>
-								<span>set
-								</span>
-								<span style="color:#89bdff">MyEpicSecret</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">&lt;</span>
-								<span>YourClientSecret</span>
-								<span style="color:#fff">&gt;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>Engine</span>
-								<span style="color:#fff">\</span>
-								<span>Binaries</span>
-								<span style="color:#fff">\</span>
-								<span>Win6</span>
-								<span style="color:#fff">4</span>
-								<span style="color:#fff">&gt;</span>
-								<span>BuildPatchTool.exe</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>-ClientId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourClientId&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-ClientSecretEnvVar</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"MyEpicSecret"</span>
 							</div>
 						</div>
 					</pre>
@@ -279,107 +219,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Engine</span>
-								<span style="color:#fff">\</span>
-								<span>Binaries</span>
-								<span style="color:#fff">\</span>
-								<span>Win6</span>
-								<span style="color:#fff">4</span>
-								<span style="color:#fff">&gt;</span>
-								<span>BuildPatchTool.exe</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-OrganizationId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourOrg&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ProductId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourProduct&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ArtifactId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourArtifact&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourClientId&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientSecretEnvVar</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourSecretEnvVar&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-mode</span>
-								<span style="color:#fff">=</span>
-								<span>PatchGeneration</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-BuildRoot</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;LocationOfLocalBuild&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-CloudDir</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourCloudDir&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-BuildVersion</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourBuildVersion&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-AppLaunch</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;AppToRun&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-AppArgs</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;LaunchArguments&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-FileAttributeList</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;LocationOfAttributesFile&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-FileIgnoreList</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;LocationOfIgnoreFile&gt;"</span>
 							</div>
 						</div>
 					</pre>
@@ -409,7 +250,7 @@
 					<p>
 						<code>ClientId</code>
 						– See
-						<a href="/docs/en-US#authentication">
+						<a href="#authentication">
 							<em>Authentication</em>
 						</a>.</p>
 				</li>
@@ -418,7 +259,7 @@
 						<code>ClientSecretEnvVar
 						</code>
 						– See
-						<a href="/docs/en-US#authentication">
+						<a href="#authentication">
 							<em>Authentication</em>
 						</a>.</p>
 				</li>
@@ -442,7 +283,9 @@
 				<li>
 					<p>
 						<code>BuildVersion</code>
-						– The version string for the build. This needs to be unique for each build of a specific artifact.  The build version string has the following restrictions: Must be between 1 and 100 chars in length, whitespace is not allowed, should only contain characters from the following sets a-z, A-Z, 0-9, or .+-_</p>
+						– The version string for the build. This needs to be unique for each build of a specific artifact, independent of platform. For example,
+						<code>BuildVersion-1.0</code>
+						can only exists for Windows or Mac, not both.  The build version string has the following restrictions: Must be between 1 and 100 chars in length, whitespace is not allowed, should only contain characters from the following sets a-z, A-Z, 0-9, or .+-_</p>
 				</li>
 				<li>
 					<p>
@@ -462,7 +305,7 @@
 						<code>FileAttributeList</code>
 						<em>(Optional)</em>
 						– An absolute path to a text file containing a list of files and corresponding special attributes (e.g. executable bit) that should be set. See
-						<a href="/docs/en-US#setting-special-file-attributes">Setting Special File Attributes</a>
+						<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
 						for a description of the file contents.</p>
 					<ul>
 						<li>Note that the attributes file should not be inside your
@@ -498,12 +341,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#00bda0">"&lt;QuotedRelativePathToFile&gt;"</span>
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">&lt;</span>
-								<span>list of attributes</span>
-								<span style="color:#fff">&gt;</span>
 							</div>
 						</div>
 					</pre>
@@ -517,15 +356,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#00bda0">"Relative/Path/To/My/file.bin"</span>
-								<span>
-									executable tag:my_tag</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#00bda0">"Second/Path/To/A/file.txt"</span>
-								<span>
-									tag:txt_files</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -568,59 +400,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Engine</span>
-								<span style="color:#fff">\</span>
-								<span>Binaries</span>
-								<span style="color:#fff">\</span>
-								<span>Win6</span>
-								<span style="color:#fff">4</span>
-								<span style="color:#fff">&gt;</span>
-								<span>BuildPatchTool.exe</span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-OrganizationId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourOrg&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ProductId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourProduct&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ArtifactId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourArtifact&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourClientId&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientSecretEnvVar</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourSecretEnvVar&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-mode</span>
-								<span style="color:#fff">=</span>
-								<span>ListBinaries</span>
 							</div>
 						</div>
 					</pre>
@@ -683,75 +464,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Engine</span>
-								<span style="color:#fff">\</span>
-								<span>Binaries</span>
-								<span style="color:#fff">\</span>
-								<span>Win6</span>
-								<span style="color:#fff">4</span>
-								<span style="color:#fff">&gt;</span>
-								<span>BuildPatchTool.exe</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-OrganizationId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourOrg&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ProductId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourProduct&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ArtifactId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourArtifact&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientId</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourClientId&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-ClientSecretEnvVar</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourSecretEnvVar&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-mode</span>
-								<span style="color:#fff">=</span>
-								<span>ChunkDeltaOptimise</span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-CloudDir</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourCloudDir&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-BuildVersionA</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourSourceBuildVersion&gt;"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									-BuildVersionB</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"&lt;YourDestinationBuildVersion&gt;"</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -777,38 +491,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Running optimization
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#f08a92">for</span>
-								<span>
-									patching
-								</span>
-								<span style="color:#ffcb8f">1.3</span>
-								<span>.0-Windows -</span>
-								<span style="color:#fff">&gt;</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1.3</span>
-								<span>.1-Windows</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">..</span>
-								<span>.</span>
-							</div>
-							<div style="color:#fff">
-								<span>** Chunk delta optimization already completed
-								</span>
-								<span style="color:#f08a92">for</span>
-								<span>
-									provided manifests. **</span>
-							</div>
-							<div style="color:#fff">
-								<span>Loaded optimised delta
-								</span>
-								<span style="color:#89bdff">file</span>
-								<span>
-									E:/CloudDir/Deltas/jd63jdu7-jsg58dh58dki8dk323/a5nbd0jbweof98fvytsvnthcsvf.delta</span>
 							</div>
 						</div>
 					</pre>
@@ -843,24 +527,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Final unknown compressed bytes, plus meta
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#ffcb8f">400000</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									Original unknown compressed bytes
-								</span>
-								<span style="color:#ffcb8f">1000000</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-									Improvement:
-								</span>
-								<span style="color:#ffcb8f">60</span>
-								<span>%</span>
 							</div>
 						</div>
 					</pre>
@@ -879,7 +547,7 @@
 				folder does contain the main game or other DLC items, then a
 				<code>-FileIgnoreList</code>
 				parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary. See
-				<a href="/docs/en-US#how-to-process-a-build">How to Process a Build</a>
+				<a href="#how-to-process-a-build">How to Process a Build</a>
 				for details.</p>
 			<p>When installed on end users’ machines, the main game and all items of related DLC will be installed into the same directory. This leads to the restriction that there must be no files within the main game or any item of DLC which share a common file path. The BuildPatchTool will perform checks on this and prevent the patch generation process from occurring if there are any files which violate this rule. This means that the Base game must be able to locate installed DLC by relative path from its install location.</p>
 			<div>
@@ -896,35 +564,35 @@
 			<ul>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---failed-to-retrieve-list-of-binaries-from-epic-services">
+						<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">
 							<em>Error - Failed to retrieve list of binaries from Epic services</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---missing-parameters">
+						<a href="#error---missing-parameters">
 							<em>Error - Missing parameters</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---missing-credentials">
+						<a href="#error---missing-credentials">
 							<em>Error - Missing credentials</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---authentication-error">
+						<a href="#error---authentication-error">
 							<em>Error - Authentication error</em>
 						</a>
 					</p>
 				</li>
 				<li>
 					<p>
-						<a href="/docs/en-US#error---unexpected-error">
+						<a href="#error---unexpected-error">
 							<em>Error - Unexpected error</em>
 						</a>
 					</p>
@@ -955,22 +623,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Please check your provided %OrganizationId%, %ProductId% and ArtifactId are</span>
-							</div>
-							<div style="color:#fff">
-								<span>correct, and that you should have access to create binaries
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#f08a92">for</span>
-								<span>
-									this</span>
-							</div>
-							<div style="color:#fff">
-								<span>artifact.</span>
-							</div>
-							<div style="color:#fff">
-								<span>Tool exited with:
-								</span>
-								<span style="color:#ffcb8f">6</span>
 							</div>
 						</div>
 					</pre>
@@ -987,15 +641,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>CloudDir, BuildRoot, ArtifactId, BuildVersion, AppLaunch, and AppArgs</span>
-							</div>
-							<div style="color:#fff">
-								<span>are required parameters</span>
-							</div>
-							<div style="color:#fff">
-								<span>Tool exited with:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#ffcb8f">2</span>
 							</div>
 						</div>
 					</pre>
@@ -1012,22 +659,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>Please ensure you have specified ClientId and also one of ClientSecret or</span>
-							</div>
-							<div style="color:#fff">
-								<span>ClientSecretEnvVar. If using ClientSecretEnvVar, ensure the
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#89bdff">env</span>
-								<span>
-									variable</span>
-							</div>
-							<div style="color:#fff">
-								<span>is properly set.</span>
-							</div>
-							<div style="color:#fff">
-								<span>Tool exited with:
-								</span>
-								<span style="color:#ffcb8f">9</span>
 							</div>
 						</div>
 					</pre>
@@ -1044,18 +677,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>An authentication error occurred - Check you have specified ClientId, and</span>
-							</div>
-							<div style="color:#fff">
-								<span>either ClientSecret or ClientSecretEnvVar parameters correctly.</span>
-							</div>
-							<div style="color:#fff">
-								<span>Message: Sorry the client credentials you are using are invalid</span>
-							</div>
-							<div style="color:#fff">
-								<span>Tool exited with:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#ffcb8f">10</span>
 							</div>
 						</div>
 					</pre>
@@ -1072,25 +695,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>An unexpected error occurred. Error code: errors.com.epicgames.common.missing_permission</span>
-								<span style="color:#fff">;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>Error message: Sorry your login does not possess the permissions</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#00bda0">'artifact:o-7kyv8uwtz74njnl544kbxzt5xqephw:3bc138d96fb24d9597d4bbff23b9ecee:asdfasd READ'</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>needed to perform the requested operation</span>
-							</div>
-							<div style="color:#fff">
-								<span>Tool exited with:
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#ffcb8f">5</span>
 							</div>
 						</div>
 					</pre>
@@ -1100,7 +706,7 @@
 				<em>What it means</em>
 				–  The Client credentials you are using do not have access to the artifact you have specified. Ensure you are using the correct BPT Client as indicated on your Product Settings page.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
+				<a href="/docs/site-map">Epic Games Store Only</a>
 			</div>
 		</section>
 		<aside>

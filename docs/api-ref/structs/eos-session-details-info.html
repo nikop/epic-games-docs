@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_SessionDetails_Info">EOS_SessionDetails_Info</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -20,7 +14,7 @@
 			<h1>EOS_SessionDetails_Info</h1>
 			<h2>EOS API reference page for EOS_SessionDetails_Info</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -75,6 +69,14 @@
 									<tr>
 										<td>const EOS_SessionDetails_Settings* Settings</td>
 										<td>Reference to the additional settings associated with this session</td>
+									</tr>
+									<tr>
+										<td>EOS_ProductUserId OwnerUserId</td>
+										<td>The Product User ID of the session owner. Null if the session is not owned by a user.</td>
+									</tr>
+									<tr>
+										<td>const char* OwnerServerClientId</td>
+										<td>The client id of the session owner. Null if the session is not owned by a server. The session is owned by a server if EOS_Platform_Options::bIsServer is EOS_TRUE.</td>
 									</tr>
 								</tbody>
 							</table>

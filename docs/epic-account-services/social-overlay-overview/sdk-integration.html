@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="SDK Integration">SDK Integration</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,177 +12,32 @@
 	<section>
 		<div>
 			<h1>SDK Integration</h1>
-			<h2>Accessing the EOS social overlay and friends list from in-game</h2>
+			<h2>Accessing the EOS social overlay and friends list from in-game.</h2>
 			<div>
-				<div>9 mins to read</div>
+				<div>8 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
-						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
-						to coordinate a release plan.</p>
-				</div>
-			</div>
 			<div>
 				<h1 id="overview">Overview</h1>
 			</div>
 			<div>
 				<h2 id="installation">Installation</h2>
 			</div>
-			<p>The EOS Overlay is installed by the Epic Games Launcher. Game applications can also install it as part of their prerequisites using the EOS service
-				<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer">redistributable installer</a>.</p>
-			<div>
-				<h2 id="sdk-initialization">SDK Initialization</h2>
-			</div>
-			<p>It is important to initialize the EOS SDK and call
-				<a href="/docs/api-ref/functions/eos-platform-create">
-					<code>EOS_Platform_Create</code>
-				</a>
-				before initializing Direct3D.  This gives the EOS Overlay a chance to install graphics API hooks necessary to render the overlay with each game frame presented to the user.</p>
-			<div>
-				<p>On Windows, the EOS Overlay has experimental support for Direct3D9, Direct3D10, and OpenGL. To opt-in to the experimental functionality, initialize the
-					<code>Flags</code>
-					field in
-					<a href="/docs/api-ref/structs/eos-platform-options">
-						<code>EOS_Platform_Options</code>
-					</a>
-					with the appropriate values before calling
-					<a href="/docs/api-ref/functions/eos-platform-create">
-						<code>EOS_Platform_Create</code>
-					</a>.</p>
-				<ul>
-					<li>Direct3D9 -
-						<code>EOS_PF_WINDOWS_ENABLE_OVERLAY_D3D9</code>
-					</li>
-					<li>Direct3D10 -
-						<code>EOS_PF_WINDOWS_ENABLE_OVERLAY_D3D10</code>
-					</li>
-					<li>OpenGL -
-						<code>EOS_PF_WINDOWS_ENABLE_OVERLAY_OPENGL</code>
-					</li>
-				</ul>
-			</div>
-			<p>In some cases, it may be desirable to disable the overlay functionality entirely. An example of this might be when a developer is running the game in an editor, and hooking the graphics API of the editor would cause problems. The
-				<a href="/docs/api-ref/structs/eos-platform-options">
-					<code>EOS_Platform_Options</code>
-				</a>
-				passed to
-				<a href="/docs/api-ref/functions/eos-platform-create">
-					<code>EOS_Platform_Create</code>
-				</a>
-				has been extended to take a Flags member, a bit-field with room for 64 flags. Currently there are three flags that will disable the overlay:</p>
-			<ol>
-				<li>
-					<code>EOS_PF_LOADING_IN_EDITOR</code>
-					- This flag should be set whenever the EOS SDK is being used in a game editor such as UE4 Play-in-Editor (PIE) or Unity.</li>
-				<li>
-					<code>EOS_PF_DISABLE_OVERLAY</code>
-					- This flag should be set whenever you want to explicitly disable the overlay functionality. Purchase related functionality in the Ecom Interface will fail.</li>
-				<li>
-					<code>EOS_PF_DISABLE_SOCIAL_OVERLAY</code>
-					- This flag should be set whenever you want to explicitly disable only the social features of the overlay functionality.</li>
-			</ol>
-			<div>
-				<h2 id="compatible-rendering-apis-and-operating-systems">Compatible Rendering APIs and Operating Systems</h2>
-			</div>
-			<div>
-				<h3 id="windows">Windows</h3>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Availability</th>
-						<th>API</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<code>Available Now</code>
-						</td>
-						<td>
-							<ul>
-								<li>Direct3D 12</li>
-								<li>Direct3D 11</li>
-								<li>Vulkan</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<code>Experimental</code>
-						</td>
-						<td>
-							<ul>
-								<li>Direct3D 10</li>
-								<li>Direct3D 9</li>
-								<li>OpenGL</li>
-							</ul>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div>
-				<h3 id="macos">macOS</h3>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Availability</th>
-						<th>API</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<code>Coming Soon</code>
-						</td>
-						<td>
-							<ul>
-								<li>Metal</li>
-								<li>Vulkan</li>
-								<li>OpenGL</li>
-							</ul>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div>
-				<h3 id="linux">Linux</h3>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Availability</th>
-						<th>API</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<code>Coming Soon</code>
-						</td>
-						<td>
-							<ul>
-								<li>Vulkan</li>
-								<li>OpenGL</li>
-							</ul>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<p>The Social Overlay is installed as part of the 
+				<!-- -->EOS Overlay
+				<!-- -->. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-overlay-overview">EOS Overlay Overview</a>
+				documentation for more information.</p>
 			
 			<!-- --> 
 			<!-- --> 
 			<!-- --> 
 			<!-- -->
 			<div>
-				<h1 id="social-overlay">Social Overlay</h1>
+				<h2 id="social-overlay">Social Overlay</h2>
 			</div>
 			<p>The
 				<strong>Social Overlay</strong>
@@ -205,7 +54,7 @@
 				<!-- -->presence
 				<!-- --> provides details about their online state, active game, and any game-defined, rich presence text.</p>
 			<div>
-				<h2 id="handling-exclusive-input-mode">Handling Exclusive Input Mode</h2>
+				<h3 id="handling-exclusive-input-mode">Handling Exclusive Input Mode</h3>
 			</div>
 			<p>While the Social Overlay (or any overlay managed by the EOS SDK such as checkout or authentication) is visible, there is a potential that all keyboard and mouse input will be consumed by the overlay.  The overlay should only be visible due to user intent.  Based on this intent, the user wishes to interact with the overlay rather than the game.  This will result in the game not receiving the keyboard or mouse input.</p>
 			<p>Some system SDK user input methods (such as the Win32 API function
@@ -217,13 +66,16 @@
 			<p>Multiple browser instances can affect the
 				<strong>Visible</strong>
 				flag at the same time, for example, receiving a social toast while making a purchase.  The more important use case is if a visible browser instance desires user interaction.  In this case, the Exclusive Input flag will be true.  The browser instance must also be visible to have any impact on the Exclusive Input flag.</p>
+			<p>The game forwards controller input events to the EOS SDK through the
+				<a href="/docs/api-ref/functions/eos-ui-report-input-state">
+					<code>EOS_UI_ReportInputState(...)</code>
+				</a>
+				API. Your game must let the EOS SDK handle input exclusively when the EOS Overlay is visible. This prevents controller input navigating simultaneously within the EOS Overlay and your game's own menus. For more information, see the Route User Input to the EOS Overlay section of each console's documentation.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			<div>
-				<h2 id="localization">Localization</h2>
-			</div>
-			<p>The locale code used for localization of the Social Overlay’s text will come from one of two sources: the language that the player selected when creating their Epic Account, or an override value provided by the game.  If a game uses an override value, then this will be the value used regardless of what the user has selected within their Epic Account.  This can be done by using
-				<code>EOS_Platform_SetOverrideLocaleCode</code>.</p>
-			<div>
-				<h2 id="using-player-presence-in-the-friends-list">Using Player Presence in the Friends List</h2>
+				<h3 id="using-player-presence-in-the-friends-list">Using Player Presence in the Friends List</h3>
 			</div>
 			<p>The
 				<strong>Presence Service</strong>
@@ -251,7 +103,7 @@
 				</div>
 			</div>
 			<div>
-				<h3 id="online-state">Online State</h3>
+				<h4 id="online-state">Online State</h4>
 			</div>
 			<p>The player's online state is set to
 				<strong>Online</strong>
@@ -265,7 +117,7 @@
 				API can be used to provide a more discrete status.  The status of a player’s friends will be shown in the Friends page of the
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>.</p>
 			<div>
-				<h3 id="active-game">Active Game</h3>
+				<h4 id="active-game">Active Game</h4>
 			</div>
 			<p>Within the Status Panel, the displayed app name will be shared directly from the
 				<code>ProductName</code>
@@ -275,15 +127,30 @@
 				<!-- --> name as defined by the host's
 				<strong>language settings</strong>.</p>
 			<div>
-				<h3 id="rich-presence-text">Rich Presence Text</h3>
+				<h4 id="rich-presence-text">Rich Presence Text</h4>
 			</div>
 			<p>The
 				<strong>rich presence text</strong>
 				should provide some game context to other players. The string provided to
 				<code>EOS_PresenceModification_SetRawRichText</code>
 				will be shared as is.  It will be displayed as part of a friends status within the Friends Page.</p>
+			<p>For more console-specific game presence information, see the console documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/platforms/switch#game-presence-and-the-social-overlay">Nintendo Switch</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-4#game-presence-and-the-social-overlay">PlayStation 4</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-5#game-presence-and-the-social-overlay">PlayStation 5</a>
+				</li>
+			</ul>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			<div>
-				<h2 id="using-game-management-in-the-friends-list">Using Game Management in the Friends List</h2>
+				<h3 id="using-game-management-in-the-friends-list">Using Game Management in the Friends List</h3>
 			</div>
 			<p>The game management interface provides a
 				<strong>Join</strong>
@@ -302,7 +169,7 @@
 				<p>When using the Social Overlay, you have two implementation options:</p>
 				<ul>
 					<li>Use the Lobbies or Sessions interfaces with
-						<code>bPResenceEnabled = true</code>
+						<code>bPresenceEnabled = true</code>
 						<ul>
 							<li>You can use these features and EOS maintains the accuracy of joins and invites</li>
 						</ul>
@@ -316,12 +183,12 @@
 				</ul>
 			</div>
 			<div>
-				<h3 id="the-join-button">The Join Button</h3>
+				<h4 id="the-join-button">The Join Button</h4>
 			</div>
 			<p>The Join button enables players to join a friend's game. The integration with the SDK depends on which game management service is being used. The button will be enabled if the presence for the remote player contains either a Lobby ID, Session ID, or a Join Info String.  This data is transferred to all friends using the
 				<a href="/docs/epic-account-services/eos-presence-interface">Presence Service</a>.  All three identifiers have an associated callback for when the user presses the Join Button. It is expected that the game will honor this intent for the user after any cleanup of the current state.</p>
 			<div>
-				<h4 id="using-lobbies">Using Lobbies</h4>
+				<h5 id="using-lobbies">Using Lobbies</h5>
 			</div>
 			<p>When using the Lobby Service, the Lobby ID is transmitted automatically.  The game then uses
 				<code>EOS_Lobby_AddNotifyJoinLobbyAccepted</code>
@@ -333,7 +200,7 @@
 				<code>EOS_UI_AcknowledgeEventId</code>
 				to allow the Social Overlay to refresh its state.</p>
 			<div>
-				<h4 id="using-sessions-matchmaking">Using Sessions Matchmaking</h4>
+				<h5 id="using-sessions-matchmaking">Using Sessions Matchmaking</h5>
 			</div>
 			<p>When using the Sessions Matchmaking Service, the Session ID is transmitted automatically. The game then uses
 				<code>EOS_Sessions_AddNotifyJoinSessionAccepted</code>
@@ -345,7 +212,7 @@
 				<code>EOS_UI_AcknowledgeEventId</code>
 				to allow the Social Overlay to refresh its state.</p>
 			<div>
-				<h4 id="using-custom-service">Using Custom Service</h4>
+				<h5 id="using-custom-service">Using Custom Service</h5>
 			</div>
 			<p>To set up the
 				<strong>Join Info String</strong>
@@ -359,7 +226,7 @@
 				<strong>Join</strong>
 				button. The callback data will contain the Join Info String.</p>
 			<div>
-				<h3 id="the-invite-button">The Invite Button</h3>
+				<h4 id="the-invite-button">The Invite Button</h4>
 			</div>
 			<p>The
 				<strong>Invite</strong>
@@ -368,7 +235,7 @@
 				<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>
 				as well.</p>
 			<div>
-				<h4 id="custom-invites">Custom Invites</h4>
+				<h5 id="custom-invites">Custom Invites</h5>
 			</div>
 			<p>For titles that do not use Epic Matchmaking,
 				<strong>
@@ -387,14 +254,14 @@
 				</strong>
 				allows detection, custom UI indication, and processing of custom invites.</p>
 			<div>
-				<h4 id="using-lobbies-1">Using Lobbies</h4>
+				<h5 id="using-lobbies-1">Using Lobbies</h5>
 			</div>
 			<p>When the Invite button is clicked, the Social Overlay transmits an invite through the Lobbies Service on behalf of the user and the game using
 				<code>EOS_Lobby_SendInvite</code>. The game uses
 				<code>EOS_Lobby_AddNotifyLobbyInviteAccepted</code>
 				to know when the player clicks Accept in the overlay. The callback data contains the Invite ID, which you can use to locate the information about the game within the Lobbies Interface.</p>
 			<div>
-				<h4 id="using-sessions-matchmaking-1">Using Sessions Matchmaking</h4>
+				<h5 id="using-sessions-matchmaking-1">Using Sessions Matchmaking</h5>
 			</div>
 			<p>When the Invite button is clicked, the Social Overlay transmits an invite through the
 				<a href="/docs/game-services/sessions">Sessions Interface</a>
@@ -403,7 +270,7 @@
 				<code>EOS_Sessions_AddNotifySessionInviteAccepted</code>
 				to know when the player clicks Accept in the overlay. The callback data contains the Session ID, which you can use to locate the information about the game within the Sessions Interface.</p>
 			<div>
-				<h3 id="invite-lifecycle-and-caveats">Invite Lifecycle and Caveats</h3>
+				<h4 id="invite-lifecycle-and-caveats">Invite Lifecycle and Caveats</h4>
 			</div>
 			<p>The lifetime of an invite is tied to the lobby or session it is a part of, not the player who sent the invite. Therefore, it is possible for a player to leave a lobby or session and have their friend join it long after they have gone. An invite is only destroyed on the backend service, not on the receiving game client. The invite is destroyed when the invite is used or the lobby/session for the invite is destroyed.</p>
 			<p>If an invite goes unused for too long, the lobby or session the invite was originally tied to may have been destroyed. In this case, the invite is stale. If a game client tries to access a stale invite, when it attempts to use it, the call fails. When an invite is stale, these are the kinds of errors a player may see:</p>
@@ -415,7 +282,7 @@
 			<p>Errors recognized by the SDK immediately bubble up to the Social Overlay. However, the receiving game client must handle any errors/race conditions that occur. This should be done after the player of the receiving game client accepts the invite. For example, your game may notify the player that the session is no longer available for the invite. Your game must then let the Social Overlay know that the invite is processed, regardless of whether it succeeds or fails. To do this, your game must call
 				<code>EOS_UI_AcknowledgeEventId()</code>. In this API call, your game must include any error codes.</p>
 			<div>
-				<h3 id="sessions-matchmaking-caveats">Sessions Matchmaking Caveats</h3>
+				<h4 id="sessions-matchmaking-caveats">Sessions Matchmaking Caveats</h4>
 			</div>
 			<p>The invite button is not available if the current session is full, and it is disabled if the invited player is already in the session they've been invited to. You can override the invite state by making session modifications that mutate the "allow invites" state of the session. All clients in the session must maintain the state of the session via the (Un)RegisterPlayer API calls.</p>
 			<div>
@@ -425,7 +292,7 @@
 				<a href="/docs/game-services/eos-platform-interface#native-platform-integration">Platform Interface</a>
 				documentation for integration details.</p>
 			<div>
-				<h2 id="supporting-achievements">Supporting Achievements</h2>
+				<h3 id="supporting-achievements">Supporting Achievements</h3>
 			</div>
 			<p>The
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
@@ -436,12 +303,12 @@
 			<p>If an achievement is marked as hidden then the locked icon will be used but the displayed text will be provided by the
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay page</a>.  If an icon is not provided within the dev portal, then a default icon will be provided by the Social Overlay page.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Overlay">Overlay</a>
-				<a href="/docs/en-US/site-map?tag=Social">
+				<a href="/docs/site-map">Overlay</a>
+				<a href="/docs/site-map">
 					Social</a>
-				<a href="/docs/en-US/site-map?tag=Getting%20Started">
+				<a href="/docs/site-map">
 					Getting Started</a>
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">
+				<a href="/docs/site-map">
 					Epic Games Store Only</a>
 			</div>
 		</section>
@@ -456,28 +323,10 @@
 						<a href="#installation">Installation</a>
 					</li>
 					<li>
-						<a href="#sdk-initialization">SDK Initialization</a>
-					</li>
-					<li>
-						<a href="#compatible-rendering-apis-and-operating-systems">Compatible Rendering APIs and Operating Systems</a>
-					</li>
-					<li>
-						<a href="#windows">Windows</a>
-					</li>
-					<li>
-						<a href="#macos">macOS</a>
-					</li>
-					<li>
-						<a href="#linux">Linux</a>
-					</li>
-					<li>
 						<a href="#social-overlay">Social Overlay</a>
 					</li>
 					<li>
 						<a href="#handling-exclusive-input-mode">Handling Exclusive Input Mode</a>
-					</li>
-					<li>
-						<a href="#localization">Localization</a>
 					</li>
 					<li>
 						<a href="#using-player-presence-in-the-friends-list">Using Player Presence in the Friends List</a>

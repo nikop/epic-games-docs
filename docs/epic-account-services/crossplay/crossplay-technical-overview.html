@@ -1,0 +1,346 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Crossplay Technical Overview</h1>
+			<h2>Using Epic Accounts to enable crossplay for titles on Epic Games Store, Steam, and stand-alone PC distributions.</h2>
+			<div>
+				<div>9 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>Traditionally, publishing your game on multiple storefronts and platforms divides your player base between distribution platforms. Using Epic Account Services, games can access a larger ecosystem with powerful social crossplay features and the ability to unify your game's matchmaking pools.</p>
+			<p>The Epic Online Services SDK provides an out-of-box integration that takes care of the complexities and details that connect your players across all of its supported platforms. This means that you can use one or more of the Epic Online Services (EOS) services in your game with crossplay, on any platform that crossplay supports.</p>
+			<div>
+				<p>Crossplay is currently available for games on Windows PC, Nintendo Switch, PlayStation, and Xbox consoles.
+					<br>
+					
+					<!-- -->Support for macOS, Linux, Android and iOS is planned.</p>
+			</div>
+			<p>The required integration steps to use crossplay in your game are covered below. For an introduction to crossplay, inlcuding an overview of the services that crossplay provides, see the
+				<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>
+				documentation.</p>
+			<p>Game integration Using crossplay requires the following integration steps:</p>
+			<ol>
+				<li>
+					<p>Create a new OAuth Application for Epic Account Services, including a brand review.</p>
+				</li>
+				<li>
+					<p>Integrate the SDK with your game client.</p>
+				</li>
+				<li>
+					<p>For builds that publish outside the Epic Games Store, add the Epic Online Services local service redistributable installer and its associated Bootstrapper application as part of your game's prerequisites.</p>
+				</li>
+			</ol>
+			<p>The following sections outline each of the integration steps.</p>
+			<div>
+				<h2 id="step-1-application-configuration-and-brand-review">Step 1: Application configuration and brand review</h2>
+			</div>
+			<p>To use Epic Account Services with your game, you will need to
+				<a href="/docs/epic-account-services/getting-started">set up an Application</a>
+				for your 
+				<!-- -->product
+				<!-- --> in the Dev Portal. After setting up your Application with the required information, submit it for a
+				<a href="/docs/epic-account-services/brand-review">brand review</a>. The brand review process will take a few days, after which players of your game will be able to log in using Epic accounts. For development purposes only, those Epic accounts that are members of your Dev Portal 
+				<!-- -->organization
+				<!-- --> will be able to log in in your game prior to it completing the brand review process.</p>
+			<p>See the documentation on the
+				<a href="/docs/epic-account-services/brand-review">brand review application process</a>
+				for more information about setting up your Application for Epic Account Services.</p>
+			<div>
+				<h2 id="step-2-game-client-sdk-integration">Step 2: Game client SDK integration</h2>
+			</div>
+			<p>An Epic Account log-in is initiated by the game client when it calls the
+				<code>EOS_Auth_Login</code>
+				SDK API. The common log-in scenarios described further in this page include distributing through the
+				<a href="#epic-games-store">Epic Games Store</a>,
+				<a href="#steam">Steam</a>, and as a
+				<a href="#stand-alone-distribution">stand-alone distribution</a>.</p>
+			<p>General flow across all platforms and scenarios is that the game client acquires some type of authentication credentials for the local user, and passes them to the
+				<code>EOS_Auth_Login</code>
+				SDK API.
+				<a href="#stand-alone-distribution">Stand-alone distribution</a>
+				may also use the
+				<code>EOS_LCT_AccountPortal</code>
+				log-in method that does not require input authentication credentials, and instead prompts the user for Epic 
+				<!-- -->account
+				<!-- --> credentials as part of the log-in process.</p>
+			<p>The SDK takes full control of the log-in flow by walking the user through any necessary steps using the in-game overlay. Once the user completes the login flow, either successfully or by canceling it, the SDK returns control to the game application via completion callback of the
+				<code>EOS_Auth_Login</code>
+				SDK API. On Steam, the user's Steam account is implicitly linked to their logged-in Epic Account as part of the log-in flow managed by the SDK.</p>
+			<p>See the
+				<a href="/docs/epic-account-services/auth/auth-interface">Auth interface</a>
+				documentation for SDK API integration details.</p>
+			<div>
+				<h2 id="step-3-bootstrapper-and-service-redistributable-installer">Step 3: Bootstrapper and service redistributable installer</h2>
+			</div>
+			<p>See the
+				<a href="/docs/epic-account-services/crossplay/redistributable-installer">redistributable installer</a>
+				and bootstrapper documentation for guidance on how to  include the bootstrapper application and the local service redistributable installer as part of the prerequisites of your game.</p>
+			<div>
+				<h2 id="player-experience">Player experience</h2>
+			</div>
+			<p>The Social Overlay makes merging social features (for example, friends list, game invites, etc.) between platforms easier by providing an existing UX that you can use in your game. To access the Social Overlay in your game, your players must have an Epic Games account. Depending on your preference, your game can offer an Epic Games account sign in as an optional choice to enable crossplay, or it can require players to sign in and create an account before they enter the game lobby menu.</p>
+			<p>Specify
+				<a href="/docs/game-services/eos-platform-interface#native-platform-integration">integrated platform</a>
+				options (as part of the SDK initialization) to also include local platform friends in the friends list of the in-game overlay.</p>
+			<div>
+				<h3 id="social-overlay-and-friends">Social Overlay and Friends</h3>
+			</div>
+			<p>On the Social Overlay, a player can see both their Epic Games friends and the friends for the platform they're playing on, if they have linked their platform account to their Epic Games account. However, if a player plays your game through the Epic Games Launcher, then they can only see their Epic Games friends. For example, a player playing your game on Steam, who has linked their Steam account to their Epic Games account, can see both their Steam friends and Epic Games friends on the Social Overlay. But a player playing your game through the Epic Games Launcher, can only see their Epic Games friends on the Social Overlay; they can not see their Steam friends while playing in the Epic Games Launcher, because they are not playing the game through Steam.</p>
+			<div>
+				<h2 id="log-in">Log in</h2>
+			</div>
+			<div>
+				<h3 id="log-in-flow">Log in Flow</h3>
+			</div>
+			<p>Game initiates Epic account login by calling
+				<code>EOS_Auth_Login</code>
+				using
+				<code>EOS_LCT_ExternalAuth</code>. If
+				<code>EOS_UserNotFound</code>
+				is returned, the game may proceed to call
+				<code>EOS_Auth_LinkAccount</code>
+				using
+				<code>EOS_ContinuanceToken</code>
+				returned in
+				<code>EOS_Auth_LoginCallbackInfo</code>. Otherwise, the user was either successfully logged in, they canceled the login, denied application consent or did not complete any necessary steps within the user experience controlled by the SDK.</p>
+			<p>The
+				<code>EOS_Auth_Login</code>
+				and
+				<code>EOS_Auth_LinkAccount</code>
+				APIs will automatically open an in-game rendered Epic Account Portal login experience and walk the user through the login process based on their account state. For example, when a user that already has linked their platform account to an Epic account is attempting to be logged in for the first time with
+				<code>EOS_Auth_Login</code>, the SDK will automatically prompt the user to permit the game application to access basic information about their Epic account.</p>
+			<div>
+				<h4 id="result-codes">Result Codes</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<code>EOS_EResult</code>
+						</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_Success</code>
+						</td>
+						<td>The local platform user has been successfully logged into their Epic account.<br>
+							<br>
+							<code>EOS_Auth_Login</code>,
+							<code>EOS_Auth_LinkAccount</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_UserNotFound</code>
+						</td>
+						<td>The initial login attempt failed because the local platform user account does not have a linked Epic account.<br>
+							<br>Game may proceed to call
+							<code>EOS_Auth_LinkAccount</code>
+							using the
+							<code>EOS_ContinuanceToken</code>
+							returned in
+							<code>EOS_Auth_LoginCallbackInfo</code>.<br>
+							<br>
+							<code>EOS_Auth_Login</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Canceled</code>
+						</td>
+						<td>The user canceled the login by closing the embedded user experience at any time during the flow.<br>
+							<br>
+							<code>EOS_Auth_Login</code>,
+							<code>EOS_Auth_LinkAccount</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Auth_ScopeConsentRequired</code>
+						</td>
+						<td>The user has an Epic account, but did not give permission to share their Epic account information with the game application. Thus, the login failed.<br>
+							<br>Game should allow users to try login again at any time, using
+							<code>EOS_Auth_Login</code>
+							with
+							<code>EOS_LCT_ExternalAuth</code>
+							as normal. This will automatically prompt the user with the consent dialog screen in-game for completing login, should they accept it.<br>
+							<br>
+							<code>EOS_Auth_Login</code>,
+							<code>EOS_Auth_LinkAccount</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Auth_AccountFeatureRestricted</code>
+						</td>
+						<td>The user has an Epic account, but action is required from the user to resolve their account state before they can login. This error result means that the user exited the login flow without completing all of the necessary steps.
+							<br>
+							<br>Game should allow users to try login again at any time, using EOS_Auth_Login with
+							<code>EOS_LCT_ExternalAuth</code>
+							as normally. This will automatically prompt the user with next steps to follow for completing login.<br>
+							<br>
+							<code>EOS_Auth_Login</code>,
+							<code>EOS_Auth_LinkAccount</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Auth_NoRealId</code>
+						</td>
+						<td>The user needs to be prompted for the Korean Real ID verification dialog.<br>
+							<br>The scope
+							<code>EOS_EAuthScopeFlags::EOS_AS_Country</code>
+							should be used with
+							<code>EOS_Auth_Login</code>
+							for the other pieces like anti addiction messaging. This scope allows the game to determine if the player's Epic account is Korean.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>* (EOS_NoConnection, EOS_UnexpectedError, ...)</code>
+						</td>
+						<td>All other results are unexpected, and we recommend including the code as part of any UX error screens.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="eos-sdk-api-with-the-built-in-log-in-experience">EOS SDK API with the Built-in Log in Experience</h4>
+			</div>
+			<div>
+				<h3 id="epic-games-store">Epic Games Store</h3>
+			</div>
+			<p>The game logs the local Epic user in using the exchange code received via command-line parameters, passed by the Epic Games Launcher to the started game process. The log-in is performed automatically without any user interaction.</p>
+			<div>
+				<h3 id="steam">Steam</h3>
+			</div>
+			<p>At startup, the game calls the
+				<code>EOS_Platform_GetDesktopCrossplayStatus</code>
+				SDK API to verify that the Epic account login can use the overlay. If the game runs into errors (e.g. the Bootstrapper or redistributable service is missing), ask the player to verify the game files in the Steam library to repair the issues. Then ask the player to restart the game to apply the fixes.</p>
+			<p>The game logs the local Steam user into their Epic account using a Steam
+				<code>AuthSessionTicket</code>
+				acquired via the Steamworks SDK. The user is walked through the built-in user onboarding experience to link the local user's Steam account with an Epic Account. Linking the Steam account with an Epic  Account enables automatic user log in across consecutive application runs and across any game titles using Epic Account Services.</p>
+			<p>New users without an existing Epic Account have the option to create a new frictionless proxy Epic  Account. This links the user's Steam account to a newly-created Epic Account, allowing an automatic log in on consecutive application runs and without requiring users to register any additional details such as their email address or password.</p>
+			<p>Proxy Epic Accounts can be used in the same way as regular Epic Accounts that have an associated email address and password. For example, if the user later installs the Epic Games Launcher they will be able to login to their Epic Account using their Steam account login credentials. At that time, the user will be asked to register an email address and set a password for their account.</p>
+			<div>
+				<div style="max-width:491px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Welcome" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Welcome" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/crossplay/welcome.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Welcome screen of the built-in user onboarding experience on Steam that supports the frictionless proxy Epic Account creation.</p>
+			</div>
+			<div>
+				<h3 id="stand-alone-distribution">Stand-alone distribution</h3>
+			</div>
+			<p>At startup, the game calls the
+				<code>EOS_Platform_GetDesktopCrossplayStatus</code>
+				SDK API to verify that the Epic account login can use the overlay. If the game runs into errors (e.g. the Bootstrapper or redistributable service is missing), guide the player through the steps to repair the game installation for missing prerequisites.</p>
+			<p>The game logs the user in to their Epic Account without an existing authentication context. The user is walked through the built-in user onboarding experience, after which the SDK stores a persisted Epic refresh token on their local device to enable automatic user log in across consecutive application runs.</p>
+			<div>
+				<h2 id="age-verification">Age verification</h2>
+			</div>
+			<p>As part of their Epic Account log in, users may be prompted to input their date of birth. Younger users may be prompted to obtain parental consent for their Epic Account, or for data sharing with your Application, before they can successfully complete the log-in process.</p>
+			<p>This process is fully managed by the SDK. If users have not yet obtained parental consent, the
+				<code>EOS_Auth_Login</code>
+				and
+				<code>EOS_Auth_LinkAccount</code>
+				SDK APIs will return the
+				<code>EOS_Auth_AccountFeatureRestricted</code>
+				error result. Games may re-initiate the log-in process to let users successfully log in after obtaining parental consent to play, or to otherwise let the user review their consent status.</p>
+			<div>
+				<h2 id="overlay">Overlay</h2>
+			</div>
+			<p>The SDK provides an in-game overlay that lets players access their Epic friends across games and platforms. Players can search and add friends, see who is online, and send game invites across all of the supported platforms.</p>
+			<p>You can also integrate some of the Epic friends functionality into the game's own UI, for example to add another player as an Epic friend programmatically, you can use the
+				<code>EOS_Friends_SendInvite</code>
+				SDK API.</p>
+			<p>The overlay requires minimal SDK code integration from the game. See the
+				<a href="/docs/epic-account-services/social-overlay-overview">overlay</a>
+				documentation for details on how to enable it for your game.</p>
+			<div>
+				<h2 id="matchmaking">Matchmaking</h2>
+			</div>
+			<p>Use the
+				<a href="/docs/game-services/lobbies">Lobbies</a>
+				or
+				<a href="/docs/game-services/sessions">Sessions</a>
+				SDK interfaces to unify your game's matchmaking pool across all platforms. Both interfaces provide an out-of-box integration with the
+				<a href="/docs/epic-account-services/social-overlay-overview">overlay</a>, making it easy for the game to add support for cross-platform game invites.</p>
+			<p>Additionally, specifying the
+				<a href="/docs/game-services/eos-platform-interface#native-platform-integration">integrated platforms</a>
+				options as part of the SDK initialization, game invites are integrated natively with the local platform to provide users with the same consistent experience that they are used to on each platform.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#step-1-application-configuration-and-brand-review">Step 1: Application configuration and brand review</a>
+					</li>
+					<li>
+						<a href="#step-2-game-client-sdk-integration">Step 2: Game client SDK integration</a>
+					</li>
+					<li>
+						<a href="#step-3-bootstrapper-and-service-redistributable-installer">Step 3: Bootstrapper and service redistributable installer</a>
+					</li>
+					<li>
+						<a href="#player-experience">Player experience</a>
+					</li>
+					<li>
+						<a href="#social-overlay-and-friends">Social Overlay and Friends</a>
+					</li>
+					<li>
+						<a href="#log-in">Log in</a>
+					</li>
+					<li>
+						<a href="#log-in-flow">Log in Flow</a>
+					</li>
+					<li>
+						<a href="#result-codes">Result Codes</a>
+					</li>
+					<li>
+						<a href="#eos-sdk-api-with-the-built-in-log-in-experience">EOS SDK API with the Built-in Log in Experience</a>
+					</li>
+					<li>
+						<a href="#epic-games-store">Epic Games Store</a>
+					</li>
+					<li>
+						<a href="#steam">Steam</a>
+					</li>
+					<li>
+						<a href="#stand-alone-distribution">Stand-alone distribution</a>
+					</li>
+					<li>
+						<a href="#age-verification">Age verification</a>
+					</li>
+					<li>
+						<a href="#overlay">Overlay</a>
+					</li>
+					<li>
+						<a href="#matchmaking">Matchmaking</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

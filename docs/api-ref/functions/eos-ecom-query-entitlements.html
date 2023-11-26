@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_Ecom_QueryEntitlements">EOS_Ecom_QueryEntitlements</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -43,7 +37,7 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Query the entitlement information defined with Epic Online Services. A set of entitlement names can be provided to filter the set of entitlements associated with the account. This data will be cached for a limited time and retrieved again from the backend when necessary. Use EOS_Ecom_CopyEntitlementByIndex, EOS_Ecom_CopyEntitlementByNameAndIndex, and EOS_Ecom_CopyEntitlementById to get the entitlement details. Use EOS_Ecom_GetEntitlementsByNameCount to retrieve the number of entitlements with a specific entitlement name.</p>
+							<p>Query the entitlement information defined with Epic Online Services. A set of entitlement names can be provided to filter the set of entitlements associated with the account. This data will be cached for a limited time and retrieved again from the backend when necessary. Depending on the number of entitlements passed, the SDK splits the query into smaller batch requests to the backend and aggregates the result. Note: If one of the request batches fails, no data is cached and the entire query is marked as failed. Use EOS_Ecom_CopyEntitlementByIndex, EOS_Ecom_CopyEntitlementByNameAndIndex, and EOS_Ecom_CopyEntitlementById to get the entitlement details. Use EOS_Ecom_GetEntitlementsByNameCount to retrieve the number of entitlements with a specific entitlement name.</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>

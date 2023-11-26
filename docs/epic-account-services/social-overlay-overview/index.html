@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Social Overlay Overview">Social Overlay Overview</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,9 +12,9 @@
 	<section>
 		<div>
 			<h1>Social Overlay Overview</h1>
-			<h2>A tour of the EOS Social Overlay as it appears to users.</h2>
+			<h2>A panel that allows players to see their achievements, friends and send/receive invitations from other players.</h2>
 			<div>
-				<div>8 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -29,640 +23,198 @@
 			<div role="alert">
 				<div></div>
 				<div>
-					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
-						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
-						to coordinate a release plan.</p>
+					<p>Players must sign in with their Epic Games account to use the Social Overlay. The Social Overlay supports Windows PC, Nintendo Switch, PlayStation, and Xbox console platforms. Support for macOS, Linux, Android, and iOS is planned.</p>
 				</div>
 			</div>
-			<div>
-				<h2 id="technology">Technology</h2>
-			</div>
-			<p>The
-				<strong>Social Overlay</strong>
-				uses web technology and is distributed through
-				<strong>Content Delivery Networks (CDN)</strong>
-				across the globe. This enables us to push new features and fix bugs independently of the Epic Online Services (EOS) SDK version your game is running.</p>
-			<p>The EOS SDK loads and initializes the Social Overlay, and then the user requests the latest Social Overlay version deployed to our CDNs. The EOS SDK and Social Overlay communicate via a bridge. During initialization, the EOS SDK informs the Social Overlay which features your EOS SDK includes. The EOS SDK also informs the Social Overlay which features you have enabled or disabled.</p>
-			<p>For rare cases when services are experiencing disruptions, Epic can enable or disable features in the Social Overlay to provide a good user experience during outages. Read more in the
-				<a href="/docs/en-US#navigation-bar">Navigation Bar</a>
-				section.</p>
-			<div>
-				<h2 id="philosophy-on-iteration">Philosophy On Iteration</h2>
-			</div>
-			<p>Our goal is to provide the best user experience for both developers integrating their games with the Social Overlay and users interacting with it. To provide the best experience for all users, features will be added and adjusted in the future. Expect the core functionality to remain stable overall, but expect the text, look, and feel of the overlay to be improved and polished over time.</p>
-			<div>
-				<h2 id="initialization">Initialization</h2>
-			</div>
-			<p>After the application loads and initializes the Social Overlay, it will display a notification reading:
-				<strong>You are now online on the Epic Social Panel</strong>. Press the hotkey combination in the notification to open the Social Overlay.</p>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Notification indicating that user has successfully connected" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Notification indicating that user has successfully connected" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 640w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 750w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 828w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 1080w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 1200w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 1920w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 2048w, null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png 3840w" src="null/epic-account-services/social-overlay-overview/3-_-1-online-notification.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>The default hotkey to open Social Overlay is
-						<strong>Shift + F3</strong>.</p>
-				</div>
-			</div>
-			<p>When you open the Social Overlay for the first time, it will display  your
-				<strong>friends list</strong>. If you navigate to another page, close the overlay, then open the overlay, you will be on the last page you opened. This behavior may change in the future to improve the user experience.</p>
-			<div>
-				<h2 id="localization">Localization</h2>
-			</div>
-			<p>The following table lists all the locales the Social Overlay currently supports:</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Locale Code</th>
-						<th>Language</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>ar</td>
-						<td>Arabic</td>
-					</tr>
-					<tr>
-						<td>de</td>
-						<td>German</td>
-					</tr>
-					<tr>
-						<td>en-US</td>
-						<td>English (United States)</td>
-					</tr>
-					<tr>
-						<td>es-ES</td>
-						<td>Spanish (Spain)</td>
-					</tr>
-					<tr>
-						<td>es-MX</td>
-						<td>Spanish (Mexico)</td>
-					</tr>
-					<tr>
-						<td>fr</td>
-						<td>French</td>
-					</tr>
-					<tr>
-						<td>it</td>
-						<td>Italian</td>
-					</tr>
-					<tr>
-						<td>ja</td>
-						<td>Japanese</td>
-					</tr>
-					<tr>
-						<td>ko</td>
-						<td>Korean</td>
-					</tr>
-					<tr>
-						<td>pl</td>
-						<td>Polish</td>
-					</tr>
-					<tr>
-						<td>pt-BR</td>
-						<td>Portrugese (Brazil)</td>
-					</tr>
-					<tr>
-						<td>ru</td>
-						<td>Russian</td>
-					</tr>
-					<tr>
-						<td>th</td>
-						<td>Thai</td>
-					</tr>
-					<tr>
-						<td>tr</td>
-						<td>Turkish</td>
-					</tr>
-					<tr>
-						<td>zh-Hans</td>
-						<td>Chinese [Simplified]</td>
-					</tr>
-					<tr>
-						<td>zh-Hant</td>
-						<td>Chinese [Traditional]</td>
-					</tr>
-				</tbody>
-			</table>
-			<div>
-				<p>The Social Overlay has various overrides and fallbacks in place to provide the next best locale based on the locale requested by users.</p>
-			</div>
-			<div>
-				<h2 id="navigation-bar">Navigation Bar</h2>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:150px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="The overlay's navigation bar" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="The overlay's navigation bar" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 640w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 750w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 828w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 1080w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 1200w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 1920w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 2048w, null/epic-account-services/social-overlay-overview/5-_-1-navbar.png 3840w" src="null/epic-account-services/social-overlay-overview/5-_-1-navbar.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The
-				<strong>Navigation Bar</strong>
-				enables users navigate to the various pages within the Social Overlay. The items listed in the Navigation Bar are primarily determined by the EOS SDK version and the features your project is using.</p>
-			<p>In rare cases when services are experiencing disruptions, Epic can hide Navigation Bar items. For example, if the Achievements service has disruptions, Epic can hide the Achievements button until the service issue is resolved. This avoids confusion and prevents bad user experiences.</p>
-			<div>
-				<h2 id="friends">Friends</h2>
-			</div>
-			<div>
-				<h3 id="overview">Overview</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:150px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="The button for friends in the navigation bar" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="The button for friends in the navigation bar" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 640w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 750w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 828w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 1080w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 1200w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 1920w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 2048w, null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-1-friends-overview.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>In EOS SDK version 1.6+, the
-				<strong>Friends</strong>
-				icon appears at the top of the Navigation Bar. The Friends page is also the first page that displays when opening the Social Overlay the first time. Friends is broken up into several sections that each display different information about the user’s friends list.</p>
-			<div>
-				<h3 id="status-panel">Status Panel</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="A status panel displaying a friend's information" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="A status panel displaying a friend's information" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 640w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 750w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 828w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 1080w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 1200w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 1920w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 2048w, null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-2-friend-status-panel.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The Status Panel shows the following:</p>
+			<p>The Social Overlay is a panel that you can integrate with your game so that players can see their achievements, friends, and send/receive invitations from other players to join a game or add a friend. Players can also open the
+				<a href="/docs/epic-account-services/social-overlay-overview/technical-overview#social-overlay-from-the-epic-games-launcher">Social Overlay from the Epic Games Launcher</a>.</p>
+			<p>Players can open the Social Overlay in your game if they press a shortcut:</p>
 			<ul>
-				<li>A colored
-					<strong>avatar</strong>
-					with the first letter of the user's name.</li>
-				<li>The user's
-					<strong>display name</strong>.</li>
-				<li>A bell icon which represents if the user has
-					<strong>Do Not Disturb</strong>
-					mode enabled or not.</li>
-				<li>The user's
-					<strong>Joinable state</strong>.
-					<!-- -->
+				<li>Windows PC (default): SHIFT+F3</li>
+				<li>Nintendo Switch (recommended): Minus button</li>
+				<li>PlayStation 4, PlayStation 5 (recommended): Touchpad</li>
+				<li>Xbox One, Xbox Series (recommended): View button</li>
+			</ul>
+			<p>Players can use the default Windows PC shortcut (SHIFT+F3) or you can change this shortcut to a different one. If you release your game on console, you must set up the shortcut. We recommend the shortcuts listed above.</p>
+			<p>For more information on how to define the shortcut for the Social Overlay, see
+				<a href="/docs/epic-account-services/social-overlay-overview/technical-overview#how-to-set-the-shortcut">How to Set the Shortcut</a>.</p>
+			<p>A player can also open the Social Overlay from the Epic Games Launcher if they select the following icon:</p>
+			<div>
+				<div style="max-width:50px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Social Overlay icon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Social Overlay icon" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/social-overlay-overview/social-overlay-button.png">
+						</noscript>
+					</span>
+				</div>
+			</div>
+			<p>Players see the Social Overlay as a layer on top of your game and when a player uses their controller on a console or a keyboard on Windows PC, their input applies to the Social Overlay (not your game).</p>
+			<p>On the Social Overlay, players can see four tabs: Friends, Add Friends Achievements, and Settings. These allow players to:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Friends</strong>
+					</p>
 					<ul>
 						<li>
-							<strong>Joinable</strong>
-							means that invites are allowed</li>
+							<p>See a list of their friends.</p>
+						</li>
 						<li>
-							<strong>Not Joinable</strong>
-							means that invites are not allowed.</li>
+							<p>See a friend’s profile for details about them (for example, what game they are playing).</p>
+						</li>
+						<li>
+							<p>Send invitations to friends to join their game.</p>
+							<p>For more information, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/friends">Social Overlay Tabs: Friends</a>
+								</li>
+								<li>
+									<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/profile">Social Overlay Tabs: Profile</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Add Friends</strong>
+					</p>
+					<ul>
+						<li>
+							<p>Send invitations to make new friends.</p>
+							<p>For more information on the Add Friends tab, see the
+								<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/friends">Social Overlay Tabs: Friends</a>
+								documentation.</p>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Achievements</strong>
+					</p>
+					<ul>
+						<li>
+							<p>See a list of achievements in your game and their progress to complete each one.</p>
+							<p>
+								<strong>Note:</strong>
+								Players only see this tab if you enable either Epic Online Services achievements or Epic Games Store achievements in your game.</p>
+							<p>For more information, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/achievements">Social Overlay Tabs: Achievements</a>
+								</li>
+								<li>
+									<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
+								</li>
+								<li>
+									<a href="/docs/epic-games-store/services/epic-achievements/overview">Epic Games Store achievements</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Settings</strong>
+					</p>
+					<ul>
+						<li>
+							<p>Choose if they receive notifications and friend requests.</p>
+							<p>For more information on the Settings tab, see the
+								<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/settings">Social Overlay Tabs: Settings</a>
+								documentation.</p>
+						</li>
 					</ul>
 				</li>
 			</ul>
-			<p>Clicking the Status Panel opens a settings screen where you can toggle your Do Not Disturb status. If Do Not Disturb is enabled, you can get game invites, friend invites, completed achievements, and so on, but you will not receive any notifications.</p>
-			<div>
-				<h3 id="filter-friends">Filter Friends</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Filtering friends with the search bar" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Filtering friends with the search bar" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 640w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 750w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 828w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 1080w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 1200w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 1920w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 2048w, null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-3-filter-friends.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>This component enables users to filter their complete list of friends. As the user types, the Social Overlay filters out all friends whose display names do not match the user’s input. The substring that matches the user's input is highlighted.</p>
-			<div>
-				<h3 id="invitations-to-play">Invitations to Play</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="The list of invitations sent by friends" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="The list of invitations sent by friends" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 640w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 750w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 828w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 1080w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 1200w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 1920w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 2048w, null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-4-friend-invites.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The first section of Friends shows incoming invites from the user’s friends. This list is displayed first for convenience and ease of use when receiving and accepting invites, but friends in this list are also shown in the appropriate section in the rest of the friends list.</p>
-			<p>For each invite, the user can choose one of two actions:
-				<strong>Accept</strong>
-				or
-				<strong>Decline</strong>
-				(represented by a button with
-				<strong>X</strong>
-				icon). After the user clicks one of these buttons, the button may briefly enter a disabled state while the EOS SDK handles the user’s requested action. If an error occurs during either action, an error notification displays.</p>
-			<div>
-				<p>For invite functionality with the Epic Games Launcher, be sure to map your deployments to your
-					<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>
-					as well.</p>
-			</div>
-			<div>
-				<h3 id="playing-app-name">Playing &lt;App Name&gt;</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="A list of friends currently playing a game" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="A list of friends currently playing a game" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 640w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 750w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 828w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 1080w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 1200w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 1920w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 2048w, null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-5-friends-currently-playing.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The second section of Friends lists friends playing the same game as the local user. The Social Overlay determines which friends belong in this section by comparing the user’s app ID to friends’ app IDs. If matched, the friend will appear in this section of friends list.</p>
-			<p>The user always appears at the top of this list, and has the YOU label at the end of their display name. If the user is in a group with other friends, they will be overlaid on top of one another and do not have actions  (see
-				<a href="/docs/epic-account-services/social-overlay-overview#same-group-friends">Same Group Friends</a>
-				).</p>
-			<p>This section is sorted in the following order:</p>
-			<ol>
-				<li>You (current user)</li>
-				<li>Same Group Friends, by display name, in alphabetical order</li>
-				<li>Other Friends, by display name, in alphabetical order.</li>
-			</ol>
-			<div>
-				<h4 id="same-group-friends">Same Group Friends</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Friends playing a game together in the same group" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Friends playing a game together in the same group" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 640w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 750w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 828w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 1080w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 1200w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 1920w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 2048w, null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-6-same-group-friends.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>Friends in the same group as the user (for example, if they are in the same party or the same game session) will be listed here and appear clumped together representing their friend group. Unlike other friends listed in this section, these users do not have actions.</p>
-			<div>
-				<h4 id="friend-playing-game">Friend Playing Game</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="A friend playing a game by themselves, without any group" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="A friend playing a game by themselves, without any group" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 640w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 750w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 828w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 1080w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 1200w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 1920w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 2048w, null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-7-friend-playing-game.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>Friends that are not in your group will fill the rest of your
-				<strong>Playing</strong>
-				friends section. Two action buttons will display beside each user name:
-				<strong>Join</strong>
-				and
-				<strong>Invite</strong>.</p>
-			<p>The Join button is disabled if the friend is not currently in a joinable state.</p>
-			<p>The Invite button is disabled if the friend is not allowing invites.</p>
-			<p>After the user takes action, both buttons may be disabled while EOS SDK handles the requested action. If an error occurs during either action, an error notification will be emitted.</p>
-			<div>
-				<h3 id="other-friends">Other Friends</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="A list of friends that do not meet previous criteria" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="A list of friends that do not meet previous criteria" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 640w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 750w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 828w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 1080w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 1200w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 1920w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 2048w, null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png 3840w" src="null/epic-account-services/social-overlay-overview/6-_-8-other-friends.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The last section of the friends list is the user’s friends who did not meet the previous criteria. This includes, but is not limited to, friends playing other games, friends sitting in the Launcher, and friends who are currently offline.</p>
-			<p>This section is sorted in the following order:</p>
-			<ol>
-				<li>Friend's Presence State
-					<!-- -->
-					<ol>
-						<li>Online</li>
-						<li>Away</li>
-						<li>Extended Away</li>
-						<li>Offline</li>
-					</ol>
+			<p>When you integrate the Social Overlay with your game, players also receive notification pop-ups when the Social Overlay is visible or hidden. These notifications let players know when they receive a game or friend invitation, and when they complete an achievement.</p>
+			<p>For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/friends">Social Overlay Tabs: Friends</a>
 				</li>
-				<li>Display name, in alphabetical order</li>
-			</ol>
-			<div>
-				<h2 id="achievements">Achievements</h2>
-			</div>
-			<div>
-				<h3 id="overview-1">Overview</h3>
-			</div>
-			<p>If using
-				<strong>Achievements</strong>
-				in EOS SDK version 1.7+, the following icon will be added to the Navigation Bar, which navigates the user to the Achievements section.</p>
-			<div>
-				<div>
-					<div style="max-width:150px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="The button for achievements in the navigation bar" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="The button for achievements in the navigation bar" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 640w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 750w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 828w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 1080w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 1200w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 1920w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 2048w, null/epic-account-services/social-overlay-overview/7-_-1-achievements.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-1-achievements.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The Achievements page lists all achievements associated with your game and with the user’s progress.</p>
-			<div>
-				<h3 id="total-progress">Total Progress</h3>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Bar showing progress for all achievements within a game" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Bar showing progress for all achievements within a game" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 640w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 750w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 828w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 1080w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 1200w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 1920w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 2048w, null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-2-total-progress.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>This component shows the total number of completed achievements compared to the total number of achievements.</p>
-			<div>
-				<h3 id="filter-achievements">Filter Achievements</h3>
-			</div>
-			<p>This component will allow the user to filter the complete list of achievements. As the user types, the Social Overlay filters out all achievement Title and Description fields that do not match the user’s input.</p>
-			<div>
-				<h3 id="achievement-types">Achievement Types</h3>
-			</div>
-			<div>
-				<h4 id="in-progress">In Progress</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Progress for a single achievement" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Progress for a single achievement" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 640w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 750w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 828w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 1080w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 1200w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 1920w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 2048w, null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-3-achievement-progress.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>
-				<strong>In-Progress</strong>
-				achievements are the first set of achievements to show in the list. This type of achievement displays the following:</p>
-			<ul>
-				<li>Locked icon</li>
-				<li>Locked title</li>
-				<li>Locked description</li>
-				<li>Progress bar with % to completion</li>
+				<li>
+					<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/achievements">Social Overlay Tabs: Achievements</a>
+				</li>
 			</ul>
-			<p>If the icon is not set or fails to load, the following icon will display by default:</p>
 			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Progress for an achievement with no icon set" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Progress for an achievement with no icon set" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 640w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 750w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 828w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 1080w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 1200w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 1920w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 2048w, null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-4-achievement-progress-noicon.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
+				<h4 id="how-do-i-add-the-social-overlay-to-my-game">How Do I Add the Social Overlay to My Game?</h4>
 			</div>
+			<p>If you want to integrate the Social Overlay with your game or allow players to use the Social Overlay from the Epic Games Launcher to join your game, then you need to use the EOS SDK. For further information on how to integrate the EOS SDK with your game, see
+				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">SDK Integration</a>.</p>
 			<div>
-				<h4 id="completed">Completed</h4>
+				<h4 id="what-interfaces-can-i-use-with-the-social-overlay">What Interfaces Can I Use With the Social Overlay?</h4>
 			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Widget showing a completed achievement" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Widget showing a completed achievement" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 640w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 750w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 828w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 1080w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 1200w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 1920w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 2048w, null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-5-achievement-complete.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>
-				<strong>Completed</strong>
-				achievements are the second set of achievements to show in the list. This type of achievement displays the following:</p>
+			<p>When you integrate the EOS SDK with your game, you can use the following interfaces to interact with the Social Overlay:</p>
 			<ul>
-				<li>Unlocked icon</li>
-				<li>Unlocked title</li>
-				<li>Unlocked description</li>
+				<li>
+					<p>
+						<strong>Custom Invites</strong>
+					</p>
+					<p>If you already have a system in your game for players to send and receive notifications to join your game, then you can use the Custom Invites Interface with the Social Overlay. This allows players to use the Social Overlay to send and receive notifications from your system.</p>
+					<p>For more information on the Custom Invites Interface, see the
+						<a href="/docs/game-services/custom-invites-interface">Custom Invites</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>UI Interface</strong>
+					</p>
+					<p>Use the UI Interface to display your own custom overlay panels.</p>
+					<p>For more information on the UI Interface, see the
+						<a href="/docs/epic-account-services/eosui-interface">UI Interface</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Lobbies Interface, Sessions Interface, and Crossplay</strong>
+					</p>
+					<p>Use the Lobbies Interface or Sessions Interface to set up a persistent connection between players and manage online games that integrate with the Social Overlay. If you also integrate crossplay with your game then players can send and receive invitations to join a lobby or a session across platforms if they have an Epic Account.</p>
+					<p>For more information, see the following documentation:</p>
+					<ul>
+						<li>
+							<a href="/docs/game-services/lobbies">Lobbies Interface</a>
+						</li>
+						<li>
+							<a href="/docs/game-services/sessions">Sessions Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Platform Interface</strong>
+					</p>
+					<p>Use the interface for each platform (mobile, console, and PC) to integrate them so that a player can send, receive, and view game invites using the notification system for that platform. This also allows you to use the user interface for that platform to show the notifications, and include friends from that platform on the Social Overlay if they have an Epic Account.</p>
+					<p>For more information, see the following documentation:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/platforms">Platform Implementation for EOS</a>: for details on each platform interface.</li>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/friends">Social Overlay Tabs: Friends</a>: for more information on the Friends tab.</li>
+						<li>
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">Social Overlay for Crossplay</a>: for more information on how to use the Social Overlay across multiple platforms, with Epic Games accounts and native invites.</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Friends Interface</strong>
+					</p>
+					<p>Use the Friends Interface to allow players to use your game’s user interface when they interact with friends, for example, to send and receive invitations to add a player as a friend. When you change the details of a player’s friend with the Friends Interface, the player can see the same details on the Social Overlay.</p>
+					<p>For more information, see the
+						<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface</a>
+						documentation.</p>
+				</li>
 			</ul>
-			<p>If the icon is not set or fails to load, the following icon will display by default:</p>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Achievement complete widget with no icon set" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Achievement complete widget with no icon set" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 640w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 750w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 828w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 1080w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 1200w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 1920w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 2048w, null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-6-achievement-complete-no-icon.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h4 id="locked">Locked</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="An achievement that has not yet been completed" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="An achievement that has not yet been completed" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 640w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 750w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 828w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 1080w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 1200w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 1920w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 2048w, null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-7-achievement-locked.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>
-				<strong>Locked</strong>
-				achievements are the third set of achievements to show in the list. This type of achievement displays the following:</p>
-			<ul>
-				<li>Locked icon</li>
-				<li>Locked title (with lock icon suffix)</li>
-				<li>Locked description</li>
-			</ul>
-			<p>If the icon is not set or fails to load, the following icon will display by default:</p>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="A locked achievement with no icon set" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="A locked achievement with no icon set" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 640w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 750w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 828w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 1080w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 1200w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 1920w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 2048w, null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-8-achievement-lock-no-icon.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h4 id="hidden">Hidden</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="An achievement that is currently hidden from the user" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="An achievement that is currently hidden from the user" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 640w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 750w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 828w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 1080w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 1200w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 1920w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 2048w, null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-9-achievement-hidden.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>
-				<strong>Hidden</strong>
-				achievements are the last set of achievements to show in the list. This type of achievement displays the following:</p>
-			<ul>
-				<li>Locked icon</li>
-				<li>Localized Hidden Achievement title</li>
-			</ul>
-			<p>If the icon is not set or fails to load, the following icon will display by default:</p>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="A hidden achievement with no icon set" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="A hidden achievement with no icon set" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 640w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 750w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 828w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 1080w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 1200w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 1920w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 2048w, null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png 3840w" src="null/epic-account-services/social-overlay-overview/7-_-10-achievement-hidden-no-icon.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h2 id="notifications">Notifications</h2>
-			</div>
-			<div>
-				<h3 id="types-of-notifications">Types of Notifications</h3>
-			</div>
-			<div>
-				<h4 id="ready">Ready</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Notification that displays when the social overlay is initialized" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Notification that displays when the social overlay is initialized" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 640w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 750w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 828w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 1080w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 1200w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 1920w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 2048w, null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png 3840w" src="null/epic-account-services/social-overlay-overview/8-_-1-online-notification.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The
-				<strong>Ready</strong>
-				notification displays when the Social Overlay fully initializes and is ready to open.</p>
-			<div>
-				<h4 id="game-invite">Game Invite</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Notification that displays when you are invited to a game" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Notification that displays when you are invited to a game" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 640w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 750w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 828w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 1080w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 1200w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 1920w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 2048w, null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png 3840w" src="null/epic-account-services/social-overlay-overview/8-_-2-game-invite-notification.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The
-				<strong>Game Invite</strong>
-				notification displays when a user’s friend has invited them to play a game.</p>
-			<div>
-				<h4 id="achievement-completed">Achievement Completed</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Notification that displays when an achievement is completed" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Notification that displays when an achievement is completed" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 640w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 750w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 828w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 1080w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 1200w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 1920w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 2048w, null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png 3840w" src="null/epic-account-services/social-overlay-overview/8-_-3-achievement-notification.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The
-				<strong>Achievement Completed</strong>
-				notification displays when a user earns an achievement.</p>
-			<div>
-				<p>The same fallback rules from
-					<a href="/docs/en-US#achievement-types">Achievement Types</a>
-					apply to the icon in this notification.</p>
-				<div>
-					<div>
-						<div style="max-width:450px">
-							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-								<img alt="Achievement complete notification with no icon set" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-								<noscript>
-									<img alt="Achievement complete notification with no icon set" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 640w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 750w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 828w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 1080w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 1200w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 1920w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 2048w, null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png 3840w" src="null/epic-account-services/social-overlay-overview/8-_-4-achievement-notification-no-icon.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-								</noscript>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h4 id="error">Error</h4>
-			</div>
-			<div>
-				<div>
-					<div style="max-width:650px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="Error notification" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="Error notification" sizes="100vw" srcset="null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 640w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 750w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 828w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 1080w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 1200w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 1920w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 2048w, null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png 3840w" src="null/epic-account-services/social-overlay-overview/8-_-5-error-notification.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-				</div>
-			</div>
-			<p>The
-				<strong>Error</strong>
-				notification displays when the user makes a request and an error occurs. The notification attempts to provide context and supply a localized error message but can fall back to a generic localized error message.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Overlay">Overlay</a>
-				<a href="/docs/en-US/site-map?tag=Social">
+				<a href="/docs/site-map">Overlay</a>
+				<a href="/docs/site-map">
 					Social</a>
-				<a href="/docs/en-US/site-map?tag=Featured">
+				<a href="/docs/site-map">
 					Featured</a>
 			</div>
 		</section>
@@ -671,91 +223,10 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#technology">Technology</a>
+						<a href="#how-do-i-add-the-social-overlay-to-my-game">How Do I Add the Social Overlay to My Game?</a>
 					</li>
 					<li>
-						<a href="#philosophy-on-iteration">Philosophy On Iteration</a>
-					</li>
-					<li>
-						<a href="#initialization">Initialization</a>
-					</li>
-					<li>
-						<a href="#localization">Localization</a>
-					</li>
-					<li>
-						<a href="#navigation-bar">Navigation Bar</a>
-					</li>
-					<li>
-						<a href="#friends">Friends</a>
-					</li>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#status-panel">Status Panel</a>
-					</li>
-					<li>
-						<a href="#filter-friends">Filter Friends</a>
-					</li>
-					<li>
-						<a href="#invitations-to-play">Invitations to Play</a>
-					</li>
-					<li>
-						<a href="#playing-app-name">Playing &lt;App Name&gt;</a>
-					</li>
-					<li>
-						<a href="#same-group-friends">Same Group Friends</a>
-					</li>
-					<li>
-						<a href="#friend-playing-game">Friend Playing Game</a>
-					</li>
-					<li>
-						<a href="#other-friends">Other Friends</a>
-					</li>
-					<li>
-						<a href="#achievements">Achievements</a>
-					</li>
-					<li>
-						<a href="#overview-1">Overview</a>
-					</li>
-					<li>
-						<a href="#total-progress">Total Progress</a>
-					</li>
-					<li>
-						<a href="#filter-achievements">Filter Achievements</a>
-					</li>
-					<li>
-						<a href="#achievement-types">Achievement Types</a>
-					</li>
-					<li>
-						<a href="#in-progress">In Progress</a>
-					</li>
-					<li>
-						<a href="#completed">Completed</a>
-					</li>
-					<li>
-						<a href="#locked">Locked</a>
-					</li>
-					<li>
-						<a href="#hidden">Hidden</a>
-					</li>
-					<li>
-						<a href="#notifications">Notifications</a>
-					</li>
-					<li>
-						<a href="#types-of-notifications">Types of Notifications</a>
-					</li>
-					<li>
-						<a href="#ready">Ready</a>
-					</li>
-					<li>
-						<a href="#game-invite">Game Invite</a>
-					</li>
-					<li>
-						<a href="#achievement-completed">Achievement Completed</a>
-					</li>
-					<li>
-						<a href="#error">Error</a>
+						<a href="#what-interfaces-can-i-use-with-the-social-overlay">What Interfaces Can I Use With the Social Overlay?</a>
 					</li>
 				</ul>
 			</div>

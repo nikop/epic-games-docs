@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Anti-Cheat Integration Checklist">Anti-Cheat Integration Checklist</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -30,6 +24,13 @@
 				<p>The
 					<strong>Anti-Cheat Interfaces</strong>
 					require using SDK 1.12 or higher. The Anti-Cheat Client interfaces supports Windows, Mac, and Linux platforms, and requires a 64-bit operating system installation.</p>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Note that to generate sanctions with the Anti-Cheat service, you must first implement the
+						<a href="/docs/game-services/reports-interface">Reports Interface</a>.</p>
+				</div>
 			</div>
 			<p>You should use these checklists to verify the integration of the Anti-Cheat interfaces and your game works properly before release.</p>
 			<div>
@@ -89,7 +90,14 @@
 			<p>2. Start the game without the anti-cheat bootstrapper.</p>
 			<p>Success criteria:</p>
 			<ul>
-				<li>Your game may function normally, or may display a warning/error message if you prefer.</li>
+				<li>Your game may function normally, or may display a warning/error message if you prefer.
+					<!-- -->
+					<div>
+						<p>
+							<code>EOS_Platform_GetAntiCheatClientInterface</code>
+							returns a nullptr if someone starts the game without the anti-cheat bootstrapper. You can use this to determine when to display a warning/error message.</p>
+					</div>
+				</li>
 				<li>However, the player should not be able to join protected multiplayer game sessions with other players. Anti-cheat authentication should fail and an appropriate message should display.</li>
 			</ul>
 			<p>3. Start the game with the anti-cheat bootstrapper.</p>
@@ -115,9 +123,10 @@
 					<strong>Client Protection</strong>
 					remains enabled after refreshing the Anti-Cheat page.</li>
 			</ul>
-			<p>5. Start the game without the anti-cheat bootstrapper and pass the additional command line argument
-				<code>-EOS_FORCE_ANTICHEATCLIENTNULL</code>
-				to the game.</p>
+			<p>5. Set the environment variable
+				<code>EOS_USE_ANTICHEATCLIENTNULL</code>
+				to a value of
+				<code>1</code>, and start the game without the anti-cheat bootstrapper. Remove the environment variable after this test step is complete.</p>
 			<p>Success criteria:</p>
 			<ul>
 				<li>Your game should function normally.</li>
@@ -166,12 +175,12 @@
 					remain enabled after refreshing the Anti-Cheat page.</li>
 			</ul>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Anti-Cheat">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Anti-Cheat</a>
-				<a href="/docs/en-US/site-map?tag=Easy%20Anti-Cheat">
+				<a href="/docs/site-map">
 					Easy Anti-Cheat</a>
-				<a href="/docs/en-US/site-map?tag=Player%20Moderation">
+				<a href="/docs/site-map">
 					Player Moderation</a>
 			</div>
 		</section>

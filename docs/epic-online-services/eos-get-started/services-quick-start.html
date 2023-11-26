@@ -1,0 +1,286 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Get Started Steps</h1>
+			<h2>Integrate Epic Online Services (EOS) into your game.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>To get up and running with the Epic Online Services (EOS), integrate the EOS SDK with your game, so your game can access EOS services. To do this, you:</p>
+			<ul>
+				<li>Set up an Epic Games account and organization in the Developer Portal.</li>
+				<li>Download the EOS SDK (available in C and C#).</li>
+				<li>Integrate the Platform Interface into your game.</li>
+			</ul>
+			<p>This document gives guidance on how to do this together with information on the sample code which comes with the SDK download.</p>
+			<p>There are also introduction resources, including introduction blogs, FAQs, and some information on the EOS game engine plugins for Unreal Engine and Unity. For more information on these see the
+				<a href="/docs/epic-online-services/eos-get-started/introduction-resources">Introduction Resources</a>
+				page.</p>
+			<div>
+				<h2 id="get-started-steps">Get Started Steps</h2>
+			</div>
+			<div>
+				<h3 id="before-you-begin---system-requirements">Before You Begin - System Requirements</h3>
+			</div>
+			<p>Check the system requirements for your development environment and your game-client's runtime environment in the
+				<a href="/docs/epic-online-services/eos-get-started/system-requirements">System Requirements</a>
+				page.</p>
+			<div>
+				<h3 id="step-1---set-up-an-epic-games-account-and-organization">Step 1 - Set up an Epic Games Account and Organization</h3>
+			</div>
+			<p>You use the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>) to set up your game to use EOS services, to configure the services, and to access the SDK download.</p>
+			<p>In the Developer Portal, you associate your Epic Games account with an "organization", which is your company or business. Each game is known as a "product". An organization can have multiple products.</p>
+			<p>Every game (<strong>product</strong>
+				in the Developer Portal) has:</p>
+			<ul>
+				<li>
+					<strong>A product ID</strong>
+					- a unique identifier for your game.</li>
+				<li>
+					<strong>One or more sandbox IDs</strong>
+					- different named environments for your game's implementation. Example use: you have three different sandboxes to separate the development, testing, and production versions of a game's implementation.</li>
+			</ul>
+			<p>Every sandbox has:</p>
+			<ul>
+				<li>
+					<strong>One or more deployment IDs</strong>
+					- different iterations of your game's implementation within a sandbox. Example use: every deployment in your testing sandbox is either a beta test version or a release candidate, and every deployment in your production sandbox is a release version.</li>
+			</ul>
+			<p>The EOS SDK uses these to identify your game with the EOS services.</p>
+			<p>For more information about how to use product management tools when setting up an account, see the documentation on
+				<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.</p>
+			<div>
+				<h3 id="step-2---download-the-eos-sdk">Step 2 - Download the EOS SDK</h3>
+			</div>
+			<p>Once you have set up your organization and products in the Developer Portal, you can download the EOS SDK from the Developer Portal.</p>
+			<p>To get the SDK download, on the Developer Portal home page, click
+				<strong>Download SDK</strong>.</p>
+			<p>
+				<strong>Note:</strong>
+				To use Epic Online Services (EOS) SDK, your local network, router, and firewall must allow access to specific host addresses. For a complete list of these host addresses, see the
+				<a href="/docs/epic-online-services/eos-get-started/firewall-considerations">Firewall Considerations</a>
+				documentation.</p>
+			<div>
+				<h4 id="eos-sdk-download-types">EOS SDK Download Types</h4>
+			</div>
+			<p>There are different types of SDK downloads to use, depending on which platform your game client runs on:</p>
+			<ul>
+				<li>
+					<strong>Windows, macOS, Linux</strong>
+					- the EOS SDK in C, and the EOS SDK in C#.</li>
+				<li>
+					<strong>Mobile</strong>
+					- the EOS SDK for iOS, and the EOS SDK for Android.</li>
+				<li>
+					<strong>Consoles</strong>
+					- there are EOS SDK downloads for game consoles in C, and in C#.
+					<br>
+					
+					<!-- -->The SDK downloads for consoles are only available to developers approved by the platform holders and approved by Epic Games.
+					<br>
+					
+					<!-- -->The platform holders are: Microsoft (Xbox One, Xbox Series X), Sony (PlayStation 4, PlayStation 5), and Nintendo (Switch).
+					<br>
+					
+					<!-- -->To get access to the SDK downloads for consoles and associated documentation:
+					<!-- -->
+					<ul>
+						<li>Go to the Developer Portal at
+							<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>, click
+							<strong>SDK &amp; RELEASE NOTES</strong>, and click
+							<strong>Request access</strong>
+							at the bottom for guidance on applying for console developer access from the platform holders.</li>
+						<li>Once you have platform-holder approval, you can apply to Epic Games using the
+							<em>Console Developer Request for Epic Online Services</em>
+							form, which is at
+							<a href="https://eoshelp.epicgames.com/s/console-access-request">eoshelp.epicgames.com</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="whats-in-the-eos-sdk-download">What's in the EOS SDK Download</h4>
+			</div>
+			<p>The EOS SDK download has the following directories:</p>
+			<table>
+				<thead>
+					<tr>
+						<td>
+							<strong>Directory</strong>
+						</td>
+						<td colspan="3">
+							<strong>Content</strong>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>/Samples</code>
+						</td>
+						<td colspan="3">Sample implementations demonstrating how the EOS SDK works.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/SDK</code>
+						</td>
+						<td colspan="3">The libraries and header files you use in your game code to integrate the EOS SDK with your game so your game can use EOS services.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/ThirdPartyNotices</code>
+						</td>
+						<td colspan="3">Legal information about supporting libraries.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="samples">Samples</h4>
+			</div>
+			<p>We recommend looking at the samples directory, which demonstrates some of the platform's features. For more detailed information about the samples, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-account-services/auth/sample-overview">Auth And Friends Sample</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/sessions/eos-session-matchmaking-sample">Session Matchmaking Sample</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/lobbies/eos-lobbies-sample">Lobby Sample</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/p-2-p/eosp-2-p-sample">P2P NAT Sample</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/player-data-storage/player-data-storage-sample">Player Data Storage Sample</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/title-storage/title-data-storage-sample">Title Storage Sample</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/leaderboards/eos-leaderboards-sample">Leaderboards Sample</a>
+				</li>
+				<li>
+					<a href="/docs/epic-games-store/services/ecom/store-sample">Store Sample</a>
+				</li>
+				<li>
+					<a href="/docs/epic-games-store/services/mods/eos-mods-sample">Mods Sample</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/android/eos-android-sample">Using the Android SDK Samples</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eossdkc-sharp-getting-started#sample-code-and-projects">Using the C# SDK Samples</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/i-os/eo-si-os-sample">Using the iOS SDK Samples</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="eos-sdk-further-information">EOS SDK Further Information</h4>
+			</div>
+			<p>Find further information on using the EOS SDK in the following documentation:</p>
+			<ul>
+				<li>For interface handles, naming conventions, and error handling and other key information, see:
+					<a href="/docs/epic-online-services/eos-get-started/services-overview">EOS SDK Key Information</a>.</li>
+				<li>The EOS SDK in C# has some implementation differences to the EOS SDK in C. If you are using C# and if you are using Unity for games development, also see:
+					<a href="/docs/epic-online-services/eos-get-started/eossdkc-sharp-getting-started">EOS SDK in C#</a>.</li>
+			</ul>
+			<div>
+				<h3 id="step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface</h3>
+			</div>
+			<p>To use EOS services in your game, you integrate interfaces. There is an interface for each service.</p>
+			<p>The first interface you integrate into your game is the Platform Interface. It holds the handles you need to access every other interface and keep them running: when your game starts up, you initialize the SDK and get a handle to the Platform Interface.</p>
+			<p>Find out more about this in the
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
+				documentation.</p>
+			<p>
+				<strong>Note:</strong>
+				The Platform Interface is not the same as the games platforms your game clients run on. The documentation refers to these game platforms as “EOS SDK on Platforms”.</p>
+			<div>
+				<h2 id="support">Support</h2>
+			</div>
+			<p>You can use the Epic developer resources support community at
+				<a href="https://eoshelp.epicgames.com/">eoshelp.epicgames.com</a>
+				to ask questions, get support, and become part of the Epic developer resources community.</p>
+			<p>Support covers:</p>
+			<ul>
+				<li>Developer Portal</li>
+				<li>Epic Games Store</li>
+				<li>Epic Online Services (EOS)</li>
+				<li>Kids Web Services (KWS)</li>
+			</ul>
+			<div>
+				<h2 id="new-features">New Features</h2>
+			</div>
+			<p>Keep up to date with new features in the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/whats-new">What's New</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
+				</li>
+			</ul>
+			<p>You can find out what's in development on the EOS roadmap at
+				<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</p>
+			<div id="tag_list">
+				<a href="/docs/site-map">Getting Started</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#get-started-steps">Get Started Steps</a>
+					</li>
+					<li>
+						<a href="#before-you-begin---system-requirements">Before You Begin - System Requirements</a>
+					</li>
+					<li>
+						<a href="#step-1---set-up-an-epic-games-account-and-organization">Step 1 - Set up an Epic Games Account and Organization</a>
+					</li>
+					<li>
+						<a href="#step-2---download-the-eos-sdk">Step 2 - Download the EOS SDK</a>
+					</li>
+					<li>
+						<a href="#eos-sdk-download-types">EOS SDK Download Types</a>
+					</li>
+					<li>
+						<a href="#whats-in-the-eos-sdk-download">What's in the EOS SDK Download</a>
+					</li>
+					<li>
+						<a href="#samples">Samples</a>
+					</li>
+					<li>
+						<a href="#eos-sdk-further-information">EOS SDK Further Information</a>
+					</li>
+					<li>
+						<a href="#step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface</a>
+					</li>
+					<li>
+						<a href="#support">Support</a>
+					</li>
+					<li>
+						<a href="#new-features">New Features</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

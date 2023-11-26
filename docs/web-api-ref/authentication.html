@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Auth Web APIs">Auth Web APIs</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -26,12 +20,16 @@
 	</section>
 	<section>
 		<section>
+			<p>
+				<strong>Note</strong>: You can also authenticate with the Auth Interface. See Epic Account Services:
+				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+				documentation for more information.</p>
 			<p>Epic Online Services (EOS) uses the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
+				<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
 				protocol for authentication and authorization, supporting common-use cases for web servers and client-side applications. Epic has also introduced custom grant types for some specific use cases.</p>
-			<p>Before starting, you will need to obtain OAuth 2.0 client credentials from Epic. These will be in the form of a Client ID and Client Secret, and will be used when requesting an access token from the Epic authorization server. See our guide on
-				<a href="/docs/epic-account-services/getting-started">Getting Started with Epic Account Services</a>
-				for more details.</p>
+			<p>Before starting, you will need to obtain OAuth 2.0 client credentials from Epic. These will be in the form of a Client ID and Client Secret, and will be used when requesting an access token from the Epic authorization server. See the
+				<a href="/docs/epic-account-services/getting-started">Get Started</a>
+				documentation on Epic Account Services for more details.</p>
 			<div>
 				<h2 id="scenarios">Scenarios</h2>
 			</div>
@@ -54,17 +52,15 @@
 			<p>The game client will include the access token on all requests to Epic services. The access token can also be passed to trusted game servers for verification, or for use in service-to-service requests.</p>
 			<p>When applicable, a refresh token will also be included in the token response. The game client will need to use the refresh token if the access token expires. This typically occurs within 2 hours after the access token is issued.</p>
 			<div>
-				<div>
-					<div style="max-width:420px">
-						<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-							<img alt="EGS Client Auth flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-							<noscript>
-								<img alt="EGS Client Auth flow" sizes="100vw" srcset="null/web-api-ref/auth-web-api/egs-auth-flow.png 640w, null/web-api-ref/auth-web-api/egs-auth-flow.png 750w, null/web-api-ref/auth-web-api/egs-auth-flow.png 828w, null/web-api-ref/auth-web-api/egs-auth-flow.png 1080w, null/web-api-ref/auth-web-api/egs-auth-flow.png 1200w, null/web-api-ref/auth-web-api/egs-auth-flow.png 1920w, null/web-api-ref/auth-web-api/egs-auth-flow.png 2048w, null/web-api-ref/auth-web-api/egs-auth-flow.png 3840w" src="null/web-api-ref/auth-web-api/egs-auth-flow.png" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" loading="lazy">
-							</noscript>
-						</span>
-					</div>
-					<p>Diagram illustrating Epic Games Launcher authentication flow. Click image to enlarge.</p>
+				<div style="max-width:420px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="EGS Client Auth flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="EGS Client Auth flow" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/web-api-ref/auth-web-api/egs-auth-flow.png">
+						</noscript>
+					</span>
 				</div>
+				<p>Diagram illustrating Epic Games Launcher authentication flow. Click image to enlarge.</p>
 			</div>
 			<div>
 				<h3 id="web-server-applications">Web Server Applications</h3>
@@ -77,7 +73,7 @@
 				<h2 id="authentication">Authentication</h2>
 			</div>
 			<p>As the first step in the authentication flow, the user must authenticate with Epic Account Services. We only support
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
+				<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
 				for authentication, with additional custom grant types.</p>
 			<p>Once the client has the necessary information to request a token (including the exchange code, authorization code, and user credentials), it begins by requesting an access token.</p>
 			<div>
@@ -87,7 +83,7 @@
 			<p>The Epic token endpoint is
 				<code>https://api.epicgames.dev/epic/oauth/v1/token</code>. If you want to indicate that an access token is no longer needed, use
 				<code>https://api.epicgames.dev/epic/oauth/v1/revoke</code>. This endpoint implements
-				<a href="/docs/en-UShttps://oauth.net/2/token-revocation/#:~:text=The%20Token%20Revocation%20extension%20defines,credentials%20associated%20with%20the%20authorization.">RFC 7009 - OAuth 2.0 Token Revocation</a>.</p>
+				<a href="https://oauth.net/2/token-revocation/#:~:text=The%20Token%20Revocation%20extension%20defines,credentials%20associated%20with%20the%20authorization.">RFC 7009 - OAuth 2.0 Token Revocation</a>.</p>
 			<p>The client credentials will be passed in the Authorization header using Basic authorization. This endpoint supports the following post parameters:</p>
 			<table>
 				<thead>
@@ -126,6 +122,10 @@
 							<code>presence</code>
 						</td>
 					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
 					<tr>
 						<td colspan="2">
 							<strong>For the
@@ -133,6 +133,12 @@
 								grant type</strong>
 						</td>
 					</tr>
+					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
 					<tr>
 						<td colspan="2">The
 							<code>password</code>
@@ -159,6 +165,10 @@
 							<code>password</code>
 							grant type.</td>
 					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
 					<tr>
 						<td colspan="2">
 							<strong>For the
@@ -167,6 +177,12 @@
 						</td>
 					</tr>
 					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
 						<td>
 							<code>exchange_code</code>
 						</td>
@@ -174,6 +190,10 @@
 							<code>exchange_code</code>
 							grant type.</td>
 					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
 					<tr>
 						<td colspan="2">
 							<strong>For the
@@ -182,20 +202,36 @@
 						</td>
 					</tr>
 					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
 						<td>
 							<code>code</code>
 						</td>
 						<td>The authorization code received from the authorization server.</td>
 					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
 					<tr>
 						<td colspan="2">
 							<strong>For the
 								<code>client_credentials</code>
 								grant type (see
-								<a href="/docs/en-US#web-applications">Web Authorization</a>
+								<a href="#web-applications">Web Authorization</a>
 								)</strong>
 						</td>
 					</tr>
+					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
 					<tr>
 						<td>
 							<code>client_id</code>
@@ -221,62 +257,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>POST /epic/oauth/v1/token HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
-								<span>Content-Type: application/x-www-form-urlencoded</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Basic
-								</span>
-								<span style="color:#89bdff">Zm9vOmJhcg</span>
-								<span style="color:#fff">==</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
 								<span style="display:inline-block">
 								</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">grant_type</span>
-								<span style="color:#fff">=</span>
-								<span>password</span>
-								<span style="color:#fff">&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">deployment_id</span>
-								<span style="color:#fff">=</span>
-								<span>foo</span>
-								<span style="color:#fff">&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">scope</span>
-								<span style="color:#fff">=</span>
-								<span>basic_profile friends_list presence</span>
-								<span style="color:#fff">&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">username</span>
-								<span style="color:#fff">=</span>
-								<span>user@example.com</span>
-								<span style="color:#fff">&amp;</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">password</span>
-								<span style="color:#fff">=</span>
-								<span>s3cr3t</span>
 							</div>
 						</div>
 					</pre>
@@ -313,7 +295,7 @@
 							<code>expires_at</code>
 						</td>
 						<td>The expire date in
-							<a href="/docs/en-UShttps://www.w3.org/TR/NOTE-datetime">ISO 8601</a>
+							<a href="https://www.w3.org/TR/NOTE-datetime">ISO 8601</a>
 							format.</td>
 					</tr>
 					<tr>
@@ -367,132 +349,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"scope"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"basic_profile friends_list presence"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"token_type"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"bearer"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"access_token"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"eyJ0IjoiZXBpY19pZCIsImFsZyI6IlJTMjU2Iiwia2lkIjoibldVQzlxSFVldWRHcnBXb3FvVXVHZkFIYmVWM2NsRnlsdFRYMzhFbXJKSSJ9.eyJhdWQiOiJ4eXphNzg5MWxoeE1WWUdDT043TGduS1paOEhRR0Q1SCIsInN1YiI6Ijk2MjZmNDQxMDU1MzQ5Y2U4Y2I3ZDdkNWE0ODNlYWEyIiwidCI6ImVwaWNfaWQiLCJzY29wZSI6ImJhc2ljX3Byb2ZpbGUgZnJpZW5kc19saXN0IHByZXNlbmNlIiwiYXBwaWQiOiJmZ2hpNDU2N08wM0hST3hFandibjdrZ1hwQmhuaFd3diIsImlzcyI6Imh0dHBzOlwvXC9hcGkuZXBpY2dhbWVzLmRldlwvZXBpY1wvb2F1dGhcL3YxIiwiZG4iOiJLcm5icnkiLCJleHAiOjE1ODgyODYwODMsImlhdCI6MTU4ODI3ODg4Mywibm9uY2UiOiJuLUI1cGNsSXZaSkJaQU1KTDVsNkdvUnJDTzNiRT0iLCJqdGkiOiI2NGMzMGQwMjk4YTM0MzdjOGE3NGU1OTAxYzM0ODZiNSJ9.MZRoCRpjIb--dD7hxoo2GvjSPhUSNpOq1FhtShTBmzMJ1qlHFPzNaUiAEETAc3mabGPKyOxUP6Q1FBadr_P_UtbtB7kf34hN2VTv5czW6WOx1HdpjwUQZuxFyDc_aix7FCS0Egu4rZlC65b-B0FUVlial_s_FrH8ou5L_d-4I0KVpIwtv-b_M6EQ9jtLdQRfMaP6aV0rIerrbqFZ617Pe7XT4IO9jZFwM8F5aDTeDHkkOO41wyVibrm38799lP4B65RIv9CwbAL-TVmV1L5gFYITaZhi5ShfZzTvxAk-3Dxwp8c5JvcO68zpbya5gFSAfhsd7vt9YLU0gQR2uXq3Vw"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"refresh_token"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"eyJ0IjoiZXBpY19pZCIsImFsZyI6IlJTMjU2Iiwia2lkIjoibldVQzlxSFVldWRHcnBXb3FvVXVHZkFIYmVWM2NsRnlsdFRYMzhFbXJKSSJ9.eyJhdWQiOiJ4eXphNzg5MWxoeE1WWUdDT043TGduS1paOEhRR0Q1SCIsInN1YiI6Ijk2MjZmNDQxMDU1MzQ5Y2U4Y2I3ZDdkNWE0ODNlYWEyIiwidCI6ImVwaWNfaWQiLCJhcHBpZCI6ImZnaGk0NTY3TzAzSFJPeEVqd2JuN2tnWHBCaG5oV3d2Iiwic2NvcGUiOiJiYXNpY19wcm9maWxlIGZyaWVuZHNfbGlzdCBwcmVzZW5jZSIsImlzcyI6Imh0dHBzOlwvXC9hcGkuZXBpY2dhbWVzLmRldlwvZXBpY1wvb2F1dGhcL3YxIiwiZG4iOiJLcm5icnkiLCJleHAiOjE1ODgzMDc2ODMsImlhdCI6MTU4ODI3ODg4MywianRpIjoiYzczYjA2NmUyZDU4NGVkNTk0NjZiOThiNzI3NzJiMjAifQ.O-eVa46NimubKwxe9SwlHxciivu0XWe1-DSL74mMiA_PpPoW0yKL9DfmsLxiPCwsRB5_hQTc6_FM7G1FyfKtX_VVAp90MZPkhCbAbfKmTpQVcL0Ya6kve4KMG8KxeLVfLLhubCbJTYlnDNVHobbpvpQtHd8Ys321ZNDJj05l_tnZzdgus-xmCO6orX4UP4wDd1jAOXXeqRT47OXuLCgSE0q6Osfh-ENPwh6ph1i7ld759xPV0oNcQb8XiPxnT6_FUmFugzG1YS1z9bTnVWmbP2RmYluue5VQm5EKGJZ91Alve8s2eNEtDfUqaBLZ45pqGkc1KjbYTtP0a_1ue2BpkQ"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"expires_in"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">7200</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"expires_at"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2020-04-30T22:34:43.549Z"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"refresh_expires_in"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">28800</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"refresh_expires_at"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2020-05-01T04:34:43.549Z"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"account_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"9626f441055349ce8cb7d7d5a483eaa2"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"client_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"xyza7891lhxMVYGCON7LgnKZZ8HQGD5H"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"application_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"fghi4567O03HROxEjwbn7kgXpBhnhWwv"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -520,19 +378,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://www.epicgames.com/id/authorize?client_id</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">{</span>
-								<span>client_id</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">response_type</span>
-								<span style="color:#fff">=</span>
-								<span>code</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">scope</span>
-								<span style="color:#fff">=</span>
-								<span>basic_profile</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -545,25 +392,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://www.epicgames.com/id/authorize?client_id</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">{</span>
-								<span>client_id</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">redirect_uri</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">{</span>
-								<span>redirect_uri</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">response_type</span>
-								<span style="color:#fff">=</span>
-								<span>code</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">scope</span>
-								<span style="color:#fff">=</span>
-								<span>basic_profile</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -572,22 +402,17 @@
 			<p>After the user logs in, they will be redirected back to the configured redirect URL with an authorization code. Your application should use that code to get an Access Token using the
 				<code>authorization_code</code>
 				grant type as described in
-				<a href="/docs/en-US#requesting-an-access-token">Requesting an Access Token</a>.</p>
+				<a href="#requesting-an-access-token">Requesting an Access Token</a>.</p>
 			<p>We also support an optional state parameter that can be used to maintain state between the request and the callback, and that is used to prevent
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc6749#section-10.12">cross-site request forgery attacks</a>.</p>
+				<a href="https://tools.ietf.org/html/rfc6749#section-10.12">cross-site request forgery attacks</a>.</p>
 			<p>The following is an example redirect after the user is authenticated:</p>
 			<div>
 				<section>
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>https://www.example.com/?code</span>
-								<span style="color:#fff">=</span>
-								<span>cfd1de1a8d224203b0445fe977838d81</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">state</span>
-								<span style="color:#fff">=</span>
-								<span>rfGWJux2WL86Zxr6nKApCAnDo8KexEUE</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -601,9 +426,9 @@
 			</div>
 			<p>The access token is a JWT (JSON Web Token) that includes a header and signature used to validate the authenticity of the token.</p>
 			<p>Before validating the signature, you will need to fetch a public key published as a
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
+				<a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>
 				from our service. We expose a single endpoint using the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7517#section-5">JWK Set</a>
+				<a href="https://tools.ietf.org/html/rfc7517#section-5">JWK Set</a>
 				format that includes all of the current public keys. While the keys are not changed frequently, it is possible that they are rotated at any time.</p>
 			<p>The JWK endpoint is
 				<code>https://api.epicgames.dev/epic/oauth/v1/.well-known/jwks.json</code>
@@ -615,83 +440,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"keys"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"kty"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"RSA"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"e"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"AQAB"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"kid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"WMS7EnkIGpcH9DGZsv2WcY9xsuFnZCtxZjj4Ahb-_8E"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"n"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"l6XI48ujknQQlsJgpGXg4l2i_DuUxuG2GXTzkOG7UtX4MqkVBCfW1t1JIIc8q0kCInC2oBwhC599ZCmd-cOi0kS7Aquv68fjERIRK9oCUnF_lJg296jV8xcalFY0FOWX--qX3xGKL33VjJBMIrIu7ETjj06s-v4li22CnHmu2lDkrp_FPTVzFscn-XRIojqIFb7pKRFPt27m12FNE_Rd9bqlVCkvMNuE7VTpTOrSfKk5B01M5IuXKXk0pTAWnelqaD9bHjAExe2I_183lp_uFhNN4hLTjOojxl-dK8Jy2OCPEAsg5rs9Lwttp3zZ--y0sM7UttN2dE0w3F2f352MNQ"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -701,7 +451,7 @@
 				<h4 id="online-verification">Online Verification</h4>
 			</div>
 			<p>If offline verification is not an option, you can perform an online verification by calling the token info endpoint with a valid access token. This endpoint implements the
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7662#section-2.1">Token Introspection</a>
+				<a href="https://tools.ietf.org/html/rfc7662#section-2.1">Token Introspection</a>
 				specification.</p>
 			<p>The token info endpoint is
 				<code>https://api.epicgames.dev/epic/oauth/v1/tokenInfo</code>
@@ -712,19 +462,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>POST /epic/oauth/v1/tokenInfo HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
-								<span>Content-Type: application/x-www-form-urlencoded</span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#89bdff">token</span>
-								<span style="color:#fff">=</span>
-								<span>eyJ0IjoiZXBpY19pZCIsImFsZyI6IlJTMjU2Iiwia2lkIjoibldVQzlxSFVldWRHcnBXb3FvVXVHZkFIYmVWM2NsRnlsdFRYMzhFbXJKSSJ9.eyJhdWQiOiJ4eXphNzg5MWxoeE1WWUdDT043TGduS1paOEhRR0Q1SCIsInN1YiI6Ijk2MjZmNDQxMDU1MzQ5Y2U4Y2I3ZDdkNWE0ODNlYWEyIiwidCI6ImVwaWNfaWQiLCJzY29wZSI6ImJhc2ljX3Byb2ZpbGUgZnJpZW5kc19saXN0IHByZXNlbmNlIiwiYXBwaWQiOiJmZ2hpNDU2N08wM0hST3hFandibjdrZ1hwQmhuaFd3diIsImlzcyI6Imh0dHBzOlwvXC9hcGkuZXBpY2dhbWVzLmRldlwvZXBpY1wvb2F1dGhcL3YxIiwiZG4iOiJLcm5icnkiLCJleHAiOjE1ODgyODYwODMsImlhdCI6MTU4ODI3ODg4Mywibm9uY2UiOiJuLUI1cGNsSXZaSkJaQU1KTDVsNkdvUnJDTzNiRT0iLCJqdGkiOiI2NGMzMGQwMjk4YTM0MzdjOGE3NGU1OTAxYzM0ODZiNSJ9.MZRoCRpjIb--dD7hxoo2GvjSPhUSNpOq1FhtShTBmzMJ1qlHFPzNaUiAEETAc3mabGPKyOxUP6Q1FBadr_P_UtbtB7kf34hN2VTv5czW6WOx1HdpjwUQZuxFyDc_aix7FCS0Egu4rZlC65b-B0FUVlial_s_FrH8ou5L_d-4I0KVpIwtv-b_M6EQ9jtLdQRfMaP6aV0rIerrbqFZ617Pe7XT4IO9jZFwM8F5aDTeDHkkOO41wyVibrm38799lP4B65RIv9CwbAL-TVmV1L5gFYITaZhi5ShfZzTvxAk-3Dxwp8c5JvcO68zpbya5gFSAfhsd7vt9YLU0gQR2uXq3Vw</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -736,99 +475,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"active"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">true</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"scope"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"basic_profile friends_list presence"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"token_type"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"bearer"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"expires_in"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">6761</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"expires_at"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2020-04-30T22:34:43.549Z"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"account_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"9626f441055349ce8cb7d7d5a483eaa2"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"client_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"xyza7891lhxMVYGCON7LgnKZZ8HQGD5H"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"application_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"fghi4567O03HROxEjwbn7kgXpBhnhWwv"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -916,34 +564,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>-AUTH_LOGIN</span>
-								<span style="color:#fff">=</span>
-								<span>unused -AUTH_PASSWORD</span>
-								<span style="color:#fff">=</span>
-								<span>ed642dfd4e6f47bf8354caf1bcab2fc2 -AUTH_TYPE</span>
-								<span style="color:#fff">=</span>
-								<span>exchangecode -epicapp</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#fff">[</span>
-								<span>AppName</span>
-								<span style="color:#fff">]</span>
-								<span>
-									-epicenv</span>
-								<span style="color:#fff">=</span>
-								<span>Prod -epicusername</span>
-								<span style="color:#fff">=</span>
-								<span style="color:#00bda0">"DisplayName"</span>
-								<span>
-									-epicuserid</span>
-								<span style="color:#fff">=</span>
-								<span>ab1f86d911d74f4aa8399849e9ca9aa5 -epiclocale</span>
-								<span style="color:#fff">=</span>
-								<span>en-US</span>
-							</div>
-							<div style="color:#fff">
-								<span>-epicovt</span>
-								<span style="color:#fff">=</span>
-								<span>”C:/AppName/.egstore/ab1f86d911d74f4aa8399849e9ca9aa5/File.ovt”</span>
+								<span style="display:inline-block">
+								</span>
 							</div>
 						</div>
 					</pre>
@@ -957,7 +579,7 @@
 				<h3 id="from-the-access-token">From the Access Token</h3>
 			</div>
 			<p>You can retrieve some information directly from the access token. The token is encoded as a
-				<a href="/docs/en-UShttps://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>, and its header includes information about the type of token and signature it uses, as well as a payload with information about the user, your client, the session, and a signature. We recommend using a library to handle decoding the JWT, but if this is not possible, refer to the JWT specification.</p>
+				<a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>, and its header includes information about the type of token and signature it uses, as well as a payload with information about the user, your client, the session, and a signature. We recommend using a library to handle decoding the JWT, but if this is not possible, refer to the JWT specification.</p>
 			<p>The payload will include the following information:</p>
 			<table>
 				<thead>
@@ -1044,132 +666,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"aud"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"xyza7891lhxMVYGCON7LgnKZZ8HQGD5H"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sub"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"9626f441055349ce8cb7d7d5a483eaa2"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"t"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"epic_id"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"scope"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"basic_profile friends_list presence"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"appid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"fghi4567O03HROxEjwbn7kgXpBhnhWwv"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"iss"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"https://api.epicgames.dev/epic/oauth/v1"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"dn"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Krnbry"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"exp"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1588286083</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"iat"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1588278883</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"nonce"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"n-B5pclIvZJBZAMJL5l6GoRrCO3bE="</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"jti"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"64c30d0298a3437c8a74e5901c3486b5"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -1192,27 +690,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span>GET /epic/id/v1/accounts?accountId</span>
-								<span style="color:#fff">=</span>
-								<span>foo531f86d911d74f4aa8399849e9ca9ba6</span>
-								<span style="color:#fff">&amp;</span>
-								<span style="color:#89bdff">accountId</span>
-								<span style="color:#fff">=</span>
-								<span>barcbab941052f540c69fbd92ddc3bf9027 HTTP/1.1</span>
-							</div>
-							<div style="color:#fff">
-								<span>Host: api.epicgames.dev</span>
-							</div>
-							<div style="color:#fff">
-								<span>Content-Type: application/x-www-form-urlencoded</span>
-							</div>
-							<div style="color:#fff">
-								<span>Authorization: Bearer
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">[</span>
-								<span>token</span>
-								<span style="color:#fff">]</span>
-								<span>eyJ0IjoiZXBpY19pZCIsImFsZyI6IlJTMjU2Iiwia2lkIjoibldVQzlxSFVldWRHcnBXb3FvVXVHZkFIYmVWM2NsRnlsdFRYMzhFbXJKSSJ9.eyJhdWQiOiJ4eXphNzg5MWxoeE1WWUdDT043TGduS1paOEhRR0Q1SCIsInN1YiI6Ijk2MjZmNDQxMDU1MzQ5Y2U4Y2I3ZDdkNWE0ODNlYWEyIiwidCI6ImVwaWNfaWQiLCJzY29wZSI6ImJhc2ljX3Byb2ZpbGUgZnJpZW5kc19saXN0IHByZXNlbmNlIiwiYXBwaWQiOiJmZ2hpNDU2N08wM0hST3hFandibjdrZ1hwQmhuaFd3diIsImlzcyI6Imh0dHBzOlwvXC9hcGkuZXBpY2dhbWVzLmRldlwvZXBpY1wvb2F1dGhcL3YxIiwiZG4iOiJLcm5icnkiLCJleHAiOjE1ODgyODYwODMsImlhdCI6MTU4ODI3ODg4Mywibm9uY2UiOiJuLUI1cGNsSXZaSkJaQU1KTDVsNkdvUnJDTzNiRT0iLCJqdGkiOiI2NGMzMGQwMjk4YTM0MzdjOGE3NGU1OTAxYzM0ODZiNSJ9.MZRoCRpjIb--dD7hxoo2GvjSPhUSNpOq1FhtShTBmzMJ1qlHFPzNaUiAEETAc3mabGPKyOxUP6Q1FBadr_P_UtbtB7kf34hN2VTv5czW6WOx1HdpjwUQZuxFyDc_aix7FCS0Egu4rZlC65b-B0FUVlial_s_FrH8ou5L_d-4I0KVpIwtv-b_M6EQ9jtLdQRfMaP6aV0rIerrbqFZ617Pe7XT4IO9jZFwM8F5aDTeDHkkOO41wyVibrm38799lP4B65RIv9CwbAL-TVmV1L5gFYITaZhi5ShfZzTvxAk-3Dxwp8c5JvcO68zpbya5gFSAfhsd7vt9YLU0gQR2uXq3Vw</span>
 							</div>
 						</div>
 					</pre>
@@ -1224,163 +703,20 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"accountId"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"531f86d911d74f4aa8399849e9ca9ba6"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"displayName"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"eas_user"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"preferredLanguage"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"en"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"linkedAccounts"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"identityProviderId"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"xbl"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"displayName"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"eas_user_xbl"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"accountId"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"cbab941052f540c69fbd92ddc3bf9027"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"displayName"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"other_user"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"preferredLanguage"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"en"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">]</span>
 							</div>
 						</div>
 					</pre>
 				</section>
 			</div>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Developer">Developer</a>
-				<a href="/docs/en-US/site-map?tag=Authentication">
+				<a href="/docs/site-map">Developer</a>
+				<a href="/docs/site-map">
 					Authentication</a>
-				<a href="/docs/en-US/site-map?tag=Auth">
+				<a href="/docs/site-map">
 					Auth</a>
-				<a href="/docs/en-US/site-map?tag=Login">
+				<a href="/docs/site-map">
 					Login</a>
 			</div>
 		</section>

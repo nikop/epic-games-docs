@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Friends Interface">Friends Interface</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -20,20 +14,12 @@
 			<h1>Friends Interface</h1>
 			<h2>Interface to retrieve friends list, or to add or remove other players.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>6 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section>
-			<div role="alert">
-				<div></div>
-				<div>
-					<p>If you plan on launching your game on consoles with Epic Account Services integration in 2022, please contact us at
-						<a href="/docs/en-USmailto:eas-on-console-beta@epicgames.com">eas-on-console-beta@epicgames.com</a>
-						to coordinate a release plan.</p>
-				</div>
-			</div>
 			<p>Playing games with your friends and meeting new players online are important parts of many online services. The
 				<strong>Epic Online Services</strong>
 				(EOS) SDK uses the
@@ -60,16 +46,23 @@
 				handle. You can acquire this handle through the
 				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
 				function,
-				<code>EOS_Platform_GetFriendsInterface</code>. Friends Interface functions require this handle to access your logged-in user's friends list. It is important to note that
-				<code>EOS_Friends_QueryFriends</code>
-				will only return friends who have played the game at least once and has given their consent. Consent is given when a player logs in to an application using Epic Account Services (EAS) and allows EAS access to their account data.</p>
+				<code>EOS_Platform_GetFriendsInterface</code>. Friends Interface functions require this handle to access your signed-in user's friends list. It is important to note that
+				<a href="/docs/api-ref/functions/eos-friends-query-friends">
+					<code>EOS_Friends_QueryFriends</code>
+				</a>
+				will only return friends who have played the game at least once and have given their consent. Consent is either give upon game purchase or when a player signs in to an application using Epic Account Services (EAS) and allows EAS access to their account data.</p>
 			<p>The first step in dealing with a player's friends list is to call
 				<code>EOS_Friends_QueryFriends</code>
 				with an
 				<code>EOS_Friends_QueryFriendsOptions</code>
-				data structure. This will download the most up-to-date version of a player's friends list into the local cache, then invoke your
+				data structure. This will download the most up-to-date version of a player's friends list, including blocked players, into the local cache, then invoke your
 				<code>EOS_Friends_QueryFriends</code>
 				callback function upon completion.</p>
+			<p>
+				<strong>Note</strong>: When you call
+				<code>EOS_Friends_QueryFriends</code>, it also retrieves the list of EOS blocked players. See the
+				<a href="#querying-for-blocked-friends">Querying for Blocked Friends</a>
+				section for more information.</p>
 			<p>To perform the
 				<code>EOS_Friends_QueryFriends</code>
 				call, create and initialize an
@@ -171,6 +164,10 @@
 					</tr>
 				</tbody>
 			</table>
+			<p>
+				<strong>Note</strong>: The
+				<code>EOS_AS_FriendsManagement</code>
+				scope controls whether the signed-in player can make changes or view pending changes to their social graph (for example, their friend status). By default, this scope isn't enabled. The EOS SDK returns only the Friends (<code>EOS_FS_Friends</code>) and Not Friends (<code>EOS_FS_NotFriends</code>) statuses to your game. The Social Overlay handles pending invites for you, which includes the remaining Invite Sent (<code>EOS_FS_InviteSent</code>) and Invite Received (<code>EOS_FS_InviteReceived</code>) statuses. While these statuses are available in the header, you do not need to handle these statuses in your game.</p>
 			<p>Friends lists can change at any time, both from in-game events like meeting new players, and from out-of-game events like the player modifying the 
 				<!-- -->account
 				<!-- --> from a separate system. Games do not need and should not call
@@ -262,7 +259,7 @@
 			</div>
 			<div>
 				<p>The friends list management APIs described in this section are currently only available for games on Windows PC.</p>
-				<p>Support for Nintendo Switch, PlayStation®, and Xbox console platforms is planned. Support for macOS, Linux, Android and iOS is planned.</p>
+				<p>Support for Nintendo Switch, PlayStation, and Xbox console platforms is planned. Support for macOS, Linux, Android and iOS is planned.</p>
 			</div>
 			<p>You can allow the local user to send friend requests to other users in the game, by calling the
 				<code>EOS_Friends_SendInvite</code>
@@ -274,9 +271,65 @@
 			<p>These APIs will return
 				<code>EOS_NotImplemented</code>
 				on platforms without yet the availability.</p>
+			<div>
+				<h2 id="querying-for-blocked-friends">Querying for Blocked Friends</h2>
+			</div>
+			<p>After the
+				<code>EOS_Friends_QueryFriends</code>
+				API retrieves the friends list, you can query for blocked friends on the friends list. For more information on how to use the
+				<code>EOS_Friends_QueryFriends</code>
+				API, see the
+				<a href="#retrieving-and-caching-the-friends-list">Retrieving and Caching the Friends List</a>
+				section.</p>
+			<p>You can use the following functions to query for blocked friends:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-get-blocked-users-count">
+								<code>EOS_Friends_GetBlockedUsersCount</code>
+							</a>
+						</td>
+						<td>Retrieves the number of blocked players on the blocklist. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-get-blocked-user-at-index">
+								<code>EOS_Friends_GetBlockedUserAtIndex</code>
+							</a>
+						</td>
+						<td>Retrieves the Epic Account ID of an entry from the blocklist. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-add-notify-blocked-users-update">
+								<code>EOS_Friends_AddNotifyBlockedUsersUpdate</code>
+							</a>
+						</td>
+						<td>Listens for changes to the blocklist for a particular account. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-remove-notify-blocked-users-update">
+								<code>EOS_Friends_RemoveNotifyBlockedUsersUpdate</code>
+							</a>
+						</td>
+						<td>Stops listening for blocklist changes on a previously bound handler. For more information, click the function to see the API documentation.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>For more information on how a player can block another player on their friends list, see the
+				<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-tabs/profile">Social Overlay Tabs: Profile</a>
+				documentation.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Interface">Interface</a>
-				<a href="/docs/en-US/site-map?tag=Friends">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
 					Friends</a>
 			</div>
 		</section>
@@ -295,6 +348,9 @@
 					</li>
 					<li>
 						<a href="#managing-the-friends-list">Managing the Friends List</a>
+					</li>
+					<li>
+						<a href="#querying-for-blocked-friends">Querying for Blocked Friends</a>
 					</li>
 				</ul>
 			</div>

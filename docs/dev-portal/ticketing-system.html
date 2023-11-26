@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Ticketing System">Ticketing System</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -26,18 +20,14 @@
 	</section>
 	<section>
 		<section>
-			<p>
-				<strong>Epic Online Services</strong>
-				(EOS) provides a
-				<strong>Ticketing System</strong>
-				to support your products from a centralized location using an automatically generated, preassigned email address and a public web API key. The ticketing system supports:</p>
+			<p>Epic Online Services (EOS) provides a ticketing system to support your products from a centralized location using an automatically generated, pre-assigned email address and a public web API key. The ticketing system supports:</p>
 			<ul>
 				<li>Tracking open, in-progress, and closed tickets</li>
 				<li>Merging related tickets</li>
 				<li>Replying to end-users who have submitted a ticket and receiving replies</li>
 			</ul>
 			<div>
-				<h2 id="getting-started">Getting Started</h2>
+				<h2 id="get-started">Get Started</h2>
 			</div>
 			<p>To use the ticketing system, you need to integrate it with your 
 				<!-- -->product
@@ -67,7 +57,7 @@
 				<h2 id="using-the-api">Using the API</h2>
 			</div>
 			<p>The ticketing system sends emails from your end-users to your dedicated mailbox. To trigger this process, send a POST request to
-				<a href="/docs/en-UShttps://dev.epicgames.com/portal/api/v1/services/tickets/submit/">https://dev.epicgames.com/portal/api/v1/services/tickets/submit/</a>
+				<a href="https://dev.epicgames.com/portal/api/v1/services/tickets/submit/">https://dev.epicgames.com/portal/api/v1/services/tickets/submit/</a>
 				with your product's API key in the HTTP authorization field and the information that you want to report. The following fields are supported:</p>
 			<table>
 				<thead>
@@ -141,71 +131,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#89bdff">curl</span>
-								<span>
-									-X POST
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>https://dev.epicgames.com/portal/api/v1/services/tickets/submit/
-								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-H
-								</span>
-								<span style="color:#00bda0">'Authorization: Token your_product_api_key_here'</span>
-								<span>
-								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-H
-								</span>
-								<span style="color:#00bda0">'Content-Type: application/json'</span>
-								<span>
-								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-d
-								</span>
-								<span style="color:#00bda0">'{</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"subject": "technical-support",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"message": "Example message.",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"sender_email": "example.user@example.domain",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"sender_name": "Example User",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"guid": "example_user_guid",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"error_code": "example error code",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"system_os": "example OS",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"system_antimalware": "example antimalware",</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">"system_other": "example system other"</span>
-							</div>
-							<div style="color:#fff">
-								<span style="color:#00bda0">}'</span>
 							</div>
 						</div>
 					</pre>
@@ -217,160 +144,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"data"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"prod_name"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example_game"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"prod_slug"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example_game_slug"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"guid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example_user_guid"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_name"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example User"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_email"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example.user@example.domain"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"subject"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Technical Support"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"message"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example message."</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"error_code"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example error code"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"system_os"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example OS"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"system_antimalware"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example antimalware"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"system_other"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example system other"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"timestamp"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2019-03-07T14:20:10.933689Z"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -391,32 +166,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#89bdff">curl</span>
-								<span>
-									--location --request GET
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/example@example.com
-								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-H
-								</span>
-								<span style="color:#00bda0">'Authorization: Token your_product_api_key_here'</span>
-								<span>
-								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-H
-								</span>
-								<span style="color:#00bda0">'Content-Type: application/json'</span>
 							</div>
 						</div>
 					</pre>
@@ -428,255 +179,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#aeaeae">"data"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"guid"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example_guid"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"subject"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"technical-support: example game"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"message"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example ticket message"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_name"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example User"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_email"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example@example.com"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"timestamp"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2019-04-11T12:49:21.349000Z"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"messages"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#fff">[</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"ticket_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"message"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example reply 2"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_name"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example User"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_email"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example@example.com"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"timestamp"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2019-04-11T12:54:21.463000Z"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">{</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"ticket_id"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#ffcb8f">1</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"message"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example reply 1"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_name"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"Example Org Support"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"sender_email"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"example_org@eos-external-support.mail.on.epicgames.com"</span>
-								<span style="color:#fff">,</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#aeaeae">"timestamp"</span>
-								<span style="color:#fff">:</span>
-								<span>
-								</span>
-								<span style="color:#00bda0">"2019-04-11T12:52:02.514000Z"</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">}</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>
-								</span>
-								<span style="color:#fff">]</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span></span>
-								<span style="color:#fff">}</span>
 							</div>
 						</div>
 					</pre>
@@ -694,23 +198,8 @@
 					<pre>
 						<div>
 							<div style="color:#fff">
-								<span style="color:#89bdff">curl</span>
-								<span>
-									--location --request DELETE
+								<span style="display:inline-block">
 								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/example@example.com
-								</span>
-								<span style="color:#fff">\</span>
-								<span></span>
-							</div>
-							<div style="color:#fff">
-								<span>-H
-								</span>
-								<span style="color:#00bda0">'Authorization: Token your_product_api_key_here'</span>
 							</div>
 						</div>
 					</pre>
@@ -726,11 +215,11 @@
 				<li>All requests must contain written material from the end-user.</li>
 				<li>The number of requests produced in a day must not exceed 10,000, or 5 per 100 Daily Active Users.</li>
 				<li>User data in this system has to be exported/deleted separately from other
-					<a href="/docs/dev-portal/data-rights-services">EOS services</a>
+					<a href="/docs/dev-portal/player-search">EOS services</a>
 					via the Export user data and Delete user data endpoints as described above.</li>
 			</ul>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Services">Services</a>
+				<a href="/docs/site-map">Services</a>
 			</div>
 		</section>
 		<aside>
@@ -738,7 +227,7 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#getting-started">Getting Started</a>
+						<a href="#get-started">Get Started</a>
 					</li>
 					<li>
 						<a href="#using-the-api">Using the API</a>

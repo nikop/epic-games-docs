@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="What's New">What's New</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -17,41 +11,471 @@
 	</div>
 	<section>
 		<div>
-			<h1>What's New</h1>
-			<h2>The high-level features and changes for each release of Epic Online Services (EOS).</h2>
+			<h1>EOS What's New</h1>
+			<h2>The high-level features and changes for each release of Epic Online Services (EOS) SDK.</h2>
 			<div></div>
 		</div>
 	</section>
 	<section>
 		<section>
-			<p>This is a high-level description of what’s changed in Epic Online Services (EOS) with every EOS SDK release.</p>
-			<p>For more detailed information on what's changed, see the release notes:</p>
+			<p>
+				<em>EOS What's New</em>
+				is a high-level description of what’s changed in Epic Online Services (EOS) with every EOS SDK release.
+				<br>
+				
+				<!-- -->See the following documentation for additional information on EOS.</p>
 			<ul>
-				<li>In the
-					<a href="/docs/epic-online-services/release-notes">Release Notes</a>
-					documentation.</li>
-				<li>On the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>). To locate the release notes in the Developer Portal, follow these steps:
-					<!-- -->
-					<ol>
-						<li>In the left-hand navigation, select the name of one of your products, then select
-							<strong>Product Settings</strong>.</li>
-						<li>On the Product Settings page, select
-							<strong>VIEW RELEASE NOTES</strong>.</li>
-					</ol>
+				<li>
+					<strong>Get started</strong>:
+					<br>
+					
+					<!-- -->See the EOS
+					<a href="/docs/epic-online-services/eos-get-started">Get Started Steps</a>
+					page for information on how to set up and use EOS services and the EOS SDK.</li>
+				<li>
+					<strong>Release notes</strong>:
+					<br>
+					
+					<!-- -->See the
+					<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
+					documentation for more detailed information on what's changed with every EOS SDK release.</li>
+				<li>
+					<strong>Planned features</strong>:
+					<br>
+					
+					<!-- -->Find out what’s in development on the EOS roadmap at
+					<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</li>
+			</ul>
+			<div>
+				<h2 id="2023">2023</h2>
+			</div>
+			<div>
+				<h3 id="116---2023-aug-16">1.16 - 2023-aug-16</h3>
+			</div>
+			<p>This release includes new console crossplay features, support for additional console SDK versions (Sony PlayStation, Microsoft Xbox, and Nintendo Switch), and numerous bug fixes. It also contains a few breaking changes required to enable these new features and updates.</p>
+			<div>
+				<h4 id="crossplay">Crossplay</h4>
+			</div>
+			<p>The SDK expands crossplay support from Windows PC (released in SDK 1.15) to games on Nintendo Switch, Sony PlayStation, and Microsoft Xbox consoles. By using the EOS Overlay in your game, players can quickly sign in to their Epic Games account on all platforms and easily interact with their friends and lobby members.</p>
+			<p>With this new release, you can now offer players:</p>
+			<ul>
+				<li>
+					<strong>Consistent overlay UX</strong>: An out-of-the-box overlay that provides a familiar player experience on PC and console platforms.</li>
+				<li>
+					<strong>One combined friend's list</strong>: Friend lists across platforms merge into one overlay, enabling players to see and invite their friends in one place. Please see Crossplay Technical Overview:
+					<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview#social-overlay-and-friends">Social Overlay and Friends</a>
+					for more information.</li>
+				<li>
+					<strong>Frictionless cross-platform account creation</strong>: Players can start playing quickly using their existing Epic Games account or a new one created for them, linked to their active native platform account.</li>
+				<li>
+					<strong>Integrated game invites</strong>: In-game, players can search and send game invites to friends across platforms, making connecting and playing together easy.</li>
+				<li>
+					<strong>Secure social experience on any platform</strong>: Implements the native platform's trust, safety, and privacy guidelines, in addition to Epic's own trust and safety controls.</li>
+			</ul>
+			<p>You can find out more in the documentation on
+				<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>.</p>
+			<div>
+				<h4 id="notable-additions">Notable Additions</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>Anti-cheat</strong>
+					<ul>
+						<li>Added client and server SDK samples for Easy Anti-Cheat.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Authentication</strong>
+					<ul>
+						<li>The
+							<code>EOS_Auth_Login</code>
+							API now accepts an
+							<code>EOS_LF_NO_USER_INTERFACE</code>
+							flag. This flag enables automatic player login that fails silently, without prompting the player to sign in if no credentials are found.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Social Overlay</strong>
+					<ul>
+						<li>The social overlay has new features in the Your Party section, which displays the members of the player’s lobby.
+							<!-- -->
+							<ul>
+								<li>The new features are: A Leave Party button, non-friends showing in Your Party, and a count of the members in Your Party.</li>
+								<li>See the Social Overlay:
+									<a href="/docs/epic-account-services/social-overlay-overview/your-party">Your Party</a>
+									documentation for more information.</li>
+							</ul>
+						</li>
+						<li>Players can now request friends to join their lobby directly from the social overlay.
+							<!-- -->
+							<ul>
+								<li>See the Social Overlay:
+									<a href="/docs/epic-account-services/social-overlay-overview/request-to-join">Request to Join</a>
+									documentation for more information</li>
+							</ul>
+						</li>
+					</ul>
 				</li>
 			</ul>
-			<hr>
 			<div>
-				<h1 id="2022">2022</h1>
+				<h4 id="breaking-changes">Breaking Changes</h4>
+			</div>
+			<ul>
+				<li>
+					<p>
+						<strong>Anti-Cheat</strong>
+					</p>
+					<ul>
+						<li>The anti-cheat bootstrapper (<code>start_protected_game</code>) may reject anti-cheat updates because of a file size limit.
+							<!-- -->
+							<ul>
+								<li>Please update this executable as soon as possible to avoid errors from future module updates. The executable can be updated without updating the rest of the SDK or recompiling your game.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Authentication</strong>
+					</p>
+					<ul>
+						<li>Device Code support using
+							<code>EOS_LCT_DeviceCode</code>
+							for Epic Games accounts sign-in is now deprecated.
+							<!-- -->
+							<ul>
+								<li>Please discontinue using
+									<code>EOS_LCT_DeviceCode</code>
+									in the
+									<code>EOS_Auth_Login</code>
+									function and use another authentication method.</li>
+							</ul>
+						</li>
+						<li>Linked account messages received from the backend are not guaranteed to have an Account ID. This is an expected state, so the
+							<code>AccountId</code>
+							field on
+							<code>EOS_UserInfo_ExternalUserInfo</code>
+							is Optional.
+							<!-- -->
+							<ul>
+								<li>We recommend you revisit any handling that assumes a specific number of external accounts. The API has not changed, but the behavior has changed, so if you have code that interacts with the
+									<code>AccountId</code>
+									field of
+									<code>EOS_UserInfo_ExternalUserInfo</code>, it must be verified to check for null values.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Crossplay</strong>
+					</p>
+					<ul>
+						<li>The struct
+							<code>EOS_Platform_GetDesktopCrossplayStatusInfo</code>
+							has been replaced with
+							<code>EOS_Platform_DesktopCrossplayStatusInfo</code>
+							for naming consistency.</li>
+						<li>The
+							<code>AllowedPlatformIds</code>
+							and
+							<code>AllowedPlatformIdsCount</code>
+							fields on
+							<code>EOS_Lobby_CreateLobbyOptions</code>
+							and
+							<code>EOS_Sessions_CreateSessionModificationOptions</code>
+							must be initialized; if the lobby is not intended to have restrictions the field should be set to
+							<code>nullptr</code>
+							and
+							<code>0</code>
+							respectively. In the case of applications that do not have default initialization, for instance C applications, these fields must be explicitly initialized.</li>
+						<li>You now need to determine the
+							<code>bCrossplayOptOut</code>
+							value in
+							<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">
+								<code>EOS_Lobby_CreateLobbyOptions</code>
+							</a>,
+							<a href="/docs/api-ref/structs/eos-lobby-join-lobby-options">
+								<code>EOS_Lobby_JoinLobbyOptions</code>
+							</a>, and
+							<a href="/docs/api-ref/structs/eos-lobby-join-lobby-by-id-options">
+								<code>EOS_Lobby_JoinLobbyByIdOptions</code>
+							</a>.</li>
+						<li>By default,
+							<code>bCrossplayOptOut</code>
+							defaults to
+							<code>EOS_FALSE</code>
+							in order to maintain the existing assumption that lobby creators and joiners permit crossplay by default.</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>EOS Core</strong>
+					</p>
+					<ul>
+						<li>Several macros have been renamed to fit with the standard EOS SDK naming convention of
+							<code>EOS_&lt;system_type&gt;_&lt;function_name&gt;_API_LATEST</code>. We have removed the string
+							<code>OPTIONS</code>
+							from macros in the
+							<code>eos_playerdatastorage_types.h</code>,
+							<code>eos_titlestorage_types.h</code>
+							and
+							<code>eos_private_ui_types.h</code>
+							header files.</li>
+					</ul>
+					<p>For example,
+						<code>EOS_PLAYERDATASTORAGE_QUERYFILEOPTIONS_API_LATEST</code>has been renamed to
+						<code>EOS_PLAYERDATASTORAGE_QUERYFILE_API_LATEST</code>.</p>
+					<ul>
+						<li>We recommend replacing any deprecated macros that use the old naming convention with macros that use the new naming convention. The deprecated macros are still present for backward compatibility, but we will be removing them in a future version.</li>
+						<li>A WebRTC vulnerability, as disclosed by Google for versions M102 and earlier, has been fixed.
+							<!-- -->
+							<ul>
+								<li>We recommend everyone using EOS P2P in earlier EOS SDK versions to update to 1.16 as soon as possible. Impacts can be found
+									<a href="https://eoshelp.epicgames.com/s/news/eos-news-article-MCVDBTZSVM7VAJHF4ZGJVXZM52I4?language=en_US">here</a>.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Friends</strong>
+					</p>
+					<ul>
+						<li>Unused types related to the previously removed
+							<code>EOS_Friends_DeleteFriend</code>
+							API have been deprecated.
+							<!-- -->
+							<ul>
+								<li>You should remove any instances of these types or references to this API.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Lobbies</strong>
+					</p>
+					<ul>
+						<li>To use the introduced leave party button, use
+							<a href="/docs/api-ref/structs/eos-lobby-add-notify-leave-lobby-requested-options">
+								<code>EOS_Lobby_AddNotifyLeaveLobbyRequested</code>
+							</a>
+							and
+							<a href="/docs/api-ref/functions/eos-lobby-remove-notify-leave-lobby-requested">
+								<code>EOS_Lobby_RemoveNotifyLeaveLobbyRequested</code>
+							</a>.</li>
+						<li>
+							<code>EOS_LobbyDetails_GetMemberCount</code>
+							now returns vMaxMemberSlots<code>-</code>NumOpenSlots` if used with a lobby search result.
+							<!-- -->
+							<ul>
+								<li>We recommend you update the usage of
+									<code>EOS_LobbyDetails_GetMemberCount</code>
+									if used with a lobby search result.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Player Data Storage</strong>
+					</p>
+					<ul>
+						<li>The unused define
+							<code>EOS_PLAYERDATASTORAGE_FILE_MAX_SIZE_BYTES</code>
+							has been deprecated.
+							<!-- -->
+							<ul>
+								<li>Although unused, any references to this define should be removed.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Sessions</strong>
+					</p>
+					<ul>
+						<li>
+							<code>EOS_Sessions_UpdateSession</code>
+							now returns
+							<code>EOS_LimitExceeded</code>
+							if a new session cannot be created because doing so would exceed the maximum allowed concurrent session count.
+							<!-- -->
+							<ul>
+								<li>We recommend you update the usage of
+									<code>EOS_Sessions_UpdateSession</code>
+									to handle the
+									<code>EOS_LimitExceeded</code>
+									return code.</li>
+							</ul>
+						</li>
+						<li>
+							<code>EOS_Sessions_UpdateSession</code>
+							and
+							<code>EOS_Sessions_JoinSession</code>
+							now returns
+							<code>EOS_InvalidUser</code>
+							if the local user associated with the session does not exist or is not authenticated.
+							<!-- -->
+							<ul>
+								<li>We recommend you update the usage of
+									<code>EOS_Sessions_UpdateSession</code>
+									and
+									<code>EOS_Sessions_JoinSession</code>
+									to handle
+									<code>EOS_InvalidUser</code>
+									return codes.</li>
+							</ul>
+						</li>
+						<li>
+							<code>EOS_Sessions_RegisterPlayers</code>
+							now returns
+							<code>EOS_Sessions_TooManyPlayers</code>
+							when registering the requested number of players would exceed the maximum capacity of the session. This was previously
+							<code>EOS_LimitExceeded</code>.
+							<!-- -->
+							<ul>
+								<li>We recommend you update the usage of
+									<code>EOS_Sessions_RegisterPlayers</code>
+									to look for
+									<code>EOS_Sessions_TooManyPlayers</code>
+									instead of
+									<code>EOS_LimitExceeded</code>
+									for cases where the requested number of players would exceed the maximum capacity of the session.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Voice</strong>
+					</p>
+					<ul>
+						<li>We deprecated and replaced some
+							<code>EOS_RTCAudio</code>
+							methods and structs.</li>
+						<li>We recommend you read the Deprecations: Voice section of the
+							<a href="/docs/epic-online-services/release-notes#voice-1">Release Notes</a>
+							and replace them with the newer methods and structs as soon as possible.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="sdk-116-updates">SDK 1.16 Updates</h4>
+			</div>
+			<p>This SDK release has some notable updates and bug fixes across several major features. See the
+				<a href="/docs/epic-online-services/release-notes">Release Notes</a>
+				for a full list.</p>
+			<ul>
+				<li>
+					<strong>Sony PlayStation</strong>
+					<ul>
+						<li>Added version support for PS4 SDK 10.5 and retained support for PS4 SDK 10.0 and PS4 SDK 9.5.</li>
+						<li>Added version support for PS5 SDK 7.0 and retained support for PS5 SDK 6.0 and PS5 SDK 5.0.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Nintendo Switch</strong>
+					<ul>
+						<li>Added version support for Nintendo Switch SDK 16.2.0 and retained support for Nintendo Switch SDK 15.3 and Nintendo Switch SDK 14.3.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Microsoft Xbox</strong>
+					<ul>
+						<li>Added version support for Xbox GDK 230305 (March 2023 QFE5) and retained support for Xbox GDK 211001 and Xbox GDK 220604.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h3>
+			</div>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
+			<p>Anti-cheat new features:</p>
+			<ul>
+				<li>The anti-cheat metric collection now keeps track of the number of players kicked from your game when you have configured anti-cheat with peer-to-peer mode.</li>
+				<li>The anti-cheat service now supports Chromebooks.</li>
+			</ul>
+			<p>There are four additional improvements to the anti-cheat bootstrapper. The anti-cheat bootstrapper now:</p>
+			<ul>
+				<li>Logs anti-cheat module failures.</li>
+				<li>Supports macOS version 10.14 and higher.</li>
+				<li>Displays a dialog for you to test unpublished anti-cheat modules.</li>
+				<li>Uses 64-bit architecture.</li>
+			</ul>
+			<p>
+				<strong>Sessions</strong>
+				<code>EOS_Sessions_RegisterPlayers</code>
+				now returns
+				<code>EOS_Sessions_TooManyPlayers</code>
+				when it registers a number of players which exceeds the maximum capacity of a session. Previously,
+				<code>EOS_Sessions_RegisterPlayers</code>
+				returned
+				<code>EOS_LimitExceeded</code>.</p>
+			<p>
+				<strong>Voice</strong>
+			</p>
+			<p>Fixed an intermittent issue where a player's status change in the voice chat room did not call a callback set up with
+				<code>EOS_Lobby_AddNotifyRTCRoomConnectionChanged</code>.</p>
+			<p>
+				<strong>Breaking Changes</strong>
+			</p>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
+			<ul>
+				<li>For games using EOS SDK version 1.15.5 and higher, you must update your anti-cheat modules to the latest version, as older anti-cheat modules might not work for players as expected.</li>
+			</ul>
+			<p>
+				<strong>Sessions</strong>
+			</p>
+			<ul>
+				<li>We deprecated the return error value,
+					<code>EOS_LimitExceeded</code>
+					for
+					<code>EOS_Sessions_RegisterPlayers</code>. Now
+					<code>EOS_Sessions_RegisterPlayers</code>
+					returns the new error value
+					<code>EOS_Sessions_TooManyPlayers</code>. For games using EOS SDK version 1.15.5 and higher, make sure you set up your games to check for the new error value.</li>
+			</ul>
+			<p>
+				<strong>SDK 1.15.5 updates</strong>
+			</p>
+			<p>
+				<strong>Microsoft Xbox</strong>
+			</p>
+			<ul>
+				<li>Added version support for Microsoft Xbox GDK version October 2022 QFE1 (221001) and Microsoft’s Xbox GDK version June 2022 QFE4. (220604).</li>
+			</ul>
+			<p>
+				<strong>Nintendo Switch</strong>
+			</p>
+			<ul>
+				<li>Added version support for Nintendo Switch SDK version 15.3.0 and retained support for Nintendo Switch SDK version 14.3.0.</li>
+			</ul>
+			<p>
+				<strong>Deprecations</strong>
+			</p>
+			<p>
+				<strong>Anti-cheat</strong>
+				The log file
+				<code>loader.log</code>
+				is deprecated. We have introduced a new log file,
+				<code>anticheatlauncher.log</code>, as the single log file for the anti-cheat bootstrapper.</p>
+			<div>
+				<h2 id="2022">2022</h2>
 			</div>
 			<div>
-				<h2 id="1154---2022-nov-16">1.15.4 - 2022-nov-16</h2>
+				<h3 id="1154---2022-nov-16">1.15.4 - 2022-nov-16</h3>
 			</div>
 			<p>This release includes improvements across multiple interfaces, as well as extra support for game consoles.</p>
-			<div>
-				<h4 id="ecom">Ecom</h4>
-			</div>
-			<p>We have added a new EOS SDK API to the Ecom Interface:
+			<p>
+				<strong>Ecom</strong>
+				We have added a new EOS SDK API to the Ecom Interface:
 				<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-ecom-query-entitlement-token">EOS_Ecom_QueryEntitlementToken</a>. It supports token-based verification of consumable items in your game (that is items which have limited persistence, decreasing a "use count" each time a player uses the item in your game). Use this new API to generate a JWT in your game’s client code to pass to a server-side verification service, if you use one.</p>
 			<p>For further information, see:</p>
 			<ul>
@@ -67,46 +491,46 @@
 					<br>
 					This has information on how to pass this data to your chosen verification service, either your own or a third-party verification service (TPV).</li>
 			</ul>
-			<div>
-				<h4 id="lobbies-and-sessions">Lobbies and Sessions</h4>
-			</div>
+			<p>
+				<strong>Lobbies and Sessions</strong>
+			</p>
 			<p>We have fixed a bug within Lobbies and Sessions so the following player limits are now correctly enforced:</p>
 			<ul>
 				<li>16 maximum concurrent lobbies per player.</li>
 				<li>16 maximum concurrent sessions per player.</li>
 			</ul>
-			<div>
-				<h4 id="peer-to-peer">Peer-to-peer</h4>
-			</div>
+			<p>
+				<strong>Peer-to-peer</strong>
+			</p>
 			<p>We have improved security and responsiveness during poor network conditions by using the
 				<code>dcSCTP</code>
 				Stream Control Transmission Protocol (SCTP) library implementation instead of
 				<code>usrsctp</code>.</p>
 			<p>
 				<strong>Note</strong>: This change is backward compatible, but we recommend you upgrade to the latest version as soon as possible for security and performance reasons.</p>
-			<div>
-				<h2 id="sdk-1154-updates">SDK 1.15.4 updates</h2>
-			</div>
-			<div>
-				<h4 id="sony-playstation">Sony PlayStation</h4>
-			</div>
+			<p>
+				<strong>SDK 1.15.4 updates</strong>
+			</p>
+			<p>
+				<strong>Sony PlayStation</strong>
+			</p>
 			<ul>
 				<li>Added version support for Sony PlayStation 4 SDK 10.008.001.</li>
 				<li>Added version support for Sony PlayStation 5 SDK 6.00.00.38.</li>
 				<li>Fixed a crash when players joined or left lobbies with voice chat enabled, on PlayStation 5  .</li>
 			</ul>
-			<div>
-				<h4 id="microsoft-xbox">Microsoft Xbox</h4>
-			</div>
+			<p>
+				<strong>Microsoft Xbox</strong>
+			</p>
 			<ul>
 				<li>Added version support for Microsoft Xbox GDK 220602 (June 2022 QFE2).</li>
 			</ul>
-			<div>
-				<h2 id="deprecations">Deprecations</h2>
-			</div>
-			<div>
-				<h4 id="anti-cheat">Anti-cheat</h4>
-			</div>
+			<p>
+				<strong>Deprecations</strong>
+			</p>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
 			<p>The
 				<code>AccountId</code>
 				parameter in
@@ -121,16 +545,16 @@
 				<code>EOS Connect ID Tokens</code>
 				to get the
 				<code>EOS_ProductUserId</code>.</p>
-			<div>
-				<h4 id="eos-core">EOS Core</h4>
-			</div>
+			<p>
+				<strong>EOS Core</strong>
+			</p>
 			<p>We have removed the string
 				<strong>OPTIONS</strong>
 				from macros across the Player Data Storage Interface and Title Storage Interface to align with the standard EOS SDK naming convention (<code>EOS_&lt;system_type&gt;_&lt;function_name&gt;_API_LATEST</code>).
 				<strong>Note:</strong>
 				For backward compatibility, the deprecated macros are still present but we will remove them in a future version. We recommend replacing any deprecated macros that use the old naming convention, with macros that use the new naming convention.</p>
 			<div>
-				<h2 id="1153---2022-sep-19">1.15.3 - 2022-sep-19</h2>
+				<h3 id="1153---2022-sep-19">1.15.3 - 2022-sep-19</h3>
 			</div>
 			<p>There are now two types of EOS SDK for Android:</p>
 			<ul>
@@ -143,7 +567,7 @@
 			</ul>
 			<p>You can use either the static SDK for Android or the dynamic SDK for Android.</p>
 			<div>
-				<h2 id="1152-and-11521---2022-aug">1.15.2 and 1.15.2.1 - 2022-aug</h2>
+				<h3 id="1152-and-11521---2022-aug">1.15.2 and 1.15.2.1 - 2022-aug</h3>
 			</div>
 			<p>The 1.15.2 release (and 1.15.2.1 update) includes added support for Apple silicon, anti-cheat and ecom updates, as well as updates to the EOS SDKs for consoles (EOS SDK for Microsoft Xbox, EOS SDK for Nintendo Switch), and numerous bug fixes.</p>
 			<p>
@@ -284,7 +708,7 @@
 				</li>
 			</ul>
 			<div>
-				<h2 id="1151---2022-jul-01">1.15.1 - 2022-jul-01</h2>
+				<h3 id="1151---2022-jul-01">1.15.1 - 2022-jul-01</h3>
 			</div>
 			<p>We deprecated
 				<code>EOS_ECT_STEAM_APP_TICKET</code>
@@ -293,7 +717,7 @@
 				and replaced it with
 				<code>EOS_ECT_STEAM_SESSION_TICKET</code>.</p>
 			<div>
-				<h2 id="115---2022-jun-16">1.15 - 2022-jun-16</h2>
+				<h3 id="115---2022-jun-16">1.15 - 2022-jun-16</h3>
 			</div>
 			<p>This release includes new crossplay features, Anti-Cheat updates, updates to the console versions of the SDK (Sony PlayStation, Microsoft Xbox, and Nintendo Switch), new voice volume control API, and numerous bug fixes. It also contains a few breaking changes required to enable these new features and updates.</p>
 			<p>
@@ -309,7 +733,7 @@
 				<li>With the new self-updating redistributable, players experience new features and improvements to the Epic Social Overlay without you making changes to your build.</li>
 			</ul>
 			<p>Crossplay is not a new interface or new overlay; we implemented crossplay in our existing features. You can find out more in the documentation on
-				<a href="/docs/epic-account-services/cross-play-across-platforms">Crossplay across platforms</a>.</p>
+				<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>.</p>
 			<p>
 				<strong>Anti-cheat updates</strong>
 			</p>
@@ -363,7 +787,7 @@
 							<!-- -->
 							<ul>
 								<li>For more information, see the documentation on
-									<a href="/docs/epic-account-services/cross-play-across-platforms/redistributable-installer">Redistributable installer</a>.</li>
+									<a href="/docs/epic-account-services/crossplay/redistributable-installer">Redistributable installer</a>.</li>
 							</ul>
 						</li>
 					</ul>
@@ -443,7 +867,7 @@
 				</li>
 			</ul>
 			<div>
-				<h2 id="1142---2022-feb-01">1.14.2 - 2022-feb-01</h2>
+				<h3 id="1142---2022-feb-01">1.14.2 - 2022-feb-01</h3>
 			</div>
 			<p>
 				<strong>NEW</strong>
@@ -483,10 +907,10 @@
 				<li>This will be resolved with the next release.</li>
 			</ul>
 			<div>
-				<h1 id="2021">2021</h1>
+				<h2 id="2021">2021</h2>
 			</div>
 			<div>
-				<h2 id="1141---2021-nov-05">1.14.1 - 2021-nov-05</h2>
+				<h3 id="1141---2021-nov-05">1.14.1 - 2021-nov-05</h3>
 			</div>
 			<p>
 				<strong>Custom Invites</strong>
@@ -519,7 +943,7 @@
 				<li>Added Amazon as a supported user authentication provider!</li>
 			</ul>
 			<div>
-				<h2 id="2021-aug-17">2021-aug-17</h2>
+				<h3 id="2021-aug-17">2021-aug-17</h3>
 			</div>
 			<p>
 				<strong>Publishing Tools Closed Beta</strong>
@@ -533,7 +957,7 @@
 			<p>We revamped the entire EOS documentation site map to help organize our content based on the services you are using: the Developer Portal, Epic Account Services, Epic Games Store, Game Services, and the API references. This is just another small step to cleaning up our content for your ease of you and our efforts continue to improve the documentation.</p>
 			<div>
 				<p>We missed highlighting one of our features from the
-					<a href="/docs/epic-online-services/whats-new#111---07-april-2021">SDK 1.11</a>
+					<a href="#111---07-april-2021">SDK 1.11</a>
 					release!</p>
 				<p>
 					<strong>Artifacts</strong>
@@ -542,7 +966,7 @@
 					<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>, you can add lobby and session invite functionality to the Epic Games Launcher to friends online, even if they are not signed into the game. This gives your players another way to connect with other players on their Epic Games Store friends list across platforms.</p>
 			</div>
 			<div>
-				<h2 id="113---2021-jun-21">1.13 - 2021-jun-21</h2>
+				<h3 id="113---2021-jun-21">1.13 - 2021-jun-21</h3>
 			</div>
 			<p>
 				<strong>Voice</strong>
@@ -576,7 +1000,7 @@
 			</p>
 			<p>You can switch between dark and light theme in our documentation! Use the switch near the bottom of the panel navigation to change your view.</p>
 			<div>
-				<h2 id="112---2021-may-27">1.12 - 2021-may-27</h2>
+				<h3 id="112---2021-may-27">1.12 - 2021-may-27</h3>
 			</div>
 			<p>
 				<strong>Easy Anti-Cheat</strong>
@@ -598,7 +1022,7 @@
 				for your products.</p>
 			<p>Available identity providers are platforms where Epic Online Services can link your users’ accounts to enable sharing their data across the different platforms and participate in cross-platform features like matchmaking. Identity providers must be configured in your Developer Portal and work with the Connect interface.</p>
 			<div>
-				<h2 id="111---2021-apr-07">1.11 - 2021-apr-07</h2>
+				<h3 id="111---2021-apr-07">1.11 - 2021-apr-07</h3>
 			</div>
 			<p>
 				<strong>Sanctions interface</strong>
@@ -630,37 +1054,31 @@
 			<div>
 				<ul>
 					<li>
+						<a href="#2023">2023</a>
+					</li>
+					<li>
+						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
+					</li>
+					<li>
+						<a href="#crossplay">Crossplay</a>
+					</li>
+					<li>
+						<a href="#notable-additions">Notable Additions</a>
+					</li>
+					<li>
+						<a href="#breaking-changes">Breaking Changes</a>
+					</li>
+					<li>
+						<a href="#sdk-116-updates">SDK 1.16 Updates</a>
+					</li>
+					<li>
+						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>
+					</li>
+					<li>
 						<a href="#2022">2022</a>
 					</li>
 					<li>
 						<a href="#1154---2022-nov-16">1.15.4 - 2022-nov-16</a>
-					</li>
-					<li>
-						<a href="#ecom">Ecom</a>
-					</li>
-					<li>
-						<a href="#lobbies-and-sessions">Lobbies and Sessions</a>
-					</li>
-					<li>
-						<a href="#peer-to-peer">Peer-to-peer</a>
-					</li>
-					<li>
-						<a href="#sdk-1154-updates">SDK 1.15.4 updates</a>
-					</li>
-					<li>
-						<a href="#sony-playstation">Sony PlayStation</a>
-					</li>
-					<li>
-						<a href="#microsoft-xbox">Microsoft Xbox</a>
-					</li>
-					<li>
-						<a href="#deprecations">Deprecations</a>
-					</li>
-					<li>
-						<a href="#anti-cheat">Anti-cheat</a>
-					</li>
-					<li>
-						<a href="#eos-core">EOS Core</a>
 					</li>
 					<li>
 						<a href="#1153---2022-sep-19">1.15.3 - 2022-sep-19</a>

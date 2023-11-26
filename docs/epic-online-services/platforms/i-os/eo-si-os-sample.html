@@ -1,0 +1,301 @@
+<section class="page">
+	<div style="left:0">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK for iOS Samples</h1>
+			<h2>An overview of the iOS samples and Apple login flow.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>Currently, we provide a
+				<strong>Login Sample</strong>
+				which demonstrates the use of the
+				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+				to login with the SDK.</p>
+			<p>You can also optionally enable native
+				<strong>Sign in with Apple (SIWA)</strong>
+				support in this sample, but you will need to use a
+				<strong>bundle identifier</strong>
+				and
+				<strong>provisioning profile</strong>
+				with this feature enabled. Additional settings adjustments required are noted later on. By default this feature is disabled.</p>
+			<p>This page will walk you through using the Login Sample on iOS with both the standard login flow and the SIWA flow. This sample has been developed using
+				<strong>Xcode 11.3.1</strong>
+				and
+				<strong>iOS SDK 13.2</strong>.</p>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>Make sure you have correctly set the values associated with your application in
+				<code>Login/Settings/settings.json</code>. Without these, the SDK will fail to run correctly. The required settings are:</p>
+			<ul>
+				<li>
+					<strong>productId:</strong>
+					Your product id</li>
+				<li>
+					<strong>sandboxId:</strong>
+					Your sandbox id</li>
+				<li>
+					<strong>deploymentId:</strong>
+					Your deployment id</li>
+				<li>
+					<strong>clientId:</strong>
+					Your client id</li>
+				<li>
+					<strong>clientSecret:</strong>
+					Your client secret</li>
+			</ul>
+			<p>If you don’t yet have the values for these settings, you can learn more about them at Developer Portal
+				<a href="https://dev.epicgames.com/docs/dev-portal">Developer Portal</a>
+				.</p>
+			<p>Some additional Xcode settings also need to be configured:</p>
+			<ol>
+				<li>
+					<p>Select
+						<code>Login/Info.plist</code>
+						and navigate to the
+						<strong>URL types</strong>
+						&gt;
+						<strong>Item 0</strong>
+						&gt;
+						<strong>URL Schemes</strong>
+						&gt;
+						<strong>Item 0</strong>. This value must be set to
+						<code>eos.clientId</code>, where clientId is the same as the data in the json file. This allows the account portal to re-trigger your application with resulting login data from the web.</p>
+				</li>
+				<li>
+					<p>Copy the
+						<code>EOSSDK.framework</code>
+						to the
+						<strong>Login/Frameworks</strong>
+						folder.</p>
+				</li>
+				<li>
+					<p>You will also need to set a bundle identifier in the
+						<strong>Signing &amp; Capabilities</strong>
+						settings, so that you can build and sign the sample.</p>
+				</li>
+			</ol>
+			<div>
+				<h2 id="sign-in-with-apple">Sign In With Apple</h2>
+			</div>
+			<p>Sign in with Apple is only available on
+				<strong>iOS 13+</strong>.</p>
+			<p>Some additional settings are required in Xcode to enable SIWA support in this sample.</p>
+			<ol>
+				<li>
+					<p>Your bundle identifier needs to have the
+						<strong>Sign in with Apple</strong>
+						capability enabled in the Apple Developer portal under
+						<strong>Certificates, Identifiers &amp; Profiles</strong>, within
+						<strong>Identifiers</strong>.</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Signing &amp; Capabilities</strong>
+						settings for the project, use the
+						<strong>+ Capability</strong>
+						option to add
+						<strong>Sign in with Apple</strong>
+						support to your application.</p>
+				</li>
+				<li>
+					<p>In
+						<strong>Build Settings</strong>, locate
+						<strong>Swift Compiler - Custom Flags</strong>
+						&gt;
+						<strong>Active Compilation Conditions</strong>, and add the define
+						<code>EOS_ENABLE_SIWA</code>
+						to both
+						<strong>Debug</strong>
+						and
+						<strong>Release</strong>
+						fields.</p>
+				</li>
+			</ol>
+			<div>
+				<h2 id="login">Login</h2>
+			</div>
+			<p>When you first start the app, you will be presented with a screen that contains a login button. If you have enabled SIWA, you will see two login options.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Login Screen with EOS_NotFound message." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Login Screen with EOS_NotFound message." loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-10.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>Each time you open the app, it will attempt to automatically log in with the last credentials you logged in with, using persistent auth. If you have not previously logged in, persistent auth will of course fail to find any existing credentials.</p>
+			<div>
+				<h2 id="logging-in-with-the-account-portal">Logging In With the Account Portal</h2>
+			</div>
+			<p>When you press the
+				<strong>Login</strong>
+				button, a secure session is started, and the OS will prompt you to continue the login process in a browser. This prompt tells you the name of the application, and the target domain that will be opened in the browser.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="Logging in with the Account Portal." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="Logging in with the Account Portal." loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-6.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>When you press
+				<strong>Continue</strong>, a browser will open on the Epic 
+				<!-- -->account
+				<!-- --> portal prompting you to sign into your Epic account.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-3.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-5.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-1.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-7.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>When this flow is completed, you will be returned to the app, where the login will be confirmed.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-2.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>From here, you can log out, or you can terminate the application and reopen it to observe the persistent login flow.</p>
+			<div>
+				<h2 id="logging-in-with-siwa-sign-in-with-apple">Logging In With SIWA (Sign In With Apple)</h2>
+			</div>
+			<p>If you have built the sample with SIWA enabled, when you start the app you will be presented with a screen that contains two login buttons. The top button will take you through the login flow on the account portal from the previous section. When you press the
+				<strong>Sign in with Apple</strong>
+				button, you will be taken though the SIWA flow.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-4.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>If this is the first time you have used SIWA you will be asked what data you want to share with the application—for example, your name/email address (See
+				<a href="https://developer.apple.com/sign-in-with-apple/get-started/">official Apple documentation</a>
+				for more information). On subsequent sign-ins  you will be asked to confirm your identity.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-9.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>When this flow is completed, you will be returned to the app, where the Connect login will be confirmed.</p>
+			<div>
+				<div style="max-width:170px">
+					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
+						<noscript>
+							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/i-os/sample/image-8.png">
+						</noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<p>From here, you can select
+				<strong>Back</strong>
+				to return to the other login options.</p>
+			<div id="tag_list">
+				<a href="/docs/site-map">Platforms</a>
+				<a href="/docs/site-map">
+					iOS</a>
+				<a href="/docs/site-map">
+					Samples</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#before-you-begin">Before You Begin</a>
+					</li>
+					<li>
+						<a href="#sign-in-with-apple">Sign In With Apple</a>
+					</li>
+					<li>
+						<a href="#login">Login</a>
+					</li>
+					<li>
+						<a href="#logging-in-with-the-account-portal">Logging In With the Account Portal</a>
+					</li>
+					<li>
+						<a href="#logging-in-with-siwa-sign-in-with-apple">Logging In With SIWA (Sign In With Apple)</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

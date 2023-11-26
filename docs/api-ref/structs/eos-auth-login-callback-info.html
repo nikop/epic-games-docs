@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_Auth_LoginCallbackInfo">EOS_Auth_LoginCallbackInfo</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -57,30 +51,28 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>
-											<a href="/docs/api-ref/enums/eos-e-result">EOS_EResult</a>
-											ResultCode</td>
+										<td>EOS_EResult ResultCode</td>
 										<td>The EOS_EResult code for the operation. EOS_Success indicates that the operation succeeded; other codes indicate errors.</td>
 									</tr>
 									<tr>
 										<td>void* ClientData</td>
-										<td>Context that was passed into EOS_Auth_Login</td>
+										<td>Context that was passed into EOS_Auth_Login.</td>
 									</tr>
 									<tr>
 										<td>EOS_EpicAccountId LocalUserId</td>
-										<td>The Epic Account ID of the local user who has logged in</td>
+										<td>The Epic Account ID of the local user who has logged in.</td>
 									</tr>
 									<tr>
 										<td>const EOS_Auth_PinGrantInfo* PinGrantInfo</td>
-										<td>Optional data returned in the middle of a EOS_LCT_DeviceCode request</td>
+										<td>Optional data that may be returned in the middle of the login flow, when neither the in-game overlay or a platform browser is used. This data is present when the ResultCode is EOS_Auth_PinGrantCode.</td>
 									</tr>
 									<tr>
 										<td>EOS_ContinuanceToken ContinuanceToken</td>
 										<td>If the user was not found with external auth credentials passed into EOS_Auth_Login, this continuance token can be passed to EOS_Auth_LinkAccount to continue the flow.</td>
 									</tr>
 									<tr>
-										<td>const EOS_Auth_AccountFeatureRestrictedInfo* AccountFeatureRestrictedInfo</td>
-										<td>If the user trying to login is restricted from doing so, the ResultCode of this structure will be EOS_Auth_AccountFeatureRestricted, and AccountFeatureRestrictedInfo will be populated with the data needed to get past the restriction</td>
+										<td>const EOS_Auth_AccountFeatureRestrictedInfo* AccountFeatureRestrictedInfo_DEPRECATED</td>
+										<td>Deprecated field that is no longer used.</td>
 									</tr>
 									<tr>
 										<td>EOS_EpicAccountId SelectedAccountId</td>

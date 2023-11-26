@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="EOS_Auth_LinkAccountCallbackInfo">EOS_Auth_LinkAccountCallbackInfo</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -57,22 +51,20 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>
-											<a href="/docs/api-ref/enums/eos-e-result">EOS_EResult</a>
-											ResultCode</td>
+										<td>EOS_EResult ResultCode</td>
 										<td>The EOS_EResult code for the operation. EOS_Success indicates that the operation succeeded; other codes indicate errors.</td>
 									</tr>
 									<tr>
 										<td>void* ClientData</td>
-										<td>Context that was passed into EOS_Auth_LinkAccount</td>
+										<td>Context that was passed into EOS_Auth_LinkAccount.</td>
 									</tr>
 									<tr>
 										<td>EOS_EpicAccountId LocalUserId</td>
-										<td>The Epic Account ID of the local user whose account has been linked during login</td>
+										<td>The Epic Account ID of the local user whose account has been linked during login.</td>
 									</tr>
 									<tr>
 										<td>const EOS_Auth_PinGrantInfo* PinGrantInfo</td>
-										<td>Optional data returned when ResultCode is EOS_Auth_PinGrantCode. Once the user has logged in with their Epic Online Services account, the account will be linked with the external account supplied when EOS_Auth_Login was called. EOS_Auth_OnLinkAccountCallback will be fired again with ResultCode in EOS_Auth_LinkAccountCallbackInfo set to EOS_Success.</td>
+										<td>Optional data that may be returned in the middle of the login flow, when neither the in-game overlay or a platform browser is used. This data is present when the ResultCode is EOS_Auth_PinGrantCode.</td>
 									</tr>
 									<tr>
 										<td>EOS_EpicAccountId SelectedAccountId</td>

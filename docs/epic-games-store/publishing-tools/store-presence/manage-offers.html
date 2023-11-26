@@ -3,13 +3,7 @@
 		<nav>
 			<ol>
 				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Manage Offers">Manage Offers</span>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
 				</li>
 			</ol>
 		</nav>
@@ -18,9 +12,9 @@
 	<section>
 		<div>
 			<h1>Manage Offers</h1>
-			<h2>Create and manage product offers</h2>
+			<h2>Create and manage product offers.</h2>
 			<div>
-				<div>11 mins to read</div>
+				<div>18 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -29,12 +23,10 @@
 			<div role="alert">
 				<div></div>
 				<div>
-					<p>
-						<strong>Are you a Closed Beta partner?</strong>
-						If you are not participating in the
-						<strong>Closed Beta</strong>
-						release, you can access documentation by using your Epic Games account to
-						<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>.</p>
+					<p>This article covers functionality offered by the self-service Epic Games Store publishing tools.
+						<strong>If the options described are not available to you</strong>, you may be using an alternate method of distribution. For documentation applicable to your experience,
+						<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>
+					</p>
 				</div>
 			</div>
 			<div>
@@ -47,7 +39,7 @@
 			<p>The offer for your primary product, referred to as the
 				<em>base product offer</em>, is automatically created when you first set up your product. You can also create additional offers that allow users to purchase or download supplemental content that enhances the experience of your product. These additional offers can consist of demos, editions, add-ons, season passes, consumables, or digital extras.</p>
 			<div>
-				<h2 id="accessing-offers">Accessing Offers</h2>
+				<h2 id="working-with-offers">Working with Offers</h2>
 			</div>
 			<div>
 				<h3 id="populating-the-base-product-offer">Populating the Base Product Offer</h3>
@@ -71,7 +63,7 @@
 				</li>
 				<li>In the table, click the name of your base product offer to open the Offer Details screen.</li>
 				<li>Complete the offer by providing
-					<a href="/docs/en-US#understanding-offer-details">required and optional information</a>
+					<a href="#understanding-offer-details">required and optional information</a>
 					about your product.</li>
 			</ol>
 			<p>
@@ -108,24 +100,24 @@
 									<em>Rocket League - Painted Prestige Bundle</em>
 									or
 									<em>Fall Guys - Season 2 Starter Pack</em>.</li>
-								<li>The offer name is used to create the URL for the item on the Epic Games Store. While the offer name can be updated at a later time, the URL cannot be modified once the offer has been created.</li>
+								<li>The provided name is used to create the URL for the offer on the Epic Games Store. While the offer name can be updated at a later time, the URL cannot be modified once the offer has been created.</li>
 							</ul>
 						</li>
 					</ul>
 				</li>
-				<li>In the Offer Type section, select the appropriate category for your offer. This category cannot be changed once the offer has been created.</li>
-				<li>Review your offer information, then click
-					<strong>Create</strong>.
+				<li>In the Offer Type section, select the appropriate category for your offer. This category cannot be changed once the offer has been created.
 					<!-- -->
 					<ul>
 						<li>
-							<strong>Note</strong>: Before you can create an
-							<em>Edition</em>
-							type offer, you are prompted to select a base offer to associate with the Edition.</li>
+							<strong>Note</strong>: If you select
+							<em>Edition</em>, you must then select a base offer for that edition. The base offer can be your base product offer or another edition.  For more information, review
+							<a href="#included-offers">Included Offers</a>.</li>
 					</ul>
 				</li>
+				<li>Review your offer information, then click
+					<strong>Create</strong>.</li>
 				<li>On the Offer Details screen, complete the offer by providing relevant
-					<a href="/docs/en-US#understanding-offer-details">required and optional information</a>.</li>
+					<a href="#understanding-offer-details">required and optional information</a>.</li>
 			</ol>
 			<div>
 				<h4 id="consumable-offers">Consumable Offers</h4>
@@ -148,9 +140,35 @@
 			<p>When creating a consumable offer, you can choose to set the offer price as
 				<em>Not Available for Direct Purchase</em>. If this setting is enabled, the offer is not available for purchase in the Epic Games Store. Instead, users can only redeem this offer through an access key and must also already own the base product.</p>
 			<div>
+				<h4 id="editions">Editions</h4>
+			</div>
+			<p>Products can have up to 10 Edition-type offers available on the storefront at a given time. (Your base game offer is
+				<strong>not</strong>
+				counted towards this limit.) While you can create more than 10 editions for your product, only 10 can be active in the Live sandbox at one time. An active edition is an offer that has not yet expired nor been marked as
+				<em>Not Visible on Store</em>.</p>
+			<p>If you push an 11<sup>th</sup>
+				Edition-type offer to the Live sandbox, the oldest available edition automatically becomes hidden on the storefront. In the Dev Portal, this offer is tagged as
+				<em>Not Visible on Store</em>. To instead choose which edition is hidden, first add an
+				<a href="#dates">Expiration Date</a>
+				to one of the editions currently in the Live sandbox. Then, push your new offer to the Live sandbox once that expiration date has occurred.</p>
+			<div>
+				<p>If you have more than 10 Edition-type offers in your Live sandbox, be aware that one of your hidden editions may automatically become available if an active edition expires. In this scenario, when an active edition expires, the hidden edition in the Live sandbox with the nearest Early Store Discovery date becomes active. (If an Early Store Discovery date is not specified, the Launch Date is used). Note that offers will
+					<strong>not</strong>
+					become visible to users prior to their Early Store Discovery date.</p>
+				<p>For example, consider the following scenario:</p>
+				<br>
+				<ul>
+					<li>Your Live sandbox contains 12 Edition-type offers. 10 of these offers are currently available on the storefront, while the remaining offers are marked as
+						<em>Not Visible on Store</em>.</li>
+					<li>One of the 10 active offers expires and is automatically removed from the storefront. In its place, the hidden offer with the nearest discovery date becomes active. The
+						<em>Not Visible on Store</em>
+						tag is removed from this offer, and it will become visible on the storefront when its discovery date occurs.</li>
+				</ul>
+			</div>
+			<div>
 				<h3 id="editing-existing-offers">Editing Existing Offers</h3>
 			</div>
-			<p>Through the Offers page of the Dev Portal, you can manage your product's existing offers. To do so, follow the steps below:</p>
+			<p>Through the Offers page, you can also edit existing offers associated with your product. To do so, follow the steps below:</p>
 			<ol>
 				<li>Navigate to
 					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>
@@ -158,10 +176,57 @@
 					<!-- -->sandbox
 					<!-- --> containing your offer.</li>
 				<li>In the table, click the name of the offer you wish to update.</li>
-				<li>On the Offer Details screen, update the different categories of information as needed. Note that some details require an offer to be in a specific sandbox in order to be edited. For full details, review the
-					<a href="/docs/en-US#understanding-offer-details">Understanding Offer Details</a>
+				<li>On the Offer Details screen, update different categories of information as needed. Note that some details can only be updated for offers within certain sandboxes. For full details, review the
+					<a href="#understanding-offer-details">Understanding Offer Details</a>
 					section below.</li>
 			</ol>
+			<div>
+				<h3 id="deleting-offers">Deleting Offers</h3>
+			</div>
+			<p>From the Offers page, you can delete certain offers associated with your product. Deleting an offer permanently removes it from your product, along with any corresponding pages or artifacts. Note that this action
+				<strong>cannot be undone</strong>.</p>
+			<p>Only offers within the Dev 
+				<!-- -->sandbox
+				<!-- --> can be deleted. You cannot delete any offers that have been advanced to the Stage (or Live) sandboxes. Additionally, the following types of offers cannot be deleted:</p>
+			<ul>
+				<li>Your
+					<a href="#populating-the-base-product-offer">base product offer</a>
+					(i.e., Game-type offers)</li>
+				<li>Edition-type offers</li>
+				<li>Offers that have been configured as
+					<a href="#consumable-offers">Not Available for Direct Purchase</a>
+				</li>
+			</ul>
+			<p>To delete an offer, follow the steps below:</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>
+					and ensure the Dev sandbox is selected.</li>
+				<li>In the table, locate the offer you wish to delete. Then, click its
+					<strong>menu (...) icon</strong>
+					and choose
+					<strong>Delete</strong>.</li>
+				<li>On the confirmation popup, click
+					<strong>Yes</strong>
+					to delete the offer.</li>
+			</ol>
+			<p>
+				<strong>Additional Considerations</strong>
+			</p>
+			<p>Depending on how an offer is configured, certain criteria might need to be met before that offer can be deleted. Consider the following guidelines:</p>
+			<ul>
+				<li>If an offer has been configured with one or more sub-offers, you must first remove these
+					<a href="#included-offers">included offers</a>
+					from the parent offer. You cannot delete an offer while it contains any sub-offers.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>
+							Offers that are used as sub-offers can be deleted directly. When you delete an offer used as a sub-offer, it is automatically removed from its parent offers. It does not need to be manually removed.</li>
+					</ul>
+				</li>
+				<li>If an offer serves as the base offer for another offer, you must first remove it as that base offer.  You cannot delete an offer that is actively set as a base offer.</li>
+			</ul>
 			<div>
 				<h2 id="understanding-offer-details">Understanding Offer Details</h2>
 			</div>
@@ -183,10 +248,30 @@
 					<strong>Early Access Product</strong>: This toggle determines if your product displays as an Early Access title within the storefront. To learn more, review
 					<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/early-access">Early Access Program Requirements</a>.</li>
 				<li>
-					<strong>Metadata</strong>: General information about your product such as genres, features, and developer and publisher names. To quickly import the information specified in your
+					<strong>Metadata</strong>: General information about your product such as genres, features, and developer and publisher names. To quickly import this information from your
 					<a href="/docs/epic-games-store/publishing-tools/store-presence/store-config">Store Settings</a>, select the
 					<em>Use Product Metadata</em>
-					button.</li>
+					button.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note about Platforms</strong>:
+							<!-- -->
+							<ul>
+								<li>If an offer has an estimated or unknown launch date, you can set platforms (e.g., Windows) for that offer in the Metadata section. For an offer with a specific launch date, platform information is automatically pulled from its
+									<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">active binary</a>.</li>
+								<li>Platforms cannot be set individually for offer types without an associated artifact, such as editions, season passes, or consumables. Instead, these offers use the platforms assigned to your base product offer. To ensure your offers without artifacts are assigned the appropriate platforms, you must promote these offers to the Stage sandbox any time you update the platforms assigned to your base product offer and push that offer to Staging.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<strong>NFT and Blockchain</strong>: This setting identifies your product in the storefront as containing NFT, cryptocurrency, or blockchain technology in any capacity. As a requirement for distributing this type of product, you must disclose this information to users by selecting
+					<em>Yes</em>
+					for this setting. For the full requirements, review
+					<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/blockchain">Blockchain Technology Guidelines</a>.</li>
+				<li>
+					<strong>Offer Content</strong>: Only available for Add-On type offers, this setting identifies the offer as containing virtual currency or other consumable items.</li>
 			</ul>
 			<div>
 				<h4 id="dates">Dates</h4>
@@ -205,9 +290,9 @@
 					<!-- -->
 					<ul>
 						<li>If you provide a specific launch date, you must attach a binary to the artifact for your offer.</li>
-						<li>If you identify your launch date as estimated or unknown, a binary is not required in order to display your product page as
+						<li>If you identify your launch date as estimated or unknown, a binary is not required in order to display your product as
 							<em>Coming Soon</em>
-							in the storefront. However, an early store discovery date must be provided in this scenario.</li>
+							in the storefront. However, an early store discovery date must be provided. Additionally, you must manually set the appropriate platforms (e.g., Windows) for the offer. The Platforms field is available in the General Details section.</li>
 						<li>For offers with an estimated or unknown launch date, you must update your offer with a specific launch date and attach at least one binary to the offer's artifact
 							<u>
 								<strong>at least one week</strong>
@@ -229,8 +314,8 @@
 				<!-- --> (i.e., Dev or Live) the offer is currently in. To learn more, review the sections below.</p>
 			<p>
 				<strong>Note</strong>: Offer dates cannot be directly updated for offers in the Stage sandbox. To update an offer in Stage, complete the desired changes to the offer in Dev. Then, push those changes to Stage when appropriate. To learn more, review the
-				<em>Updating Dates for Offers in Dev Sandboxes</em>
-				section.</p>
+				<em>Offers in Dev Sandboxes</em>
+				section below.</p>
 			<p>
 				<strong>Offers in Dev Sandboxes</strong>
 			</p>
@@ -260,7 +345,11 @@
 			<p>In certain scenarios, you may need to update offer dates for products that have already been pushed live (e.g., to accommodate release schedule changes). You can make live updates to your offer dates by following the steps below. Live updates are immediately reflected on the storefront and do not require approval by the Epic Games Store team.</p>
 			<ul>
 				<li>Updates can only be made to future offer dates. Past offer dates (i.e., offer dates that have already occurred) cannot be changed.</li>
-				<li>Live updates can only be made to offer dates that have already been configured. If a live offer does not contain a specific date (e.g., an Expiration Date), that type of date cannot be added through this process.</li>
+				<li>Additional dates cannot be added to an offer through the the live update process. Live updates can only be made to dates that have already been configured. For example, if an offer does not contain an Expiration Date, you cannot add one through this process.</li>
+				<li>The type of Launch Date set for an offer cannot be changed via live update. For example, if an offer has its Launch Date type set to
+					<em>Estimated</em>, you cannot switch the type to
+					<em>Specific</em>
+					through this process. To change Launch Date types, follow the standard publishing process.</li>
 				<li>The steps below can only be completed for offers in the Live sandbox. However, updates made through this process automatically overwrite the corresponding offer date information in all sandboxes (Dev, Stage, and Live). For example, if you update the launch date for an offer in the Live sandbox, the versions of that offer in the Dev and Stage sandboxes also receive that update. Note that the Stage sandbox will not be updated if the offer is currently under review by the Epic Games Store team.</li>
 			</ul>
 			<p>To update early store discovery, launch, or expiration dates for an offer within the Live sandbox, follow the steps below:</p>
@@ -287,35 +376,76 @@
 					to save your changes.</li>
 			</ol>
 			<div>
+				<h4 id="offer-visibility">Offer Visibility</h4>
+			</div>
+			<p>You may choose whether or not an offer will be promoted in the Epic Games Store so that anyone can easily find it. Or, you may prefer to keep an offer hidden, making it exclusively available for in-game redemption or for gamers with a promo code.</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Hidden</strong>: Offer page is not visible in the Epic Games Store at all, but the offer is still available to gamers by other means such as an in-game redemption code or special promo code.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Visible</strong>: Offer page is viewable in the Epic Games Store by direct link only. The offer can also be available by other methods such as an in-game redemption code.<br>
+						<br>
+					</p>
+					<p>
+						<strong>Note</strong>: To select the option, Visible in Store, the Offer Page required information must be complete.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Searchable</strong>: The Offer Page can be found in the Epic Game Store via a search. The offer can also be available by other methods such as an in-game redemption code.<br>
+						<br>
+					</p>
+					<p>
+						<strong>Note</strong>: To select the option, Searchable in Store, the Offer Page required information must be complete.</p>
+				</li>
+			</ul>
+			<div>
 				<h4 id="price">Price</h4>
 			</div>
 			<p>On the Base Price page, select the desired price tier for the offer. Base prices are set in USD.</p>
-			<p>Once set, the Regional Pricing section populates prices in local currency in accordance with the base USD price. The USD equivalent is calculated using the current exchange rate at the moment of purchase. Final prices are regulated by Epic Games.</p>
-			<p>If needed, you can create custom price tiers to determine your own regional pricing instead of using the suggested price tiers. To learn more, review
+			<p>Once set, the Regional Pricing section populates prices in local currency in accordance with the base USD price. The USD equivalent is calculated using the current exchange rate at the moment of purchase.</p>
+			<p>If needed, you can create custom price tiers to determine your own regional pricing instead of using the Epic-delivered price tiers. To learn more, review
 				<a href="/docs/epic-games-store/publishing-tools/store-presence/custom-price-tiers">Create Custom Price Tiers</a>.</p>
 			<div>
 				<h4 id="artifact-settings">Artifact Settings</h4>
 			</div>
-			<p>Through the Artifact Settings page, you can link uploaded artifacts with your offers.
-				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">Artifacts</a>
-				are used to fulfill user requests to download content.</p>
-			<p>Configuring Artifact Settings is required for your base product offer. However, it may be optional for other offer types, such as add-ons. Artifact Settings include the following:</p>
+			<p>In the publishing tools, artifacts are groups of binaries, metadata, and configurations that are used to fulfill user requests to download content.</p>
+			<p>When you first create your product, an artifact for that product is automatically generated. Artifacts are also auto-generated for any additional offers you create that feature downloadable content, such as demos or digital extras.</p>
+			<p>
+				<strong>Base Product Offer</strong>
+			</p>
+			<p>For your base product offer, the following Artifact Settings are available. Configuring these settings is required.</p>
 			<ul>
-				<li>
-					<strong>Linked Artifact</strong>: Select an existing artifact to associate with the offer. For some types of offers, an artifact may be pre-selected.</li>
 				<li>
 					<strong>Default Folder</strong>: If desired, update the name of the default folder where the artifact is installed on users' devices. The folder name must be alphanumeric, begin with a letter, and include 25 characters or less with no spaces.</li>
 				<li>
 					<strong>EAS Integration</strong>: If you are using an application through
 					<a href="/docs/epic-account-services">Epic Account Services</a>, enter the ID associated with this offer. This option may not be available for all offer types.</li>
 			</ul>
+			<p>To upload a binary and further manage this artifact, click the arrow icon in the Linked Artifact section to quickly navigate to the Artifacts and Binaries section of the Dev Portal. To learn more, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">Manage Artifacts</a>.</p>
+			<p>
+				<strong>Additional Offers</strong>
+			</p>
+			<p>When you create an offer that features downloadable content, such as a Demo type offer, an artifact is automatically generated and linked to that offer. To upload a binary for this artifact, click the arrow icon in the Linked Artifact section to quickly navigate to the Artifacts and Binaries section of the Dev Portal.</p>
+			<p>Artifacts are not automatically generated for Add-On type offers as they may or may not feature downloadable content. If an artifact is needed for one of your Add-On offers, click the
+				<em>Create Artifact</em>
+				button on the Artifact Settings page. (This button only displays if an artifact has not yet been created for the offer.) Once generated, click the arrow icon in the Linked Artifact section to further manage this artifact.</p>
+			<p>To learn more about uploading binaries to artifacts, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-artifacts">
+					Manage Artifacts</a>.</p>
 			<div>
 				<h4 id="images">Images</h4>
 			</div>
-			<p>The Images section captures digital assets used to represent and market your product throughout the storefront. You can upload general offer images that depict the main promotional key art for your product. Optionally, you can also upload separate images that display in the Library section of the Epic Games launcher for users who purchase or download your offer.</p>
+			<p>The Images section captures digital assets used to represent and market your product throughout the storefront. You can upload general offer images that depict the main promotional key art for your product. You can also upload separate images that display in the Library section of the Epic Games launcher for users who purchase or download your offer.</p>
 			<p>To learn more, review the
 				<a href="/docs/epic-games-store/publishing-tools/store-presence/storefront-media-guide#offer-images">Offer Images</a>
-				section of the Storefront Media Guide.</p>
+				section of the Storefront Media Guide. For a full list of branding resources and policies, review the
+				<a href="/docs/epic-games-store/getting-started/brand-guidelines-overview">Brand Guidelines Overview</a>
+				and
+				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/content-guidelines">Content Guidelines</a>.</p>
 			<div>
 				<h3 id="optional-information">Optional Information</h3>
 			</div>
@@ -323,7 +453,40 @@
 			<div>
 				<h4 id="included-offers">Included Offers</h4>
 			</div>
-			<p>Certain types of offers, such as Editions and Season Passes, support the ability to include sub-offers. When a user purchases an offer that includes sub-offers, they receive entitlements for all included offers upon completing their purchase. For example, an Edition offer must have your base product offer (or another Edition-type offer) set as its base offer. You can then add up to five additional offers for items such as season passes, add-ons, or digital extras to the Edition as sub-offers. When a user purchases the Edition offer, they receive both your base product offer and your selected sub-offers.</p>
+			<p>Certain types of offers, such as Editions and Season Passes, support the ability to include sub-offers. When a user purchases an offer that includes one or more sub-offers, they receive entitlements for
+				<strong>all</strong>
+				included offers upon completing their purchase. The Included Offers section is required for Edition-type offers.</p>
+			<p>For example, when you create an Edition-type offer, you first select a base offer. This base offer can be your base product offer or another edition you previously created. Up to five sub-offers can also be added to that edition for items such as season passes, add-ons, or digital extras. When a user purchases your edition, they receive both the base offer and any selected sub-offers.</p>
+			<p>
+				<strong>Editions - Additional Information</strong>
+			</p>
+			<p>The primary component of an Edition-type offer is the base offer. The base offer can be your base product offer, which grants users access to your primary product. It can also be another edition you have previously created, which grants users access to all offers included in that edition.</p>
+			<p>At times, you may need to make changes to an offer being used as the base offer for an edition. For example, you want to update the artifact for your base product or add additional sub-offers to a base edition. If you push the updated base offer to the Stage sandbox along with the associated edition, those updates are reflected in both offers.</p>
+			<p>However, there may be scenarios where you need to push updates to your base offer but are not yet ready to promote your edition to the Stage sandbox. For example, you need to update your base product, which is already available for purchase on the storefront, but your edition has not yet been released.</p>
+			<p>In these situations, you must unlink the base offer from your edition prior to making any updates. Once you update the base offer and push it to the Stage sandbox, you can relink the base offer to your edition. This process ensures updates to the base offer are also reflected in the edition. Otherwise, the associated edition may be linked to an outdated version of the base offer. Note that this process is only necessary for editions within the Dev sandbox.</p>
+			<p>To unlink a base offer from an edition, follow the steps below. You must unlink the base offer prior to making updates to that offer.</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>
+					and select the
+					<strong>Dev</strong>
+					sandbox.</li>
+				<li>In the table, click the name of an edition that includes the base offer you wish to update.</li>
+				<li>On the Offer Details screen, click
+					<strong>Included Offers</strong>.</li>
+				<li>In the Base Offer section, click the
+					<strong>Unlink (chainlink) icon</strong>
+					to the left of the offer name. Then, click
+					<strong>Save</strong>.
+					<!-- -->
+					<ul>
+						<li>
+							<strong>Note</strong>: If the base offer has already been unlinked, the chainlink icon displays with a line through it. Clicking this icon relinks the base offer to the edition.</li>
+					</ul>
+				</li>
+				<li>Repeat this process as needed for each edition associated with the base offer requiring an update.</li>
+			</ol>
+			<p>After the base offer is unlinked, you can update the base offer as needed and push those changes to the Stage sandbox. Once complete, relink the base offer to your editions through the same process outlined above.</p>
 			<div>
 				<h4 id="cloud-save">Cloud Save</h4>
 			</div>
@@ -333,10 +496,10 @@
 				<h4 id="regions-and-ratings">Regions and Ratings</h4>
 			</div>
 			<p>By default, the Regions and Ratings sections both inherit information from your product’s Store Settings. If needed, you can customize the regions and ratings selected for individual offers through these sections of the Offer Details screen.</p>
-			<p>To learn more about adding regions and ratings to your product, review
-				<a href="/docs/epic-games-store/publishing-tools/store-presence/store-config#add-regions-and-ratings">Configure Store Settings</a>.</p>
+			<p>To learn more, review
+				<a href="/docs/epic-games-store/publishing-tools/store-presence/regions-ratings">Manage Regions &amp; Ratings</a>.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
+				<a href="/docs/site-map">Epic Games Store Only</a>
 			</div>
 		</section>
 		<aside>
@@ -347,7 +510,7 @@
 						<a href="#overview">Overview</a>
 					</li>
 					<li>
-						<a href="#accessing-offers">Accessing Offers</a>
+						<a href="#working-with-offers">Working with Offers</a>
 					</li>
 					<li>
 						<a href="#populating-the-base-product-offer">Populating the Base Product Offer</a>
@@ -359,7 +522,13 @@
 						<a href="#consumable-offers">Consumable Offers</a>
 					</li>
 					<li>
+						<a href="#editions">Editions</a>
+					</li>
+					<li>
 						<a href="#editing-existing-offers">Editing Existing Offers</a>
+					</li>
+					<li>
+						<a href="#deleting-offers">Deleting Offers</a>
 					</li>
 					<li>
 						<a href="#understanding-offer-details">Understanding Offer Details</a>
@@ -375,6 +544,9 @@
 					</li>
 					<li>
 						<a href="#updating-offer-dates-dev-or-live">Updating Offer Dates (Dev or Live)</a>
+					</li>
+					<li>
+						<a href="#offer-visibility">Offer Visibility</a>
 					</li>
 					<li>
 						<a href="#price">Price</a>

@@ -47,7 +47,8 @@ while (linkQueue.TryDequeue(out var uri))
         chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
         chromeDriver.FindElement(By.CssSelector("section.page"));
-        var document = await context.OpenAsync(req => req.Content(chromeDriver.PageSource).Address(uri));
+        var pageSource = chromeDriver.PageSource;
+        var document = await context.OpenAsync(req => req.Content(pageSource).Address(uri));
 
         var page = document.QuerySelector("section.page");
 
@@ -183,5 +184,7 @@ while (linkQueue.TryDequeue(out var uri))
     {
         errorCount++;
         Console.WriteLine(ex);
-    }   
+    }
+
+    await Task.Delay(500).ConfigureAwait(false);
 }

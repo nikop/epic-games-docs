@@ -1,0 +1,125 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_Lobby_GetConnectString</h1>
+			<h2>EOS API reference page for EOS_Lobby_GetConnectString</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/lobby">Lobby Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Get the Connection string for an EOS lobby. The connection string describes the presence of a player in terms of game state. Xbox platforms expect titles to embed this into their MultiplayerActivity at creation. When present, the SDK will use this value to populate session presence in the social overlay and facilitate platform invitations.</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success if retrieving the string was successful.</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if the OutBuffer or InOutBufferLength are null.</p>
+								</li>
+								<li>
+									<p>EOS_IncompatibleVersion if the API version passed in is incorrect.</p>
+								</li>
+								<li>
+									<p>EOS_NotFound if no lobby is found matching the LobbyID and PUID provided.</p>
+								</li>
+								<li>
+									<p>EOS_LimitExceeded if the provided InOutBufferLength is too small to contain the resulting string.</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_Lobby_GetConnectString</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HLobby Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-lobby-get-connect-string-options">EOS_Lobby_GetConnectStringOptions</a>* Options</td>
+										<td>Structure containing the input parameters. API version, the LobbyID of the lobby to generate the string from and the PUID of the requesting user.</td>
+									</tr>
+									<tr>
+										<td>char* OutBuffer</td>
+										<td>The buffer to store the null-terminated ConnectString within</td>
+									</tr>
+									<tr>
+										<td>uint32_t* InOutBufferLength</td>
+										<td>In: The maximum amount of writable chars in OutBuffer see EOS_LOBBY_GETCONNECTSTRING_BUFFER_SIZE, Out: The minimum amount of chars needed in OutBuffer to store the ConnectString (including the null-terminator). May be set to zero depending on the error result.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-lobby-get-connect-string-options">EOS_Lobby_GetConnectStringOptions</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

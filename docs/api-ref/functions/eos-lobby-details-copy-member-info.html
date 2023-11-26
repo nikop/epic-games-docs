@@ -1,0 +1,136 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_LobbyDetails_CopyMemberInfo</h1>
+			<h2>EOS API reference page for EOS_LobbyDetails_CopyMemberInfo</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/lobby">Lobby Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>EOS_LobbyDetails_CopyMemberInfo is used to immediately retrieve a copy of lobby member information from an existing lobby. If the call returns an EOS_Success result, the out parameter, OutLobbyDetailsMemberInfo, must be passed to EOS_LobbyDetails_MemberInfo_Release to release the memory associated with it. Note: this information is only available if you are actively in the lobby.  It is not available for search results.</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success if the information is available and passed out in OutLobbyMemberDetailsInfo</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if you pass a null pointer for the out parameter</p>
+								</li>
+								<li>
+									<p>EOS_IncompatibleVersion if the API version passed in is incorrect</p>
+								</li>
+								<li>
+									<p>EOS_NotFound if searching for a target user ID returns no results</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>
+								<a href="/docs/api-ref/structs/eos-lobby-details-member-info">EOS_LobbyDetails_MemberInfo</a>,
+								<a href="/docs/api-ref/structs/eos-lobby-details-copy-member-info-options">EOS_LobbyDetails_CopyMemberInfoOptions</a>,
+								<a href="/docs/api-ref/functions/eos-lobby-details-member-info-release">EOS_LobbyDetails_MemberInfo_Release</a>
+							</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_LobbyDetails_CopyMemberInfo</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HLobbyDetails Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-lobby-details-copy-member-info-options">EOS_LobbyDetails_CopyMemberInfoOptions</a>* Options</td>
+										<td>Structure containing the input parameters</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/structs/eos-lobby-details-member-info">EOS_LobbyDetails_MemberInfo</a>** OutLobbyDetailsMemberInfo</td>
+										<td>Out parameter used to receive the EOS_LobbyDetails_Info structure.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<p>If successful, this function provides data to the caller through an output parameter. Once you are finished with the data, you must release it by making the appropriate call into the EOS SDK.</p>
+							</div>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-lobby-details-copy-member-info-options">EOS_LobbyDetails_CopyMemberInfoOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/structs/eos-lobby-details-member-info">EOS_LobbyDetails_MemberInfo</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

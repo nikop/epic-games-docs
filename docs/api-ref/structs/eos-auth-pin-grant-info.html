@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -14,7 +14,7 @@
 			<h1>EOS_Auth_PinGrantInfo</h1>
 			<h2>EOS API reference page for EOS_Auth_PinGrantInfo</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -22,11 +22,9 @@
 		<section>
 			<div>
 				<div>
-					<div style="overflow:hidden;margin-bottom:0">
-						<div aria-label="Content Tabs" role="tablist">
-							<button tabindex="0" type="button" role="tab" aria-selected="true" id="simple-tab-0" aria-controls="simple-tabpanel-0">C<span></span>
-							</button>
-						</div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
 					</div>
 				</div>
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
@@ -37,7 +35,7 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Intermediate data needed to complete the EOS_LCT_DeviceCode and EOS_LCT_ExternalAuth login flows, returned by EOS_Auth_LoginCallbackInfo. The data inside should be exposed to the user for entry on a secondary device. All data must be copied out before the completion of this callback.</p>
+							<p>Intermediate data for completing Epic account login, when neither the in-game overlay or a platform browser is used. The EOS_Auth_PinGrantInfo struct is returned as part of the EOS_Auth_LoginCallbackInfo and EOS_Auth_LinkAccountCallbackInfo structs. The data inside should be exposed to the user for entry on a secondary device. All data must be copied out before the completion of this callback.</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
@@ -56,7 +54,7 @@
 									</tr>
 									<tr>
 										<td>const char* UserCode</td>
-										<td>Code the user must input on an external device to activate the login</td>
+										<td>Code the user must input on an external device to activate the login.</td>
 									</tr>
 									<tr>
 										<td>const char* VerificationURI</td>
@@ -64,7 +62,7 @@
 									</tr>
 									<tr>
 										<td>int32_t ExpiresIn</td>
-										<td>Time the user has, in seconds, to complete the process or else timeout</td>
+										<td>Time the user has, in seconds, to complete the process or else timeout.</td>
 									</tr>
 									<tr>
 										<td>const char* VerificationURIComplete</td>

@@ -3,7 +3,13 @@
 		<nav>
 			<ol>
 				<li>
-					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="Player Reports Web APIs">Player Reports Web APIs</span>
 				</li>
 			</ol>
 		</nav>
@@ -176,8 +182,109 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="display: inline-block;">
+								<span style="">curl
 								</span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span style="color: rgb(102, 0, 102);">location</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span>request
+								</span>
+								<span style="color: rgb(0, 102, 102);">POST</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">'https://api.epicgames.dev/player-reports/v1/report'</span>
+								<span>
+									\</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span>header
+								</span>
+								<span style="color: rgb(0, 136, 0);">'Content-Type: text/plain'</span>
+								<span>
+									\</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span>data</span>
+								<span style="color: rgb(102, 102, 0);">-</span>
+								<span>raw '</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"time"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"2020-04-02T00:00:00.000Z"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reportingPlayerId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"player_1"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reportedPlayerId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"player_2"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">1</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"message"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(0, 136, 0);">"This player is cheating"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"context"</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"{\"key\": \"value\"}"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span>'</span>
 							</div>
 						</div>
 					</pre>
@@ -401,8 +508,19 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="display: inline-block;">
+								<span style="">curl
 								</span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span style="color: rgb(102, 0, 102);">location</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span>request
+								</span>
+								<span style="color: rgb(0, 102, 102);">GET</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">'https://api.epicgames.dev/player-reports/v1/report/deployment_0?reportingPlayerId=player_1&amp;reportingPlayerId=player_2&amp;reportingPlayerId=player_3&amp;reasonId=1&amp;reasonId=2&amp;pagination=true&amp;offset=0&amp;limit=10&amp;startTime=2018-05-01T00:00:00.000&amp;endTime=2020-06-01T00:00:00.000Z&amp;order=time:asc'</span>
 							</div>
 						</div>
 					</pre>
@@ -642,6 +760,190 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"paging"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"offset"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">0</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"limit"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">1</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"total"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">1</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"elements"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">[</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"productId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"product_0"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"sandboxId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"sandbox_0"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"deploymentId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"deployment_0"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"time"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"2019-04-01T00:00:00.000Z"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reportingPlayerId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"player_1"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reportedPlayerId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"player_2"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">1</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"message"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"This player is cheating"</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"context"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"{\"key\": \"value\"}"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">]</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>
 							</div>
@@ -682,8 +984,19 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="display: inline-block;">
+								<span style="">curl
 								</span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span style="color: rgb(102, 0, 102);">location</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">--</span>
+								<span>request
+								</span>
+								<span style="color: rgb(0, 102, 102);">GET</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">'https://api.epicgames.dev/player-reports/v1/report/reason/definition'</span>
 							</div>
 						</div>
 					</pre>
@@ -799,6 +1112,268 @@
 				<section>
 					<pre>
 						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"elements"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">[</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">1</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Cheating"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">2</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Exploiting"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">3</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Offensive profile"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">4</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Verbal abuse"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">5</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Scamming"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">6</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Spamming"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonId"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">7</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">"reasonString"</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 136, 0);">"Other negative behavior"</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">]</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span></span>
+							</div>
 							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>

@@ -1,0 +1,177 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_IntegratedPlatform_SetUserPreLogoutCallback</h1>
+			<h2>EOS API reference page for EOS_IntegratedPlatform_SetUserPreLogoutCallback</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/integrated-platform">IntegratedPlatform Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Sets the integrated platform user logout handler for all integrated platforms. There can only be one handler set at once, attempting to set a handler when one is already set will result in a EOS_AlreadyConfigured error. This callback handler allows applications to decide if a user is logged-out immediately when the SDK receives a system user logout event, or if the application would like to give the user a chance to correct themselves and log back in if they are in a state that might be disruptive if an accidental logout happens (unsaved user data, in a multiplayer match, etc). This is not supported on all integrated platforms, such as those where applications automatically close when a user logs out, or those where a user is always logged-in. If a logout is deferred, applications are expected to eventually call EOS_IntegratedPlatform_FinalizeDeferredUserLogout when they have decided a user meant to logout, or if they have logged in again.</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success if the platform user logout handler was bound successfully.</p>
+								</li>
+								<li>
+									<p>EOS_AlreadyConfigured if there is already a platform user logout handler bound.</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>
+								<a href="/docs/api-ref/functions/eos-integrated-platform-clear-user-pre-logout-callback">EOS_IntegratedPlatform_ClearUserPreLogoutCallback</a>,
+								<a href="/docs/api-ref/functions/eos-integrated-platform-finalize-deferred-user-logout">EOS_IntegratedPlatform_FinalizeDeferredUserLogout</a>
+							</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_IntegratedPlatform_SetUserPreLogoutCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HIntegratedPlatform Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-integrated-platform-set-user-pre-logout-callback-options">EOS_IntegratedPlatform_SetUserPreLogoutCallbackOptions</a>* Options</td>
+										<td>Data that specifies the API version.</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>An optional context pointer that is returned in the callback data.</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/callbacks/eos-integrated-platform-on-user-pre-logout-callback">EOS_IntegratedPlatform_OnUserPreLogoutCallback</a>
+											CallbackFunction</td>
+										<td>The function that will handle the callback.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>This function is asynchronous; the EOS SDK guarantees that your callback (the
+										<code>CallbackFunction</code>
+										parameter) will run when the operation completes, regardless of whether it succeeds or fails. Use the
+										<code>void*</code>
+										parameter to pass any contextual information the callback may need in order to react properly. Relevant information can be copied from the EOS SDK's cache while the callback function is running. You do not need to remove the callback function.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="callback-function-information">Callback Function Information</h2>
+							</div>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_IntegratedPlatform_OnUserPreLogoutCallback to report the results of its operation.</p>
+							<div>
+								<h3 id="callback-remarks">Callback Remarks</h3>
+							</div>
+							<p>The callback function for when an integrated platform user is detected to have logged-out.</p>
+							<div>
+								<h3 id="callback-parameters">Callback Parameters</h3>
+							</div>
+							<p>EOS_IntegratedPlatform_OnUserPreLogoutCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-integrated-platform-user-pre-logout-callback-info">EOS_IntegratedPlatform_UserPreLogoutCallbackInfo</a>* Data</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-integrated-platform-set-user-pre-logout-callback-options">EOS_IntegratedPlatform_SetUserPreLogoutCallbackOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-integrated-platform-on-user-pre-logout-callback">EOS_IntegratedPlatform_OnUserPreLogoutCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-function-information">Callback Function Information</a>
+					</li>
+					<li>
+						<a href="#callback-remarks">Callback Remarks</a>
+					</li>
+					<li>
+						<a href="#callback-parameters">Callback Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

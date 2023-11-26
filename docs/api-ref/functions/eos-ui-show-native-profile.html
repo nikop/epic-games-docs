@@ -1,0 +1,179 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_UI_ShowNativeProfile</h1>
+			<h2>EOS API reference page for EOS_UI_ShowNativeProfile</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/ui">UI Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Requests that the native ID for a target player be identified and the native profile be displayed for that player.</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success If the native SDK has been requested to display a profile.</p>
+								</li>
+								<li>
+									<p>EOS_IncompatibleVersion if the API version passed in is incorrect.</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters If any of the options are incorrect.</p>
+								</li>
+								<li>
+									<p>EOS_ApplicationSuspended If the application is suspended.</p>
+								</li>
+								<li>
+									<p>EOS_NetworkDisconnected If the network is disconnected.</p>
+								</li>
+								<li>
+									<p>EOS_NotFound If the platform ID for the target player cannot be found.</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_UI_ShowNativeProfile</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HUI Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-ui-show-native-profile-options">EOS_UI_ShowNativeProfileOptions</a>* Options</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Arbitrary data that is passed back to you in the NotificationFn.</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-ui-on-show-native-profile-callback">EOS_UI_OnShowNativeProfileCallback</a>
+											CompletionDelegate</td>
+										<td>A callback that is fired when the profile has been shown.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>This function is asynchronous; the EOS SDK guarantees that your callback (the
+										<code>CompletionDelegate</code>
+										parameter) will run when the operation completes, regardless of whether it succeeds or fails. Use the
+										<code>void*</code>
+										parameter to pass any contextual information the callback may need in order to react properly. Relevant information can be copied from the EOS SDK's cache while the callback function is running. You do not need to remove the callback function.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="callback-function-information">Callback Function Information</h2>
+							</div>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_UI_OnShowNativeProfileCallback to report the results of its operation.</p>
+							<div>
+								<h3 id="callback-remarks">Callback Remarks</h3>
+							</div>
+							<p>Function prototype definition for callbacks passed to EOS_UI_ShowNativeProfile</p>
+							<div>
+								<h3 id="callback-parameters">Callback Parameters</h3>
+							</div>
+							<p>EOS_UI_OnShowNativeProfileCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-ui-show-native-profile-callback-info">EOS_UI_ShowNativeProfileCallbackInfo</a>* Data</td>
+										<td>A EOS_UI_ShowNativeProfileCallbackInfo containing the output information and result</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-ui-show-native-profile-options">EOS_UI_ShowNativeProfileOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-ui-on-show-native-profile-callback">EOS_UI_OnShowNativeProfileCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-function-information">Callback Function Information</a>
+					</li>
+					<li>
+						<a href="#callback-remarks">Callback Remarks</a>
+					</li>
+					<li>
+						<a href="#callback-parameters">Callback Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

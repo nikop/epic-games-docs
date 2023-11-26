@@ -1,0 +1,93 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_EIntegratedPlatformPreLogoutAction</h1>
+			<h2>EOS API reference page for EOS_EIntegratedPlatformPreLogoutAction</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This enumerated type is part of the
+								<a href="/docs/api-ref/interfaces/integrated-platform">IntegratedPlatform Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>The return value for the EOS_IntegratedPlatform_OnUserPreLogoutCallback callback function. This signifies what the application wants to do for the provided user of the integrated platform.</p>
+							<div>
+								<h2 id="values">Values</h2>
+							</div>
+							<p>EOS_EIntegratedPlatformPreLogoutAction</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Enumerated Value</th>
+										<th>Meaning</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_IPLA_ProcessLogoutImmediately</td>
+										<td>The application accepts the user being logged-out. all cached data for the user will be cleared immediately and any pending actions canceled.</td>
+									</tr>
+									<tr>
+										<td>EOS_IPLA_DeferLogout</td>
+										<td>Instead of the user being logged-out, the SDK will wait for a call to EOS_IntegratedPlatform_FinalizeDeferredUserLogout with the expected login state of the user. If the expected state matches the current state, the user will continue to be logged-in or they will be logged-out, depending on the value of the expected state. This lets the application choose to ask the user if they meant to logout if it wishes, possibly preventing losing any unsaved changes, such as game progress, leaving a multiplayer match, or similar.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-integrated-platform-on-user-pre-logout-callback">EOS_IntegratedPlatform_OnUserPreLogoutCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#values">Values</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

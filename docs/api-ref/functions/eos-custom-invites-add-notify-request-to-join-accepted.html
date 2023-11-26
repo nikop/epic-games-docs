@@ -1,0 +1,196 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_CustomInvites_AddNotifyRequestToJoinAccepted</h1>
+			<h2>EOS API reference page for EOS_CustomInvites_AddNotifyRequestToJoinAccepted</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/custom-invites">CustomInvites Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Register to receive notifications when a Request to Join for any logged in local user is accepted via the Social Overlay</p>
+							<div>
+								<p>must call EOS_CustomInvites_RemoveNotifyRequestToJoinAccepted to remove the notification</p>
+							</div>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<p>handle representing the registered callback</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_CustomInvites_AddNotifyRequestToJoinAccepted</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HCustomInvites Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-custom-invites-add-notify-request-to-join-accepted-options">EOS_CustomInvites_AddNotifyRequestToJoinAcceptedOptions</a>* Options</td>
+										<td>Structure containing information about the request.</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Arbitrary data that is passed back to you in the CompletionDelegate.</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-custom-invites-on-request-to-join-accepted-callback">EOS_CustomInvites_OnRequestToJoinAcceptedCallback</a>
+											NotificationFn</td>
+										<td>A callback that is fired when a Request to Join is accepted via the Social Overlay.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>This function enables your callback (the
+										<code>NotificationFn</code>
+										parameter) to respond to events that happen on the back-end service. Remember to remove your callback function when it is no longer needed.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="callback-function-information">Callback Function Information</h2>
+							</div>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_CustomInvites_OnRequestToJoinAcceptedCallback to report the results of its operation. See the
+								<a href="/docs/api-ref/structs/eos-custom-invites-on-request-to-join-accepted-callback-info">EOS_CustomInvites_OnRequestToJoinAcceptedCallbackInfo</a>
+								page for more details, or check the [Callback Data] section below.</p>
+							<div>
+								<h3 id="callback-remarks">Callback Remarks</h3>
+							</div>
+							<p>Function prototype definition for notifications that comes from EOS_CustomInvites_AddNotifyRequestToJoinAccepted</p>
+							<div>
+								<h3 id="callback-parameters">Callback Parameters</h3>
+							</div>
+							<p>EOS_CustomInvites_OnRequestToJoinAcceptedCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-custom-invites-on-request-to-join-accepted-callback-info">EOS_CustomInvites_OnRequestToJoinAcceptedCallbackInfo</a>* Data</td>
+										<td>A EOS_CustomInvites_OnRequestToJoinAcceptedCallbackInfo containing the output information and result</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h3 id="callback-data">Callback Data</h3>
+							</div>
+							<p>The EOS SDK passes the following data structure to the callback function:</p>
+							<p>EOS_CustomInvites_OnRequestToJoinAcceptedCallbackInfo</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Property</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Context that was passed into EOS_CustomInvites_AddNotifyRequestToJoinAccepted</td>
+									</tr>
+									<tr>
+										<td>EOS_ProductUserId TargetUserId</td>
+										<td>User that sent the request to join</td>
+									</tr>
+									<tr>
+										<td>EOS_ProductUserId LocalUserId</td>
+										<td>Local user ID of the Request to Join recipient</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>For more information, see the
+								<a href="/docs/api-ref/structs/eos-custom-invites-on-request-to-join-accepted-callback-info">EOS_CustomInvites_OnRequestToJoinAcceptedCallbackInfo</a>
+								page.</p>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-custom-invites-add-notify-request-to-join-accepted-options">EOS_CustomInvites_AddNotifyRequestToJoinAcceptedOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-custom-invites-on-request-to-join-accepted-callback">EOS_CustomInvites_OnRequestToJoinAcceptedCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-function-information">Callback Function Information</a>
+					</li>
+					<li>
+						<a href="#callback-remarks">Callback Remarks</a>
+					</li>
+					<li>
+						<a href="#callback-parameters">Callback Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-data">Callback Data</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

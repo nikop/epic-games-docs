@@ -1,0 +1,125 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_IntegratedPlatform_FinalizeDeferredUserLogout</h1>
+			<h2>EOS API reference page for EOS_IntegratedPlatform_FinalizeDeferredUserLogout</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/integrated-platform">IntegratedPlatform Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Complete a Logout/Login for a previously deferred Integrated Platform User Logout. This function allows applications to control whether an integrated-platform user actually logs out when an integrated platform's system tells the SDK a user has been logged-out. This allows applications to prevent accidental logouts from destroying application user state. If a user did not mean to logout, the application should prompt and confirm whether the user meant to logout, and either wait for them to confirm they meant to, or wait for them to login again, before calling this function. If the sign-out is intended and your application believes the user is still logged-out, the UserExpectedLoginState in Options should be EOS_LS_NotLoggedIn. If the sign-out was NOT intended and your application believes the user has logged-in again, the UserExpectedLoginState in Options should be EOS_LS_LoggedIn.</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<ul>
+								<li>
+									<p>EOS_Success if the platform user state matches the UserExpectedLoginState internally.</p>
+								</li>
+								<li>
+									<p>EOS_NotConfigured if the Integrated Platform was not initialized on platform creation</p>
+								</li>
+								<li>
+									<p>EOS_InvalidUser if the LocalPlatformUserId is not a valid user id for the provided Integrated Platform, or if there is no deferred logout waiting to be completed for this specified user</p>
+								</li>
+								<li>
+									<p>EOS_InvalidParameters if any other input was invalid</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>
+								<a href="/docs/api-ref/functions/eos-integrated-platform-set-user-pre-logout-callback">EOS_IntegratedPlatform_SetUserPreLogoutCallback</a>,
+								<a href="/docs/api-ref/functions/eos-integrated-platform-clear-user-pre-logout-callback">EOS_IntegratedPlatform_ClearUserPreLogoutCallback</a>,
+								<a href="/docs/api-ref/functions/eos-integrated-platform-add-notify-user-login-status-changed">EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged</a>
+							</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_IntegratedPlatform_FinalizeDeferredUserLogout</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HIntegratedPlatform Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-integrated-platform-finalize-deferred-user-logout-options">EOS_IntegratedPlatform_FinalizeDeferredUserLogoutOptions</a>* Options</td>
+										<td>Data for which integrated platform and user is now in the expected logged-in/logged-out state.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-integrated-platform-finalize-deferred-user-logout-options">EOS_IntegratedPlatform_FinalizeDeferredUserLogoutOptions</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

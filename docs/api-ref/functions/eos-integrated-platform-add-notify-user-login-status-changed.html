@@ -1,0 +1,167 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged</h1>
+			<h2>EOS API reference page for EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/integrated-platform">IntegratedPlatform Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Register to receive notifications when the login state of Integrated Platform users change. This notification will trigger any time the EOS SDK's internal login state changes for a user, including for manual login state changes (when the EOS_IPMF_ApplicationManagedIdentityLogin flag is set), or automatically detected ones (when not disabled by the EOS_IPMF_ApplicationManagedIdentityLogin flag).</p>
+							<div>
+								<h2 id="return-value">Return Value</h2>
+							</div>
+							<p>A valid notification that can be used to unregister for notifications, or EOS_INVALID_NOTIFICATIONID if input was invalid.</p>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>
+								<a href="/docs/api-ref/functions/eos-integrated-platform-remove-notify-user-login-status-changed">EOS_IntegratedPlatform_RemoveNotifyUserLoginStatusChanged</a>
+							</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HIntegratedPlatform Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-integrated-platform-add-notify-user-login-status-changed-option">EOS_IntegratedPlatform_AddNotifyUserLoginStatusChangedOptions</a>* Options</td>
+										<td>Data associated with what version of the notification to receive.</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>A context pointer that is returned in the callback function.</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-integrated-platform-on-user-login-status-changed-callback">EOS_IntegratedPlatform_OnUserLoginStatusChangedCallback</a>
+											CallbackFunction</td>
+										<td>The function that is called when Integrated Platform user logins happen</td>
+									</tr>
+								</tbody>
+							</table>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>This function enables your callback (the
+										<code>CallbackFunction</code>
+										parameter) to respond to events that happen on the back-end service. Remember to remove your callback function when it is no longer needed.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="callback-function-information">Callback Function Information</h2>
+							</div>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_IntegratedPlatform_OnUserLoginStatusChangedCallback to report the results of its operation.</p>
+							<div>
+								<h3 id="callback-remarks">Callback Remarks</h3>
+							</div>
+							<p>The callback function for when a local integrated platform user's login status has changed.</p>
+							<div>
+								<h3 id="callback-parameters">Callback Parameters</h3>
+							</div>
+							<p>EOS_IntegratedPlatform_OnUserLoginStatusChangedCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-integrated-platform-user-login-status-changed-callback-info">EOS_IntegratedPlatform_UserLoginStatusChangedCallbackInfo</a>* Data</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-integrated-platform-add-notify-user-login-status-changed-option">EOS_IntegratedPlatform_AddNotifyUserLoginStatusChangedOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-integrated-platform-on-user-login-status-changed-callback">EOS_IntegratedPlatform_OnUserLoginStatusChangedCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-function-information">Callback Function Information</a>
+					</li>
+					<li>
+						<a href="#callback-remarks">Callback Remarks</a>
+					</li>
+					<li>
+						<a href="#callback-parameters">Callback Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

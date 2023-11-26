@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -14,7 +14,7 @@
 			<h1>EOS_Connect_UserLoginInfo</h1>
 			<h2>EOS API reference page for EOS_Connect_UserLoginInfo</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -22,11 +22,9 @@
 		<section>
 			<div>
 				<div>
-					<div style="overflow:hidden;margin-bottom:0">
-						<div aria-label="Content Tabs" role="tablist">
-							<button tabindex="0" type="button" role="tab" aria-selected="true" id="simple-tab-0" aria-controls="simple-tabpanel-0">C<span></span>
-							</button>
-						</div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
 					</div>
 				</div>
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
@@ -37,7 +35,7 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Additional information about the local user. As the information passed here is client-controlled and not part of the user authentication tokens, it is only treated as non-authoritative informational data to be used by some of the feature services. For example displaying player names in Leaderboards rankings.</p>
+							<p>Additional information about the local user.</p>
 							<div>
 								<h2 id="properties">Properties</h2>
 							</div>
@@ -56,7 +54,11 @@
 									</tr>
 									<tr>
 										<td>const char* DisplayName</td>
-										<td>The user's display name on the identity provider systems as UTF-8 encoded null-terminated string. The length of the name can be at maximum up to EOS_CONNECT_USERLOGININFO_DISPLAYNAME_MAX_LENGTH bytes.</td>
+										<td>The user's display name on the identity provider systems as UTF-8 encoded null-terminated string. The length of the name can be at maximum up to EOS_CONNECT_USERLOGININFO_DISPLAYNAME_MAX_LENGTH bytes. As the display name passed here is client-controlled and not part of user authentication tokens, it is only treated as non-authoritative informational data to be used by some of the feature services. For example displaying player names in Leaderboards rankings.</td>
+									</tr>
+									<tr>
+										<td>const char* NsaIdToken</td>
+										<td>Nintendo Service Account ID Token (NSA ID). This field is required to be set and only used when running on the Nintendo Switch device, and the user is being authenticated using any other credential type than EOS_ECT_NINTENDO_NSA_ID_TOKEN. In order to use the Lobbies and Sessions interfaces, a valid NSA ID Token is required to be provided for the active local Nintendo Switch user. Otherwise, attempting to use either of the Lobbies or Sessions interfaces will return the EOS_Permission_OnlinePlayRestricted error result.</td>
 									</tr>
 								</tbody>
 							</table>

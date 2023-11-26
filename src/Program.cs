@@ -13,7 +13,10 @@ using System.Globalization;
 var dir = new DirectoryInfo("docs");
 CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-var chromeDriver = new ChromeDriver();
+var chromeOptions = new ChromeOptions();
+chromeOptions.AddArgument("headless");
+
+var chromeDriver = new ChromeDriver(chromeOptions);
 var config = Configuration.Default;
 var context = BrowsingContext.New(config);
 
@@ -62,10 +65,10 @@ while (linkQueue.TryDequeue(out var uri))
             await Task.Delay(10000);
         }
 
-        if (pageSource.Contains("Sorry, you don't have access to this page!"))
-        {
-            Console.WriteLine($"::error::No permission to {uri}");
-        }
+        //if (pageSource.Contains("Sorry, you don't have access to this page!"))
+        //{
+        //    Console.WriteLine($"::error::No permission to {uri}");
+        //}
 
         var document = await context.OpenAsync(req => req.Content(pageSource).Address(uri));
 

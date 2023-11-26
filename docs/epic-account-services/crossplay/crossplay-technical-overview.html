@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -28,8 +28,7 @@
 			<div>
 				<p>Crossplay is currently available for games on Windows PC, Nintendo Switch, PlayStation, and Xbox consoles.
 					<br>
-					
-					<!-- -->Support for macOS, Linux, Android and iOS is planned.</p>
+					Support for macOS, Linux, Android and iOS is planned.</p>
 			</div>
 			<p>The required integration steps to use crossplay in your game are covered below. For an introduction to crossplay, inlcuding an overview of the services that crossplay provides, see the
 				<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>
@@ -52,12 +51,16 @@
 			</div>
 			<p>To use Epic Account Services with your game, you will need to
 				<a href="/docs/epic-account-services/getting-started">set up an Application</a>
-				for your 
-				<!-- -->product
-				<!-- --> in the Dev Portal. After setting up your Application with the required information, submit it for a
-				<a href="/docs/epic-account-services/brand-review">brand review</a>. The brand review process will take a few days, after which players of your game will be able to log in using Epic accounts. For development purposes only, those Epic accounts that are members of your Dev Portal 
-				<!-- -->organization
-				<!-- --> will be able to log in in your game prior to it completing the brand review process.</p>
+				for your
+				<span>
+					<span>product</span>
+				</span>
+				in the Dev Portal. After setting up your Application with the required information, submit it for a
+				<a href="/docs/epic-account-services/brand-review">brand review</a>. The brand review process will take a few days, after which players of your game will be able to log in using Epic accounts. For development purposes only, those Epic accounts that are members of your Dev Portal
+				<span>
+					<span>organization</span>
+				</span>
+				will be able to log in in your game prior to it completing the brand review process.</p>
 			<p>See the documentation on the
 				<a href="/docs/epic-account-services/brand-review">brand review application process</a>
 				for more information about setting up your Application for Epic Account Services.</p>
@@ -76,9 +79,11 @@
 				<a href="#stand-alone-distribution">Stand-alone distribution</a>
 				may also use the
 				<code>EOS_LCT_AccountPortal</code>
-				log-in method that does not require input authentication credentials, and instead prompts the user for Epic 
-				<!-- -->account
-				<!-- --> credentials as part of the log-in process.</p>
+				log-in method that does not require input authentication credentials, and instead prompts the user for Epic
+				<span>
+					<span>account</span>
+				</span>
+				credentials as part of the log-in process.</p>
 			<p>The SDK takes full control of the log-in flow by walking the user through any necessary steps using the in-game overlay. Once the user completes the login flow, either successfully or by canceling it, the SDK returns control to the game application via completion callback of the
 				<code>EOS_Auth_Login</code>
 				SDK API. On Steam, the user's Steam account is implicitly linked to their logged-in Epic Account as part of the log-in flow managed by the SDK.</p>
@@ -235,12 +240,10 @@
 			<p>New users without an existing Epic Account have the option to create a new frictionless proxy Epic  Account. This links the user's Steam account to a newly-created Epic Account, allowing an automatic log in on consecutive application runs and without requiring users to register any additional details such as their email address or password.</p>
 			<p>Proxy Epic Accounts can be used in the same way as regular Epic Accounts that have an associated email address and password. For example, if the user later installs the Epic Games Launcher they will be able to login to their Epic Account using their Steam account login credentials. At that time, the user will be asked to register an email address and set a password for their account.</p>
 			<div>
-				<div style="max-width:491px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Welcome" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Welcome" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/crossplay/welcome.png">
-						</noscript>
+				<div style="max-width: 491px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Welcome" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Welcome screen of the built-in user onboarding experience on Steam that supports the frictionless proxy Epic Account creation.</p>

@@ -1,0 +1,137 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Tools to Transition Your Game Between Network and Application States</h1>
+			<h2>A list of the available methods that you can use to remove, mute, and block players for your game's network and application status changes.</h2>
+			<div>
+				<div>
+					<div>
+						<span>Preview</span>
+					</div>
+				</div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>When one of your players' Application Status or Network Status changes, you must update the state accordingly in your game to keep Real Time Communications (RTC) up to date. Some of these states require you to remove the player from the room, mute them, or even block them. See the
+				<a href="/docs/game-services/eos-platform-interface#application-and-network-status">Application Status and Network Status</a>
+				documentation for more information on the various states and how to set them. You can use the tools and methods below to help your players and game move between the required states.</p>
+			<div>
+				<h2 id="mute-and-block-players">Mute and Block Players</h2>
+			</div>
+			<p>You can use the methods below to mute and block players:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>METHOD</th>
+						<th>DESCRIPTION</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Local mute</td>
+						<td>You can mute local users in your game's chat by using both
+							<code>EOS_RTCAudio_UpdateSendingOptions::AudioStatus</code>
+							and
+							<code>EOS_RTCAudio_UpdateReceivingOptions::bAudioEnabled</code>. The local user is still active in the room, but they can't send or receive audio.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>NotListening</code>
+							state</td>
+						<td>RTC has an unique flow for
+							<code>EOS_RTCAudio_UpdateSendingOptions::AudioStatus::EOS_RTCAS_NotListeningDisabled</code>. In this case, the client is still active in the room, but the media server blocks all audio transmissions to that client. The valid use case for this is if you have two or more connected rooms, but the player only wants to be active in one room (but still visible in other rooms, effectively keeping the player's spot).</td>
+					</tr>
+					<tr>
+						<td>Hard mute</td>
+						<td>You can toggle the hard mute option for a player with
+							<code>EOS_RTCAdmin_SetParticipantHardMuteOptions::bMute</code>. The affected player is muted or unmuted from the media server. This doesn't affect the player's room activity.</td>
+					</tr>
+					<tr>
+						<td>Block</td>
+						<td>You can block a player with
+							<code>EOS_RTC_BlockParticipantOptions::bBlocked</code>. The player is still active in the room, but they can no longer send or receive audio.</td>
+					</tr>
+					<tr>
+						<td>Audio hardware</td>
+						<td>To support voice, RTC uses a player's audio hardware only when it needs to use it. For example, when the player is alone in a room, it doesn't use their hardware.<br>
+							<br>This is worth considering, as people can be sensitive to when their audio devices are used.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="remove-players-from-rooms">Remove Players from Rooms</h2>
+			</div>
+			<p>You can use the methods below to remove a player from a room:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>METHOD</th>
+						<th>DESCRIPTION</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>RTC directly</td>
+						<td>You can call
+							<code>EOS_RTC_LeaveRoom</code>
+							to remove a player from the room entirely.</td>
+					</tr>
+					<tr>
+						<td>RTC indirectly</td>
+						<td>Rtc can raise it internally by some triggers, like losing connection and the media server events. This removes the player from the room entirely.</td>
+					</tr>
+					<tr>
+						<td>Lobby RTC indirectly</td>
+						<td>Lobby utilizes RTC, and RTC lifetime depends on lobby rules. The player leaves the room entirely, but lobby RTC keeps the RTC state for further reconnections.<br>
+							<br>
+							<strong>Note</strong>: By default, lobby usually tries to reconnect RTC on its indirect triggers (For example, it always stays connected from a lobby perspective).</td>
+					</tr>
+					<tr>
+						<td>Release SDK platform</td>
+						<td>You can call
+							<code>EOS_Platform_Release</code>
+							to release the EOS SDK platform. This looks like an RTC indirect trigger with the same flow and conditions.<br>
+							<br>
+							<strong>Note</strong>: This can have issues. It is better to recheck it in advance.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="tag_list">
+				<a href="/docs/site-map">Interface</a>
+				<a href="/docs/site-map">
+					Voice</a>
+				<a href="/docs/site-map">
+					Lobbies</a>
+				<a href="/docs/site-map">
+					Chat</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#mute-and-block-players">Mute and Block Players</a>
+					</li>
+					<li>
+						<a href="#remove-players-from-rooms">Remove Players from Rooms</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

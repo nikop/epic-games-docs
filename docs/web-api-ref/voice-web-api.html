@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -47,8 +47,8 @@
 			<p>In order to join a voice conference on a media server, users need to provide a room token.</p>
 			<p>The
 				<code>createRoomToken</code>
-				request will query these tokens for a list of
-				<code>ProductUserIds</code>, using the optional player IP addresses to select the best server region for the voice session.</p>
+				request queries these tokens for a list of
+				<code>ProductUserIds</code>, using player IP addresses to choose a server close to a player's location. The player IP address is optional, however for the best user experience, we recommend including this data. This is because a server close to a player's location has low network latency during the voice session.</p>
 			<p>If the specified
 				<code>roomId</code>
 				does not exist, it is created.</p>
@@ -211,7 +211,7 @@
 							<code>clientIP</code>
 						</td>
 						<td>String</td>
-						<td>IP of the Participant, used to select an appropriate server region for the voice room.</td>
+						<td>IP address of the player (also known as the "participant"). The service uses this data to select a server for the voice session that is close to the player's location. If there is no IP address provided, the service chooses a server in a default location. This might result in a poor player experience: the server might not be close to the player's location which might result in the player experiencing high network latency during the voice session.</td>
 					</tr>
 					<tr>
 						<td>
@@ -229,8 +229,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -240,7 +240,7 @@
 			<div>
 				<h3 id="response">Response</h3>
 			</div>
-			<table style="width:100%">
+			<table style="width: 100%;">
 				<thead>
 					<tr>
 						<td colspan="3">
@@ -379,8 +379,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -396,7 +396,7 @@
 			<div>
 				<h3 id="request-1">Request</h3>
 			</div>
-			<table style="width:100%">
+			<table style="width: 100%;">
 				<thead>
 					<tr>
 						<td>
@@ -485,8 +485,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -512,8 +512,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -626,8 +626,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -653,8 +653,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>

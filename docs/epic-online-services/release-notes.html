@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -18,6 +18,14 @@
 	</section>
 	<section>
 		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>As of April 2024, the EOS SDK will stop supporting Windows 7, Windows 8, and Windows 8.1. EOS SDK versions released after April 2024 will not support these versions of Windows. To use versions of the EOS SDK released after April 2024, you will need to update to a more recent version of Windows. See the
+						<a href="/docs/epic-online-services/platforms/windows">EOS SDK for Windows</a>
+						documentation for more information.</p>
+				</div>
+			</div>
 			<p>
 				<strong>About the EOS SDK</strong>
 			</p>
@@ -25,28 +33,24 @@
 				<li>
 					<strong>Get started</strong>:
 					<br>
-					
-					<!-- -->See the EOS
+					See the EOS
 					<a href="/docs/epic-online-services/eos-get-started">Get Started Steps</a>
 					page for information on how to set up and use EOS services and the EOS SDK.</li>
 				<li>
 					<strong>SDK download types</strong>:
 					<br>
-					
-					<!-- -->In addition to different release versions of the EOS SDK, there are different types of SDK download to use, depending on the platform your game clients run on. Find out about these in the EOS get started documentation
+					In addition to different release versions of the EOS SDK, there are different types of SDK download to use, depending on the platform your game clients run on. Find out about these in the EOS get started documentation
 					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>.</li>
 				<li>
 					<strong>What's new</strong>:
 					<br>
-					
-					<!-- -->See the
+					See the
 					<a href="/docs/epic-online-services/whats-new">EOS What's New</a>
 					documentation for a high-level overview of what's changed with every EOS SDK release.</li>
 				<li>
 					<strong>Planned features</strong>:
 					<br>
-					
-					<!-- -->Find out what's in development on the EOS roadmap at
+					Find out what's in development on the EOS roadmap at
 					<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</li>
 			</ul>
 			<div role="alert">
@@ -109,7 +113,6 @@
 					<strong>Bug fix</strong>: We have added the correct Gradle files to the Android login sample, and Android headers are now in the new
 					<code>/SDK/Include</code>
 					directory that matches other platforms.
-					<!-- -->
 					<ul>
 						<li>See the
 							<a href="/docs/epic-online-services/platforms/android">EOS SDK for Android</a>
@@ -153,8 +156,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -218,7 +221,6 @@
 					API. You can use this flag to attempt automatic player login that silently fails without prompting the player.</li>
 				<li>
 					<strong>New</strong>: Added command-line arguments to the Developer Authentication Tool (Dev Auth Tool):
-					<!-- -->
 					<ul>
 						<li>
 							<code>--port=N</code>
@@ -526,7 +528,6 @@
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue that occurred when you pinned the same buffer multiple times in a multi-threaded environment while using the C# wrapper.
-					<!-- -->
 					<ul>
 						<li>For instance, if you used the
 							<code>NetProtect</code>
@@ -739,7 +740,6 @@
 					<strong>New</strong>: You can find out which player owns a session with the
 					<code>EOS_SessionsDetails_Info</code>
 					struct. This value is in one of two forms:
-					<!-- -->
 					<ul>
 						<li>The
 							<code>EOS_ProductUserId</code>
@@ -781,7 +781,6 @@
 			<ul>
 				<li>
 					<strong>New</strong>: Integrated Platform on Console expands on the existing Integrated Platform provided for Steam, but now it applies to all the major consoles.
-					<!-- -->
 					<ul>
 						<li>See the original documentation for Platform Interface:
 							<a href="/docs/game-services/eos-platform-interface#native-platform-integration">Native Platform Integration</a>.</li>
@@ -849,7 +848,6 @@
 				<li>
 					<strong>Deprecated</strong>: We deprecated Device Code support,
 					<code>EOS_LCT_DeviceCode</code>, for Epic Games accounts sign in.
-					<!-- -->
 					<ul>
 						<li>We recommend you stop using
 							<code>EOS_LCT_DeviceCode</code>
@@ -889,7 +887,6 @@
 					<code>EOS_PLAYERDATASTORAGE_QUERYFILEOPTIONS_API_LATEST</code>
 					becomes
 					<code>EOS_PLAYERDATASTORAGE_QUERYFILE_API_LATEST</code>.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: For backward compatibility, the deprecated macros are still present, but we will be removing them in a future version. We recommend replacing any deprecated macros that use the old naming convention with macros that use the new naming convention.</li>
@@ -1033,7 +1030,6 @@
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: The anti-cheat bootstrapper (<code>start_protected_game</code>) may reject anti-cheat updates because of a file size limit.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: We recommend updating this executable as soon as possible to avoid errors from future module updates. The executable can be updated without updating the rest of the SDK or recompiling your game.</li>
@@ -1129,7 +1125,6 @@
 					<a href="/docs/api-ref/structs/eos-lobby-join-lobby-by-id-options">
 						<code>EOS_Lobby_JoinLobbyByIdOptions</code>
 					</a>.
-					<!-- -->
 					<ul>
 						<li>By default,
 							<code>bCrossplayOptOut</code>
@@ -1172,7 +1167,6 @@
 					<strong>Bug fix</strong>:
 					<code>EOS_LobbyDetails_GetMemberCount</code>
 					is now accurate in all contexts including lobby search results.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: We recommend that you review the usage of
@@ -1183,7 +1177,6 @@
 				</li>
 				<li>
 					<strong>Bug fix</strong>:  The following functions incorrectly returned data with search results. As of this fix, they no longer work with search results:
-					<!-- -->
 					<ul>
 						<li>
 							<a href="/docs/api-ref/functions/eos-lobby-details-get-member-by-index">
@@ -1293,7 +1286,6 @@
 			</div>
 			<ul>
 				<li>In EOS SDK version 1.16 the Android login sample has incorrect gradle files. To fix this, please follow these steps:
-					<!-- -->
 					<ol>
 						<li>Delete the following files:</li>
 					</ol>
@@ -1375,8 +1367,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -1590,7 +1582,6 @@
 					library implementation instead of
 					<code>usrsctp</code>. This change addresses security issues with
 					<code>usrsctp</code>, and improves responsiveness during poor network conditions.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: This change is backward compatible, but we recommend you upgrade to the latest SDK version as soon as possible for improved security and performance.</li>
@@ -1664,7 +1655,6 @@
 					parameter to replace it. The new
 					<code>EOS_AntiCheatServer_RegisterClientOptions</code>
 					parameter has typing.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: If your game servers do not yet securely receive the
@@ -1691,7 +1681,6 @@
 					<code>EOS_PLAYERDATASTORAGE_QUERYFILEOPTIONS_API_LATEST</code>
 					becomes
 					<code>EOS_PLAYERDATASTORAGE_QUERYFILE_API_LATEST</code>.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: For backward compatibility, the deprecated macros are still present but we will be removing them in a future version. We recommend replacing any deprecated macros that use the old naming convention with macros that use the new naming convention.</li>
@@ -1806,7 +1795,6 @@
 			<ul>
 				<li>
 					<strong>New</strong>: The SDK now supports Apple silicon on Mac as a universal dylib.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: Anti-cheat currently does not support Apple silicon.</li>
@@ -1854,7 +1842,6 @@
 				<li>
 					<strong>Bug fix:</strong>
 					Fixed a compatibility issue between the Anti-Cheat bootstrapper and the latest version of Arch Linux. This issue will also affect the Steam Deck when attempting to run games compiled for Windows using Proton.
-					<!-- -->
 					<ul>
 						<li>To apply the fix, replace the old version of
 							<code>start_protected_game.exe</code>
@@ -1864,7 +1851,6 @@
 				<li>
 					<strong>Improvement:</strong>
 					The anti-cheat bootstrapper’s binary (executable file) is now inside a bundle. This executable bundle means:
-					<!-- -->
 					<ul>
 						<li>We have added a default icon to the macOS executable bundle, so it now has the same icon on macOS as it does on Windows.</li>
 					</ul>
@@ -1917,7 +1903,6 @@
 					to
 					<code>EOS_NS_Online</code>
 					on all console platforms.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Now</strong>: On all console platforms, the default network status is offline. This provides better management when you use
@@ -1949,7 +1934,6 @@
 					<strong>New</strong>: Added a new field to
 					<code>EOS_P2P_SendPacket</code>. The new field, called
 					<code>DisableAutoAcceptConnection</code>, allows automatic acceptance of connections in packet-sending logic.
-					<!-- -->
 					<ul>
 						<li>If you use this option, your game must always use
 							<code>EOS_P2P_AcceptConnection</code>
@@ -1958,7 +1942,6 @@
 							<code>EOS_P2P_SendPacket</code>, it now returns
 							<code>EOS_EResult::EOS_NoConnection</code>
 							when it fails under the following two circumstances:
-							<!-- -->
 							<ul>
 								<li>The remote peer has not accepted the connection.</li>
 								<li>The connection has closed since the last time the remote peer accepted it.</li>
@@ -1969,7 +1952,6 @@
 				<li>
 					<strong>New</strong>: Added a function, called
 					<code>EOS_P2P_AddNotifyPeerConnectionInterrupted</code>, which listens for non-fatal disconnects in the connection. If this function returns a disconnect, one of the following callbacks fire to let your game know the connection status:
-					<!-- -->
 					<ul>
 						<li>
 							<code>EOS_P2P_OnPeerConnectionEstablishedCallback</code>
@@ -1993,7 +1975,6 @@
 					<code>EOS_Ecom_CatalogOffer</code>.</li>
 				<li>
 					<strong>New</strong>* Introduced two new APIs to the Ecom Interface:
-					<!-- -->
 					<ul>
 						<li>
 							<code>EOS_Ecom_GetLastRedeemedEntitlementsCount</code>
@@ -2014,7 +1995,6 @@
 					<code>PurchasedCount</code>
 					field from
 					<code>EOS_ECom_CatalogOffer</code>.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: Do not use the
@@ -2075,7 +2055,6 @@
 			<ul>
 				<li>
 					<strong>New</strong>:  The EOS SDKs for consoles are now pinned to two release versions of a console’s SDK. The two release versions of a console’s SDK (Microsoft’s Xbox SDKs, Sony’s PlayStation SDKs, and Nintendo’s Switch SDKs, for example) are:
-					<!-- -->
 					<ul>
 						<li>The latest release version.</li>
 						<li>The previous release version.</li>
@@ -2141,7 +2120,6 @@
 					Use
 					<code>EOS_ECT_STEAM_SESSION_TICKET</code>
 					instead.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: The SDKs for consoles are unaffected.</li>
@@ -2196,7 +2174,6 @@
 					replaces it.</li>
 				<li>
 					<strong>Improvements</strong>: The anti-cheat bootstrapper’s binary (executable file) is now inside a bundle. This executable bundle means:
-					<!-- -->
 					<ul>
 						<li>We have added a default icon to the macOS executable bundle, so it now has the same icon on macOS as it does on Windows.</li>
 						<li>You can add more modifications to your game running on macOS.</li>
@@ -2217,7 +2194,6 @@
 					and
 					<code>EOS_LCT_ExternalAuth</code>
 					login types now require the EOS redistributable installed with your game.
-					<!-- -->
 					<ul>
 						<li>For more information, see
 							<a href="https://dev.epicgames.com/docs/services/en-US/EpicAccountServices/Crossplayacrossplatforms/RedistributableInstaller/index.html">Redistributable Installer</a>.</li>
@@ -2227,7 +2203,6 @@
 					<strong>New</strong>: The SDK now supports verifiable parental consent. Younger users may be prompted to obtain parental consent for their Epic Account, or for data sharing within a game.</li>
 				<li>
 					<strong>New</strong>: SDK packages now contain the EOS bootstrapper and EOS bootstrapper tool for use with the EOS redistributable for crossplay on Windows PC.
-					<!-- -->
 					<ul>
 						<li>For more information, see
 							<a href="https://dev.epicgames.com/docs/services/en-US/EpicAccountServices/Crossplayacrossplatforms/RedistributableInstaller/index.html">Redistributable Installer</a>.</li>
@@ -2280,7 +2255,6 @@
 						<li>All games must now call the two
 							<code>Set</code>
 							APIs for the SDK to work correctly:
-							<!-- -->
 							<ul>
 								<li>
 									<code>EOS_Platform_SetApplicationStatus</code>
@@ -2381,14 +2355,12 @@
 					<code>Release_SDL</code>.</li>
 				<li>
 					<strong>AuthAndFriends Sample</strong>:
-					<!-- -->
 					<ul>
 						<li>Improved the UI on the custom invites dialog box.</li>
 					</ul>
 				</li>
 				<li>
 					<strong>Voice Sample</strong>:
-					<!-- -->
 					<ul>
 						<li>Added support for setting an individual player’s audio volume.</li>
 					</ul>
@@ -2403,7 +2375,6 @@
 					<code>EOS_UI_PauseSocialOverlay</code>which pauses the Social Overlay and
 					<code>EOS_UI_IsSocialOverlayPaused</code>
 					which checks if the Social Overlay is paused.
-					<!-- -->
 					<ul>
 						<li>While paused, the Social Overlay is not displayed.</li>
 						<li>Pause the Social Overlay during cut-scenes to prevent toasts and temporarily keep the player immersed in your experience.</li>
@@ -2424,7 +2395,6 @@
 					<strong>New</strong>: The Social Overlay now shows a player ALL their Epic friends. This includes Epic friends who have never played the game a player is playing.</li>
 				<li>
 					<strong>New</strong>: Added functionality so players can:
-					<!-- -->
 					<ul>
 						<li>Search Epic friends</li>
 						<li>Manage Epic friends: add and remove friends, accept and deny incoming friend invites, and cancel outgoing friend invites</li>
@@ -2461,7 +2431,6 @@
 					field to
 					<code>EOS_RTC_ParticipantStatusChangedCallbackInfo</code>
 					which reports when a player is added or removed from a block list. Use this to know when a player can’t be heard in a lobby because they are on a block list.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: This is an automatic enforced internal block which you can’t override.</li>
@@ -2550,7 +2519,6 @@
 				<li>See the
 					<a href="https://dev.epicgames.com/docs/services/en-US/GameServices/AntiCheat/UsingAntiCheat/index.html#peer-to-peermode">documentation</a>
 					for details on how to use peer-to-peer mode in cross-platform play.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: To ensure authentication works correctly with this feature, you must update the SDK for PC and console platforms simultaneously when you use this feature.</li>
@@ -2575,7 +2543,6 @@
 			</p>
 			<ul>
 				<li>All games must now call the following two APIs for the SDK to work correctly:
-					<!-- -->
 					<ul>
 						<li>
 							<code>EOS_Platform_SetApplicationStatus</code>
@@ -2586,7 +2553,6 @@
 					</ul>
 				</li>
 				<li>Added these APIs to the Platform Interface. They inform the SDK when the game gets suspended and resumed, and when the network connectivity state of the local system changes. You can use two new related APIs optionally, to check the status:
-					<!-- -->
 					<ul>
 						<li>
 							<code>EOS_Platform_GetApplicationStatus</code>
@@ -2630,7 +2596,6 @@
 					fields of
 					<code>EOS_Lobby_AddNotifyRTCRoomConnectionChangedOptions</code>
 					are now deprecated.
-					<!-- -->
 					<ul>
 						<li>The registered callback is now called for all local users and lobbies.</li>
 						<li>If the game needs to perform any filtering, use the LocalUserId and LobbyId in the
@@ -2702,7 +2667,6 @@
 			<ul>
 				<li>Updated to Xbox GDK to version 211001.</li>
 				<li>Added support for the EOS developer auth tool on Xbox GDK platforms.
-					<!-- -->
 					<ul>
 						<li>Treat the target IP address of the developer auth tool as a local IP, such as 192.168.x.x, 10.x.x.x, 127.x.x.x, 172.16.x.x through 172.31.x.x, or the equivalent IPv6 addresses.</li>
 						<li>Hostnames are not supported at this time.</li>
@@ -2744,7 +2708,6 @@
 					Use
 					<code>EOS_ECT_STEAM_SESSION_TICKET</code>
 					instead.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: The SDKs for consoles are unaffected.</li>
@@ -2942,7 +2905,6 @@
 			</p>
 			<ul>
 				<li>When the anti-cheat bootstrapper is provided with a custom icon it will sometimes appear blurry.
-					<!-- -->
 					<ul>
 						<li>This will be resolved with the next release</li>
 					</ul>
@@ -3105,7 +3067,6 @@
 					UI elements and functionality to
 					<code>AuthAndFriends</code>
 					sample.
-					<!-- -->
 					<ul>
 						<li>A
 							<strong>Send Invite</strong>
@@ -3387,7 +3348,6 @@
 					and
 					<code>EOS_RTC_SetRoomSetting</code>
 					APIs
-					<!-- -->
 					<ul>
 						<li>
 							<code>DisableEchoCancelation</code>
@@ -3439,11 +3399,9 @@
 					zip file.</li>
 				<li>Changes in the
 					<code>start_protected_game.exe</code>:
-					<!-- -->
 					<ul>
 						<li>The following settings are no longer supported, these were previously defined in the associated
 							<code>Settings.json</code>:
-							<!-- -->
 							<ul>
 								<li>
 									<code>parameters</code>: The bootstrapper now forwards all parameters to the game process that were provided to it upon process start, therefore the associated Settings file doesn't offer this functionality.</li>
@@ -3630,7 +3588,6 @@
 				<li>
 					<strong>New:</strong>
 					Added automatic Real Time Communication (RTC) Room support to Lobbies.
-					<!-- -->
 					<ul>
 						<li>This feature handles automatically creating, joining, and maintaining connections to a dedicated RTC Room for the lobby when enabled. This feature requires enabling the
 							<strong>createLobbyConference</strong>
@@ -3640,7 +3597,6 @@
 				<li>
 					<strong>New:</strong>
 					Lobby creation now allows for the specification of a "lobby id override".
-					<!-- -->
 					<ul>
 						<li>The values need to be universally unique within the context of the application.</li>
 					</ul>

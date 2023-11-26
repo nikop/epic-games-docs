@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -29,16 +29,14 @@
 					<strong>EOS Game Services</strong>
 					enable you to build and integrate online functionality into your game. You can set up your game to use Games Services without any requirement for your players to have an Epic Games account.
 					<br>
-					
-					<!-- -->(See the
+					(See the
 					<a href="#eos-game-services">EOS Game Services</a>
 					section below for more information.)</li>
 				<li>
 					<strong>EOS Epic Account Services</strong>
 					provide player accounts. Use Epic Account Services to tap into an ecosystem of over 500 million players across multiple platforms and stores.
 					<br>
-					
-					<!-- -->(See the
+					(See the
 					<a href="#eos-epic-account-services">EOS Epic Account Services</a>
 					section below for more information.)</li>
 			</ul>
@@ -49,20 +47,17 @@
 			<ul>
 				<li>The Developer Portal
 					<br>
-					
-					<!-- -->(Documentation:
+					(Documentation:
 					<a href="/docs/dev-portal">Developer Portal</a>)</li>
 				<li>The EOS SDK and API - in C and C#
 					<br>
-					
-					<!-- -->(Documentation:
+					(Documentation:
 					<a href="/docs/epic-online-services/eos-get-started/services-overview">EOS SDK Key Information</a>
 					and
 					<a href="/docs/api-ref">EOS SDK API Reference</a>)</li>
 				<li>The EOS Web API - HTTP APIs for common use cases
 					<br>
-					
-					<!-- -->(Documentation:
+					(Documentation:
 					<a href="/docs/web-api-ref/web-api-introduction">EOS Web API Introduction</a>)</li>
 			</ul>
 			<p>
@@ -91,29 +86,25 @@
 			</div>
 			<p>EOS Game Services enable you to build and integrate online functionality into your game. You can set up your game to use Games Services without any requirement for your players to have an Epic Games account.
 				<br>
-				
-				<!-- -->You can use any of the following free services:</p>
+				You can use any of the following free services:</p>
 			<ul>
 				<li>
 					<p>
 						<strong>Multiplayer</strong>
 						<br>
-						
-						<!-- -->Set up multiplayer sessions, lobbies, peer-to-peer networking and enable voice chat between players.</p>
+						Set up multiplayer sessions, lobbies, peer-to-peer networking and enable voice chat between players.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Player progression</strong>
 						<br>
-						
-						<!-- -->Track metrics, stats, and achievements for every player. Set up leaderboards and store encrypted, user-specific, game-specific data to cloud servers.</p>
+						Track metrics, stats, and achievements for every player. Set up leaderboards and store encrypted, user-specific, game-specific data to cloud servers.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Game operations</strong>
 						<br>
-						
-						<!-- -->Use anti-cheat, player sanctions, reports and a ticketing system to manage your community. Store data for your game that is accessible to any player on any device where they can log in.</p>
+						Use anti-cheat, player sanctions, reports and a ticketing system to manage your community. Store data for your game that is accessible to any player on any device where they can log in.</p>
 				</li>
 			</ul>
 			<div>
@@ -126,8 +117,7 @@
 			<p>
 				<strong>Note:</strong>
 				<br>
-				
-				<!-- -->The Social Overlay is part of EOS Epic Account Services. You can use this service to enable players to accept Lobby invites.</p>
+				The Social Overlay is part of EOS Epic Account Services. You can use this service to enable players to accept Lobby invites.</p>
 			<p>Documentation:</p>
 			<ul>
 				<li>EOS Game Services:
@@ -209,8 +199,7 @@
 			<p>
 				<strong>Note:</strong>
 				<br>
-				
-				<!-- -->You can offer XP to players in games published on the Epic Games Store by using Epic Games Store achievements. Epic Games Store achievements are built on Epic Online Services achievements.</p>
+				You can offer XP to players in games published on the Epic Games Store by using Epic Games Store achievements. Epic Games Store achievements are built on Epic Online Services achievements.</p>
 			<p>Documentation:</p>
 			<ul>
 				<li>EOS Game Services:
@@ -306,8 +295,7 @@
 			<p>
 				<strong>Note:</strong>
 				<br>
-				
-				<!-- -->To use EOS Epic Account Services, players of your game must have an Epic Games account (or a proxy Epic Games account). They connect to your game using the Auth Interface.</p>
+				To use EOS Epic Account Services, players of your game must have an Epic Games account (or a proxy Epic Games account). They connect to your game using the Auth Interface.</p>
 			<p>Documentation:</p>
 			<ul>
 				<li>EOS Epic Account Services:
@@ -367,34 +355,19 @@
 			<p>For your game to use EOS Game Services, your players do not require an Epic Games account and your game does not have to use EOS Epic Account Services. Players can connect to your game using either an identity from a supported identity provider (such as a Steam account) or an Epic Games account.</p>
 			<p>Note that how you set up a player's connection to your game depends on player identity:</p>
 			<ul>
-				<li>A player connecting via an identity from a supported identity provider (such as a Steam account) uses:
-					<!-- -->
-					<ul>
-						<li>EOS Game Services: Connect Interface.</li>
-					</ul>
-				</li>
-				<li>A player connecting via an Epic Games account uses both:
-					<!-- -->
-					<ul>
-						<li>EOS Game Services: Connect Interface, and</li>
-						<li>EOS Epic Account Services: Auth Interface.</li>
-					</ul>
-				</li>
+				<li>To let players connect to your game with their Epic Games accounts, use the EOS Epic Account Services: Auth Interface.</li>
+				<li>To let players connect to your game with identities provided by online stores and gaming services such as Steam, use the EOS Game Services: Connect Interface.</li>
 			</ul>
-			<p>Documentation:</p>
+			<p>For more information, see the following documentation:</p>
 			<ul>
-				<li>EOS Games Services:
-					<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>
-				</li>
-				<li>EOS API Reference in C and C#:
-					<a href="/docs/api-ref/enums/eos-e-external-credential-type">External credentials</a>
-					(for supported identity providers)</li>
-				<li>The
-					<a href="#eos-epic-account-services">EOS Epic Account Services</a>
-					section of this document</li>
-				<li>EOS Epic Account Services:
-					<a href="#depic-account-services/auth/auth-interface">Auth Interface</a>
-				</li>
+				<li>For details of the identity providers supported by EOS, see
+					<a href="/docs/dev-portal/identity-provider-management">Identity Provider Management</a>.</li>
+				<li>
+					<a href="/docs/game-services/eos-connect-interface">EOS Games Services: Connect Interface</a>.</li>
+				<li>
+					<a href="/docs/epic-account-services/auth/auth-interface">EOS Epic Account Services: Auth Interface</a>.</li>
+				<li>
+					<a href="/docs/api-ref/enums/eos-e-external-credential-type">EOS SDK API Reference: EOS_EExternal Credential Type</a>.</li>
 			</ul>
 			<div id="tag_list">
 				<a href="/docs/site-map">Getting Started</a>

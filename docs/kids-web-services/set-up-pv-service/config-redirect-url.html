@@ -1,0 +1,71 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Set up a redirect URL</h1>
+			<h2>How to configure a redirect URL to which KWS sends parents after verification.</h2>
+			<div>
+				<div>Under 1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>The
+				<strong>Redirect URL</strong>
+				setting is optional. If entered, KWS redirects the parent to this URL after they successfully verify their identity. For example, you might wish to redirect the parent to a webpage where they can manage their child’s permissions in your app.</p>
+			<p>If you do not specify a redirect URL, KWS displays a verification success message within the PV service web page:</p>
+			<div>
+				<div style="max-width: 200px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="No redirect" src="https://static-assets-prod.epicgames.com/eos-docs/kids-web-services/set-up-pv-service/config-pv-settings/no-redirect.png" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
+					</span>
+				</div>
+				<p>Click image for full size.</p>
+			</div>
+			<ol>
+				<li>To get to your PV service settings, select your product in the
+					<strong>Dashboard</strong>, then click the
+					<strong>Services</strong>
+					tab, and in the
+					<strong>Parent Verification</strong>
+					panel, click
+					<strong>View or Edit</strong>.</li>
+				<li>In your PV service settings, enter your
+					<strong>Redirect URL</strong>.</li>
+			</ol>
+			<p>Restrictions:</p>
+			<ul>
+				<li>The redirect URL must be in this format:
+					<code>https://your.domain.com/your/path</code>
+				</li>
+				<li>A valid web resource must exist at the provided URL.</li>
+				<li>Your redirect URL should not be used to determine the result of the verification. You should use a
+					<a href="/docs/kids-web-services/set-up-pv-service/config-pv-webhook">webhook</a>
+					to determine the result.</li>
+			</ul>
+			<div>
+				<p>NOTE: The information in the redirect URL is not signed and may be modified by the parent.</p>
+			</div>
+			<p>The next step is to
+				<a href="/docs/kids-web-services/set-up-pv-service/config-pv-webhook">set up your product to receive a "verification success" notification webhook from KWS</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul></ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

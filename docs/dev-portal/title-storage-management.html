@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -63,12 +63,16 @@
 					</p>
 					<p>This is a key the EOS service uses to encrypt and decrypt the default and alternate files.</p>
 					<ul>
+						<li>The key must be the same value as the
+							<code>EncryptionKey</code>
+							that you used to initialize the EOS SDK in your
+							<code>EOS_Platform_Options</code>. See the
+							<a href="/docs/game-services/eos-platform-interface#creating-the-platform-interface">Platform Interface</a>
+							documentation for more information.</li>
+						<li>The key must be the same key for all files across your product. Only use one encryption key.</li>
+						<li>The key must be a 64 hexadecimal character key and contain only alpha-numeric characters "0-9" and "A-F".</li>
 						<li>You must provide this key when you add a new file or edit an existing file through the Title Storage page on the Developer Portal, and when you query files through the Title Storage Interface.</li>
-						<li>The key is your choice, but it must be a 64 hexadecimal character key and contain only alpha-numeric characters "0-9" and "A-F".</li>
 						<li>Your file's encryption key is not stored on the EOS Service's servers. You are responsible for creating and storing this key. So, make sure you note it down somewhere for safekeeping.</li>
-						<li>
-							<strong>Tip</strong>:<br>
-							We recommend that you create one key per file and use that key every time you edit the file. While it is possible to change the key every time you edit a file, we do not recommend this because your game clients might encounter errors: game clients must use the latest key you entered when you edited a file, otherwise they can't read the file through the Title Storage Interface.</li>
 					</ul>
 				</li>
 			</ul>
@@ -165,12 +169,10 @@
 				<strong>Edit New File</strong>
 				dialog. Both dialogs have the same configuration options.</p>
 			<div>
-				<div style="max-width:300px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/title-storage/title-storage-file-overriding-dialog.png">
-						</noscript>
+				<div style="max-width: 300px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>

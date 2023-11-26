@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -23,7 +23,6 @@
 			<p>Players may opt out of crossplay interactions for various reasons:</p>
 			<ul>
 				<li>Some console platform providers offer settings to disable crossplay.
-					<!-- -->
 					<ul>
 						<li>In this case, you must follow those settings as part of the certification requirements.</li>
 					</ul>
@@ -50,7 +49,6 @@
 			<p>Epic Services and game clients split the responsibility for enforcing crossplay restrictions. The SDK sends information between the parties. Specifically:</p>
 			<ul>
 				<li>The backend lobby or session service uses authentication tokens to identify a player's platform where possible.
-					<!-- -->
 					<ul>
 						<li>In the case of lobbies, the backend lobby service returns the backend-identified platform for each lobby member, and the SDK exposes this value in
 							<code>EOS_LobbyDetails_MemberInfo</code>
@@ -59,7 +57,6 @@
 					</ul>
 				</li>
 				<li>When a player creates a lobby or session, the SDK informs the player's newly created lobby or session which platforms can join it.
-					<!-- -->
 					<ul>
 						<li>
 							<p>If that player's platform is not allowed to join the lobby or session, the backend lobby or session service will prevent any player from joining via
@@ -89,7 +86,6 @@
 				<li>Player B is on a different platform than Player A. For example, Player A is on PSN, and Player B is on XBL.</li>
 				<li>Player B attempts to join Player A's lobby.</li>
 				<li>Behaviors:
-					<!-- -->
 					<ul>
 						<li>Player B cannot find Player A's lobby in a search.</li>
 						<li>If Player B attempts to join Player A's lobby via invite or via presence join, they receive an error,
@@ -109,7 +105,6 @@
 				<li>Player B has opted out of crossplay.</li>
 				<li>Player B attempts to join Player A's lobby</li>
 				<li>Behaviors:
-					<!-- -->
 					<ul>
 						<li>In this case, the backend will allow Player B to join Player A's lobby even though Player B has opted out of crossplay; this arrangement will violate that opt-out.</li>
 						<li>The backend cannot enforce the crossplay restrictions, so you are responsible for enforcing crossplay restrictions in cases where the lobby is unrestricted.</li>
@@ -135,11 +130,9 @@
 			<p>We recommend that you implement strategy two (As new members are added, adjust which platforms can join a crossplay lobby), since it encourages inclusivity and enabling crossplay. The workflow for this strategy is captured here:</p>
 			<div>
 				<div>
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Crossplay restrictions workflow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Crossplay restrictions workflow" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/crossplay/crossplay-restrictions/crossplay-restrictions-workflow.png">
-						</noscript>
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Crossplay restrictions workflow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 			</div>

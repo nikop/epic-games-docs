@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -42,10 +42,10 @@
 				<tbody>
 					<tr>
 						<td>Player ID</td>
-						<td>The player's Epic Games account ID. The player can sign in with an email and password combination, or a linked external account<a href="#footnote-1" style="text-decoration:none">
+						<td>The player's Epic Games account ID. The player can sign in with an email and password combination, or a linked external account<a href="#footnote-1" style="text-decoration: none;">
 								<sup id="footnote-1-ref">1</sup>
 							</a>.</td>
-						<td>A Product User ID (PUID) for a player, that's linked to one or more supported identity providers<a href="#footnote-2" style="text-decoration:none">
+						<td>A Product User ID (PUID) for a player, that's linked to one or more supported identity providers<a href="#footnote-2" style="text-decoration: none;">
 								<sup id="footnote-2-ref">2</sup>
 							</a>. Note that the PUID is specific to a single product.</td>
 					</tr>
@@ -56,14 +56,14 @@
 					</tr>
 					<tr>
 						<td>Supported Services</td>
-						<td>The player has access to the Friends<a href="#footnote-3" style="text-decoration:none">
+						<td>The player has access to the Friends<a href="#footnote-3" style="text-decoration: none;">
 								<sup id="footnote-3-ref">3</sup>
-							</a>, Presence<a href="#footnote-4" style="text-decoration:none">
+							</a>, Presence<a href="#footnote-4" style="text-decoration: none;">
 								<sup id="footnote-4-ref">4</sup>
-							</a>, and Ecom<a href="#footnote-5" style="text-decoration:none">
+							</a>, and Ecom<a href="#footnote-5" style="text-decoration: none;">
 								<sup id="footnote-5-ref">5</sup>
 							</a>
-							interfaces, as well as the EOS Social Overlay<a href="#footnote-6" style="text-decoration:none">
+							interfaces, as well as the EOS Social Overlay<a href="#footnote-6" style="text-decoration: none;">
 								<sup id="footnote-6-ref">6</sup>
 							</a>.</td>
 						<td>The player has access to Game Services across Multiplayer, Progression, Moderation, and Operations.</td>
@@ -72,10 +72,10 @@
 						<td>Access Token Lifetime</td>
 						<td>The game automatically refreshes the token as long as it calls
 							<code>EOS_Platform_Tick</code>
-							<a href="#footnote-7" style="text-decoration:none">
+							<a href="#footnote-7" style="text-decoration: none;">
 								<sup id="footnote-7-ref">7</sup>
 							</a>.</td>
-						<td>The game must periodically refresh the player's token based on expiration notification events<a href="#footnote-8" style="text-decoration:none">
+						<td>The game must periodically refresh the player's token based on expiration notification events<a href="#footnote-8" style="text-decoration: none;">
 								<sup id="footnote-8-ref">8</sup>
 							</a>.</td>
 					</tr>
@@ -118,13 +118,17 @@
 				<code>EOS_Auth_Login</code>
 				function with an
 				<code>EOS_Auth_LoginOptions</code>
-				structure containing a local player's 
-				<!-- -->account
-				<!-- --> credentials. Whether the login attempt succeeds or fails, your callback function, of type
+				structure containing a local player's
+				<span>
+					<span>account</span>
+				</span>
+				credentials. Whether the login attempt succeeds or fails, your callback function, of type
 				<code>EOS_Auth_OnLoginCallback</code>, will run upon completion.</p>
-			<p>The brand review process verifies your game's brand with Epic Games. Once verified, players outside of your 
-				<!-- -->organization
-				<!-- --> can use your game's integration of Epic Account Services. Prior to brand review, players receive an error if they try to log into your game with an external account. See the documentation on the
+			<p>The brand review process verifies your game's brand with Epic Games. Once verified, players outside of your
+				<span>
+					<span>organization</span>
+				</span>
+				can use your game's integration of Epic Account Services. Prior to brand review, players receive an error if they try to log into your game with an external account. See the documentation on the
 				<a href="/docs/epic-account-services/brand-review">Brand Review Application Process</a>
 				for more details.</p>
 			<p>The
@@ -244,8 +248,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -329,9 +333,11 @@
 				<code>EOS_EAuthScopeFlags</code>
 				(API LINK). Scopes are a set of permissions that are required for your application to function properly. For example, if your application needs to see the user's friends list, then you must request the
 				<code>EOS_AS_FriendsList</code>
-				scope, and the user will be asked to give consent for it during the login flow. If the user does not consent to one of the requested scopes, then the login will fail. When requesting consent, your request must exactly match the scopes configured for the 
-				<!-- -->product
-				<!-- --> in the Developer Portal.</p>
+				scope, and the user will be asked to give consent for it during the login flow. If the user does not consent to one of the requested scopes, then the login will fail. When requesting consent, your request must exactly match the scopes configured for the
+				<span>
+					<span>product</span>
+				</span>
+				in the Developer Portal.</p>
 			<div>
 				<p>Multiple users can be logged in at the same time on a single local device and using the same shared EOS_HPlatform instance</p>
 			</div>
@@ -343,8 +349,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -528,11 +534,9 @@
 				for more information.</p>
 			<div>
 				<div>
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="EOS Authentication Flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="EOS Authentication Flow" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/auth/eos-auth-flow.png">
-						</noscript>
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="EOS Authentication Flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 			</div>

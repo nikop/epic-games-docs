@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -14,7 +14,7 @@
 			<h1>Social Overlay for Crossplay</h1>
 			<h2>A guide on how to use the Social Overlay across multiple platforms, with Epic Games accounts and native invites.</h2>
 			<div>
-				<div>10 mins to read</div>
+				<div>11 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -51,7 +51,11 @@
 			<div>
 				<h3 id="when-should-i-initialize-the-eos-sdk">When should I Initialize the EOS SDK?</h3>
 			</div>
-			<p>When you develop a game with the EOS SDK for a number of different platforms, you need to:</p>
+			<p>You must initialize the EOS SDK in the proper order for your platform to ensure that the graphics (<span>
+					<span>EOS Overlay</span>
+				</span>) render properly.
+				<br>
+				When you develop a game with the EOS SDK for a number of different platforms, you need to:</p>
 			<ul>
 				<li>
 					<strong>PC: Windows, macOS, and Linux</strong>
@@ -61,27 +65,54 @@
 					<br>
 					<strong>Consoles: Nintendo Switch, PlayStation (4, 5)</strong>
 					<br>
-					
-					<!-- -->Initialize the EOS SDK before you initialize the graphics layer of your game.</li>
+					Initialize the EOS SDK before you initialize the graphics layer of your game.</li>
 				<li>
 					<strong>Microsoft (Xbox One, Xbox Series X)</strong>
 					<br>
-					
-					<!-- -->Initialize the EOS SDK after you initialize the graphics layer of your game.
-					<br>
-					
-					<!-- -->For more information on how to initialize the EOS SDK, see
-					<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">Platform Interface: Initializing the SDK</a>
+					Initialize the EOS SDK after you initialize the graphics layer of your game.</li>
+			</ul>
+			<p>For more information, see the documentation:</p>
+			<ul>
+				<li>
+					<p>How to initialize the EOS SDK, see the
+						<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">Platform Interface: Initializing the SDK</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>How to integrate the EOS Overlay on console, see the EOS Overlay section of each platform's documentation for more information:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/platforms/switch#the-eos-overlay">Nintendo Switch</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/platforms/xbox#the-eos-overlay">Xbox</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/platforms/ps-4#the-eos-overlay">PlayStation 4</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/platforms/ps-5#the-eos-overlay">PlayStation 5</a>
+						</li>
+					</ul>
+					<p>You can only access console documentation if you have the appropriate permissions. See the
+						<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+						documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 				</li>
 			</ul>
-			<p>If you develop your game with Unreal Engine then we recommend that you use modules to initialize the EOS SDK on different platforms. This allows you to run the modules to initialize the EOS SDK in the order that each platform needs to be initialized. Run the modules for most platforms before you initialize the graphics layer of your game and a module for Microsoft (Xbox One, Xbox Series X) after.</p>
+			<p>If you develop your game with Unreal Engine, we recommend that you use our EOS Online Subsystem (OSS) plugin (UE 4.27 and higher) to integrate EOS into your game. It handles the proper initialization order for your platforms. For more information, See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-sdk-and-game-engines#unreal-engine">EOS SDK and Game Engines: Unreal Engine</a>
+				documentation.</p>
+			<p>
+				<strong>Custom Initialization Notes</strong>
+			</p>
+			<p>If you choose not to use our EOS OSS plugin, you should integrate the EOS SDK into Unreal Engine yourself through a custom plugin. You must make sure the EOS Overlay initializes in the proper order for each platform, as mentioned above. We recommend that you use modules to handle this. You can load the modules in specific module loading phases to initialize the EOS SDK when each platform requires. Load the modules for most platforms before you initialize the graphics layer of your game and a module for Microsoft (Xbox One, Xbox Series X) after.</p>
 			<p>See below for some example settings:</p>
 			<div>
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -113,8 +144,7 @@
 					<p>
 						<strong>Local player requests to join</strong>
 						<br>
-						
-						<!-- -->The local player selects
+						The local player selects
 						<strong>REQUEST TO JOIN</strong>
 						on the Social Overlay when they view the profile of a remote player.</p>
 				</li>
@@ -122,36 +152,31 @@
 					<p>
 						<strong>Remote player accepts or rejects a request to join</strong>
 						<br>
-						
-						<!-- -->The remote player accepts or rejects the request from the local player to join their game instance.</p>
+						The remote player accepts or rejects the request from the local player to join their game instance.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Remote player sends an invitation</strong>
 						<br>
-						
-						<!-- -->The remote player sends an invitation to the local player.</p>
+						The remote player sends an invitation to the local player.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Local player rejects an invitation</strong>
 						<br>
-						
-						<!-- -->The local player rejects an invitation from the remote player.</p>
+						The local player rejects an invitation from the remote player.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Local player accepts an invitation and is ready to join a game instance</strong>
 						<br>
-						
-						<!-- -->This is when you should clean up your local code and get ready for the local player to travel to the game instance.</p>
+						This is when you should clean up your local code and get ready for the local player to travel to the game instance.</p>
 				</li>
 				<li>
 					<p>
 						<strong>Local player leaves the game instance</strong>
 						<br>
-						
-						<!-- -->The local player selects
+						The local player selects
 						<strong>LEAVE PARTY</strong>
 						and leaves the game instance.</p>
 				</li>
@@ -180,16 +205,24 @@
 			<p>You can configure the EOS SDK in your game to integrate automatically with all the platforms that you want to release your game on. To do this, follow the steps in the
 				<a href="/docs/game-services/eos-platform-interface#native-platform-integration">Platform Interface: Native Platform Integration</a>.</p>
 			<p>
-				<strong>Manage Sessions</strong>
+				<strong>Manage Sessions Notes</strong>
 				<br>
-				
-				<!-- -->When you set the platform-specific options in
-				<code>EOS_IntegratedPlatform_Options</code>
-				you can also choose to disable the EOS sessions service that manages sessions (which is used for both EOS lobbies and EOS sessions). You should disable the EOS sessions service if:</p>
+				The EOS sessions service (which is used for both EOS lobbies and EOS sessions) manages the following:</p>
+			<ul>
+				<li>Shares the lobby and session presence enabled games with the Integrated Platform.</li>
+				<li>Handles the Social Overlay join button events that cannot be handled by normal processing of Epic Services.</li>
+				<li>Handles the Social Overlay invite button events that cannot be handled by normal processing of Epic Services.</li>
+				<li>Handles startup requests from the Integrated Platform to immediately join a game for an invite that you receive while offline.</li>
+			</ul>
+			<p>When you set the platform-specific options in
+				<a href="/docs/api-ref/structs/eos-integrated-platform-options">
+					<code>EOS_IntegratedPlatform_Options</code>
+				</a>
+				you can also choose to disable the EOS sessions service that manages sessions.</p>
+			<p>You should disable the EOS sessions service if:</p>
 			<ul>
 				<li>You want to manage sessions with your own implementation (and not use the EOS SDK session management).</li>
 				<li>You want to use the Social Overlay across these platforms:
-					<!-- -->
 					<ul>
 						<li>PlayStation (4,5)</li>
 						<li>Microsoft (Xbox One, Xbox Series X)
@@ -219,9 +252,7 @@
 				<li>
 					<strong>Remote player invites local player to join</strong>
 					<br>
-					
-					<!-- -->When the local player is a member of a session/lobby and invites a remote player to join, this invite may need to be sent by the native platform. You also need to do this if you use Custom Invites. In these cases, the following callbacks notify the game to send an invite on behalf of the local player:
-					<!-- -->
+					When the local player is a member of a session/lobby and invites a remote player to join, this invite may need to be sent by the native platform. You also need to do this if you use Custom Invites. In these cases, the following callbacks notify the game to send an invite on behalf of the local player:
 					<ul>
 						<li>
 							<code>EOS_Sessions_AddNotifySendSessionNativeInviteRequested</code>
@@ -282,13 +313,17 @@
 				<li>PS4 (non-crossgen)</li>
 				<li>Microsoft (Xbox One, Xbox Series X)</li>
 			</ul>
-			<p>To allow friends to join via presence, set the following parameter in
-				<code>EOS_Sessions_CreateSessionModificationOptions</code>
-				(the struct of input parameters for
-				<code>EOS_Sessions_CreateSessionModification</code>).</p>
-			<p>
+			<p>To allow friends to join via presence, set
 				<code>EOS_Bool bPresenceEnabled = EOS_TRUE</code>
-			</p>
+				in
+				<a href="/docs/api-ref/functions/eos-sessions-create-session-modification">
+					<code>EOS_Sessions_CreateSessionModificationOptions</code>
+				</a>
+				for sessions and
+				<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">
+					<code>EOS_Lobby_CreateLobbyOptions</code>
+				</a>
+				for lobbies.</p>
 			<p>For more information on how to allow players to request to join, see the
 				<a href="/docs/epic-account-services/social-overlay-overview/request-to-join">Request to Join</a>
 				documentation.</p>
@@ -311,8 +346,7 @@
 					<p>
 						<strong>Join a game instance using an invitation</strong>
 						<br>
-						
-						<!-- -->A local player who is already in a game instance can invite a remote player to join, if they have permission to do so.<br>
+						A local player who is already in a game instance can invite a remote player to join, if they have permission to do so.<br>
 						<br>
 					</p>
 					<p>For more information on:</p>
@@ -329,8 +363,7 @@
 					<p>
 						<strong>Join a game instance via presence</strong>
 						<br>
-						
-						<!-- -->You can allow players to join a game instance via presence: when the local player with an Epic Games account selects JOIN on the Social Overlay or the local player with an account on a platform you integrate with your game joins using the user interface of that platform.<br>
+						You can allow players to join a game instance via presence: when the local player with an Epic Games account selects JOIN on the Social Overlay or the local player with an account on a platform you integrate with your game joins using the user interface of that platform.<br>
 						<br>
 					</p>
 					<p>The following platforms support join via presence:</p>
@@ -357,8 +390,7 @@
 					<p>
 						<strong>Request to join a private game instance hosted by a friend (Epic Games account only)</strong>
 						<br>
-						
-						<!-- -->When you do not allow players to join via presence, then a local player with an Epic Games account can select
+						When you do not allow players to join via presence, then a local player with an Epic Games account can select
 						<strong>REQUEST TO JOIN</strong>
 						on the Social Overlay. They can then join the game instance if a remote player in the game instance accepts their request on the Social Overlay.<br>
 						<br>

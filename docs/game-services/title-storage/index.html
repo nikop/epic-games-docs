@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -20,8 +20,6 @@
 	</section>
 	<section>
 		<section>
-			
-			<!-- -->
 			<p>The
 				<strong>Title Storage Interface</strong>
 				enables developers using
@@ -107,7 +105,7 @@
 				<a href="/docs/dev-portal">Dev Portal</a>.</p>
 			<div>
 				<p>Be sure to
-					<a href="#ExaminingCachedFileInformation">copy any information you may need from the cache</a>
+					<a href="#examining-cached-file-information">copy any information you may need from the cache</a>
 					during your query's callback function. This data's lifetime is not guaranteed to last beyond the duration of the callback function. This is especially important when running multiple queries, as each successful query can alter the contents of the cache.</p>
 				<p>Most functions contain an optional Product User ID parameter for better tracking. You can query data with no Product User ID (by passing nullptr instead), but the User ID overrides you set up on the Dev Portal will not be available. Callbacks contain the same User Product ID value you pass</p>
 			</div>
@@ -119,8 +117,6 @@
 				function, passing in an
 				<code>EOS_TitleStorage_QueryFileOptions</code>
 				structure initialized as follows:</p>
-			
-			<!-- -->
 			<table>
 				<thead>
 					<tr>
@@ -165,8 +161,6 @@
 				with an
 				<code>EOS_TitleStorage_QueryFileListOptions</code>
 				data structure initialized as follows:</p>
-			
-			<!-- -->
 			<table>
 				<thead>
 					<tr>
@@ -215,8 +209,6 @@
 			<p>The Title Storage Interface does not provide a specific API call to query all files. However, if you apply a certain tag to every file you upload, you could use
 				<code>EOS_TitleStorage_QueryFileListOptions</code>
 				with that tag to retrieve data about all of your files.</p>
-			
-			<!-- -->
 			<div>
 				<h3 id="examining-cached-file-information">Examining Cached File Information</h3>
 			</div>
@@ -331,18 +323,14 @@
 				function will not be encrypted.</p>
 			<p>The following timeline diagram shows a hypothetical read operation in action:</p>
 			<div>
-				<div style="max-width:500px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/title-storage/read-operation-diagram.png">
-						</noscript>
+				<div style="max-width: 500px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 			</div>
 			<p>When downloading multiple files in succession, you can improve performance by querying the file list first, caching the metadata, and then performing downloads. This avoids having to perform multiple queries and wait for the results between file downloads.</p>
-			
-			<!-- -->
 			<div>
 				<h3 id="data-caching-and-encryption">Data Caching and Encryption</h3>
 			</div>
@@ -388,8 +376,7 @@
 			</div>
 			<p>You can manage default files in your game code, but you might want to provide alternate versions of these files. For example, each game server may have its own configuration settings file that you want to use. You must manage these alternate files through the Developer Portal. There, you can configure settings for the files, including specifying who should receive the alternate files. When you query the file through the Title Storage Interface, the Title Storage Interface then returns the alternate file, if applicable.
 				<br>
-				
-				<!-- -->See the
+				See the
 				<a href="/docs/dev-portal/title-storage-management">Title Storage Management</a>
 				documentation for more information.</p>
 			<div>
@@ -445,12 +432,12 @@
 				</li>
 				<li>
 					<p>The two interfaces implement file encryption differently. See the
-						<a href="#DataCachingAndEncryption">Data Caching and Encryption</a>
+						<a href="#data-caching-and-encryption">Data Caching and Encryption</a>
 						section for more details.</p>
 				</li>
 				<li>
 					<p>The Title Storage Interface supports conditional file overriding, enabling developers to provide different versions of files based on various conditions. See the
-						<a href="#FileOverriding">File Overriding</a>
+						<a href="#file-overriding">File Overriding</a>
 						section for more details.</p>
 				</li>
 				<li>

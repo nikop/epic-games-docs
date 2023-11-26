@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -31,44 +31,28 @@
 				<p>
 					<strong>Tip</strong>
 					<br>
+					<br>
 				</p>
 				<ul>
-					<li>A player connecting via an identity from a supported identity provider (such as a Steam account) uses:
-						<!-- -->
-						<ul>
-							<li>EOS Game Services: Connect Interface.</li>
-						</ul>
-					</li>
-					<li>A player connecting via an Epic Games account uses both:
-						<!-- -->
-						<ul>
-							<li>EOS Game Services: Connect Interface, and</li>
-							<li>EOS Epic Account Services: Auth Interface.</li>
-						</ul>
-					</li>
+					<li>To let players connect to your game with their Epic Games accounts, use the EOS Epic Account Services: Auth Interface.</li>
+					<li>To let players connect to your game with identities provided by online stores and gaming services such as Steam, use the EOS Game Services: Connect Interface.</li>
 				</ul>
 				<p>For more information, see the following documentation:</p>
 				<ul>
-					<li>EOS Games Services:
-						<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>
-					</li>
-					<li>EOS Epic Account Services:
-						<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
-					</li>
-					<li>Developer Portal:
-						<a href="/docs/dev-portal/identity-provider-management">Identity Providers</a>
-					</li>
-					<li>EOS SDK API Reference:
-						<a href="/docs/api-ref/enums/eos-e-external-credential-type">External Credential Types</a>
-						for supported identity providers</li>
+					<li>For details of the identity providers supported by EOS, see
+						<a href="/docs/dev-portal/identity-provider-management">Identity Provider Management</a>.</li>
+					<li>
+						<a href="/docs/game-services/eos-connect-interface">EOS Games Services: Connect Interface</a>.</li>
+					<li>
+						<a href="/docs/epic-account-services/auth/auth-interface">EOS Epic Account Services: Auth Interface</a>.</li>
+					<li>
+						<a href="/docs/api-ref/enums/eos-e-external-credential-type">EOS SDK API Reference: EOS_EExternal Credential Type</a>.</li>
 				</ul>
 			</div>
 			<div>
 				<h2 id="before-you-start">Before you start</h2>
 			</div>
-			<p>Before you can begin setting up an EOS Epic Account Services 
-				<!-- -->account
-				<!-- --> and application, be sure that you fulfill these prerequisites:</p>
+			<p>Before you can begin setting up an EOS Epic Account Services account and application, be sure that you fulfill these prerequisites:</p>
 			<ol>
 				<li>Sign up for the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>) and enable multi-factor authentication on your account.</li>
 				<li>In the Developer Portal, create your own organization or become a member of an existing one.
@@ -88,9 +72,7 @@
 			<div>
 				<h3 id="1-accessing-eos-epic-account-services-in-the-developer-portal">1. Accessing EOS Epic Account Services in the Developer Portal</h3>
 			</div>
-			<p>You can find Epic Account Services from the Developer Portal along the navigation panel or the home page for a 
-				<!-- -->product
-				<!-- -->.</p>
+			<p>You can find Epic Account Services from the Developer Portal along the navigation panel or the home page for a product.</p>
 			<p>To proceed to the Epic Account Services dashboard, you must review and accept a Service Addendum for Epic Account Services. You can always review all accepted agreements under the
 				<strong>Licenses</strong>
 				tab of the
@@ -100,9 +82,7 @@
 			<p>You should also review the
 				<strong>Epic Games Privacy Policy</strong>
 				to understand how Epic Games collects, uses, and shares user data.</p>
-			<p>Depending on your 
-				<!-- -->organization
-				<!-- --> type, you may only need to accept each license agreement once (as a
+			<p>Depending on your organization type, you may only need to accept each license agreement once (as a
 				<strong>Company</strong>
 				entity). However,
 				<strong>Individual</strong>
@@ -116,12 +96,10 @@
 			</div>
 			<p>From the Epic Account Services dashboard, you can proceed creating your first application. The Developer Portal will show a placeholder for a future application, but none of the configuration details.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="EOS Epic Account Services Application on Dashboard" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="EOS Epic Account Services Application on Dashboard" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/eas-placeholder-info.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="EOS Epic Account Services Application on Dashboard" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
@@ -147,21 +125,17 @@
 			<p>The first section for configuring your application is
 				<strong>Application Brand Settings</strong>.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Application Brand Settings" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Application Brand Settings" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/app-brand-settings.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Application Brand Settings" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
 			</div>
 			<p>On the left you can see a preview of the consent dialog that will be shown to Epic users requesting their permission to share information with that application. The preview is available in a mobile and a web version.</p>
 			<p>Initially, a red warning banner will appear at the top of the preview for the consent dialog. This warning indicates that the application brand settings have not been reviewed against potential toxicity or an attempt to spoof the brand. Additionally, the consent dialog for an unverified application is prefaced with another warning dialog. The purpose of the double warning is to fully ensure that the user understands all the implications of proceeding with an unverified application.</p>
-			<p>All applications are created unverified, and with 
-				<!-- -->audience
-				<!-- --> restrictions in place. Only members of the same development organization will be able to use their Epic Games accounts to authenticate against this unverified application. All other users will see an audience restriction error message. The purpose of these audience restrictions is to protect Epic users while allowing developers to iterate on integration while they prepare the application for the brand review.</p>
+			<p>All applications are created unverified, and with audience restrictions in place. Only members of the same development organization will be able to use their Epic Games accounts to authenticate against this unverified application. All other users will see an audience restriction error message. The purpose of these audience restrictions is to protect Epic users while allowing developers to iterate on integration while they prepare the application for the brand review.</p>
 			<p>To remove these restrictions, the details in the fields on the right must be filled out and submitted for Application Brand Review. These include:</p>
 			<ul>
 				<li>
@@ -176,12 +150,10 @@
 			</ul>
 			<p>As you update these fields, the preview will immediately update to reflect your changes.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Application Brand Settings after being filled" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Application Brand Settings after being filled" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/app-brand-settings-filled.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Application Brand Settings after being filled" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
@@ -194,12 +166,10 @@
 				<strong>Permissions</strong>
 				tab is where you define the level of access the application will request from the user.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Application Permissions" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Application Permissions" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/app-permissions.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Application Permissions" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
@@ -220,12 +190,10 @@
 				<strong>Save</strong>
 				to save your changes. The consent dialog preview will update to reflect the permissions you add or remove.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Application Permissions after being enabled" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Application Permissions after being enabled" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/app-permissions-enabled.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Application Permissions after being enabled" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
@@ -239,12 +207,10 @@
 				<em>client</em>
 				is any piece of software or website that can access the application's data within the Epic Account Services backend. All clients associated with an application are listed in its Product Settings, and all of them share the user's consent once it is given.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Unconfigured application clients tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Unconfigured application clients tab" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/client-config.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Unconfigured application clients tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
@@ -262,24 +228,20 @@
 				<strong>Save</strong>
 				button to save your changes.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Dashboard with configured application" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Dashboard with configured application" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/client-config-filled.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Dashboard with configured application" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
 			</div>
 			<p>At this point you have completed the EOS Epic Account Services Application Configuration. From here you are ready to integrate EAS into a product and use it to access user data. Following a review of the application brand settings you submitted, audience restrictions will be lifted, and the application can be made visible to users outside of your organization.</p>
 			<div>
-				<div style="max-width:700px">
-					<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-						<img alt="Application Permissions after being enabled" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-						<noscript>
-							<img alt="Application Permissions after being enabled" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/epic-account-services/getting-started/battle-breakers-product-page.png">
-						</noscript>
+				<div style="max-width: 700px;">
+					<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+						<img alt="Application Permissions after being enabled" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+						<noscript></noscript>
 					</span>
 				</div>
 				<p>Click to enlarge image.</p>
@@ -290,16 +252,14 @@
 			<p>Using an Epic Games account requires no special setup with the EOS SDK. However, you must use a login type appropriate for your target platform (see the
 				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>), and you must remember to include the scopes you want the user to consent to in the login call that you denoted during your
 				<a href="/docs/epic-account-services/brand-review">brand review application</a>
-				(their profile, 
-				<!-- -->presence
-				<!-- -->, and friends list).</p>
+				(their profile, presence, and friends list).</p>
 			<p>For example, to login via the account portal on a PC, your login call may appear as follows:</p>
 			<div>
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -324,8 +284,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -347,8 +307,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -373,8 +333,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -385,8 +345,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -478,8 +438,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>

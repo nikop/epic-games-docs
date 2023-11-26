@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -38,7 +38,6 @@
 				<li>(<em>Windows Only</em>) Configure the
 					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces#windows-service-installer">Windows Service Installer</a>.</li>
 				<li>Integrate the Anti-Cheat interfaces with your game code:
-					<!-- -->
 					<ol>
 						<li>Establish user identity with the
 							<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>.</li>
@@ -107,7 +106,6 @@
 				<li>Choose
 					<strong>Download Config File</strong>. This downloads a plain text configuration file to force a test system to download and use the specified anti-cheat module instead of your active one.</li>
 				<li>Place the downloaded configuration file in the same directory as your game executable with the same name.
-					<!-- -->
 					<ol>
 						<li>For example, if your game’s executable name is
 							<code>MyGame-Win64-Shipping.exe</code>, then the configuration file must be placed in the same directory with the name
@@ -306,7 +304,6 @@
 				<li>List your final game executable in the
 					<code>Settings.json</code>
 					file to call the EOS SDK APIs and be protected by anti-cheat.
-					<!-- -->
 					<ol>
 						<li>For example, Unreal Engine is often configured to output a small BootstrapPackagedGame helper executable in the game root directory while the actual game executable resides in a subdirectory such as
 							<code>Binaries\Win64</code>. The executable listed in
@@ -317,7 +314,6 @@
 					</ol>
 				</li>
 				<li>Optional configurations:
-					<!-- -->
 					<ol>
 						<li>
 							<p>
@@ -343,7 +339,6 @@
 							<p>Icon Customization</p>
 							<ol>
 								<li>Windows
-									<!-- -->
 									<ol>
 										<li>
 											<p>Starting with EOS SDK 1.15 the bootstrapper will attempt to extract the target executable’s icon, specified in the
@@ -361,7 +356,6 @@
 									</ol>
 								</li>
 								<li>Mac
-									<!-- -->
 									<ol>
 										<li>
 											<p>Starting with EOS SDK 1.15 the bootstrapper will be stored in its own
@@ -631,7 +625,6 @@
 			</div>
 			<ul>
 				<li>Windows:
-					<!-- -->
 					<ul>
 						<li>Module download info:
 							<code>%AppData%\EasyAntiCheat\&lt;Your ProductId&gt;\&lt;Your DeploymentId&gt;\loader.log</code>
@@ -642,7 +635,6 @@
 					</ul>
 				</li>
 				<li>Linux:
-					<!-- -->
 					<ul>
 						<li>Module download info:
 							<code>.cache/com.epicgames.easyanticheat/&lt;Your ProductId&gt;/&lt;Your DeploymentId&gt;/loader.log</code>
@@ -653,7 +645,6 @@
 					</ul>
 				</li>
 				<li>Mac:
-					<!-- -->
 					<ul>
 						<li>Module download info:
 							<code>/Users/&lt;Current_User&gt;/Library/Caches/com.epicgames.easyanticheat/&lt;Your ProductId&gt;/&lt;Your DeploymentId&gt;/loader.log</code>
@@ -664,7 +655,6 @@
 					</ul>
 				</li>
 				<li>Steam Deck:
-					<!-- -->
 					<ul>
 						<li>Bootstrapper log:
 							<code>/home/deck/.local/share/Steam/steamapps/compatdata/&lt;Steam AppID&gt;/pfx/drive_c/users/steamuser/AppData/Roaming/EasyAntiCheat/&lt;Your ProductId&gt;/&lt;Your DeploymentId&gt;/anticheatlauncher.log</code>
@@ -728,7 +718,6 @@
 			<p>In Client-Server Mode, this error means that a player has been temporarily blocked from playing on the current game server. The most common causes for this are:</p>
 			<ul>
 				<li>Anti-cheat messages are being frequently lost or discarded in transmission between the game client and game server.
-					<!-- -->
 					<ul>
 						<li>Verify that the player's internet connection is working normally.</li>
 						<li>Verify that the game server is performing normally using your own performance metrics.</li>

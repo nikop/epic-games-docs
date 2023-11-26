@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -22,28 +22,24 @@
 				<em>EOS What's New</em>
 				is a high-level description of what’s changed in Epic Online Services (EOS) with every EOS SDK release.
 				<br>
-				
-				<!-- -->See the following documentation for additional information on EOS.</p>
+				See the following documentation for additional information on EOS.</p>
 			<ul>
 				<li>
 					<strong>Get started</strong>:
 					<br>
-					
-					<!-- -->See the EOS
+					See the EOS
 					<a href="/docs/epic-online-services/eos-get-started">Get Started Steps</a>
 					page for information on how to set up and use EOS services and the EOS SDK.</li>
 				<li>
 					<strong>Release notes</strong>:
 					<br>
-					
-					<!-- -->See the
+					See the
 					<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
 					documentation for more detailed information on what's changed with every EOS SDK release.</li>
 				<li>
 					<strong>Planned features</strong>:
 					<br>
-					
-					<!-- -->Find out what’s in development on the EOS roadmap at
+					Find out what’s in development on the EOS roadmap at
 					<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</li>
 			</ul>
 			<div>
@@ -98,7 +94,6 @@
 					<strong>Social Overlay</strong>
 					<ul>
 						<li>The social overlay has new features in the Your Party section, which displays the members of the player’s lobby.
-							<!-- -->
 							<ul>
 								<li>The new features are: A Leave Party button, non-friends showing in Your Party, and a count of the members in Your Party.</li>
 								<li>See the Social Overlay:
@@ -107,7 +102,6 @@
 							</ul>
 						</li>
 						<li>Players can now request friends to join their lobby directly from the social overlay.
-							<!-- -->
 							<ul>
 								<li>See the Social Overlay:
 									<a href="/docs/epic-account-services/social-overlay-overview/request-to-join">Request to Join</a>
@@ -127,7 +121,6 @@
 					</p>
 					<ul>
 						<li>The anti-cheat bootstrapper (<code>start_protected_game</code>) may reject anti-cheat updates because of a file size limit.
-							<!-- -->
 							<ul>
 								<li>Please update this executable as soon as possible to avoid errors from future module updates. The executable can be updated without updating the rest of the SDK or recompiling your game.</li>
 							</ul>
@@ -142,7 +135,6 @@
 						<li>Device Code support using
 							<code>EOS_LCT_DeviceCode</code>
 							for Epic Games accounts sign-in is now deprecated.
-							<!-- -->
 							<ul>
 								<li>Please discontinue using
 									<code>EOS_LCT_DeviceCode</code>
@@ -156,7 +148,6 @@
 							field on
 							<code>EOS_UserInfo_ExternalUserInfo</code>
 							is Optional.
-							<!-- -->
 							<ul>
 								<li>We recommend you revisit any handling that assumes a specific number of external accounts. The API has not changed, but the behavior has changed, so if you have code that interacts with the
 									<code>AccountId</code>
@@ -229,7 +220,6 @@
 					<ul>
 						<li>We recommend replacing any deprecated macros that use the old naming convention with macros that use the new naming convention. The deprecated macros are still present for backward compatibility, but we will be removing them in a future version.</li>
 						<li>A WebRTC vulnerability, as disclosed by Google for versions M102 and earlier, has been fixed.
-							<!-- -->
 							<ul>
 								<li>We recommend everyone using EOS P2P in earlier EOS SDK versions to update to 1.16 as soon as possible. Impacts can be found
 									<a href="https://eoshelp.epicgames.com/s/news/eos-news-article-MCVDBTZSVM7VAJHF4ZGJVXZM52I4?language=en_US">here</a>.</li>
@@ -245,7 +235,6 @@
 						<li>Unused types related to the previously removed
 							<code>EOS_Friends_DeleteFriend</code>
 							API have been deprecated.
-							<!-- -->
 							<ul>
 								<li>You should remove any instances of these types or references to this API.</li>
 							</ul>
@@ -268,7 +257,6 @@
 						<li>
 							<code>EOS_LobbyDetails_GetMemberCount</code>
 							now returns vMaxMemberSlots<code>-</code>NumOpenSlots` if used with a lobby search result.
-							<!-- -->
 							<ul>
 								<li>We recommend you update the usage of
 									<code>EOS_LobbyDetails_GetMemberCount</code>
@@ -285,7 +273,6 @@
 						<li>The unused define
 							<code>EOS_PLAYERDATASTORAGE_FILE_MAX_SIZE_BYTES</code>
 							has been deprecated.
-							<!-- -->
 							<ul>
 								<li>Although unused, any references to this define should be removed.</li>
 							</ul>
@@ -302,7 +289,6 @@
 							now returns
 							<code>EOS_LimitExceeded</code>
 							if a new session cannot be created because doing so would exceed the maximum allowed concurrent session count.
-							<!-- -->
 							<ul>
 								<li>We recommend you update the usage of
 									<code>EOS_Sessions_UpdateSession</code>
@@ -318,7 +304,6 @@
 							now returns
 							<code>EOS_InvalidUser</code>
 							if the local user associated with the session does not exist or is not authenticated.
-							<!-- -->
 							<ul>
 								<li>We recommend you update the usage of
 									<code>EOS_Sessions_UpdateSession</code>
@@ -335,7 +320,6 @@
 							<code>EOS_Sessions_TooManyPlayers</code>
 							when registering the requested number of players would exceed the maximum capacity of the session. This was previously
 							<code>EOS_LimitExceeded</code>.
-							<!-- -->
 							<ul>
 								<li>We recommend you update the usage of
 									<code>EOS_Sessions_RegisterPlayers</code>
@@ -575,7 +559,6 @@
 			</p>
 			<ul>
 				<li>The SDK now supports Apple silicon on Mac with a universal dylib.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note:</strong>
@@ -583,7 +566,6 @@
 					</ul>
 				</li>
 				<li>From EOS SDK version 1.15.2 onwards, the EOS SDK is pinned to two release versions of a console platform's SDK (Microsoft’s Xbox SDKs, Sony’s PlayStation SDKs, and Nintendo’s Switch SDKs, for example), where applicable. These two console platform versions are:
-					<!-- -->
 					<ul>
 						<li>The console platform SDK's latest release version.</li>
 						<li>The console platform SDK's previous release version.</li>
@@ -618,7 +600,6 @@
 					<code>EffectiveDate</code>, to
 					<code>EOS_Ecom_CatalogOffer</code>, which you can use to inform players when an offer will become available for purchase.</li>
 				<li>We have introduced two new APIs to the Ecom Interface:
-					<!-- -->
 					<ul>
 						<li>
 							<code>EOS_Ecom_GetLastRedeemedEntitlementsCount</code>
@@ -639,7 +620,6 @@
 					<code>PurchasedCount</code>
 					field from
 					<code>EOS_Ecom_CatalogOffer</code>, which now always returns 0. Do not use this field anymore.
-					<!-- -->
 					<ul>
 						<li>In previous versions of the SDK
 							<code>PurchasedCount</code>
@@ -784,7 +764,6 @@
 							and
 							<code>EOS_LCT_ExternalAuth</code>
 							login types now require the EOS redistributable installed and your game must launch with the EOS bootstrapper.
-							<!-- -->
 							<ul>
 								<li>For more information, see the documentation on
 									<a href="/docs/epic-account-services/crossplay/redistributable-installer">Redistributable installer</a>.</li>
@@ -957,7 +936,7 @@
 			<p>We revamped the entire EOS documentation site map to help organize our content based on the services you are using: the Developer Portal, Epic Account Services, Epic Games Store, Game Services, and the API references. This is just another small step to cleaning up our content for your ease of you and our efforts continue to improve the documentation.</p>
 			<div>
 				<p>We missed highlighting one of our features from the
-					<a href="#111---07-april-2021">SDK 1.11</a>
+					<a href="#111---2021-apr-07">SDK 1.11</a>
 					release!</p>
 				<p>
 					<strong>Artifacts</strong>

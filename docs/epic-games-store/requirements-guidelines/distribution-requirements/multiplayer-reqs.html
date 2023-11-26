@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -23,9 +23,11 @@
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
-			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts in order to be distributed on the Epic Games Store. This requirement ensures users who purchase a multiplayer 
-				<!-- -->product
-				<!-- --> on the Epic Games Store can easily connect with friends and other players, regardless of where purchases were made.</p>
+			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts in order to be distributed on the Epic Games Store. This requirement ensures users who purchase a multiplayer
+				<span>
+					<span>product</span>
+				</span>
+				on the Epic Games Store can easily connect with friends and other players, regardless of where purchases were made.</p>
 			<p>You may use your preferred solution for crossplay, such as the free Epic Online Services (EOS) crossplay functionality, your own method, or any third-party system that works across PC storefronts. Crossplay with other non-PC platforms (i.e., consoles) is optional but encouraged.</p>
 			<p>The sections below provide guidelines, additional details, and test cases to help you meet this requirement and prepare your product for release on the Epic Games Store.</p>
 			<div>
@@ -78,7 +80,6 @@
 					<em>Enable cross-platform invites to friends using an Epic Games account</em>). By default, this crossplay setting should not have a known true/false value so that users must provide their selection. Additionally, you must implement crossplay in your product using Epic Account Services.</li>
 				<li>Once implemented, users should be prompted upon first launch of your product to enable cross-platform multiplayer by linking their Epic Games account (e.g.,
 					<em>Would you like to enable cross-platform invites to friends using an Epic Games account? You can update this preference at any time in the Settings menu.</em>)
-					<!-- -->
 					<ul>
 						<li>If a user selects
 							<strong>No</strong>, save the
@@ -95,7 +96,6 @@
 					<em>true</em>
 					or
 					<em>false</em>) and take the appropriate action:
-					<!-- -->
 					<ul>
 						<li>If
 							<strong>True</strong>, automatically log in the user during initial boot.</li>
@@ -106,7 +106,6 @@
 				<li>In your product's UI where direct direct session invites between friends are supported, use the
 					<a href="/docs/game-services/eos-platform-interface#native-platform-integration">EOS Native Platform Integration</a>
 					to display Steam and Epic Games friends together in the social overlay.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Alternative</strong>: Provide separate options to send Steam friend invites (through the Steam API/overlay) and Epic Games friend invites (through the EOS API/overlay).</li>
@@ -252,9 +251,11 @@
 			<div>
 				<h4 id="typical-tech-stack-1">Typical Tech Stack</h4>
 			</div>
-			<p>Typically, a game client leveraging their publisher 
-				<!-- -->account
-				<!-- --> for the primary social graph across storefronts also uses their own game services. They may also have their own storefront. This is not required.</p>
+			<p>Typically, a game client leveraging their publisher
+				<span>
+					<span>account</span>
+				</span>
+				for the primary social graph across storefronts also uses their own game services. They may also have their own storefront. This is not required.</p>
 			<table>
 				<thead>
 					<tr>
@@ -420,7 +421,6 @@
 				<li>Have one or more players launch the product on the Epic Games Store.</li>
 				<li>Have one or more players launch the product on another storefront (e.g., Steam).</li>
 				<li>If the product has a server browser:
-					<!-- -->
 					<ul>
 						<li>Have one player on the Epic Games Store create a game.</li>
 						<li>Have additional players on the Epic Games Store and other storefront join the game.</li>
@@ -428,7 +428,6 @@
 					</ul>
 				</li>
 				<li>If the product has matchmaking:
-					<!-- -->
 					<ul>
 						<li>Have all players across both storefronts look for a match at the same time.</li>
 					</ul>
@@ -510,7 +509,6 @@
 					page.</li>
 				<li>Launch the product on Steam.</li>
 				<li>Trigger the in-game Epic Games account linking flow.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: To ensure account linking is understood to be optional, account linking and EAS consent should be driven by explicit player action (e.g., through a
@@ -557,7 +555,6 @@
 					page.</li>
 				<li>Launch the product on Steam.</li>
 				<li>Trigger the in-game Epic Games account authentication flow.
-					<!-- -->
 					<ul>
 						<li>
 							<strong>Note</strong>: In cases where the use of Epic Account Services is optional, EAS consent and logging in should be driven by explicit player action (e.g., through a
@@ -642,7 +639,6 @@
 			<ul>
 				<li>Product includes Epic Online Services redistributable as part of  its installation flow and log-in occurs without issue.</li>
 				<li>Product informs users how to install the Epic Online Services redistributable when uninstalled.
-					<!-- -->
 					<ul>
 						<li>On Steam, the recommended method is having the product use the
 							<code>EOS_Platform_GetDesktopCrossplayStatus</code>

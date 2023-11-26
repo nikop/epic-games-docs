@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -39,7 +39,6 @@
 					and
 					<a href="/docs/game-services/voice/voice-sample-c-sharp">C#</a>) and learn how to use the Voice interface with your product.</li>
 				<li>Integrate the Voice interface into your applications:
-					<!-- -->
 					<ol>
 						<li>Configure your
 							<a href="/docs/dev-portal/client-credentials#policies">client policies</a>
@@ -218,50 +217,62 @@
 			<div>
 				<h2 id="audio-device-selection">Audio Device Selection</h2>
 			</div>
-			<p>If not explicitly changed, the SDK uses the operating system’s default input and output audio devices. However, you can request the list of available input devices (microphones) and output devices (speakers) to select alternatives.</p>
-			<p>For input devices, you can use
-				<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-devices-count">
-					<code>EOS_RTCAudio_GetAudioInputDevicesCount</code>
+			<p>If not explicitly changed, the SDK uses the operating system's default input and output audio devices. However, you can request the list of available input devices (microphones) and output devices (speakers) to select alternatives.</p>
+			<div>
+				<h3 id="select-an-alternative-input-device">Select an Alternative Input Device</h3>
+			</div>
+			<p>For input devices, call
+				<a href="/docs/api-ref/functions/eos-rtc-audio-query-input-devices-information">
+					<code>EOS_RTCAudio_QueryInputDevicesInformation</code>
 				</a>
-				to know how many input devices are available and call
-				<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-input-device-by-index">
-					<code>EOS_RTCAudio_GetAudioInputDeviceByIndex</code>
+				and wait for the
+				<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-query-input-devices-information-callback">
+					<code>EOS_RTCAudio_OnQueryInputDevicesInformationCallback</code>
 				</a>
-				to iterate through the list. As a response,
+				callback. Next, call
+				<a href="/docs/api-ref/functions/eos-rtc-audio-get-input-devices-count">
+					<code>EOS_RTCAudio_GetInputDevicesCount</code>
+				</a>
+				to know how many input devices are available, and iterate through the list with
+				<a href="/docs/api-ref/functions/eos-rtc-audio-copy-input-device-information-by-index">
+					<code>EOS_RTCAudio_CopyInputDeviceInformationByIndex</code>
+				</a>. As a response,
 				<a href="/docs/api-ref/structs/eos-rtc-audio-input-device-information">
 					<code>EOS_RTCAudio_InputDeviceInformation</code>
 				</a>
 				provides a
 				<code>DeviceId</code>
-				that uniquely identifies the device. You can then pass this
+				field that uniquely identifies the device.</p>
+			<p>You can then pass this
 				<code>DeviceId</code>
 				to
-				<a href="/docs/api-ref/functions/eos-rtc-audio-set-audio-input-settings">
-					<code>EOS_RTCAudio_SetAudioInputSettings</code>
+				<a href="/docs/api-ref/functions/eos-rtc-audio-set-input-device-settings">
+					<code>EOS_RTCAudio_SetInputDeviceSettings</code>
 				</a>
-				to select the device to use.</p>
-			<p>Similarly, for output devices, you use
-				<a href="/docs/api-ref/functions/eos-rtc-audio-get-audio-output-devices-count">
-					<code>EOS_RTCAudio_GetAudioOutputDevicesCount</code>
-				</a>
-				to know how many output devices are available and call
-				<code>EOS_RTC_GetAudioOutputDeviceByIndex</code>
-				to iterate through the list. As a response,
-				<a href="/docs/api-ref/structs/eos-rtc-audio-output-device-information">
-					<code>EOS_RTCAudio_AudioOutputDeviceInformation</code>
-				</a>
-				provides a
-				<code>DeviceId</code>
-				to uniquely identify the device. You can then pass this
-				<code>DeviceId</code>
-				to
-				<a href="/docs/api-ref/functions/eos-rtc-audio-set-audio-output-settings">
-					<code>EOS_RTCAudio_SetAudioOutputSettings</code>
-				</a>
-				to select the device to use.</p>
-			<p>Available input and output audio devices may change during a session. For example, your user may plug in or remove a new headset while your 
-				<!-- -->product
-				<!-- --> is running. You can use
+				to select the audio device to use.</p>
+			<p>
+				<strong>Note</strong>: Make sure that you delete any data received at
+				<code>EOS_RTCAudio_CopyInputDeviceInformationByIndex</code>. To do this, use the function
+				<a href="/docs/api-ref/functions/eos-rtc-audio-input-device-information-release">
+					<code>EOS_RTCAudio_InputDeviceInformation_Release</code>
+				</a>.</p>
+			<div>
+				<h3 id="select-an-alternative-output-device">Select an Alternative Output Device</h3>
+			</div>
+			<p>For output devices, there is a similar set of functions to the ones that you use to select an alternative input device, except they have
+				<code>output</code>
+				in the API name (For example,
+				<a href="/docs/api-ref/functions/eos-rtc-audio-query-output-devices-information">
+					<code>EOS_RTCAudio_QueryOutputDevicesInformation</code>
+				</a>). Use the corresponding output functions and follow the same process outlined in the previous section to select an alternative audio output device.</p>
+			<div>
+				<h3 id="receive-notifications-when-an-audio-device-changes">Receive Notifications When an Audio Device Changes</h3>
+			</div>
+			<p>Available input and output audio devices may change during a session. For example, your user may plug in or remove a new headset while your
+				<span>
+					<span>product</span>
+				</span>
+				is running. You can use
 				<a href="/docs/api-ref/functions/eos-rtc-audio-add-notify-audio-devices-changed">
 					<code>EOS_RTCAudio_AddNotifyAudioDevicesChanged</code>
 				</a>
@@ -530,6 +541,15 @@
 					</li>
 					<li>
 						<a href="#audio-device-selection">Audio Device Selection</a>
+					</li>
+					<li>
+						<a href="#select-an-alternative-input-device">Select an Alternative Input Device</a>
+					</li>
+					<li>
+						<a href="#select-an-alternative-output-device">Select an Alternative Output Device</a>
+					</li>
+					<li>
+						<a href="#receive-notifications-when-an-audio-device-changes">Receive Notifications When an Audio Device Changes</a>
 					</li>
 					<li>
 						<a href="#changing-the-volume">Changing the Volume</a>

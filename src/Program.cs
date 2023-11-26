@@ -41,6 +41,13 @@ while (linkQueue.TryDequeue(out var uri))
             continue;
         }
 
+#if DEBUG
+        if (uri.PathAndQuery.StartsWith("/docs/api-ref/"))
+        {
+            continue;
+        }
+#endif
+
         errorCount = 0;
 
         chromeDriver.Navigate().GoToUrl(uri);
@@ -48,12 +55,28 @@ while (linkQueue.TryDequeue(out var uri))
 
         chromeDriver.FindElement(By.CssSelector("section.page"));
         var pageSource = chromeDriver.PageSource;
+
+        if (pageSource.Contains("Too many requests, please try again later."))
+        {
+            linkQueue.Queue(uri);
+            await Task.Delay(10000);
+        }
+
+        if (pageSource.Contains("Sorry, you don't have access to this page!"))
+        {
+            Console.WriteLine($"::error::No permission to {uri}");
+        }
+
         var document = await context.OpenAsync(req => req.Content(pageSource).Address(uri));
 
         var page = document.QuerySelector("section.page");
 
         if (page is null)
+        {
+            Console.WriteLine($"::error::Failed to parse {uri}");
+
             continue;
+        }
 
         var hero = page.QuerySelector("div.hero__header");
         hero?.Remove();
@@ -186,5 +209,7 @@ while (linkQueue.TryDequeue(out var uri))
         Console.WriteLine(ex);
     }
 
-    await Task.Delay(500).ConfigureAwait(false);
+    await Task.Delay(100).ConfigureAwait(false);
 }
+
+chromeDriver.Close();

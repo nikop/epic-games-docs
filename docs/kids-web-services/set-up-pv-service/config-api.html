@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -20,9 +20,11 @@
 	</section>
 	<section>
 		<section>
-			<p>To trigger the PV service flow, your 
-				<!-- -->product
-				<!-- --> needs to call the
+			<p>To trigger the PV service flow, your
+				<span>
+					<span>product</span>
+				</span>
+				needs to call the
 				<a href="https://freekwslaunch.docs.apiary.io/#reference/verifications">send-email API endpoint</a>.</p>
 			<div>
 				<h2 id="get-the-api-integration-details">Get the API integration details</h2>
@@ -70,12 +72,10 @@
 							- The URL where the PV service is located. API queries should be made against this URL.</li>
 					</ul>
 					<div>
-						<div style="max-width:400px">
-							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-								<img alt="PV details" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-								<noscript>
-									<img alt="PV details" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/kids-web-services/set-up-pv-service/config-api/pv-details.png">
-								</noscript>
+						<div style="max-width: 400px;">
+							<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+								<img alt="PV details" src="https://static-assets-prod.epicgames.com/eos-docs/kids-web-services/set-up-pv-service/config-api/pv-details.png" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+								<noscript></noscript>
 							</span>
 						</div>
 						<p>Click image for full size.</p>
@@ -92,14 +92,13 @@
 			<ul>
 				<li>Parent's email address.</li>
 				<li>Child's location. This can be either:
-					<!-- -->
 					<ul>
 						<li>a ISO 3166-1 alpha-2 code. For example, 'US', 'GB', 'CA'.</li>
 						<li>a recognised ISO 3166-2 subdivision. For example, 'US-CA', 'GB-ENG', 'CA-BC'.</li>
 					</ul>
 				</li>
 				<li>Parent's language. This is the language that KWS uses for emails and verification screens presented to the parent. For example, ‘en’, ‘de’, ‘ja’. For the full list of supported languages, see
-					<a href="/docs/kids-web-services/kws-platform/kws-localization#localizing-the-parent-verification-service">Localizing the PV service</a>.</li>
+					<a href="/docs/kids-web-services/kws-platform/kws-localization#languages-supported-by-kws-services">Localizing the PV service</a>.</li>
 			</ul>
 			<div>
 				<h2 id="call-the-send-email-endpoint">Call the send-email endpoint</h2>
@@ -137,8 +136,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -163,7 +162,6 @@
 				<li>KWS presents the parent with a web-based interface where they can enter their verification credentials. Depending on the child’s location and
 					<a href="/docs/kids-web-services/set-up-pv-service/choose-verification">which verification methods you choose to present to the parent</a>, different verification methods are available.</li>
 				<li>On successful verification:
-					<!-- -->
 					<ul>
 						<li>
 							<p>KWS sends the 'parent-verified' event back to your system using the
@@ -172,8 +170,8 @@
 								<section>
 									<pre>
 										<div>
-											<div style="color:#fff">
-												<span style="display:inline-block">
+											<div style="color: rgb(0, 0, 0);">
+												<span style="display: inline-block;">
 												</span>
 											</div>
 										</div>
@@ -192,7 +190,7 @@
 						</li>
 						<li>
 							<p>If you
-								<a href="/docs/kids-web-services/set-up-pv-service/config-pv-settings#set-up-your-pv-service-redirect-url">provided a
+								<a href="/docs/kids-web-services/set-up-pv-service/config-redirect-url">provided a
 									<strong>Redirect URL</strong>
 									in the Developer Portal</a>, KWS redirects the parent to that URL. Otherwise, KWS displays a verification success message within the PV service web page.</p>
 						</li>

@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -23,8 +23,6 @@
 			<div>
 				<h2 id="supported-android-release-versions">Supported Android Release Versions</h2>
 			</div>
-			
-			<!-- -->
 			<p>The table below lists the Android release version which each EOS SDK release version supports:</p>
 			<table>
 				<thead>
@@ -62,6 +60,12 @@
 					</tr>
 				</tbody>
 			</table>
+			<p>
+				<strong>Tip</strong>: You can call the
+				<a href="/docs/api-ref/functions/eos-get-version">
+					<code>EOS_GetVersion</code>
+				</a>
+				function to get the EOS SDK version and the version of the platform that your game is compiled against.</p>
 			<div>
 				<h2 id="set-up-the-eos-sdk-for-android">Set up the EOS SDK for Android</h2>
 			</div>
@@ -91,10 +95,8 @@
 				<li>The EOS SDK Android AAR library is in the
 					<code>Bin/Android</code>
 					subdirectories.
-					<!-- -->
 					<ul>
 						<li>Two variants of EOS AAR library are provided:
-							<!-- -->
 							<ul>
 								<li>
 									<code>Bin/Android/dynamic-stdc++</code>
@@ -109,7 +111,6 @@
 									</ul>
 								</li>
 								<li>See the next section for differences.
-									<!-- -->
 									<ul>
 										<li>Use
 											<code>static-stdc++</code>
@@ -119,7 +120,6 @@
 							</ul>
 						</li>
 						<li>Each AAR supports four architectures:
-							<!-- -->
 							<ul>
 								<li>
 									<code>arm64-v8a</code>
@@ -138,7 +138,6 @@
 						<li>For convenience, unpacked
 							<code>so</code>
 							libraries are also provided.
-							<!-- -->
 							<ul>
 								<li>These are identical to the ones included in AAR.</li>
 							</ul>
@@ -168,7 +167,6 @@
 			<p>We recommend the following setup:</p>
 			<ul>
 				<li>EOS SDK:
-					<!-- -->
 					<ul>
 						<li>Only the
 							<code>static-stdc++</code>
@@ -178,7 +176,6 @@
 				<li>Any other third-party AAR's and
 					<code>so</code>
 					libraries:
-					<!-- -->
 					<ul>
 						<li>Only the
 							<code>static-stdc++</code>
@@ -186,7 +183,6 @@
 					</ul>
 				</li>
 				<li>Your main game application binary and your first-party libraries:
-					<!-- -->
 					<ul>
 						<li>The
 							<code>static-stdc++</code>
@@ -195,7 +191,6 @@
 							<code>dynamic-stdc++</code>, if all your first-party binaries can be compiled against the exact same
 							<code>libc++_shared.so</code>, and no third-party library uses
 							<code>dynamic-stdc++</code>.
-							<!-- -->
 							<ul>
 								<li>You should still include third-party binaries as
 									<code>static-stdc++</code>
@@ -260,11 +255,9 @@
 						in the menu.</p>
 					<div>
 						<div>
-							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-								<img alt="Select JAR/AAR Dependency in the Declared Dependencies tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-								<noscript>
-									<img alt="Select JAR/AAR Dependency in the Declared Dependencies tab" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/android/image-1.png">
-								</noscript>
+							<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+								<img alt="Select JAR/AAR Dependency in the Declared Dependencies tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+								<noscript></noscript>
 							</span>
 						</div>
 					</div>
@@ -277,11 +270,9 @@
 						configuration.</p>
 					<div>
 						<div>
-							<span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0">
-								<img alt="Enter the path to the eos-sdk.arr file" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%">
-								<noscript>
-									<img alt="Enter the path to the eos-sdk.arr file" loading="lazy" decoding="async" data-nimg="fill" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" src="null/game-services/platforms/android/image-2.png">
-								</noscript>
+							<span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+								<img alt="Enter the path to the eos-sdk.arr file" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+								<noscript></noscript>
 							</span>
 						</div>
 					</div>
@@ -305,8 +296,8 @@
 						<section>
 							<pre>
 								<div>
-									<div style="color:#fff">
-										<span style="display:inline-block">
+									<div style="color: rgb(0, 0, 0);">
+										<span style="display: inline-block;">
 										</span>
 									</div>
 								</div>
@@ -348,8 +339,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -365,8 +356,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -381,8 +372,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -409,8 +400,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -429,8 +420,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -458,8 +449,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -479,8 +470,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -499,8 +490,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -512,8 +503,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -530,8 +521,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -545,8 +536,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>
@@ -574,8 +565,8 @@
 				<section>
 					<pre>
 						<div>
-							<div style="color:#fff">
-								<span style="display:inline-block">
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
 								</span>
 							</div>
 						</div>

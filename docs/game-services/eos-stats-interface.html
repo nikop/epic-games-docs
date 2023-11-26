@@ -1,5 +1,5 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
@@ -28,8 +28,6 @@
 				<a href="/docs/game-services/achievements">achievements</a>
 				and how to use rank users in
 				<a href="/docs/game-services/leaderboards">leaderboards</a>.</p>
-			
-			<!-- -->
 			<div>
 				<h2 id="accessing-the-stats-interface">Accessing the Stats Interface</h2>
 			</div>
@@ -732,9 +730,9 @@
 			</table>
 			<p>
 				<a href="#ingesting-stats">Stats Ingestion</a>
-				is the endpoint for submitting stat changes to the service, and has a per-user rate limit. When a dedicated server submits stats on behalf of users, the per-user limits do not apply; in these cases, limits are based on the number of concurrent users (CCU) per 
-				<!-- -->deployment
-				<!-- --> at that time.</p>
+				is the endpoint for submitting stat changes to the service, and has a per-user rate limit. When a dedicated server submits stats on behalf of users, the per-user limits do not apply; in these cases, limits are based on the rate per second for each
+				<code>clientId</code>
+				per deployment at that time.</p>
 			<table>
 				<thead>
 					<tr>
@@ -747,7 +745,7 @@
 					<tr>
 						<td>Ingest stats</td>
 						<td>60 requests per minute, 500 stats per request</td>
-						<td>1 request per 5 CCU per minute</td>
+						<td>1 request per 5 Client IDs per minute</td>
 					</tr>
 					<tr>
 						<td>Get stats by Player ID</td>

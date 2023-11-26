@@ -3,7 +3,9 @@ using AngleSharp.Html;
 
 using EpicDocSync;
 
-using System.Collections.Concurrent;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
 using System.Globalization;
 
 
@@ -11,12 +13,7 @@ using System.Globalization;
 var dir = new DirectoryInfo("docs");
 CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-var httpClient = new HttpClient
-{
-    Timeout = TimeSpan.FromSeconds(10),
-};
-
-// Angle Sharp
+var chromeDriver = new ChromeDriver();
 var config = Configuration.Default;
 var context = BrowsingContext.New(config);
 
@@ -44,23 +41,13 @@ while (linkQueue.TryDequeue(out var uri))
             continue;
         }
 
-        var response = await httpClient.GetAsync(uri).ConfigureAwait(false);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            if (response.StatusCode >= System.Net.HttpStatusCode.InternalServerError)
-            {
-                errorCount++;
-                continue;
-            }
-
-            continue;
-        }
-
         errorCount = 0;
 
-        var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-        var document = await context.OpenAsync(req => req.Content(content).Address(uri));
+        chromeDriver.Navigate().GoToUrl(uri);
+        chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+        chromeDriver.FindElement(By.CssSelector("section.page"));
+        var document = await context.OpenAsync(req => req.Content(chromeDriver.PageSource).Address(uri));
 
         var page = document.QuerySelector("section.page");
 

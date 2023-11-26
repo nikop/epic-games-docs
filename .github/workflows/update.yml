@@ -15,5 +15,6 @@ jobs:
       uses: actions/setup-dotnet@v3
     - name: Git name
       run: git config user.name github-actions && git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    - uses: nanasess/setup-chromedriver@v2
     - name: Run script
       run: ./update.sh

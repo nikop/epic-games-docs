@@ -1,9 +1,15 @@
 <section class="page">
-	<div style="left:0">
+	<div style="left: 300px;">
 		<nav>
 			<ol>
 				<li>
-					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="EOS_LobbyDetails_Info">EOS_LobbyDetails_Info</span>
 				</li>
 			</ol>
 		</nav>
@@ -22,11 +28,9 @@
 		<section>
 			<div>
 				<div>
-					<div style="overflow:hidden;margin-bottom:0">
-						<div aria-label="Content Tabs" role="tablist">
-							<button tabindex="0" type="button" role="tab" aria-selected="true" id="simple-tab-0" aria-controls="simple-tabpanel-0">C<span></span>
-							</button>
-						</div>
+					<div style="overflow: hidden; margin-bottom: 0px;">
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span style="left: 0px; width: 40.1406px;"></span>
 					</div>
 				</div>
 				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
@@ -95,6 +99,18 @@
 									<tr>
 										<td>EOS_Bool bRejoinAfterKickRequiresInvite</td>
 										<td>Does rejoining after being kicked require an invite</td>
+									</tr>
+									<tr>
+										<td>EOS_Bool bPresenceEnabled</td>
+										<td>If true, this lobby will be associated with the local user's presence information.</td>
+									</tr>
+									<tr>
+										<td>const uint32_t* AllowedPlatformIds</td>
+										<td>Array of platform IDs indicating the player platforms allowed to register with the session. Platform IDs are found in the EOS header file, e.g. EOS_OPT_Epic. For some platforms, the value will be in the EOS Platform specific header file. If null, the lobby will be unrestricted.</td>
+									</tr>
+									<tr>
+										<td>uint32_t AllowedPlatformIdsCount</td>
+										<td>Number of platform IDs in the array</td>
 									</tr>
 								</tbody>
 							</table>

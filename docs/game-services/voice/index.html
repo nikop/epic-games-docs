@@ -422,8 +422,191 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
+								<span style="">#ifdef _WIN32</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(136, 0, 0);">// Get absolute path for xaudio2_9redist.dll file</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+									wchar_t
+								</span>
+								<span>CurDir</span>
+								<span style="color: rgb(102, 102, 0);">[</span>
+								<span style="color: rgb(0, 102, 102);">MAX_PATH</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">+</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">1</span>
+								<span style="color: rgb(102, 102, 0);">]</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 0, 102);">GetCurrentDirectoryW</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span style="color: rgb(0, 102, 102);">MAX_PATH</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">+</span>
+								<span>
+									1u</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span>
+								</span>
+								<span>CurDir</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+									std</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>wstring
+								</span>
+								<span>BasePath</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+									std</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 0, 102);">wstring</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span>CurDir</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+									std</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span>string</span>
+								<span>
+								</span>
+								<span>XAudio29DllPath</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+								</span>
+								<span>FStringUtils</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 102, 0);">:</span>
+								<span style="color: rgb(102, 0, 102);">Narrow</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span>BasePath</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span>XAudio29DllPath</span>
+								<span style="color: rgb(102, 102, 0);">.</span>
+								<span style="color: rgb(102, 0, 102);">append</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span style="color: rgb(0, 136, 0);">"/xaudio2_9redist.dll"</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span>EOS_Windows_RTCOptions</span>
+								<span>
+								</span>
+								<span>WindowsRtcOptions</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">{</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">0</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">}</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span>WindowsRtcOptions</span>
+								<span style="color: rgb(102, 102, 0);">.</span>
+								<span>ApiVersion</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+								</span>
+								<span style="color: rgb(0, 102, 102);">EOS_WINDOWS_RTCOPTIONS_API_LATEST</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span>WindowsRtcOptions</span>
+								<span style="color: rgb(102, 102, 0);">.</span>
+								<span>XAudio29DllPath</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+								</span>
+								<span>XAudio29DllPath</span>
+								<span style="color: rgb(102, 102, 0);">.</span>
+								<span style="color: rgb(102, 0, 102);">c_str</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span>
+								</span>
+								<span>RtcOptions</span>
+								<span style="color: rgb(102, 102, 0);">.</span>
+								<span>PlatformSpecificOptions</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">=</span>
+								<span>
+								</span>
+								<span style="color: rgb(102, 102, 0);">&amp;</span>
+								<span>WindowsRtcOptions</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
 							</div>
 						</div>
 					</pre>

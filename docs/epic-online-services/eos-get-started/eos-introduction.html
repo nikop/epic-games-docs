@@ -1,0 +1,133 @@
+<section class="page">
+	<div style="left: 300px;">
+		<nav>
+			<ol>
+				<li>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="EOS Introduction">EOS Introduction</span>
+				</li>
+			</ol>
+		</nav>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS Introduction</h1>
+			<h2>Key information when integrating Epic Online Services (EOS) into your game.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<p>Use the Epic Online Services (EOS) SDK to integrate the following services into your game:</p>
+			<ul>
+				<li>EOS Game Services</li>
+				<li>EOS Epic Account Services</li>
+				<li>Epic Game Store Services</li>
+			</ul>
+			<p>Integrate these services into a game running on multiple platforms, including Windows, macOS, Linux, PlayStation, Xbox, and Switch. (Note you can only use Epic Games Store Services on Windows and macOS.)
+				<br>
+				See the
+				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+				page for a full list of platforms and versions supported.</p>
+			<p>For an overview of the features available with each service, see the following documentation:
+				<a href="/docs">Epic Developer Resources: Overview</a>.</p>
+			<p>
+				<strong>About the SDK</strong>
+			</p>
+			<p>The Epic Online Services (EOS) SDK is available in C, and also has a C# wrapper.</p>
+			<p>By focusing on C, we can provide stable application binary interfaces (ABI) to ensure integration functionality, regardless of compiler choice, implementation, calling conventions, data sizes, or alignments.</p>
+			<p>This also allows independent code patching for the SDK to limit interruptions in your own development, and helps maintain the life of the SDK without recompiling the application after distributing fixes and updates. Additionally, focusing on C APIs enforces a more deliberate exposure of the public API.</p>
+			<p>There are different types of SDK download to use, depending on the platform your game clients run on:</p>
+			<ul>
+				<li>
+					<strong>Windows, macOS, Linux</strong>
+					-  the EOS SDK in C, and the EOS SDK in C#.</li>
+				<li>
+					<strong>Mobile</strong>
+					-  the EOS SDK for iOS, and the EOS SDK for Android.</li>
+				<li>
+					<strong>Consoles</strong>
+					- there are EOS SDK downloads for game consoles in C, and in C#.
+					<br>
+					The SDK downloads for consoles are only available to developers approved by the platform holders and approved by Epic Games.
+					<br>
+					The platform holders are: Microsoft (Xbox One, Xbox Series X), Sony (PlayStation 4, PlayStation 5), Nintendo (Switch).
+					<br>
+					To get access to the SDK downloads for consoles and associated documentation, you must apply for platform-holder approval. You can do this once you have set up an Epic Games account and organization in the Developer Portal. See the EOS
+					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
+					page for information on this.</li>
+			</ul>
+			<div>
+				<h3 id="release-versioning">Release Versioning</h3>
+			</div>
+			<p>EOS SDK versioning guarantees backwards compatibility with products using an older version of the SDK, even with API changes. Every interface, function, and data type has a version associated with it.</p>
+			<p>When a new SDK version is released, the SDK recognizes and supports older versions and reacts appropriately to data and function calls coming from them. This may include calling the original version of the function internally, migrating the original input structures to newer forms, or setting up reasonable defaults where possible.</p>
+			<p>Older products using the SDK maintain compatibility with EOS without updates.</p>
+			<div>
+				<h3 id="interface-handles">Interface Handles</h3>
+			</div>
+			<p>The EOS features group together by modular, service-specific interfaces. For example, the
+				<a href="/docs/game-services/lobbies">Lobbies Interface</a>
+				manages the creation and interactions of your game’s lobbies, the
+				<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface</a>
+				manages functionality with your friends list, and so on.</p>
+			<p>The EOS SDK exposes its interfaces through opaque handles provided by the
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>. An interface handle's lifetime lasts as long as the Platform Interface itself and is required as the first parameter to every API function using an interface.</p>
+			<div>
+				<h2 id="further-information">Further Information</h2>
+			</div>
+			<p>For further information, see the following pages:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
+				</li>
+				<li>Working with the EOS SDK:
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations">Conventions and Limitations</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eossdkc-sharp-getting-started">EOS SDK in C#</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eos-sdk-and-game-engines">Game Engines</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div id="tag_list">
+				<a href="/docs/site-map">Getting Started</a>
+				<a href="/docs/site-map">
+					EOS</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#release-versioning">Release Versioning</a>
+					</li>
+					<li>
+						<a href="#interface-handles">Interface Handles</a>
+					</li>
+					<li>
+						<a href="#further-information">Further Information</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

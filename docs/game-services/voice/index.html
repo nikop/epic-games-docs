@@ -68,11 +68,19 @@
 						<li>Integrate the Voice interface based on your chosen integration method.</li>
 					</ol>
 				</li>
-				<li>Review the
-					<a href="#best-practices">best practices</a>,
-					<a href="#voice-metrics">voice metrics</a>, and
-					<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">usage limitations</a>
-					for the Voice interface.</li>
+				<li>Review the following sections:
+					<ul>
+						<li>
+							<a href="#best-practices">Best practices</a>
+							on this page.</li>
+						<li>
+							<a href="#voice-metrics">Voice metrics</a>
+							on this page.</li>
+						<li>The section on service usage limitations in the
+							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+							page.</li>
+					</ul>
+				</li>
 			</ol>
 			<div>
 				<h2 id="voice-integration-methods">Voice Integration Methods</h2>
@@ -422,191 +430,8 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="">#ifdef _WIN32</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(136, 0, 0);">// Get absolute path for xaudio2_9redist.dll file</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-									wchar_t
-								</span>
-								<span>CurDir</span>
-								<span style="color: rgb(102, 102, 0);">[</span>
-								<span style="color: rgb(0, 102, 102);">MAX_PATH</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">+</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">1</span>
-								<span style="color: rgb(102, 102, 0);">]</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">{</span>
-								<span style="color: rgb(102, 102, 0);">}</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 0, 102);">GetCurrentDirectoryW</span>
-								<span style="color: rgb(102, 102, 0);">(</span>
-								<span style="color: rgb(0, 102, 102);">MAX_PATH</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">+</span>
-								<span>
-									1u</span>
-								<span style="color: rgb(102, 102, 0);">,</span>
-								<span>
-								</span>
-								<span>CurDir</span>
-								<span style="color: rgb(102, 102, 0);">)</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-									std</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span>wstring
-								</span>
-								<span>BasePath</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-									std</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 0, 102);">wstring</span>
-								<span style="color: rgb(102, 102, 0);">(</span>
-								<span>CurDir</span>
-								<span style="color: rgb(102, 102, 0);">)</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-									std</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span>string</span>
-								<span>
-								</span>
-								<span>XAudio29DllPath</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-								</span>
-								<span>FStringUtils</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(102, 0, 102);">Narrow</span>
-								<span style="color: rgb(102, 102, 0);">(</span>
-								<span>BasePath</span>
-								<span style="color: rgb(102, 102, 0);">)</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>XAudio29DllPath</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span style="color: rgb(102, 0, 102);">append</span>
-								<span style="color: rgb(102, 102, 0);">(</span>
-								<span style="color: rgb(0, 136, 0);">"/xaudio2_9redist.dll"</span>
-								<span style="color: rgb(102, 102, 0);">)</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>EOS_Windows_RTCOptions</span>
-								<span>
-								</span>
-								<span>WindowsRtcOptions</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">{</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">0</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">}</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>WindowsRtcOptions</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span>ApiVersion</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">EOS_WINDOWS_RTCOPTIONS_API_LATEST</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>WindowsRtcOptions</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span>XAudio29DllPath</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-								</span>
-								<span>XAudio29DllPath</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span style="color: rgb(102, 0, 102);">c_str</span>
-								<span style="color: rgb(102, 102, 0);">(</span>
-								<span style="color: rgb(102, 102, 0);">)</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>RtcOptions</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span>PlatformSpecificOptions</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">&amp;</span>
-								<span>WindowsRtcOptions</span>
-								<span style="color: rgb(102, 102, 0);">;</span>
 							</div>
 						</div>
 					</pre>
@@ -630,8 +455,9 @@
 			<div>
 				<h2 id="usage-limitations">Usage Limitations</h2>
 			</div>
-			<p>Voice has interface-specific usage rate limitations. For general information about throttling, usage quotas, and best practices, see
-				<a href="/docs/epic-online-services/eos-get-started/services-overview#service-usage-limitations">Service Usage Limitations</a>.</p>
+			<p>Voice has interface-specific usage rate limitations. For general information about throttling, usage quotas, and best practices, see the section on service usage limitations in the
+				<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+				page.</p>
 			<table>
 				<thead>
 					<tr>

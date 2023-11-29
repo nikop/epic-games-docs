@@ -83,81 +83,8 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="color: rgb(0, 102, 102);">SET</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">UE3_PREREQ_IDS</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(0, 136, 0);">"UE3Redist"</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">SET</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">UE3_PREREQ_PATH</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(0, 136, 0);">"Binaries\Windows\UE3Redist.exe"</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">SET</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">UE3_PREREQ_ARGS</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(0, 136, 0);">""</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>BuildPatchTool</span>
-								<span>
-									…
-								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>mode</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>UploadBinary</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>PrereqIds</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span style="color: rgb(0, 102, 102);">UE3_PREREQ_IDS</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>PrereqPath</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span style="color: rgb(0, 102, 102);">UE3_PREREQ_PATH</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>PrereqArgs</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span style="color: rgb(0, 102, 102);">UE3_PREREQ_ARGS</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
 							</div>
 						</div>
 					</pre>
@@ -187,77 +114,8 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="">reg query
-								</span>
-								<span style="color: rgb(0, 102, 102);">HKEY_CLASSES_ROOT</span>
-								<span>\</span>
-								<span>Installer</span>
-								<span>\</span>
-								<span>Products</span>
-								<span>\70140BF22CB7C94419A535B0925B0EEF</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(0, 0, 136);">if</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span style="color: rgb(0, 102, 102);">ERRORLEVEL</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">EQU</span>
-								<span>
-								</span>
-								<span style="color: rgb(0, 102, 102);">0</span>
-								<span>
-									goto
-								</span>
-								<span style="color: rgb(0, 102, 102);">LAUNCH_UE3_GAME</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span style="display: inline-block;">
-								</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span>\</span>
-								<span>Windows</span>
-								<span>\</span>
-								<span>UE3Redist</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span>exe</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span style="display: inline-block;">
-								</span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">:</span>
-								<span style="color: rgb(0, 102, 102);">LAUNCH_UE3_GAME</span>
-								<span></span>
-							</div>
-							<div style="color: rgb(0, 0, 0);">
-								<span>
-								</span>
-								<span>UE3Game</span>
-								<span style="color: rgb(102, 102, 0);">.</span>
-								<span>com</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">%</span>
-								<span style="color: rgb(102, 102, 0);">*</span>
 							</div>
 						</div>
 					</pre>
@@ -269,28 +127,8 @@
 					<pre>
 						<div>
 							<div style="color: rgb(0, 0, 0);">
-								<span style="">BuildPatchTool</span>
-								<span>
-									…
+								<span style="display: inline-block;">
 								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>mode</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>PatchGeneration</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>FeatureLevel</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span>Latest</span>
-								<span>
-								</span>
-								<span style="color: rgb(102, 102, 0);">-</span>
-								<span>AppLaunch</span>
-								<span style="color: rgb(102, 102, 0);">=</span>
-								<span style="color: rgb(0, 136, 0);">"Binaries\UE3Game.bat"</span>
-								<span>
-									…</span>
 							</div>
 						</div>
 					</pre>

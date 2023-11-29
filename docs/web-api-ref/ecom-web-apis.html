@@ -25,7 +25,7 @@
 						<span>Epic Games Store</span>
 					</div>
 				</div>
-				<div>10 mins to read</div>
+				<div>13 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -605,6 +605,400 @@
 					</pre>
 				</section>
 			</div>
+			<div>
+				<h2 id="query-clawbacks">Query Clawbacks</h2>
+			</div>
+			<p>A clawback is when a seller reclaims a player's access to an entitlement that the player purchased. This typically happens when a player requests a refund, or a chargeback occurs. The endpoint to check for recent clawbacks is shown below:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>This endpoint supports the following query parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>clawbackDate</code>
+						</td>
+						<td>The date of the clawback. This is required.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>count</code>
+						</td>
+						<td>The amount of data per page. It should be between 1 and 100. If it is null, a default value of
+							<code>10</code>
+							is used instead.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>namespace</code>
+						</td>
+						<td>The game's sandbox ID.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The response contains the following fields:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Data Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>accountId</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The Epic Account ID of the user who purchased the entitlement.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>active</code>
+						</td>
+						<td>
+							<code>boolean</code>
+						</td>
+						<td>
+							<code>True</code>
+							if the clawbacked entitlement is currently active.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>catalogItemId</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The ID for the item in the catalog that the entitlement is for.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>clawbackReason</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The reason why we removed the entitlement from the user's account. Some examples include
+							<code>REFUND</code>,
+							<code>CHARGEBACK</code>, and
+							<code>FRAUD</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>consumable</code>
+						</td>
+						<td>
+							<code>boolean</code>
+						</td>
+						<td>
+							<code>True</code>
+							if the entitlement can be used.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>country</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The country for the item record.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>created</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The date and time when the clawback information was created.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>endDate</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The end date of the clawback entitlement period.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>entitlementId</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The entitlement's ID.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>entitlementName</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The entitlement's name.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>entitlementType</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The category or nature of the entitlement. Some examples are
+							<code>AUDIENCE</code>,
+							<code>ENTITLEMENT</code>, and
+							<code>EXECUTABLE</code>. For example, if you buy a deluxe edition of a game, you might be granted a deluxe edition audience.
+							<code>AUDIENCE</code>
+							is the
+							<code>entitlementType</code>
+							in that case. Another example is an in-game item, such as a unique skin for your character. The skin is an
+							<code>ENTITLEMENT</code>
+							<code>entitlementType</code>. The executable for the main game is an
+							<code>EXECUTABLE</code>
+							<code>entitlementType</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>grantDate</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The date when the entitlement was originally granted.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>hasMore</code>
+						</td>
+						<td>
+							<code>boolean</code>
+						</td>
+						<td>
+							<code>True</code>
+							if there might be another page of results. We do not guarantee that there are items in the next page. It is your responsibility to handle an empty response, if there is one.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>id</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The unique identifier of the item record.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>namespace</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The namespace for the entitlement.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>nextPageKey</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>Indicates the position in a paginated set of results. You can include the
+							<code>nextPageKey</code>
+							value in subsequent requests to get the next page of results that follow the current page of results.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>originalUseCount</code>
+						</td>
+						<td>
+							<code>integer</code>
+						</td>
+						<td>The original number of times the entitlement could be used.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>platformType</code>
+						</td>
+						<td>
+							<code>enum</code>
+						</td>
+						<td>The platform on which the entitlement was originally granted. The
+							<code>platformType</code>
+							can be one of these values:<ul>
+								<li>
+									<code>EPIC</code>
+								</li>
+								<li>
+									<code>PSN</code>
+								</li>
+								<li>
+									<code>XBL</code>
+								</li>
+								<li>
+									<code>ITUNES</code>
+								</li>
+								<li>
+									<code>NINTENDO</code>
+								</li>
+								<li>
+									<code>WEGAME</code>
+								</li>
+								<li>
+									<code>GOOGLEPLAY</code>
+								</li>
+								<li>
+									<code>EOS</code>
+								</li>
+								<li>
+									<code>EMP</code>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>startDate</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The start date of the clawback entitlement period.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>status</code>
+						</td>
+						<td>
+							<code>string</code>
+						</td>
+						<td>The current status of the clawbacked entitlement.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>useCount</code>
+						</td>
+						<td>
+							<code>integer</code>
+						</td>
+						<td>The number of times that the user attached to the
+							<code>accountId</code>
+							has used the entitlement.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following is a sample response from the server for clawbacks:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="example-clawback-query">Example Clawback Query</h3>
+			</div>
+			<p>For example, to query the first page of clawbacks, you can build the query like this:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>The following is a condensed sample response from the server for clawbacks:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<p>In this example,
+				<code>hasMore</code>
+				is
+				<code>true</code>, so you can query the next page. To query the next page, you can build a query like this:</p>
+			<div>
+				<section>
+					<pre>
+						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+						</div>
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="clawback-error-codes">Clawback Error Codes</h3>
+			</div>
+			<p>The following table lists the possible error codes and responses with their description when you call the clawback API:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Error Code</th>
+						<th>Status</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>400</code>
+						</td>
+						<td>
+							<code>46022</code>
+						</td>
+						<td>The request is invalid.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>401</code>
+						</td>
+						<td>
+							<code>46099</code>
+						</td>
+						<td>The request has invalid or missing authorization.</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 		<aside>
 			<div>Contents</div>
@@ -639,6 +1033,15 @@
 					</li>
 					<li>
 						<a href="#redeemconsume-entitlements">Redeem/Consume Entitlements</a>
+					</li>
+					<li>
+						<a href="#query-clawbacks">Query Clawbacks</a>
+					</li>
+					<li>
+						<a href="#example-clawback-query">Example Clawback Query</a>
+					</li>
+					<li>
+						<a href="#clawback-error-codes">Clawback Error Codes</a>
 					</li>
 				</ul>
 			</div>

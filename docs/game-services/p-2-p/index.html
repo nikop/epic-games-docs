@@ -3,7 +3,13 @@
 		<nav>
 			<ol>
 				<li>
-					<span aria-label="Epic Developer Resources">Epic Developer Resources</span>
+					<a href="/docs">Epic Developer Resources</a>
+				</li>
+				<li aria-hidden="true"></li>
+				<li></li>
+				<li aria-hidden="true"></li>
+				<li>
+					<span aria-label="NAT P2P Interface">NAT P2P Interface</span>
 				</li>
 			</ol>
 		</nav>
@@ -14,7 +20,7 @@
 			<h1>NAT P2P Interface</h1>
 			<h2>Interface to send and receive data between users, and related networking functionality.</h2>
 			<div>
-				<div>15 mins to read</div>
+				<div>17 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -67,6 +73,8 @@
 			<p>The
 				<code>SocketName</code>
 				field can be a single value for all connections, or it can be a secret value known only to specific players in a multiplayer session. As accepted P2P connections expose a user's IP address to the peer that they are connecting to, it is important to not blindly accept any connection request.</p>
+			<p>
+				<strong>Note</strong>: The P2P Interface uses Simple Text Oriented Messaging Protocol (STOMP) messaging notifications, with websockets, when a player accepts a connection or when they request a connection. You might see STOMP in the EOS Messaging category of EOS SDK logs.</p>
 			<p>A valid
 				<code>EOS_ProductUserId</code>
 				is also usually required both for users to identify themselves when sending data, and to specify which user they wish to send data to.</p>
@@ -92,6 +100,15 @@
 				<code>EOS_P2P_AcceptConnection</code>
 				to pre-emptively accept the next connection request made with a given SocketId.</p>
 			<p>If multiple connections are open with a particular user, only the first connection must be negotiated. This greatly increases the speed at which data may be received with subsequent connection requests.</p>
+			<p>
+				<strong>Common Connection Failure Causes</strong>
+				<br>
+				Your players' peer-to-peer connection might fail if they have one or more of these issues:</p>
+			<ul>
+				<li>A player's internet is unavailable.</li>
+				<li>A player's operating system is suspended or hibernating.</li>
+				<li>A player runs into a bug in your game's code.</li>
+			</ul>
 			<div>
 				<h3 id="receiving-connection-request-notifications">Receiving Connection Request Notifications</h3>
 			</div>
@@ -953,51 +970,21 @@
 				<code>EOS_NotFound</code>
 				instead.</p>
 			<div>
-				<h2 id="determining-nat-type">Determining NAT Type</h2>
+				<h2 id="determining-network-address-translation-nat-type">Determining Network Address Translation (NAT) Type</h2>
 			</div>
-			<p>While the P2P Interface will attempt NAT-traversal, it is not always possible to receive incoming connections when one or more peers has a restrictive NAT. In these cases a relay is required, which will be used automatically in case of NAT-traversal failure. To help determine if the user can easily connect to peers, the P2P Interface can query the local user's
-				<strong>NAT Type</strong>
-				in relation to the internet. This is represented by
-				<code>EOS_ENATType</code>, which can take the following values:</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Value</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<code>EOS_NAT_Unknown</code>
-						</td>
-						<td>The NAT Type is either currently unknown or we are otherwise unable to accurately determine it.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_NAT_Open</code>
-						</td>
-						<td>All types of peers should be able to directly connect to you.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_NAT_Moderate</code>
-						</td>
-						<td>You can directly connect to other Moderate and Open peers without the use of relay servers.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>EOS_NAT_Strict</code>
-						</td>
-						<td>You can directly connect only to Open peers without the use of relay servers.</td>
-					</tr>
-				</tbody>
-			</table>
-			<p>The
+			<p>When the P2P Interface attempts to make connections with other players, it attempts NAT-traversal. If the P2P Interface cannot receive an incoming connection because the other player has a restrictive NAT, then the interface automatically uses a relay to establish the peer-to-peer connection between your players. For more information on how the P2P Interface uses relays, see the
+				<a href="#relay-control">Relay Control</a>
+				section.</p>
+			<p>You can call the P2P Interface's
 				<code>EOS_P2P_QueryNATType</code>
-				function can asynchronously determine the NAT Type of the current connection. It does this by sending multiple packets of data to remote servers, and those servers respond back with what IP and Ports the local application used. Note that additional calls to
+				function to retrieve the NAT type of the local player's current connection. The
 				<code>EOS_P2P_QueryNATType</code>
-				while a request is already in progress will be grouped into that first request, and will not start new requests.
+				asynchronously sends multiple packets of data to remote servers, and those servers respond back with what IP address and ports the local game uses. After you know the NAT type of your players, you can use that information to determine how well they can connect to each other.</p>
+			<p>
+				<strong>Note</strong>: If you make additional calls to
+				<code>EOS_P2P_QueryNATType</code>
+				while a request is already in progress, the EOS SDK groups additional calls into the first request; it does not start a new request.</p>
+			<p>
 				<code>EOS_P2P_QueryNATType</code>
 				takes the following parameters:</p>
 			<table>
@@ -1028,7 +1015,9 @@
 						<td>
 							<code>ClientData</code>
 							(Optional)</td>
-						<td>Pointer to data that will be returned to the caller when the query finishes.</td>
+						<td>Pointer to data that
+							<code>EOS_P2P_QueryNATType</code>
+							returns to the caller when the query finishes.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1051,21 +1040,62 @@
 				<tbody>
 					<tr>
 						<td>ApiVersion</td>
-						<td>A version field. Set to
+						<td>A version field. Set this to
 							<code>EOS_P2P_QUERYNATTYPE_API_LATEST</code>.</td>
 					</tr>
 				</tbody>
 			</table>
-			<p>Because the NAT Type query is asynchronous, this function does not return a value directly. Instead, it outputs the user's NAT Type through a
-				<strong>NAT Type Queried Handler</strong>, a function that is registered to occur when the query finishes. In some cases this query will be unable to determine the user's NAT Type, and will instead return a value of
-				<code>EOS_NAT_Unknown</code>.</p>
-			<p>When
+			<p>
 				<code>EOS_P2P_QueryNATType</code>
-				completes, the value of the user's NAT Type is cached, and you can instead call the function
+				does not return a value directly because it is asynchronous. Instead,
+				<code>EOS_P2P_QueryNATType</code>
+				outputs the player's NAT type through the callback function that you set for the
+				<code>NATTypeQueriedHandler</code>
+				parameter.</p>
+			<p>The P2P Interface represents the NAT type with
+				<code>EOS_ENATType</code>, which has the following possible values:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_NAT_Unknown</code>
+						</td>
+						<td>The local player's NAT type is either currently unknown or the P2P Interface is unable to accurately determine it.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_NAT_Open</code>
+						</td>
+						<td>All types of peers should be able to directly connect to the local player.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_NAT_Moderate</code>
+						</td>
+						<td>The local player can directly connect to other moderate and open peers. Relay servers are not required.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_NAT_Strict</code>
+						</td>
+						<td>The local player can directly connect only to open peers. To connect to other peers, the local player might need to use relays.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="get-the-nat-type-from-the-cache">Get the Nat Type From the Cache</h3>
+			</div>
+			<p>After
+				<code>EOS_P2P_QueryNATType</code>
+				completes at least once, the EOS SDK caches the value of the player's NAT type. You can then call the function
 				<code>EOS_P2P_GetNATType</code>
-				to return that value immediately. This will only return successfully if
-				<code>EOS_P2P_QueryNATType</code>
-				has completed at least once. To call the
+				to return the player's NAT type value immediately. To call the
 				<code>EOS_P2P_GetNATType</code>
 				function, you must provide the following parameters:</p>
 			<table>
@@ -1125,15 +1155,56 @@
 			</table>
 			<p>The
 				<code>EOS_P2P_GetNATType</code>
-				function will return
+				function returns
 				<code>EOS_Success</code>
 				if
 				<code>EOS_P2P_QueryNATType</code>
-				was successfully called in the past. It will return
+				was successfully called in the past. It returns
 				<code>EOS_NotFound</code>
 				if
 				<code>EOS_P2P_QueryNATType</code>
-				has not been called before, or if it has not been completed.</p>
+				has not been called before, or if it has not completed.</p>
+			<div>
+				<h3 id="relay-control">Relay Control</h3>
+			</div>
+			<p>The P2P Interface's relay control setting determines if the P2P Interface uses relays to establish the peer-to-peer connection. Each platform, except Xbox, has three relay modes available. Our relays are hosted in AWS data centers by Amazon. The specific relay server that a player connects to depends on Amazon's GEOIP DNS routing. For more information on the Xbox-specific peer-to-peer requirements, see the
+				<a href="/docs/epic-online-services/platforms/xbox#using-peer-to-peer-p2p">EOS SDK for Xbox: Using Peer-to-peer</a>
+				documentation.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>
+				<strong>Note</strong>: Our relays are hosted in AWS data centers by Amazon. The specific relay server that a player connects to depends on Amazon's GEOIP DNS routing.</p>
+			<p>The table below lists the available relay modes for the P2P Interface:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Mode</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Allow Relays</td>
+						<td>First, the P2P Interface attempts a direct peer-to-peer connection between players through a Session Traversal Utilities for NAT (STUN) server. The STUN server reports what the players' IP addresses and ports are, so the P2P Interface can establish the connection. If a direct connection through the STUN server fails, the P2P Interface attempts to use relays. This is the default value.</td>
+					</tr>
+					<tr>
+						<td>No Relays</td>
+						<td>The P2P Interface doesn't use relays to attempt to establish a peer-to-peer connection. It attempts only a direct peer-to-peer connection (through a STUN server). Players with restrictive NATs might not be able to connect to other players with this mode.</td>
+					</tr>
+					<tr>
+						<td>Force Relays</td>
+						<td>The P2P Interface uses only relays to attempt to establish the peer-to-peer connection. This adds latency to all connections, but it hides your players' IP Addresses from each other.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>See the
+				<a href="/docs/api-ref/enums/eos-e-relay-control">
+					<code>EOS_ERelayControl</code>
+				</a>
+				documentation for more information.</p>
+			<p>
+				<strong>Note</strong>: Your players' firewalls must allow UDP packets through to use the relay connection; typically, firewalls allow UDP packets through. However, if a player's firewall is restrictive, it might still block UDP packets, or it might require specific whitelisting of ports to allow UDP packets through. In either of these cases, the relay fails.</p>
 			<div id="tag_list">
 				<a href="/docs/site-map">Interface</a>
 				<a href="/docs/site-map">
@@ -1178,7 +1249,13 @@
 						<a href="#determining-packet-size">Determining Packet Size</a>
 					</li>
 					<li>
-						<a href="#determining-nat-type">Determining NAT Type</a>
+						<a href="#determining-network-address-translation-nat-type">Determining Network Address Translation (NAT) Type</a>
+					</li>
+					<li>
+						<a href="#get-the-nat-type-from-the-cache">Get the Nat Type From the Cache</a>
+					</li>
+					<li>
+						<a href="#relay-control">Relay Control</a>
 					</li>
 				</ul>
 			</div>

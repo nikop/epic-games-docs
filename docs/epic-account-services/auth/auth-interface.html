@@ -348,40 +348,6 @@
 				<p>Multiple users can be logged in at the same time on a single local device and using the same shared EOS_HPlatform instance</p>
 			</div>
 			<div>
-				<h5 id="associating-with-the-epic-games-launcher">Associating With the Epic Games Launcher</h5>
-			</div>
-			<p>When an application associated with the Epic Games Launcher starts, the launcher will provide a command line with several parameters, which will take this format:</p>
-			<div>
-				<section>
-					<pre>
-						<div>
-							<div style="color: rgb(0, 0, 0);">
-								<span style="display: inline-block;">
-								</span>
-							</div>
-						</div>
-					</pre>
-				</section>
-			</div>
-			<p>The important fields of this command line are as follows:This information must be parsed by the application and provided to the
-				<code>EOS_Auth_Login</code>
-				through the
-				<code>EOS_Auth_Credentials</code>
-				structure.
-				<code>EOS_Auth_Credentials</code>
-				has three variables:
-				<code>Id</code>,
-				<code>Token</code>, and
-				<code>Type</code>. For the
-				<code>Type</code>, use
-				<code>EOS_LCT_ExchangeCode</code>.</p>
-			<p>You may leave
-				<code>Id</code>
-				blank, as this field is unused for this login type. Finally, provide the Exchange Code from
-				<code>AUTH_PASSWORD</code>
-				as the
-				<code>Token</code>.</p>
-			<div>
 				<h4 id="persisting-user-login-to-epic-account-outside-epic-games-launcher">Persisting user login to Epic Account outside Epic Games Launcher</h4>
 			</div>
 			<p>On PC and mobile platforms, to support persistent user login outside of the Epic Games Launcher, use the
@@ -895,9 +861,6 @@
 					</li>
 					<li>
 						<a href="#auth-scopes">Auth Scopes</a>
-					</li>
-					<li>
-						<a href="#associating-with-the-epic-games-launcher">Associating With the Epic Games Launcher</a>
 					</li>
 					<li>
 						<a href="#persisting-user-login-to-epic-account-outside-epic-games-launcher">Persisting user login to Epic Account outside Epic Games Launcher</a>

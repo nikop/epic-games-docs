@@ -87,6 +87,9 @@ while (linkQueue.TryDequeue(out var uri))
         var toolbox = page.QuerySelector("#toolbox_panel");
         toolbox?.Remove();
 
+        var nav = page.QuerySelector("nav");
+        nav?.Remove();
+
         foreach (var style in page.QuerySelectorAll("style"))
         {
             style.Remove();

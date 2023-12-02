@@ -1,18 +1,5 @@
 <section class="page">
 	<div style="left: 300px;">
-		<nav>
-			<ol>
-				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Logging Interface">Logging Interface</span>
-				</li>
-			</ol>
-		</nav>
 		<div></div>
 	</div>
 	<section>
@@ -57,6 +44,89 @@
 				<section>
 					<pre>
 						<div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="color: rgb(136, 0, 0);">// Set all categories to Warning level; ignore anything that isn't at least as important as a Warning.</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 0, 102);">EOS_Logging_SetLogLevel</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span style="color: rgb(0, 102, 102);">EOS_LC_ALL_CATEGORIES</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span>
+								</span>
+								<span>EOS_LOG_Warning</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(136, 0, 0);">// For the Friends Interface, restrict it a little more; we only want things that are at or above Error level, no Warnings.</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 0, 102);">EOS_Logging_SetLogLevel</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span>EOS_LC_Friends</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span>
+								</span>
+								<span>EOS_LOG_Error</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(136, 0, 0);">// Report everything from the Ecom Interface. This might be something we're currently debugging, so we want all the log information we can get.</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 0, 102);">EOS_Logging_SetLogLevel</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span>EOS_LC_Ecom</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span>
+								</span>
+								<span>EOS_LOG_VeryVerbose</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span style="display: inline-block;">
+								</span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(136, 0, 0);">// We don't want log output from the Lobby Interface, so turn it off completely.</span>
+								<span></span>
+							</div>
+							<div style="color: rgb(0, 0, 0);">
+								<span></span>
+								<span style="color: rgb(102, 0, 102);">EOS_Logging_SetLogLevel</span>
+								<span style="color: rgb(102, 102, 0);">(</span>
+								<span>EOS_LC_Lobby</span>
+								<span style="color: rgb(102, 102, 0);">,</span>
+								<span>
+								</span>
+								<span>EOS_LOG_Off</span>
+								<span style="color: rgb(102, 102, 0);">)</span>
+								<span style="color: rgb(102, 102, 0);">;</span>
+								<span></span>
+							</div>
 							<div style="color: rgb(0, 0, 0);">
 								<span style="display: inline-block;">
 								</span>

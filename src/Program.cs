@@ -29,6 +29,8 @@ var errorCount = 0;
 
 while (linkQueue.TryDequeue(out var uri))
 {
+    retry:
+
     if (errorCount >= 10)
     {
         Console.WriteLine("::error::Aborting due to frequent server errors!");
@@ -61,8 +63,9 @@ while (linkQueue.TryDequeue(out var uri))
 
         if (pageSource.Contains("Too many requests, please try again later."))
         {
-            linkQueue.Queue(uri);
+            errorCount++;
             await Task.Delay(10000);
+            goto retry;
         }
 
         //if (pageSource.Contains("Sorry, you don't have access to this page!"))
@@ -89,6 +92,11 @@ while (linkQueue.TryDequeue(out var uri))
 
         var nav = page.QuerySelector("nav");
         nav?.Remove();
+
+        foreach (var el in page.QuerySelectorAll("[style]"))
+        {
+            el.RemoveAttribute("style");
+        }
 
         foreach (var style in page.QuerySelectorAll("style"))
         {

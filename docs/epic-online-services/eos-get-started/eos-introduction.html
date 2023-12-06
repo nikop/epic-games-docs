@@ -7,7 +7,7 @@
 			<h1>EOS Introduction</h1>
 			<h2>Key information when integrating Epic Online Services (EOS) into your game.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -21,18 +21,80 @@
 			</ul>
 			<p>Integrate these services into a game running on multiple platforms, including Windows, macOS, Linux, PlayStation, Xbox, and Switch. (Note you can only use Epic Games Store Services on Windows and macOS.)
 				<br>
-				See the
+				For a full list of platforms and platform versions supported, see the
 				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
-				page for a full list of platforms and versions supported.</p>
+				documentation.</p>
 			<p>For an overview of the features available with each service, see the following documentation:
 				<a href="/docs">Epic Developer Resources: Overview</a>.</p>
-			<p>
-				<strong>About the SDK</strong>
+			<div>
+				<h2 id="eos-sdk">EOS SDK</h2>
+			</div>
+			<div>
+				<h3 id="interfaces">Interfaces</h3>
+			</div>
+			<p>You integrate EOS services with your game through interfaces. These interfaces are SDK APIs and Web APIs. To integrate EOS services, you must call these APIs in your game’s (or software application’s) code.</p>
+			<p>The interfaces are modular and specific to each EOS service. For example:</p>
+			<ul>
+				<li>
+					<p>The Lobbies Interface integrates your game with the EOS lobbies service. This service manages the creation and interactions of your game’s lobbies. (Documentation:
+						<a href="/docs/game-services/lobbies">Lobbies Interface</a>.)</p>
+				</li>
+				<li>
+					<p>The Friends Interface integrates your game with the EOS friends service. This service manages the features associated with a player’s friends list. (Documentation:
+						<a href="/docs/en-USepic-account-services/eos-friends-interface">Friends Interface</a>.)</p>
+				</li>
+			</ul>
+			<div>
+				<h4 id="eos-game-services-interfaces">EOS Game Services Interfaces</h4>
+			</div>
+			<p>The interfaces in EOS Game Services consist of the following:</p>
+			<ul>
+				<li>
+					<strong>Multiplayer</strong>: lobbies, p2p, sessions, stats, title storage, voice chat</li>
+				<li>
+					<strong>Player progression</strong>: metrics, stats, achievements, leaderboards</li>
+				<li>
+					<strong>Game operations</strong>: anti-cheat, player sanctions, reports, ticketing for community-management</li>
+			</ul>
+			<p>Overview documentation:
+				<a href="/docs/epic-online-services#eos-game-services">Epic Online Services (EOS) Overview: EOS Game Services</a>
 			</p>
-			<p>The Epic Online Services (EOS) SDK is available in C, and also has a C# wrapper.</p>
+			<div>
+				<h4 id="eos-epic-account-services-interfaces">EOS Epic Account Services Interfaces</h4>
+			</div>
+			<p>The interfaces in EOS Epic Account Services consist of the following:</p>
+			<ul>
+				<li>
+					<strong>Crossplay</strong>: Enable players accessing your game from different storefronts to play together using  combined friends lists.</li>
+				<li>
+					<strong>Friends</strong>: Enable players to invite friends to join a game-play session. Retrieve and display friend information to players.</li>
+				<li>
+					<strong>Presence</strong>: Display a player’s status (online/offline/playing) in the game.</li>
+				<li>
+					<strong>Social Overlay</strong>: Display to a player their achievements and friends information, including if their friends are playing the same game.</li>
+			</ul>
+			<p>Overview documentation:
+				<a href="/docs/epic-online-services#eos-epic-account-services">Epic Online Services (EOS) Overview: EOS Epic Account Services</a>
+			</p>
+			<div>
+				<h4 id="platform-interface">Platform Interface</h4>
+			</div>
+			<p>To use any EOS services, you must integrate the Platform Interface into your game.</p>
+			<p>The Platform Interface does not provide a service, instead it facilitates your game’s integration with all other EOS services. EOS requires the Platform Interface as the first parameter to every API call that uses an interface. (Documentation:
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>.)</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>The Platform Interface is an EOS Game Services interface. However both EOS Game Services and EOS Epic Account Services require the Platform Interface.</li>
+				<li>"Platform" in "Platform Interface" is the EOS platform. It does not relate to the games platform your game clients run on.</li>
+			</ul>
+			<div>
+				<h3 id="coding-languages-and-game-platforms">Coding Languages and Game Platforms</h3>
+			</div>
+			<p>The EOS SDK is available in C, and also has a C# wrapper.</p>
 			<p>By focusing on C, we can provide stable application binary interfaces (ABI) to ensure integration functionality, regardless of compiler choice, implementation, calling conventions, data sizes, or alignments.</p>
 			<p>This also allows independent code patching for the SDK to limit interruptions in your own development, and helps maintain the life of the SDK without recompiling the application after distributing fixes and updates. Additionally, focusing on C APIs enforces a more deliberate exposure of the public API.</p>
-			<p>There are different types of SDK download to use, depending on the platform your game clients run on:</p>
+			<p>There are different types of SDK download to use, depending on the game platform your game clients run on:</p>
 			<ul>
 				<li>
 					<strong>Windows, macOS, Linux</strong>
@@ -52,22 +114,15 @@
 					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
 					page for information on this.</li>
 			</ul>
+			<p>For details of which EOS SDK release versions support which game-client platform release versions, see the
+				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+				documentation.</p>
 			<div>
 				<h3 id="release-versioning">Release Versioning</h3>
 			</div>
-			<p>EOS SDK versioning guarantees backwards compatibility with products using an older version of the SDK, even with API changes. Every interface, function, and data type has a version associated with it.</p>
-			<p>When a new SDK version is released, the SDK recognizes and supports older versions and reacts appropriately to data and function calls coming from them. This may include calling the original version of the function internally, migrating the original input structures to newer forms, or setting up reasonable defaults where possible.</p>
-			<p>Older products using the SDK maintain compatibility with EOS without updates.</p>
-			<div>
-				<h3 id="interface-handles">Interface Handles</h3>
-			</div>
-			<p>The EOS features group together by modular, service-specific interfaces. For example, the
-				<a href="/docs/game-services/lobbies">Lobbies Interface</a>
-				manages the creation and interactions of your game’s lobbies, the
-				<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface</a>
-				manages functionality with your friends list, and so on.</p>
-			<p>The EOS SDK exposes its interfaces through opaque handles provided by the
-				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>. An interface handle's lifetime lasts as long as the Platform Interface itself and is required as the first parameter to every API function using an interface.</p>
+			<p>EOS SDK versioning guarantees backwards compatibility with games using an older version of the EOS SDK, even with API changes.</p>
+			<p>Every interface, function, and data type has a version associated with it.  When a new EOS SDK version is released, the new EOS SDK recognizes and supports games using older versions of the EOS SDK and reacts appropriately to data and function calls coming from them. This reaction might include calling the original version of the function internally, migrating the original input structures to newer forms, or setting up defaults.</p>
+			<p>If your game uses an older version of the EOS SDK, you do not need to update it to the latest version to continue to use Epic Online Services.</p>
 			<div>
 				<h2 id="further-information">Further Information</h2>
 			</div>
@@ -104,10 +159,25 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#release-versioning">Release Versioning</a>
+						<a href="#eos-sdk">EOS SDK</a>
 					</li>
 					<li>
-						<a href="#interface-handles">Interface Handles</a>
+						<a href="#interfaces">Interfaces</a>
+					</li>
+					<li>
+						<a href="#eos-game-services-interfaces">EOS Game Services Interfaces</a>
+					</li>
+					<li>
+						<a href="#eos-epic-account-services-interfaces">EOS Epic Account Services Interfaces</a>
+					</li>
+					<li>
+						<a href="#platform-interface">Platform Interface</a>
+					</li>
+					<li>
+						<a href="#coding-languages-and-game-platforms">Coding Languages and Game Platforms</a>
+					</li>
+					<li>
+						<a href="#release-versioning">Release Versioning</a>
 					</li>
 					<li>
 						<a href="#further-information">Further Information</a>

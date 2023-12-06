@@ -19,7 +19,7 @@
 				<li>Download the EOS SDK (available in C and C#).</li>
 				<li>Integrate the Platform Interface into your game.</li>
 			</ul>
-			<p>This document gives guidance on how to do this together with information on the sample code which comes with the SDK download.</p>
+			<p>This document gives guidance on how to do this together with information on the SDK download.</p>
 			<p>There are also introduction resources, including introduction blogs, FAQs, and some information on the EOS game engine plugins for Unreal Engine and Unity. For more information on these see the
 				<a href="/docs/epic-online-services/eos-get-started/get-started-resources">Get Started Resources</a>
 				page.</p>
@@ -65,8 +65,9 @@
 			<div>
 				<h3 id="step-2---download-the-eos-sdk">Step 2 - Download the EOS SDK</h3>
 			</div>
+			<p>Your game uses the EOS SDK to access EOS services. You integrate EOS services with your game through interfaces. These interfaces are SDK APIs and Web APIs. To integrate EOS services, you must call these APIs in your game’s code.</p>
 			<p>Once you have set up your organization and products in the Developer Portal, you can download the EOS SDK from the Developer Portal.</p>
-			<p>To get the SDK download, on the Developer Portal home page, click
+			<p>To get the EOS SDK download, on the Developer Portal home page, click
 				<strong>Download SDK</strong>.</p>
 			<p>
 				<strong>Note:</strong>
@@ -153,7 +154,7 @@
 			</div>
 			<p>Find further information on using the EOS SDK in the following documentation:</p>
 			<ul>
-				<li>For interface handles, naming conventions, and error handling and other key information, see:
+				<li>For naming conventions, error handling and other key information, see:
 					<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations">Working with the SDK: Conventions and Limitations</a>.</li>
 				<li>The EOS SDK in C# has some implementation differences to the EOS SDK in C. If you are using C# and if you are using Unity for games development, also see
 					<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eossdkc-sharp-getting-started">Working with the SDK: EOS SDK in C#</a>.</li>
@@ -163,18 +164,19 @@
 			<div>
 				<h3 id="step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface</h3>
 			</div>
-			<p>To use EOS services in your game, you integrate interfaces. There is an interface for each service (outlined in the
-				<a href="#interface-functionality">Interface Functionality</a>
-				section below).</p>
-			<p>The first interface you integrate into your game is the Platform Interface. It holds the handles you need to access every other interface and keep them running: when your game starts up, you initialize the SDK and get a handle to the Platform Interface.</p>
-			<p>Find out more about this in the
+			<p>To use any EOS services, you must first integrate the Platform Interface into your game.</p>
+			<p>The Platform Interface does not provide a service, instead it facilitates your game’s integration with all other EOS services. EOS requires the Platform Interface as the first parameter to every API call that uses an interface.</p>
+			<p>For full guidance, see the
 				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
 				documentation.</p>
 			<p>
-				<strong>Note:</strong>
-				The Platform Interface is not the same as the games platforms your game clients run on. The documentation refers to these game platforms as “EOS SDK on Platforms”.</p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>The Platform Interface is an EOS Game Services interface. However both EOS Game Services and EOS Epic Account Services require the Platform Interface.</li>
+				<li>The Platform Interface is not related to the games platforms your game clients run on.</li>
+			</ul>
 			<div>
-				<h4 id="interface-functionality">Interface Functionality</h4>
+				<h4 id="interfaces">Interfaces</h4>
 			</div>
 			<p>For an overview of the functionality provided by each interface, see the following documentation:</p>
 			<div>
@@ -202,7 +204,7 @@
 				<li>
 					<strong>Friends</strong>: Enable players to invite friends to join a game-play session. Retrieve and display friend information to players.</li>
 				<li>
-					<strong>Prescence</strong>: Display a player’s status (online/offline/playing) within the game.</li>
+					<strong>Presence</strong>: Display a player’s status (online/offline/playing) within the game.</li>
 				<li>
 					<strong>Social Overlay</strong>: Display to a player their achievements and friends information, including if their friends are playing the same game.</li>
 			</ul>
@@ -272,7 +274,7 @@
 						<a href="#step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface</a>
 					</li>
 					<li>
-						<a href="#interface-functionality">Interface Functionality</a>
+						<a href="#interfaces">Interfaces</a>
 					</li>
 					<li>
 						<a href="#eos-game-services">EOS Game Services</a>

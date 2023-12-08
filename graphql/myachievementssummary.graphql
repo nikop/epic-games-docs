@@ -1,0 +1,30 @@
+query myAchievementsSummary($epicAccountId: String!, $locale: String!) {
+  PlayerProfile {
+    playerProfile(epicAccountId: $epicAccountId) {
+      achievementsSummaries {
+        ... on PlayerAchievementResponseSuccess {
+          data {
+            totalUnlocked
+            totalXP
+            sandboxId
+            baseOfferForSandbox(locale: $locale) {
+              keyImages {
+                url
+                type
+                alt
+              }
+            }
+            product(locale: $locale) {
+              name
+              slug
+            }
+            productAchievements(locale: $locale) {
+              totalAchievements
+              totalProductXP
+            }
+          }
+        }
+      }
+    }
+  }
+}

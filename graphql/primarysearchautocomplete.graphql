@@ -1,0 +1,29 @@
+query primarySearchAutocomplete($allowCountries: String, $category: String, $count: Int, $country: String, $keywords: String, $locale: String, $sortBy: String, $sortDir: String) {
+  Catalog {
+    searchStore(
+      allowCountries: $allowCountries
+      category: $category
+      count: $count
+      country: $country
+      keywords: $keywords
+      locale: $locale
+      sortBy: $sortBy
+      sortDir: $sortDir
+    ) {
+      elements {
+        countriesBlacklist
+        countriesWhitelist
+        customAttributes {
+          key
+          value
+        }
+        isCodeRedemptionOnly
+        offerId: id
+        sandboxId: namespace
+      }
+      paging {
+        total
+      }
+    }
+  }
+}

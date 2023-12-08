@@ -1,0 +1,10 @@
+query getAccountUplayCodes($accountId: String!) {
+  PartnerIntegration {
+    accountUplayCodes(accountId: $accountId) {
+      epicAccountId
+      gameId
+      redeemedOnUplay
+      uplayAccountId
+    }
+  }
+}

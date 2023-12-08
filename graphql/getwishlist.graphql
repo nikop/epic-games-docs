@@ -1,0 +1,14 @@
+query getWishlist($start: Int, $count: Int, $sortBy: String) {
+  Wishlist {
+    wishlistItems(start: $start, count: $count, sortBy: $sortBy) {
+      elements {
+        id
+        order
+        created
+        offerId
+        updated
+        namespace
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+query getCouponsQuery($currencyCountry: String!, $identityId: String!, $locale: String, $merchantGroup: String!, $count: Int = 50) {
+  CodeRedemption {
+    coupons(
+      currencyCountry: $currencyCountry
+      identityId: $identityId
+      includeSalesEventInfo: true
+      merchantGroup: $merchantGroup
+      count: $count
+    ) {
+      code
+      codeStatus
+      codeType
+      consumptionMetadata {
+        amountDisplay {
+          amount
+          currency
+          placement
+          symbol
+        }
+        minSalesPriceDisplay {
+          amount
+          currency
+          placement
+          symbol
+        }
+      }
+      endDate
+      namespace
+      salesEvent(locale: $locale) {
+        id
+        eventName
+        eventSlug
+        voucherImages {
+          type
+          url
+        }
+        voucherLink
+        voucherName
+      }
+      startDate
+    }
+  }
+}

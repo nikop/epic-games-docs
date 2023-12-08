@@ -1,0 +1,37 @@
+query PlayerAchievement($epicAccountId: String!, $sandboxId: String!) {
+  PlayerAchievement {
+    playerAchievementGameRecordsBySandbox(
+      epicAccountId: $epicAccountId
+      sandboxId: $sandboxId
+    ) {
+      records {
+        totalXP
+        totalUnlocked
+        playerAwards {
+          awardType
+          unlockedDateTime
+          achievementSetId
+        }
+        achievementSets {
+          achievementSetId
+          isBase
+          totalUnlocked
+          totalXP
+        }
+        playerAchievements {
+          playerAchievement {
+            sandboxId
+            epicAccountId
+            unlocked
+            progress
+            XP
+            unlockDate
+            achievementName
+            isBase
+            achievementSetId
+          }
+        }
+      }
+    }
+  }
+}

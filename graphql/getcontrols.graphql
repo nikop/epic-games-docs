@@ -1,0 +1,8 @@
+query getControls($pin: String!) {
+  ContentControl {
+    verifyPin(pin: $pin) {
+      pinCorrect
+      err
+    }
+  }
+}

@@ -1,0 +1,17 @@
+query getBinaryMetadata($sandboxId: String!, $artifactId: String!, $label: String!, $platform: String!) {
+  Library {
+    binary {
+      metadata(
+        sandboxId: $sandboxId
+        artifactId: $artifactId
+        label: $label
+        platform: $platform
+      ) {
+        artifactId
+        binaryVersion
+        downloadSizeBytes
+        installedSizeBytes
+      }
+    }
+  }
+}

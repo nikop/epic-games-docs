@@ -1,0 +1,7 @@
+query getFreeCouponsRemainingQuery($identityId: String!, $salesEventId: String!) {
+  PriceEngine {
+    salesEvent(salesEventId: $salesEventId) {
+      freeCouponsRemaining(identityId: $identityId)
+    }
+  }
+}

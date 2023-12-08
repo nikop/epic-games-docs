@@ -1,0 +1,25 @@
+query getProductHomeConfig($locale: String!, $sandboxId: String!, $templateId: String) {
+  Product {
+    sandbox(sandboxId: $sandboxId) {
+      configuration(locale: $locale, templateId: $templateId) {
+        ... on HomeConfiguration {
+          configs {
+            keyImages {
+              ... on KeyImage {
+                type
+                url
+                alt
+              }
+              ... on Video {
+                type
+                url
+                alt
+              }
+            }
+            longDescription
+          }
+        }
+      }
+    }
+  }
+}

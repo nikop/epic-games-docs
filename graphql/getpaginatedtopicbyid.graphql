@@ -1,0 +1,106 @@
+query getPaginatedTopicById($country: String!, $id: String!, $count: Int!, $start: Int!, $locale: String) {
+  StoreDiscovery {
+    paginatedTopic(id: $id, count: $count, start: $start) {
+      id
+      offers {
+        offerId
+        namespace
+        offer {
+          __typename
+          title
+          id
+          namespace
+          offerType
+          expiryDate
+          status
+          isCodeRedemptionOnly
+          description
+          effectiveDate
+          viewableDate
+          pcReleaseDate
+          releaseDate
+          approximateReleasePlan {
+            day
+            month
+            quarter
+            year
+            releaseDateType
+          }
+          prePurchase
+          keyImages {
+            type
+            url
+          }
+          seller {
+            id
+            name
+          }
+          productSlug
+          urlSlug
+          items {
+            id
+            namespace
+          }
+          customAttributes {
+            key
+            value
+          }
+          developerDisplayName
+          publisherDisplayName
+          categories {
+            path
+          }
+          catalogNs {
+            mappings(pageType: "productHome") {
+              pageSlug
+              pageType
+            }
+          }
+          mappings {
+            pageSlug
+            pageType
+          }
+          price(country: $country) {
+            totalPrice {
+              discountPrice
+              originalPrice
+              voucherDiscount
+              discount
+              fmtPrice(locale: $locale) {
+                originalPrice
+                discountPrice
+                intermediatePrice
+              }
+              currencyCode
+              currencyInfo {
+                decimals
+                symbol
+              }
+            }
+            lineOffers {
+              appliedRules {
+                id
+                endDate
+              }
+            }
+          }
+          linkedOfferId
+          linkedOffer {
+            effectiveDate
+            customAttributes {
+              key
+              value
+            }
+          }
+          countriesBlacklist
+          countriesWhitelist
+        }
+      }
+      paging {
+        total
+        count
+        start
+      }
+    }
+  }
+}

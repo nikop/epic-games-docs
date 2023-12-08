@@ -1,0 +1,338 @@
+query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String!, $layoutType: LayoutType) {
+  Storefront {
+    discoverLayout(locale: $locale, slug: $layoutSlug, layoutType: $layoutType) {
+      affiliateId
+      modules {
+        ... on PageHeader {
+          __typename
+          eyebrow
+          type
+          title
+          description
+          banner {
+            src
+            altText
+          }
+        }
+        ... on StorefrontBreaker {
+          __typename
+          type
+          title
+          titleGroup
+          description
+          backgroundColors
+          layout
+          action
+          couponSlug
+          link {
+            src
+            linkText
+          }
+          image {
+            src
+            alt
+          }
+          eyebrow
+          offer {
+            namespace
+            id
+          }
+          videoRecipe
+        }
+        ... on StorefrontFreeGames {
+          __typename
+          type
+          title
+        }
+        ... on StorefrontCardGroup {
+          __typename
+          type
+          title
+          offerPresentation
+          offerType
+          titleIcon
+          groupStyle
+          hideTitle
+          cardType
+          link {
+            src
+            linkText
+          }
+          offers {
+            namespace
+            id
+            offer {
+              title
+              id
+              namespace
+              description
+              keyImages {
+                type
+                url
+              }
+              seller {
+                id
+                name
+              }
+              productSlug
+              urlSlug
+              items {
+                id
+                namespace
+              }
+              customAttributes {
+                key
+                value
+              }
+              categories {
+                path
+              }
+              catalogNs {
+                mappings(pageType: "productHome") {
+                  pageSlug
+                  pageType
+                }
+              }
+              offerMappings {
+                pageSlug
+                pageType
+              }
+              price(country: $country) {
+                totalPrice {
+                  discountPrice
+                  originalPrice
+                  voucherDiscount
+                  discount
+                  fmtPrice(locale: $locale) {
+                    originalPrice
+                    discountPrice
+                    intermediatePrice
+                  }
+                  currencyCode
+                  currencyInfo {
+                    decimals
+                    symbol
+                  }
+                }
+                lineOffers {
+                  appliedRules {
+                    id
+                    endDate
+                  }
+                }
+              }
+              releaseDate
+              pcReleaseDate
+              effectiveDate
+              viewableDate
+              approximateReleasePlan {
+                day
+                month
+                quarter
+                year
+                releaseDateType
+              }
+              prePurchase
+              countriesBlacklist
+              countriesWhitelist
+              developerDisplayName
+              publisherDisplayName
+            }
+          }
+        }
+        ... on StorefrontSubModules {
+          __typename
+          id
+          type
+          title
+          modules {
+            ... on StorefrontBreaker {
+              id
+              type
+              title
+              titleGroup
+              description
+              backgroundColors
+              layout
+              action
+              couponSlug
+              link {
+                src
+                linkText
+              }
+              image {
+                src
+                alt
+              }
+              regionRestrictions {
+                filterType
+                appliedCountries
+              }
+              offer {
+                namespace
+                id
+              }
+              videoRecipe
+            }
+            ... on StorefrontCardGroup {
+              id
+              type
+              title
+              link {
+                src
+                linkText
+              }
+              titleIcon
+              hideTitle
+              groupStyle
+              offerType
+              offerPresentation
+              cardType
+              offers {
+                namespace
+                id
+                offer {
+                  title
+                  id
+                  namespace
+                  offerType
+                  expiryDate
+                  status
+                  isCodeRedemptionOnly
+                  description
+                  effectiveDate
+                  releaseDate
+                  pcReleaseDate
+                  approximateReleasePlan {
+                    day
+                    month
+                    quarter
+                    year
+                    releaseDateType
+                  }
+                  prePurchase
+                  keyImages {
+                    type
+                    url
+                  }
+                  seller {
+                    id
+                    name
+                  }
+                  productSlug
+                  urlSlug
+                  items {
+                    id
+                    namespace
+                  }
+                  customAttributes {
+                    key
+                    value
+                  }
+                  categories {
+                    path
+                  }
+                  catalogNs {
+                    mappings(pageType: "productHome") {
+                      pageSlug
+                      pageType
+                    }
+                  }
+                  offerMappings {
+                    pageSlug
+                    pageType
+                  }
+                  price(country: $country) {
+                    totalPrice {
+                      discountPrice
+                      originalPrice
+                      voucherDiscount
+                      discount
+                      fmtPrice(locale: $locale) {
+                        originalPrice
+                        discountPrice
+                        intermediatePrice
+                      }
+                      currencyCode
+                      currencyInfo {
+                        decimals
+                        symbol
+                      }
+                    }
+                    lineOffers {
+                      appliedRules {
+                        id
+                        endDate
+                      }
+                    }
+                  }
+                  linkedOfferId
+                  linkedOffer {
+                    effectiveDate
+                    customAttributes {
+                      key
+                      value
+                    }
+                  }
+                  countriesBlacklist
+                  countriesWhitelist
+                  developerDisplayName
+                  publisherDisplayName
+                }
+              }
+            }
+          }
+        }
+        ... on StorefrontFeaturedCarousel {
+          __typename
+          type
+          title
+          slides {
+            title
+            eyebrow
+            description
+            backgroundColor
+            image {
+              src
+              alt
+            }
+            mobileImage {
+              src
+              alt
+            }
+            link {
+              src
+              linkText
+            }
+            videoRecipe
+          }
+        }
+        ... on StorefrontMarkdown {
+          __typename
+          type
+          title
+          content
+        }
+      }
+      pageTheme {
+        preferredMode
+        light {
+          theme
+          accent
+        }
+        dark {
+          theme
+          accent
+        }
+      }
+      faq {
+        title
+        content
+      }
+      redirect {
+        code
+        url
+      }
+    }
+  }
+}

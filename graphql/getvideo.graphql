@@ -1,0 +1,16 @@
+query getVideo($mediaRefId: String!) {
+  Media {
+    getMediaRef(mediaRefId: $mediaRefId) {
+      accountId
+      outputs {
+        duration
+        url
+        width
+        height
+        key
+        contentType
+      }
+      namespace
+    }
+  }
+}

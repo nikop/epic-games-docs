@@ -1,0 +1,168 @@
+query getCatalogOffer($sandboxId: String!, $offerId: String!, $locale: String, $country: String!) {
+  Catalog {
+    catalogOffer(namespace: $sandboxId, id: $offerId, locale: $locale) {
+      title
+      id
+      namespace
+      countriesBlacklist
+      countriesWhitelist
+      developerDisplayName
+      description
+      effectiveDate
+      expiryDate
+      viewableDate
+      allowPurchaseForPartialOwned
+      offerType
+      externalLinks {
+        text
+        url
+      }
+      isCodeRedemptionOnly
+      keyImages {
+        type
+        url
+      }
+      longDescription
+      seller {
+        id
+        name
+      }
+      productSlug
+      publisherDisplayName
+      releaseDate
+      urlSlug
+      url
+      tags {
+        id
+        name
+        groupName
+      }
+      items {
+        id
+        namespace
+        releaseInfo {
+          appId
+          platform
+        }
+      }
+      customAttributes {
+        key
+        value
+      }
+      categories {
+        path
+      }
+      catalogNs {
+        parent
+        displayName
+        mappings {
+          createdDate
+          deletedDate
+          mappings {
+            cmsSlug
+            offerId
+            prePurchaseOfferId
+          }
+          pageSlug
+          pageType
+          productId
+          sandboxId
+          updatedDate
+        }
+        store
+      }
+      offerMappings {
+        createdDate
+        deletedDate
+        mappings {
+          cmsSlug
+        }
+        pageSlug
+        pageType
+        productId
+        sandboxId
+        updatedDate
+      }
+      pcReleaseDate
+      prePurchase
+      approximateReleasePlan {
+        day
+        month
+        quarter
+        year
+        releaseDateType
+      }
+      price(country: $country) {
+        totalPrice {
+          discountPrice
+          originalPrice
+          voucherDiscount
+          discount
+          currencyCode
+          currencyInfo {
+            decimals
+          }
+          fmtPrice(locale: $locale) {
+            originalPrice
+            discountPrice
+            intermediatePrice
+          }
+        }
+        lineOffers {
+          appliedRules {
+            id
+            endDate
+            discountSetting {
+              discountType
+            }
+          }
+        }
+      }
+      allDependNsOfferIds
+      majorNsOffers {
+        categories {
+          path
+        }
+        id
+        namespace
+        title
+      }
+      subNsOffers {
+        categories {
+          path
+        }
+        id
+        namespace
+        price(country: $country) {
+          totalPrice {
+            discountPrice
+            originalPrice
+            voucherDiscount
+            discount
+            currencyCode
+            currencyInfo {
+              decimals
+            }
+            fmtPrice(locale: $locale) {
+              originalPrice
+              discountPrice
+              intermediatePrice
+            }
+          }
+          lineOffers {
+            appliedRules {
+              id
+              endDate
+              discountSetting {
+                discountType
+              }
+            }
+          }
+        }
+        title
+      }
+      status
+      refundType
+    }
+  }
+}

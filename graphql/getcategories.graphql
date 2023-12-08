@@ -1,0 +1,12 @@
+query getCategories($locale: String) {
+  StoreCategory {
+    categories(locale: $locale) {
+      _slug
+      pageData {
+        description
+        title
+        tagName
+      }
+    }
+  }
+}

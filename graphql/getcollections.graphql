@@ -1,0 +1,11 @@
+query getCollections($accountId: String!) {
+  Library {
+    collection {
+      collections(accountId: $accountId) {
+        name
+        collectionId
+        libraryItemContentVersion
+      }
+    }
+  }
+}

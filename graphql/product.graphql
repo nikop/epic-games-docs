@@ -1,0 +1,10 @@
+query Product($productId: String!, $sandboxFilter: [String!]) {
+  Product {
+    productSandboxes(productId: $productId, sandboxFilter: $sandboxFilter) {
+      id
+      productId
+      name
+      defaultPublic
+    }
+  }
+}

@@ -1,0 +1,15 @@
+query getSalesEventData($locale: String) {
+  PriceEngine {
+    salesEvents(locale: $locale) {
+      endDate
+      eventSlug
+      grantInitialVoucher
+      id
+      voucherImages {
+        type
+        url
+      }
+      voucherLink
+    }
+  }
+}

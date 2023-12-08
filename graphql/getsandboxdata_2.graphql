@@ -1,0 +1,13 @@
+query getSandboxData($sandboxId:String!) {
+    Product {
+        sandbox(sandboxId: $sandboxId) {
+            productId
+            isModMarketSuspended
+            moddingGuidesLink
+            gameDeveloperContactLink
+            product {
+                supportedTypes
+            }
+        }
+    }
+}

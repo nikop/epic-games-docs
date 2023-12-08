@@ -1,0 +1,12 @@
+query getCatalogOfferSubItems($sandboxId: String!, $offerId: String!, $locale: String!) {
+  Catalog {
+    offerSubItems(namespace: $sandboxId, id: $offerId, locale: $locale) {
+      namespace
+      id
+      releaseInfo {
+        appId
+        platform
+      }
+    }
+  }
+}

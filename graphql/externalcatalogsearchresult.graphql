@@ -1,0 +1,18 @@
+query externalCatalogSearchResult($keyword: String!, $start: Int, $count: Int) {
+  ExternalCatalog {
+    externalCatalogSearch(keyword: $keyword, start: $start, count: $count) {
+      elements {
+        gameId
+        title
+        coverImageUrl
+        url
+        developerDisplayName
+      }
+      paging {
+        total
+        count
+        start
+      }
+    }
+  }
+}

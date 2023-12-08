@@ -1,0 +1,100 @@
+query browseLayoutQuery($locale: String!, $country: String!) {
+  Storefront {
+    browseLayout(locale: $locale) {
+      _locale
+      _slug
+      __typename
+      _activeDate
+      _urlPattern
+      lastModified
+      _noIndex
+      data {
+        offerBlades {
+          offerType
+          topicId
+          hideTitle
+          offerPresentation
+          groupStyle
+          type
+          title
+          titleIcon
+          cardOrder
+          link {
+            src
+            linkText
+          }
+          offers {
+            id
+            namespace
+            offer {
+              title
+              id
+              namespace
+              description
+              keyImages {
+                type
+                url
+              }
+              seller {
+                id
+                name
+              }
+              productSlug
+              urlSlug
+              items {
+                id
+                namespace
+              }
+              customAttributes {
+                key
+                value
+              }
+              categories {
+                path
+              }
+              catalogNs {
+                mappings(pageType: "productHome") {
+                  pageSlug
+                  pageType
+                }
+              }
+              mappings {
+                pageSlug
+                pageType
+              }
+              price(country: $country) {
+                totalPrice {
+                  discountPrice
+                  originalPrice
+                  voucherDiscount
+                  discount
+                  fmtPrice(locale: $locale) {
+                    originalPrice
+                    discountPrice
+                    intermediatePrice
+                  }
+                  currencyCode
+                  currencyInfo {
+                    decimals
+                    symbol
+                  }
+                }
+                lineOffers {
+                  appliedRules {
+                    id
+                    endDate
+                  }
+                }
+              }
+              releaseDate
+              effectiveDate
+              prePurchase
+              developerDisplayName
+              publisherDisplayName
+            }
+          }
+        }
+      }
+    }
+  }
+}

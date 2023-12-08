@@ -1,0 +1,31 @@
+query getCatalogItem($namespace: String!, $id: String!, $locale: String) {
+  Catalog {
+    catalogItem(namespace: $namespace, id: $id, locale: $locale) {
+      id
+      namespace
+      title
+      keyImages {
+        type
+        url
+      }
+      categories {
+        path
+      }
+      releaseInfo {
+        appId
+        platform
+        compatibleApps
+      }
+      customAttributes {
+        key
+        value
+      }
+      dlcItemList {
+        id
+      }
+      mainGameItem {
+        id
+      }
+    }
+  }
+}

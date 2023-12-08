@@ -1,0 +1,8 @@
+query getVideoById($videoId: String!, $locale: String!) {
+  Video {
+    fetchVideoByLocale(videoId: $videoId, locale: $locale) {
+      recipe
+      mediaRefId
+    }
+  }
+}

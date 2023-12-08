@@ -1,0 +1,49 @@
+query playerProfileAchievementsByProductId($epicAccountId: String!, $productId: String!) {
+  PlayerProfile {
+    playerProfile(epicAccountId: $epicAccountId) {
+      epicAccountId
+      displayName
+      relationship
+      avatar {
+        small
+        medium
+        large
+      }
+      productAchievements(productId: $productId) {
+        __typename
+        ... on PlayerProductAchievementsResponseSuccess {
+          data {
+            epicAccountId
+            sandboxId
+            totalXP
+            totalUnlocked
+            achievementSets {
+              achievementSetId
+              isBase
+              totalUnlocked
+              totalXP
+            }
+            playerAwards {
+              awardType
+              unlockedDateTime
+              achievementSetId
+            }
+            playerAchievements {
+              playerAchievement {
+                achievementName
+                epicAccountId
+                progress
+                sandboxId
+                unlocked
+                unlockDate
+                XP
+                achievementSetId
+                isBase
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

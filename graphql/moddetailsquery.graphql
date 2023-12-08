@@ -1,0 +1,51 @@
+query modDetailsQuery($sandboxId: String!, $modSlug: String!, $locale: String, $isUserAuthorized: Boolean!) {
+  Mod {
+    sandbox(sandboxId: $sandboxId) {
+      mainGame(locale: $locale) {
+        id
+        namespace
+        title
+        description
+        keyImages {
+          type
+          url
+        }
+      }
+      product {
+        id
+        mod(modSlug: $modSlug, locale: $locale) {
+          title
+          appName
+          shortDescription
+          longDescriptionMarkdown
+          createdBy
+          tags {
+            name
+          }
+          socialNetworks {
+            networkType
+            link
+          }
+          createdAt
+          updatedAt
+          publishedAt
+          platforms
+          images {
+            type
+            url
+          }
+          like {
+            count
+            isLiked @include(if: $isUserAuthorized)
+          }
+          installs
+          modSlug
+          itemId
+          offerId
+          artifactId
+          namespace
+        }
+      }
+    }
+  }
+}

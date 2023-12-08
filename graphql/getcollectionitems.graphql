@@ -1,0 +1,17 @@
+query getCollectionItems($accountId: String!, $collectionId: String!, $cursor: String) {
+  Library {
+    collection {
+      items(accountId: $accountId, collectionId: $collectionId, cursor: $cursor) {
+        records {
+          relationshipId
+          artifactId
+          catalogId
+          sandbox
+        }
+        responseMetadata {
+          nextCursor
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+query getRelatedOfferIdsByCategory($allowCountries: String!, $category: String!, $country: String!, $locale: String!, $namespace: String!, $sortBy: String!, $sortDir: String!, $codeRedemptionOnly: Boolean) {
+  Catalog {
+    catalogOffers(
+      namespace: $namespace
+      locale: $locale
+      params: {allowCountries: $allowCountries, category: $category, country: $country, sortBy: $sortBy, sortDir: $sortDir, codeRedemptionOnly: $codeRedemptionOnly}
+    ) {
+      elements {
+        id
+        countriesBlacklist
+        countriesWhitelist
+        customAttributes {
+          key
+          value
+        }
+        isCodeRedemptionOnly
+        prePurchase
+      }
+      paging {
+        total
+      }
+    }
+  }
+}

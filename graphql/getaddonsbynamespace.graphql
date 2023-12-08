@@ -1,0 +1,88 @@
+query getAddonsByNamespace(
+    $categories: String!
+    $count: Int!
+    $country: String!
+    $locale: String!
+    $namespace:String!
+    $sortBy: String!
+    $sortDir: String!
+) {
+    Catalog{
+        catalogOffers(
+            namespace: $namespace
+            locale: $locale
+            params: {
+                category: $categories
+                count: $count
+                country: $country
+                sortBy: $sortBy
+                sortDir: $sortDir
+            }
+        ){
+            elements{
+                catalogNs {
+                    mappings(pageType: "productHome") {
+                        pageSlug
+                        pageType
+                    }
+                }
+                countriesBlacklist
+                customAttributes {
+                    key
+                    value
+                }
+                developerDisplayName
+                publisherDisplayName
+                description
+                developer
+                effectiveDate
+                id
+                isFeatured
+                keyImages{
+                    type
+                    url
+                }
+                offerMappings {
+                    pageSlug
+                    pageType
+                }
+                price(country: $country){
+                    totalPrice {
+                        discountPrice
+                        originalPrice
+                        voucherDiscount
+                        discount
+                        currencyCode
+                        currencyInfo {
+                            decimals
+                        }
+                        fmtPrice(locale: $locale) {
+                            originalPrice
+                            discountPrice
+                            intermediatePrice
+                        }
+                    }
+                    lineOffers {
+                        appliedRules {
+                            id
+                            endDate
+                            discountSetting {
+                                discountType
+                            }
+                        }
+                    }
+                }
+                lastModifiedDate
+                longDescription
+                namespace
+                offerType
+                productSlug
+                releaseDate
+                status
+                technicalDetails
+                title
+                urlSlug
+            }
+        }
+    }
+}

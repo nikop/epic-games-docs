@@ -1,0 +1,11 @@
+query getSimplifiedLegacyMappingByPageSlug($pageSlug: String!, $sandboxId: String) {
+  StorePageMapping {
+    mapping(pageSlug: $pageSlug, sandboxId: $sandboxId) {
+      mappings {
+        cmsSlug
+      }
+      pageType
+      sandboxId
+    }
+  }
+}

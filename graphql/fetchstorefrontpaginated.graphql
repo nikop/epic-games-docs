@@ -1,0 +1,124 @@
+query fetchStorefrontPaginated($locale: String!, $country: String!, $start: Int, $count: Int) {
+  Storefront {
+    storefrontModulesPaginated(
+      locale: $locale
+      country: $country
+      start: $start
+      count: $count
+    ) {
+      modules {
+        ... on StorefrontBreaker {
+          ...storefrontBreakerFragment
+        }
+        ... on StorefrontFreeGames {
+          id
+          type
+          title
+        }
+        ... on StorefrontCardGroup {
+          ...cardGroupFragment
+        }
+        ... on StorefrontFeaturedCarousel {
+          id
+          type
+          title
+          slides {
+            title
+            eyebrow
+            description
+            backgroundColor
+            image {
+              src
+              alt
+            }
+            mobileImage {
+              src
+              alt
+            }
+            link {
+              src
+              linkText
+            }
+            videoRecipe
+            regionRestrictions {
+              filterType
+              appliedCountries
+            }
+          }
+        }
+        ... on StorefrontSaleCarousel {
+          id
+          type
+          title
+          slides {
+            title
+            eyebrow
+            description
+            textColor
+            accentColor
+            textAccentColor
+            theme {
+              preferredMode
+              light {
+                theme
+                accent
+              }
+              dark {
+                theme
+                accent
+              }
+            }
+            image {
+              src
+              altText
+            }
+            mobileImage {
+              src
+              altText
+            }
+            logoImage {
+              src
+              altText
+            }
+            thumbnail {
+              src
+              altText
+            }
+            link {
+              src
+              linkText
+            }
+            videoRecipe
+            regionRestrictions {
+              filterType
+              appliedCountries
+            }
+            offer {
+              namespace
+              id
+            }
+          }
+        }
+        ... on StorefrontSubModules {
+          id
+          type
+          title
+          modules {
+            ... on StorefrontBreaker {
+              ...storefrontBreakerFragment
+            }
+            ... on StorefrontCardGroup {
+              ...cardGroupFragment
+            }
+          }
+        }
+      }
+      paging {
+        total
+        count
+        start
+      }
+    }
+  }
+}
+    $

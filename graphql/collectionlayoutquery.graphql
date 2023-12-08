@@ -1,0 +1,145 @@
+query collectionLayoutQuery($locale: String, $country: String!, $slug: String) {
+  Storefront {
+    collectionLayout(locale: $locale, slug: $slug) {
+      _activeDate
+      _locale
+      _metaTags
+      _slug
+      _title
+      _urlPattern
+      lastModified
+      regionBlock
+      affiliateId
+      takeover {
+        banner {
+          altText
+          src
+        }
+        description
+        eyebrow
+        title
+      }
+      seo {
+        title
+        description
+        keywords
+        image {
+          src
+          altText
+        }
+        twitter {
+          title
+          description
+        }
+        og {
+          title
+          description
+          image {
+            src
+            alt
+          }
+        }
+      }
+      collectionOffers {
+        title
+        id
+        namespace
+        description
+        effectiveDate
+        countriesBlacklist
+        countriesWhitelist
+        developerDisplayName
+        publisherDisplayName
+        keyImages {
+          type
+          url
+        }
+        seller {
+          id
+          name
+        }
+        releaseDate
+        pcReleaseDate
+        approximateReleasePlan {
+            day
+            month
+            quarter
+            year
+            releaseDateType
+        }
+        prePurchase
+        productSlug
+        urlSlug
+        url
+        items {
+          id
+          namespace
+        }
+        customAttributes {
+          key
+          value
+        }
+        categories {
+          path
+        }
+        linkedOfferId
+        linkedOffer {
+          effectiveDate
+          customAttributes {
+            key
+            value
+          }
+        }
+        catalogNs {
+            mappings(pageType: "productHome") {
+                pageSlug
+                pageType
+            }
+        }
+        offerMappings {
+            pageSlug
+            pageType
+        }
+        price(country: $country) {
+          totalPrice {
+            currencyCode
+            currencyInfo {
+              decimals
+              symbol
+            }
+            discountPrice
+            originalPrice
+            voucherDiscount
+            discount
+            fmtPrice(locale: $locale) {
+              originalPrice
+              discountPrice
+              intermediatePrice
+            }
+          }
+          lineOffers {
+            appliedRules {
+              id
+              endDate
+            }
+          }
+        }
+      }
+      pageTheme {
+        preferredMode
+        light {
+          theme
+          accent
+        }
+        dark {
+          theme
+          accent
+        }
+      }
+      redirect {
+        code
+        url
+      }
+    }
+  }
+}

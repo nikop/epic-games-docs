@@ -1,0 +1,16 @@
+query getOfferSubItems($namespace: String!, $offerId: String!) {
+  Catalog {
+    offerSubItems(namespace: $namespace, id: $offerId) {
+      id
+      namespace
+      title
+      categories {
+        path
+      }
+      customAttributes {
+        key
+        value
+      }
+    }
+  }
+}

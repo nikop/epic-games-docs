@@ -1,0 +1,14 @@
+query getCatalogTagsByNamespace($namespace: String!, $locale: String!, $start: Int = 0, $count: Int = 999) {
+  Catalog {
+    tags(namespace: $namespace, locale: $locale, start: $start, count: $count) {
+      elements {
+        aliases
+        id
+        name
+        referenceCount
+        status
+        groupName
+      }
+    }
+  }
+}

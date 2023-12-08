@@ -1,0 +1,34 @@
+query getOffersValidation($offers: [OfferToValidate]!) {
+  Entitlements {
+    cartOffersValidation(offerParams: $offers) {
+      conflictingOffers {
+        offerId
+        namespace
+        conflictingOffers {
+          namespace
+          offerId
+        }
+      }
+      missingPrerequisites {
+        namespace
+        offerId
+        missingPrerequisiteItems {
+          itemId
+          namespace
+        }
+      }
+      fullyOwnedOffers {
+        namespace
+        offerId
+      }
+      possiblePartialUpgradeOffers {
+        namespace
+        offerId
+      }
+      unablePartiallyUpgradeOffers {
+        namespace
+        offerId
+      }
+    }
+  }
+}

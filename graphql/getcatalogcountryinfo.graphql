@@ -1,0 +1,9 @@
+query getCatalogCountryInfo($countryCode: String!) {
+  Catalog {
+    countryData(countryCode: $countryCode) {
+      defaultCurrency
+      paymentCurrency
+      currencySymbolPlacement
+    }
+  }
+}

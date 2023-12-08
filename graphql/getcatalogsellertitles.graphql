@@ -1,0 +1,26 @@
+query getCatalogSellerTitles($locale: String!, $storeId: String!, $count: Int, $start: Int, $sellerId: String) {
+  Catalog {
+    catalogSellerTitles(
+      storeId: $storeId
+      locale: $locale
+      count: $count
+      start: $start
+      sellerId: $sellerId
+    ) {
+      elements {
+        sellerName
+        sellerId
+        offers {
+          namespace
+          id
+          title
+        }
+      }
+      paging {
+        count
+        start
+        total
+      }
+    }
+  }
+}

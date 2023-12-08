@@ -1,0 +1,36 @@
+query mods($sandboxId: String!, $locale: String, $count: Int, $sortBy: String, $start: Int, $sortDir: String, $tags: String, $searchTemplate: String, $isRecommended: Boolean, $isUserAuthorized: Boolean!) {
+  Mod {
+    sandbox(sandboxId: $sandboxId) {
+      product {
+        mods(
+          params: {count: $count, start: $start, tags: $tags, sortBy: $sortBy, sortDir: $sortDir, searchTemplate: $searchTemplate, isRecommended: $isRecommended}
+          locale: $locale
+        ) {
+          elements {
+            title
+            artifactId
+            modSlug
+            images {
+              url
+              type
+            }
+            offerId
+            itemId
+            namespace
+            createdBy
+            installs
+            like {
+              count
+              isLiked @include(if: $isUserAuthorized)
+            }
+          }
+          paging {
+            total
+            count
+            start
+          }
+        }
+      }
+    }
+  }
+}

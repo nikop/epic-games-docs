@@ -1,0 +1,20 @@
+query getProductResult($sandboxId: String!, $locale: String!) {
+  RatingsPolls {
+    getProductResult(sandboxId: $sandboxId, locale: $locale) {
+      averageRating
+      pollResult {
+        id
+        tagId
+        pollDefinitionId
+        localizations {
+          text
+          emoji
+          resultEmoji
+          resultTitle
+          resultText
+        }
+        total
+      }
+    }
+  }
+}

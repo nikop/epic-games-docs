@@ -1,0 +1,23 @@
+query getStoreTagsByGroupName($storeId: String, $groupName: String, $locale: String, $status: String = "ACTIVE", $start: Int = 0, $count: Int = 999, $sortBy: String = "referenceCount", $sortDir: String = "DESC") {
+  Catalog {
+    tags(
+      storeId: $storeId
+      groupName: $groupName
+      locale: $locale
+      status: $status
+      start: $start
+      count: $count
+      sortBy: $sortBy
+      sortDir: $sortDir
+    ) {
+      elements {
+        aliases
+        id
+        name
+        referenceCount
+        status
+        groupName
+      }
+    }
+  }
+}

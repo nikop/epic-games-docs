@@ -1,0 +1,18 @@
+query fetchOfferSubItemsQuery($namespace: String!, $offerId: String!) {
+  Catalog {
+    offerSubItems(namespace: $namespace, id: $offerId) {
+      namespace
+      id
+      releaseInfo {
+        appId
+      }
+      categories {
+        path
+      }
+      customAttributes {
+        key
+        value
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+query PlayerGameAchievementProgress($epicAccountId: String!) {
+  PlayerAchievement {
+    playerAchievementGameRecords(
+      epicAccountId: $epicAccountId
+      includeAchievements: false
+    ) {
+      records {
+        playerAwards {
+          awardType
+          unlockedDateTime
+          achievementSetId
+        }
+        achievementSets {
+          achievementSetId
+          isBase
+          totalUnlocked
+          totalXP
+        }
+        sandboxId
+        totalUnlocked
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+query getProductInBundles($allowCountries: String, $country: String!, $locale: String, $itemNs: String) {
+  Catalog {
+    searchStore(
+      allowCountries: $allowCountries
+      category: "bundles/games"
+      country: $country
+      locale: $locale
+      itemNs: $itemNs
+    ) {
+      elements {
+        id
+        namespace
+        productSlug
+        customAttributes {
+          key
+          value
+        }
+        seller {
+          id
+        }
+        countriesBlacklist
+        countriesWhitelist
+        expiryDate
+        developerDisplayName
+        publisherDisplayName
+      }
+      paging {
+        count
+        total
+      }
+    }
+  }
+}

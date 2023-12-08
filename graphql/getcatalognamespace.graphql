@@ -1,0 +1,22 @@
+query getCatalogNamespace($sandboxId: String!) {
+  Catalog {
+    catalogNs(namespace: $sandboxId) {
+      displayName
+      mappings {
+        createdDate
+        deletedDate
+        mappings {
+          cmsSlug
+          offerId
+          prePurchaseOfferId
+        }
+        pageSlug
+        pageType
+        productId
+        sandboxId
+        updatedDate
+      }
+      store
+    }
+  }
+}

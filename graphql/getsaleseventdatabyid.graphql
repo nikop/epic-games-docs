@@ -1,0 +1,25 @@
+query getSalesEventDataById($salesEventId: String!, $locale: String) {
+  PriceEngine {
+    salesEvent(salesEventId: $salesEventId, locale: $locale) {
+      currencyRewards {
+        currency {
+          code
+        }
+        discountPercentage
+        minSalePrice
+        reward
+      }
+      endDate
+      eventSlug
+      grantInitialVoucher
+      id
+      voucherApplyMode
+      voucherDiscountType
+      voucherImages {
+        type
+        url
+      }
+      voucherLink
+    }
+  }
+}

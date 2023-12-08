@@ -1,0 +1,13 @@
+query getProductSandboxes($productId: String!, $sandboxFilter: [String!], $sandboxType: String) {
+  Product {
+    productSandboxes(
+      productId: $productId
+      sandboxFilter: $sandboxFilter
+      sandboxType: $sandboxType
+    ) {
+      id
+      name
+      purposeTypes
+    }
+  }
+}

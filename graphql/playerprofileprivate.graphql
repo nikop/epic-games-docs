@@ -1,0 +1,93 @@
+query playerProfilePrivate($epicAccountId: String!, $locale: String!, $page: Int!) {
+  PlayerProfile {
+    playerProfile(epicAccountId: $epicAccountId) {
+      privacy {
+        accessLevel
+      }
+      relationship
+      achievementsSummaries {
+        __typename
+        ... on PlayerAchievementResponseSuccess {
+          status
+          data {
+            totalUnlocked
+            totalXP
+            sandboxId
+            baseOfferForSandbox(locale: $locale) {
+              keyImages {
+                url
+                type
+                alt
+              }
+            }
+            product(locale: $locale) {
+              name
+              slug
+            }
+            productAchievements(locale: $locale) {
+              totalAchievements
+              totalProductXP
+            }
+            playerAwards {
+              awardType
+              unlockedDateTime
+              achievementSetId
+            }
+          }
+        }
+        ... on ServiceError {
+          status
+          message
+        }
+      }
+      friendsSummaries(page: $page) {
+        __typename
+        ... on PlayerFriendResponseSuccess {
+          status
+          data {
+            page
+            nextPage
+            previousPage
+            totalPages
+            totalItems
+            content {
+              epicAccountId
+              displayName
+              avatar {
+                small
+                medium
+                large
+              }
+            }
+          }
+        }
+        ... on ServiceError {
+          status
+          message
+        }
+      }
+    }
+  }
+  ContentControl {
+    get {
+      __typename
+      ... on ContentControlGetSuccess {
+        status
+        data {
+          controlsEnabled
+          maxEpicProfilePrivacy
+        }
+      }
+    }
+  }
+  Friends {
+    summary {
+      outgoing {
+        accountId
+      }
+      blocklist {
+        accountId
+      }
+    }
+  }
+}

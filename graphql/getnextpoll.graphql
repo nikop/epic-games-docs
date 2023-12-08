@@ -1,0 +1,39 @@
+query getNextPoll($accountId: String!, $sandboxId: String!, $locale: String) {
+  RatingsPolls {
+    getNextPoll(accountId: $accountId, sandboxId: $sandboxId, locale: $locale) {
+      id
+      sandboxId
+      accountId
+      status
+      pollDefinitionId
+      answerDefinitionId
+      pollDefinition {
+        id
+        type
+        answers {
+          id
+          pollDefinitionId
+          localizations {
+            text
+            emoji
+            resultEmoji
+            resultTitle
+            resultText
+          }
+        }
+        localizations {
+          text
+        }
+      }
+      offer {
+        offerImage
+        offerTitle
+      }
+      result {
+        answerDefinitionId
+        percentage
+      }
+      averageRating
+    }
+  }
+}

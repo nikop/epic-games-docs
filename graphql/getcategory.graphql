@@ -1,0 +1,40 @@
+query getCategory($locale: String, $slug: String) {
+  StoreCategory {
+    category(locale: $locale, slug: $slug) {
+      _slug
+      pageData {
+        description
+        title
+        tagName
+      }
+      seo {
+        title
+        description
+        keywords
+        image {
+          src
+          altText
+        }
+        twitter {
+          title
+          description
+        }
+        og {
+          title
+          description
+          image {
+            src
+            alt
+          }
+        }
+      }
+      faq {
+        questionAndAnswers {
+          answer
+          question
+        }
+        title
+      }
+    }
+  }
+}

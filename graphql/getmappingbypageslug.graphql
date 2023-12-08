@@ -1,0 +1,30 @@
+query getMappingByPageSlug($pageSlug: String!, $sandboxId: String, $locale: String!) {
+  StorePageMapping {
+    mapping(pageSlug: $pageSlug, sandboxId: $sandboxId) {
+      pageSlug
+      pageType
+      sandboxId
+      productId
+      createdDate
+      updatedDate
+      mappings {
+        cmsSlug
+        offerId
+        offer(locale: $locale) {
+          id
+          namespace
+          effectiveDate
+          expiryDate
+        }
+        prePurchaseOfferId
+        prePurchaseOffer(locale: $locale) {
+          id
+          namespace
+          effectiveDate
+          expiryDate
+        }
+        pageId
+      }
+    }
+  }
+}

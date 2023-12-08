@@ -70,6 +70,124 @@
 					<pre>
 						<div>
 							<div>
+								<span>if</span>
+								<span>
+								</span>
+								<span>(</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>!</span>
+								<span>Target</span>
+								<span>.</span>
+								<span>IsInPlatformGroup</span>
+								<span>(</span>
+								<span>UnrealPlatformGroup</span>
+								<span>.</span>
+								<span>Windows</span>
+								<span>)</span>
+								<span>
+								</span>
+								<span>&amp;&amp;</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>!</span>
+								<span>Target</span>
+								<span>.</span>
+								<span>IsInPlatformGroup</span>
+								<span>(</span>
+								<span>UnrealPlatformGroup</span>
+								<span>.</span>
+								<span>Unix</span>
+								<span>)</span>
+								<span>
+								</span>
+								<span>&amp;&amp;</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>!</span>
+								<span>Target</span>
+								<span>.</span>
+								<span>IsInPlatformGroup</span>
+								<span>(</span>
+								<span>UnrealPlatformGroup</span>
+								<span>.</span>
+								<span>Apple</span>
+								<span>)</span>
+								<span>
+								</span>
+								<span>&amp;&amp;</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>!</span>
+								<span>Target</span>
+								<span>.</span>
+								<span>IsInPlatformGroup</span>
+								<span>(</span>
+								<span>UnrealPlatformGroup</span>
+								<span>.</span>
+								<span>Android</span>
+								<span>)</span>
+								<span></span>
+							</div>
+							<div>
+								<span></span>
+								<span>)</span>
+								<span>
+								</span>
+								<span>{</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>AppendStringToPublicDefinition</span>
+								<span>(</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>'EOS_BUILD_PLATFORM_NAME'</span>
+								<span>,</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>Target</span>
+								<span>.</span>
+								<span>Platform</span>
+								<span>.</span>
+								<span>ToString</span>
+								<span>(</span>
+								<span>)</span>
+								<span></span>
+							</div>
+							<div>
+								<span>
+								</span>
+								<span>)</span>
+								<span>;</span>
+								<span></span>
+							</div>
+							<div>
+								<span></span>
+								<span>}</span>
+								<span></span>
+							</div>
+							<div>
 								<span>
 								</span>
 							</div>
@@ -85,8 +203,21 @@
 					<pre>
 						<div>
 							<div>
-								<span>
+								<span>#include
 								</span>
+								<span>"eos_platform_prereqs.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_sdk.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_[interface]_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -101,8 +232,21 @@
 					<pre>
 						<div>
 							<div>
-								<span>
+								<span>#include
 								</span>
+								<span>"eos_friends_types.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_auth_types.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_lobby_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -119,8 +263,50 @@
 					<pre>
 						<div>
 							<div>
+								<span>#</span>
+								<span>if</span>
 								<span>
 								</span>
+								<span>defined</span>
+								<span>(</span>
+								<span>__THECOMPILER__</span>
+								<span>)</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"ThePlatform/eos_ThePlatform_base.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#elif
+								</span>
+								<span>defined</span>
+								<span>(</span>
+								<span>__SOMECOMPILER__</span>
+								<span>)</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"SomePlatform/eos_SomePlatform_base.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#endif</span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_sdk.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_friends_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -137,8 +323,21 @@
 					<pre>
 						<div>
 							<div>
-								<span>
+								<span>#include
 								</span>
+								<span>"ThePlatform/eos_ThePlatform_base.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_sdk.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_[interface]_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -153,8 +352,21 @@
 					<pre>
 						<div>
 							<div>
-								<span>
+								<span>#include
 								</span>
+								<span>"eos_friends_types.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_auth_types.h"</span>
+								<span></span>
+							</div>
+							<div>
+								<span>#include
+								</span>
+								<span>"eos_lobby_types.h"</span>
 							</div>
 						</div>
 					</pre>
@@ -187,8 +399,82 @@
 					<pre>
 						<div>
 							<div>
+								<span>PublicAdditionalLibraries</span>
+								<span>.</span>
+								<span>Add</span>
+								<span>(</span>
+								<span>LibraryLinkName</span>
+								<span>)</span>
+								<span>;</span>
+								<span></span>
+							</div>
+							<div>
+								<span></span>
+								<span>string</span>
 								<span>
 								</span>
+								<span>RuntimeLibrarySourcePath</span>
+								<span>
+								</span>
+								<span>=</span>
+								<span>
+								</span>
+								<span>Path</span>
+								<span>.</span>
+								<span>Combine</span>
+								<span>(</span>
+								<span>SDKBinariesDir</span>
+								<span>,</span>
+								<span>
+								</span>
+								<span>RuntimeLibraryFileName</span>
+								<span>)</span>
+								<span>;</span>
+								<span></span>
+							</div>
+							<div>
+								<span></span>
+								<span>string</span>
+								<span>
+								</span>
+								<span>RuntimeLibraryTargetPath</span>
+								<span>
+								</span>
+								<span>=</span>
+								<span>
+								</span>
+								<span>Path</span>
+								<span>.</span>
+								<span>Combine</span>
+								<span>(</span>
+								<span>ProjectBinariesDir</span>
+								<span>,</span>
+								<span>
+								</span>
+								<span>RuntimeLibraryFileName</span>
+								<span>)</span>
+								<span>;</span>
+								<span></span>
+							</div>
+							<div>
+								<span></span>
+								<span>RuntimeDependencies</span>
+								<span>.</span>
+								<span>Add</span>
+								<span>(</span>
+								<span>RuntimeLibraryTargetPath</span>
+								<span>,</span>
+								<span>
+								</span>
+								<span>RuntimeLibrarySourcePath</span>
+								<span>,</span>
+								<span>
+								</span>
+								<span>StagedFileType</span>
+								<span>.</span>
+								<span>NonUFS</span>
+								<span>)</span>
+								<span>;</span>
 							</div>
 						</div>
 					</pre>

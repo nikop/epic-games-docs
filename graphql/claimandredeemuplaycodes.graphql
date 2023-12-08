@@ -1,0 +1,25 @@
+mutation claimAndRedeemUplayCodes($accountId: String!, $uplayAccountId: String!, $gameIds: [String]!) {
+  PartnerIntegration {
+    claimAndRedeemUplayCodes(
+      accountId: $accountId
+      uplayAccountId: $uplayAccountId
+      gameIds: $gameIds
+    ) {
+      data {
+        claimed {
+          data {
+            gameId
+          }
+          success
+        }
+        redeemed {
+          data {
+            gameId
+          }
+          success
+        }
+      }
+      success
+    }
+  }
+}

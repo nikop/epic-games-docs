@@ -1,0 +1,8 @@
+mutation dismissInvite($accountId: String!) {
+  Friends {
+    deleteFriend(friendToDelete: $accountId) {
+      success
+      message
+    }
+  }
+}

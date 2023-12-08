@@ -65,7 +65,7 @@ internal class EpicStoreSync
         }
     }
 
-    static Regex GraphQLString = new("query ([a-zA-Z0-9]+)\\(");
+    static Regex GraphQLString = new("((query|mutation) (?<name>[a-zA-Z0-9]+)\\(|fragment (?<name>[a-zA-Z0-9]+) on (?<parent>[a-zA-Z0-9]+))");
 
     static Dictionary<string, List<string>> FoundQueries = new Dictionary<string, List<string>>();
 
@@ -102,8 +102,9 @@ internal class EpicStoreSync
                     continue;
 
                 var query = token.Value[1..^1].Replace("\\n", "\n");
+                var name = m.Groups["parent"].Success ? $"{m.Groups["parent"].Value}_{m.Groups["name"].Value}" : m.Groups["name"].Value;
 
-                AddQuery(m.Groups[1].Value, query);
+                AddQuery(name, query);
             }
             else if (token.Type == TokenType.Template)
             {
@@ -113,7 +114,9 @@ internal class EpicStoreSync
                     continue;
 
                 var query = token.Value[1..^1].Trim();
-                AddQuery(m.Groups[1].Value, query);
+                var name = m.Groups["parent"].Success ? $"{m.Groups["parent"].Value}_{m.Groups["name"].Value}" : m.Groups["name"].Value;
+
+                AddQuery(name, query);
             }
         }
     }

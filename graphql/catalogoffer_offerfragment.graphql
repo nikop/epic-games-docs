@@ -1,0 +1,89 @@
+fragment offerFragment on CatalogOffer {
+  title
+  id
+  namespace
+  offerType
+  expiryDate
+  status
+  isCodeRedemptionOnly
+  description
+  effectiveDate
+  viewableDate
+  pcReleaseDate
+  releaseDate
+  approximateReleasePlan {
+    day
+    month
+    quarter
+    year
+    releaseDateType
+  }
+  prePurchase
+  keyImages {
+    type
+    url
+  }
+  seller {
+    id
+    name
+  }
+  productSlug
+  urlSlug
+  items {
+    id
+    namespace
+  }
+  customAttributes {
+    key
+    value
+  }
+  developerDisplayName
+  publisherDisplayName
+  categories {
+    path
+  }
+  catalogNs {
+    mappings(pageType: "productHome") {
+      pageSlug
+      pageType
+    }
+  }
+  offerMappings {
+    pageSlug
+    pageType
+  }
+  price(country: $country) {
+    totalPrice {
+      discountPrice
+      originalPrice
+      voucherDiscount
+      discount
+      fmtPrice(locale: $locale) {
+        originalPrice
+        discountPrice
+        intermediatePrice
+      }
+      currencyCode
+      currencyInfo {
+        decimals
+        symbol
+      }
+    }
+    lineOffers {
+      appliedRules {
+        id
+        endDate
+      }
+    }
+  }
+  linkedOfferId
+  linkedOffer {
+    effectiveDate
+    customAttributes {
+      key
+      value
+    }
+  }
+  countriesBlacklist
+  countriesWhitelist
+}

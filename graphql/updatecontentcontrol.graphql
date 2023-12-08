@@ -1,0 +1,17 @@
+mutation updateContentControl($pin: String!, $maxEpicProfilePrivacy: String!) {
+  ContentControl {
+    update(payload: {pin: $pin, maxEpicProfilePrivacy: $maxEpicProfilePrivacy}) {
+      ... on ServiceError {
+        status
+        message
+      }
+      ... on ContentControlUpdateSuccess {
+        data {
+          principalId
+          controlsEnabled
+          maxEpicProfilePrivacy
+        }
+      }
+    }
+  }
+}

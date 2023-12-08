@@ -1,0 +1,10 @@
+mutation removeCollection($accountId: String!, $collectionId: String!) {
+  Library {
+    collection {
+      remove(accountId: $accountId, collectionId: $collectionId) {
+        data
+        status
+      }
+    }
+  }
+}

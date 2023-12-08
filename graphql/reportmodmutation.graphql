@@ -1,0 +1,23 @@
+mutation reportModMutation($namespace: String!, $targetId: String!, $storeName: String!, $abuseType: String!) {
+  Review {
+    setReport(
+      namespace: $namespace
+      targetId: $targetId
+      storeName: $storeName
+      abuseType: $abuseType
+    ) {
+      id
+      identityId
+      topicId
+      topicType
+      content
+      status
+      abuseType
+      createdAt
+      lastModifiedAt
+      namespace
+      storeName
+      success
+    }
+  }
+}

@@ -1,0 +1,14 @@
+mutation createCollection($accountId: String!, $name: String!) {
+  Library {
+    collection {
+      create(accountId: $accountId, name: $name) {
+        status
+        data {
+          collectionId
+          name
+          libraryItemContentVersion
+        }
+      }
+    }
+  }
+}

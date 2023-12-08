@@ -1,0 +1,12 @@
+mutation updateRating($accountId: String!, $sandboxId: String!, $pollDefinitionId: Int!, $ratingRequest: RatingRequest!) {
+  RatingsPolls {
+    updateRating(
+      accountId: $accountId
+      sandboxId: $sandboxId
+      pollDefinitionId: $pollDefinitionId
+      ratingRequest: $ratingRequest
+    ) {
+      success
+    }
+  }
+}

@@ -1,0 +1,9 @@
+mutation updateProfilePrivacy($epicAccountId: String!, $accessLevel: PrivacyLevelType!) {
+  PlayerPrivacy {
+    updatePlayerPrivacy(accessLevel: $accessLevel, epicAccountId: $epicAccountId) {
+      privacy {
+        accessLevel
+      }
+    }
+  }
+}

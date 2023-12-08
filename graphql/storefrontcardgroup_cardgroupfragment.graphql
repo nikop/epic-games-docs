@@ -1,0 +1,23 @@
+fragment cardGroupFragment on StorefrontCardGroup {
+  id
+  type
+  title
+  link {
+    src
+    linkText
+  }
+  titleIcon
+  hideTitle
+  groupStyle
+  offerType
+  offerPresentation
+  cardType
+  offers {
+    namespace
+    id
+    offer(locale: $locale) {
+      ...offerFragment
+    }
+  }
+}
+    $

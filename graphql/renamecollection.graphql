@@ -1,0 +1,14 @@
+mutation renameCollection($accountId: String!, $collectionId: String!, $name: String!) {
+  Library {
+    collection {
+      rename(accountId: $accountId, collectionId: $collectionId, name: $name) {
+        data {
+          name
+          collectionId
+          libraryItemContentVersion
+        }
+        status
+      }
+    }
+  }
+}

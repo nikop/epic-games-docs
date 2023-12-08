@@ -1,0 +1,12 @@
+mutation addToCart($namespace: String!, $offerId: String!) {
+  Cart {
+    addToCart(namespace: $namespace, offerId: $offerId) {
+      success
+      cartItem {
+        id
+        offerId
+        namespace
+      }
+    }
+  }
+}

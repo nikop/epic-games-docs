@@ -1,0 +1,40 @@
+mutation claimFreeCouponMutation($country: String!, $identityId: String!, $language: String!, $salesEventId: String!, $locale: String) {
+  CodeRedemption {
+    claimFreeCoupon(
+      country: $country
+      identityId: $identityId
+      language: $language
+      salesEventId: $salesEventId
+    ) {
+      code
+      codeStatus
+      codeType
+      consumptionMetadata {
+        discountPercentage
+        amountDisplay {
+          amount
+          currency
+          placement
+          symbol
+        }
+        minSalesPriceDisplay {
+          amount
+          currency
+          placement
+          symbol
+        }
+      }
+      endDate
+      namespace
+      salesEvent(locale: $locale) {
+        eventSlug
+        voucherImages {
+          type
+          url
+        }
+        voucherLink
+      }
+      startDate
+    }
+  }
+}

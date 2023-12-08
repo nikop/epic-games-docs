@@ -1,0 +1,11 @@
+mutation ackPoll($accountId: String!, $sandboxId: String!, $pollDefinitionId: Int!) {
+  RatingsPolls {
+    ackPoll(
+      accountId: $accountId
+      sandboxId: $sandboxId
+      pollDefinitionId: $pollDefinitionId
+    ) {
+      success
+    }
+  }
+}

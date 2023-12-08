@@ -1,0 +1,94 @@
+mutation addToWishlistMutation($namespace: String!, $offerId: String!, $country: String!, $locale: String) {
+  Wishlist {
+    addToWishlist(namespace: $namespace, offerId: $offerId) {
+      wishlistItem {
+        id
+        order
+        created
+        offerId
+        updated
+        namespace
+        isFirstTime
+        offer(locale: $locale) {
+          productSlug
+          urlSlug
+          title
+          id
+          namespace
+          offerType
+          expiryDate
+          status
+          isCodeRedemptionOnly
+          description
+          effectiveDate
+          pcReleaseDate
+          releaseDate
+          prePurchase
+          keyImages {
+            type
+            url
+          }
+          seller {
+            id
+            name
+          }
+          productSlug
+          urlSlug
+          items {
+            id
+            namespace
+          }
+          customAttributes {
+            key
+            value
+          }
+          developerDisplayName
+          publisherDisplayName
+          catalogNs {
+            mappings(pageType: "productHome") {
+              pageSlug
+              pageType
+            }
+          }
+          offerMappings {
+            pageSlug
+            pageType
+          }
+          categories {
+            path
+          }
+          tags {
+            id
+            groupName
+            name
+          }
+          price(country: $country) {
+            totalPrice {
+              discountPrice
+              originalPrice
+              voucherDiscount
+              discount
+              fmtPrice(locale: $locale) {
+                originalPrice
+                discountPrice
+                intermediatePrice
+              }
+              currencyCode
+              currencyInfo {
+                decimals
+                symbol
+              }
+            }
+            lineOffers {
+              appliedRules {
+                id
+                endDate
+              }
+            }
+          }
+        }
+      }
+      success
+    }
+  }
+}

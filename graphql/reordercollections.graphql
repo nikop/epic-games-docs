@@ -1,0 +1,13 @@
+mutation reorderCollections($accountId: String!, $orderedCollectionIdList: [String!]!) {
+  Library {
+    collection {
+      reorder(
+        accountId: $accountId
+        orderedCollectionIdList: $orderedCollectionIdList
+      ) {
+        data
+        status
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+mutation lockCodeMutation($codeId: String, $locale: String) {
+  CodeRedemption {
+    lockCode(codeId: $codeId, locale: $locale) {
+      success
+      data {
+        namespace
+        title
+        description
+        image
+        eulaIds
+        entitlementName
+        codeUseId
+      }
+    }
+  }
+}

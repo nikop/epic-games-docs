@@ -1,0 +1,13 @@
+mutation redeemAllPendingCodes($accountId: String!, $uplayAccountId: String!) {
+  PartnerIntegration {
+    redeemAllPendingCodes(accountId: $accountId, uplayAccountId: $uplayAccountId) {
+      data {
+        epicAccountId
+        uplayAccountId
+        redeemedOnUplay
+        redemptionTimestamp
+      }
+      success
+    }
+  }
+}

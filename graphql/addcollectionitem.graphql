@@ -1,0 +1,14 @@
+mutation addCollectionItem($accountId: String!, $collectionId: String!, $item: CollectionItemProps!) {
+  Library {
+    collection {
+      addItem(accountId: $accountId, collectionId: $collectionId, item: $item) {
+        status
+        data {
+          collectionId
+          name
+          libraryItemContentVersion
+        }
+      }
+    }
+  }
+}

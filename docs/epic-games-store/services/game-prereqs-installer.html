@@ -70,81 +70,8 @@
 					<pre>
 						<div>
 							<div>
-								<span>SET</span>
 								<span>
 								</span>
-								<span>UE3_PREREQ_IDS</span>
-								<span>=</span>
-								<span>"UE3Redist"</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>SET</span>
-								<span>
-								</span>
-								<span>UE3_PREREQ_PATH</span>
-								<span>=</span>
-								<span>"Binaries\Windows\UE3Redist.exe"</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>SET</span>
-								<span>
-								</span>
-								<span>UE3_PREREQ_ARGS</span>
-								<span>=</span>
-								<span>""</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>BuildPatchTool</span>
-								<span>
-									…
-								</span>
-								<span>-</span>
-								<span>mode</span>
-								<span>=</span>
-								<span>UploadBinary</span>
-								<span>
-								</span>
-								<span>-</span>
-								<span>PrereqIds</span>
-								<span>=</span>
-								<span>%</span>
-								<span>UE3_PREREQ_IDS</span>
-								<span>%</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>-</span>
-								<span>PrereqPath</span>
-								<span>=</span>
-								<span>%</span>
-								<span>UE3_PREREQ_PATH</span>
-								<span>%</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>-</span>
-								<span>PrereqArgs</span>
-								<span>=</span>
-								<span>%</span>
-								<span>UE3_PREREQ_ARGS</span>
-								<span>%</span>
 							</div>
 						</div>
 					</pre>
@@ -174,77 +101,8 @@
 					<pre>
 						<div>
 							<div>
-								<span>reg query
-								</span>
-								<span>HKEY_CLASSES_ROOT</span>
-								<span>\</span>
-								<span>Installer</span>
-								<span>\</span>
-								<span>Products</span>
-								<span>\70140BF22CB7C94419A535B0925B0EEF</span>
-							</div>
-							<div>
 								<span>
 								</span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>if</span>
-								<span>
-								</span>
-								<span>%</span>
-								<span>ERRORLEVEL</span>
-								<span>%</span>
-								<span>
-								</span>
-								<span>EQU</span>
-								<span>
-								</span>
-								<span>0</span>
-								<span>
-									goto
-								</span>
-								<span>LAUNCH_UE3_GAME</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>.</span>
-								<span>\</span>
-								<span>Windows</span>
-								<span>\</span>
-								<span>UE3Redist</span>
-								<span>.</span>
-								<span>exe</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>:</span>
-								<span>LAUNCH_UE3_GAME</span>
-								<span></span>
-							</div>
-							<div>
-								<span>
-								</span>
-								<span>UE3Game</span>
-								<span>.</span>
-								<span>com</span>
-								<span>
-								</span>
-								<span>%</span>
-								<span>*</span>
 							</div>
 						</div>
 					</pre>
@@ -256,28 +114,8 @@
 					<pre>
 						<div>
 							<div>
-								<span>BuildPatchTool</span>
-								<span>
-									…
-								</span>
-								<span>-</span>
-								<span>mode</span>
-								<span>=</span>
-								<span>PatchGeneration</span>
 								<span>
 								</span>
-								<span>-</span>
-								<span>FeatureLevel</span>
-								<span>=</span>
-								<span>Latest</span>
-								<span>
-								</span>
-								<span>-</span>
-								<span>AppLaunch</span>
-								<span>=</span>
-								<span>"Binaries\UE3Game.bat"</span>
-								<span>
-									…</span>
 							</div>
 						</div>
 					</pre>

@@ -13,9 +13,8 @@ using System.Globalization;
 CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
 var chromeOptions = new ChromeOptions();
-#if !DEBUG
 chromeOptions.AddArgument("headless");
-#endif
+chromeOptions.AddArgument("user-agent=EpicGamesLauncher/14.0.8-22004686+++Portal+Release-Live");
 
 var chromeDriver = new ChromeDriver(chromeOptions);
 var config = Configuration.Default;

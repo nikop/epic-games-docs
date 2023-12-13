@@ -50,6 +50,7 @@ namespace EpicDocSync
                     chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
 
                     chromeDriver.FindElement(By.CssSelector("section.page"));
+
                     var pageSource = chromeDriver.PageSource;
 
                     if (pageSource.Contains("Too many requests, please try again later."))
@@ -102,6 +103,13 @@ namespace EpicDocSync
                     foreach (var image in page.QuerySelectorAll("svg"))
                     {
                         image.Remove();
+                    }
+
+                    // Code Blocks
+                    foreach (var codeBlock in page.QuerySelectorAll("pre"))
+                    {
+                        // Cleanup HTML, leaving text only
+                        codeBlock.TextContent = codeBlock.TextContent;
                     }
 
                     // Search

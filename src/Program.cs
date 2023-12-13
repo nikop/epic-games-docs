@@ -23,9 +23,7 @@ var context = BrowsingContext.New(config);
 // GraphQL
 await EpicStoreSync.Run(chromeDriver, context).ConfigureAwait(false);
 
-#if !DEBUG
 // Docs
 await DevDocSync.Run(chromeDriver, context).ConfigureAwait(false);
-#endif
 
 chromeDriver.Close();

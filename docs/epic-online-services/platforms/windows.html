@@ -100,17 +100,13 @@
 				<code>delayhlp.cpp</code>. You can prevent the automatic loading of the DLL by providing a completely blank implementation, similar to:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>extern "C"FARPROC WINAPI__delayLoadHelper2(  PCImgDelayDescr     pidd,  FARPROC *           ppfnIATEntry){  return NULL;}</pre>
 				</section>
 			</div>
 			<p>Alternatively, you can explicitly load the module with the following:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>HMODULE Module = ::LoadLibrary(Filename);</pre>
 				</section>
 			</div>
 			<p>Where

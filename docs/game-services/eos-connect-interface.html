@@ -186,13 +186,17 @@
 			</div>
 			<p>To assure that your application knows whenever a user's authentication status has changed, the Connect Interface provides a callback for such notifications.</p>
 			<p>The callback function you provide to
-				<code>EOS_Connect_AddNotifyUserLoginStatusChanged</code>
+				<a href="/docs/api-ref/functions/eos-connect-add-notify-login-status-changed">
+					<code>EOS_Connect_AddNotifyLoginStatusChanged</code>
+				</a>
 				runs whenever a local user's authentication status changes. This only occurs if the expiration notification is ignored, the external provider credentials are unable to refresh the access token, or the access was revoked explicitly by the backend service for some administrative reason. This callback fires only when other calls in the EOS ecosystem detect that this auth token is invalid; it does not automatically fire otherwise.</p>
 			<p>You must handle all the error messages in specific calls that may fail because of authentication. Recovery is often possible by calling
 				<code>EOS_Connect_Login</code>
 				then retrying the original call on success.</p>
 			<p>Use the
-				<code>EOS_Connect_RemoveNotifyUserLoginStatusChanged</code>
+				<a href="/docs/api-ref/functions/eos-connect-remove-notify-login-status-changed">
+					<code>EOS_Connect_RemoveNotifyLoginStatusChanged</code>
+				</a>
 				function to stop listening for notifications.</p>
 			<div>
 				<h4 id="checking-current-user-authentication-status">Checking current user authentication status</h4>

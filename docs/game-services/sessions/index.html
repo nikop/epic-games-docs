@@ -7,7 +7,7 @@
 			<h1>Sessions Interface</h1>
 			<h2>Interface to handle session-based matchmaking.</h2>
 			<div>
-				<div>31 mins to read</div>
+				<div>32 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -1308,6 +1308,67 @@
 				</tbody>
 			</table>
 			<div>
+				<h4 id="reserved-attribute-constants">Reserved Attribute Constants</h4>
+			</div>
+			<p>The
+				<code>eos_sessions_types.h</code>
+				header file, included in the EOS SDK, defines attribute constants that you can use in your search configuration. The available reserved constants are listed in the table below:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Constant</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_SESSIONS_SEARCH_BUCKET_ID</code>
+						</td>
+						<td>Search for a matching bucket ID. Use this as a key to query the attribute set
+							<code>EOS_SessionModification_SetBucketId</code>. Set
+							<code>AttrData.Value</code>
+							to the string of the bucket ID.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SESSIONS_SEARCH_EMPTY_SERVERS_ONLY</code>
+						</td>
+						<td>Search for only empty servers. Set the
+							<code>AttrData.Value</code>
+							to
+							<code>true</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SESSIONS_SEARCH_NONEMPTY_SERVERS_ONLY</code>
+						</td>
+						<td>Search for only full servers. Set
+							<code>AttrData.Value</code>
+							to
+							<code>true</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SESSIONS_SEARCH_MINSLOTSAVAILABLE</code>
+						</td>
+						<td>Search for a specified number of slots available. Set
+							<code>AttrData.Value</code>
+							to an integer.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The example configuration below uses the
+				<code>EOS_SESSIONS_SEARCH_BUCKET_ID</code>
+				constant to search for a matching bucket ID:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
 				<h3 id="executing-a-search">Executing a Search</h3>
 			</div>
 			<p>To execute the search, call
@@ -2040,6 +2101,9 @@
 					</li>
 					<li>
 						<a href="#configuring-for-attribute-data">Configuring for Attribute Data</a>
+					</li>
+					<li>
+						<a href="#reserved-attribute-constants">Reserved Attribute Constants</a>
 					</li>
 					<li>
 						<a href="#executing-a-search">Executing a Search</a>

@@ -1,0 +1,720 @@
+<section class="page">
+	<div>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>BuildPatch Tool Instructions (1.4.0)</h1>
+			<h2>Setup and processing instructions for BPT 1.4.0.</h2>
+			<div>
+				<div>12 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<strong>Important Note</strong>: For best results, we recommend using the most recent version of the BuildPatch Tool. To learn more, review
+				<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-150">BuildPatch Tool Instructions (1.5.0)</a>
+			</div>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<div>
+				<h3 id="how-to-find-credential-ids">How to Find Credential IDs</h3>
+			</div>
+			<p>There are a number of IDs you will need to locate in the Developer Portal.</p>
+			<p>
+				<strong>Client ID and Client Secret for the product</strong>
+			</p>
+			<ol>
+				<li>Go to
+					<strong>Developer Portal Dashboard &gt; Product &gt; Games Services &gt; Product Settings</strong>.</li>
+				<li>View the credentials in
+					<strong>Product Settings &gt; SDK Credentials &gt; BPT Credentials</strong>.</li>
+			</ol>
+			<p>
+				<strong>Artifact Name and ID for the offer</strong>
+			</p>
+			<ul>
+				<li>
+					<p>Go to
+						<strong>Product &gt; Artifacts</strong>
+						page
+						<strong>&gt; Offer Artifact &gt; Edit Details</strong>
+						drop-down.</p>
+				</li>
+				<li>
+					<p>The Artifact Name and ID display on
+						<strong>Manage Artifact</strong>
+						modal
+						<strong>&gt; Edit Details</strong>
+						drop-down.</p>
+				</li>
+			</ul>
+			<p>
+				<strong>Offer IDs for the Offer</strong>
+			</p>
+			<ul>
+				<li>
+					<p>Go to
+						<strong>Product &gt; Offers page &gt; Offer</strong>.</p>
+				</li>
+				<li>
+					<p>The Offer IDs are located at the bottom of the
+						<strong>Edit Offer</strong>
+						modal.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</h3>
+			</div>
+			<p>Any user in your Organization with Owner, Admin or Store
+				<a href="/docs/dev-portal/organization-management">roles</a>
+				can view your BuildPatch Tool credentials for a product. They can also copy the credentials to the clipboard.</p>
+			<p>To view your organization’s BuildPatch Tool credentials:</p>
+			<ol>
+				<li>Sign in to the
+					<a href="https://dev.epicgames.com/portal">Dev Portal</a>.</li>
+				<li>Select the product for which you want to view credentials.</li>
+				<li>Select
+					<strong>Product Settings</strong>.</li>
+				<li>Scroll down to
+					<strong>SDK Credentials &gt; BPT Credentials</strong>.</li>
+				<li>To copy the credentials to the clipboard, click
+					<strong>Copy</strong>:</li>
+			</ol>
+			<p>
+				<img src="https://static-assets-prod.epicgames.com/eos-docs/docs/epic-games-store/tech-features-config/bpt-instructions-spt/copy-14.png" alt="">
+			</p>
+			<div>
+				<h3 id="paths-on-the-command-line">Paths on the Command Line</h3>
+			</div>
+			<p>Due to the way the command prompt interprets
+				<code>\"</code>
+				(a backslash directly followed by a double quote) on the command line, you need to follow at least one of the following pieces of guidance when specifying paths in BuildPatchTool arguments:</p>
+			<ul>
+				<li>Do not append a trailing slash to your directory names.</li>
+				<li>Use forward slashes for directory separators.</li>
+				<li>Do not enclose paths in quotes (this is not possible if your path contains one or more spaces).</li>
+				<li>Escape only the trailing backslash with another backslash if it is double-quote enclosed (not recommended, as is error prone)</li>
+			</ul>
+			<div>
+				<h4 id="examples-of-valid-path-syntax">Examples of Valid Path Syntax</h4>
+			</div>
+			<ul>
+				<li>
+					<code>-BuildRoot="D:/MyFolder/"</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:\MyFolder\</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:\MyFolder</code>
+				</li>
+				<li>
+					<code>-BuildRoot="D:\MyFolder"</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:/MyFolder/</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:/MyFolder</code>
+				</li>
+				<li>
+					<code>-BuildRoot="D:\MyFolder\\"</code>
+				</li>
+			</ul>
+			<div>
+				<h4 id="invalid-path-syntax">Invalid Path Syntax</h4>
+			</div>
+			<p>The following syntax
+				<strong>will not work</strong>
+				when defining a path on the Command Line:</p>
+			<p>
+				<code>-BuildRoot="D:\MyFolder\"</code>
+			</p>
+			<div>
+				<h2 id="initial-setup">Initial Setup</h2>
+			</div>
+			<p>Extract the contents of the
+				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP file</a>
+				to a machine that has access to the build you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
+			<p>
+				<strong>Note:</strong>
+				The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file,
+				<a href="https://eoshelp.epicgames.com/">create a private discussion</a>
+				on our Developer Support site for assistance.</p>
+			<div>
+				<h2 id="authentication">Authentication</h2>
+			</div>
+			<p>Authentication is carried out by supplying a
+				<strong>Client ID</strong>
+				and
+				<strong>Client Secret</strong>
+				to BuildPatchTool. These must be provided for every operation using command line arguments.</p>
+			<p>
+				<strong>Note:</strong>
+				BuildPatchTool uses a unique Client ID and Client Secret, separate from any EOS Client IDs your game may use. EOS Client IDs (which typically begin with
+				<em>xyza</em>) cannot be used with the BuildPatchTool.</p>
+			<p>The
+				<code>ClientId</code>
+				parameter
+				<em>must</em>
+				be provided with every operation that interacts with Epic's backend services. The client secret must be provided by using either of the
+				<code>ClientSecret</code>
+				or
+				<code>ClientSecretEnvVar</code>
+				parameters.</p>
+			<p>When using the
+				<code>ClientSecret</code>
+				parameter, then your client secret should be passed verbatim as the value of the parameter:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>When using the
+				<code>ClientSecretEnvVar</code>
+				parameter, then you pass the name of an OS environment variable which contains the client secret:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>We recommend using the
+				<code>ClientSecretEnvVar</code>
+				parameter whenever possible, as this prevents the value of your secret appearing in system logs and command line history. Best practice would be to store your client secret in a secrets management system (such as Hashicorp Vault), and having this securely injected into your build machine's environment during each run. How to set this up lies outside of the scope of this document.</p>
+			<div>
+				<h2 id="how-to-process-a-build">How to Process a Build</h2>
+			</div>
+			<p>Navigate to the
+				<code>Engine/Binaries/Win64/</code>
+				directory. From a command line, run BuildPatchTool.exe in
+				<em>PatchGeneration</em>
+				mode, and point it at your build (see CLI argument details below). This will process your build, upload it to our cloud storage, and register the build with our backend:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>Descriptions for each of the parameters that you have to specify are below. You can also add the
+				<code>"-help"</code>
+				option after any mode (e.g.
+				<code>"BuildPatchTool.exe -mode=PatchGeneration -help"</code>) to get information about the required arguments.</p>
+			<ul>
+				<li>
+					<p>
+						<code>OrganizationID</code>
+						– Use the Organization ID string that was provided along with your credentials.</p>
+				</li>
+				<li>
+					<p>
+						<code>ProductID</code>
+						– Use the Product ID string that was provided along with your credentials.</p>
+				</li>
+				<li>
+					<p>
+						<code>ArtifactID</code>
+						– Specify the Artifact ID string that was provided along with your credentials.</p>
+				</li>
+				<li>
+					<p>
+						<code>ClientId</code>
+						– See
+						<a href="#authentication">
+							<em>Authentication</em>
+						</a>.</p>
+				</li>
+				<li>
+					<p>
+						<code>ClientSecretEnvVar
+						</code>
+						– See
+						<a href="#authentication">
+							<em>Authentication</em>
+						</a>.</p>
+				</li>
+				<li>
+					<p>
+						<code>BuildRoot</code>
+						– The path to the directory containing the build to be read and processed. This should be an absolute path from the drive root, not a relative path. Additionally, it is recommended that this path be located near the drive root, to avoid any files exceeding the OS MAX_PATH limit (typically 260 characters).</p>
+				</li>
+				<li>
+					<p>
+						<code>CloudDir</code>
+						– The directory where any existing processed build data will be recognized, and new data added to.</p>
+					<ul>
+						<li>As with the
+							<em>BuildRoot</em>, this should be an absolute path from the drive root. This location is used to cache information about existing builds, and should be a different directory from the
+							<em>BuildRoot</em>
+							parameter. It is OK if this directory is initially empty; BuildPatchTool will download information as needed from the Epic backend and store it in the
+							<code>CloudDir</code>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<code>BuildVersion</code>
+						– The version string for the build. This needs to be unique for each build of a specific artifact, independent of platform. For example,
+						<code>BuildVersion-1.0</code>
+						can only exists for Windows or Mac, not both.  The build version string has the following restrictions: Must be between 1 and 100 chars in length, whitespace is not allowed, should only contain characters from the following sets a-z, A-Z, 0-9, or .+-_</p>
+				</li>
+				<li>
+					<p>
+						<code>AppLaunch</code>
+						– The path to the app executable that should be launched when running your game, relative to (and inside of) the BuildRoot. For Mac builds, this should be the executable file contained within the .app folder, usually in the location
+						<code>Game.app/Contents/MacOS/Game</code>.</p>
+				</li>
+				<li>
+					<p>
+						<code>AppArgs</code>
+						– The commandline to send to the app on launch. This can be set to
+						<code>“”</code>
+						when no additional arguments are needed.</p>
+				</li>
+				<li>
+					<p>
+						<code>FileAttributeList</code>
+						<em>(Optional)</em>
+						– An absolute path to a text file containing a list of files and corresponding special attributes (e.g. executable bit) that should be set. See
+						<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
+						for a description of the file contents.</p>
+					<ul>
+						<li>Note that the attributes file should not be inside your
+							<em>BuildRoot</em>
+							to ensure that it does not get erroneously included with your actual build content.</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<code>FileIgnoreList</code>
+						<em>(Optional)</em>
+						– An absolute path to a text file containing a list of files that should be excluded from the generated patch data. Each entry should be on a new line, and be a relative path from BuildRoot. A forward slash ("/") separator should be used.</p>
+					<ul>
+						<li>Note that if the ignore file is located inside
+							<em>BuildRoot</em>
+							then its own relative file path needs to be included in the ignore list to avoid it being included in the patch data.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="setting-special-file-attributes">Setting Special File Attributes</h3>
+			</div>
+			<p>You can use the optional
+				<code>-FileAttributeList</code>
+				parameter with the PatchGeneration mode to apply special attributes to files within your build, such as executable, or tagging groups of files. Note that the launch app (as specified by the
+				<code>-AppLaunch</code>
+				argument) is automatically marked as executable and does not need to be explicitly included in this configuration file. If you do not need to set any special attributes, the
+				<code>-FileAttributeList</code>
+				argument can be omitted.</p>
+			<p>Your custom FileAttributeList file must be a text file with one or more newline-separated entries. Each line must contain a quoted (BuildRoot-relative) filepath, followed by one or more space-delimited attributes to be applied to the referenced file:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>Example entries:</strong>
+			</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>The following file attribute flags are supported:</p>
+			<ul>
+				<li>
+					<p>
+						<code>executable</code>
+					</p>
+				</li>
+				<li>
+					<p>
+						<code>tag:my_tag</code>
+					</p>
+				</li>
+			</ul>
+			<p>File tagging is primarily used to explicitly indicate executable files when uploading Mac builds on Windows machines. The feature is also used by the Epic Games Launcher's selective download feature, which reduces download sizes for a limited number of games with a significant amount of localized assets.</p>
+			<div>
+				<h3 id="setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</h3>
+			</div>
+			<p>By default, the desktop shortcut icon will be set to the icon of the app executable indicated by the AppLaunch argument. There are two ways of updating this icon:</p>
+			<ul>
+				<li>
+					<p>Updating the icon embedded in the app executable</p>
+				</li>
+				<li>
+					<p>Adding a separate .ico file with same file name as the app executable (for example: launch.ico should be used if the executable is launch.exe)</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="how-to-list-existing-binaries">How to List Existing Binaries</h2>
+			</div>
+			<p>You can also query our backend to retrieve the list of binaries that you have already registered using the
+				<em>ListBinaries</em>
+				Mode:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="how-to-copy-a-binary">How to Copy a Binary</h2>
+			</div>
+			<p>The
+				<em>CopyBinary</em>
+				mode allows you to copy binaries from one artifact to another without having to re-upload the build. This is useful when you want to move a final build from a
+				<strong>Stage</strong>
+				artifact to a
+				<strong>Live</strong>
+				artifact.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>You can also use the
+						<strong>Duplicate to another artifact</strong>
+						feature in Developer Portal publishing tools.</p>
+				</div>
+			</div>
+			<p>Run the
+				<code>-help</code>
+				command to generate a list of all required args for the mode.</p>
+			<p>
+				<strong>Example:</strong>
+				<code>C:\Users\Name.Name\Desktop\Engine\Binaries\Win64&gt;BuildPatchTool.exe -help -mode=CopyBinary</code>
+			</p>
+			<div>
+				<h3 id="required-args">Required args</h3>
+			</div>
+			<p>Most of the required arguments are the same used in the modes listed above.</p>
+			<p>
+				<code>SourceArtifactId=""</code>
+				— Specifies the ID of the
+				<span>
+					<span>artifact</span>
+				</span>
+				the
+				<span>
+					<span>binary</span>
+				</span>
+				is being copied from</p>
+			<p>
+				<code>DestArtifactId=""</code>
+				— Specifies the ID of the artifact the binary is being copied to</p>
+			<div>
+				<h2 id="reducing-update-size">Reducing Update Size</h2>
+			</div>
+			<p>
+				<em>Requires v1.4.0 and above</em>
+			</p>
+			<p>BuildPatchTool uses a general patching system for all binaries uploaded using the
+				<em>PatchGeneration</em>
+				mode. The system allows the Epic Games store to update any version of your binary on a user's machine to any other version, minimising the download size to do so.</p>
+			<p>The
+				<em>ChunkDeltaOptimise</em>
+				mode is designed to take two binaries already uploaded to the Epic Services and produce a smaller download for users who are updating between these two specific versions. We call this an A-to-B patch. Running this command is an optional step that can be taken to improve the user experience when releasing a larger than usual patch, with the majority of your players known to be on a specific build version (build "A").</p>
+			<p>The following is a sample command line to improve delta patching between two builds:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>When running in
+				<em>ChunkDeltaOptimise</em>
+				mode, BuildPatchTool will stream the existing binary data from our cloud network, re-analyze, and upload new A-to-B specific patch data. This process can take longer than the standard PatchGeneration mode if the original download size between
+				<code>BuildVersionA</code>
+				and
+				<code>BuildVersionB</code>
+				is large.</p>
+			<p>It is generally advised to run
+				<em>ChunkDeltaOptimise</em>
+				mode using your current Live binary as BuildVersionA, and a binary you will release next as BuildVersionB. Ideally, plan to complete this process several days before your release in case of any issues running the tool, such as network loss.</p>
+			<p>To check on your current Live binary version, you can make use of the
+				<em>ListBinaries</em>
+				mode. If
+				<em>ChunkDeltaOptimise</em>
+				was already run between the two provided BuildVersion values, the process will succeed short circuiting the operation, indicated in the output.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>Once the processing is completed, the output will show the improvement achieved.</p>
+			<ul>
+				<li>
+					<p>"Final unknown compressed bytes, plus meta [Bytes]"</p>
+				</li>
+				<li>
+					<p>This will refer to the new download size achieved for patching between BuildVersionA and BuildVersionB.</p>
+				</li>
+				<li>
+					<p>"Original unknown compressed bytes [Bytes]"</p>
+				</li>
+				<li>
+					<p>This will refer to the download size for patching between BuildVersionA and BuildVersionB before the optimisation was run.</p>
+				</li>
+				<li>
+					<p>"Improvement: [Percentage]"</p>
+				</li>
+				<li>
+					<p>This will show the improvement that was achieved. The percentage refers to the size of the reduction, larger is better.</p>
+				</li>
+			</ul>
+			<p>
+				<strong>Example output:</strong>
+			</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="downloadable-content-dlc">Downloadable Content (DLC)</h2>
+			</div>
+			<p>The Epic Games store provides full support for Downloadable Content (DLC).</p>
+			<p>You can enable artifact download for your add-on offer by selecting
+				<strong>Product &gt; Artifacts &gt; Create New Artifact</strong>
+				and then associating the new artifact with the add-on offer in question. Accordingly, each item of DLC will need its own patch generation process to be executed with the appropriate Artifact ID specified. Because each is generated separately, then it is important when performing patch generation for a DLC item that the Base game, and all other DLC items are not present at the same time in the folder specified in the
+				<em>BuildRoot</em>
+				parameter during the patch generation process. Alternatively, if the
+				<em>BuildRoot</em>
+				folder does contain the main game or other DLC items, then a
+				<code>-FileIgnoreList</code>
+				parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary. See
+				<a href="#how-to-process-a-build">How to Process a Build</a>
+				for details.</p>
+			<p>When installed on end users’ machines, the main game and all items of related DLC will be installed into the same directory. This leads to the restriction that there must be no files within the main game or any item of DLC which share a common file path. The BuildPatchTool will perform checks on this and prevent the patch generation process from occurring if there are any files which violate this rule. This means that the Base game must be able to locate installed DLC by relative path from its install location.</p>
+			<div>
+				<h2 id="troubleshooting-common-errors">Troubleshooting Common Errors</h2>
+			</div>
+			<p>When using the BPT, make sure your
+				<strong>command lines are exact</strong>. If they are off, you will get a message about the error you are encountering.</p>
+			<div>
+				<h3 id="common-errors">Common errors</h3>
+			</div>
+			<p>Please be aware these are only the common errors. You can run the
+				<code>-help</code>
+				command in the BPT with the specific mode to get more info on what may be causing the error.</p>
+			<ul>
+				<li>
+					<p>
+						<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">
+							<em>Error - Failed to retrieve list of binaries from Epic services</em>
+						</a>
+					</p>
+				</li>
+				<li>
+					<p>
+						<a href="#error---missing-parameters">
+							<em>Error - Missing parameters</em>
+						</a>
+					</p>
+				</li>
+				<li>
+					<p>
+						<a href="#error---missing-credentials">
+							<em>Error - Missing credentials</em>
+						</a>
+					</p>
+				</li>
+				<li>
+					<p>
+						<a href="#error---authentication-error">
+							<em>Error - Authentication error</em>
+						</a>
+					</p>
+				</li>
+				<li>
+					<p>
+						<a href="#error---unexpected-error">
+							<em>Error - Unexpected error</em>
+						</a>
+					</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="things-to-check">Things to check</h3>
+			</div>
+			<p>The Client ID and Client Secret being used are specifically indicated for BuildPatchTool use; the correct client is listed as a
+				<strong>BPT Client</strong>
+				in the Clients section of the Product Settings page. Other clients may exist to interface with EOS features, but will not have BuildPatchTool permissions.</p>
+			<ul>
+				<li>
+					<p>All required parameters are provided</p>
+				</li>
+				<li>
+					<p>Parameters are free of typos, including incorrect capitalization or spacing issues</p>
+				</li>
+				<li>
+					<p>Missing quotation marks for a parameter that includes spaces</p>
+				</li>
+			</ul>
+			<div>
+				<h4 id="error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<em>What it means</em>
+				– The Client credentials you are using do not grant access to upload to the specified artifact. This could be a typo in the credentials or another parameter, or an issue with the permissions granted to the Client.</p>
+			<div>
+				<h4 id="error---missing-parameters">Error - Missing parameters</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<em>What it means</em>
+				– The BPT is not detecting one or more of the parameters that are listed above. This could simply be that they are missing, or that they were added incorrectly.</p>
+			<div>
+				<h4 id="error---missing-credentials">Error - Missing credentials</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<em>What it means</em>
+				– The BPT is not detecting one or more of the parameters that are listed above. This could simply be that they are missing, or that they were added incorrectly.</p>
+			<div>
+				<h4 id="error---authentication-error">Error - Authentication error</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<em>What it means</em>
+				– The Client credentials you are using do not match our records. This could be a typo in the credentials or another parameter, or an issue with the permissions granted to the Client.</p>
+			<div>
+				<h4 id="error---unexpected-error">Error - Unexpected error</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<em>What it means</em>
+				–  The Client credentials you are using do not have access to the artifact you have specified. Ensure you are using the correct BPT Client as indicated on your Product Settings page.</p>
+			<div id="tag_list">
+				<a href="/docs/site-map">Epic Games Store Only</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#before-you-start">Before You Start</a>
+					</li>
+					<li>
+						<a href="#how-to-find-credential-ids">How to Find Credential IDs</a>
+					</li>
+					<li>
+						<a href="#view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</a>
+					</li>
+					<li>
+						<a href="#paths-on-the-command-line">Paths on the Command Line</a>
+					</li>
+					<li>
+						<a href="#examples-of-valid-path-syntax">Examples of Valid Path Syntax</a>
+					</li>
+					<li>
+						<a href="#invalid-path-syntax">Invalid Path Syntax</a>
+					</li>
+					<li>
+						<a href="#initial-setup">Initial Setup</a>
+					</li>
+					<li>
+						<a href="#authentication">Authentication</a>
+					</li>
+					<li>
+						<a href="#how-to-process-a-build">How to Process a Build</a>
+					</li>
+					<li>
+						<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
+					</li>
+					<li>
+						<a href="#setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</a>
+					</li>
+					<li>
+						<a href="#how-to-list-existing-binaries">How to List Existing Binaries</a>
+					</li>
+					<li>
+						<a href="#how-to-copy-a-binary">How to Copy a Binary</a>
+					</li>
+					<li>
+						<a href="#required-args">Required args</a>
+					</li>
+					<li>
+						<a href="#reducing-update-size">Reducing Update Size</a>
+					</li>
+					<li>
+						<a href="#downloadable-content-dlc">Downloadable Content (DLC)</a>
+					</li>
+					<li>
+						<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
+					</li>
+					<li>
+						<a href="#common-errors">Common errors</a>
+					</li>
+					<li>
+						<a href="#things-to-check">Things to check</a>
+					</li>
+					<li>
+						<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</a>
+					</li>
+					<li>
+						<a href="#error---missing-parameters">Error - Missing parameters</a>
+					</li>
+					<li>
+						<a href="#error---missing-credentials">Error - Missing credentials</a>
+					</li>
+					<li>
+						<a href="#error---authentication-error">Error - Authentication error</a>
+					</li>
+					<li>
+						<a href="#error---unexpected-error">Error - Unexpected error</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

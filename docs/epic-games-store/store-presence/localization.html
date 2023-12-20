@@ -1,0 +1,520 @@
+<section class="page">
+	<div>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>Localize Store Presence</h1>
+			<h2>Localize storefront content to best reach global Epic Games Store users.</h2>
+			<div>
+				<div>11 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>This article covers functionality offered by the self-service Epic Games Store publishing tools.
+						<strong>If the options described are not available to you</strong>, you may be using an alternate method of distribution. For documentation applicable to your experience,
+						<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>
+					</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>Through the Epic Games Store publishing tools, you can localize your store presence to provide a better experience for global Epic Games Store users. Localizing the content of your storefront allows users to review and interact with your product in their preferred language.</p>
+			<p>To help you localize your store presence, the following tools and services are available:</p>
+			<ul>
+				<li>
+					<a href="#text-localization">Text localization</a>: Manage localized strings for text entities associated with your product via a bulk upload template available in the Dev Portal.</li>
+				<li>
+					<a href="#request-text-translations-from-the-epic-translation-service">Epic Translation Service</a>: A complimentary localization service available for all products on the Epic Games Store. If you are unable to provide your own translations, you can request support from the Epic Games Store team.</li>
+				<li>
+					<a href="#asset-localization-image-and-video">Asset Localization (Image and Video)</a>: Upload localized images and videos to ensure storefront users are presented with the right assets for their region.</li>
+			</ul>
+			<div>
+				<h2 id="supported-languages">Supported Languages</h2>
+			</div>
+			<p>The Epic Games Store currently supports the following languages:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>
+								Language
+							</strong>
+						</th>
+						<th>
+							<strong>
+								Locale code
+							</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>English</td>
+						<td>en</td>
+					</tr>
+					<tr>
+						<td>Arabic</td>
+						<td>ar</td>
+					</tr>
+					<tr>
+						<td>French</td>
+						<td>fr</td>
+					</tr>
+					<tr>
+						<td>German</td>
+						<td>de</td>
+					</tr>
+					<tr>
+						<td>Italian</td>
+						<td>it</td>
+					</tr>
+					<tr>
+						<td>Japanese</td>
+						<td>ja</td>
+					</tr>
+					<tr>
+						<td>Korean</td>
+						<td>ko</td>
+					</tr>
+					<tr>
+						<td>Polish</td>
+						<td>pl</td>
+					</tr>
+					<tr>
+						<td>Portuguese (Brazil)</td>
+						<td>pt-BR</td>
+					</tr>
+					<tr>
+						<td>Russian</td>
+						<td>ru</td>
+					</tr>
+					<tr>
+						<td>Spanish (Spain)</td>
+						<td>es-ES</td>
+					</tr>
+					<tr>
+						<td>Spanish</td>
+						<td>es</td>
+					</tr>
+					<tr>
+						<td>Thai</td>
+						<td>th</td>
+					</tr>
+					<tr>
+						<td>Turkish</td>
+						<td>tr</td>
+					</tr>
+					<tr>
+						<td>Chinese (Simplified)</td>
+						<td>zh-CN</td>
+					</tr>
+					<tr>
+						<td>Chinese (Traditional)</td>
+						<td>zh-Hant</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="text-localization">Text Localization</h2>
+			</div>
+			<p>In the Dev Portal, you can manage localized content for your store presence by visiting
+				<em>Your Product &gt; Epic Games Store &gt; Localization</em>.</p>
+			<p>The Localization section provides a downloadable template that is used to collect localized content for your various entities, such as
+				<a href="/docs/epic-games-store/store-presence/store-config">store settings</a>,
+				<a href="/docs/epic-games-store/store-presence/manage-offers">offers</a>
+				and
+				<a href="/docs/epic-games-store/store-presence/manage-pages">pages</a>. If you are unable to provide your own translations, the Epic Games Store offers a complimentary translation service to partners.</p>
+			<p>To get started, review the following sections:</p>
+			<ul>
+				<li>
+					<a href="#create-text-localizations">Create Text Localization</a>
+				</li>
+				<li>
+					<a href="#request-text-translations-from-the-epic-translation-service">Request Text Translations from the Epic Translation Service</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="create-text-localizations">Create Text Localizations</h3>
+			</div>
+			<p>Before you begin, complete the required fields for the entities you intend to localize (e.g., offers, pages, etc.) in English. English content populates the localization template and is required for all products distributed on the Epic Games Store. Additionally, ensure these entities are in the Dev sandbox with a
+				<em>Ready for Stage</em>
+				status. (To learn more about sandboxes and statuses, review
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>.)</p>
+			<div>
+				<p>Character limits for individual text fields are applied consistently across all languages. To ensure localized content strings can be imported without issue, we recommend keeping English (en) text to no more than 70–80% of the maximum character limit.</p>
+			</div>
+			<p>Once your entities are ready, follow the process below to localize your content:</p>
+			<ol>
+				<li>
+					<a href="#step-1-download-the-localization-template">Download the localization template</a>
+				</li>
+				<li>
+					<a href="#step-2-complete-the-localization-template">Complete the localization template</a>
+				</li>
+				<li>
+					<a href="#step-3-import-localizations">Import Localizations</a>
+				</li>
+				<li>
+					<a href="#step-4-preview-localizations">Preview your localizations</a>
+				</li>
+				<li>
+					<a href="#step-5-publish-localizations">Publish your localizations</a>
+				</li>
+			</ol>
+			<div>
+				<h4 id="step-1-download-the-localization-template">Step 1: Download the Localization Template</h4>
+			</div>
+			<p>To start the process, you must first download the localization template. The localization template is a .CSV file containing all user-facing content strings for your selected entities.</p>
+			<p>Once retrieved, you will add your translations to this template as needed. If you cannot provide your own translations, review the
+				<a href="#request-text-translations-from-the-epic-translation-service">Request Text Translations from the Epic Translation Service</a>
+				section for more information.</p>
+			<p>To retrieve the localization template, complete the following:</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Localization</strong>.</li>
+				<li>Ensure the
+					<strong>Dev</strong>
+					sandbox is selected. Then, click
+					<strong>Download Template</strong>.</li>
+				<li>Select one or more entities to localize. Then, click
+					<strong>Download</strong>
+					to export the template.</li>
+			</ol>
+			<p>Once downloaded, continue to
+				<a href="#step-2-complete-the-localization-template">Step 2: Complete the Localization Template</a>
+				to populate the .CSV file with your translations. If you have already created one or more localizations, the file may already contain data in certain locale columns.</p>
+			<div>
+				<p>If you have some entities that support complete localization (i.e., content provided for all locales) and other entities that do not fully support localization (i.e., content provided for only some locales), it is recommended that you download and complete these templates separately. For example, if your Product Home is to be fully localized, but Product Configuration is not, manage these templates separately as follows:</p>
+				<br>
+				<ol>
+					<li>Download the Product Home template and provide localizations for all locale columns. Upload Product Home Page template.</li>
+					<li>Download the Product Configuration template and provide localizations in one or more locale columns as needed. Remove any columns that do not contain localizations. Upload the Product Configuration template.</li>
+				</ol>
+			</div>
+			<div>
+				<h4 id="step-2-complete-the-localization-template">Step 2: Complete the Localization Template</h4>
+			</div>
+			<p>Next, fill out the localization template with your translated content.</p>
+			<p>In the .CSV file, each row represents a specific string, with the
+				<code>en</code>
+				column containing your English content. Additional locale columns are provided to collect your translated strings for each supported language.</p>
+			<p>Locale columns are labeled by locale code (e.g.,
+				<code>ja</code>
+				or
+				<code>ko</code>). For a full list of codes, review the
+				<a href="#supported-languages">Supported Languages</a>
+				section.</p>
+			<div>
+				<p>To ensure a successful import of your localization template,
+					<strong>do not</strong>
+					edit or remove the first row (header) of the template or adjust the file format. Changes to the template structure or file format may cause an import to fail. Additionally, ensure you remove any unused locale columns prior to uploading the template, or the import may result in an error.</p>
+			</div>
+			<p>To complete the localization template, follow the steps below:</p>
+			<ol>
+				<li>In the .CSV file, review the
+					<code>Localization Field</code>,
+					<code>Field Description</code>, and
+					<code>en</code>
+					columns to identify the strings requiring translation.</li>
+				<li>For each string, add your translated content to each locale column as needed.</li>
+				<li>Remove any locale columns that are not being used. Your completed file should only include locale columns that contain translated content.
+					<ul>
+						<li>
+							<strong>Note</strong>: If any unused columns are not removed prior to uploading your template, the import may result in an error.</li>
+					</ul>
+				</li>
+				<li>Save your completed template as a .CSV UTF8 file.</li>
+			</ol>
+			<div>
+				<h4 id="step-3-import-localizations">Step 3: Import Localizations</h4>
+			</div>
+			<p>Once your template is finalized, follow the steps below to upload the file and import your localizations:</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Localization</strong>.</li>
+				<li>Click
+					<strong>Upload File</strong>. Then, upload your completed .CSV file. The max file size is 5MB.
+					<ul>
+						<li>
+							<strong>If the import was successful</strong>: The file displays with a confirmation message, and you can continue to
+							<a href="#step-4-preview-localizations">Step 4: Preview Localizations</a>.</li>
+						<li>
+							<strong>If the import presented errors</strong>: If any issues are detected in the file, an alert message displays on screen. These errors must be resolved before you can continue.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>Errors during the import process may occur for a variety of reasons. Common errors include translated content for a specific field exceeding its character limit or translated content missing for one or more required fields.</p>
+			<p>Languages affected by one or more errors display with a warning icon in the Languages section of the screen.</p>
+			<ul>
+				<li>Click an affected language to review its specific error details. Using this information, resolve any issues in your .CSV file. Then, upload the modified file using the steps above.</li>
+				<li>Repeat this process as needed to resolve any additional errors. Once you have successfully imported your localizations without error, continue to
+					<a href="#step-4-preview-localizations">Step 4: Preview Localizations</a>.</li>
+			</ul>
+			<div>
+				<h4 id="step-4-preview-localizations">Step 4: Preview Localizations</h4>
+			</div>
+			<p>Next, preview how your localizations display to users. Note that this process is only available for offer and page entities.</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Localization</strong>.</li>
+				<li>In the Dev sandbox list, click the entity you wish to preview.</li>
+				<li>Select a language from the list to the right. Then, click
+					<strong>Text</strong>.</li>
+				<li>Fields containing localized content then display.  Click
+					<strong>Preview in Store</strong>
+					to the top right to launch a storefront preview in a new tab.</li>
+				<li>Review the preview to ensure your localized content displays as desired. When ready, continue to
+					<a href="#step-5-publish-localizations">Step 5: Publish Localizations</a>
+					<ul>
+						<li>
+							<strong>Tip</strong>: To update any content, return to
+							<a href="#step-2-complete-the-localization-template">Step 2: Complete the Localization Template</a>
+							and
+							<a href="#step-3-import-localizations">Step 3: Import Localizations</a>
+							as needed.</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h4 id="step-5-publish-localizations">Step 5: Publish Localizations</h4>
+			</div>
+			<p>To publish your localizations, you first must push the localized entities to the Stage
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">sandbox</a>
+				and submit them for review. Once approved, you can then publish your changes to the Live sandbox.</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Release Management</strong>.</li>
+				<li>In the Dev sandbox, click
+					<strong>Push to Stage</strong>.</li>
+				<li>Select the entities containing new localizations from the list.</li>
+				<li>Click
+					<strong>Push to Stage</strong>. The entities then display in the Stage sandbox section of the screen.</li>
+				<li>In the Stage sandbox, click
+					<strong>Submit for Review</strong>
+					to submit your content to the Epic Games Store team.</li>
+				<li>Once your entities have been approved, push your content to the Live sandbox by clicking
+					<strong>Push to Live</strong>
+					in the Stage sandbox.</li>
+			</ol>
+			<p>After you have created one or more localizations, you can manage this information through the Dev Portal. For more information, review the
+				<a href="#localization-management">Localization Management</a>.</p>
+			<div>
+				<p>During the review process, the Epic Games Store team may provide feedback that requires content changes in English. In this scenario, you must also update any associated translations before resubmitting your entities for review.</p>
+			</div>
+			<div>
+				<h3 id="request-text-translations-from-the-epic-translation-service">Request Text Translations from the Epic Translation Service</h3>
+			</div>
+			<p>While not required, localizing your store presence is highly recommended to help your product reach a wider audience of Epic Games Store users.</p>
+			<p>To support your localization efforts, the Epic Games Store offers the Epic Translation Service. If you are unable to provide your own localizations, you can request complimentary text translations from this service.</p>
+			<p>To request text translations, follow the steps below. Note that this process may take
+				<strong>two weeks or more</strong>
+				to complete.</p>
+			<ol>
+				<li>In the Dev Portal, ensure your entities (i.e., store settings, offers, and pages) have been completed in English.</li>
+				<li>Download the localization template by following the process described in
+					<a href="#step-1-download-the-localization-template">Step 1: Download the Localization Template</a>.</li>
+				<li>
+					<a href="https://eoshelp.epicgames.com/">Create a private discussion</a>
+					on our Developer Support site to submit a request for text translation. Ensure you attach the downloaded localization template to the request. Note that it may take 2 weeks or more to receive your translations.</li>
+				<li>Once you have your translations, follow the
+					<a href="#create-text-localizations">Create Text Localizations</a>
+					process to publish your localizations.</li>
+			</ol>
+			<div>
+				<h2 id="asset-localization-image-and-video">Asset Localization (Image and Video)</h2>
+			</div>
+			<p>In addition to text-based localization, the Epic Games Store also supports localizing media assets. With asset localization, you can customize the store experience for users based on their selected locale and present them with images and videos in their preferred language.</p>
+			<div>
+				<h3 id="create-asset-localizations">Create Asset Localizations</h3>
+			</div>
+			<p>Before you begin, configure the entities you intend to localize (e.g., offers, pages, etc.) in English. Additionally, ensure these entities are in the Dev sandbox with a
+				<em>Ready for Stage</em>
+				status. (To learn more about sandboxes and statuses, review
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>.)</p>
+			<p>Once your entities are ready, complete the following process for media asset localization:</p>
+			<ol>
+				<li>
+					<a href="#step-1-upload-localized-assets">Upload localized assets</a>
+				</li>
+				<li>
+					<a href="#step-2-publish-localized-assets">Publish localized assets</a>
+				</li>
+			</ol>
+			<div>
+				<h4 id="step-1-upload-localized-assets">Step 1: Upload Localized Assets</h4>
+			</div>
+			<p>Follow the steps below to upload assets to an entity for a specific locale. Repeat this process as needed for additional locales and entities.</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Localization</strong>.</li>
+				<li>Ensure the Dev sandbox is selected. Then, click the name of an entity to edit.</li>
+				<li>Choose the language you wish to configure from the options on the right. If the desired language is not available, click
+					<strong>Add New Language</strong>
+					and select the appropriate option to add it to the list.</li>
+				<li>In the Media Localization section, select a component to configure (e.g., Offer Images). Then, upload your localized assets as needed.
+					<ul>
+						<li>
+							<strong>Tip</strong>: While updating your assets, click
+							<strong>Preview in Store</strong>
+							to launch a preview of your storefront in a new tab. Use this preview to ensure your localized assets display as desired on your product pages. Note that this option may not be available for all entity types.</li>
+					</ul>
+				</li>
+				<li>Click
+					<strong>Save Changes</strong>
+					to finalize the upload.</li>
+			</ol>
+			<p>Once you have uploaded and reviewed your localized assets, continue to
+				<a href="#step-2-publish-localized-assets">Step 2: Publish Localized Assets</a>.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>Assets associated with a specific language have the
+					<em>Localized</em>
+					label, while assets copied from the original English configuration display the
+					<em>Default</em>
+					label. If you make any unintended edits, click
+					<strong>Use Original Media</strong>
+					to revert to the default assets for that section.</li>
+				<li>If you update an asset in English that has previously been localized, you are given the option to either
+					<em>Update All</em>
+					or
+					<em>Update Non-Localized Only</em>. If you select Update Non-Localized Only, then all assets associated with an entity for a given locale are no longer counted as Default and instead display as Localized.</li>
+			</ul>
+			<div>
+				<h4 id="step-2-publish-localized-assets">Step 2: Publish Localized Assets</h4>
+			</div>
+			<p>To publish your localized assets, you first must push the localized entities to the Stage
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">sandbox</a>
+				and submit them for review. Once approved, you can then publish your changes to the Live sandbox.</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Release Management</strong>.</li>
+				<li>In the Dev sandbox, click
+					<strong>Push to Stage</strong>.</li>
+				<li>Select the entities containing localized assets from the list.</li>
+				<li>Click
+					<strong>Push to Stage</strong>. The entities then display in the Stage sandbox section of the screen.</li>
+				<li>In the Stage sandbox, click
+					<strong>Submit for Review</strong>
+					to submit your media to the Epic Games Store team.</li>
+				<li>Once your entities have been approved, push your content to the Live sandbox by clicking
+					<strong>Push to Live</strong>
+					in the Stage sandbox.</li>
+			</ol>
+			<p>After you have created one or more localizations, you can manage this information through the Dev Portal. For more information, review the
+				<a href="#localization-management">Localization Management</a>.</p>
+			<p>
+				<strong>Note</strong>: During the review process, the Epic Games Store team may provide feedback that requires media changes in English. In this scenario, you must also update any associated localized assets before resubmitting your entities for review.</p>
+			<div>
+				<h2 id="localization-management">Localization Management</h2>
+			</div>
+			<p>Once localizations have been created for your product, you can review that content, remove specific language support, and access a history of your template uploads through the Dev Portal.</p>
+			<div>
+				<h3 id="review-content-or-remove-language-support">Review Content or Remove Language Support</h3>
+			</div>
+			<p>To review existing localized content or remove specific language support, follow the steps below:</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Localization</strong>.</li>
+				<li>Click the name of an entity to access its Manage Localization screen. From here, you can:
+					<ul>
+						<li>
+							<strong>Review localized content</strong>: First, select a language from the list on the right. Then, choose the option for either
+							<strong>Text</strong>
+							or
+							<strong>Media Localization</strong>
+							to review the entity's content.</li>
+						<li>
+							<strong>Remove language support</strong>: To remove all content associated with a specific locale from the entity, click the
+							<strong>Delete icon</strong>
+							to the right of the language. This action deletes both text and media asset localizations and cannot be undone. Once deleted, entities are replaced with default images and English text.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>
+				<strong>Note</strong>: The
+				<em>Add New Language</em>
+				option available on the Manage Localization screen only supports uploading localized media assets; it does not support text localization. To translate text-based content, you must follow the
+				<a href="#create-text-localizations">Create Text Localizations</a>
+				process.</p>
+			<div>
+				<h3 id="view-localization-upload-history">View Localization Upload History</h3>
+			</div>
+			<p>In the Dev Portal, a history of localization templates your organization has uploaded is available. This history includes details such as file names, upload dates, locales added, statuses of uploads (i.e., if an upload was successful or had issues), and any associated errors.</p>
+			<p>To access your localization upload history, navigate to
+				<strong>Your Product &gt; Epic Games Store &gt; Localization</strong>
+				and click the
+				<strong>Localized File History</strong>
+				(clock) icon to the top right.</p>
+			<div id="tag_list">
+				<a href="/docs/site-map">Epic Games Store Only</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#supported-languages">Supported Languages</a>
+					</li>
+					<li>
+						<a href="#text-localization">Text Localization</a>
+					</li>
+					<li>
+						<a href="#create-text-localizations">Create Text Localizations</a>
+					</li>
+					<li>
+						<a href="#step-1-download-the-localization-template">Step 1: Download the Localization Template</a>
+					</li>
+					<li>
+						<a href="#step-2-complete-the-localization-template">Step 2: Complete the Localization Template</a>
+					</li>
+					<li>
+						<a href="#step-3-import-localizations">Step 3: Import Localizations</a>
+					</li>
+					<li>
+						<a href="#step-4-preview-localizations">Step 4: Preview Localizations</a>
+					</li>
+					<li>
+						<a href="#step-5-publish-localizations">Step 5: Publish Localizations</a>
+					</li>
+					<li>
+						<a href="#request-text-translations-from-the-epic-translation-service">Request Text Translations from the Epic Translation Service</a>
+					</li>
+					<li>
+						<a href="#asset-localization-image-and-video">Asset Localization (Image and Video)</a>
+					</li>
+					<li>
+						<a href="#create-asset-localizations">Create Asset Localizations</a>
+					</li>
+					<li>
+						<a href="#step-1-upload-localized-assets">Step 1: Upload Localized Assets</a>
+					</li>
+					<li>
+						<a href="#step-2-publish-localized-assets">Step 2: Publish Localized Assets</a>
+					</li>
+					<li>
+						<a href="#localization-management">Localization Management</a>
+					</li>
+					<li>
+						<a href="#review-content-or-remove-language-support">Review Content or Remove Language Support</a>
+					</li>
+					<li>
+						<a href="#view-localization-upload-history">View Localization Upload History</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

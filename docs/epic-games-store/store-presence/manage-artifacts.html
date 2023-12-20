@@ -1,26 +1,13 @@
 <section class="page">
-	<div style="left:0">
-		<nav>
-			<ol>
-				<li>
-					<a href="/docs">Epic Developer Resources</a>
-				</li>
-				<li aria-hidden="true"></li>
-				<li></li>
-				<li aria-hidden="true"></li>
-				<li>
-					<span aria-label="Manage Artifacts">Manage Artifacts</span>
-				</li>
-			</ol>
-		</nav>
+	<div>
 		<div></div>
 	</div>
 	<section>
 		<div>
 			<h1>Manage Artifacts</h1>
-			<h2>Create and manage product artifacts and binaries</h2>
+			<h2>Create and manage product artifacts and binaries.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -29,25 +16,25 @@
 			<div role="alert">
 				<div></div>
 				<div>
-					<p>
-						<strong>Are you a Closed Beta partner?</strong>
-						If you are not participating in the
-						<strong>Closed Beta</strong>
-						release, you can access documentation by using your Epic Games account to
-						<a href="/docs/en-UShttps://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>.</p>
+					<p>This article covers functionality offered by the self-service Epic Games Store publishing tools.
+						<strong>If the options described are not available to you</strong>, you may be using an alternate method of distribution. For documentation applicable to your experience,
+						<a href="https://epicsupport.force.com/epicgamesstoreknowledgebase/s/">sign in to the Knowledge Base</a>
+					</p>
 				</div>
 			</div>
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
-			<p>In the Epic Games Store publishing tools, an 
-				<!-- -->artifact
-				<!-- --> represents a group of binaries, metadata, and configurations used to fulfill user requests to download content. In the Dev Portal, the Artifacts and Binaries section allows you to review and upload binaries to your artifacts.</p>
+			<p>In the Epic Games Store publishing tools, an
+				<span>
+					<span>artifact</span>
+				</span>
+				represents a group of binaries, metadata, and configurations used to fulfill user requests to download content. In the Dev Portal, the Artifacts and Binaries section allows you to review and upload binaries to your artifacts.</p>
 			<p>When you first create your product, an artifact for that product is automatically generated. Artifacts are also auto-generated for any additional offers you create that feature downloadable content, such as Demo type offers.</p>
 			<p>Note that artifacts are
 				<strong>not</strong>
 				automatically created for Add-On type offers as add-ons may or may not feature downloadable content. You can create artifacts for these offers as needed through the
-				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers#artifact-settings">Offers section</a>
+				<a href="/docs/epic-games-store/store-presence/manage-offers#artifact-settings">Offers section</a>
 				of the Dev Portal.</p>
 			<p>
 				<strong>Notes about Offer Dates</strong>
@@ -60,16 +47,17 @@
 					<strong>Exact Release Date</strong>: If the offer has been assigned an exact release date, the associated artifact must have an attached binary before it can be pushed to the Stage sandbox.</li>
 			</ul>
 			<p>To learn more, review the Dates section of
-				<a href="/docs/epic-games-store/publishing-tools/store-presence/manage-offers#dates">Manage Offers</a>.</p>
+				<a href="/docs/epic-games-store/store-presence/manage-offers#dates">Manage Offers</a>.</p>
 			<div>
 				<h2 id="create-and-upload-your-build">Create and Upload Your Build</h2>
 			</div>
 			<div>
 				<h3 id="before-you-begin">Before You Begin</h3>
 			</div>
-			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely package and upload binary files for your product to the Dev 
-				<!-- -->sandbox
-				<!-- -->. You must use this tool in order to upload binaries to your artifacts in the Dev Portal.</p>
+			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely package and upload binary files for your product to the Dev
+				<span>
+					<span>sandbox</span>
+				</span>. You must use this tool in order to upload binaries to your artifacts in the Dev Portal.</p>
 			<p>To download the tool, follow the steps below:</p>
 			<ol>
 				<li>Navigate to
@@ -77,7 +65,7 @@
 				<li>To the top right, click
 					<strong>Download Tool</strong>.</li>
 				<li>Refer to the
-					<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>
+					<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>
 					for more information.</li>
 			</ol>
 			<div>
@@ -85,18 +73,38 @@
 			</div>
 			<p>Follow the steps below to attach binaries to your artifacts through the Manage Artifact screen. You can also review artifact details and active binaries from this screen.</p>
 			<ol>
-				<li>In Dev Portal, navigate to
+				<li>In the Dev Portal, navigate to
 					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
-				<li>Select the artifact to edit by clicking its name or the corresponding
+				<li>Select an artifact to edit by clicking its name or the corresponding
 					<strong>menu (...) icon</strong>.</li>
 				<li>On the Manage Artifact screen, click
 					<strong>Upload Binary</strong>.</li>
 				<li>Use the
-					<a href="/docs/epic-games-store/publishing-tools/store-presence/upload-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>
+					<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-150">BuildPatch Tool Instructions</a>
 					to complete this process.</li>
 			</ol>
+			<p>After you upload your binary, you can add the appropriate labels to your artifact in the Dev Portal. To do so, follow the steps below:</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>. Then, select the appropriate artifact from the list.</li>
+				<li>On the Manage Artifacts screen, click the
+					<strong>menu (...) icon</strong>
+					in the Active Binaries section. Then, select
+					<strong>Manage Platforms</strong>.</li>
+				<li>Select the appropriate platform for your build. Then, click
+					<strong>Save Changes</strong>.</li>
+			</ol>
+			<p>Once a platform has been selected, the binary automatically receives the
+				<em>Live</em>
+				label. These labels allow your binary to be accessible from the Epic Games Launcher.</p>
+			<p>Applying a label to a binary associates a label name (e.g.,
+				<em>Live</em>) and a platform (e.g.,
+				<em>Win32</em>) with a single binary version. Multiple labels can be assigned to the same binary. The Epic Games Launcher only queries for binaries associated with the platform on which it is currently running. For example, the Win32 Launcher client only queries using a platform of Win32, preventing it from receiving binaries labeled with
+				<em>Windows</em>
+				or
+				<em>Mac</em>.</p>
 			<div id="tag_list">
-				<a href="/docs/en-US/site-map?tag=Epic%20Games%20Store%20Only">Epic Games Store Only</a>
+				<a href="/docs/site-map">Epic Games Store Only</a>
 			</div>
 		</section>
 		<aside>

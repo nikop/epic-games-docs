@@ -1,0 +1,1229 @@
+<section class="page">
+	<div>
+		<div></div>
+	</div>
+	<section>
+		<div>
+			<h1>BuildPatch Tool Instructions (Recommended - 1.5.0)</h1>
+			<h2>Setup and processing instructions for BPT 1.5.0.</h2>
+			<div>
+				<div>20 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section>
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely upload binary files for your product to the Dev
+				<span>
+					<span>sandbox</span>
+				</span>
+				for your product. You can then use the Artifacts and Binaries section of the Dev Portal to attach binaries to the correct artifact for your product offer and conduct testing. (For some organizations, this section may be labeled as
+				<em>Builds</em>.) Using the
+				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>
+				process, you can promote binaries uploaded via the BuildPatch tool between sandboxes.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you begin, review the sections below to gather the information needed in preparation for using the BuildPatch tool.</p>
+			<div>
+				<h3 id="download-the-buildpatch-tool">Download the BuildPatch Tool</h3>
+			</div>
+			<p>You can download the BuildPatch tool (BPT) from the Artifacts and Binaries page of the Dev Portal.</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>To the top right, click
+					<strong>Download Tool</strong>.</li>
+				<li>After the download finishes, install the tool on your local machine.</li>
+			</ol>
+			<div>
+				<h3 id="retrieve-credential-ids">Retrieve Credential IDs</h3>
+			</div>
+			<p>To ensure you have the information needed to use the BPT, retrieve the following IDs from the Dev Portal.</p>
+			<p>
+				<strong>Client ID and Client Secret for the Product</strong>
+			</p>
+			<p>Any user in your organization with Owner, Admin, or Store roles can retrieve the following credentials:</p>
+			<ol>
+				<li>In the Dev Portal, navigate to
+					<strong>Your Product &gt; Product Settings</strong>.</li>
+				<li>Select the
+					<strong>General</strong>
+					tab.</li>
+				<li>Locate the Build Patch Tool Credentials section and save the client ID and secret.</li>
+			</ol>
+			<p>
+				<strong>Artifact Name and ID for the Offer</strong>
+			</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>From the list, click the name of the offer for which you wish to retrieve credentials.</li>
+				<li>On the Manage Artifact screen, click the
+					<strong>arrow icon</strong>
+					to the right of Edit Details.</li>
+				<li>Save the artifact name and ID.</li>
+				<li>Repeat as needed for additional offers.</li>
+			</ol>
+			<p>
+				<strong>Offer IDs for the Offer</strong>
+			</p>
+			<ol>
+				<li>Navigate to
+					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>.</li>
+				<li>From the list, click the name of the offer for which you wish to retrieve credentials.</li>
+				<li>On the Offer Details screen, locate the IDs section and save the offer ID.</li>
+				<li>Repeat as needed for additional offers.</li>
+			</ol>
+			<div>
+				<h3 id="review-paths-on-the-command-line">Review Paths on the Command Line</h3>
+			</div>
+			<p>Due to the way the command prompt interprets
+				<code>\"</code>
+				(a backslash directly followed by a double quote) on the command line, you need to follow at least one of the following pieces of guidance when specifying paths in BuildPatchTool arguments:</p>
+			<ul>
+				<li>Do not append a trailing slash to your directory names.</li>
+				<li>Use forward slashes for directory separators.</li>
+				<li>Do not enclose paths in quotes (this is not possible if your path contains one or more spaces).</li>
+				<li>Escape only the trailing backslash with another backslash if it is double-quote enclosed (not recommended, as is error prone)</li>
+			</ul>
+			<p>
+				<strong>Examples of Valid Path Syntax</strong>
+			</p>
+			<ul>
+				<li>
+					<code>-BuildRoot="D:/MyFolder/"
+					</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:\MyFolder\
+					</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:\MyFolder
+					</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:/MyFolder/
+					</code>
+				</li>
+				<li>
+					<code>-BuildRoot=D:/MyFolder
+					</code>
+				</li>
+				<li>
+					<code>-BuildRoot="D:\MyFolder\\"
+					</code>
+				</li>
+			</ul>
+			<p>
+				<strong>Invalid Path Syntax</strong>
+			</p>
+			<p>The following syntax
+				<strong>does not work</strong>
+				when defining a path on the Command Line:</p>
+			<p>
+				<code>-BuildRoot="D:\MyFolder\"</code>
+			</p>
+			<div>
+				<h2 id="using-the-buildpatch-tool">Using the BuildPatch Tool</h2>
+			</div>
+			<div>
+				<h3 id="initial-setup">Initial Setup</h3>
+			</div>
+			<p>Extract the contents of the
+				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP</a>
+				file to a machine that has access to the
+				<span>
+					<span>binary</span>
+				</span>
+				you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
+			<div>
+				<p>The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file,
+					<a href="https://eoshelp.epicgames.com/">create a private discussion</a>
+					on our Developer Support site for assistance.</p>
+			</div>
+			<div>
+				<h3 id="authentication">Authentication</h3>
+			</div>
+			<p>Authentication is carried out by supplying a
+				<code>Client ID</code>
+				and
+				<code>Client Secret</code>
+				to BuildPatchTool. These must be provided for every operation using command line arguments.  These credentials are available in the Dev Portal under Your Product &gt; Product Settings &gt; General tab &gt; Build Patch Tool Credentials.</p>
+			<div>
+				<p>BuildPatchTool uses a unique
+					<code>Client ID</code>
+					and
+					<code>Client Secret</code>, separate from any EOS Client IDs your game may use. Ensure you use the Build Patch Tool Credentials available in the Product Settings section of the Dev Portal. Clients listed under SDK Credentials cannot be used with this tool.</p>
+			</div>
+			<p>The
+				<code>ClientId</code>
+				parameter must be provided with every operation that interacts with Epic's backend services. The client secret must be provided by using either of the
+				<code>ClientSecret</code>
+				or
+				<code>ClientSecretEnvVar</code>
+				parameters.</p>
+			<p>If using the
+				<code>ClientSecret</code>
+				parameter, then your client secret should be passed verbatim as the value of the parameter:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>If using the
+				<code>ClientSecretEnvVar</code>
+				parameter, then you pass the name of an OS environment variable which contains the client secret:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>We recommend using the</strong>
+				<code>ClientSecretEnvVar</code>
+				<strong>parameter whenever possible, as this prevents the value of your secret appearing in system logs and command line history.</strong>
+				It is a best practice to store your client secret in a secrets management system (such as Hashicorp Vault), and securely inject into your build machine's environment during each run.</p>
+			<div>
+				<h2 id="how-to-upload-a-binary">How to Upload a Binary</h2>
+			</div>
+			<p>Navigate to the
+				<code>Engine/Binaries/Win64/</code>
+				directory. From a command line, run BuildPatchTool.exe in UploadBinary mode, and point it at your binary (see CLI argument details below).</p>
+			<p>This will process your binary , upload it to our cloud storage, and register the binary with our backend:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>Descriptions for each of the parameters that you have to specify are below. You can also add the "-help" option after any mode (e.g.
+				<code>"BuildPatchTool.exe -mode=PatchGeneration -help"</code>) to get information about the required arguments.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildRoot</code>
+						</td>
+						<td>The path to the directory containing the binary to be read and processed. It can be an absolute path from the drive root or a relative path from the current working directory. Additionally, it is recommended that this path be located near the drive root, to avoid any files exceeding the OS MAX_PATH limit (typically 260 characters).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>CloudDir</code>
+						</td>
+						<td>A directory where BuildPatchTool can save files to be uploaded, this can be empty each run. As with the BuildRoot, this can be an absolute or a relative path. (This location is used to cache information about existing binaries, and should be a different directory from the BuildRoot parameter. It is OK if this directory is initially empty; BuildPatchTool will download information as needed from the Epic backend and store it in the CloudDir.)</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersion</code>
+						</td>
+						<td>The version string for the build. This needs to be unique for each build of a specific artifact, independent of platform. For example,
+							<code>BuildVersion-1.0</code>
+							can only exists for Windows or Mac, not both. The build version string has the following restrictions: Must be between 1 and 100 chars in length, whitespace is not allowed, should only contain characters from the following sets a-z, A-Z, 0-9, or .+-_</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AppLaunch</code>
+						</td>
+						<td>The path to the app executable that should be launched when running your game, relative to (and inside of) the BuildRoot. For Mac binaries, this should be the executable file contained within the .app folder, usually in the location Game.app/Contents/MacOS/Game.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AppArgs</code>
+						</td>
+						<td>The commandline to send to the app on launch. This can be set to “” when no additional arguments are needed.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FileList (Optional)</code>
+						</td>
+						<td>A path to a text file containing files to be included in the binary. The files must be BuildRoot relative. This is an alternative to using FileIgnoreList.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FileAttributeList (Optional)</code>
+						</td>
+						<td>A path to a text file containing a list of files and corresponding special attributes (e.g. executable bit) that should be set. See Setting Special File Attributes section for a description of the file contents. Note that the attributes file should not be inside your BuildRoot to ensure that it does not get erroneously included in your binary upload.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FileIgnoreList (Optional)</code>
+						</td>
+						<td>A path to a text file containing a list of files that should be excluded from the generated patch data. Each entry should be on a new line, and be a relative path from BuildRoot. A forward slash ("/") separator should be used. Note that if the ignore file is located inside BuildRoot then its own relative file path needs to be included in the ignore list to avoid it being included in the patch data.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="setting-special-file-attributes">Setting Special File Attributes</h3>
+			</div>
+			<p>You can use the optional
+				<code>-FileAttributeList</code>
+				parameter with the PatchGeneration mode to apply special attributes to files within your binary, such as executable, or tagging groups of files. Note that the launch app (as specified by the -<code>AppLaunch</code>
+				argument) is automatically marked as executable and does not need to be explicitly included in this configuration file. If you do not need to set any special attributes, the -<code>FileAttributeList</code>
+				argument can be omitted.</p>
+			<p>Your custom
+				<code>FileAttributeList</code>
+				file must be a text file with one or more newline-separated entries. Each line must contain a quoted (BuildRoot-relative) filepath, followed by one or more space-delimited attributes to be applied to the referenced file:</p>
+			<p>
+				<code>"&lt;QuotedRelativePathToFile&gt;" &lt;list of attributes&gt;</code>
+			</p>
+			<div>
+				<h4 id="example-entries">Example entries</h4>
+			</div>
+			<p>
+				<code>"Relative/Path/To/My/file.bin" executable tag:my_tag</code>
+				<code>"Second/Path/To/A/file.txt" tag:txt_files
+				</code>
+			</p>
+			<p>The following file attribute flags are supported:</p>
+			<ul>
+				<li>
+					<code>executable</code>
+				</li>
+				<li>
+					<code>tag:my_tag</code>
+				</li>
+			</ul>
+			<p>File tagging is used for providing input to Epic Games Launcher's selective download feature, exposed in installation options screens. If you feel you need to use this feature, please contact an Epic Games representative, as the feature is still in beta.</p>
+			<div>
+				<h3 id="setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</h3>
+			</div>
+			<p>By default, the desktop shortcut icon will be set to the icon of the app executable indicated by the AppLaunch argument. There are two ways of updating this icon:</p>
+			<ul>
+				<li>Updating the icon embedded in the app executable</li>
+				<li>Adding a separate .ico file with same file name as the app executable (for example: launch.ico should be used if the executable is launch.exe)</li>
+			</ul>
+			<div>
+				<h2 id="how-to-label-a-binary">How to Label a Binary</h2>
+			</div>
+			<div>
+				If your organization is using the
+				<strong>self-service</strong>
+				Epic Games Store publishing tools, labeling your binary via the BuildPatch Tool is not currently supported. Instead, you can add the appropriate platforms to your artifacts through the Dev Portal. When a platform is assigned to an artifact, the artifact automatically receives the
+				<em>Live</em>
+				label. For more information, review
+				<a href="/docs/epic-games-store/store-presence/manage-artifacts#upload-the-binary">Manage Artifacts</a>
+			</div>
+			<p>After the chunking and upload process has completed, you must apply a label to your binary to make it accessible from the Epic Games Launcher. Applying a label to a binary associates a label name (e.g. "Live") and a platform (e.g. "Win32") with a single binary version. Multiple labels can be assigned to the same binary.</p>
+			<p>The EpicGamesLauncher client will only ever query for binaries associated with the platform on which it is currently running. For example, the Win32 Launcher client will only ever query with a platform of Win32, so it will never receive binaries labeled with Windows or Mac. A Windows x64 client will only query for binaries using the Windows platform, and so on. If you do actually have a single binary that is compatible with multiple platforms (for example, one compatible with both Windows and Win32), then you can apply two labels (one for each platform) to the same binary to make it available for both platforms without having to re-upload it.</p>
+			<div>
+				<h4 id="labelbinary-mode">LabelBinary mode:</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersion</code>
+						</td>
+						<td>The version string of the binary that should be labeled. A binary with this version must already have been registered, or the labeling operation will be rejected.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Label</code>
+						</td>
+						<td>The label name to apply to your binary. This must be the string "Live" when setting a binary as live to the public. Additionally, the string “Archive” can be used to label a single binary per platform that should be retained even after it is no longer live. Unlabeled binaries will be deleted after roughly a week by automatic cleanup jobs.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Platform</code>
+						</td>
+						<td>The platform associated with the binary to be labeled. Currently must be one of:
+							<code>[Windows, Win32, Mac]</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SandboxId</code>
+						</td>
+						<td>Specifies the id of the sandbox to label this binary under. If not provided, the binary will be labeled for public sandbox.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="how-to-unlabel-a-binary">How to Unlabel a Binary</h2>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				When you remove all labels from a binary, the binary is deleted automatically in seven days. If you want to prevent this deletion, locate the binary in the
+				<strong>Inactive binaries</strong>
+				section and
+				<a href="#how-to-label-a-binary">add at least one label to it</a>.</p>
+			<p>To remove previously set label you can use
+				<em>UnlabelBinary</em>
+				Mode with the same parameters that were used for
+				<em>LabelBinary</em>
+				Mode:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters-1">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersion</code>
+						</td>
+						<td>The version string of the binary that should be labeled. A binary with this version must already have been registered, or the labeling operation will be rejected.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Label</code>
+						</td>
+						<td>The label name to apply to your binary. This must be the string "Live" when setting a binary as live to the public. Additionally, the string “Archive” can be used to label a single binary per platform that should be retained even after it is no longer live. Unlabeled binaries will be deleted after roughly a week by automatic cleanup jobs.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Platform</code>
+						</td>
+						<td>The platform associated with the binary to be labeled. Currently must be one of:
+							<code>[Windows, Win32, Mac]</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SandboxId</code>
+						</td>
+						<td>Specifies the id of the sandbox to unlabel this binary from. If not provided, the binary will be unlabeled from public sandbox.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="how-to-list-existing-binaries">How to List Existing Binaries</h3>
+			</div>
+			<p>You can also query our backend to retrieve the list of binaries that you have already registered using the
+				<em>ListBinaries</em>
+				Mode:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters-2">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>OnlyLabeled</code>
+							(Optional)</td>
+						<td>Only list binaries that are associated with a label.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Num</code>
+							(Optional)</td>
+						<td>Restrict the number of binaries returned. Binaries are returned in date order with the most recent first.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>OutputFile</code>
+							(Optional)</td>
+						<td>The list of binaries will be output to the specified file as a JSON array.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="how-to-delete-a-binary">How to Delete a Binary</h2>
+			</div>
+			<p>To delete a binary,
+				<a href="#how-to-unlabel-a-binary">remove all labels from the binary</a>. The binary is deleted automatically in seven days.</p>
+			<div>
+				<h4 id="description-of-parameters-3">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersion</code>
+						</td>
+						<td>The version string of the binary that should be labeled. A binary with this version must already have been registered, or the labeling operation will be rejected.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="how-to-copy-a-binary">How to Copy a Binary</h2>
+			</div>
+			<p>The
+				<em>CopyBinary</em>
+				mode allows you to copy binaries from one
+				<span>
+					<span>artifact</span>
+				</span>
+				to another without having to re-upload the binary. This is useful when you want to move a final binary from a Staging artifact to a Live artifact.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters-4">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersion</code>
+						</td>
+						<td>The version string of the binary that should be labeled. A binary with this version must already have been registered, or the labeling operation will be rejected.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SourceArtifactId</code>
+						</td>
+						<td>Specifies the ID of the artifact the binary is being copied from.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>DestArtifactId</code>
+						</td>
+						<td>Specifies the ID of the artifact the binary is being copied to.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="how-to-diff-binaries">How to Diff Binaries</h2>
+			</div>
+			<p>The
+				<em>DiffBinaries</em>
+				Tool Mode calculates the difference between two binaries that were already uploaded and outputs statistics for applying the update between them.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters-5">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersionA</code>
+						</td>
+						<td>The version string for the base binary image.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersionB</code>
+						</td>
+						<td>The version string for the binary image to be updated.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>InstallTagsA</code>
+							(Optional)</td>
+						<td>Specifies in quotes a comma separated list of install tags used on BuildVersionA. You should include an empty string if you want to count untagged files. Leaving the parameter out will use all files. InstallTagsA="" will be untagged files only. InstallTagsA=",tag" will be untagged files plus files tagged with 'tag'. InstallTagsA="tag" will be files tagged with 'tag' only.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>InstallTagsB</code>
+							(Optional)</td>
+						<td>Specifies in quotes a comma separated list of install tags used on BuildVersionB. Same rules apply as InstallTagsA.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>CompareTagSet</code>
+							(Optional)</td>
+						<td>Specifies in quotes a comma separated list of install tags used to calculate differential statistics between the binaries. Multiple lists are allowed. Same rules apply as InstallTagsA.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>OutputFile</code>
+							(Optional)</td>
+						<td>The differential will be output to the specified file as a JSON object.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="reducing-update-size">Reducing Update Size</h2>
+			</div>
+			<p>
+				<em>
+					<strong>Requires v1.4.0 and above</strong>
+				</em>
+			</p>
+			<p>BuildPatchTool uses a general patching system for all binaries uploaded using the
+				<em>UploadBinary</em>
+				mode. The system allows the Epic Games store to update any version of your binary on a user's machine to any other version, minimising the download size to do so.</p>
+			<p>The
+				<em>BinaryDeltaOptimise</em>
+				mode is designed to take two binaries already uploaded to the Epic Services and produce a smaller download for users who are updating between these two specific versions. We call this an A-to-B patch. Running this command is an optional step that can be taken to improve the user experience when releasing a larger than usual patch, with the majority of your players known to be on a specific binary version (binary "A").</p>
+			<p>The following is a sample command line to improve delta patching between two binaries:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters-6">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>CloudDir</code>
+						</td>
+						<td>A directory where BuildPatchTool can save files to be uploaded, this can be empty each run. As with the BuildRoot, this can be an absolute or a relative path. (This location is used to cache information about existing binaries, and should be a different directory from the BuildRoot parameter. It is OK if this directory is initially empty; BuildPatchTool will download information as needed from the Epic backend and store it in the CloudDir.)</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersionA</code>
+						</td>
+						<td>The version string for the base binary image.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersionB</code>
+						</td>
+						<td>The version string for the destination binary image.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>DiffAbortThreshold</code>
+							(Optional)</td>
+						<td>Specified in bytes, an upper limit for original diffs to try to enhance. This allows short circuiting lengthy optimisation attempts on large diffs which may not benefit. Range accepted is n &gt;= 1GB, defaults to never abort.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When running in
+				<em>BinaryDeltaOptimise</em>
+				mode, BuildPatchTool will stream the existing binary data from our cloud network, re-analyze, and upload new A-to-B specific patch data. This process can take longer than the standard PatchGeneration mode if the original download size between
+				<code>BuildVersionA</code>
+				and
+				<code>BuildVersionB</code>
+				is large.</p>
+			<p>It is generally advised to run
+				<em>BinaryDeltaOptimise</em>
+				mode using your current Live binary as
+				<code>BuildVersionA</code>, and a binary you will release next as
+				<code>BuildVersionB</code>. Ideally, plan to complete this process several days before your release in case of any issues running the tool, such as network loss.</p>
+			<p>To check on your current Live binary version, you can make use of the ListBinaries mode. If
+				<em>BinaryDeltaOptimise</em>
+				was already run between the two provided BuildVersion values, the process will succeed short circuiting the operation, indicated in the output.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>Once the processing is completed, the output will show the improvement achieved.</p>
+			<ul>
+				<li>"Final unknown compressed bytes, plus meta [Bytes]"
+					<ul>
+						<li>This will refer to the new download size achieved for patching between
+							<code>BuildVersionA</code>
+							and
+							<code>BuildVersionB</code>.</li>
+					</ul>
+				</li>
+				<li>"Original unknown compressed bytes [Bytes]"
+					<ul>
+						<li>This will refer to the download size for patching between
+							<code>BuildVersionA</code>
+							and
+							<code>BuildVersionB</code>
+							before the optimisation was run.</li>
+					</ul>
+				</li>
+				<li>"Improvement: [Percentage]"
+					<ul>
+						<li>This will show the improvement that was achieved. The percentage refers to the size of the reduction, larger is better.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="example-output">Example output:</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="downloadable-content-dlc">Downloadable Content (DLC)</h2>
+			</div>
+			<p>The Epic Games store provides full support for Downloadable Content (DLC). The operation of BuildPatchTool is exactly the same for DLC as it is for full games, with the following additional notes:</p>
+			<p>Each item of DLC will be given its own, unique Artifact ID. Accordingly, each item of DLC will need its own patch generation process to be executed with the appropriate Artifact ID specified. Because each is generated separately, then it is important when performing patch generation for a DLC item that the base game, and all other DLC items are not present at the same time in the folder specified in the BuildRoot parameter during the patch generation process. Alternatively, if the BuildRoot folder does contain the main game or other DLC items, then a -FileIgnoreList parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary (see the ::How to Upload a Binary:: for more details).</p>
+			<p>When installed on end users’ machines, the main game and all items of related DLC will be installed into the same directory. This leads to the restriction that there must be no files within the main game or any item of DLC which share a common file path. The BuildPatchTool will perform checks on this and prevent the patch generation process from occurring if there are any files which violate this rule. This means that the base game must be able to locate installed DLC by relative path from its install location.</p>
+			<p>In the short-term, Artifact IDs for DLC items will be allocated to you by Epic, and the association between the main game and the DLC item will be provisioned as part of that process. Longer term, we will look to incorporate this provisioning into a self-service operation on the Developer Portal.</p>
+			<div>
+				<h2 id="troubleshooting-common-errors">Troubleshooting Common Errors</h2>
+			</div>
+			<div>
+				<h3 id="getting-started">Getting Started</h3>
+			</div>
+			<p>When troubleshooting an error, review the following potential issues first:</p>
+			<ul>
+				<li>Check Path syntax -
+					<code>BuildRoot="D:\MyFolder\"</code>
+					- WILL NOT WORK</li>
+				<li>Ensure spaces have been added between all arguments.</li>
+				<li>Files included in the build are subject to Windows MAX_PATH limits (limit of 260 characters); if the upload process is failing unexpectedly, ensure all file path locations do not exceed this limit.</li>
+				<li>Most BuildPatchTool arguments are typically provided as absolute paths or relative to the working directory, but the AppLaunch argument must be provided only relative to the BuildRoot location.</li>
+				<li>CloudDir contents will grow over time as more builds are processed on the same machine. However, this folder can be cleared at any time without negative impact.</li>
+			</ul>
+			<div>
+				<h3 id="common-errors">Common errors</h3>
+			</div>
+			<p>When using the BPT, Make sure your command lines are exact. If you do not use exact commands, you will receive a specific error message.</p>
+			<p>Please be aware these are only the common errors.</p>
+			<div>
+				<h4 id="error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>What it means</strong>
+				This means that the Client credentials you are using do not grant access to upload to the specified artifact. This could be a typo in the credentials or another parameter, or an issue with the permissions granted to the Client.</p>
+			<div>
+				<h4 id="error---missing-parameters">Error - Missing parameters</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>What it means</strong>
+				This simply means that the BPT is not detecting one or more of the parameters that are listed above. This could simply be that they are missing, or that they were added incorrectly.</p>
+			<div>
+				<h4 id="error---missing-credentials">Error - Missing credentials</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>What it means</strong>
+				This simply means that the BPT is not detecting one or more of the parameters that are listed above. This could simply be that they are missing, or that they were added incorrectly.</p>
+			<div>
+				<h4 id="error---authentication-error">Error - Authentication error</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>What it means</strong>
+				This means that the Client credentials you are using do not match our records. This could be a typo in the credentials or another parameter, or an issue with the permissions granted to the Client.</p>
+			<div>
+				<h4 id="error---unexpected-error">Error - Unexpected error</h4>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>What it means</strong>
+				This means that the Client credentials you are using do not have access to the artifact you have specified. This is usually the result of an issue with the permissions granted to the Client, and can be addressed by Service Delivery.</p>
+			<div>
+				<h3 id="additional-considerations">Additional Considerations</h3>
+			</div>
+			<ul>
+				<li>Ensure you entered the specific BuildPatchTool Client ID and Client Secret; these credentials can be found in the Dev Portal under
+					<em>Your Product &gt; Product Settings &gt; General tab &gt; Build Patch Tool Credentials</em>. EOS SDK credentials cannot be used.</li>
+				<li>All required parameters are provided</li>
+				<li>Parameters are free of typos, including incorrect capitalization or spacing issues</li>
+				<li>Missing quotation marks for a parameter that includes spaces</li>
+			</ul>
+			<div id="tag_list">
+				<a href="/docs/site-map">Epic Games Store Only</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#before-you-start">Before You Start</a>
+					</li>
+					<li>
+						<a href="#download-the-buildpatch-tool">Download the BuildPatch Tool</a>
+					</li>
+					<li>
+						<a href="#retrieve-credential-ids">Retrieve Credential IDs</a>
+					</li>
+					<li>
+						<a href="#review-paths-on-the-command-line">Review Paths on the Command Line</a>
+					</li>
+					<li>
+						<a href="#using-the-buildpatch-tool">Using the BuildPatch Tool</a>
+					</li>
+					<li>
+						<a href="#initial-setup">Initial Setup</a>
+					</li>
+					<li>
+						<a href="#authentication">Authentication</a>
+					</li>
+					<li>
+						<a href="#how-to-upload-a-binary">How to Upload a Binary</a>
+					</li>
+					<li>
+						<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
+					</li>
+					<li>
+						<a href="#example-entries">Example entries</a>
+					</li>
+					<li>
+						<a href="#setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</a>
+					</li>
+					<li>
+						<a href="#how-to-label-a-binary">How to Label a Binary</a>
+					</li>
+					<li>
+						<a href="#labelbinary-mode">LabelBinary mode:</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#how-to-unlabel-a-binary">How to Unlabel a Binary</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-1">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#how-to-list-existing-binaries">How to List Existing Binaries</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-2">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#how-to-delete-a-binary">How to Delete a Binary</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-3">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#how-to-copy-a-binary">How to Copy a Binary</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-4">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#how-to-diff-binaries">How to Diff Binaries</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-5">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#reducing-update-size">Reducing Update Size</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-6">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#example-output">Example output:</a>
+					</li>
+					<li>
+						<a href="#downloadable-content-dlc">Downloadable Content (DLC)</a>
+					</li>
+					<li>
+						<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
+					</li>
+					<li>
+						<a href="#getting-started">Getting Started</a>
+					</li>
+					<li>
+						<a href="#common-errors">Common errors</a>
+					</li>
+					<li>
+						<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</a>
+					</li>
+					<li>
+						<a href="#error---missing-parameters">Error - Missing parameters</a>
+					</li>
+					<li>
+						<a href="#error---missing-credentials">Error - Missing credentials</a>
+					</li>
+					<li>
+						<a href="#error---authentication-error">Error - Authentication error</a>
+					</li>
+					<li>
+						<a href="#error---unexpected-error">Error - Unexpected error</a>
+					</li>
+					<li>
+						<a href="#additional-considerations">Additional Considerations</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

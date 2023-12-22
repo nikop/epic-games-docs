@@ -67,7 +67,8 @@
 				file:</p>
 			<div>
 				<section>
-					<pre>if (  !Target.IsInPlatformGroup(UnrealPlatformGroup.Windows) &amp;&amp;  !Target.IsInPlatformGroup(UnrealPlatformGroup.Unix) &amp;&amp;  !Target.IsInPlatformGroup(UnrealPlatformGroup.Apple) &amp;&amp;  !Target.IsInPlatformGroup(UnrealPlatformGroup.Android)) {  AppendStringToPublicDefinition(    'EOS_BUILD_PLATFORM_NAME',    Target.Platform.ToString()  );}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -76,7 +77,9 @@
 				when using the different EOS interfaces:</p>
 			<div>
 				<section>
-					<pre>#include "eos_platform_prereqs.h"#include "eos_sdk.h"#include "eos_[interface]_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>For
@@ -85,7 +88,9 @@
 				with the interface you are using:</p>
 			<div>
 				<section>
-					<pre>#include "eos_friends_types.h"#include "eos_auth_types.h"#include "eos_lobby_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -96,7 +101,9 @@
 				doesn't fit with the project's build system, it can reference macros provided by custom compilers. For example:</p>
 			<div>
 				<section>
-					<pre>#if defined(__THECOMPILER__)#include "ThePlatform/eos_ThePlatform_base.h"#elif defined(__SOMECOMPILER__)#include "SomePlatform/eos_SomePlatform_base.h"#endif#include "eos_sdk.h"#include "eos_friends_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -107,7 +114,9 @@
 				for the EOS Friends Service, use the following:</p>
 			<div>
 				<section>
-					<pre>#include "ThePlatform/eos_ThePlatform_base.h"#include "eos_sdk.h"#include "eos_[interface]_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>For
@@ -116,7 +125,9 @@
 				with the interface you are using:</p>
 			<div>
 				<section>
-					<pre>#include "eos_friends_types.h"#include "eos_auth_types.h"#include "eos_lobby_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -143,7 +154,9 @@
 				file should include code similar to the following:</p>
 			<div>
 				<section>
-					<pre>PublicAdditionalLibraries.Add(LibraryLinkName);string RuntimeLibrarySourcePath = Path.Combine(SDKBinariesDir, RuntimeLibraryFileName);string RuntimeLibraryTargetPath = Path.Combine(ProjectBinariesDir, RuntimeLibraryFileName);RuntimeDependencies.Add(RuntimeLibraryTargetPath, RuntimeLibrarySourcePath, StagedFileType.NonUFS);</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>

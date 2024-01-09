@@ -13,7 +13,7 @@
 	</section>
 	<section>
 		<section>
-			<p>The Epic Online Services (EOS) SDK is a game engine-agnostic tool that gives you access to several cross-platform online services that you can use in your game. The game engine you choose determines the available options you have to integrate the EOS SDK into your game. The approach you take is completely up to you. You can even use a combination of integration options, if you prefer. You are not required to use the plugins described in the sections below.</p>
+			<p>The Epic Online Services (EOS) SDK is a game engine-agnostic tool that gives you access to several cross-platform online services that you can use in your game. The game engine you choose determines the available options you have to integrate the EOS SDK into your game. You can even use a combination of integration options, if you prefer. You are not required to use the plugins described in the sections below.</p>
 			<div>
 				<h2 id="any-game-engine">Any Game Engine</h2>
 			</div>
@@ -31,40 +31,67 @@
 					documentation for more information. After you've completed these steps, you can use the EOS SDK interfaces in your game's code.
 					<ul>
 						<li>
-							<strong>Note</strong>: You must initialize the EOS SDK in a project plugin. If you add the code to a game object, the Social Overlay may not load.</li>
+							<strong>Note</strong>: You must initialize the EOS SDK in a project plugin (See Unreal Engine's documentation:
+							<a href="https://docs.unrealengine.com/plugins-in-unreal-engine/">Plugins</a>). If you add the code to a game object, the
+							<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
+							might not load.</li>
 					</ul>
 				</li>
 				<li>
-					<strong>The EOS Online Subsystem (OSS) plugin (UE 4.27 and higher)</strong>:
+					<strong>The EOS Online Subsystem plugin (UE 4.27 and higher)</strong>:
 					<ul>
 						<li>Configure your game's EOS settings in the Unreal Editor (no code required). See Unreal Engine's
-							<a href="https://docs.unrealengine.com/en-US/online-subsystem-eos-plugin-in-unreal-engine/">EOS Online Subsystem (OSS) Plugin</a>
+							<a href="https://docs.unrealengine.com/online-subsystem-eos-plugin-in-unreal-engine/">Online Subsystem EOS Plugin</a>
 							documentation for more information.</li>
-						<li>Use the OSS interfaces to include EOS services in your game. See Unreal Engine's
-							<a href="https://docs.unrealengine.com/en-US/online-subsystem-in-unreal-engine/#interfaces">OSS Interfaces</a>
+						<li>Use the Online Subsystem interfaces to include EOS services in your game. See Unreal Engine's
+							<a href="https://docs.unrealengine.com/online-subsystem-in-unreal-engine/#interfaces">Online Subsystem Interfaces</a>
 							documentation for more information.</li>
-						<li>
-							<strong>Note</strong>: The EOS Online Subsystem plugin exposes EOS SDK interfaces with the Online Subsystem interfaces. However, the list of interfaces below aren't currently included in the EOS Online Subsystem. Therefore, you have to use the following EOS SDK interfaces to use the corresponding services in your game:
+					</ul>
+				</li>
+				<li>
+					<strong>The EOS Online Services plugins (UE 5.1 and higher)</strong>:
+					<ul>
+						<li>EOS functionality is split into two plugins based on what you want to use:
 							<ul>
-								<li>Anti-Cheat: See the
-									<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces">Anti-Cheat Interfaces</a>
+								<li>Online Services EOS: this provides access to Epic Account Services. See the
+									<a href="/docs/epic-account-services">Epic Account Services</a>
 									documentation for more information.</li>
-								<li>Custom Invites: See the
-									<a href="/docs/game-services/custom-invites-interface">Custom Invites Interface</a>
-									documentation for more information.</li>
-								<li>Reports Interface: See the
-									<a href="/docs/game-services/reports-interface">Reports Interface</a>
-									documentation for more information.</li>
-								<li>Sanctions Interface: See the
-									<a href="/docs/game-services/sanctions-interface">Sanctions Interface</a>
+								<li>Online Services EOSGS: this provides access to EOS Game Services. See the
+									<a href="/docs/game-services">EOS Game Services</a>
 									documentation for more information.</li>
 							</ul>
 						</li>
+						<li>Use the Online Services interfaces to include EOS services in your game. See Unreal Engine's
+							<a href="https://docs.unrealengine.com/overview-of-online-services-in-unreal-engine/#interfaces">Online Services Interfaces</a>
+							documentation for more information.</li>
+						<li>See Unreal Engine's
+							<a href="https://docs.unrealengine.com/online-services-in-unreal-engine/">Online Services</a>
+							documentation for more information.</li>
 					</ul>
 				</li>
 			</ul>
-			<p>For information on how to upgrade the EOS SDK for Unreal Engine, see the Upgrading the EOS SDK documentation at
-				<a href="https://docs.unrealengine.com/en-US/upgrading-the-eos-sdk-in-unreal-engine/">docs.unrealengine.com</a>.</p>
+			<p>If you want to use either the Online Subsystem EOS plugin or the Online Services EOS plugins, see the
+				<a href="https://docs.unrealengine.com/overview-of-online-services-in-unreal-engine/#usingonlineservicesoronlinesubsystem">Using Online Subsystem or Online Services</a>
+				documentation to help decide which plugin is right for your project.</p>
+			<p>
+				<strong>Note</strong>: The EOS Online Subsystem plugin exposes EOS SDK interfaces with the Online Subsystem interfaces. However, the list of interfaces below aren't currently included in the EOS Online Subsystem. Therefore, you have to use the following EOS SDK interfaces to use the corresponding services in your game:</p>
+			<ul>
+				<li>Anti-Cheat: See the
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces">Anti-Cheat Interfaces</a>
+					documentation for more information.</li>
+				<li>Custom Invites: See the
+					<a href="/docs/game-services/custom-invites-interface">Custom Invites Interface</a>
+					documentation for more information.</li>
+				<li>Reports Interface: See the
+					<a href="/docs/game-services/reports-interface">Reports Interface</a>
+					documentation for more information.</li>
+				<li>Sanctions Interface: See the
+					<a href="/docs/game-services/sanctions-interface">Sanctions Interface</a>
+					documentation for more information.</li>
+			</ul>
+			<p>For information on how to upgrade the EOS SDK for Unreal Engine, see Unreal Engine's
+				<a href="https://docs.unrealengine.com/en-US/upgrading-the-eos-sdk-in-unreal-engine/">Upgrading the EOS SDK</a>
+				documentation.</p>
 			<div>
 				<h2 id="unity">Unity</h2>
 			</div>

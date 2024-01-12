@@ -414,9 +414,7 @@
 			<p>The C SDK example code snippet for Windows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>#ifdef _WIN32	// Get absolute path for xaudio2_9redist.dll file	wchar_t CurDir[MAX_PATH + 1] = {};	::GetCurrentDirectoryW(MAX_PATH + 1u, CurDir);	std::wstring BasePath = std::wstring(CurDir);	std::string XAudio29DllPath = FStringUtils::Narrow(BasePath);	XAudio29DllPath.append("/xaudio2_9redist.dll"); 	EOS_Windows_RTCOptions WindowsRtcOptions = { 0 };	WindowsRtcOptions.ApiVersion = EOS_WINDOWS_RTCOPTIONS_API_LATEST;	WindowsRtcOptions.XAudio29DllPath = XAudio29DllPath.c_str();	RtcOptions.PlatformSpecificOptions = &amp;WindowsRtcOptions;</pre>
 				</section>
 			</div>
 			<div>

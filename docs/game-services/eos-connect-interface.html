@@ -7,7 +7,7 @@
 			<h1>Connect Interface</h1>
 			<h2>The Connect Interface handles connections between users' accounts under different identity providers.</h2>
 			<div>
-				<div>20 mins to read</div>
+				<div>19 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -26,6 +26,9 @@
 				<li>Links external identity providers' accounts to our services.</li>
 			</ul>
 			<p>A player can associate one or more external user accounts with a unique player ID called a Product User ID (PUID). This Product User ID is a unique ID for each Product under the same Organization.</p>
+			<div>
+				<h3 id="differences-between-auth-interface-and-connect-interface">Differences between Auth Interface and Connect Interface</h3>
+			</div>
 			<p>You can also use the Auth Interface to let players sign in to their Epic Games account directly from your game. See the
 				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface documentation</a>
 				for more information on using the Auth Interface. The differences between the Auth Interface and Connect Interface are listed in the table below:</p>
@@ -40,11 +43,11 @@
 				<tbody>
 					<tr>
 						<td>Player ID</td>
-						<td>The player's Epic Games account ID. The player can sign in with an email and password combination, or a linked external account<a href="#footnote-1">
-								<sup id="footnote-1-ref">1</sup>
+						<td>The player's Epic Games account ID. The player can sign in with an email and password combination, or a linked external account<a href="#footnotes">
+								<sup>1</sup>
 							</a>.</td>
-						<td>A Product User ID (PUID) for a player, that's linked to one or more supported identity providers<a href="#footnote-2">
-								<sup id="footnote-2-ref">2</sup>
+						<td>A Product User ID (PUID) for a player, that's linked to one or more supported identity providers<a href="#footnotes">
+								<sup>2</sup>
 							</a>. Note that the PUID is specific to a single product.</td>
 					</tr>
 					<tr>
@@ -54,15 +57,15 @@
 					</tr>
 					<tr>
 						<td>Supported Services</td>
-						<td>The player has access to the Friends<a href="#footnote-3">
-								<sup id="footnote-3-ref">3</sup>
-							</a>, Presence<a href="#footnote-4">
-								<sup id="footnote-4-ref">4</sup>
-							</a>, and Ecom<a href="#footnote-5">
-								<sup id="footnote-5-ref">5</sup>
+						<td>The player has access to the Friends<a href="#footnotes">
+								<sup>3</sup>
+							</a>, Presence<a href="#footnotes">
+								<sup>4</sup>
+							</a>, and Ecom<a href="#footnotes">
+								<sup>5</sup>
 							</a>
-							interfaces, as well as the EOS Social Overlay<a href="#footnote-6">
-								<sup id="footnote-6-ref">6</sup>
+							interfaces, as well as the EOS Social Overlay<a href="#footnotes">
+								<sup>6</sup>
 							</a>.</td>
 						<td>The player has access to Game Services across Multiplayer, Progression, Moderation, and Operations.</td>
 					</tr>
@@ -70,11 +73,11 @@
 						<td>Access Token Lifetime</td>
 						<td>The game automatically refreshes the token as long as it calls
 							<code>EOS_Platform_Tick</code>
-							<a href="#footnote-7">
-								<sup id="footnote-7-ref">7</sup>
+							<a href="#footnotes">
+								<sup>7</sup>
 							</a>.</td>
-						<td>The game must periodically refresh the player's token based on expiration notification events<a href="#footnote-8">
-								<sup id="footnote-8-ref">8</sup>
+						<td>The game must periodically refresh the player's token based on expiration notification events<a href="#footnotes">
+								<sup>8</sup>
 							</a>.</td>
 					</tr>
 				</tbody>
@@ -657,50 +660,50 @@
 					</tr>
 				</tbody>
 			</table>
-			<p>
-				<strong>Footnotes</strong>
-			</p>
+			<div>
+				<h3 id="footnotes">Footnotes</h3>
+			</div>
 			<ol>
 				<li id="footnote-1">
 					<p>See the
 						<a href="/docs/epic-account-services/auth/auth-interface#external-account-authentication">Auth Interface</a>
 						documentation for more information on linked external accounts.
-						<a href="#footnote-1-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-2">
 					<p>See the
 						<a href="/docs/dev-portal/identity-provider-management">Identity Provider Management</a>
 						documentation for more information on identity providers.
-						<a href="#footnote-2-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-3">
 					<p>See the
 						<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface</a>
 						documentation for more information on using the Friends Interface.
-						<a href="#footnote-3-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-4">
 					<p>See the
 						<a href="/docs/epic-account-services/eos-presence-interface">Presence Interface</a>
 						documentation for more information on using the Presence Interface.
-						<a href="#footnote-4-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-5">
 					<p>See the
 						<a href="/docs/epic-games-store/services/ecom/ecom-overview">Ecom Interface</a>
 						documentation for more information on using the Ecom Interface.
-						<a href="#footnote-5-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-6">
 					<p>See the
 						<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay Overview</a>
 						documentation for more information on the EOS social overlay.
-						<a href="#footnote-6-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-7">
@@ -708,14 +711,14 @@
 						<a href="/docs/api-ref/functions/eos-platform-tick">Api Reference</a>
 						documentation for more information on calling
 						<code>EOS_Platform_Tick</code>.
-						<a href="#footnote-7-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 				<li id="footnote-8">
 					<p>See the
 						<a href="/docs/game-services/eos-connect-interface#user-authentication-refresh-notification">Connect Interface</a>
 						documentation for more information on expiration notification events.
-						<a href="#footnote-8-ref">↩</a>
+						<a href="#differences-between-auth-interface-and-connect-interface">↩</a>
 					</p>
 				</li>
 			</ol>
@@ -735,6 +738,9 @@
 				<ul>
 					<li>
 						<a href="#connect-interface">Connect Interface</a>
+					</li>
+					<li>
+						<a href="#differences-between-auth-interface-and-connect-interface">Differences between Auth Interface and Connect Interface</a>
 					</li>
 					<li>
 						<a href="#managing-users">Managing users</a>
@@ -795,6 +801,9 @@
 					</li>
 					<li>
 						<a href="#external-account-information-act">External account information (act)</a>
+					</li>
+					<li>
+						<a href="#footnotes">Footnotes</a>
 					</li>
 				</ul>
 			</div>

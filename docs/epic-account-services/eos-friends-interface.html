@@ -141,13 +141,13 @@
 						<td>
 							<code>EOS_FS_InviteSent</code>
 						</td>
-						<td>The local user has sent a friend invite to the other user.</td>
+						<td>The local user has sent a friend invite to the other user. There are some limitations on this feature: see the note below this table for details.</td>
 					</tr>
 					<tr>
 						<td>
 							<code>EOS_FS_InviteReceived</code>
 						</td>
-						<td>The other user has sent a friend invite to the local user.</td>
+						<td>The other user has sent a friend invite to the local user. There are some limitations on this feature: see the note below this table for details.</td>
 					</tr>
 					<tr>
 						<td>
@@ -158,9 +158,11 @@
 				</tbody>
 			</table>
 			<p>
-				<strong>Note</strong>: The
+				<strong>Note:</strong>
+				The
 				<code>EOS_AS_FriendsManagement</code>
-				scope controls whether the signed-in player can make changes or view pending changes to their social graph (for example, their friend status). By default, this scope isn't enabled. The EOS SDK returns only the Friends (<code>EOS_FS_Friends</code>) and Not Friends (<code>EOS_FS_NotFriends</code>) statuses to your game. The Social Overlay handles pending invites for you, which includes the remaining Invite Sent (<code>EOS_FS_InviteSent</code>) and Invite Received (<code>EOS_FS_InviteReceived</code>) statuses. While these statuses are available in the header, you do not need to handle these statuses in your game.</p>
+				scope controls whether the signed-in player can make changes or view pending changes to their social graph, such as their friend status. This scope is not enabled by default. When the scope is not enabled, the EOS SDK returns only the Friends (<code>EOS_FS_Friends</code>) and Not Friends (<code>EOS_FS_NotFriends</code>) statuses. It does not return the Invite Sent (<code>EOS_FS_InviteSent</code>) and Invite Received (<code>EOS_FS_InviteReceived</code>) statuses. However, you do not need to handle these statuses in your game, because the Social Overlay handles pending invites for you, which includes these statuses. For information on the Social Overlay, see
+				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay Overview</a>.</p>
 			<p>Friends lists can change at any time, both from in-game events like meeting new players, and from out-of-game events like the player modifying the
 				<span>
 					<span>account</span>

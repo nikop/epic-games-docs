@@ -7,7 +7,7 @@
 			<h1>UI Interface</h1>
 			<h2>Interface that accesses overlay features.</h2>
 			<div>
-				<div>6 mins to read</div>
+				<div>7 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -31,15 +31,15 @@
 				<code>EOS_Platform_GetUIInterface</code>. All UI Interface functions require this handle as their first parameter. You must ensure that the
 				<code>EOS_HPlatform</code>
 				handle is ticking for callbacks to trigger when operations complete.</p>
-			<p>Each overlay behaves independently of the product, and in a uniform manner with all other EOS products. The UI Interface does not directly control the overlays, and cannot read data from them or write data to them, but it can command them to show or hide themselves, detect whether a given overlay is currently visible, and get or set the user hotkey that shows or hides an overlay.</p>
+			<p>Each overlay behaves independently of the product, and in a uniform manner with all other EOS products. The UI Interface does not directly control the overlays, and cannot read data from them or write data to them, but it can command them to show or hide themselves, detect whether a given overlay is currently visible, and get or set the user hotkey or gamepad button that shows or hides an overlay.</p>
 			<div>
-				<p>The UI Interface is a work in progress, and currently only supports the friends list page, which is part of the larger
+				<p>The UI Interface is a work in progress, and currently only supports the friends-list page, which is part of the larger
 					<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>; future versions of the EOS SDK will expand support for other pages across multiple overlays.</p>
 			</div>
 			<div>
-				<h2 id="showing-or-hiding-an-overlay">Showing or Hiding an Overlay</h2>
+				<h2 id="show-or-hide-an-overlay">Show or Hide an Overlay</h2>
 			</div>
-			<p>To show the friends list page, call
+			<p>To show the friends-list page, call
 				<code>EOS_UI_ShowFriends</code>
 				with an
 				<code>EOS_UI_ShowFriendsOptions</code>
@@ -66,7 +66,7 @@
 				<code>EOS_UI_OnShowFriendsCallback</code>) will receive a call that includes an
 				<code>EOS_UI_ShowFriendsCallbackInfo</code>
 				data structure.</p>
-			<p>To hide the friends list page, call
+			<p>To hide the friends-list page, call
 				<code>EOS_UI_HideFriends</code>
 				with an
 				<code>EOS_UI_HideFriendsOptions</code>
@@ -93,12 +93,12 @@
 				<code>EOS_UI_OnHideFriendsCallback</code>), passing it a parameter of type
 				<code>EOS_UI_HideFriendsCallbackInfo</code>.</p>
 			<div>
-				<p>These operations could change the overall visibility status of the overlay system, but they will not necessarily do so every time. For example, showing the friends list page could make the Overlay system become visible if it was previously invisible, but the system could have been visible already if it was already displaying the friends list or another page. Similarly, hiding a page could result in the entire overlay system becoming invisible if that was the last page being displayed, but this will not always be the case. See the section on
-					<a href="#detecting-visibility-status">Detecting the Overlay's Current Visibility Status</a>
+				<p>These operations could change the overall visibility status of the overlay system, but they will not necessarily do so every time. For example, showing the friends-list page could make the Overlay system become visible if it was previously invisible, but the system could have been visible already if it was already displaying the friends list or another page. Similarly, hiding a page could result in the entire overlay system becoming invisible if that was the last page being displayed, but this will not always be the case. See the section on
+					<a href="#detect-visibility-status">Detecting the Overlay's Current Visibility Status</a>
 					for a reliable way to know whether the Overlay system is visible at any given time.</p>
 			</div>
 			<div>
-				<h2 id="blocking-and-reporting">Blocking and Reporting</h2>
+				<h2 id="block-and-report">Block and Report</h2>
 			</div>
 			<p>
 				<a href="/docs/api-ref/functions/eos-ui-show-block-player">
@@ -163,7 +163,7 @@
 				</tbody>
 			</table>
 			<div>
-				<h2 id="detecting-visibility-status">Detecting Visibility Status</h2>
+				<h2 id="detect-visibility-status">Detect Visibility Status</h2>
 			</div>
 			<p>The UI Interface provides two levels of visibility status information.</p>
 			<p>The first is for the overlay system itself. When at least one page in one overlay is showing, the system as a whole is considered visible. This information can be very useful when making certain high-level decisions, such as where to route input, or when to pause simulation.</p>
@@ -206,7 +206,7 @@
 			<div>
 				<h3 id="individual-page-visibility-status">Individual Page Visibility Status</h3>
 			</div>
-			<p>Each page that the UI Interface can show or hide has its own function to report its visibility status. For the friends list page, call
+			<p>Each page that the UI Interface can show or hide has its own function to report its visibility status. For the friends-list page, call
 				<code>EOS_UI_GetFriendsVisible</code>
 				with an
 				<code>EOS_UI_GetFriendsVisibleOptions</code>
@@ -235,7 +235,7 @@
 				<code>EOS_Bool</code>
 				indicating whether the page is visible or not.</p>
 			<div>
-				<h2 id="pausing-the-social-overlay">Pausing the Social Overlay</h2>
+				<h2 id="pause-the-social-overlay">Pause the Social Overlay</h2>
 			</div>
 			<p>The Social Overlay processes notifications as they arrive. To pause this behavior use
 				<a href="/docs/api-ref/functions/eos-ui-pause-social-overlay">
@@ -269,7 +269,7 @@
 				</tbody>
 			</table>
 			<div>
-				<h2 id="getting-and-setting-hotkeys">Getting and Setting Hotkeys</h2>
+				<h2 id="get-and-set-hotkeys">Get and Set Hotkeys</h2>
 			</div>
 			<p>Users can use hotkeys to show or hide overlay pages. Hotkeys act as toggles, so the hotkey that shows a page will also hide that page.</p>
 			<p>To define a hotkey, you must pick a main key and one or more modifier keys. The main key can be
@@ -297,7 +297,7 @@
 				<code>EOS_UI_EKeyCombination::EOS_UIK_None</code>).</p>
 			<p>Call
 				<code>EOS_UI_GetToggleFriendsKey</code>
-				to get the current hotkey for the friends list page. Configure the
+				to get the current hotkey for the friends-list page. Configure the
 				<code>EOS_UI_GetToggleFriendsKeyOptions</code>
 				parameter as follows:</p>
 			<table>
@@ -314,8 +314,8 @@
 					</tr>
 				</tbody>
 			</table>
-			<p>To set (or reset) the hotkey for the friends list page, use
-				<code>EOS_UI_SetToggleFriendsKeyOptions</code>
+			<p>To set (or reset) the hotkey for the friends-list page, use
+				<code>EOS_UI_SetToggleFriendsKey</code>
 				with an
 				<code>EOS_UI_SetToggleFriendsKeyOptions</code>
 				initialized as follows:</p>
@@ -339,6 +339,88 @@
 					</tr>
 				</tbody>
 			</table>
+			<div>
+				<h2 id="get-and-set-gamepad-buttons">Get and Set Gamepad Buttons</h2>
+			</div>
+			<p>Players can use gamepad buttons to show or hide overlay pages. Gamepad buttons act as toggles, so the button combination that shows a page also hides that page.</p>
+			<p>The UI Interface provides functions for you to configure the button combination that your players can use to toggle the friends-list page. These include functions to get the current toggle-friends button combination, set the toggle-friends button combination to a new value, and check if a button combination is valid. These functions are analogous to the toggle-friends key functions specified in the
+				<a href="#get-and-set-hotkeys">Get and Set Hotkeys</a>
+				section.</p>
+			<p>
+				<strong>Note</strong>: On Windows, the Social Overlay automatically listens to gamepad input and routes it to the Social Overlay when appropriate. If you have configured the toggle-friends button, the player can open the friends-list page using either this button combination or the toggle-friends key. See the
+				<a href="#get-and-set-hotkeys">Get and Set Hotkeys</a>
+				section of this page for for more information on how to configure hotkeys. On console platforms, the game must call
+				<code>EOS_UI_ReportInputState</code>
+				to route gamepad input to the overlay. For more information, see the
+				<em>Route User Input to the EOS Overlay</em>
+				section of each console's documentation.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>Call
+				<a href="/docs/api-ref/functions/eos-ui-get-toggle-friends-button">
+					<code>EOS_UI_GetToggleFriendsButton</code>
+				</a>
+				to get the current button combination that toggles the friends-list page. Configure the
+				<a href="/docs/api-ref/structs/eos-ui-get-toggle-friends-button-options">
+					<code>EOS_UI_GetToggleFriendsButtonOptions</code>
+				</a>
+				parameter as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>Set this to
+							<code>EOS_UI_GETTOGGLEFRIENDSBUTTON_API_LATEST</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>To set (or reset) the button combination that toggles the friends-list page, use
+				<a href="/docs/api-ref/functions/eos-ui-set-toggle-friends-button">
+					<code>EOS_UI_SetToggleFriendsButton</code>
+				</a>
+				with an
+				<a href="/docs/api-ref/structs/eos-ui-set-toggle-friends-button-options">
+					<code>EOS_UI_SetToggleFriendsButtonOptions</code>
+				</a>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>int32_t ApiVersion</td>
+						<td>Set this to
+							<code>EOS_UI_SETTOGGLEFRIENDSBUTTON_API_LATEST</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/enums/eos-ui-e-input-state-button-flags">
+								<code>EOS_UI_EInputStateButtonFlags</code>
+							</a>
+							ButtonCombination</td>
+						<td>The new button combination to toggle the friends-list page. It can be any combination of buttons. The default value is no button. Set the value to
+							<code>EOS_UISBF_None</code>
+							to revert to the default.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note</strong>: You can call
+				<a href="/docs/api-ref/functions/eos-ui-is-valid-button-combination">
+					<code>IsValidButtonCombination</code>
+				</a>
+				to check whether a button combination is valid.</p>
 			<div id="tag_list">
 				<a href="/docs/site-map">Interface</a>
 				<a href="/docs/site-map">
@@ -352,13 +434,13 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#showing-or-hiding-an-overlay">Showing or Hiding an Overlay</a>
+						<a href="#show-or-hide-an-overlay">Show or Hide an Overlay</a>
 					</li>
 					<li>
-						<a href="#blocking-and-reporting">Blocking and Reporting</a>
+						<a href="#block-and-report">Block and Report</a>
 					</li>
 					<li>
-						<a href="#detecting-visibility-status">Detecting Visibility Status</a>
+						<a href="#detect-visibility-status">Detect Visibility Status</a>
 					</li>
 					<li>
 						<a href="#overlay-system-visibility-status">Overlay System Visibility Status</a>
@@ -367,10 +449,13 @@
 						<a href="#individual-page-visibility-status">Individual Page Visibility Status</a>
 					</li>
 					<li>
-						<a href="#pausing-the-social-overlay">Pausing the Social Overlay</a>
+						<a href="#pause-the-social-overlay">Pause the Social Overlay</a>
 					</li>
 					<li>
-						<a href="#getting-and-setting-hotkeys">Getting and Setting Hotkeys</a>
+						<a href="#get-and-set-hotkeys">Get and Set Hotkeys</a>
+					</li>
+					<li>
+						<a href="#get-and-set-gamepad-buttons">Get and Set Gamepad Buttons</a>
 					</li>
 				</ul>
 			</div>

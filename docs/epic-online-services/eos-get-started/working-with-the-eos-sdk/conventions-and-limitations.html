@@ -1,10 +1,17 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
-			<h1>Conventions and Limitations</h1>
+			<h1>EOS SDK Conventions and Limitations</h1>
 			<h2>Fundamentals when working with the SDK.</h2>
 			<div>
 				<div>5 mins to read</div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<p>This page details the conventions used by the EOS SDK and its limitations. For an introduction to Epic Online Services and how to set up the EOS SDK, see the following documentation:</p>
 			<ul>
 				<li>
@@ -192,8 +199,8 @@
 				<code>EOS_TooManyRequests</code>
 				result or warning about incorrect use patterns.</p>
 			<p>Client request throttling and service usage quotas work in parallel to limit the impact an individual
-				<span>
-					<span>product</span>
+				<span role="tooltip" aria-label="product">
+					<span tabindex="0">product</span>
 				</span>
 				can have on the overall EOS ecosystem.</p>
 			<div>

@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<div>
 				<h2 id="connect-interface">Connect Interface</h2>
 			</div>
@@ -86,8 +93,8 @@
 				<h3 id="managing-users">Managing users</h3>
 			</div>
 			<p>Users login using a set of external credentials. If the user already exists for this
-				<span>
-					<span>product</span>
+				<span role="tooltip" aria-label="product">
+					<span tabindex="0">product</span>
 				</span>, an
 				<strong>access token</strong>
 				is granted that lasts for a set period of time (currently one hour). The game is notified prior to the token expiration and is required to refresh the existing token, given a valid external credential at that time.</p>
@@ -109,8 +116,8 @@
 				<li>Grant lengthy access</li>
 			</ul>
 			<p>The external
-				<span>
-					<span>account</span>
+				<span role="tooltip" aria-label="account">
+					<span tabindex="0">account</span>
 				</span>
 				provider is expected to have authoritative access to the application.</p>
 			<div>

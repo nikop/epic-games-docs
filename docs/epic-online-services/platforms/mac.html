@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<div>
 				<h2 id="supported-macos-release-versions">Supported MacOS Release Versions</h2>
 			</div>
@@ -55,8 +62,8 @@
 			</div>
 			<p>MacOS does not require the use of
 				<code>Mac/eos_Mac_base.h</code>.  It is provided to ease implementation of a cross-platform
-				<span>
-					<span>product</span>
+				<span role="tooltip" aria-label="product">
+					<span tabindex="0">product</span>
 				</span>.</p>
 			<div>
 				<h3 id="linking-eos-on-macos">Linking EOS on MacOS</h3>

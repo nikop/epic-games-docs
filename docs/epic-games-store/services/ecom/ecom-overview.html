@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -17,7 +24,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
@@ -435,9 +442,7 @@
 				<code>https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</code>. A sample request follows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>GET/ecommerceintegration/api/public/publickeys/pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g HTTP/1.1Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com{	"kty": "RSA",	"e": "AQAB",	"kid": "pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g",	"n": "gcStqtD8XD9c9ifNuxXT9Xd_EEZLLCw34yxINRQPt0MxEWkoOFsuisRWGktSFtGrnUuQnp8GQY0k4Pyl_yDItWAcRtO7JUjrhQnxx3xXp_0P8xJMH1ny-RcxHF3bEJWhDzNW5PBpBjQTQZis-83499z-4OlNA7oUnDKEJkqNfzh4mMDFluPxvW_Hwpaw71nhzJI7-N-BdsPsLdqUANajLsFKq9fr06Lek_tm-6-RUxNPE3yS0x0UIsGyapA4Apcczz0xTzRDfwOkq_TyKGZiZc7vtgjkWnqdsCyXZC7dzKJvg0ggO3mKXhqZNNC_2pz24o1X_xCbG8rXtuvX8-ux-Q"}</pre>
 				</section>
 			</div>
 			<div>
@@ -490,8 +495,8 @@
 				<h2 id="fulfilling-purchases">Fulfilling Purchases</h2>
 			</div>
 			<p>After making a purchase, the user's
-				<span>
-					<span>account</span>
+				<span role="tooltip" aria-label="account">
+					<span tabindex="0">account</span>
 				</span>
 				gains an entitlement, but the user may not see the effect of their purchase in the game yet. In some cases, fulfilling a purchase can be as simple as checking that the user owns a specific entitlement and applying some game logic to the result. In these cases, verifying ownership through the SDK is sufficient. In other cases, such as purchases involving consumable items or game currency, you may also need to fulfill the order in-game or with a third-party back-end service by redeeming the entitlement.</p>
 			<div>
@@ -633,9 +638,7 @@
 				<code>https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</code>. A sample request follows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>GET/ecommerceintegration/api/public/publickeys/pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g HTTP/1.1Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com{	"kty": "RSA",	"e": "AQAB",	"kid": "pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g",	"n": "gcStqtD8XD9c9ifNuxXT9Xd_EEZLLCw34yxINRQPt0MxEWkoOFsuisRWGktSFtGrnUuQnp8GQY0k4Pyl_yDItWAcRtO7JUjrhQnxx3xXp_0P8xJMH1ny-RcxHF3bEJWhDzNW5PBpBjQTQZis-83499z-4OlNA7oUnDKEJkqNfzh4mMDFluPxvW_Hwpaw71nhzJI7-N-BdsPsLdqUANajLsFKq9fr06Lek_tm-6-RUxNPE3yS0x0UIsGyapA4Apcczz0xTzRDfwOkq_TyKGZiZc7vtgjkWnqdsCyXZC7dzKJvg0ggO3mKXhqZNNC_2pz24o1X_xCbG8rXtuvX8-ux-Q"}</pre>
 				</section>
 			</div>
 			<div>

@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<p>In
 				<strong>Epic Account Services (EAS)</strong>, third-party applications require that you authorize consent for data access permissions before they can authenticate the user or gain access to the user data.</p>
 			<div>
@@ -23,8 +30,8 @@
 				<h2 id="consent">Consent</h2>
 			</div>
 			<p>Unverified applications are only available to users within your
-				<span>
-					<span>organization</span>
+				<span role="tooltip" aria-label="organization">
+					<span tabindex="0">organization</span>
 				</span>.</p>
 			<ul>
 				<li>
@@ -71,8 +78,8 @@
 				<h2 id="verifiable-parental-consent">Verifiable Parental Consent</h2>
 			</div>
 			<p>The SDK implements verifiable parental consent. This means that when a player first attempts to sign in to their Epic Games account in your game, they must enter their date of birth if they have not already done so. Players under 13 years old or under their country's
-				<span>
-					<span>age of digital consent</span>
+				<span role="tooltip" aria-label="age of digital consent">
+					<span tabindex="0">age of digital consent</span>
 				</span>, whichever is the higher, cannot continue to sign in without their parent's or guardian's consent.</p>
 			<p>To get parental consent, players under 13 years old or their country's age of digital consent, whichever is the higher, must enter their parent or guardian's email address. Epic Account Services then sends an email to the parent or guardian with instructions on how to complete the parental consent.</p>
 			<p>The EOS Social Overlay, or a web browser if the overlay is not installed or disabled in the game, automatically prompts the player for verifiable parental consent and the SDK automatically handles the authorization after consent is given.</p>
@@ -83,8 +90,8 @@
 				<h2 id="deleting-user-account-data">Deleting User Account Data</h2>
 			</div>
 			<p>As a developer, you're required to delete all of a user's
-				<span>
-					<span>account</span>
+				<span role="tooltip" aria-label="account">
+					<span tabindex="0">account</span>
 				</span>
 				data upon their request. Or upon notification from Epic Games that a user has requested deletion of their data.</p>
 			<div>

@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<p>Epic Online Services (EOS) provides a ticketing system to support your products from a centralized location using an automatically generated, pre-assigned email address and a public web API key. The ticketing system supports:</p>
 			<ul>
 				<li>Tracking open, in-progress, and closed tickets</li>
@@ -23,8 +30,8 @@
 				<h2 id="get-started">Get Started</h2>
 			</div>
 			<p>To use the ticketing system, you need to integrate it with your
-				<span>
-					<span>product</span>
+				<span role="tooltip" aria-label="product">
+					<span tabindex="0">product</span>
 				</span>
 				through the Developer Portal.</p>
 			<ol>
@@ -141,8 +148,8 @@
 				<h3 id="export-user-data">Export user data</h3>
 			</div>
 			<p>In order to export a user’s data, for example to fulfill a
-				<span>
-					<span>GDPR</span>
+				<span role="tooltip" aria-label="GDPR">
+					<span tabindex="0">GDPR</span>
 				</span>
 				request, send a GET request to
 				<code>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/{email}</code>

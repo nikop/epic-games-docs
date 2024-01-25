@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<p>
 				<strong>Note</strong>: You can also authenticate with the Auth Interface. See Epic Account Services:
 				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
@@ -39,8 +46,8 @@
 				as a command-line argument.</p>
 			<p>When the game client is launched, it will make a request to the Epic token endpoint that includes the client credentials and exchange code. The response will include an
 				<strong>access token</strong>, information about the client and
-				<span>
-					<span>account</span>
+				<span role="tooltip" aria-label="account">
+					<span tabindex="0">account</span>
 				</span>
 				that were authenticated, and an optional
 				<strong>refresh token</strong>.</p>

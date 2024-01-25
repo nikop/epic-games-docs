@@ -1,178 +1,228 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
-			<h1>Brand Review Application Process</h1>
-			<h2>Brand review protects you, all your players, and Epic Games from malicious activities, such as brand spoofing, phishing, malware, stolen identity, and copyright infringement, among others.</h2>
+			<h1>Brand Review Process</h1>
+			<h2>Verify the brand associated with your game.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
+			<p>Brand review enables your game (or software application) to integrate with EOS Epic Account Services. The brand review process verifies your game’s brand with Epic Games. Your brand is the company or real-world organization that is associated with your product.</p>
+			<p>Before starting the brand review process, see the documentation
+				<a href="/docs/epic-account-services/brand-review/brand-review-intro">Brand Review Introduction</a>.</p>
+			<p>
+				<strong>Note on the terms “product” and “application”</strong>
+				<br>
+				In the Developer Portal during the brand review process, note the following:</p>
+			<ul>
+				<li>“product” represents your game or software application. (For example, the game “Fall Guys”.)</li>
+				<li>“application” represents an implementation of your product for Epic Account Services. An application associated with your product has settings for brand, user permissions (consent), and linked clients. (For example, the settings for Fall Guys' brand, user permissions and linked clients in Epic Account Services is an application.)</li>
+			</ul>
+			<p>This set of brand review pages uses “product” to mean game or software application and "application" to mean a product's Epic Account Services settings.</p>
 			<div>
-				<h2 id="brand-review-process">Brand Review Process</h2>
+				<h2 id="how-to-submit-or-resubmit-your-product-for-brand-review">How to Submit (or Resubmit) Your Product for Brand Review</h2>
 			</div>
+			<p>To start the brand review process, you must follow the steps below.</p>
 			<div>
-				<h3 id="brand-review-helps-you-make-your-application-available-to-epics-general-audience">Brand Review helps you make your application available to Epic’s general audience.</h3>
+				<h3 id="step-1-verify-your-brands-website-domain">Step 1: Verify your brand's website domain.</h3>
 			</div>
-			<p>The brand review process verifies your game's brand with Epic Games. Once verified, players outside of your
-				<a href="/docs/dev-portal">Organization</a>
-				can use your game's integration of Epic Account Services. This includes functionality such as the
-				<a href="/docs/epic-account-services/eos-presence-interface">Presence interface</a>, the
-				<a href="/docs/epic-account-services/auth/auth-interface">Auth interface</a>
-				for authentication, and the
-				<a href="/docs/epic-account-services/eos-friends-interface">Friends interface</a>.</p>
+			<ul>
+				<li>See the
+					<a href="/docs/epic-account-services/brand-review/domain-verification">Domain Verification</a>
+					documentation for guidance.</li>
+			</ul>
 			<div>
-				<div>
-					<span>
-						<img alt="Image detailing the definition of an application in Epic Accounts Services and the brand review process evaluating your application’s name, logo, and privacy policy." src="https://static-assets-prod.epicgames.com/eos-docs/epic-account-services/brand-review/brand-review-evaluates.png" decoding="async" data-nimg="fill">
-						<noscript></noscript>
-					</span>
-				</div>
+				<h3 id="step-2-submit-your-product-for-brand-review-in-the-developer-portal">Step 2: Submit your product for brand review in the Developer Portal.</h3>
 			</div>
-			<div>
-				<p>We do not review or certify your application or product. We only review your application’s brand that users in the Epic Games ecosystem can encounter before having granted their explicit consent.</p>
-			</div>
-			<p>Until your brand review is successfully verified, every new Epic Account Services application displays a warning to your users as part of the consent dialog and has specific
-				<span>
-					<span>audience</span>
-				</span>
-				restrictions, as seen below.</p>
-			<div>
-				<div>
-					<span>
-						<img alt="An example of a warning label when your application has not yet been verified; part of the consent dialog." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
-						<noscript></noscript>
-					</span>
-				</div>
-			</div>
-			<div>
-				<div>
-					<span>
-						<img alt="An example of a warning label when your application has not yet been verified; part of the consent dialog." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
-						<noscript></noscript>
-					</span>
-				</div>
-			</div>
-			<p>Audience restrictions are put in place in order to protect Epic Games ecosystem users, you (the developer), other game developers, and Epic Games from brand spoofing, phishing, and more.</p>
-			<p>Only the members of the same development
-				<a href="/docs/dev-portal">organization</a>
-				can
-				<a href="/docs/epic-account-services/auth/auth-interface">authenticate</a>
-				against the application before its brand is reviewed and verified. All other users will see an access restriction error message.</p>
-			<div>
-				<div>
-					<span>
-						<img alt="This warning is shown when an application is not verified and has restricted access." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
-						<noscript></noscript>
-					</span>
-				</div>
-			</div>
-			<div>
-				<h3 id="submitting-or-resubmitting-your-brand-review">Submitting or Resubmitting your Brand Review</h3>
-			</div>
-			<p>To begin the brand review process, you must follow these steps:</p>
+			<p>To do this:</p>
 			<ol>
-				<li>Verify your
-					<a href="/docs/epic-account-services/brand-review/domain-verification">domain</a>.</li>
-				<li>Go to your product in the
-					<strong>Developer Portal</strong>
-					&gt;
-					<strong>Epic Account Services</strong>.</li>
-				<li>Select
-					<strong>Create Application</strong>
-					for a new application or
-					<strong>Configure</strong>
-					for an existing application.</li>
-				<li>Enter your application’s details in the
-					<strong>
-						<a href="#brand-settings">Brand Settings</a>
-					</strong>
-					tab.</li>
-				<li>After you specify all required assets, you can
-					<strong>Submit for Review</strong>.</li>
-				<li>Your application brand is
-					<a href="#evaluation-criteria">evaluated</a>.</li>
-				<li>You are notified of the
-					<a href="#review-results">review results</a>
-					over email.</li>
+				<li>
+					<p>Go to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal/en-US/">dev.epicgames.com</a>.</p>
+				</li>
+				<li>
+					<p>Select your organization name from the top of the left navigation’s dropdown menu.
+						<br>
+						(In the image below, the organization name is “Your Organization Here”.)
+						<br>
+						This displays a list of your organization’s products in the left navigation menu.
+						<br>
+						(In the image below, the product name is “Your Product Name Here”.)</p>
+					<div>
+						<div>
+							<span>
+								<img alt="Developer Portal left navigation menu, showing an organization and its list of products. Here the organization is called 'Your Organization Name Here' and there is one product called 'Your Product Name Here'." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+								<noscript></noscript>
+							</span>
+						</div>
+						<p>Developer Portal left navigation menu, showing an organization and its list of products. Here the organization is called "Your Organization Name Here" and there is one product called "Your Product Name Here".  | Click image to enlarge.|</p>
+					</div>
+				</li>
+				<li>
+					<p>Click your product name from under the list of
+						<strong>Products</strong>
+						in the left navigation menu.
+						<br>
+						This displays your product’s page.
+						<br>
+						(In the images in the step above and the step below, the product name is “Your Product Name Here”.)</p>
+				</li>
+				<li>
+					<p>In the left navigation menu, click
+						<strong>Epic Account Services</strong>.
+						<br>
+						This displays your product’s Epic Account Services page (shown below).</p>
+					<div>
+						<div>
+							<span>
+								<img alt="Developer Portal showing an organization's Epic Account Services page and its list of products." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+								<noscript></noscript>
+							</span>
+						</div>
+						<p>Developer Portal showing a organization's Epic Account Services page and its list of products (here the product called “Your Product Name Here”).  | Click image to enlarge.|</p>
+					</div>
+				</li>
+				<li>
+					<p>To create a new application of your product, click
+						<strong>Create Application</strong>.
+						<br>
+						(Click
+						<strong>Configure</strong>
+						for an existing application of your product).
+						<br>
+						This displays a pane showing the application settings tabs. It defaults to the Brand settings tab.</p>
+				</li>
+				<li>
+					<p>In the Brand settings tab, follow the on-screen instructions.
+						<br>
+						See the
+						<a href="/docs/epic-account-services/brand-review/brand-review-process#brand-settings">Brand Settings</a>
+						section of this page for details.</p>
+				</li>
+				<li>
+					<p>After you have completed the required fields in the Brand settings tab, select
+						<strong>Submit for review</strong>.</p>
+				</li>
 			</ol>
+			<div>
+				<h3 id="step-3-wait-for-epic-games-to-contact-you">Step 3: Wait for Epic Games to contact you.</h3>
+			</div>
+			<ul>
+				<li>
+					<p>Epic Games evaluates your application’s brand.
+						<br>
+						See the
+						<em>Brand Review Introduction</em>
+						page's section on
+						<a href="/docs/epic-account-services/brand-review/brand-review-intro#evaluation-criteria">Evaluation Criteria</a>
+						for details.</p>
+				</li>
+				<li>
+					<p>Epic Games notifies you of the review results by email.
+						<br>
+						See the
+						<a href="/docs/epic-account-services/brand-review/brand-review-process#brand-review-results">Brand Review Results</a>
+						section of this page for details.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="changes-to-your-brand-details-during-the-brand-review-proces">Changes to your brand details during the brand review proces</h3>
+			</div>
+			<p>After you submit your brand details for review, you cannot make any changes to your brand details during the review.</p>
+			<p>Note the following points:</p>
+			<ul>
+				<li>If you want to change your brand details aftrer you have submitted them for review, you must cancel the brand review you have already started and start a new brand review.</li>
+				<li>If your product has already passed brand review and is in a live environment, you can change the brand settings. However, any changes you make to your product’s brand details do not affect your live environment until they have successfully passed the brand review.</li>
+				<li>You can change other product settings, such as permissions or OAuth client configuration at any time, independent of your product brand review status.</li>
+			</ul>
 			<div>
 				<h3 id="brand-settings">Brand Settings</h3>
 			</div>
-			<p>An application’s brand settings are a part of the EAS application consent dialog and includes:</p>
-			<ul>
-				<li>
-					<strong>Application Name</strong>
-					- A non-unique string that serves best to identify your application. By default it’s auto-populated with your product name, but can be changed as needed.</li>
-				<li>
-					<strong>Application Logo</strong>
-					- Your logo must be in PNG or JPEG format and 128x128 pixels.</li>
-				<li>
-					<strong>Application Domain</strong>
-					- A
-					<a href="/docs/epic-account-services/brand-review/domain-verification">verified web domain</a>
-					for your organization.</li>
-				<li>
-					<strong>Application Privacy Policy URL</strong>
-					- You must provide the link to your privacy policy.</li>
-				<li>
-					<strong>
-						<em>[Optional]</em>
-						Application Support URL</strong>
-					- You may optionally supply a URL for end users to access support for your application.</li>
-			</ul>
+			<p>Users see your application’s brand details on the consent dialog that Epic Games displays when users access your product.</p>
+			<p>You add your brand details in the Brand Settings page of the Developer Portal (shown below).</p>
+			<p>To access the page, see step 2 of the section in this page
+				<a href="#how-to-submit-or-resubmit-your-product-for-brand-review">How to Submit or Resubmit Your Product for Brand Review</a>.</p>
 			<div>
 				<div>
 					<span>
-						<img alt="The Brand Settings configuration page located in the Developer Portal, which can be found under Epic Account Services > Create Application." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<img alt="The Brand Settings configuration page located in the Developer Portal.  Epic Account Services > Create Application." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
 						<noscript></noscript>
 					</span>
 				</div>
+				<blockquote>
+				</blockquote>
+				<p>The Brand Settings page in the Developer Portal. |Click image to enlarge.|</p>
 			</div>
-			<p>Once you submit your brand settings for review, you must cancel the submission to make any changes. Any submitted changes made to your brand settings do not affect your live environment until they have successfully passed the brand review.</p>
-			<div>
-				<p>Other application settings such as permissions or OAuth client configuration can be changed at any time independent of the brand review submission state.</p>
-			</div>
-			<div>
-				<h3 id="evaluation-criteria">Evaluation Criteria</h3>
-			</div>
-			<p>When reviewing your application, the moderation team applies a set of guidelines that may evolve over time to reflect changes to the features or regulations.</p>
-			<p>The criteria we focus on includes, but is not limited to:</p>
+			<p>On the left of the Brand Settings tab, you can see a preview of an Epic Games consent dialog. When your product uses Epic Account Services, this is the dialog that displays to your users. It requests their permission to share their information with your product through Epic Account Services.</p>
+			<p>On the right of the Brand Settings tab, there are configuration fields that you must complete.</p>
+			<p>Complete the fields to start the Epic Games brand review process.</p>
+			<p>The fields are as follows:</p>
 			<ul>
-				<li>Your privacy policy demonstrates intent to use end user account information with respect and in a manner that complies with applicable law and Epic Games’ requirements.
-					<ul>
-						<li>You must have a public privacy policy</li>
-						<li>It must include contact info so customers can contact with you with privacy concerns</li>
-						<li>It must be descriptive in how data will be handled for customers</li>
-					</ul>
-				</li>
-				<li>Brand content does not contain third party intellectual property not owned by or adequately licensed to you.</li>
-				<li>Brand content does not attempt to misrepresent or deceive end users about the application owner’s identity.</li>
-				<li>Brand content does not contain or represent illicit or illegal material.</li>
-				<li>Brand content is appropriate to all audiences.</li>
+				<li>
+					<strong>Application Name</strong>
+					- A non-unique string that serves best to identify the Epic Account Services application of your product. By default it’s auto-populated with your product’s name as listed in the Developer Portal but you can change this.</li>
+				<li>
+					<strong>Application Website</strong>
+					- A verified website domain for your organization. See the
+					<a href="/docs/epic-account-services/brand-review/domain-verification">Domain Verification</a>
+					documentation for guidance.</li>
+				<li>
+					<strong>Privacy Policy URL</strong>
+					- You must provide a link to your privacy policy.</li>
+				<li>
+					<strong>UPLOAD APPLICATION LOGO</strong>
+					- Your brand or product logo must be in PNG or JPEG format and 128x128 pixels.</li>
 			</ul>
 			<div>
-				<h3 id="review-results">Review Results</h3>
+				<h3 id="brand-review-results">Brand Review Results</h3>
 			</div>
-			<p>Once the review is complete, you will be notified of the results over email. You can use the Developer Portal to check the status of your review at any time.</p>
-			<p>Your submission is assigned a unique case number that you can find in your Developer Portal under
-				<strong>Your Product &gt; Epic Account Services &gt; Applications</strong>. Use this case number if you contact Epic Online Services support.</p>
+			<p>When the review is complete, Epic Games notifies you of the results through email. You can use the Developer Portal to check the status of your review at any time.</p>
 			<div>
-				<h4 id="successful-review">Successful Review</h4>
+				<h4 id="case-number">Case Number</h4>
 			</div>
-			<p>Your application’s brand settings are automatically applied to the live environment and the audience restriction and warning messages are removed.</p>
+			<p>Your brand review submission is assigned a unique case number. It is in the Developer Portal on your product’s Epic Account Services page. You can access the page as follows:</p>
+			<ul>
+				<li>
+					<a href="https://dev.epicgames.com/porta">dev.epicgames.com/portal</a>
+					menu:
+					<code>/your organization name/</code>
+					&gt;
+					<strong>Products</strong>:
+					<code>/your product name/</code>
+					&gt;
+					<strong>Epic Account Services.</strong>
+				</li>
+			</ul>
+			<p>Use this case number if you contact Epic Online Services support. See the
+				<a href="/docs/support">Support</a>
+				page for details on how to get support.</p>
 			<div>
-				<h4 id="failure-to-pass">Failure to Pass</h4>
+				<h4 id="successful--review">Successful  Review</h4>
 			</div>
-			<p>We will communicate why your application did not pass and work with you to update your content and resubmit.</p>
+			<p>If your brand is verified by Epic Games, your product’s brand settings are automatically applied to the live environment, and the audience restriction and warning messages are automatically removed.</p>
 			<div>
-				<p>Failed reviews do not affect the live state of your application. If you were previously verified, your end users continue to see the brand content that was previously verified.</p>
+				<h4 id="failed-review">Failed Review</h4>
 			</div>
+			<p>If your brand is not verified by Epic Games, we will communicate why your brand failed and work with you to update your content and resubmit.</p>
+			<p>
+				<strong>Note</strong>:</p>
+			<ul>
+				<li>Failed reviews for products (or software applications) that are already in a live environment do not affect the live state of your product.</li>
+				<li>If your brand was previously verified, your players continue to see the brand content that is already verified.</li>
+			</ul>
 			<div id="tag_list">
 				<a href="/docs/site-map">Epic Account</a>
 				<a href="/docs/site-map">
@@ -188,28 +238,34 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#brand-review-process">Brand Review Process</a>
+						<a href="#how-to-submit-or-resubmit-your-product-for-brand-review">How to Submit (or Resubmit) Your Product for Brand Review</a>
 					</li>
 					<li>
-						<a href="#brand-review-helps-you-make-your-application-available-to-epics-general-audience">Brand Review helps you make your application available to Epic’s general audience.</a>
+						<a href="#step-1-verify-your-brands-website-domain">Step 1: Verify your brand's website domain.</a>
 					</li>
 					<li>
-						<a href="#submitting-or-resubmitting-your-brand-review">Submitting or Resubmitting your Brand Review</a>
+						<a href="#step-2-submit-your-product-for-brand-review-in-the-developer-portal">Step 2: Submit your product for brand review in the Developer Portal.</a>
+					</li>
+					<li>
+						<a href="#step-3-wait-for-epic-games-to-contact-you">Step 3: Wait for Epic Games to contact you.</a>
+					</li>
+					<li>
+						<a href="#changes-to-your-brand-details-during-the-brand-review-proces">Changes to your brand details during the brand review proces</a>
 					</li>
 					<li>
 						<a href="#brand-settings">Brand Settings</a>
 					</li>
 					<li>
-						<a href="#evaluation-criteria">Evaluation Criteria</a>
+						<a href="#brand-review-results">Brand Review Results</a>
 					</li>
 					<li>
-						<a href="#review-results">Review Results</a>
+						<a href="#case-number">Case Number</a>
 					</li>
 					<li>
-						<a href="#successful-review">Successful Review</a>
+						<a href="#successful--review">Successful  Review</a>
 					</li>
 					<li>
-						<a href="#failure-to-pass">Failure to Pass</a>
+						<a href="#failed-review">Failed Review</a>
 					</li>
 				</ul>
 			</div>

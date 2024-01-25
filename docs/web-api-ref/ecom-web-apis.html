@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -17,13 +24,13 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<p>
 				<strong>Epic Online Services</strong>
 				(EOS) provides multiple ways to verify an account's ownership of catalog items. The preferred method is to use the EOS SDK APIs through the
 				<a href="/docs/epic-games-store/services/ecom">Ecom Interface</a>. This document is provided for titles and services that prefer to access ownership information via RESTful endpoints. EOS has RESTful service endpoints for direct online ownership verification, creating and validating an ownership token that can be passed between clients and services, and entitlements services for querying, enumerating and consuming
-				<span>
-					<span>entitlement</span>
+				<span role="tooltip" aria-label="entitlement">
+					<span tabindex="0">entitlement</span>
 				</span>
 				records.</p>
 			<p>The method used for ownership verification depends on the use case. The online method can be used by your game client or your game server by integrating with our endpoints directly. The ownership verification token method provides a token that includes information about the game client, user, and entitlement as well as a signature that can be verified by your game client or any other service. If integrating with a third-party service that performs ownership verification, it is preferred to use the ownership verification token check to avoid granting them access to a user's data.</p>
@@ -37,7 +44,9 @@
 			<p>The endpoint to check if a user owns an item, or a list of items.</p>
 			<div>
 				<section>
-					<pre>https://api.epicgames.dev/epic/ecom/v1/platforms/EPIC/identities/{{currentAccountId}}/ownership?nsCatalogItemId={{sandboxId:catalogItemId}}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -77,7 +86,9 @@
 			<p>The following snippet shows a sample request to get the ownership information:</p>
 			<div>
 				<section>
-					<pre>GET /epic/ecom/v1/platforms/EPIC/identities/12abc3de456f78901a2bc345dd6789e0/ownership HTTP/1.1Host: api.epicgames.devAuthorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e nsCatalogItemId=fn:ff150af93c9a4fb99fee12f5db49fa5b&amp;nsCatalogItemId=fn:94egdb6df476d45199f6be940aa1337c0[  {    "namespace": "fn",    "itemId": "94egdb6df476d45199f6be940aa1337c0",    "owned": false  },  {    "namespace": "fn",    "itemId": "ff150af93c9a4fb99fee12f5db49fa5b",    "owned": true  }]</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -138,7 +149,9 @@
 			<p>The endpoint to request an ownership verification token is:</p>
 			<div>
 				<section>
-					<pre>https://api.epicgames.dev/epic/ecom/v1/platforms/{platform}/identities/{identityId}/ownershipToken</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>You will need to pass an access token in the Authorization header using Bearer authorization.</p>
@@ -168,7 +181,9 @@
 			<p>The following snippet shows a sample request to get a verification token:</p>
 			<div>
 				<section>
-					<pre>POST /epic/ecom/v1/platforms/EPIC/identities/{{currentAccountId}}/ownershipToken HTTP/1.1Host: api.epicgames.dev Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e nsCatalogItemId=fn:c204662afac64acd8a2117590be477da{  "token": "egoc1~eyJraWQiOiJWbWdpMDFoQ2V2dXVEbUtWZFZubXphWnhpT2lBa0dEZWdRQmdDdWc4dkRZIiwiYWxnIjoiUlM1MTIifQ.eyJzdWIiOiI5NGVkYjZkZjQ3NmQ0NTE5OWY2YmU5NDBhYTEzMzdjMCIsImlwIjoiNTAuOTguMjI2LjEwIiwiY2xpZCI6IjI5Y2VlNDJlNzExNzQ2ZTFiYmNhZmI2MjkyOWU0OGZkIiwiZW50IjpbeyJjYXRhbG9nSXRlbUlkIjoiYzIwNDY2MmFmYWM2NGFjZDhhMjExNzU5MGJlNDc3ZGEiLCJvd25lZCI6dHJ1ZSwibmFtZXNwYWNlIjoiY2F0bmlwIn1dLCJleHAiOjE1Njk5Nzg1NjUsImlhdCI6MTU2OTk3ODI2NSwianRpIjoiMzgzN2FjODhlNDJjNDE1OTlmMzI5OTNjMmViYzBhOWQifQ.CX4yEEsZph9qPaVvtpnS0sLe_9YGLic5jIOQhhk3tG88GfNLp10w5y9DbYXocDlMXdEoAsAt-33G1JOPIFzrktrOxpR_FNdQ_ozCbBCF1aTQFTYKtvrbYkpA5AIGHmy_J9jSKMq-jN4TQxoSbR0LnowiWoKp_ntibmx0titFQ0kOYBQMvwwTlLgTzUv55I6VlFl8gMBSEw1_oRIUbdNbdHJO4UwnHTeUbcUUvuAWm13BpI2P39vRjU1xx4t51kUj_yY9ISWFBSGsLgEAhH13Mm1CilaeiPsLanE1sA5B3mRMjq8KcLtkkp8JvlIrgD4e-xo_tnRSLkRyKuU0GoqNKw"}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -182,14 +197,16 @@
 			<p>The following is a sample of the JWT header:</p>
 			<div>
 				<section>
-					<pre>{  "kid": "tFC2UIhFpTM_Ea3qcOd_MqQT1cBBm9kFLSDfeJhsRG8",  "alg": "RS512"}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
 			<p>The following is a sample of the JWT body:</p>
 			<div>
 				<section>
-					<pre>{  "jti": "a19c3f03edf84c0a9621ee44ff36566f",  "sub": "d144285abee343df98c4e84572c576bb",  "clid": "44c39619da304266855c9646e1081ab5",  "iat": 1547675438,  "exp": 1547704238,  "ent": [    {      "catalogItemId": "c204662afac64acd8a2117590be477da",      "owned": true,      "namespace": "catnip"    }  ]}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -203,13 +220,17 @@
 			<p>The public keys endpoint is:</p>
 			<div>
 				<section>
-					<pre>https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}.</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>The following snippet shows a sample request to get a public key:</p>
 			<div>
 				<section>
-					<pre>GET /ecommerceintegration/api/public/publickeys/Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY HTTP/1.1Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com {  "kty": "RSA",  "e": "AQAB",  "kid": "Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY",  "n": "k-LHmLHW5bbiqYLmPxC77ciG4N7IuF1SUOSsnDBLneKH3ZAU9kXRkq5MYjmRjxt8g3HpXmmhi_sHe4_g-VnSrM7jP6ntMiJ5t0d5J9ERkSEUSY4w_LS_YECavTr76GiutV_xPT-9jpHJWdVYqk68tiqR42xPFHEFUkYYsb_t6gONhth85ICnVY8Mjg6F0hFvvaMvOJcDVYfQbdjWY8-mzvIF9DmvyVkWaZSQYBaVuNCNKkSiSnkyCtbrynneayugwW0R-rNP5lEcp8UwXpBnep6sRf8nQEsByCnR91RdRXjuvrCSl7fOxpFX82t2WjWTYEOkOgb6yGc_ft-sJidSIQ"}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -218,7 +239,9 @@
 			<p>The endpoint to check in cases where you need to get a list of direct entitlements for accounts.</p>
 			<div>
 				<section>
-					<pre>https://api.epicgames.dev/epic/ecom/v1/identities/{identityId}/entitlements</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -263,7 +286,9 @@
 			<p>The following snippet shows a sample request to get all entitlements for user and sandbox:</p>
 			<div>
 				<section>
-					<pre>GET /api.epicgames.dev/epic/ecom/v1/identities/12abc3de456f78901a2bc345dd6789e0/entitlements HTTP/1.1Host: api.epicgames.dev Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e[{  "id": "8894469f1120432095eff043a4529433",  "entitlementName": "942e8a7133464f0ea83179030536505e",  "namespace": "buffalo",  "catalogItemId": "942e8a7133464f0ea83179030536505e",  "entitlementType": "AUDIENCE",  "grantDate": "2019-01-04T21:34:24.826Z",  "consumable": false,  "status": "ACTIVE",  "useCount": 0,  "entitlementSource": "AppEpicgamesCom"},{  "id": "e21aa0b339ae4e778971058c9395b2b7",  "entitlementName": "25ed76af7816430cbfc0f5e6d3195d56",  "namespace": "badger",  "catalogItemId": "25ed76af7816430cbfc0f5e6d3195d56",  "entitlementType": "AUDIENCE",  "grantDate": "2019-01-16T04:42:06.270Z",  "consumable": false,  "status": "ACTIVE",  "useCount": 0,  "entitlementSource": "LauncherWeb"}]</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -352,7 +377,9 @@
 			<p>The following snippet shows a sample request to get a verification token:</p>
 			<div>
 				<section>
-					<pre>POST/epic/ecom/v1/platforms/EPIC/identities/12abc3de456f78901a2bc345dd6789e0/entitlementToken HTTP/1.1Host: api.epicgames.devAuthorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e sandboxId=2bd59d629cda497b9f65dbdbee7d443s {  "token": "egoc1~eyJraWQiOiJ0RkMyVUloRnBUTV9FYTNxY09kX01xUVQxY0JCbTlrRkxTRGZlSmhzUkc4IiwiYWxnIjoiUlM1MTIifQ. eyJqdGkiOiJhMTljM2YwM2VkZjg0YzBhOTYyMWVlNDRmZjM2NTY2ZiIsInN1YiI6ImQxNDQyODVhYmVlMzQzZGY5OGM0ZTg0NTcyYzU3NmJiIiwiY2xpZCI6IjQ0YzM5NjE5ZGEzMDQyNjY4NTVjOTY0NmUxMDgxYWI1IiwiaWF0IjoxNTQ3Njc1NDM4LCJleHAiOjE1NDc3MDQyMzgsImVudCI6W3siaWF0IjoxNTQ3Njc1MDAwLCJuYmYiOjE1NDc2NzkwMDAsInNyYyI6IkVQSUMiLCJucyI6InNuYXBkcmFnb24iLCJpdGVtIjoiMTJmYjdkNTBiYmJhNGQwNTlkNWJhYzJlOGUyNzZkMmYiLCJ0eXBlIjoiRU5USVRMRU1FTlQiLCJuYW1lIjoiNDNlZDI4ZTU3N2FiNGMyYThjZWEyN2Q2YjQ0YmJhMTgiLCJjb25zIjoxLCJ1c2NudCI6MH1dfQ.JHFFCjxmcKQDBGWaas53PsvaqeobK_kLZDgw3Je9Btwx5AzmmnW8TGUQGgr-FdZEkpdP2N_TMYV2UBO91QG1ApvwCYrvW3IYBwtl3_9e3NA1QrNLqw2qxG9X8LPiowh0gRO7rpJJ4BwbrYBwImcyf0KPhmCEKkHI9XiDsZDkoD8"}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
@@ -362,14 +389,17 @@
 			<p>The following is a sample of the JWT header:</p>
 			<div>
 				<section>
-					<pre>{  "kid": "tFC2UIhFpTM_Ea3qcOd_MqQT1cBBm9kFLSDfeJhsRG8",  "alg": "RS512"}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
 			<p>The following is a sample of the JWT body:</p>
 			<div>
 				<section>
-					<pre>{  "jti" : "a19c3f03edf84c0a9621ee44ff36566f",  "sub" : "d144285abee343df98c4e84572c576bb",  "clid": "44c39619da304266855c9646e1081ab5",  "iat" : 1547675438,  "exp" : 1547704238,  "ent" : [{    "grantDate"         : 1547375000,    "startDate"         : 1547375000,    "endDate"           : (timestamp, optional),    "platformType"      : "EPIC",    "namespace"         : "tbd",    "catalogItemId"     : "tbd",    "entitlementType"   : "AUDIENCE",    "entitlementName"   : "43ed28e577ab4c2a8cea27d6b44bba18",    "consumable"        : false,    "useCount"          : 0  }]}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -383,7 +413,9 @@
 			<p>The following snippet shows a sample request to get a public key:</p>
 			<div>
 				<section>
-					<pre>GET /ecommerceintegration/api/public/publickeys/Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY HTTP/1.1Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com {  "kty": "RSA",  "e": "AQAB",  "kid": "Vmgi01hCevuuDmKVdVnmzaZxiOiAkGDegQBgCug8vDY",  "n": "k-LHmLHW5bbiqYLmPxC77ciG4N7IuF1SUOSsnDBLneKH3ZAU9kXRkq5MYjmRjxt8g3HpXmmhi_sHe4_g-VnSrM7jP6ntMiJ5t0d5J9ERkSEUSY4w_LS_YECavTr76GiutV_xPT-9jpHJWdVYqk68tiqR42xPFHEFUkYYsb_t6gONhth85ICnVY8Mjg6F0hFvvaMvOJcDVYfQbdjWY8-mzvIF9DmvyVkWaZSQYBaVuNCNKkSiSnkyCtbrynneayugwW0R-rNP5lEcp8UwXpBnep6sRf8nQEsByCnR91RdRXjuvrCSl7fOxpFX82t2WjWTYEOkOgb6yGc_ft-sJidSIQ"}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -393,7 +425,9 @@
 			<p>The endpoint to request a list of catalog offers defined with Epic Online Services is shown below:</p>
 			<div>
 				<section>
-					<pre>https://api.epicgames.dev/epic/ecom/v1/identities/{identityId}/namespaces/{sandboxID}/offers/</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>This API provides the same data as the SDK API
@@ -404,13 +438,17 @@
 			<p>The following snippet shows a sample request to request offers for a user and sandbox:</p>
 			<div>
 				<section>
-					<pre>GET/ecom/v1/identities/12abc3de456f78901a2bc345dd6789e0/namespaces/8894469f1120432095eff043a4529433/offers/Host: api.epicgames.dev Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468e</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>The following is a sample response from the server for a virtual currency offer:</p>
 			<div>
 				<section>
-					<pre>{    "elements": [        {            "id": "123ca45c67a8487895811a1234567890",            "namespace": "tbd",            "title": "1500 Coins",            "description": "1500 Coins",            "longDescription": "",            "availableForPurchase": true,            "purchaseLimit": 1,            "purchasedCount": 0,            "priceInfo": {                "currencyCode": "USD",                "discountPrice": 0,                "originalPrice": 0,                "discountPercentage": 0,                "decimals": 2            },            "releaseDate": "2099-02-01T08:00:00.000Z",            "effectiveDate": "2099-02-01T08:00:00.000Z",            "keyImages": [                {                    "type": "OfferImage",                    "url": "https://offer/image/url",                    "md5": "tbd",                    "width": 1200,                    "height": 1600,                    "size": 651591,                    "uploadedDate": "2022-05-12T22:29:48.971Z"                },                {                    "type": "ProductLogo",                    "url": "https://product/logo/url",                    "md5": "tbd",                    "width": 400,                    "height": 400,                    "size": 42030,                    "uploadedDate": "2022-06-07T19:48:31.668Z"                }            ],            "items": [                {                    "id": "12c3f456f7bf89e0bbc1234c567d890d",                    "namespace": "tbd",                    "title": "1500 Coins Audience",                    "itemType": "CONSUMABLE",                    "entitlementName": "12c3f456f7bf89e0bbc1234c567d890d",                    "description": "1500 Coins Audience",                    "developer": "Epic Games",                    "keyImages": [],                    "releaseInfo": []                }            ],            "offerType": "VIRTUAL_CURRENCY"        }           ],    "paging": {        "count": 100,        "start": 0,        "total": 17    }}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -439,21 +477,26 @@
 			<p>The endpoint to redeem/consume an entitlement. Once an entitlement is redeemed, the entitlement's status will be changed to inactive.</p>
 			<div>
 				<section>
-					<pre>https://api.epicgames.dev/epic/ecom/v1/identities/{identityId}/entitlements/redeem</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>You need to pass an access token in the Authorization header using Bearer authorization.</p>
 			<p>This endpoint supports the following request body:</p>
 			<div>
 				<section>
-					<pre>{  "entitlementIds": [    "8894469f1134432095eff043a4529433",    "25ed76af9816430cbfc0f5e6d3195d56"  ],  "sandboxId": "8894469f1120432095eff043a4529433"}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
 			<p>The following snippet shows a sample request to redeem multiple entitlements for a user and sandbox:</p>
 			<div>
 				<section>
-					<pre>PUT/ecom/v1/identities/12abc3de456f78901a2bc345dd6789e0/entitlements/redeemHost: api.epicgames.dev Authorization: Bearer 1fe59d629cda497b9f65dbdbee7d468eContent-Type:  application/jsonRequest body:{  "entitlementIds": [    "8894469f1134432095eff043a4529433",    "25ed76af9816430cbfc0f5e6d3195d56"  ],  "sandboxId": "8894469f1120432095eff043a4529433"}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -462,7 +505,9 @@
 			<p>A clawback is when a seller reclaims a player's access to an entitlement that the player purchased. This typically happens when a player requests a refund, or a chargeback occurs. The endpoint to check for recent clawbacks is shown below:</p>
 			<div>
 				<section>
-					<pre>https://api.epicgames.dev/epic/ecom/v1/namespace/{namespace}/entitlements/clawbacks</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>This endpoint supports the following query parameters:</p>
@@ -755,7 +800,9 @@
 			<p>The following is a sample response from the server for clawbacks:</p>
 			<div>
 				<section>
-					<pre>{   "nextPageKey": "",   "elements": [    {       "country": "",       "endDate": "",       "created": "",       "entitlementId": "",       "platformType": "",       "grantDate": "",       "active": false,       "entitlementType": "",       "catalogItemId": "",       "accountId": "",       "consumable": false,       "namespace": "",       "id": "",       "useCount": 0,       "startDate": "",       "entitlementName": "",       "status": "",       "originalUseCount": 0     }   ],  "hasMore": false }</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -764,13 +811,17 @@
 			<p>For example, to query the first page of clawbacks, you can build the query like this:</p>
 			<div>
 				<section>
-					<pre>GET/epic/ecom/v1/namespace/{namespace}/entitlements/clawbacks?clawbackDate=2019-04-19 Host: api.epicgames.dev</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>The following is a condensed sample response from the server for clawbacks:</p>
 			<div>
 				<section>
-					<pre>{   "nextPageKey": "09c04dcefae34029919b0d3ccb43ce9a_1545202399023",   "entitlementClawbackInfoList": [...],   "hasMore": true }</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>In this example,
@@ -779,7 +830,9 @@
 				<code>true</code>, so you can query the next page. To query the next page, you can build a query like this:</p>
 			<div>
 				<section>
-					<pre>GET/epic/ecom/v1/namespace/{namespace}/entitlements/clawbacks?clawbackDate=2019-04-19&amp;nextPageKey=09c04dcefae34029919b0d3ccb43ce9a_1545202399023Host: api.epicgames.dev</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>

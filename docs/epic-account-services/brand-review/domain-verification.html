@@ -1,134 +1,147 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
 			<h1>Domain Verification</h1>
-			<h2>How to verify your host domain for your Brand Review application through the Developer Portal.</h2>
+			<h2>How to verify your website domain as part of brand review.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
-		<section>
-			<div>
-				<h2 id="domain-verification">Domain Verification</h2>
-			</div>
-			<p>
-				<strong>Domain Verification</strong>
-				is designed to help you, all end users, and Epic Games link your game, brand, EGS Store front, and any other associated web-links to assist with brand cohesion and to aid against malicious activities, such as brand spoofing, copyright infringement, malware, and stolen identities.</p>
-			<p>Before proceeding forward through the
-				<a href="/docs/epic-account-services/brand-review">Brand Review</a>
-				process. Epic Games is required to verify the safety of your Hosting Domain and Privacy Policy.</p>
-			<p>The Domain Verification steps are as follows:</p>
+		<section role="main">
+			<p>Website domain verification is part of the brand review process. See the
+				<a href="/docs/epic-account-services/brand-review">Brand Review Process</a>
+				documentation for further information.</p>
+			<p>Brand review and website domain verification link the following:</p>
+			<ul>
+				<li>Your game (or software application), known as “product” in domain verification.</li>
+				<li>Your brand</li>
+				<li>Your Epic Games Store storefront presence</li>
+				<li>Any other associated web links</li>
+			</ul>
+			<p>This assists with brand cohesion and mitigates against malicious activities, such as brand spoofing, copyright infringement, malware, and stolen identities.</p>
+			<p>Before proceeding with the brand review process, Epic Games must verify the veracity of your website domain and privacy policy.</p>
+			<p>The domain verification steps are as follows:</p>
 			<ul>
 				<li>
-					<p>
-						<strong>Automated Verification</strong>: Adding a domain to your Organization.</p>
+					<p>Automated verification: You add a website domain to your
+						<span role="tooltip" aria-label="organization">
+							<span tabindex="0">organization</span>
+						</span>
+						in the Developer Portal.</p>
 				</li>
 				<li>
-					<p>
-						<strong>Ownership Verification</strong>: Verifying ownership of your domain.</p>
+					<p>Ownership verification: You verify ownership of your website domain.</p>
 				</li>
 				<li>
-					<p>
-						<strong>Manual Verification</strong>: An Epic Games Moderator is tasked with manually verifying the domain.</p>
+					<p>Manual verification: An Epic Games moderator manually verifies the website domain.</p>
 				</li>
 			</ul>
 			<div>
-				<h2 id="automated-verification">Automated Verification</h2>
+				<h2 id="steps">Steps</h2>
 			</div>
-			<p>The verification process begins when you add a domain to your
-				<a href="/docs/dev-portal/organization-management">organization</a>. To add a domain click
-				<strong>Add Domain</strong>
-				on the
-				<strong>Organization</strong>
-				page of your
-				<strong>Developer Portal</strong>. This automated verification process ensures that your domain resolves and is not blocked by any deny-list.</p>
-			<p>If the automated verification fails, the domain is not added to your
-				<span>
-					<span>organization</span>
-				</span>
-				and no further verification will proceed.</p>
 			<div>
-				<h2 id="ownership-verification">Ownership Verification</h2>
+				<h3 id="step-1-add-domain-and-get-automated-verification">Step 1: Add Domain and Get Automated Verification</h3>
 			</div>
-			<p>After your domain passes the automated verification, you are required to verify ownership of the domain and ensure your links successfully open your website and privacy policy.</p>
-			<p>To verify ownership,
-				<strong>Epic Online Services</strong>
-				(EOS) provides a unique
-				<strong>TXT Domain Secret</strong>
-				that is manually added to your domain
-				<strong>Host</strong>
-				<strong>DNS records</strong>. EOS will confirm your domain ownership when the record becomes visible.</p>
-			<p>Follow the steps below to add the TXT Domain Secret to your domain host DNS records:</p>
+			<p>Add a website address ("domain") to your organization and verify ownership. To do this:</p>
+			<p>To do this:</p>
+			<ol>
+				<li>Go to the Developer Portal at
+					<a href="https://dev.epicgames.com/portal/en-US/">dev.epicgames.com</a>.</li>
+				<li>Select your organization name from the top of the left navigation’s dropdown menu.</li>
+				<li>Click
+					<strong>Organization</strong>
+					to see your Organization page.</li>
+				<li>Select the
+					<strong>Settings</strong>
+					tab.</li>
+				<li>Scroll down the page to
+					<strong>Domains</strong>.</li>
+				<li>Click
+					<strong>Add Domain</strong>.</li>
+			</ol>
+			<p>If the domain you add passes the automatic verification, the Developer Portal moves onto the next step and displays the
+				<strong>Verify ownership</strong>
+				pane.</p>
+			<p>If the domain fails automatic verification, the Developer Portal does not move onto the next step and the domain is not added to your organization.</p>
+			<p>This automated verification process ensures that your domain resolves and is not blocked by any deny-list.</p>
+			<div>
+				<h3 id="step-2-ownership-verification">Step 2: Ownership Verification</h3>
+			</div>
+			<p>After your domain passes the automated verification, you must verify ownership of the domain.</p>
+			<p>To verify ownership, Epic Online Services (EOS) provides a unique
+				<code>TXT Domain Secret</code>
+				that you manually add to your domain host DNS records. EOS confirms your domain ownership when the
+				<code>TXT Domain Secret</code>
+				becomes visible.</p>
+			<p>Follow the steps below to add the
+				<code>TXT Domain Secret</code>
+				to your domain host DNS records:</p>
 			<ol>
 				<li>
-					<p>Copy the
+					<p>In the Developer Portal's
+						<strong>Verify ownership</strong>
+						pane, copy the starred out text in the
 						<strong>Domain Secret</strong>
-						included in your
-						<strong>Verify Ownership</strong>
-						form from the
-						<strong>Developer Portal</strong>.</p>
+						field</p>
 				</li>
 				<li>
-					<p>Sign in to your domain
-						<strong>Host Account</strong>.</p>
-					<div>
-						<p>The management of your domain account depends on your provider and is beyond the scope of this document. Please contact your domain provider for further assistance.</p>
-					</div>
+					<p>Go to your domain host account administration access.<br>
+						<strong>Note</strong>: The management of your domain host account depends on your domain host provider and is beyond the scope of this page. Contact your website domain host provider for assistance.</p>
 				</li>
 				<li>
-					<p>Find your domain’s
-						<strong>DNS</strong>
-						<strong>records</strong>
-						and select the option to
-						<strong>add a new record</strong>.</p>
+					<p>In your domain host account, do the following:</p>
+					<ol>
+						<li>Find your domain’s DNS records and select the option to add a new record (it might be slightly different text to “add a new record”).</li>
+						<li>Select the
+							<strong>TXT record</strong>
+							type.<br>
+							<strong>Note</strong>: If your domain host account doesn't support
+							<code>TXT record</code>, (for example it uses
+							<code>CNAME</code>), contact Epic Games support. See the
+							<a href="/docs/support">Support</a>
+							page for details.</li>
+						<li>In the appropriate field, paste your
+							<code>TXT Domain Secret</code>. This field might be known as
+							<strong>Value</strong>,
+							<strong>Answer</strong>,
+							<strong>Destination</strong>, or some other name.</li>
+						<li>Save the record on the domain host account. A
+							<code>TXT Domain Secret</code>
+							verification record does not affect your website or DNS settings.</li>
+					</ol>
 				</li>
 				<li>
-					<p>Select the
-						<strong>TXT record</strong>
-						type.</p>
-					<div>
-						<p>If your website doesn't support TXT record, for example it uses CNAME, reach out to support at
-							<a href="https://eoshelp.epicgames.com/s/private-question-page?language=en_US">eoshelp.epicgames.com</a>.</p>
-					</div>
-				</li>
-				<li>
-					<p>In the appropriate field, paste your
-						<strong>Domain Secret</strong>. This field may be called
-						<strong>Value</strong>,
-						<strong>Answer</strong>,
-						<strong>Destination</strong>, or some other name.</p>
-				</li>
-				<li>
-					<p>Save the record on the domain host account. A TXT verification record does not affect your website or DNS settings.</p>
-				</li>
-				<li>
-					<p>Return to the
-						<strong>Developer Portal</strong>
-						and select
-						<strong>Check TXT Record</strong>
-						in the
-						<strong>Verify Ownership</strong>
-						form.</p>
+					<p>In the Developer Portal's Verify ownership pane, click
+						<strong>Check txt record</strong>.</p>
 				</li>
 			</ol>
-			<p>When your domain ownership is successful, a
-				<strong>Verified</strong>
-				status will appear below the domain name in the list of your organization’s domain names. Upon completing the automated and ownership verification steps, you can use the domain in your
-				<a href="/docs/epic-account-services/brand-review">Brand Review</a>
-				for your product’s website and your privacy policy.</p>
+			<p>
+				<strong>Successful Ownership Verification</strong>: When your domain’s ownership verification is successfully completed, the Developer Portal Organization page’s Settings tab displays Verified below the domain name list.</p>
+			<p>
+				<strong>Failed Ownership Verification</strong>: When your domain’s ownership verification fails, contact Epic Games support. See the
+				<a href="/docs/support">Support</a>
+				page for details.</p>
+			<p>When you have successfully completed both the automated verification step and the ownership verification step, you can use the domain in your brand review, including any links you provide for your privacy policy.</p>
 			<div>
-				<h2 id="manual-verification">Manual Verification</h2>
+				<h3 id="step-3--manual-verification">Step 3:  Manual Verification</h3>
 			</div>
-			<p>The final step of domain verification process is performed by a moderator during the review of your brand content. The moderator manually checks the domain name as well as the hosted content to validate that it does not contain anything offensive, explicit, or violate any intellectual property rights.</p>
+			<p>Epic Games does this step during your product’s brand review. An Epic Games moderator manually checks the domain name as well as the hosted content to validate that it does not contain anything offensive, explicit, or violate any intellectual property rights.</p>
 			<div>
-				<h2 id="feedback">Feedback</h2>
+				<h3 id="feedback">Feedback</h3>
 			</div>
-			<p>The moderator can provide feedback at any step of verification. If your domain is declined, you will be notified with an explanation of issues to remedy for a successful verification at resubmission.</p>
+			<p>The Epic Games moderator can provide feedback at any step of verification. If your domain fails verification, Epic Games notifies you with an explanation of the issues to remedy for successful verification when you resubmit your domain for verification.</p>
 			<div id="tag_list">
 				<a href="/docs/site-map">Epic Account</a>
 				<a href="/docs/site-map">
@@ -144,16 +157,16 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#domain-verification">Domain Verification</a>
+						<a href="#steps">Steps</a>
 					</li>
 					<li>
-						<a href="#automated-verification">Automated Verification</a>
+						<a href="#step-1-add-domain-and-get-automated-verification">Step 1: Add Domain and Get Automated Verification</a>
 					</li>
 					<li>
-						<a href="#ownership-verification">Ownership Verification</a>
+						<a href="#step-2-ownership-verification">Step 2: Ownership Verification</a>
 					</li>
 					<li>
-						<a href="#manual-verification">Manual Verification</a>
+						<a href="#step-3--manual-verification">Step 3:  Manual Verification</a>
 					</li>
 					<li>
 						<a href="#feedback">Feedback</a>

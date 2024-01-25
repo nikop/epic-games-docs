@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -10,7 +17,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<div role="alert">
 				<div></div>
 				<div>
@@ -193,9 +200,7 @@
 			</ul>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_HLobbyModification LobbyModificationHandle = nullptr;EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &amp;ModifyOptions, &amp;LobbyModificationHandle);assert(LobbyModificationHandle != nullptr); //Create a lobby level modification (lobby attributes or lobby settings) using the LobbyModification handle created above //Now add a member attribute change to the same LobbyModificationHandle used to make the lobby level modificationFLobbyAttribute WorkaroundAttribute;WorkaroundAttribute.Key = "WorkaroundKey";WorkaroundAttribute.ValueType = FLobbyAttribute::Int64;WorkaroundAttribute.AsInt64 = 0;	EOS_Lobby_AttributeData AttributeData = WorkaroundAttribute.ToAttributeData();EOS_LobbyModification_AddMemberAttributeOptions AddAttrOptions = {};AddAttrOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;AddAttrOptions.Attribute = &amp;AttributeData;AddAttrOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PRIVATE; EOS_EResult Result = EOS_LobbyModification_AddMemberAttribute(LobbyModificationHandle, &amp;AddAttrOptions); assert(Result != EOS_EResult::EOS_Success); //Now apply lobby update which includes both the lobby level modification //and the workaround member attribute addition EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;UpdateOptions.LobbyModificationHandle = LobbyModificationHandle;EOS_Lobby_UpdateLobby(LobbyHandle, &amp;UpdateOptions, nullptr, OnLobbyUpdateFinished);</pre>
 				</section>
 			</div>
 			<div>
@@ -1433,9 +1438,7 @@
 			</ul>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_HLobbyModification LobbyModificationHandle = nullptr;EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &amp;ModifyOptions, &amp;LobbyModificationHandle);assert(LobbyModificationHandle != nullptr); //Create a lobby level modification (lobby attributes or lobby settings) using the LobbyModification handle created above //Now add a member attribute change to the same LobbyModificationHandle used to make the lobby level modificationFLobbyAttribute WorkaroundAttribute;WorkaroundAttribute.Key = "WorkaroundKey";WorkaroundAttribute.ValueType = FLobbyAttribute::Int64;WorkaroundAttribute.AsInt64 = 0;	EOS_Lobby_AttributeData AttributeData = WorkaroundAttribute.ToAttributeData();EOS_LobbyModification_AddMemberAttributeOptions AddAttrOptions = {};AddAttrOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;AddAttrOptions.Attribute = &amp;AttributeData;AddAttrOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PRIVATE; EOS_EResult Result = EOS_LobbyModification_AddMemberAttribute(LobbyModificationHandle, &amp;AddAttrOptions); assert(Result != EOS_EResult::EOS_Success); //Now apply lobby update which includes both the lobby level modification //and the workaround member attribute addition EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;UpdateOptions.LobbyModificationHandle = LobbyModificationHandle;EOS_Lobby_UpdateLobby(LobbyHandle, &amp;UpdateOptions, nullptr, OnLobbyUpdateFinished);</pre>
 				</section>
 			</div>
 			<div>

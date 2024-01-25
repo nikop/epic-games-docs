@@ -1,6 +1,13 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
@@ -12,13 +19,13 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
 			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts in order to be distributed on the Epic Games Store. This requirement ensures users who purchase a multiplayer
-				<span>
-					<span>product</span>
+				<span role="tooltip" aria-label="product">
+					<span tabindex="0">product</span>
 				</span>
 				on the Epic Games Store can easily connect with friends and other players, regardless of where purchases were made.</p>
 			<p>You may use your preferred solution for crossplay, such as the free Epic Online Services (EOS) crossplay functionality, your own method, or any third-party system that works across PC storefronts. Crossplay with other non-PC platforms (i.e., consoles) is optional but encouraged.</p>
@@ -245,8 +252,8 @@
 				<h4 id="typical-tech-stack-1">Typical Tech Stack</h4>
 			</div>
 			<p>Typically, a game client leveraging their publisher
-				<span>
-					<span>account</span>
+				<span role="tooltip" aria-label="account">
+					<span tabindex="0">account</span>
 				</span>
 				for the primary social graph across storefronts also uses their own game services. They may also have their own storefront. This is not required.</p>
 			<table>

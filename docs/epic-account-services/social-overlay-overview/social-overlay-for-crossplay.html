@@ -1,10 +1,17 @@
 <section class="page">
 	<div>
-		<div></div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation">
+					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
 	</div>
 	<section>
 		<div>
-			<h1>Social Overlay for Crossplay</h1>
+			<h1>How to Use the Social Overlay for Crossplay</h1>
 			<h2>A guide on how to use the Social Overlay across multiple platforms, with Epic Games accounts and native invites.</h2>
 			<div>
 				<div>11 mins to read</div>
@@ -12,7 +19,7 @@
 		</div>
 	</section>
 	<section>
-		<section>
+		<section role="main">
 			<p>If you want to release your game with Epic Online Services (EOS) on multiple platforms and allow players to use the Social Overlay across these platforms, then you need to use the Integrated Platform API and register a number of callbacks when you initialize the EOS SDK. This allows players to use the Social Overlay across platforms to invite other players to join their game or allow other players to request to join their game.</p>
 			<p>To do this, see the following documentation for information on:</p>
 			<ul>
@@ -44,8 +51,8 @@
 			<div>
 				<h3 id="when-should-i-initialize-the-eos-sdk">When should I Initialize the EOS SDK?</h3>
 			</div>
-			<p>You must initialize the EOS SDK in the proper order for your platform to ensure that the graphics (<span>
-					<span>EOS Overlay</span>
+			<p>You must initialize the EOS SDK in the proper order for your platform to ensure that the graphics (<span role="tooltip" aria-label="EOS Overlay">
+					<span tabindex="0">EOS Overlay</span>
 				</span>) render properly.
 				<br>
 				When you develop a game with the EOS SDK for a number of different platforms, you need to:</p>

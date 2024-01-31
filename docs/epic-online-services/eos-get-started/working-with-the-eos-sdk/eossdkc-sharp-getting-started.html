@@ -226,17 +226,13 @@
 			<p>The following sample code demonstrates the structure of what your native library may look like:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>void* Allocate(size_t InSizeInBytes, size_t InAlignment){} void* Reallocate(void* InPointer, size_t InSizeInBytes, size_t InAlignment){} void Release(void* InPointer){} typedef void* (*AllocateFunctionPointer)(size_t InSizeInBytes, size_t InAlignment);extern "C" __declspec(dllexport) AllocateFunctionPointer GetAllocateFunctionPointer();{  return Allocate;} typedef void* (*ReallocateFunctionPointer)(void* InPointer, size_t InSizeInBytes, size_t InAlignment);extern "C" __declspec(dllexport) ReallocateFunctionPointer GetReallocateFunctionPointer(){  return Reallocate;} typedef void (*ReleaseFunctionPointer)(void* InPointer);extern "C" __declspec(dllexport) ReleaseFunctionPointer GetReleaseFunctionPointer(){  return Release;}</pre>
 				</section>
 			</div>
 			<p>And the following sample code demonstrates what the C# bindings may look like:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>[DllImport("MyNativeLibrary.dll")]private static extern IntPtr GetAllocateFunctionPointer(); [DllImport("MyNativeLibrary.dll")]private static extern IntPtr GetReallocateFunctionPointer(); [DllImport("MyNativeLibrary.dll")]private static extern IntPtr GetReleaseFunctionPointer();</pre>
 				</section>
 			</div>
 			<div>
@@ -303,24 +299,19 @@
 			<p>For example, you may have the following extern functions defined on Windows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>[DllImport("Kernel32.dll")]private static extern IntPtr LoadLibrary(string lpLibFileName); [DllImport("Kernel32.dll")]private static extern int FreeLibrary(IntPtr hLibModule); [DllImport("Kernel32.dll")]private static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);</pre>
 				</section>
 			</div>
 			<p>Then to begin using the SDK, load the library and hook the dynamic bindings with:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>var libraryPath = $"Assets/{Config.LibraryName}"; var libraryPointer = LoadLibrary(libraryPath);if (libraryPointer == IntPtr.Zero){  throw new Exception($"Failed to load library {libraryPath}");} Bindings.Hook(libraryPointer, GetProcAddress);</pre>
 				</section>
 			</div>
 			<p>When the application is finished, unhook the dynamic bindings and free the library with:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>Bindings.Unhook();FreeLibrary(libraryPointer);
 					</pre>
 				</section>
 			</div>
@@ -348,9 +339,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>// Set these values as appropriate. For more information, see the Developer Portal documentation.string productName = "MyCSharpApplication";string productVersion = "1.0";string productId = "";string sandboxId = "";string deploymentId = "";string clientId = "";string clientSecret = ""; var initializeOptions = new Epic.OnlineServices.Platform.InitializeOptions(){  ProductName = productName,  ProductVersion = productVersion}; var initializeResult = Epic.OnlineServices.Platform.PlatformInterface.Initialize(initializeOptions);if (initializeResult != Epic.OnlineServices.Result.Success){  throw new System.Exception("Failed to initialize platform: " + initializeResult);} // The SDK outputs lots of information that is useful for debugging.// Make sure to set up the logging interface as early as possible: after initializing.Epic.OnlineServices.Logging.LoggingInterface.SetLogLevel(Epic.OnlineServices.Logging.LogCategory.AllCategories, Epic.OnlineServices.Logging.LogLevel.VeryVerbose);Epic.OnlineServices.Logging.LoggingInterface.SetCallback((Epic.OnlineServices.Logging.LogMessage logMessage) =&gt;{  System.Console.WriteLine(logMessage.Message);}); var options = new Epic.OnlineServices.Platform.Options(){  ProductId = productId,  SandboxId = sandboxId,  DeploymentId = deploymentId,  ClientCredentials = new Epic.OnlineServices.Platform.ClientCredentials()  {    ClientId = clientId,    ClientSecret = clientSecret  }}; var platformInterface = Epic.OnlineServices.Platform.PlatformInterface.Create(options);if (platformInterface == null){  throw new System.Exception("Failed to create platform");}</pre>
 				</section>
 			</div>
 			<div>
@@ -358,9 +347,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>var loginCredentialType = Epic.OnlineServices.Auth.LoginCredentialType.AccountPortal;/// These fields correspond to &lt;see cref="Epic.OnlineServices.Auth.Credentials.Id" /&gt; and &lt;see cref="Epic.OnlineServices.Auth.Credentials.Token" /&gt;,/// and their use differs based on the login type. For more information, see &lt;see cref="Epic.OnlineServices.Auth.Credentials" /&gt;/// and the Auth Interface documentation.string loginCredentialId = null;string loginCredentialToken = null; var authInterface = platformInterface.GetAuthInterface();if (authInterface == null){  throw new System.Exception("Failed to get auth interface");} var loginOptions = new Epic.OnlineServices.Auth.LoginOptions(){  Credentials = new Epic.OnlineServices.Auth.Credentials()  {    Type = loginCredentialType,    Id = loginCredentialId,    Token = loginCredentialToken  },  // Change these scopes to match the ones set up on your product on the Developer Portal.    ScopeFlags = Epic.OnlineServices.Auth.AuthScopeFlags.BasicProfile | Epic.OnlineServices.Auth.AuthScopeFlags.FriendsList | Epic.OnlineServices.Auth.AuthScopeFlags.Presence}; // Ensure platform tick is called on an interval, or the following call will never callback.authInterface.Login(loginOptions, null, (Epic.OnlineServices.Auth.LoginCallbackInfo loginCallbackInfo) =&gt;{  if (loginCallbackInfo.ResultCode == Epic.OnlineServices.Result.Success)  {    System.Console.WriteLine("Login succeeded");  }  else if (Epic.OnlineServices.Common.IsOperationComplete(loginCallbackInfo.ResultCode))  {    System.Console.WriteLine("Login failed: " + loginCallbackInfo.ResultCode);  }});</pre>
 				</section>
 			</div>
 			<div>
@@ -371,9 +358,7 @@
 				The code below requires SDK 1.15 or above.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>// This code is provided for demonstration purposes and is not intended to represent ideal practices.using Epic.OnlineServices;using Epic.OnlineServices.Auth;using Epic.OnlineServices.Logging;using Epic.OnlineServices.Platform;using System;using System.Runtime.InteropServices;using UnityEngine; public class EOSSDKComponent : MonoBehaviour{    // Set these values as appropriate. For more information, see the Developer Portal documentation.    public string m_ProductName = "MyUnityApplication";    public string m_ProductVersion = "1.0";    public string m_ProductId = "";    public string m_SandboxId = "";    public string m_DeploymentId = "";    public string m_ClientId = "";    public string m_ClientSecret = "";    public LoginCredentialType m_LoginCredentialType = LoginCredentialType.AccountPortal;    // These fields correspond to \&lt;see cref="Credentials.Id" /&gt; and \&lt;see cref="Credentials.Token" /&gt;,    // and their use differs based on the login type. For more information, see \&lt;see cref="Credentials" /&gt;    // and the Auth Interface documentation.    public string m_LoginCredentialId = null;    public string m_LoginCredentialToken = null;     private static PlatformInterface s_PlatformInterface;    private const float c_PlatformTickInterval = 0.1f;    private float m_PlatformTickTimer = 0f;     // If we're in editor, we should dynamically load and unload the SDK between play sessions.    // This allows us to initialize the SDK each time the game is run in editor.#if UNITY_EDITOR    [DllImport("Kernel32.dll")]    private static extern IntPtr LoadLibrary(string lpLibFileName);     [DllImport("Kernel32.dll")]    private static extern int FreeLibrary(IntPtr hLibModule);     [DllImport("Kernel32.dll")]    private static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);     private IntPtr m_LibraryPointer;#endif     private void Awake()    {#if UNITY_EDITOR        var libraryPath = "Assets/" + Config.LibraryName;         m_LibraryPointer = LoadLibrary(libraryPath);        if (m_LibraryPointer == IntPtr.Zero)        {            throw new Exception("Failed to load library" + libraryPath);        }         Bindings.Hook(m_LibraryPointer, GetProcAddress);#endif    }     private void OnApplicationQuit()    {        if (s_PlatformInterface != null)        {            s_PlatformInterface.Release();            s_PlatformInterface = null;            PlatformInterface.Shutdown();        } #if UNITY_EDITOR        if (m_LibraryPointer != IntPtr.Zero)        {            Bindings.Unhook();             // Free until the module ref count is 0            while (FreeLibrary(m_LibraryPointer) != 0) { }            m_LibraryPointer = IntPtr.Zero;        }#endif    }     void Start()    {        var initializeOptions = new InitializeOptions()        {            ProductName = m_ProductName,            ProductVersion = m_ProductVersion        };         var initializeResult = PlatformInterface.Initialize(ref initializeOptions);        if (initializeResult != Result.Success)        {            throw new Exception("Failed to initialize platform: " + initializeResult);        }         // The SDK outputs lots of information that is useful for debugging.        // Make sure to set up the logging interface as early as possible: after initializing.        LoggingInterface.SetLogLevel(LogCategory.AllCategories, LogLevel.VeryVerbose);        LoggingInterface.SetCallback((ref LogMessage logMessage) =&gt; Debug.Log(logMessage.Message));         var options = new Options()        {            ProductId = m_ProductId,            SandboxId = m_SandboxId,            DeploymentId = m_DeploymentId,            ClientCredentials = new ClientCredentials()            {                ClientId = m_ClientId,                ClientSecret = m_ClientSecret            }        };         s_PlatformInterface = PlatformInterface.Create(ref options);        if (s_PlatformInterface == null)        {            throw new Exception("Failed to create platform");        }         var loginOptions = new LoginOptions()        {            Credentials = new Credentials()            {                Type = m_LoginCredentialType,                Id = m_LoginCredentialId,                Token = m_LoginCredentialToken            },            // Change these scopes to match the ones set up on your product on the Developer Portal.            ScopeFlags = Epic.OnlineServices.Auth.AuthScopeFlags.BasicProfile | Epic.OnlineServices.Auth.AuthScopeFlags.FriendsList | Epic.OnlineServices.Auth.AuthScopeFlags.Presence        };         // Ensure platform tick is called on an interval, or this will not callback.        s_PlatformInterface.GetAuthInterface().Login(ref loginOptions, null, (ref LoginCallbackInfo loginCallbackInfo) =&gt;        {            if (loginCallbackInfo.ResultCode == Result.Success)            {                Debug.Log("Login succeeded");            }            else if (Common.IsOperationComplete(loginCallbackInfo.ResultCode))            {                Debug.Log("Login failed: " + loginCallbackInfo.ResultCode);            }        });    }     // Calling tick on a regular interval is required for callbacks to work.    private void Update()    {        if (s_PlatformInterface != null)        {            m_PlatformTickTimer += Time.deltaTime;             if (m_PlatformTickTimer &gt;= c_PlatformTickInterval)            {                m_PlatformTickTimer = 0;                s_PlatformInterface.Tick();            }        }    }}</pre>
 				</section>
 			</div>
 			<div>

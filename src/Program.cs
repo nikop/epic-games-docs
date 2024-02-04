@@ -26,4 +26,10 @@ await EpicStoreSync.Run(chromeDriver, context).ConfigureAwait(false);
 // Docs
 await DevDocSync.Run(chromeDriver, context).ConfigureAwait(false);
 
-chromeDriver.Close();
+try
+{
+    chromeDriver.Close();
+}
+catch (Exception)
+{
+}

@@ -43,9 +43,6 @@ namespace EpicDocSync
                         continue;
                     }
 #endif
-
-                    errorCount = 0;
-
                     chromeDriver.Navigate().GoToUrl(uri);
                     chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
 
@@ -211,6 +208,8 @@ namespace EpicDocSync
                     }
 
                     await File.WriteAllTextAsync(file, str).ConfigureAwait(false);
+
+                    errorCount = 0;
                 }
                 catch (TaskCanceledException)
                 {

@@ -53,12 +53,12 @@
 				<a href="/docs/epic-account-services/getting-started">set up an Application</a>
 				for your
 				<span role="tooltip" aria-label="product">
-					<span tabindex="0">product</span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
 				</span>
 				in the Dev Portal. After setting up your Application with the required information, submit it for a
 				<a href="/docs/epic-account-services/brand-review">brand review</a>. The brand review process will take a few days, after which players of your game will be able to log in using Epic accounts. For development purposes only, those Epic accounts that are members of your Dev Portal
 				<span role="tooltip" aria-label="organization">
-					<span tabindex="0">organization</span>
+					<span aria-label="tooltip organization" tabindex="0" role="button">organization</span>
 				</span>
 				will be able to log in in your game prior to it completing the brand review process.</p>
 			<p>See the documentation on the
@@ -81,7 +81,7 @@
 				<code>EOS_LCT_AccountPortal</code>
 				log-in method that does not require input authentication credentials, and instead prompts the user for Epic
 				<span role="tooltip" aria-label="account">
-					<span tabindex="0">account</span>
+					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
 				</span>
 				credentials as part of the log-in process.</p>
 			<p>The SDK takes full control of the log-in flow by walking the user through any necessary steps using the in-game overlay. Once the user completes the login flow, either successfully or by canceling it, the SDK returns control to the game application via completion callback of the
@@ -239,14 +239,16 @@
 				acquired via the Steamworks SDK. The user is walked through the built-in user onboarding experience to link the local user's Steam account with an Epic Account. Linking the Steam account with an Epic  Account enables automatic user log in across consecutive application runs and across any game titles using Epic Account Services.</p>
 			<p>New users without an existing Epic Account have the option to create a new frictionless proxy Epic  Account. This links the user's Steam account to a newly-created Epic Account, allowing an automatic log in on consecutive application runs and without requiring users to register any additional details such as their email address or password.</p>
 			<p>Proxy Epic Accounts can be used in the same way as regular Epic Accounts that have an associated email address and password. For example, if the user later installs the Epic Games Launcher they will be able to login to their Epic Account using their Steam account login credentials. At that time, the user will be asked to register an email address and set a password for their account.</p>
-			<div>
+			<div tabindex="0" aria-label="Welcome image, press Enter to open full size">
 				<div>
 					<span>
 						<img alt="Welcome" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
 						<noscript></noscript>
 					</span>
 				</div>
-				<p>Welcome screen of the built-in user onboarding experience on Steam that supports the frictionless proxy Epic Account creation.</p>
+				<figcaption>
+					<p>Welcome screen of the built-in user onboarding experience on Steam that supports the frictionless proxy Epic Account creation.</p>
+				</figcaption>
 			</div>
 			<div>
 				<h3 id="stand-alone-distribution">Stand-alone distribution</h3>

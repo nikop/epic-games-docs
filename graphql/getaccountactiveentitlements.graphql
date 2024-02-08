@@ -1,0 +1,22 @@
+query getAccountActiveEntitlements($accountId: String!, $namespace: String!) {
+  Entitlements {
+    accountEntitlements(
+      accountId: $accountId
+      params: {namespace: $namespace, active: true, count: 100, consumable: false, entitlementType: "AUDIENCE,ENTITLEMENT,EXECUTABLE"}
+    ) {
+      entitlements {
+        catalogItemId
+        country
+        created
+        entitlementName
+        entitlementType
+        grantDate
+        id
+        namespace
+        purpose
+        startDate
+      }
+      count
+    }
+  }
+}

@@ -45,17 +45,18 @@
 					<p>Denoted(*) providers do not require configuration in your Developer Portal.</p>
 				</div>
 			</div>
-			<div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
 				<div>
 					<span>
 						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
 						<noscript></noscript>
 					</span>
 				</div>
+				<figcaption></figcaption>
 			</div>
 			<p>Anytime a user starts an instance of your
 				<span role="tooltip" aria-label="product">
-					<span tabindex="0">product</span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
 				</span>
 				on an enabled identity provider  (shown in the flow above), the product authenticates the local user using the
 				<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</p>
@@ -67,7 +68,7 @@
 			<p>EOS verifies the submitted token and the user’s identity using the identity provider configuration to connect the user to existing product data.</p>
 			<p>If the user is playing the product for the first time on a new platform, EOS sees that the player has no data for that product on that platform. Your product client can then ask the user to proceed with their
 				<span role="tooltip" aria-label="account">
-					<span tabindex="0">account</span>
+					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
 				</span>
 				on the current platform, create a new account for that game on that platform, or log in using another account that they have previously used to play the product.</p>
 			<p>If the user chooses to log in with an existing account from another identity provider, your product can ask the user if they want to link the two accounts. After this initial event, EOS remembers which account to use when the user plays this product, and does not prompt the user again.</p>
@@ -232,12 +233,12 @@
 			<p>
 				<strong>Tip</strong>: If your game is using Steam Auth Session Tickets, use the same Encryption Key for all of the SteamAppIDs in your Steamworks web dashboard configuration. This allows you to use a single EOS credentials entry across your different Steam game builds.</p>
 			<div id="tag_list">
-				<a href="/docs/site-map">DevPortal</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag DevPortal" href="/docs/site-map">DevPortal</a>
+				<a aria-label="Tag  Identity" href="/docs/site-map">
 					Identity</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Identity Provider" href="/docs/site-map">
 					Identity Provider</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Publishing" href="/docs/site-map">
 					Publishing</a>
 			</div>
 		</section>

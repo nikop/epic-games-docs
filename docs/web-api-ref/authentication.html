@@ -47,20 +47,22 @@
 			<p>When the game client is launched, it will make a request to the Epic token endpoint that includes the client credentials and exchange code. The response will include an
 				<strong>access token</strong>, information about the client and
 				<span role="tooltip" aria-label="account">
-					<span tabindex="0">account</span>
+					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
 				</span>
 				that were authenticated, and an optional
 				<strong>refresh token</strong>.</p>
 			<p>The game client will include the access token on all requests to Epic services. The access token can also be passed to trusted game servers for verification, or for use in service-to-service requests.</p>
 			<p>When applicable, a refresh token will also be included in the token response. The game client will need to use the refresh token if the access token expires. This typically occurs within 2 hours after the access token is issued.</p>
-			<div>
+			<div tabindex="0" aria-label="EGS Client Auth flow image, press Enter to open full size">
 				<div>
 					<span>
 						<img alt="EGS Client Auth flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
 						<noscript></noscript>
 					</span>
 				</div>
-				<p>Diagram illustrating Epic Games Launcher authentication flow. Click image to enlarge.</p>
+				<figcaption>
+					<p>Diagram illustrating Epic Games Launcher authentication flow. Click image to enlarge.</p>
+				</figcaption>
 			</div>
 			<div>
 				<h3 id="web-server-applications">Web Server Applications</h3>
@@ -647,12 +649,12 @@
 				</section>
 			</div>
 			<div id="tag_list">
-				<a href="/docs/site-map">Developer</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag Developer" href="/docs/site-map">Developer</a>
+				<a aria-label="Tag  Authentication" href="/docs/site-map">
 					Authentication</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Auth" href="/docs/site-map">
 					Auth</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Login" href="/docs/site-map">
 					Login</a>
 			</div>
 		</section>

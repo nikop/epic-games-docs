@@ -24,10 +24,7 @@
 				<strong>Logging Interface</strong>
 				gives developers access to useful output from the
 				<strong>Epic Online Services</strong>
-				(EOS) SDK that can help to diagnose technical issues both during development and after shipping a
-				<span role="tooltip" aria-label="product">
-					<span tabindex="0">product</span>
-				</span>. Unlike other interfaces in the EOS SDK, the Logging Interface does not communicate with remote machines, and does not require a handle.</p>
+				(EOS) SDK that can help to diagnose technical issues both during development and after shipping a product. Unlike other interfaces in the EOS SDK, the Logging Interface does not communicate with remote machines, and does not require a handle.</p>
 			<div>
 				<h2 id="receiving-log-data">Receiving Log Data</h2>
 			</div>
@@ -49,8 +46,7 @@
 				<code>EOS_ELogLevel</code>). You can also set the level for all categories at once, and can filter one or more categories out entirely. The following code snippet shows a few examples:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>// Set all categories to Warning level; ignore anything that isn't at least as important as a Warning.EOS_Logging_SetLogLevel(EOS_LC_ALL_CATEGORIES, EOS_LOG_Warning); // For the Friends Interface, restrict it a little more; we only want things that are at or above Error level, no Warnings.EOS_Logging_SetLogLevel(EOS_LC_Friends, EOS_LOG_Error); // Report everything from the Ecom Interface. This might be something we're currently debugging, so we want all the log information we can get.EOS_Logging_SetLogLevel(EOS_LC_Ecom, EOS_LOG_VeryVerbose); // We don't want log output from the Lobby Interface, so turn it off completely.EOS_Logging_SetLogLevel(EOS_LC_Lobby, EOS_LOG_Off);
 					</pre>
 				</section>
 			</div>
@@ -58,16 +54,16 @@
 				<strong>Note</strong>: The default log level for all categories is
 				<code>EOS_LOG_Warning</code>.</p>
 			<div id="tag_list">
-				<a href="/docs/site-map">Interface</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag Interface" href="/docs/site-map">Interface</a>
+				<a aria-label="Tag  Log" href="/docs/site-map">
 					Log</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Debug" href="/docs/site-map">
 					Debug</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Debugging" href="/docs/site-map">
 					Debugging</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Logging" href="/docs/site-map">
 					Logging</a>
-				<a href="/docs/site-map">
+				<a aria-label="Tag  Featured" href="/docs/site-map">
 					Featured</a>
 			</div>
 		</section>

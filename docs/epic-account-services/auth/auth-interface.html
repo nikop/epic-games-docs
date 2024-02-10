@@ -254,14 +254,18 @@
 			<div>
 				<h5 id="epic-games-launcher">Epic Games Launcher</h5>
 			</div>
-			<p>When an application associated with the Epic Games Launcher starts, the launcher provides a command line with several parameters, which take this format:</p>
+			<p>When an application associated with the Epic Games Launcher starts, the launcher provides a command line with the following parameters:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>-AUTH_LOGIN=unused -AUTH_PASSWORD=&lt;password&gt; -AUTH_TYPE=exchangecode -epicapp=&lt;appid&gt; -epicenv=Prod -EpicPortal  -epicusername=&lt;username&gt; -epicuserid=&lt;userid&gt; -epiclocale=en-US -epicsandboxid=&lt;sandboxid&gt; -deploymentid=&lt;deploymentid&gt;</pre>
 				</section>
 			</div>
+			<p>
+				<strong>Note:</strong>
+				If you have not specified a deployment ID for the artifact for the application, then the Epic Games Launcher does not send the
+				<code>-deploymentID</code>
+				parameter. For information on how to set a deployment ID on an artifact, see
+				<a href="/docs/epic-games-store/store-presence/manage-artifacts#select-deployment-id">Manage Artifacts: Select Deployment ID</a>.</p>
 			<p>The important fields of this command line are as follows:</p>
 			<table>
 				<thead>

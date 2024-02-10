@@ -14,7 +14,7 @@
 			<h1>Manage Artifacts</h1>
 			<h2>Create and manage product artifacts and binaries.</h2>
 			<div>
-				<div>3 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -110,6 +110,68 @@
 				<em>Windows</em>
 				or
 				<em>Mac</em>.</p>
+			<div>
+				<h3 id="select-deployment-id">Select Deployment ID</h3>
+			</div>
+			<p>If your product uses the Epic Online Services (EOS) SDK, then your build must specify the correct deployment when it initializes the EOS SDK. To make sure that your build can identify the correct deployment, you must set a deployment ID on your artifact. When the Epic Games Launcher starts your build, it sends this deployment ID to your build as a command-line parameter.</p>
+			<p>The Epic Games Launcher sends the deployment ID in the command-line parameter
+				<code>-epicdeploymentid</code>
+				and the ID of the sandbox that contains this deployment in the parameter
+				<code>-epicsandboxid</code>. If you do not specify a deployment ID, then the Epic Games Launcher does not send the parameter
+				<code>-epicdeploymentid</code>
+				to your product.</p>
+			<p>The deployment ID is also stored in the environment configuration file for the artifact on the product user's machine. This file is stored in the
+				<code>.egstore</code>
+				subdirectory of the game installation directory. The filename has the form
+				<code>&lt;artifactid&gt;appconfig.json</code>. Example:
+				<code>915f171a87bf4a75b3456c968b5fde4cappconfig.json</code>.</p>
+			<p>More information:</p>
+			<ul>
+				<li>
+					<a href="/docs/dev-portal/product-management#deployments">Deployments</a>
+				</li>
+				<li>
+					<a href="/docs/epic-account-services/auth/auth-interface#epic-games-launcher">Epic Games Launcher</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="set-a-deployment-id-on-an-artifact">Set a Deployment ID on an Artifact</h4>
+			</div>
+			<p>To set a deployment ID on an artifact:</p>
+			<ol>
+				<li>In the Dev Portal, go to
+					<strong>Your Product</strong>
+					&gt;
+					<strong>Epic Games Store</strong>
+					&gt;
+					<strong>Artifacts and Binaries</strong>.</li>
+				<li>Click the name of the artifact or the corresponding menu (<strong>...</strong>) icon.</li>
+				<li>In
+					<strong>Deployment ID</strong>, select the deployment you want to link to this artifact.</li>
+			</ol>
+			<div>
+				<h4 id="notes-about-deployment-ids-on-artifacts">Notes about Deployment IDs on Artifacts</h4>
+			</div>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>Deployment IDs are optional on artifacts.</li>
+				<li>You can only select a deployment ID that refers to an active deployment.</li>
+				<li>If you do not select a deployment ID on an artifact, then the Epic Games Launcher does not send the
+					<code>deploymentID parameter</code>.</li>
+				<li>If you archive a deployment, the Developer Portal does not automatically remove any deployment IDs on artifacts that point to this archived deployment. You must do one of the following:
+					<ul>
+						<li>Remove the deployment IDs from the artifacts.</li>
+						<li>Set new deployment IDs on the artifacts.</li>
+					</ul>
+				</li>
+				<li>You can promote an artifact (move it from your Dev sandbox to your staging or Live sandbox, or move it from your Staging sandbox to your Live sandbox) without a deployment ID.</li>
+				<li>When you promote an artifact, any associated deployment ID is not promoted with it. As a result, the deployment ID in the destination sandbox is empty. For example, if you promote an artifact from your Dev sandbox to your Staging sandbox, then the associated deployment ID in your Staging sandbox is empty. If you want the artifact in the destination sandbox to have a deployment ID, then you must set the deployment ID manually after you promote the artifact.</li>
+			</ul>
+			<p>See the
+				<a href="/docs/dev-portal/product-management#deployments">Deployments</a>
+				documentation for more information.</p>
 			<div id="tag_list">
 				<a aria-label="Tag Epic Games Store Only" href="/docs/site-map">Epic Games Store Only</a>
 			</div>
@@ -129,6 +191,15 @@
 					</li>
 					<li>
 						<a href="#upload-the-binary">Upload the Binary</a>
+					</li>
+					<li>
+						<a href="#select-deployment-id">Select Deployment ID</a>
+					</li>
+					<li>
+						<a href="#set-a-deployment-id-on-an-artifact">Set a Deployment ID on an Artifact</a>
+					</li>
+					<li>
+						<a href="#notes-about-deployment-ids-on-artifacts">Notes about Deployment IDs on Artifacts</a>
 					</li>
 				</ul>
 			</div>

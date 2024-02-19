@@ -49,8 +49,7 @@
 				<code>EOS_ELogLevel</code>). You can also set the level for all categories at once, and can filter one or more categories out entirely. The following code snippet shows a few examples:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>// Set all categories to Warning level; ignore anything that isn't at least as important as a Warning.EOS_Logging_SetLogLevel(EOS_LC_ALL_CATEGORIES, EOS_LOG_Warning); // For the Friends Interface, restrict it a little more; we only want things that are at or above Error level, no Warnings.EOS_Logging_SetLogLevel(EOS_LC_Friends, EOS_LOG_Error); // Report everything from the Ecom Interface. This might be something we're currently debugging, so we want all the log information we can get.EOS_Logging_SetLogLevel(EOS_LC_Ecom, EOS_LOG_VeryVerbose); // We don't want log output from the Lobby Interface, so turn it off completely.EOS_Logging_SetLogLevel(EOS_LC_Lobby, EOS_LOG_Off);
 					</pre>
 				</section>
 			</div>

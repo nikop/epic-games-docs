@@ -1,0 +1,13 @@
+query getAccountRedeemedUplayCodes($accountId: String!, $ubisoftAccountId: String!) {
+  PartnerIntegration {
+    accountRedeemedUplayCodes(
+      accountId: $accountId
+      ubisoftAccountId: $ubisoftAccountId
+    ) {
+      epicAccountId
+      gameId
+      redeemedOnUplay
+      uplayAccountId
+    }
+  }
+}

@@ -3,8 +3,8 @@
 		<div>
 			<div>
 				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-					<input type="hidden" name="filter" value="Documentation">
-					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
 			</div>
 		</div>
@@ -21,11 +21,11 @@
 	<section>
 		<section role="main">
 			<p>Products are games or other software projects that contain sandboxes and deployments within EOS. You can have multiple products registered with EOS, and  each
-				<span role="tooltip" aria-label="product">
+				<span>
 					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
 				</span>
 				maintains a separate set of sandboxes. At every product creation, a new public
-				<span role="tooltip" aria-label="sandbox">
+				<span>
 					<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
 				</span>
 				is automatically assigned to your live environment.</p>
@@ -239,7 +239,7 @@
 			<p>Deployments are specific distributions of a product and store’s progression, achievements, statistics, matchmaking, and other gameplay-related user information. You can configure your deployments by clicking
 				<strong>Deployments</strong>
 				for a sandbox. Each
-				<span role="tooltip" aria-label="deployment">
+				<span>
 					<span aria-label="tooltip deployment" tabindex="0" role="button">deployment</span>
 				</span>
 				can only attach to a single sandbox. If you want parallel deployments in two different sandboxes, you must create one deployment for each.</p>
@@ -256,7 +256,7 @@
 				<a href="/docs/game-services/eos-platform-interface#platform-interface">initializing the SDK</a>
 				and is configured to access product session data for that deployment. Information stored at the sandbox level is also obtained by the deployment ID.</p>
 			<p>You can associate a deployment with a specific build of your product. To do this, set a deployment ID on the
-				<span role="tooltip" aria-label="artifact">
+				<span>
 					<span aria-label="tooltip artifact" tabindex="0" role="button">artifact</span>
 				</span>
 				associated with that build. For information, see
@@ -272,7 +272,7 @@
 				<h4 id="deployment-use-cases-examples">Deployment Use Cases Examples</h4>
 			</div>
 			<p>Deployments can provide another level of
-				<span role="tooltip" aria-label="organization">
+				<span>
 					<span aria-label="tooltip organization" tabindex="0" role="button">organization</span>
 				</span>
 				and separation to your development, testing, and shipping process. The following examples highlight different deployment opportunities:</p>
@@ -416,7 +416,7 @@
 				<a href="#sandboxes">sandboxes</a>
 				and
 				<a href="#deployments">deployments</a>. By default, private sandbox or deployment access is denied to external users unless they are given permission by using Player Groups. For example, you can add your QA team’s
-				<span role="tooltip" aria-label="account">
+				<span>
 					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
 				</span>
 				ID to a group so they can test on their own private version of your product. If you are using Epic Account Services, access is denied to external users until your application has gone through our
@@ -452,10 +452,10 @@
 				from the Player Groups tab by selecting the
 				<strong>More Options</strong>.</p>
 			<div id="tag_list">
-				<a aria-label="Tag DevPortal" href="/docs/site-map">DevPortal</a>
-				<a aria-label="Tag  Products" href="/docs/site-map">
+				<a aria-label="Tag DevPortal" aria-hidden="false" tabindex="0" href="/docs/site-map">DevPortal</a>
+				<a aria-label="Tag  Products" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Products</a>
-				<a aria-label="Tag  Sandboxes" href="/docs/site-map">
+				<a aria-label="Tag  Sandboxes" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Sandboxes</a>
 			</div>
 		</section>

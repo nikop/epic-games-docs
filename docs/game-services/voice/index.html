@@ -3,8 +3,8 @@
 		<div>
 			<div>
 				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-					<input type="hidden" name="filter" value="Documentation">
-					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 				<p>Linux is currently not supported for EOS Voice.</p>
 			</div>
 			<p>The connections made with EOS Voice establish only between authenticated users and go through Voice servers without exposing personal information (PI) about the users. EOS handles all the scaling, quality of service, maintenance, multi-region
-				<span role="tooltip" aria-label="presence">
+				<span>
 					<span aria-label="tooltip presence" tabindex="0" role="button">presence</span>
 				</span>, and other machinery of the voice servers.</p>
 			<div>
@@ -425,9 +425,7 @@
 			<p>The C SDK example code snippet for Windows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>#ifdef _WIN32	// Get absolute path for xaudio2_9redist.dll file	wchar_t CurDir[MAX_PATH + 1] = {};	::GetCurrentDirectoryW(MAX_PATH + 1u, CurDir);	std::wstring BasePath = std::wstring(CurDir);	std::string XAudio29DllPath = FStringUtils::Narrow(BasePath);	XAudio29DllPath.append("/xaudio2_9redist.dll"); 	EOS_Windows_RTCOptions WindowsRtcOptions = { 0 };	WindowsRtcOptions.ApiVersion = EOS_WINDOWS_RTCOPTIONS_API_LATEST;	WindowsRtcOptions.XAudio29DllPath = XAudio29DllPath.c_str();	RtcOptions.PlatformSpecificOptions = &amp;WindowsRtcOptions;</pre>
 				</section>
 			</div>
 			<div>
@@ -501,12 +499,12 @@
 					<strong>Errors</strong>: Detailed information about errors and their rates.</li>
 			</ul>
 			<div id="tag_list">
-				<a aria-label="Tag Interface" href="/docs/site-map">Interface</a>
-				<a aria-label="Tag  Voice" href="/docs/site-map">
+				<a aria-label="Tag Interface" aria-hidden="false" tabindex="0" href="/docs/site-map">Interface</a>
+				<a aria-label="Tag  Voice" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Voice</a>
-				<a aria-label="Tag  Lobbies" href="/docs/site-map">
+				<a aria-label="Tag  Lobbies" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Lobbies</a>
-				<a aria-label="Tag  Chat" href="/docs/site-map">
+				<a aria-label="Tag  Chat" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Chat</a>
 			</div>
 		</section>

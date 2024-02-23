@@ -3,8 +3,8 @@
 		<div>
 			<div>
 				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-					<input type="hidden" name="filter" value="Documentation">
-					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
 			</div>
 		</div>
@@ -124,7 +124,7 @@
 					<code>EOS_Auth_LoginOptions</code>
 				</a>
 				structure containing a local player's
-				<span role="tooltip" aria-label="account">
+				<span>
 					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
 				</span>
 				credentials. Whether the login attempt succeeds or fails, your callback function, of type
@@ -132,7 +132,7 @@
 					<code>EOS_Auth_OnLoginCallback</code>
 				</a>, runs upon completion.</p>
 			<p>The brand review process verifies your game's brand with Epic Games. Once verified, players outside of your
-				<span role="tooltip" aria-label="organization">
+				<span>
 					<span aria-label="tooltip organization" tabindex="0" role="button">organization</span>
 				</span>
 				can use your game's integration of Epic Account Services. Prior to brand review, players receive an error if they try to log into your game with an external account. See the documentation on the
@@ -347,7 +347,7 @@
 				</a>. Scopes are a set of permissions that are required for your application to function properly. For example, if your application needs to see the user's friends list, then you must request the
 				<code>EOS_AS_FriendsList</code>
 				scope, and the user is then asked to give consent for it during the login flow. If the user does not consent to one of the requested scopes, then the login fails. When requesting consent, your request must exactly match the scopes configured for the
-				<span role="tooltip" aria-label="product">
+				<span>
 					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
 				</span>
 				in the Developer Portal.</p>
@@ -835,8 +835,8 @@
 				</li>
 			</ol>
 			<div id="tag_list">
-				<a aria-label="Tag Interface" href="/docs/site-map">Interface</a>
-				<a aria-label="Tag  Auth" href="/docs/site-map">
+				<a aria-label="Tag Interface" aria-hidden="false" tabindex="0" href="/docs/site-map">Interface</a>
+				<a aria-label="Tag  Auth" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Auth</a>
 			</div>
 		</section>

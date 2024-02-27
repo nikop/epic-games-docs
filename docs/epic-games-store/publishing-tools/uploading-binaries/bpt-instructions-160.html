@@ -11,10 +11,10 @@
 	</div>
 	<section>
 		<div>
-			<h1>BuildPatch Tool Instructions (1.5.0)</h1>
-			<h2>Setup and processing instructions for BPT 1.5.0.</h2>
+			<h1>BuildPatch Tool Instructions (1.6.0)</h1>
+			<h2>Setup and processing instructions for BPT 1.6.0.</h2>
 			<div>
-				<div>21 mins to read</div>
+				<div>22 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -31,10 +31,6 @@
 				<em>Builds</em>.) Using the
 				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>
 				process, you can promote binaries uploaded via the BuildPatch tool between sandboxes.</p>
-			<div>
-				<strong>Important Note</strong>: For best results, we recommend using the most recent version of the BuildPatch Tool. To learn more, review
-				<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160">BuildPatch Tool Instructions (1.6.0)</a>.
-			</div>
 			<div>
 				<h2 id="before-you-start">Before You Start</h2>
 			</div>
@@ -158,6 +154,9 @@
 					on our Developer Support site for assistance.</p>
 			</div>
 			<div>
+				<p>Examples in this document are provided for the Windows platform but will be similar on macOS and Linux.</p>
+			</div>
+			<div>
 				<h3 id="authentication">Authentication</h3>
 			</div>
 			<p>Authentication is carried out by supplying a
@@ -218,7 +217,10 @@
 				</section>
 			</div>
 			<p>Descriptions for each of the parameters that you have to specify are below. You can also add the "-help" option after any mode (e.g.
-				<code>"BuildPatchTool.exe -mode=PatchGeneration -help"</code>) to get information about the required arguments.</p>
+				<code>"BuildPatchTool.exe -mode=UploadBinary -help"</code>) to get information about the required arguments.</p>
+			<div>
+				<p>BuildPatchTool command line help contains FeatureLevel optional argument, please use this argument only after direct instruction from Epic Games.</p>
+			</div>
 			<table>
 				<thead>
 					<tr>
@@ -295,20 +297,20 @@
 					</tr>
 					<tr>
 						<td>
-							<code>FileList (Optional)</code>
-						</td>
+							<code>FileList</code>
+							(Optional)</td>
 						<td>A path to a text file containing files to be included in the binary. The files must be BuildRoot relative. This is an alternative to using FileIgnoreList.</td>
 					</tr>
 					<tr>
 						<td>
-							<code>FileAttributeList (Optional)</code>
-						</td>
+							<code>FileAttributeList</code>
+							(Optional)</td>
 						<td>A path to a text file containing a list of files and corresponding special attributes (e.g. executable bit) that should be set. See Setting Special File Attributes section for a description of the file contents. Note that the attributes file should not be inside your BuildRoot to ensure that it does not get erroneously included in your binary upload.</td>
 					</tr>
 					<tr>
 						<td>
-							<code>FileIgnoreList (Optional)</code>
-						</td>
+							<code>FileIgnoreList</code>
+							(Optional)</td>
 						<td>A path to a text file containing a list of files that should be excluded from the generated patch data. Each entry should be on a new line, and be a relative path from BuildRoot. A forward slash ("/") separator should be used. Note that if the ignore file is located inside BuildRoot then its own relative file path needs to be included in the ignore list to avoid it being included in the patch data.</td>
 					</tr>
 				</tbody>
@@ -403,7 +405,7 @@
 						<td>
 							<code>ArtifactID</code>
 						</td>
-						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+						<td>Specify the Artifact ID associated with the binary to be labeled.</td>
 					</tr>
 					<tr>
 						<td>
@@ -444,7 +446,7 @@
 					<tr>
 						<td>
 							<code>SandboxId</code>
-						</td>
+							(Optional)</td>
 						<td>Specifies the id of the sandbox to label this binary under. If not provided, the binary will be labeled for public sandbox.</td>
 					</tr>
 				</tbody>
@@ -538,7 +540,7 @@
 					<tr>
 						<td>
 							<code>SandboxId</code>
-						</td>
+							(Optional)</td>
 						<td>Specifies the id of the sandbox to unlabel this binary from. If not provided, the binary will be unlabeled from public sandbox.</td>
 					</tr>
 				</tbody>
@@ -624,8 +626,16 @@
 			<div>
 				<h2 id="how-to-delete-a-binary">How to Delete a Binary</h2>
 			</div>
-			<p>To delete a binary,
-				<a href="#how-to-unlabel-a-binary">remove all labels from the binary</a>. The binary is deleted automatically in seven days.</p>
+			<p>You can delete a previously uploaded binary by using the
+				<em>DeleteBinary</em>
+				Mode:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
 			<div>
 				<h4 id="description-of-parameters-3">Description of parameters:</h4>
 			</div>
@@ -721,12 +731,6 @@
 					</tr>
 					<tr>
 						<td>
-							<code>ArtifactID</code>
-						</td>
-						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
-					</tr>
-					<tr>
-						<td>
 							<code>ClientId</code>
 						</td>
 						<td>See
@@ -801,7 +805,7 @@
 						<td>
 							<code>ArtifactID</code>
 						</td>
-						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+						<td>Specify the Artifact ID associated with the binary to be labeled.</td>
 					</tr>
 					<tr>
 						<td>
@@ -835,7 +839,7 @@
 						<td>
 							<code>InstallTagsA</code>
 							(Optional)</td>
-						<td>Specifies in quotes a comma separated list of install tags used on BuildVersionA. You should include an empty string if you want to count untagged files. Leaving the parameter out will use all files. InstallTagsA="" will be untagged files only. InstallTagsA=",tag" will be untagged files plus files tagged with 'tag'. InstallTagsA="tag" will be files tagged with 'tag' only.</td>
+						<td>Specifies in quotes a comma separated list of install tags used on BuildVersionA. You should include an empty string if you want to count untagged files. Leaving the parameter out will use all files. -InstallTagsA="" will be untagged files only. -InstallTagsA=",tag" will be untagged files plus files tagged with 'tag'. -InstallTagsA="tag" will be files tagged with 'tag' only.</td>
 					</tr>
 					<tr>
 						<td>
@@ -858,20 +862,11 @@
 				</tbody>
 			</table>
 			<div>
-				<h2 id="reducing-update-size">Reducing Update Size</h2>
+				<h2 id="how-to-get-binary-metadata">How to Get Binary Metadata</h2>
 			</div>
-			<p>
-				<em>
-					<strong>Requires v1.4.0 and above</strong>
-				</em>
-			</p>
-			<p>BuildPatchTool uses a general patching system for all binaries uploaded using the
-				<em>UploadBinary</em>
-				mode. The system allows the Epic Games store to update any version of your binary on a user's machine to any other version, minimising the download size to do so.</p>
 			<p>The
-				<em>BinaryDeltaOptimise</em>
-				mode is designed to take two binaries already uploaded to the Epic Services and produce a smaller download for users who are updating between these two specific versions. We call this an A-to-B patch. Running this command is an optional step that can be taken to improve the user experience when releasing a larger than usual patch, with the majority of your players known to be on a specific binary version (binary "A").</p>
-			<p>The following is a sample command line to improve delta patching between two binaries:</p>
+				<em>GetBinaryMetadata</em>
+				Tool Mode produces output with information about the specified binary and its contents.</p>
 			<div>
 				<section>
 					<pre>
@@ -906,7 +901,94 @@
 						<td>
 							<code>ArtifactID</code>
 						</td>
-						<td>Specify the Artifact ID string that was provided along with your credentials.</td>
+						<td>Specify the Artifact ID associated with the binary to be labeled.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientId</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientSecretEnvVar</code>
+						</td>
+						<td>See
+							<a href="#authentication">Authentication</a>
+							section.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BuildVersion</code>
+						</td>
+						<td>The version string for the binary image.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>OutputFile</code>
+						</td>
+						<td>Specifies in quotes, the path on disk to save the resulting metadata in a selected output format.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>OutputFormat</code>
+							(Optional)</td>
+						<td>Specifies the format for the output file, currently supports 'human' or 'json'. 'json' is set by default.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="reducing-update-size">Reducing Update Size</h2>
+			</div>
+			<p>
+				<em>
+					<strong>Requires v1.4.0 and above</strong>
+				</em>
+			</p>
+			<p>BuildPatchTool uses a general patching system for all binaries uploaded using the
+				<em>UploadBinary</em>
+				mode. The system allows the Epic Games store to update any version of your binary on a user's machine to any other version, minimising the download size to do so.</p>
+			<p>The
+				<em>BinaryDeltaOptimise</em>
+				mode is designed to take two binaries already uploaded to the Epic Services and produce a smaller download for users who are updating between these two specific versions. We call this an A-to-B patch. Running this command is an optional step that can be taken to improve the user experience when releasing a larger than usual patch, with the majority of your players known to be on a specific binary version (binary "A").</p>
+			<p>The following is a sample command line to improve delta patching between two binaries:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="description-of-parameters-7">Description of parameters:</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Argument Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>OrganizationID</code>
+						</td>
+						<td>Use the Organization ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ProductID</code>
+						</td>
+						<td>Use the Product ID string that was provided along with your credentials.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ArtifactID</code>
+						</td>
+						<td>Specify the Artifact ID associated with the binary to be labeled.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1010,8 +1092,13 @@
 			<div>
 				<h2 id="downloadable-content-dlc">Downloadable Content (DLC)</h2>
 			</div>
-			<p>The Epic Games store provides full support for Downloadable Content (DLC). The operation of BuildPatchTool is exactly the same for DLC as it is for full games, with the following additional notes:</p>
-			<p>Each item of DLC will be given its own, unique Artifact ID. Accordingly, each item of DLC will need its own patch generation process to be executed with the appropriate Artifact ID specified. Because each is generated separately, then it is important when performing patch generation for a DLC item that the base game, and all other DLC items are not present at the same time in the folder specified in the BuildRoot parameter during the patch generation process. Alternatively, if the BuildRoot folder does contain the main game or other DLC items, then a -FileIgnoreList parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary (see the ::How to Upload a Binary:: for more details).</p>
+			<p>The Epic Games store provides full support for Downloadable Content (DLC).
+				<strong>Please contact your Epic Service Delivery Team representatives to get artifacts for your DLC items provisioned, as they require additional up-front configuration that differs from non-DLC items.</strong>
+			</p>
+			<p>Once your DLC artifacts have been pre-provisioned in the Epic backend, the operation of BuildPatchTool is exactly the same for DLC as it is for full games, with the following additional notes:</p>
+			<p>Each item of DLC will be given its own, unique Artifact ID. Accordingly, each item of DLC will need its own patch generation process to be executed with the appropriate Artifact ID specified. Because each is generated separately, then it is important when performing patch generation for a DLC item that the base game, and all other DLC items are not present at the same time in the folder specified in the BuildRoot parameter during the patch generation process. Alternatively, if the BuildRoot folder does contain the main game or other DLC items, then a -FileIgnoreList parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary (see the
+				<a href="#how-to-upload-a-binary">How to Upload a Binary</a>
+				for more details).</p>
 			<p>When installed on end users’ machines, the main game and all items of related DLC will be installed into the same directory. This leads to the restriction that there must be no files within the main game or any item of DLC which share a common file path. The BuildPatchTool will perform checks on this and prevent the patch generation process from occurring if there are any files which violate this rule. This means that the base game must be able to locate installed DLC by relative path from its install location.</p>
 			<p>In the short-term, Artifact IDs for DLC items will be allocated to you by Epic, and the association between the main game and the DLC item will be provisioned as part of that process. Longer term, we will look to incorporate this provisioning into a self-service operation on the Developer Portal.</p>
 			<div>
@@ -1026,10 +1113,10 @@
 					<code>%LocalAppData%\BuildPatchTool\Saved\Logs</code>
 				</li>
 				<li>Mac:
-					<code>/Users/&lt;Current_User&gt;/Library/Logs/Unreal Engine/BuildPatchTool/BuildPatchTool.log</code>
+					<code>/Users/$USER/Library/Logs/Unreal Engine/BuildPatchTool/BuildPatchTool.log</code>
 				</li>
 				<li>Linux:
-					<code>/home/&lt;Current_User&gt;/.config/Epic/BuildPatchTool/Saved/Logs</code>
+					<code>/home/$USER/.config/Epic/BuildPatchTool/Saved/Logs</code>
 				</li>
 			</ul>
 			<div>
@@ -1209,10 +1296,16 @@
 						<a href="#description-of-parameters-5">Description of parameters:</a>
 					</li>
 					<li>
-						<a href="#reducing-update-size">Reducing Update Size</a>
+						<a href="#how-to-get-binary-metadata">How to Get Binary Metadata</a>
 					</li>
 					<li>
 						<a href="#description-of-parameters-6">Description of parameters:</a>
+					</li>
+					<li>
+						<a href="#reducing-update-size">Reducing Update Size</a>
+					</li>
+					<li>
+						<a href="#description-of-parameters-7">Description of parameters:</a>
 					</li>
 					<li>
 						<a href="#example-output">Example output:</a>

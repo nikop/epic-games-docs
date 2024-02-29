@@ -3,8 +3,8 @@
 		<div>
 			<div>
 				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-					<input type="hidden" name="filter" value="Documentation">
-					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
 			</div>
 		</div>
@@ -21,8 +21,8 @@
 	<section>
 		<section role="main">
 			<p>To trigger the PV service flow, your
-				<span role="tooltip" aria-label="product">
-					<span tabindex="0">product</span>
+				<span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
 				</span>
 				needs to call the
 				<a href="https://freekwslaunch.docs.apiary.io/#reference/verifications">send-email API endpoint</a>.</p>
@@ -71,14 +71,16 @@
 							<strong>Service API host URL</strong>
 							- The URL where the PV service is located. API queries should be made against this URL.</li>
 					</ul>
-					<div>
+					<div tabindex="0" aria-label="PV details image, press Enter to open full size">
 						<div>
 							<span>
 								<img alt="PV details" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
 								<noscript></noscript>
 							</span>
 						</div>
-						<p>Click image for full size.</p>
+						<figcaption>
+							<p>Click image for full size.</p>
+						</figcaption>
 					</div>
 				</li>
 			</ol>

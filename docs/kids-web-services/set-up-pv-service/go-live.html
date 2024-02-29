@@ -3,8 +3,8 @@
 		<div>
 			<div>
 				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
-					<input type="hidden" name="filter" value="Documentation">
-					<input type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
 			</div>
 		</div>
@@ -33,14 +33,16 @@
 						<strong>Dashboard</strong>, select the required product and then click the
 						<strong>Production</strong>
 						button in the top right corner.</p>
-					<div>
+					<div tabindex="0" aria-label="Production button image, press Enter to open full size">
 						<div>
 							<span>
 								<img alt="Production button" src="https://static-assets-prod.epicgames.com/eos-docs/kids-web-services/set-up-pv-service/go-live/production-button.png" decoding="async" data-nimg="fill">
 								<noscript></noscript>
 							</span>
 						</div>
-						<p>Click image for full size.</p>
+						<figcaption>
+							<p>Click image for full size.</p>
+						</figcaption>
 					</div>
 				</li>
 				<li>
@@ -84,8 +86,8 @@
 				<h3 id="what-exactly-do-we-review">What exactly do we review?</h3>
 			</div>
 			<p>We primarily review those
-				<span role="tooltip" aria-label="product">
-					<span tabindex="0">product</span>
+				<span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
 				</span>
 				and branding settings where there is the potential for content to be malicious to the Kids Web Services and/or Epic brand names.</p>
 			<p>If your content violates any of the following restrictions, we will not approve your Production environment configuration:</p>

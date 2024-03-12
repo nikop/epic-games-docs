@@ -771,9 +771,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>static EOS_EResult CreateIntegratedPlatform(EOS_Platform_Options&amp; PlatformOptions){  // Create the generic container.  const EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainerOptions CreateOptions =  {    EOS_INTEGRATEDPLATFORM_CREATEINTEGRATEDPLATFORMOPTIONSCONTAINER_API_LATEST  };   const EOS_EResult Result = EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer(&amp;CreateOptions, &amp;PlatformOptions.IntegratedPlatformOptionsContainerHandle);  if (Result != EOS_EResult::EOS_Success)  {    return Result;  }   // Configure platform-specific options.  const EOS_IntegratedPlatform_Steam_Options PlatformSpecificOptions =  {      EOS_INTEGRATEDPLATFORM_STEAM_OPTIONS_API_LATEST,      nullptr  };   // Add the configuration to the SDK initialization options.  const EOS_IntegratedPlatform_Options Options =  {    EOS_INTEGRATEDPLATFORM_OPTIONS_API_LATEST,    EOS_IPT_Steam,    EOS_EIntegratedPlatformManagementFlags::EOS_IPMF_LibraryManagedByApplication | EOS_EIntegratedPlatformManagementFlags::EOS_IPMF_DisableSDKManagedSessions,    &amp;PlatformSpecificOptions  };   const EOS_IntegratedPlatformOptionsContainer_AddOptions AddOptions =  {    EOS_INTEGRATEDPLATFORMOPTIONSCONTAINER_ADD_API_LATEST,    &amp;Options  };   return EOS_IntegratedPlatformOptionsContainer_Add(PlatformOptions.IntegratedPlatformOptionsContainerHandle, &amp;AddOptions);} static void FreeIntegratedPlatform(EOS_Platform_Options&amp; PlatformOptions){  // Free the created container after SDK initialization.  if (PlatformOptions.IntegratedPlatformOptionsContainerHandle)  {    EOS_IntegratedPlatformOptionsContainer_Release(PlatformOptions.     IntegratedPlatformOptionsContainerHandle);    PlatformOptions.IntegratedPlatformOptionsContainerHandle = nullptr;  }} void InitializeEosSdk(){  EOS_Platform_Options PlatformOptions = {};  CreateIntegratedPlatform(PlatformOptions);  // ...  EOS_Platform_Create(&amp;PlatformOptions);   FreeIntegratedPlatform(PlatformOptions);}</pre>
 				</section>
 			</div>
 			<div id="tag_list">

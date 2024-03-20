@@ -14,7 +14,7 @@
 			<h1>EOS_Platform_Options</h1>
 			<h2>EOS API reference page for EOS_Platform_Options</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -109,6 +109,10 @@
 									<tr>
 										<td>const void* SystemSpecificOptions</td>
 										<td>Pointer to EOS_&lt;Platform&gt;<em>SystemSpecificOptions. This structure will be located in &lt;Platform&gt;/eos</em>&lt;Platform&gt;.h</td>
+									</tr>
+									<tr>
+										<td>double* TaskNetworkTimeoutSeconds</td>
+										<td>Number of seconds for a task to wait for the network to become available before timing out with an EOS_TimedOut error. This timeout period applies when the network status is not EOS_NS_Online. Tasks that need the network will queue for up to this timeout until EOS_Platform_SetNetworkStatus is used to set the network status to online. Pass a null pointer to use the default.  Otherwise, pass a pointer to a double containing the number of seconds for tasks that are waiting for network to time out.</td>
 									</tr>
 								</tbody>
 							</table>

@@ -37,7 +37,7 @@
 							</div>
 							<p>Register to receive notifications about a custom invite "INVITE" performed by a local user via the overlay. This is only needed when a configured integrated platform has EOS_IPMF_DisableSDKManagedSessions set.  The EOS SDK will then use the state of EOS_IPMF_PreferEOSIdentity and EOS_IPMF_PreferIntegratedIdentity to determine when the NotificationFn is called.</p>
 							<div>
-								<p>must call EOS_CustomInvites_RemoveNotifySendCustomNativeInviteRequested to remove the notification.</p>
+								<p>If the returned NotificationId is valid, you must call EOS_CustomInvites_RemoveNotifySendCustomNativeInviteRequested when you no longer wish to have your NotificationHandler called.</p>
 							</div>
 							<div>
 								<h2 id="return-value">Return Value</h2>

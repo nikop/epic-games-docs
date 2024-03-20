@@ -37,6 +37,19 @@
 			<div>
 				<p>The EOS SDK has timeout settings for P2P connections. We don't recommend overriding connection timeouts in your game code.</p>
 			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>In EOS SDK 1.16.2, the
+						<code>ReceivePacketOptions</code>
+						and
+						<code>SocketId</code>
+						arguments for the
+						<code>ReceivePacket</code>
+						API are now references. Before EOS SDK 1.16.2 they were out parameters. For more information, see the
+						<a href="/docs/epic-online-services/release-notes#release-notes">Release Notes</a>.</p>
+				</div>
+			</div>
 			<p>The P2P Interface uses the struct
 				<code>EOS_P2P_SocketId</code>
 				as a title-specified identifier for a connection between peers. Most P2P functions related to connections either require an

@@ -14,7 +14,7 @@
 			<h1>Platform Interface</h1>
 			<h2>Interface that grants access to all other interfaces.</h2>
 			<div>
-				<div>9 mins to read</div>
+				<div>10 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -695,6 +695,25 @@
 					for more information.</p>
 			</div>
 			<div>
+				<h4 id="configure-network-tasks-time-out">Configure Network Tasks Time-out</h4>
+			</div>
+			<p>By default, the EOS SDK times out network tasks after 30 seconds if the network is not available. If a task times out, the EOS SDK returns the error
+				<code>EOS_TimeOut</code>. You can override the default time-out (in seconds) by setting the
+				<code>TaskNetworkTimeoutSeconds</code>
+				property in
+				<code>EOS_Platform_Options</code>
+				when you create the Platform Interface. To override the default time-out, pass a pointer to a double containing the number of seconds that you want tasks to wait for the network to time out.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>The time-out applies when the network status is not
+					<code>EOS_NS_Online</code>.</li>
+				<li>Tasks that need the network queue for up to this time, until your game calls
+					<code>EOS_Platform_SetNetworkStatus</code>
+					to set the network status to online.</li>
+				<li>To use the default time-out of 30 seconds, pass a null pointer.</li>
+			</ul>
+			<div>
 				<h2 id="native-platform-integration">Native Platform Integration</h2>
 			</div>
 			<p>The SDK provides functionality to integrate automatically with the native platform. These integrations allow the game to:</p>
@@ -822,6 +841,9 @@
 					</li>
 					<li>
 						<a href="#network-status">Network Status</a>
+					</li>
+					<li>
+						<a href="#configure-network-tasks-time-out">Configure Network Tasks Time-out</a>
 					</li>
 					<li>
 						<a href="#native-platform-integration">Native Platform Integration</a>

@@ -1,0 +1,153 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_Connect_Logout</h1>
+			<h2>EOS API reference page for EOS_Connect_Logout</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/connect">Connect Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Logout a currently logged in user. NOTE: Access tokens for Product User IDs cannot be revoked. This operation really just cleans up state for the Product User ID and locally discards any associated access token.</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_Connect_Logout</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HConnect Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-connect-logout-options">EOS_Connect_LogoutOptions</a>* Options</td>
+										<td>Structure containing the input parameters for the operation</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Arbitrary data that is passed back to the caller in the CompletionDelegate.</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-connect-on-logout-callback">EOS_Connect_OnLogoutCallback</a>
+											CompletionDelegate</td>
+										<td>A callback that is fired when the operation completes, either successfully or in error.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>This function is asynchronous; the EOS SDK guarantees that your callback (the
+										<code>CompletionDelegate</code>
+										parameter) will run when the operation completes, regardless of whether it succeeds or fails. Use the
+										<code>void*</code>
+										parameter to pass any contextual information the callback may need in order to react properly. Relevant information can be copied from the EOS SDK's cache while the callback function is running. You do not need to remove the callback function.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="callback-function-information">Callback Function Information</h2>
+							</div>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_Connect_OnLogoutCallback to report the results of its operation.</p>
+							<div>
+								<h3 id="callback-remarks">Callback Remarks</h3>
+							</div>
+							<p>Function prototype definition for callbacks passed to EOS_Connect_Logout</p>
+							<div>
+								<h3 id="callback-parameters">Callback Parameters</h3>
+							</div>
+							<p>EOS_Connect_OnLogoutCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-connect-logout-callback-info">EOS_Connect_LogoutCallbackInfo</a>* Data</td>
+										<td>A EOS_Connect_LogoutCallbackInfo containing the result.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-connect-logout-options">EOS_Connect_LogoutOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-connect-on-logout-callback">EOS_Connect_OnLogoutCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-function-information">Callback Function Information</a>
+					</li>
+					<li>
+						<a href="#callback-remarks">Callback Remarks</a>
+					</li>
+					<li>
+						<a href="#callback-parameters">Callback Parameters</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

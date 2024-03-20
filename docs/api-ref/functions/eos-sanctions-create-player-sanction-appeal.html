@@ -1,0 +1,188 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS_Sanctions_CreatePlayerSanctionAppeal</h1>
+			<h2>EOS API reference page for EOS_Sanctions_CreatePlayerSanctionAppeal</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This function is part of the
+								<a href="/docs/api-ref/interfaces/sanctions">Sanctions Interface</a>.</p>
+							<div>
+								<h2 id="remarks">Remarks</h2>
+							</div>
+							<p>Create a sanction appeal on behalf of a local user. Note that for creating the sanction appeal you'll need the sanction reference id, which is available through CopyPlayerSanctionByIndex.</p>
+							<div>
+								<h2 id="parameters">Parameters</h2>
+							</div>
+							<p>EOS_Sanctions_CreatePlayerSanctionAppeal</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_HSanctions Handle</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-options">EOS_Sanctions_CreatePlayerSanctionAppealOptions</a>* Options</td>
+										<td>Structure containing the player sanction appeal information.</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Optional client data provided by the user of the SDK.</td>
+									</tr>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/callbacks/eos-sanctions-create-player-sanction-appeal-callback">EOS_Sanctions_CreatePlayerSanctionAppealCallback</a>
+											CompletionDelegate</td>
+										<td>This function is called when the send operation completes.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>This function is asynchronous; the EOS SDK guarantees that your callback (the
+										<code>CompletionDelegate</code>
+										parameter) will run when the operation completes, regardless of whether it succeeds or fails. Use the
+										<code>void*</code>
+										parameter to pass any contextual information the callback may need in order to react properly. Relevant information can be copied from the EOS SDK's cache while the callback function is running. You do not need to remove the callback function.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="callback-function-information">Callback Function Information</h2>
+							</div>
+							<p>Because this function is asynchronous, it employs a callback of type EOS_Sanctions_CreatePlayerSanctionAppealCallback to report the results of its operation. See the
+								<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</a>
+								page for more details, or check the [Callback Data] section below.</p>
+							<div>
+								<h3 id="callback-remarks">Callback Remarks</h3>
+							</div>
+							<p>Function definition for callbacks passed to EOS_Sanctions_CreatePlayerSanctionAppeal.</p>
+							<div>
+								<h3 id="callback-parameters">Callback Parameters</h3>
+							</div>
+							<p>EOS_Sanctions_CreatePlayerSanctionAppealCallback</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Parameter Type And Name</th>
+										<th>Usage Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>const
+											<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</a>* Data</td>
+										<td>- EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo containing the output information and result.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h3 id="callback-data">Callback Data</h3>
+							</div>
+							<p>The EOS SDK passes the following data structure to the callback function:</p>
+							<p>EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Property</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>EOS_EResult ResultCode</td>
+										<td>The EOS_EResult code for the operation. EOS_Success indicates that the operation succeeded; other codes indicate errors.</td>
+									</tr>
+									<tr>
+										<td>void* ClientData</td>
+										<td>Context that was passed into EOS_Sanctions_CreatePlayerSanctionAppeal.</td>
+									</tr>
+									<tr>
+										<td>const char* ReferenceId</td>
+										<td>A unique identifier for the specific sanction that was appealed</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>For more information, see the
+								<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</a>
+								page.</p>
+							<div>
+								<h2 id="related-api-members">Related API Members</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-options">EOS_Sanctions_CreatePlayerSanctionAppealOptions</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-sanctions-create-player-sanction-appeal-callback">EOS_Sanctions_CreatePlayerSanctionAppealCallback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#remarks">Remarks</a>
+					</li>
+					<li>
+						<a href="#parameters">Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-function-information">Callback Function Information</a>
+					</li>
+					<li>
+						<a href="#callback-remarks">Callback Remarks</a>
+					</li>
+					<li>
+						<a href="#callback-parameters">Callback Parameters</a>
+					</li>
+					<li>
+						<a href="#callback-data">Callback Data</a>
+					</li>
+					<li>
+						<a href="#related-api-members">Related API Members</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

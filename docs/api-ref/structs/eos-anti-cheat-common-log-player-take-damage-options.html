@@ -14,7 +14,7 @@
 			<h1>EOS_AntiCheatCommon_LogPlayerTakeDamageOptions</h1>
 			<h2>EOS API reference page for EOS_AntiCheatCommon_LogPlayerTakeDamageOptions</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -52,11 +52,11 @@
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_Vec3f* VictimPlayerPosition</td>
-										<td>Victim player's current world position as a 3D vector</td>
+										<td>Victim player character's world position as a 3D vector. This should be the center of the character.</td>
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_Quat* VictimPlayerViewRotation</td>
-										<td>Victim player's view rotation as a quaternion</td>
+										<td>Victim player camera's world rotation as a quaternion.</td>
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_ClientHandle AttackerPlayerHandle</td>
@@ -64,11 +64,11 @@
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_Vec3f* AttackerPlayerPosition</td>
-										<td>Attacker player's current world position as a 3D vector if applicable, otherwise NULL.</td>
+										<td>Attacker player character's world position as a 3D vector if applicable, otherwise NULL.</td>
 									</tr>
 									<tr>
 										<td>EOS_AntiCheatCommon_Quat* AttackerPlayerViewRotation</td>
-										<td>Attacker player's view rotation as a quaternion if applicable, otherwise NULL.</td>
+										<td>Attacker player camera's world rotation as a quaternion if applicable, otherwise NULL.</td>
 									</tr>
 									<tr>
 										<td>EOS_Bool bIsHitscanAttack</td>
@@ -98,11 +98,7 @@
 										<td>
 											<a href="/docs/api-ref/enums/eos-e-anti-cheat-common-player-take-damage-source">EOS_EAntiCheatCommonPlayerTakeDamageSource</a>
 											DamageSource</td>
-										<td>Source of the damage</td>
-									</tr>
-									<tr>
-										<td>event</td>
-										<td></td>
+										<td>Source of the damage event</td>
 									</tr>
 									<tr>
 										<td>
@@ -127,6 +123,10 @@
 									<tr>
 										<td>EOS_AntiCheatCommon_Vec3f* DamagePosition</td>
 										<td>World position where damage hit the victim as a 3D vector if available, otherwise NULL</td>
+									</tr>
+									<tr>
+										<td>EOS_AntiCheatCommon_Vec3f* AttackerPlayerViewPosition</td>
+										<td>Attacker player camera's world position as a 3D vector if applicable, otherwise NULL</td>
 									</tr>
 								</tbody>
 							</table>

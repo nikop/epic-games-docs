@@ -37,7 +37,7 @@
 							</div>
 							<p>Register to receive notifications about leave session requests performed by local user via the overlay. When user requests to leave the session in the social overlay, the SDK does not automatically leave the session, it is up to the game to perform any necessary cleanup and call the EOS_Sessions_DestroySession method using the SessionName sent in the notification function.</p>
 							<div>
-								<p>must call EOS_Sessions_RemoveNotifyLeaveSessionRequested to remove the notification.</p>
+								<p>If the returned NotificationId is valid, you must call EOS_Sessions_RemoveNotifyLeaveSessionRequested when you no longer wish to have your NotificationHandler called.</p>
 							</div>
 							<div>
 								<h2 id="return-value">Return Value</h2>

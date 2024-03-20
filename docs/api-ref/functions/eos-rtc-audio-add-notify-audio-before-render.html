@@ -35,6 +35,9 @@
 							</div>
 							<p>Register to receive notifications with remote audio buffers before they are rendered. This gives you access to the audio data received, allowing for example the implementation of custom filters/effects. If the returned NotificationId is valid, you must call EOS_RTCAudio_RemoveNotifyAudioBeforeRender when you no longer wish to have your CompletionDelegate called.</p>
 							<div>
+								<p>The CompletionDelegate may be called from a thread other than the one from which the SDK is ticking.</p>
+							</div>
+							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
 							<p>Notification ID representing the registered callback if successful, an invalid NotificationId if not</p>
@@ -73,7 +76,7 @@
 										<td>const
 											<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-audio-before-render-callback">EOS_RTCAudio_OnAudioBeforeRenderCallback</a>
 											CompletionDelegate</td>
-										<td>The callback to be fired when a presence change occurs</td>
+										<td>The callback to be fired when remote audio buffers are about to be rendered</td>
 									</tr>
 								</tbody>
 							</table>

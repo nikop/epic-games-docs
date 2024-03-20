@@ -48,49 +48,768 @@
 			</div>
 			<ul>
 				<li>
-					<strong>Get started</strong>:
+					<strong>Get started</strong>
 					<br>
 					See the EOS
 					<a href="/docs/epic-online-services/eos-get-started">Get Started Steps</a>
 					page for information on how to set up and use EOS services and the EOS SDK.</li>
 				<li>
-					<strong>SDK download types</strong>:
-					<br>
-					In addition to different release versions of the EOS SDK, there are different types of SDK download to use, depending on the platform your game clients run on. Find out about these in the EOS get started documentation
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>.</li>
-				<li>
-					<strong>What's new</strong>:
+					<strong>What's new</strong>
 					<br>
 					See the
 					<a href="/docs/epic-online-services/whats-new">EOS What's New</a>
 					documentation for a high-level overview of what's changed with every EOS SDK release.</li>
-			</ul>
-			<div>
-				<h3 id="planned-features">Planned Features</h3>
-			</div>
-			<ul>
-				<li>Find out what's in development on the EOS roadmap at
+				<li>
+					<strong>Planned Features</strong>
+					<br>
+					Find out what's in development on the EOS roadmap at
 					<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</li>
-			</ul>
-			<div>
-				<h3 id="platforms-supported">Platforms Supported</h3>
-			</div>
-			<ul>
-				<li>For a full list of the platforms and platform versions that the Epic Online Services (EOS) SDK supports, see the documentation:
+				<li>
+					<strong>Platforms Supported</strong>
+					<br>
+					For a full list of the platforms and platform versions that the Epic Online Services (EOS) SDK supports, see the documentation:
 					<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>.</li>
 			</ul>
 			<div>
 				<h2 id="release-notes">Release Notes</h2>
 			</div>
 			<div>
-				<h2 id="2023">2023</h2>
+				<h1 id="2024">2024</h1>
+			</div>
+			<div>
+				<h2 id="1162-cl32273396---2024-mar-19">1.16.2-CL32273396 - 2024-mar-19</h2>
+			</div>
+			<div>
+				<h5 id="eos-core">EOS Core</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: You can add timeouts for tasks waiting because the network is offline. In your game, when you initialize EOS by creating a handle to the EOS service through the Platform Interface, you can configure a timeout value as any non-negative number. Do this by setting the
+					<code>TaskNetworkTimeoutSeconds</code>
+					field of
+					<code>EOS_Platform_Options</code>
+					to the timeout value you want; the value represents seconds.  The default timeout value is 30 seconds if you do not provide a timeout value.</li>
+				<li>
+					<strong>New</strong>: Added support for Steamworks SDK 1.58a. This adds support for the version 1.58a initialization API.
+					<ul>
+						<li>
+							<strong>Note</strong>: The EOS SDK will continue to support higher versions of the Steamworks SDK after 1.58a, until Steamworks changes the initialization API.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a bug where, in certain situations, if the client platform was not yet initialized,
+					<code>EOS_UserInfo_GetLocalPlatformType</code>
+					returned an unknown platform type, despite the game targeting a known platform type at build time.</li>
+				<li>
+					<strong>Bug fix</strong>: Improved how HTTP retries are handled during lower-level WinHTTP requests.</li>
+				<li>
+					<strong>Bug fix</strong>: Previously EOS SDK serialized doubles larger than 1e9 using scientific notation. Now only numbers larger than 1e17 use scientific notation.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a crash in
+					<code>EOS_UserInfo_CopyBestDisplayName</code>
+					that occurred when the EOS SDK was initialized without
+					<code>EOS_Platform_RTCOptions</code>.</li>
+				<li>
+					<strong>Comment update</strong>: Updated the comment for
+					<code>EOS_GetVersion</code>
+					to be more explicit about its format.</li>
+			</ul>
+			<p>See the following section for more information about EOS SDK core updates:
+				<a href="/docs/epic-online-services/release-notes#programming-upgrade-notes">Programming Upgrade Notes</a>.</p>
+			<div>
+				<h5 id="eos-sdk-in-c">EOS SDK in C#</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Deprecated:</strong>
+					The following properties have been removed:
+					<ul>
+						<li>
+							<code>PS4InitializeOptionsSystemInitializeOptions.CommandLine_DEPRECATED</code>
+						</li>
+						<li>
+							<code>SwitchInitializeOptionsSystemInitializeOptions.OnNetworkRequested_DEPRECATED</code>
+						</li>
+						<li>
+							<code>QueryDefinitionsOptions.EpicUserId_DEPRECATED</code>
+						</li>
+						<li>
+							<code>QueryDefinitionsOptions.HiddenAchievementIds_DEPRECATED</code>
+						</li>
+						<li>
+							<code>RegisterPeerOptions.AccountId_DEPRECATED</code>
+						</li>
+						<li>
+							<code>LogPlayerTakeDamageOptions.HitBoneId_DEPRECATED</code>
+						</li>
+						<li>
+							<code>RegisterClientOptions.AccountId_DEPRECATED</code>
+						</li>
+						<li>
+							<code>LoginCallbackInfo.AccountFeatureRestrictedInfo_DEPRECATED</code>
+						</li>
+						<li>
+							<code>QueryProductUserIdMappingsOptions.AccountIdType_DEPRECATED</code>
+						</li>
+						<li>
+							<code>CatalogOffer.TechnicalDetailsText_DEPRECATED</code>
+						</li>
+						<li>
+							<code>CatalogOffer﻿.OriginalPrice_DEPRECATED</code>
+						</li>
+						<li>
+							<code>CatalogOffer﻿.CurrentPrice_DEPRECATED</code>
+						</li>
+						<li>
+							<code>CatalogOffer﻿.PurchasedCount_DEPRECATED</code>
+						</li>
+						<li>
+							<code>AddNotifyRTCRoomConnectionChangedOptions.LobbyId_DEPRECATED</code>
+						</li>
+						<li>
+							<code>AddNotifyRTCRoomConnectionChangedOptions.LocalUserId_DEPRECATED</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<strong>New (breaking change)</strong>: In the
+					<code>ReceivePacket</code>
+					method, two out parameters have changed to ref parameters. This allows the arguments to be buffers and so avoids constantly creating new objects.
+					<br>
+					See  the following section for more information on this change:
+					<a href="#programming-upgrade-notes">Programming Upgrade Notes</a>.</li>
+				<li>
+					<strong>New (breaking change)</strong>: Moved the online platform constants and the integrated platform strings to the namespace
+					<code>Epic.OnlineServices.Types</code>. Online platform constants are part of the
+					<code>OnlinePlatform</code>
+					class and integrated platform strings are part of
+					<code>IntegrationPlatform</code>
+					class.
+					<br>
+					See  the following section for more information on this change:
+					<a href="#upgrade-notes">Upgrade Notes</a>.</li>
+				<li>
+					<strong>New</strong>: Significantly reduced memory allocations when calling the following P2P APIs:
+					<code>SendPacket</code>
+					and
+					<code>ReceivePacket</code>.</li>
+				<li>
+					<strong>Bug fix</strong>: Reduced heap allocations caused by the EOS SDK in C# wrapper in .NET versions where
+					<code>IntPtr</code>
+					is not equatable.</li>
+			</ul>
+			<p>See the following sections for more information about the EOS SDK in C# updates: [Upgrade Notes[(#upgrade-notes) and
+				<a href="#programming-upgrade-notes">Programming Upgrade Notes</a>.</p>
+			<div>
+				<h5 id="eos-overlay">EOS Overlay</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Prevented memory exhaustion dependent on memory access pattern.</li>
+				<li>
+					<strong>Bug fix</strong>: Delayed graphics setup until the first call to
+					<code>EOS_UI_PrePresent</code>. This ensures
+					<code>EOS_Platform_Create</code>
+					runs before any graphics setup.</li>
+				<li>
+					<strong>Bug fix</strong>: Minimized usage of TLS slots to prevent resource exhaustion.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed the EOS Overlay to ensure it refreshes after a network status change.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed the EOS Overlay to ensure it doesn’t crash  in Unreal Engine 5 when
+					<code>-nvnDebug -nvnDebugLevel=4</code>
+					is enabled.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed the Social Overlay to ensure it correctly renders the
+					<strong>A</strong>
+					button on Nintendo Switch and XBox.</li>
+				<li>
+					<strong>Bug fix</strong>: Ensured that the EOS Overlay’s Account Portal login screen rendered correctly.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a crash that happened on Xbox when the EOS Overlay’s Account Portal resumed after being suspended during the user login flow.</li>
+			</ul>
+			<div>
+				<h5 id="samples">Samples</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Updated the anti-cheat sample to use EOS Connect ID Tokens to securely verify each
+					<code>EOS_ProductUserId</code>
+					sent to the game server.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a case sensitivity issue in the demo logic for sessions sample:
+					<ul>
+						<li>Level vs LEVEL was inconsistently applied in the code base, resulting in an inaccurate display of the information for joining clients.</li>
+						<li>Player count was wrong on the joining player. This is a shortcoming of the sample since it doesn't have a p2p connection between instances. The player count is only accurate as of the time of the create/join call. Game Hosts need to call
+							<code>EOS_Sessions_RegisterPlayer</code>
+							on the host to keep the information accurate. Game clients need to keep track of player count based on game logic indicating players joining/leaving the server.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="interfaces">INTERFACES</h4>
+			</div>
+			<div>
+				<h5 id="achievements">Achievements</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>:
+					<code>EOS_Achievements_OnQueryPlayerAchievementsCompleteCallback</code>
+					now returns
+					<code>LocalUserId</code>
+					and
+					<code>TargetUserId</code>
+					in the
+					<code>EOS_Achievements_OnQueryPlayerAchievementsCompleteCallbackInfo</code>
+					data.</li>
+			</ul>
+			<div>
+				<h5 id="anti-cheat">Anti-Cheat</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Anti-cheat gameplay data functions now consume slightly less network bandwidth.</li>
+				<li>
+					<strong>New</strong>: Added a new definition,
+					<code>EOS_ANTICHEATSERVER_ONMESSAGETOCLIENTCALLBACK_MAX_MESSAGE_SIZE</code>. This specifies a value for the maximum buffer size provided in the callback function
+					<code>EOS_AntiCheatServer_OnMessageToClientCallback</code>.
+					<ul>
+						<li>
+							<strong>Note</strong>: The value is set by Epic Games and is likely to change in future EOS SDK release versions.</li>
+						<li>
+							<strong>Programmer Notes</strong>: Use the new definition,
+							<code>EOS_ANTICHEATSERVER_ONMESSAGETOCLIENTCALLBACK_MAX_MESSAGE_SIZE</code>
+							to specify the array size of the message-handling flow.
+							<br>
+							Note that if Epic Games changes this value, you will need to recompile your game using the changed value.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>New</strong>: Added
+					<code>PlayerViewPosition</code>
+					field to options structs to
+					<code>EOS_AntiCheatServer_LogPlayerTick</code>
+					and
+					<code>EOS_AntiCheatServer_LogPlayerTakeDamage</code>. This allows better context for third-person-perspective games where the camera position differs significantly from the player-character position.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a bug where players missing the correct anti-cheat client module were disconnected in certain circumstances with the
+					<code>EOS_ACCCAR_AuthenticationFailed</code>
+					instead of
+					<code>EOS_ACCCAR_NullClient</code>.
+					<br>
+					The circumstances were:
+					<ul>
+						<li>A player fails to download the correct anti-cheat client module at game launch due to a network issue.</li>
+						<li>The player attempts to connect to more than one protected game session before restarting the game process.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed an issue where the EOS Anti-Cheat Bootstrapper,
+					<code>start_protected_game.exe</code>
+					would hang, returning a not-found error message, if the file path to the game was long and contained no spaces.</li>
+				<li>
+					<strong>Bug fix</strong>: Improved handling of anti-cheat messages that are delivered out of order. This resulted in players being kicked with reason “Corrupt or invalid backend message - internal data corruption”.</li>
+				<li>
+					<strong>Bug fix</strong>: Resolved a crash issue that occurred in an internal background task that is related to checking client-authentication timeout.</li>
+				<li>
+					<strong>Bug fix</strong>: Resolved an issue where the
+					<code>RegisterTimeoutSeconds</code>
+					of
+					<code>EOS_AntiCheatServer_BeginSessionOptions</code>
+					was not respected.</li>
+				<li>
+					<strong>Bug fix</strong>: Resolved a crash issue that occurred on game-process launch for Unity versions 2023.x (early 2023 versions) and lower.</li>
+				<li>
+					<strong>Bug fix</strong>: Improved the performance of the EOS Anti-Cheat service’s server in high player-count scenarios. We have load tested the networking code and it now supports up to a few thousand players, depending on the tick rate of the server.</li>
+			</ul>
+			<div>
+				<h5 id="authentication">Authentication</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed access-token refresh for the Developer Authentication Tool.  Developer Authentication Tool credentials now remain valid until they have actually expired.</li>
+			</ul>
+			<div>
+				<h5 id="connect">Connect</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Added
+					<code>EOS_Connect_Logout</code>
+					to better support platforms that require account switching. Call
+					<code>EOS_Connect_Logout</code>
+					with a logged-in Product User ID (PUID) to remove the access token from memory and notify listeners of the login status-change to
+					<code>EOS_LS_NotLoggedIn</code>. The access token is not revoked, just discarded locally. Any pending tasks then proceed as if the user is still logged in, while new tasks fail with<code>
+						EOS_InvalidUser</code>.</li>
+				<li>
+					<strong>New</strong>: Added VIVEPORT (see
+					<a href="https://www.viveport.com">www.viveport.com</a>) as a supported user-authentication provider.</li>
+			</ul>
+			<div>
+				<h5 id="leaderboards">Leaderboards</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed
+					<code>EOS_Leaderboards_QueryLeaderboardDefinitions</code>
+					so it now returns
+					<code>EOS_LEADERBOARDS_TIME_UNDEFINED</code>
+					for
+					<code>EndTime</code>
+					when the end time is not defined.</li>
+				<li>
+					<strong>Bug fix</strong>:
+					<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallback</code>
+					now also returns the ID of the leaderboard that was queried in the
+					<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo</code>
+					data.</li>
+			</ul>
+			<div>
+				<h5 id="lobbies">Lobbies</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: The warning "LogEOSLobby: Lobby backend has attributes missing from client" no longer appears unnecessarily during updates.</li>
+				<li>
+					<strong>Bug fix</strong>: Resolved an issue In EOS SDK version 1.16 where, if you add an attribute to a lobby using
+					<code>EOS_LobbyModification_AddAttribute</code>
+					without modifying any lobby owner member attributes, the lobby owner member attributes set previously with
+					<code>EOS_LobbyModification_AddMemberAttribute</code>
+					are removed. From EOS SDK 1.16.2 onwards, you do not need to use the workaround for lobbies described in
+					<a href="/docs/epic-online-services/release-notes#known-issues-and-workarounds">Release Notes 1.16: Known Issues and Workarounds</a>.</li>
+			</ul>
+			<div>
+				<h5 id="p2p">P2P</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug Fix</strong>: Listeners created with
+					<code>EOS_P2P_AddNotifyPeerConnectionEstablished</code>
+					now get notifications when there’s a new connection (new Socket ID) on already established peer connection</li>
+				<li>
+					<strong>Bug fix</strong>: Listeners who have already been notified about a new connection (a new Socket ID) on an already-established peer connection, do not get notified again.</li>
+			</ul>
+			<div>
+				<h5 id="presence">Presence</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>:  Fixed a rare crash in the Presence Interface that could occur just after a new Epic Games account log in.</li>
+			</ul>
+			<div>
+				<h5 id="sanctions">Sanctions</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: The Sanctions Interface client now supports submitting sanction appeals.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a race-condition bug where
+					<code>EOS_Sanctions_GetPlayerSanctionCount</code>
+					could return an
+					<code>EOS_InvalidParameters</code>
+					error with "unknown TargetUserId" in the log message if multiple calls to
+					<code>EOS_Sanctions_QueryActivePlayerSanctions</code>
+					are made in a short period of time.</li>
+			</ul>
+			<div>
+				<h5 id="stats">Stats</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>API documentation update</strong>: Updated
+					<code>EOS_Stats_IngestStatCompleteCallbackInfo</code>
+					documentation to clarify what success means.</li>
+			</ul>
+			<div>
+				<h5 id="ui-eos-overlaysocial-overlay">UI (EOS Overlay/Social Overlay)</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: When a game resumes from a suspended state, or the network connection is re-established, the Social Overlay now refreshes.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed a crash that occurred when a player switched between tabs multiple times.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed presence updates and friend requests so they are correctly updated after a game has been in a suspended state.</li>
+			</ul>
+			<div>
+				<h5 id="voice">Voice</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bugfix</strong>: Resolved freezes for Nintendo Switch devices in Airplane Mode.</li>
+				<li>
+					<strong>Bugfix</strong>: Reduced peak CPU and memory usage when players joined a room for Nintendo Switch and PlayStation.</li>
+				<li>
+					<strong>Bugfix</strong>: Fixed the automatic gain controller configuration for Nintendo Switch.</li>
+				<li>
+					<strong>Bugfix</strong>: Improved stability when there are limited system resources for Windows and Xbox.</li>
+				<li>
+					<strong>New</strong>: Use the Real-Time Communication (RTC) Data Interface to allow players to send data messages to each other in a voice chat room.</li>
+				<li>
+					<strong>Bug fix</strong>: Fixed audio sound noise generation which could happen during Real-time communication (RTC) room reconnections.</li>
+			</ul>
+			<div>
+				<h4 id="mobile">MOBILE</h4>
+			</div>
+			<div>
+				<h5 id="ios">iOS</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: EOS now ensures that EOS Social Overlay Account Portal credentials are not present in automatic screenshots on iOS.
+					<br>
+					See the following section for further information:
+					<a href="#programming-upgrade-notes">Programming Upgrade Notes</a>.</li>
+				<li>
+					<strong>Bug fix</strong>:
+					<code>EOS_IOS_Auth_CredentialsOptions.PresentationContextProviding</code>
+					can now handle standalone objects that are retained only by a single
+					<code>CFBridgingRetain()</code>
+					call.</li>
+			</ul>
+			<div>
+				<h5 id="android">Android</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: The EOS SDK for Android now builds with later versions of Google’s Android packages. See the following section for more information:
+					<a href="#upgrade-notes">Upgrade Notes</a>.</li>
+			</ul>
+			<p>See also the following sections for more information about mobile updates:
+				<a href="#upgrade-notes">Upgrade Notes</a>
+				and
+				<a href="#programming-upgrade-notes">Programming Upgrade Notes</a>.</p>
+			<div>
+				<h4 id="console-specific">CONSOLE-SPECIFIC</h4>
+			</div>
+			<div>
+				<h5 id="general">General</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Hosts can now provide their own virtual memory implementation for the EOS Overlay. See the documentation for more details:
+					<a href="/docs/epic-online-services/platforms/switch#Override#the#Virtual#Memory#System">Nintendo Switch: Override the Virtual Memory System</a>.</li>
+			</ul>
+			<div>
+				<h5 id="nintendo-switch">Nintendo Switch</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>:  Added the
+					<code>EOS_Connect_Switch_GetOnlinePlayPermission</code>
+					API. Use this to check if the local Nintendo Switch user associated with a locally authenticated EOS Product User is permitted for Nintendo Switch Online play.</li>
+				<li>
+					<strong>Bug fix</strong>:  Added mandatory
+					<code>PlatformGraphicsDevice</code>
+					field to
+					<code>EOS_UI_Switch_PrePresentData</code>
+					<strong>.</strong>
+				</li>
+			</ul>
+			<div>
+				<h5 id="xbox">Xbox</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Added support for Xbox GDK version 231003.</li>
+				<li>
+					<strong>Bug fix</strong>: On Xbox, you can now safely call
+					<code>EOS_Initialize</code>
+					and
+					<code>EOS_Platform_Create</code>
+					before a graphics device is initialized.</li>
+				<li>
+					<strong>Bug fix</strong>: In accordance with the Xbox requirement XR-046, the EOS SDK now uses
+					<code>Gamertag</code>
+					name for display names. Previously it used the
+					<code>gameDisplayName()</code>
+					API.</li>
+			</ul>
+			<p>See  the following sections for more information on console-specific updates:
+				<a href="#upgrade-notes">Upgrade Notes</a>
+				and
+				<a href="#programming-upgrade-notes">Programming Upgrade Notes</a>.</p>
+			<div>
+				<h4 id="upgrade-notes">UPGRADE NOTES</h4>
+			</div>
+			<div>
+				<h5 id="eos-sdk-in-c-1">EOS SDK in C#</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Breaking change</strong>: In the P2P Interface’s
+					<code>ReceivePacket</code>
+					method, two out parameters have changed to ref parameters. This allows the arguments to be buffers and so avoids constantly creating new objects. See the following section for more information:
+					<a href="#programming-upgrade-notes">Programming Upgrade Notes</a>.</li>
+				<li>
+					<strong>Breaking change</strong>: We moved the online platform constants and the integrated platform strings to the namespace
+					<code>Epic.OnlineServices.Types</code>. Online platform constants are part of the
+					<code>OnlinePlatform</code>
+					class and integrated platform strings are part of
+					<code>IntegrationPlatform</code>
+					class.
+					<br>
+					You must do the following:
+					<ul>
+						<li>Update the namespace of the online platform constants from
+							<code>Epic.OnlineServices.Common</code>
+							to
+							<code>Epic.OnlineServices.Types.OnlinePlatform</code>.</li>
+						<li>Update the namespace of the integrated platform constants from
+							<code>Epic.OnlineServices.Common</code>
+							to
+							<code>Epic.OnlineServices.Types.IntegratedPlatform</code>.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h5 id="mobile---android">Mobile - Android</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: The EOS SDK for Android is now built with Android NDK r21e LTS.</li>
+				<li>
+					<strong>New</strong>: Android AAR now comes in two explicitly named versions:
+					<code>eossdk-DynamicSTDC-release.aar</code>
+					and
+					<code>eossdk-StaticSTDC-release.aar</code>. Use
+					<code>eossdk-StaticSTDC-release.aar</code>
+					by default, because it uses
+					<code>libc++_static</code>
+					which is more compatible.</li>
+				<li>
+					<strong>New</strong>: The EOS SDK for Android download (zip package) no longer includes duplicate
+					<code>libEOSSD.so</code>
+					binaries directly. These are still present in each included EOS SDK
+					<code>.aar</code>
+					archive. This means you can unpack them by renaming the
+					<code>.aar</code>
+					extension to
+					<code>.zip</code>.</li>
+				<li>
+					<strong>New (dependencies)</strong>: Dependencies are upgraded. Add the following packages to your app build.gradle
+					<br>
+					<code>implementation 'androidx.appcompat:appcompat:1.5.1</code>
+					<br>
+					<code>implementation 'androidx.constraintlayout:constraintlayout:2.1.4</code>
+					<br>
+					<code>implementation 'androidx.security:security-crypto:1.0.0</code>
+					<br>
+					<code>implementation 'androidx.browser:browser:1.4.0</code>
+				</li>
+			</ul>
+			<div>
+				<h5 id="console-specific---nintendo-switch">Console-Specific - Nintendo Switch</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fill the new
+					<code>PlatformGraphicsDevice</code>
+					field in
+					<code>EOS_UI_Switch_PrePresentData</code>
+					with the
+					<code>nvn::Device</code>
+					used by the host application before calling
+					<code>EOS_UI_PrePresent</code>
+					<strong>.</strong>
+				</li>
+			</ul>
+			<div>
+				<h5 id="console-specific---xbox">Console-Specific - Xbox</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: The
+					<code>PlatformGraphicsDevice</code>
+					parameter on Xbox platforms is now optional. If it is not provided (<code>nullptr</code>), the graphics device is extracted from the device objects in
+					<code>EOS_UI_PrePresent</code>.</li>
+			</ul>
+			<div>
+				<h5 id="samples-1">Samples</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>Bug fix</strong>: Fixed a case sensitivity problem in the logic for the sessions sample.
+					<ul>
+						<li>Level vs LEVEL was inconsistently applied in the code base resulting in an inaccurate display of the information for joining clients resulting in an inaccurate display of the information for joining clients.</li>
+						<li>Player count was wrong on the joining player. This is a shortcoming of the sample since it doesn't have a p2p connection between instances. The player count is only accurate as of the time of the create/join call. Game hosts need to call
+							<code>EOS_Sessions_RegisterPlayer**</code>
+							on the host to keep the information accurate. Game clients need to keep track of player count based on game logic indicating players joining/leaving the server.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="programming-upgrade-notes">PROGRAMMING UPGRADE NOTES</h4>
+			</div>
+			<div>
+				<h5 id="eos-core-1">EOS Core</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Use the new
+					<code>EOS_EResult</code>
+					enumeration values listed below to help you diagnose certain initialization failures. See the header file
+					<code>eos_result.h</code>
+					for details of what each value means.
+					<ul>
+						<li>
+							<code>EOS_Android_ReservedMustReferenceLocalVM</code>
+						</li>
+						<li>
+							<code>EOS_Android_ReservedMustBeNull</code>
+						</li>
+						<li>
+							<code>EOS_ConsoleInit_OnNetworkRequestedDeprecatedCallbackNotSet</code>
+						</li>
+						<li>
+							<code>EOS_Switch_InitializeOptions.OnNetworkRequested_DEPRECATED</code>
+						</li>
+						<li>
+							<code>EOS_ConsoleInit_CacheStorage_SizeKBNotMultipleOf16</code>
+						</li>
+						<li>
+							<code>EOS_Switch_InitializeOptions.CacheStorageSizekB</code>
+						</li>
+						<li>
+							<code>EOS_ConsoleInit_CacheStorage_SizeKBBelowMinimumSize</code>
+						</li>
+						<li>
+							<code>EOS_Switch_InitializeOptions.CacheStorageSizekB</code>
+						</li>
+						<li>
+							<code>EOS_ConsoleInit_CacheStorage_SizeKBExceedsMaximumSize</code>
+						</li>
+						<li>
+							<code>EOS_Switch_InitializeOptions.CacheStorageSizekB</code>
+						</li>
+						<li>
+							<code>EOS_ConsoleInit_CacheStorage_IndexOutOfRangeRange</code>
+						</li>
+						<li>
+							<code>EOS_Switch_InitializeOptions.CacheStorageIndex</code>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h5 id="eos-sdk-in-c-2">EOS SDK in C#</h5>
+			</div>
+			<ul>
+				<li>
+					<p>
+						<strong>New</strong>: In the P2P Interface the
+						<code>ReceivePacket</code>
+						method signature has changed in the following way:</p>
+					<ul>
+						<li>
+							<code>ProductUserId*outPeerId</code>
+							has changed to a ref parameter.</li>
+						<li>
+							<code>SocketId*OutSocketId</code>
+							has changed to a ref parameter.</li>
+					</ul>
+					<p>The P2P Interface’s
+						<code>SendPacket</code>
+						method signature has not changed. However, make sure you use the same
+						<code>SendPacketOptions</code>
+						reference for all send requests to avoid continually creating a new
+						<code>SocketId</code>
+						reference for each request.</p>
+					<p>The minimum lines of code to upgrade to this version would be, initialize a
+						<code>ProductUserId</code>
+						and
+						<code>SocketId</code>
+						before calling the method. For example:</p>
+					<ul>
+						<li>
+							<p>
+								<code>ProductUserId outPeerId = null;</code>
+								<br>
+								<code>SocketId outSocketId = new SocketId();</code>
+								<br>
+								<code>Result result =_p2pInterface.ReceivePacket(ref options, ref outPeerId, ref outSocketId, out byte outChannel, outData, out uint outBytesWritten);</code>
+							</p>
+						</li>
+					</ul>
+					<p>However, to reduce memory allocations to zero on send/receive, you should:</p>
+					<ul>
+						<li>Reuse and pass the same
+							<code>ProductUserId</code>
+							and
+							<code>SocketId</code>
+							on each call.</li>
+						<li>Compare
+							<code>ProductUserId</code>'s by the inner handle inside of it.  Looking at the string value causes a string to be allocated. A
+							<code>Dictionary&lt;IntPtr, string&gt;</code>
+							is a good way to reduce memory cost and still track
+							<code>PeerId</code>s. For example:
+							<ul>
+								<li>
+									<code>lastPeerId.InnerHandle == outPeerId.InnerHandle</code>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<code>SocketId</code>
+							caches the
+							<code>SocketName</code>
+							and only updates it on demand if it is changed. Repeatedly observing the
+							<code>SocketName</code>
+							when the
+							<code>SocketName</code>
+							continues to change incurs a string allocation each time the
+							<code>SocketName</code>
+							changes.</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>New</strong>: There is a new source folder ‘/SDK/Source/Overrides’ to include in your project.  Do either of the following:</p>
+					<ul>
+						<li>Make sure your project includes the entire ‘/SDK/Source’ directory and its subdirectories.</li>
+						<li>Explicitly add the
+							<code>Overrides</code>
+							directory to your project.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h5 id="mobile---ios">Mobile - iOS</h5>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: The EOS SDK has a new player-facing image that displays when the EOS Overlay’s Account Portal is active and the EOS Overlay transitions to a background or inactive app on the device.
+					<ul>
+						<li>The player-facing image is a screenshot, the “Application Snapshot",  that the iOS task-switcher uses.</li>
+						<li>Without this image, the Account Portal password could be visible and could be stored as .PNG, if it is on display when the EOS Overlay transitions to a background or inactive app.</li>
+						<li>This image is used only when the EOS Overlay’s Account Portal is active and the EOS Overlay transitions to a background or inactive app on the device.</li>
+						<li>Automatic image:
+							<ul>
+								<li>By default, the EOS SDK presents a blank opaque image with your game’s icon in the IOS task switcher.</li>
+							</ul>
+						</li>
+						<li>Custom image:
+							<ul>
+								<li>You can provide your own custom image by implementing the
+									<code>EOS_IOS_Auth_CredentialsOptions.CreateBackgroundSnapshotView</code>
+									callback.</li>
+								<li>Your custom image should be opaque and full screen to obscure any passwords that might be displayed anywhere on the screen.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<hr>
+			<div>
+				<h1 id="2023">2023</h1>
 			</div>
 			<div>
 				<h3 id="1161-cl30020700---2023-nov-30">1.16.1-CL30020700 - 2023-nov-30</h3>
 			</div>
-			<div>
-				<h5 id="sony-playstation">Sony PlayStation</h5>
-			</div>
+			<p>
+				<strong>Sony PlayStation</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added support for Sony's PlayStation 4 SDK version 11.00.
@@ -107,12 +826,13 @@
 					</ul>
 				</li>
 			</ul>
+			<hr>
 			<div>
 				<h3 id="1161---2023-aug-30">1.16.1 - 2023-aug-30</h3>
 			</div>
-			<div>
-				<h5 id="anti-cheat">Anti-cheat</h5>
-			</div>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue with the Easy Anti-Cheat (EAC) service setup that resulted in launch error
@@ -121,9 +841,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed a bug in the Service Installer (<code>EasyAntiCheat_EOS_Setup.exe</code>) that caused games to fail to launch with the error "StartService failed: 1053".</li>
 			</ul>
-			<div>
-				<h5 id="auth">Auth</h5>
-			</div>
+			<p>
+				<strong>Auth</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed the expiration of auth tokens after the application is suspended and then resumed for over 2 hours. This included Epic Account ID auth tokens and the Connect auth refresh notification not firing from
@@ -131,9 +851,9 @@
 						<code>EOS_Connect_AddNotifyAuthExpiration</code>
 					</a>.</li>
 			</ul>
-			<div>
-				<h5 id="connect">Connect</h5>
-			</div>
+			<p>
+				<strong>Connect</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed the expiration of auth tokens after the application is suspended and then resumed for over 2 hours. This included Epic Account ID auth tokens and the Connect auth refresh notification not firing from
@@ -141,16 +861,16 @@
 						<code>EOS_Connect_AddNotifyAuthExpiration</code>
 					</a>.</li>
 			</ul>
-			<div>
-				<h5 id="lobbies">Lobbies</h5>
-			</div>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed Lobby connection timeouts after the application is suspended and then resumed.</li>
 			</ul>
-			<div>
-				<h5 id="mobile">Mobile</h5>
-			</div>
+			<p>
+				<strong>Mobile</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: We have added the correct Gradle files to the Android login sample, and Android headers are now in the new
@@ -166,9 +886,9 @@
 			<p>
 				<strong>PLATFORM SPECIFIC</strong>
 			</p>
-			<div>
-				<h5 id="sony-playstation-1">Sony PlayStation</h5>
-			</div>
+			<p>
+				<strong>Sony PlayStation</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Improved performance of
@@ -177,12 +897,12 @@
 					</a>
 					in high latency situations when targeting PS5 7.00. This bug was introduced in EOS SDK version 1.16.</li>
 			</ul>
-			<p>
-				<strong>KNOWN ISSUES AND WORKAROUNDS</strong>
-			</p>
 			<div>
-				<h5 id="lobbies-1">Lobbies</h5>
+				<h5 id="known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</h5>
 			</div>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<p>In EOS SDK version 1.16, if you add an attribute to a lobby using
@@ -205,12 +925,13 @@
 					</pre>
 				</section>
 			</div>
+			<hr>
 			<div>
 				<h3 id="116---2023-aug-16">1.16 - 2023-aug-16</h3>
 			</div>
-			<div>
-				<h5 id="anti-cheat-1">Anti-cheat</h5>
-			</div>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: The maximum individual message chunk size sent from the server to clients is increased to 512 bytes from 256 bytes.</li>
@@ -248,9 +969,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed a bug where anti-cheat module updates fail to download if their file size is large.</li>
 			</ul>
-			<div>
-				<h5 id="authentication">Authentication</h5>
-			</div>
+			<p>
+				<strong>Authentication</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added a
@@ -280,9 +1001,9 @@
 						<code>EOS_UserInfo_ExternalUserInfo</code>
 					</a>) did not include external accounts that existed with an unset account ID. This was unexpected because the account ID is not guaranteed to be available for all users across all external accounts.</li>
 			</ul>
-			<div>
-				<h5 id="connect-1">Connect</h5>
-			</div>
+			<p>
+				<strong>Connect</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added an input parameter,
@@ -291,12 +1012,12 @@
 						<code>EOS_Connect_Login</code>
 					</a>. The token is a check to see if the local user has permission to play online. If the local user has a token, the EOS service allows the local user to use the Lobbies Interface and Sessions Interface. If they do not have a token, they can't play online or use either the Lobbies Interface or Sessions Interface.</li>
 			</ul>
-			<div>
-				<h5 id="console-specific">Console Specific</h5>
-			</div>
-			<div>
-				<h6 id="microsoft-xbox">Microsoft Xbox</h6>
-			</div>
+			<p>
+				<strong>CONSOLE SPECIFIC</strong>
+			</p>
+			<p>
+				<strong>Microsoft Xbox</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added support for Microsoft's Xbox GDK version March 2023 QFE5 (230305).
@@ -306,9 +1027,8 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h6 id="sony-playstation-2">Sony PlayStation</h6>
-			</div>
+			<p>#<strong>Sony PlayStation</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added support for Sony's PlayStation 4 SDK version 10.508.001.
@@ -329,9 +1049,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue where bad memory usage, when internally accessing parental controls on PlayStation 4, caused the SDK to crash.</li>
 			</ul>
-			<div>
-				<h6 id="nintendo-switch">Nintendo Switch</h6>
-			</div>
+			<p>
+				<strong>Nintendo Switch</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added support for Nintendo's Switch version 16.2.0.
@@ -350,9 +1070,9 @@
 					<code>-Oz</code>
 					(aggressive size).</li>
 			</ul>
-			<div>
-				<h5 id="crossplay">Crossplay</h5>
-			</div>
+			<p>
+				<strong>Crossplay</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -420,9 +1140,9 @@
 						<strong>New</strong>: Updated the EOSH installer to version 2.5.9.</p>
 				</li>
 			</ul>
-			<div>
-				<h5 id="ecom">Ecom</h5>
-			</div>
+			<p>
+				<strong>Ecom</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -474,9 +1194,9 @@
 						failed.</p>
 				</li>
 			</ul>
-			<div>
-				<h5 id="eos-core">EOS Core</h5>
-			</div>
+			<p>
+				<strong>EOS Core</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -597,9 +1317,9 @@
 						<strong>Bug fix</strong>: Fixed an issue where some internal HTTP requests were misconfigured, and could take much longer to retry than intended. The affected delegates now report connection related issues results much sooner.</p>
 				</li>
 			</ul>
-			<div>
-				<h5 id="eos-sdk-in-c">EOS SDK in C#</h5>
-			</div>
+			<p>
+				<strong>EOS SDK in C#</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue that occurred when you pinned the same buffer multiple times in a multi-threaded environment while using the C# wrapper.
@@ -610,16 +1330,16 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="eos-overlay">EOS Overlay</h5>
-			</div>
+			<p>
+				<strong>EOS Overlay</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed intermittent issues that would cause a crash when signing in with a proxy account.</li>
 			</ul>
-			<div>
-				<h5 id="friends">Friends</h5>
-			</div>
+			<p>
+				<strong>Friends</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -654,9 +1374,9 @@
 						will now additionally retrieve the list of EOS blocked players.</p>
 				</li>
 			</ul>
-			<div>
-				<h5 id="lobbies-2">Lobbies</h5>
-			</div>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Improved comments around using
@@ -720,21 +1440,21 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed a few crashes related to log output using the wrong type of specifiers.</li>
 			</ul>
-			<div>
-				<h5 id="mobile-1">Mobile</h5>
-			</div>
-			<div>
-				<h6 id="ios">iOS</h6>
-			</div>
+			<p>
+				<strong>MOBILE</strong>
+			</p>
+			<p>
+				<strong>iOS</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Updated the Login Sample UI / UX to reflect recent Android UI / UX updates. The update also includes minor refactoring for clarity and better support of the new UX.</li>
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue for calls to EOS on multiple threads in the Login Sample on iOS with a dedicated background thread.</li>
 			</ul>
-			<div>
-				<h5 id="peer-to-peer">Peer-to-peer</h5>
-			</div>
+			<p>
+				<strong>Peer-to-peer</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>:
@@ -761,9 +1481,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue where a player disconnecting for a short period would cause the connection to timeout, even if the connection had reconnected.</li>
 			</ul>
-			<div>
-				<h5 id="player-data-storage">Player Data Storage</h5>
-			</div>
+			<p>
+				<strong>Player Data Storage</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Improved the error and event logging in Player Data Storage.</li>
@@ -784,9 +1504,9 @@
 						<code>EOS_PlayerDataStorage_WriteFile</code>
 					</a>.</li>
 			</ul>
-			<div>
-				<h5 id="samples">Samples</h5>
-			</div>
+			<p>
+				<strong>Samples</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Added support for ingesting a non-local player's stats via the
@@ -807,9 +1527,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed a crash in the mods sample due to breaking codepoints during string handling.</li>
 			</ul>
-			<div>
-				<h5 id="session-based-matchmaking">Session Based Matchmaking</h5>
-			</div>
+			<p>
+				<strong>Session Based Matchmaking</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: You can find out which player owns a session with the
@@ -850,9 +1570,9 @@
 					</a>
 					not returning the updated player list in callback when called on a non session owner.</li>
 			</ul>
-			<div>
-				<h5 id="social-overlay">Social Overlay</h5>
-			</div>
+			<p>
+				<strong>Social Overlay</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Integrated Platform on Console expands on the existing Integrated Platform provided for Steam, but now it applies to all the major consoles.
@@ -864,16 +1584,14 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="title-storage">Title Storage</h5>
-			</div>
+			<p>** Title Storage**</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Improved the error and event logging in Title Storage.</li>
 			</ul>
-			<div>
-				<h5 id="tools">Tools</h5>
-			</div>
+			<p>
+				<strong>Tools</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>EOS bootstrapper tool</strong>
@@ -882,9 +1600,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="voice">Voice</h5>
-			</div>
+			<p>
+				<strong>Voice</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: Introduced a way to configure rooms behavior when your game enters a background state.</li>
@@ -913,12 +1631,12 @@
 				<li>
 					<strong>Bug Fix</strong>: Fixed a resource leak when a player leaves the room through internal methods.</li>
 			</ul>
-			<div>
-				<h4 id="deprecations">Deprecations</h4>
-			</div>
-			<div>
-				<h5 id="authentication-1">Authentication</h5>
-			</div>
+			<p>
+				<strong>DEPRECATIONS</strong>
+			</p>
+			<p>
+				<strong>Authentication</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated Device Code support,
@@ -934,9 +1652,8 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="crossplay-1">Crossplay</h5>
-			</div>
+			<p>#<strong>Crossplay</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated and replaced the struct
@@ -945,9 +1662,9 @@
 					<code>EOS_Platform_DesktopCrossplayStatusInfo</code>
 					for naming consistency.</li>
 			</ul>
-			<div>
-				<h5 id="eos-core-1">EOS Core</h5>
-			</div>
+			<p>
+				<strong>EOS Core</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated and replaced some macros to fit with the standard EOS SDK naming convention of
@@ -968,26 +1685,26 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="friends-1">Friends</h5>
-			</div>
+			<p>
+				<strong>Friends</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated unused types related to the previously removed
 					<code>EOS_Friends_DeleteFriend</code>
 					API.</li>
 			</ul>
-			<div>
-				<h5 id="player-data-storage-1">Player Data Storage</h5>
-			</div>
+			<p>
+				<strong>Player Data Storage</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Deprecated</strong>: We deprecated the unused define
 					<code>EOS_PLAYERDATASTORAGE_FILE_MAX_SIZE_BYTES</code>.</li>
 			</ul>
-			<div>
-				<h5 id="voice-1">Voice</h5>
-			</div>
+			<p>
+				<strong>Voice</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -1096,12 +1813,12 @@
 						<strong>Note</strong>: We recommend you read the API references to these and replace them with the newer methods and structs as soon as possible.</p>
 				</li>
 			</ul>
-			<div>
-				<h4 id="upgrade-notes">UPGRADE NOTES</h4>
-			</div>
-			<div>
-				<h5 id="anti-cheat-2">Anti-cheat</h5>
-			</div>
+			<p>
+				<strong>UPGRADE NOTES</strong>
+			</p>
+			<p>
+				<strong>Anti-cheat</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: The anti-cheat bootstrapper (<code>start_protected_game</code>) may reject anti-cheat updates because of a file size limit.
@@ -1111,9 +1828,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="authentication-2">Authentication</h5>
-			</div>
+			<p>
+				<strong>Authentication</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -1154,9 +1871,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="crossplay-2">Crossplay</h5>
-			</div>
+			<p>
+				<strong>Crossplay</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: See Crossplay:
@@ -1209,9 +1926,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="eos-core-2">EOS Core</h5>
-			</div>
+			<p>
+				<strong>EOS Core</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: The EOS SDK supports SteamWorks versions 1.13 and higher. The EOS SDK used to require SteamWorks v1.48 and higher.</li>
@@ -1225,9 +1942,9 @@
 				<li>
 					<strong>Bug fix</strong>: Fixed an issue where building the EOS SDK on Microsoft Xbox GDK printed false warnings about closing sockets during their shutdown.</li>
 			</ul>
-			<div>
-				<h5 id="lobbies-3">Lobbies</h5>
-			</div>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: To use the introduced leave party button, use
@@ -1276,9 +1993,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h5 id="session-based-matchmaking-1">Session Based Matchmaking</h5>
-			</div>
+			<p>
+				<strong>Session-Based Matchmaking</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Bug fix</strong>: Fixed
@@ -1337,12 +2054,12 @@
 					<code>EOS_LimitExceeded</code>
 					for cases where the requested number of players would exceed the maximum capacity of the session.</li>
 			</ul>
-			<div>
-				<h4 id="platform-specific">PLATFORM-SPECIFIC</h4>
-			</div>
-			<div>
-				<h5 id="nintendo-switch-1">Nintendo Switch</h5>
-			</div>
+			<p>
+				<strong>PLATFORM-SPECIFIC</strong>
+			</p>
+			<p>
+				<strong>Nintendo Switch</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>New</strong>: We updated the Nintendo Switch compilation and link optimizations to compress and reduce binary size. We now use
@@ -1354,11 +2071,11 @@
 					(aggressive size).</li>
 			</ul>
 			<div>
-				<h4 id="known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</h4>
+				<h4 id="known-issues-and-workarounds-1">KNOWN ISSUES AND WORKAROUNDS</h4>
 			</div>
-			<div>
-				<h5 id="android-login-sample-116">Android Login Sample 1.16</h5>
-			</div>
+			<p>
+				<strong>Android Login Sample 1.16</strong>
+			</p>
 			<ul>
 				<li>In EOS SDK version 1.16 the Android login sample has incorrect gradle files. To fix this, please follow these steps:
 					<ol>
@@ -1414,15 +2131,14 @@
 					</ol>
 				</li>
 			</ul>
-			<div>
-				<h5 id="anti-cheat-service-installer">Anti-cheat Service Installer</h5>
-			</div>
+			<p>#<strong>Anti-cheat Service Installer</strong>
+			</p>
 			<ul>
 				<li>The Service Installer (<code>EasyAntiCheat_EOS_Setup.exe</code>) provided in EOS SDK version 1.16 has a bug that causes games to fail the launch with the error "StartService failed: 1053". This issue will be fixed in the next release.</li>
 			</ul>
-			<div>
-				<h5 id="lobbies-4">Lobbies</h5>
-			</div>
+			<p>
+				<strong>Lobbies</strong>
+			</p>
 			<ul>
 				<li>
 					<p>In EOS SDK version 1.16, if you add an attribute to a lobby using
@@ -1445,6 +2161,7 @@
 					</pre>
 				</section>
 			</div>
+			<hr>
 			<div>
 				<h3 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h3>
 			</div>
@@ -1536,8 +2253,9 @@
 				<li>
 					<strong>New</strong>: Added version support for Nintendo Switch SDK version 15.3.0 and retained support for Nintendo Switch SDK version 14.3.0.</li>
 			</ul>
+			<hr>
 			<div>
-				<h2 id="2022">2022</h2>
+				<h1 id="2022">2022</h1>
 			</div>
 			<div>
 				<h3 id="1154---2022-nov-16">1.15.4 - 2022-nov-16</h3>
@@ -2982,7 +3700,7 @@
 			</ul>
 			<hr>
 			<div>
-				<h2 id="2021">2021</h2>
+				<h1 id="2021">2021</h1>
 			</div>
 			<div>
 				<h3 id="1141---2021-nov-08">1.14.1 - 2021-nov-08</h3>
@@ -3722,76 +4440,13 @@
 						<a href="#about-the-eos-sdk">About the EOS SDK</a>
 					</li>
 					<li>
-						<a href="#planned-features">Planned Features</a>
-					</li>
-					<li>
-						<a href="#platforms-supported">Platforms Supported</a>
-					</li>
-					<li>
 						<a href="#release-notes">Release Notes</a>
 					</li>
 					<li>
-						<a href="#2023">2023</a>
+						<a href="#2024">2024</a>
 					</li>
 					<li>
-						<a href="#1161-cl30020700---2023-nov-30">1.16.1-CL30020700 - 2023-nov-30</a>
-					</li>
-					<li>
-						<a href="#sony-playstation">Sony PlayStation</a>
-					</li>
-					<li>
-						<a href="#1161---2023-aug-30">1.16.1 - 2023-aug-30</a>
-					</li>
-					<li>
-						<a href="#anti-cheat">Anti-cheat</a>
-					</li>
-					<li>
-						<a href="#auth">Auth</a>
-					</li>
-					<li>
-						<a href="#connect">Connect</a>
-					</li>
-					<li>
-						<a href="#lobbies">Lobbies</a>
-					</li>
-					<li>
-						<a href="#mobile">Mobile</a>
-					</li>
-					<li>
-						<a href="#sony-playstation-1">Sony PlayStation</a>
-					</li>
-					<li>
-						<a href="#lobbies-1">Lobbies</a>
-					</li>
-					<li>
-						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
-					</li>
-					<li>
-						<a href="#anti-cheat-1">Anti-cheat</a>
-					</li>
-					<li>
-						<a href="#authentication">Authentication</a>
-					</li>
-					<li>
-						<a href="#connect-1">Connect</a>
-					</li>
-					<li>
-						<a href="#console-specific">Console Specific</a>
-					</li>
-					<li>
-						<a href="#microsoft-xbox">Microsoft Xbox</a>
-					</li>
-					<li>
-						<a href="#sony-playstation-2">Sony PlayStation</a>
-					</li>
-					<li>
-						<a href="#nintendo-switch">Nintendo Switch</a>
-					</li>
-					<li>
-						<a href="#crossplay">Crossplay</a>
-					</li>
-					<li>
-						<a href="#ecom">Ecom</a>
+						<a href="#1162-cl32273396---2024-mar-19">1.16.2-CL32273396 - 2024-mar-19</a>
 					</li>
 					<li>
 						<a href="#eos-core">EOS Core</a>
@@ -3803,100 +4458,115 @@
 						<a href="#eos-overlay">EOS Overlay</a>
 					</li>
 					<li>
-						<a href="#friends">Friends</a>
-					</li>
-					<li>
-						<a href="#lobbies-2">Lobbies</a>
-					</li>
-					<li>
-						<a href="#mobile-1">Mobile</a>
-					</li>
-					<li>
-						<a href="#ios">iOS</a>
-					</li>
-					<li>
-						<a href="#peer-to-peer">Peer-to-peer</a>
-					</li>
-					<li>
-						<a href="#player-data-storage">Player Data Storage</a>
-					</li>
-					<li>
 						<a href="#samples">Samples</a>
 					</li>
 					<li>
-						<a href="#session-based-matchmaking">Session Based Matchmaking</a>
+						<a href="#interfaces">INTERFACES</a>
 					</li>
 					<li>
-						<a href="#social-overlay">Social Overlay</a>
+						<a href="#achievements">Achievements</a>
 					</li>
 					<li>
-						<a href="#title-storage">Title Storage</a>
+						<a href="#anti-cheat">Anti-Cheat</a>
 					</li>
 					<li>
-						<a href="#tools">Tools</a>
+						<a href="#authentication">Authentication</a>
+					</li>
+					<li>
+						<a href="#connect">Connect</a>
+					</li>
+					<li>
+						<a href="#leaderboards">Leaderboards</a>
+					</li>
+					<li>
+						<a href="#lobbies">Lobbies</a>
+					</li>
+					<li>
+						<a href="#p2p">P2P</a>
+					</li>
+					<li>
+						<a href="#presence">Presence</a>
+					</li>
+					<li>
+						<a href="#sanctions">Sanctions</a>
+					</li>
+					<li>
+						<a href="#stats">Stats</a>
+					</li>
+					<li>
+						<a href="#ui-eos-overlaysocial-overlay">UI (EOS Overlay/Social Overlay)</a>
 					</li>
 					<li>
 						<a href="#voice">Voice</a>
 					</li>
 					<li>
-						<a href="#deprecations">Deprecations</a>
+						<a href="#mobile">MOBILE</a>
 					</li>
 					<li>
-						<a href="#authentication-1">Authentication</a>
+						<a href="#ios">iOS</a>
 					</li>
 					<li>
-						<a href="#crossplay-1">Crossplay</a>
+						<a href="#android">Android</a>
 					</li>
 					<li>
-						<a href="#eos-core-1">EOS Core</a>
+						<a href="#console-specific">CONSOLE-SPECIFIC</a>
 					</li>
 					<li>
-						<a href="#friends-1">Friends</a>
+						<a href="#general">General</a>
 					</li>
 					<li>
-						<a href="#player-data-storage-1">Player Data Storage</a>
+						<a href="#nintendo-switch">Nintendo Switch</a>
 					</li>
 					<li>
-						<a href="#voice-1">Voice</a>
+						<a href="#xbox">Xbox</a>
 					</li>
 					<li>
 						<a href="#upgrade-notes">UPGRADE NOTES</a>
 					</li>
 					<li>
-						<a href="#anti-cheat-2">Anti-cheat</a>
+						<a href="#eos-sdk-in-c-1">EOS SDK in C#</a>
 					</li>
 					<li>
-						<a href="#authentication-2">Authentication</a>
+						<a href="#mobile---android">Mobile - Android</a>
 					</li>
 					<li>
-						<a href="#crossplay-2">Crossplay</a>
+						<a href="#console-specific---nintendo-switch">Console-Specific - Nintendo Switch</a>
 					</li>
 					<li>
-						<a href="#eos-core-2">EOS Core</a>
+						<a href="#console-specific---xbox">Console-Specific - Xbox</a>
 					</li>
 					<li>
-						<a href="#lobbies-3">Lobbies</a>
+						<a href="#samples-1">Samples</a>
 					</li>
 					<li>
-						<a href="#session-based-matchmaking-1">Session Based Matchmaking</a>
+						<a href="#programming-upgrade-notes">PROGRAMMING UPGRADE NOTES</a>
 					</li>
 					<li>
-						<a href="#platform-specific">PLATFORM-SPECIFIC</a>
+						<a href="#eos-core-1">EOS Core</a>
 					</li>
 					<li>
-						<a href="#nintendo-switch-1">Nintendo Switch</a>
+						<a href="#eos-sdk-in-c-2">EOS SDK in C#</a>
+					</li>
+					<li>
+						<a href="#mobile---ios">Mobile - iOS</a>
+					</li>
+					<li>
+						<a href="#2023">2023</a>
+					</li>
+					<li>
+						<a href="#1161-cl30020700---2023-nov-30">1.16.1-CL30020700 - 2023-nov-30</a>
+					</li>
+					<li>
+						<a href="#1161---2023-aug-30">1.16.1 - 2023-aug-30</a>
 					</li>
 					<li>
 						<a href="#known-issues-and-workarounds">KNOWN ISSUES AND WORKAROUNDS</a>
 					</li>
 					<li>
-						<a href="#android-login-sample-116">Android Login Sample 1.16</a>
+						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
 					</li>
 					<li>
-						<a href="#anti-cheat-service-installer">Anti-cheat Service Installer</a>
-					</li>
-					<li>
-						<a href="#lobbies-4">Lobbies</a>
+						<a href="#known-issues-and-workarounds-1">KNOWN ISSUES AND WORKAROUNDS</a>
 					</li>
 					<li>
 						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>

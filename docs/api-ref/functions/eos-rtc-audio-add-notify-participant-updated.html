@@ -33,7 +33,7 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Register to receive notifications when a room participant audio status is updated (f.e when speaking flag changes). If the returned NotificationId is valid, you must call EOS_RTCAudio_RemoveNotifyParticipantUpdated when you no longer wish to have your CompletionDelegate called.</p>
+							<p>Register to receive notifications when a room participant audio status is updated (f.e when mute state changes or speaking flag changes). The notification is raised when the participant's audio status is updated. In order not to miss any participant status changes, applications need to add the notification before joining a room. If the returned NotificationId is valid, you must call EOS_RTCAudio_RemoveNotifyParticipantUpdated when you no longer wish to have your CompletionDelegate called.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
@@ -42,7 +42,9 @@
 								<h2 id="see-also">See Also</h2>
 							</div>
 							<p>EOS_INVALID_NOTIFICATIONID,
-								<a href="/docs/api-ref/functions/eos-rtc-audio-remove-notify-participant-updated">EOS_RTCAudio_RemoveNotifyParticipantUpdated</a>
+								<a href="/docs/api-ref/functions/eos-rtc-audio-remove-notify-participant-updated">EOS_RTCAudio_RemoveNotifyParticipantUpdated</a>,
+								<a href="/docs/api-ref/structs/eos-rtc-audio-participant-updated-callback-info">EOS_RTCAudio_ParticipantUpdatedCallbackInfo</a>,
+								<a href="/docs/api-ref/enums/eos-ertc-audio-status">EOS_ERTCAudioStatus</a>
 							</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
@@ -73,7 +75,7 @@
 										<td>const
 											<a href="/docs/api-ref/callbacks/eos-rtc-audio-on-participant-updated-callback">EOS_RTCAudio_OnParticipantUpdatedCallback</a>
 											CompletionDelegate</td>
-										<td>The callback to be fired when a presence change occurs</td>
+										<td>The callback to be fired when a participant changes audio status</td>
 									</tr>
 								</tbody>
 							</table>

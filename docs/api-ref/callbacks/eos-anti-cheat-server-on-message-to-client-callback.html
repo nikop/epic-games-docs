@@ -35,7 +35,7 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Callback issued when a new message must be dispatched to a connected client. Messages contain opaque binary data of up to 256 bytes and must be transmitted to the correct client using the game's own networking layer, then delivered to the client anti-cheat instance using the EOS_AntiCheatClient_ReceiveMessageFromServer function. This callback is always issued from within EOS_Platform_Tick on its calling thread.</p>
+							<p>Callback issued when a new message must be dispatched to a connected client. Messages contain opaque binary data and must be transmitted to the correct client using the game's own networking layer, then delivered to the client anti-cheat instance using the EOS_AntiCheatClient_ReceiveMessageFromServer function. The upper limit of the message size is EOS_ANTICHEATSERVER_ONMESSAGETOCLIENTCALLBACK_MAX_MESSAGE_SIZE. This callback is always issued from within EOS_Platform_Tick on its calling thread.</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>

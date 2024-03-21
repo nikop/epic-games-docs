@@ -64,7 +64,10 @@
 				<h3 id="building-on-windows">Building on Windows</h3>
 			</div>
 			<p>Windows does not require the use of
-				<code>Windows/eos_Windows_base.h</code>. It is provided to ease implementation of a cross-platform product.</p>
+				<code>Windows/eos_Windows_base.h</code>. It is provided to ease implementation of a cross-platform
+				<span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
+				</span>.</p>
 			<div>
 				<h3 id="linking-on-windows">Linking on Windows</h3>
 			</div>
@@ -104,17 +107,13 @@
 				<code>delayhlp.cpp</code>. You can prevent the automatic loading of the DLL by providing a completely blank implementation, similar to:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>extern "C"FARPROC WINAPI__delayLoadHelper2(  PCImgDelayDescr     pidd,  FARPROC *           ppfnIATEntry){  return NULL;}</pre>
 				</section>
 			</div>
 			<p>Alternatively, you can explicitly load the module with the following:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>HMODULE Module = ::LoadLibrary(Filename);</pre>
 				</section>
 			</div>
 			<p>Where

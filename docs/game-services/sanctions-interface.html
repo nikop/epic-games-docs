@@ -14,7 +14,7 @@
 			<h1>Sanctions Interface</h1>
 			<h2>Manage punitive actions taken against your users including temporary or permanent bans from gameplay or communication.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -126,8 +126,75 @@
 			<div>
 				<h2 id="creating-player-sanction-appeals">Creating Player Sanction Appeals</h2>
 			</div>
-			<p>You can create a sanction appeal via the
-				<a href="/docs/web-api-ref/sanctions-web-apis">Sanctions Web APIs</a>.</p>
+			<p>You can use one of the methods below to create a sanction appeal:</p>
+			<ul>
+				<li>The
+					<a href="/docs/web-api-ref/sanctions-web-apis">Sanctions Web APIs</a>.</li>
+				<li>The EOS SDK functions shown below (EOS SDK 1.16.2 and higher).</li>
+			</ul>
+			<div>
+				<h3 id="create-sanction-appeals-through-the-eos-sdk">Create Sanction Appeals Through the EOS SDK</h3>
+			</div>
+			<p>To create an appeal through the EOS SDK, when the player who was sanctioned makes the appeal, you must call
+				<code>EOS_Sanctions_CreatePlayerSanctionAppeal</code>
+				with the following
+				<code>EOS_Sanctions_CreatePlayerSanctionAppealOptions</code>
+				structure initialized with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SANCTIONS_CREATEPLAYERSANCTIONAPPEAL_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The Product User ID of the sanctioned player that makes the appeal</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_ESanctionAppealReason</code>
+						</td>
+						<td>The reason code for the appeal. Possible values are:<ul>
+								<li>
+									<code>1</code>: The sanction was incorrectly placed.</li>
+								<li>
+									<code>2</code>: The account was compromised or stolen.</li>
+								<li>
+									<code>3</code>: The punishment is considered too severe by the player.</li>
+								<li>
+									<code>4</code>: The player admits to rule breaking, but still appeals for forgiveness.</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ReferenceId</code>
+						</td>
+						<td>A unique identifier for the specific sanction. Query active player sanctions to get the reference ID for the sanction. See the
+							<a href="#querying-active-player-sanctions">Querying Active Player Sanctions</a>
+							section for more information.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note</strong>: Only players can create their own sanction appeals. A server cannot create an appeal for a player.</p>
+			<p>After you create the sanction appeal, your
+				<code>EOS_Sanctions_CreatePlayerSanctionAppealCallback</code>
+				callback function returns an
+				<code>EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</code>
+				data structure indicating if the appeal was created successfully.</p>
 			<div>
 				<h2 id="managing-sanction-appeals-in-the-developer-portal">Managing Sanction Appeals in the Developer Portal</h2>
 			</div>
@@ -188,6 +255,9 @@
 					</li>
 					<li>
 						<a href="#creating-player-sanction-appeals">Creating Player Sanction Appeals</a>
+					</li>
+					<li>
+						<a href="#create-sanction-appeals-through-the-eos-sdk">Create Sanction Appeals Through the EOS SDK</a>
 					</li>
 					<li>
 						<a href="#managing-sanction-appeals-in-the-developer-portal">Managing Sanction Appeals in the Developer Portal</a>

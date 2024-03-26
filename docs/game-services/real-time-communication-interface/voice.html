@@ -1,0 +1,562 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Voice Interface</h1>
+			<h2>Use the Voice interface to create and manage voice chat rooms for your users while they use your product.</h2>
+			<div>
+				<div>
+					<div>
+						<span>Preview</span>
+					</div>
+				</div>
+				<div>8 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>
+				<strong>Epic Online Services (EOS) Voice</strong>
+				helps you create and manage voice chat rooms for your users. You can host EOS Voice chat rooms on Epic's server(s) using
+				<a href="/docs/game-services/lobbies">EOS Lobbies</a>, or on your back-end server(s). Also, a user can communicate one-on-one or in groups across multiple platforms, during a match, and in your product's lobby.</p>
+			<div>
+				<p>The Voice interface requires EOS SDK release 1.13 or higher.</p>
+				<p>Voice will be fully supported by the Online Subsystem (OSS) and the VoiceChat plugins with the Unreal Engine 4.27 release.</p>
+				<p>Linux is currently not supported for EOS Voice.</p>
+			</div>
+			<p>The connections made with EOS Voice establish only between authenticated users and go through Voice servers without exposing personal information (PI) about the users. EOS handles all the scaling, quality of service, maintenance, multi-region
+				<span>
+					<span aria-label="tooltip presence" tabindex="0" role="button">presence</span>
+				</span>, and other machinery of the voice servers.</p>
+			<div>
+				<p>Nintendo Switch games can't link a Nintendo Switch account to an Epic Games account. This restriction means that blocked Nintendo Switch accounts are not blocked in EOS Voice chat. Therefore, players can still hear blocked Nintendo Switch account players in EOS Voice chat. See the
+					<a href="/docs/epic-online-services/platforms/switch#logging-into-eos-auth-epic-account-services">Nintendo Switch: Logging into EOS Auth (Epic Account Services)</a>
+					documentation for more information on the authentication method used for Nintendo Switch.</p>
+				<p>You can only access console documentation if you have the appropriate permissions. See the
+					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+					documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			</div>
+			<p>To use the Voice interface, you should:</p>
+			<ol>
+				<li>Review and determine the
+					<a href="#voice-integration-methods">integration method</a>
+					you want to use with your game.</li>
+				<li>Investigate the Voice sample (<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample">C</a>
+					and
+					<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample-c-sharp">C#</a>) and learn how to use the Voice interface with your product.</li>
+				<li>Integrate the Voice interface into your applications:
+					<ol>
+						<li>Configure your
+							<a href="/docs/dev-portal/client-credentials#policies">client policies</a>
+						</li>
+						<li>Integrate the Voice interface based on your chosen integration method.</li>
+					</ol>
+				</li>
+				<li>Review the following sections:
+					<ul>
+						<li>
+							<a href="#best-practices">Best practices</a>
+							on this page.</li>
+						<li>
+							<a href="#voice-metrics">Voice metrics</a>
+							on this page.</li>
+						<li>The section on service usage limitations in the
+							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+							page.</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h2 id="voice-integration-methods">Voice Integration Methods</h2>
+			</div>
+			<p>You can integrate Voice into your application in two ways:</p>
+			<ul>
+				<li>
+					<p>
+						<a href="#voice-with-lobbies">
+							<strong>Use Voice with Lobbies</strong>
+						</a>: Integrate the EOS SDK into your
+						<strong>Game Client</strong>
+						and let
+						<strong>EOS Lobbies</strong>
+						take care of room management and authorization. Using the
+						<a href="/docs/game-services/lobbies">Lobbies Interface</a>
+						only requires a client integration and offers room ownership, search, and invites.</p>
+				</li>
+				<li>
+					<p>
+						<a href="#voice-with-a-trusted-server-application">
+							<strong>Use a Trusted Server Application</strong>
+						</a>: Integrate the EOS SDK into your
+						<strong>Game Client</strong>
+						and the SDK or the Web API into a
+						<strong>trusted server</strong>
+						application. This approach gives developers the most flexibility by allowing them to customize room management and authorization, but requires more integration effort.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="voice-with-lobbies">Voice with Lobbies</h3>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>When using Voice with Lobbies, integrate the EOS SDK into your Game Client and let Lobbies take on the role of the trusted server application. The lobby generates
+				<code>roomIds</code>, creates
+				<code>tokens</code>
+				for members, and authorizes requests to
+				<code>join</code>,
+				<code>kick</code>, or
+				<code>mute</code>
+				other players.</p>
+			<p>To secure rooms, lobbies can be made
+				<a href="/docs/game-services/lobbies#inviting-users-to-a-lobby">private and require invites</a>.</p>
+			<div>
+				<h4 id="policy-configuration">Policy Configuration</h4>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Configure your
+				<a href="/docs/dev-portal/client-credentials#policies">client policy</a>
+				for the Game Client with
+				<strong>userRequired</strong>
+				and allow:</p>
+			<ul>
+				<li>
+					<strong>Lobbies</strong>
+					with actions appropriate for that client, such as
+					<code>connect</code>,
+					<code>readLobby</code>, and so on</li>
+				<li>
+					<strong>Voice</strong>
+					with the
+					<code>lobbyConference</code>
+					action</li>
+			</ul>
+			<p>
+				<code>createRoomToken</code>,
+				<code>mute</code>, and
+				<code>kick</code>
+				are intended for
+				<a href="#voice-with-a-trusted-server-application">server use only</a>
+				and should remain disabled. Otherwise, this would allow Game Clients access to any
+				<code>roomId</code>.</p>
+			<div>
+				<h4 id="voice-flow-with-lobbies">Voice Flow with Lobbies</h4>
+			</div>
+			<ol>
+				<li>The
+					<strong>Game Client</strong>
+					<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">initializes the SDK</a>
+					and acquires the
+					<code>EOS_HLobby</code>
+					interface as well as the
+					<strong>EOS_RTC</strong>
+					and
+					<strong>EOS_RTCAudio</strong>
+					interface.</li>
+				<li>The
+					<strong>Game Client</strong>
+					authorizes the local user using the
+					<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</li>
+				<li>The
+					<strong>Game Client</strong>
+					creates a new Lobby using
+					<code>EOS_Lobby_CreateLobby</code>
+					with the
+					<code>bEnableRTCRoom</code>
+					flag enabled.</li>
+				<li>The Lobby requests room tokens and returns them with the media server URL. The EOS SDK then uses the token to join the voice room.</li>
+				<li>Other users joining the lobby automatically receive the matching room token to join the voice conference.</li>
+				<li>The Lobby owner can send out invites to other players, and public lobbies can be searched for and joined without an invitation.</li>
+				<li>The Lobby owner can mute or kick other players.</li>
+				<li>All clients use the
+					<strong>EOS_RTC</strong>
+					and
+					<strong>EOS_RTCAudio</strong>
+					interfaces to manage audio input/output, change the local mute/speaker status, or leave the room.</li>
+			</ol>
+			<p>The EOS SDK
+				<a href="/docs/game-services/lobbies/eos-lobbies-sample">Lobbies sample</a>
+				demonstrates this configuration.</p>
+			<p>For more control over room management and authorization with Voice, you can use the
+				<strong>Trusted Server Application integration</strong>
+				instead.</p>
+			<div>
+				<h3 id="voice-with-a-trusted-server-application">Voice with a Trusted Server Application</h3>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h4 id="policy-configurations">Policy Configurations</h4>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Configure your
+				<a href="/docs/dev-portal/client-credentials#policies">client policy</a>
+				for the Server with:</p>
+			<ul>
+				<li>
+					<strong>userRequired</strong>
+					disabled to allow the server to use
+					<code>clientId</code>
+					and
+					<code>client secret</code>
+					for authorization with the
+					<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</li>
+				<li>
+					<strong>Voice</strong>
+					with
+					<code>createRoomToken</code>,
+					<code>kick</code>, and
+					<code>mute</code>
+					to allow the server to create room tokens for players for any
+					<code>roomId</code>, remove a player and revoke their token, and mute a player, respectively.</li>
+			</ul>
+			<div role="alert">
+				<div></div>
+				<div>
+					<ul>
+						<li>The client policy for the
+							<strong>GameClient</strong>
+							should
+							<em>not</em>
+							have
+							<em>any</em>
+							Voice permissions as it does not make any requests to the EOS Voice backend itself.</li>
+						<li>
+							<code>createRoomToken</code>,
+							<code>mute</code>, and
+							<code>kick</code>
+							are intended only for use on a trusted server and require a policy with
+							<strong>userRequired</strong>
+							disabled.</li>
+						<li>These actions can operate on
+							<em>any</em>
+							<code>roomId</code>, issue tokens to
+							<em>any</em>
+							user, and kick or mute any user in rooms within their authorized deployments to allow the server to manage them.</li>
+						<li>Client policies should only be configured to have these Voice actions enabled if the client is running in a trusted environment.</li>
+						<li>Community servers and players’ game client policies should
+							<em>not</em>
+							have access to these actions.</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<h4 id="voice-flow-with-a-trusted-server">Voice Flow with a Trusted Server</h4>
+			</div>
+			<ol>
+				<li>The
+					<strong>Game Client</strong>
+					<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">initializes the SDK</a>
+					and asks a trusted application, such as a dedicated server or web application, to enter a voice room.</li>
+				<li>The trusted server authenticates, using its
+					<strong>ClientId</strong>
+					and
+					<strong>Client Secret</strong>
+					with the
+					<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</li>
+				<li>The server generates a
+					<code>roomId</code>
+					and requests a room token on behalf of players for their
+					<code>ProductUserIds</code>
+					and the given
+					<code>roomId</code>
+					from the EOS Voice backend.
+					<ul>
+						<li>When using a dedicated server with the EOS SDK, the server
+							<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">initializes the SDK</a>
+							and calls
+							<a href="/docs/api-ref/functions/eos-platform-get-rtc-admin-interface">
+								<code>EOS_Platform_GetRTCAdminInterface</code>
+							</a>
+							to get an
+							<code>EOS_HRTCAdmin</code>
+							handle that can call
+							<code>createRoomToken</code>,
+							<code>mute</code>, and
+							<code>kick</code>.</li>
+						<li>A web application can acquire an
+							<a href="/docs/web-api-ref/connect-web-api">EOS Client Auth token</a>
+							and use the
+							<a href="/docs/web-api-ref/voice-web-api">Voice Web API</a>
+							instead.</li>
+					</ul>
+				</li>
+				<li>The trusted server returns the room token and media server URL to each players’ game client applications, using existing communication methods.
+					<ul>
+						<li>The communication method between the client and server is up to you and can be accomplished with network replication, messaging, HTTP, or any other existing communication method.</li>
+					</ul>
+				</li>
+				<li>The
+					<strong>Game Client</strong>
+					connects to the media server using
+					<a href="/docs/api-ref/functions/eos-rtc-join-room">
+						<code>EOS_RTC_JoinRoom</code>
+					</a>
+					to join the room with the token provided by the server.</li>
+				<li>Other users can join the room by asking the trusted server for a
+					<strong>Token</strong>
+					for their
+					<code>ProductUserId</code>
+					of the same room and using it to connect to the media server.
+					<ul>
+						<li>The server logic dictates the authorization method used to determine who is allowed to join a given room and mute or kick other users from it. This integration method enables developers to customize this aspect.</li>
+						<li>The Voice Server sample demonstrates this with a password to join the room and with a lock that is shared with the owner and needs to be provided for operations such as kick or mute.</li>
+					</ul>
+				</li>
+				<li>All clients use the
+					<strong>EOS_RTC</strong>
+					and
+					<strong>EOS_RTCAudio</strong>
+					interfaces to manage audio input/output, change the local mute/speaker status, or leave the room.</li>
+			</ol>
+			<p>The EOS SDK
+				<strong>Voice Client &amp; Voice Server Samples</strong>
+				(<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample">C</a>
+				and
+				<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample-c-sharp">C#</a>) demonstrate this configuration.</p>
+			<div>
+				<h2 id="handles-to-the-rtc-interfaces">Handles to the RTC Interfaces</h2>
+			</div>
+			<p>There are 3 interface handles available for
+				<span>
+					<span aria-label="tooltip RTC" tabindex="0" role="button">RTC</span>
+				</span>
+				functionality, which you can get from your
+				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>.</p>
+			<p>
+				<code>EOS_HRTCAdmin</code>
+				handle</p>
+			<ul>
+				<li>The Voice backend keeps voice rooms managed by lobbies separate from those managed by developer servers. This means features such as kicking or hard-muting a participant in a lobby conference cannot be accomplished with the
+					<code>EOS_HRTCAdmin</code>
+					interface, but only through the
+					<a href="/docs/game-services/lobbies">Lobbies interface</a>
+					itself.</li>
+				<li>Used for admin functionality such as creating a room token, kicking, or muting.</li>
+				<li>Should only be used on trusted server applications, not on game clients or shared community servers.</li>
+				<li>Retrieve this handle with
+					<a href="/docs/api-ref/functions/eos-platform-get-rtc-admin-interface">
+						<code>EOS_Platform_GetRTCAdminInterface</code>
+					</a>
+				</li>
+			</ul>
+			<p>
+				<code>EOS_HRTC</code>
+				handle</p>
+			<ul>
+				<li>Used for room level functionality that is not specific to audio/voice, such as notifications when a user leaves or joins a room.</li>
+				<li>Obtain this handle with
+					<a href="/docs/api-ref/functions/eos-platform-get-rtc-interface">
+						<code>EOS_Platform_GetRTCInterface</code>
+					</a>
+				</li>
+			</ul>
+			<p>
+				<code>EOS_HRTCAudio</code>
+				handle</p>
+			<ul>
+				<li>A voice-specific subinterface of
+					<code>EOS_HRTC</code>.</li>
+				<li>Obtain this handle from the
+					<code>EOS_HRTC</code>
+					handle with
+					<a href="/docs/api-ref/functions/eos-rtc-get-audio-interface">
+						<code>EOS_RTC_GetAudioInterface</code>
+					</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="implementing-the-voice-interface-on-windows">Implementing the Voice Interface on Windows</h2>
+			</div>
+			<p>For Windows, you must pass the
+				<code>EOS_Windows_RTCOptions</code>
+				in the Platform Interface's
+				<code>RTCOptions</code>
+				before creating the platform.</p>
+			<p>The C SDK example (a code snippet is copied below, but see the
+				<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample">Voice Interface - C SDK</a>
+				page for full details) does the following for windows:</p>
+			<ul>
+				<li>Creates an instance of the
+					<code>EOS_Windows_RTCOptions</code>
+					class called
+					<code>WindowsRtcOptions</code>.</li>
+				<li>Configures its attributes.</li>
+				<li>Points the value of
+					<code>RtcOptions.PlatformSpecificOptions</code>
+					to the address of
+					<code>WindowsRtcOptions</code>.</li>
+			</ul>
+			<p>The C SDK example code snippet for Windows:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="best-practices">Best Practices</h2>
+			</div>
+			<p>
+				<strong>Bidirectional Muting</strong>
+			</p>
+			<p>To comply with various platform requirements such as blocklists, you should use
+				<a href="/docs/api-ref/functions/eos-rtc-block-participant">
+					<code>EOS_RTC_BlockParticipant</code>
+				</a>
+				to implement bidirectional muting of players where necessary.</p>
+			<p>
+				<strong>Parental Controls</strong>
+			</p>
+			<p>Consider checking parental control settings before enabling Voice in your sessions.</p>
+			<div>
+				<h2 id="usage-limitations">Usage Limitations</h2>
+			</div>
+			<p>Voice has interface-specific usage rate limitations. For general information about throttling, usage quotas, and best practices, see the section on service usage limitations in the
+				<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+				page.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Service Limit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Max room size</td>
+						<td>64</td>
+					</tr>
+					<tr>
+						<td>Voice with lobbies</td>
+						<td>16</td>
+					</tr>
+					<tr>
+						<td>Max requests per user/minute</td>
+						<td>50</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note</strong>: If you use EOS SDK version 1.16 or later, you can have a maximum room size of 64 players. If you use a version of the EOS SDK earlier than 1.16, you can have a maximum room size of only 16 players.</p>
+			<div>
+				<h2 id="voice-metrics">Voice Metrics</h2>
+			</div>
+			<p>You can access your Voice operational metrics under
+				<strong>Your Product &gt; Game Services &gt; Voice</strong>
+				in your
+				<strong>Developer Portal</strong>
+				from the previous 30 days.</p>
+			<p>You can filter the data by time interval (5 minutes, 30 minutes, 1 hour, 1 day, 7 days, 14 days, 30 days) and by platform (Windows, PS4, PS5, and so on).</p>
+			<p>Once you start using the Voice service, data populates the graphs automatically and requires no additional setup from you.</p>
+			<p>Metrics include:</p>
+			<ul>
+				<li>
+					<strong>Connected Users per Platform</strong>: Amount of players connected to the voice service within the selected timeframe, broken down by platform.</li>
+				<li>
+					<strong>Voice Users Status</strong>: A breakdown of voice SDK statuses (i.e. Connected, Error, Disconnected, and so on).</li>
+				<li>
+					<strong>Join Room</strong>: Overall user join error rates.</li>
+				<li>
+					<strong>Join Room Errors</strong>: Detailed information about specific join room errors and their rates.</li>
+				<li>
+					<strong>Room Sizes</strong>: Distribution of room sizes based on participant count across all platforms.</li>
+				<li>
+					<strong>Errors</strong>: Detailed information about errors and their rates.</li>
+			</ul>
+			<div id="tag_list">
+				<a aria-label="Tag Interface" aria-hidden="false" tabindex="0" href="/docs/site-map">Interface</a>
+				<a aria-label="Tag  Voice" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Voice</a>
+				<a aria-label="Tag  Lobbies" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Lobbies</a>
+				<a aria-label="Tag  Chat" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Chat</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#voice-integration-methods">Voice Integration Methods</a>
+					</li>
+					<li>
+						<a href="#voice-with-lobbies">Voice with Lobbies</a>
+					</li>
+					<li>
+						<a href="#policy-configuration">Policy Configuration</a>
+					</li>
+					<li>
+						<a href="#voice-flow-with-lobbies">Voice Flow with Lobbies</a>
+					</li>
+					<li>
+						<a href="#voice-with-a-trusted-server-application">Voice with a Trusted Server Application</a>
+					</li>
+					<li>
+						<a href="#policy-configurations">Policy Configurations</a>
+					</li>
+					<li>
+						<a href="#voice-flow-with-a-trusted-server">Voice Flow with a Trusted Server</a>
+					</li>
+					<li>
+						<a href="#handles-to-the-rtc-interfaces">Handles to the RTC Interfaces</a>
+					</li>
+					<li>
+						<a href="#implementing-the-voice-interface-on-windows">Implementing the Voice Interface on Windows</a>
+					</li>
+					<li>
+						<a href="#best-practices">Best Practices</a>
+					</li>
+					<li>
+						<a href="#usage-limitations">Usage Limitations</a>
+					</li>
+					<li>
+						<a href="#voice-metrics">Voice Metrics</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

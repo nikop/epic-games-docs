@@ -1,0 +1,187 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>RTC Data Interface</h1>
+			<h2>Interface for real-time communication (RTC) data.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the Real-time Communication (<span>
+					<span aria-label="tooltip RTC" tabindex="0" role="button">RTC</span>
+				</span>) Data Interface to allow players to send data messages to each other in a voice chat room.</p>
+			<p>
+				<strong>Note</strong>: The RTC-data service restricts the amount of data that a player can send. See the
+				<a href="#rtc-data-service-limits">RTC-data Service Limits</a>
+				section of this document for details.</p>
+			<p>See the
+				<a href="/docs/api-ref/interfaces/rtc">EOS RTC Interface</a>
+				API reference documentation for more information on the RTC Interface's API.</p>
+			<div>
+				<h2 id="set-up-the-rtc-data-service">Set up the RTC-data Service</h2>
+			</div>
+			<div>
+				<h3 id="enable-data-for-a-voice-chat-room">Enable Data for a Voice Chat Room</h3>
+			</div>
+			<p>To allow your players to send and receive data messages in a voice chat room, follow these steps:</p>
+			<ol>
+				<li>Enable data in the voice chat room when you call the
+					<a href="/docs/api-ref/functions/eos-rtc-join-room">
+						<code>JoinRoom</code>
+					</a>
+					function by adding the following flag:
+					<br>
+					<code>EOS_RTC_JOINROOMFLAGS_ENABLE_DATACHANNEL</code>
+					in
+					<code>EOS_RTC_JoinRoomOptions</code>.</li>
+				<li>Enable the voice chat room to send or receive data after a player joins it by calling:
+					<br>
+					<code>EOS_RTCData_UpdateSending</code>
+					and
+					<code>EOS_RTCData_UpdateReceiving</code>.<br>
+					<br>
+					<strong>Notes</strong>:
+					<ul>
+						<li>After you have enabled a voice chat room to send and receive data, you can call the functions
+							<code>EOS_RTCData_UpdateSending</code>
+							and
+							<code>EOS_RTCData_UpdateReceiving</code>
+							again to disable sending and receiving data in that voice chat room.</li>
+						<li>Before your game sends any data to a player, you must receive a notification from the EOS SDK with the status
+							<strong>Enabled</strong>. Use
+							<code>EOS_RTCData_AddNotifyParticipantUpdated()</code>
+							to subscribe to this event.</li>
+					</ul>
+				</li>
+				<li>To allow a player to receive data messages, you must call
+					<code>EOS_RTCData_AddNotifyDataReceived</code>
+					to register a notification handler.<br>
+					<br>
+					<strong>Note</strong>: When a player sends a data message, the RTC-data service shares that data message with all players in the voice chat room that have subscribed to receive messages. By default, a Player cannot send a data message to a specific player in the voice chat room. However, you can extend the RTC-data service's functionality with your own protocol. See the
+					<a href="#recommendations-for-how-to-add-custom-protocols">Recommendations For How to Add Custom Protocols</a>
+					section of this document for more information.</li>
+			</ol>
+			<div>
+				<h3 id="data-message-sample-code">Data Message Sample Code</h3>
+			</div>
+			<p>After you've enabled RTC data for a voice chat room, your game can send data. The sample code below gives an example of how to send data:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="rtc-data-service-limits">RTC-data Service Limits</h2>
+			</div>
+			<p>The RTC-data service has the following limits:</p>
+			<ul>
+				<li>A player can send and receive a data message of a maximum length of 1170 bytes (defined as
+					<code>EOS_RTCDATA_MAX_PACKET_SIZE</code>). If a player attempts to send a longer message, it fails and the EOS SDK returns an error.</li>
+				<li>The RTC-data service can receive nearly 500 messages per second. If you exceed this limit, voice chat disconnects.</li>
+				<li>Outgoing data messages might have some buffering. If it reaches our limits, the EOS SDK returns an error and has to wait some time before it tries to send the message again. Sending too many messages at a high rate results in errors.<br>
+					<br>
+					<strong>Note</strong>: The exact buffer size depends on which platform you use.</li>
+				<li>If you plan to allow your players to send data messages to each other, you must set a flag when you call the
+					<code>JoinRoom</code>
+					function. After a player initiates a connection, it is impossible for them to send or receive data without reconnection. See the
+					<a href="#enable-data-for-a-voice-chat-room">Enable Data for a Voice Chat Room</a>
+					section of this document for more information.</li>
+			</ul>
+			<div>
+				<h2 id="recommendations-for-how-to-add-custom-protocols">Recommendations for How to Add Custom Protocols</h2>
+			</div>
+			<p>If you want to add functionality with your own protocol, see the recommendations below for general advice on how to extend common functionality for the RTC-data service.</p>
+			<div>
+				<h3 id="send-large-data-messages">Send Large Data Messages</h3>
+			</div>
+			<p>To allow players to send messages larger than the maximum size of the RTC data message, create packetizers to split messages into packets.</p>
+			<div>
+				<h3 id="send-data-messages-to-a-specific-player">Send Data Messages to a Specific Player</h3>
+			</div>
+			<p>To allow a player to send a data message to a specific player in the room, add
+				<code>ParticipantId</code>
+				in your internal message type. The message recipient's client must then filter the messages by the
+				<code>ParticipantId</code>.</p>
+			<div>
+				<h3 id="send-and-receive-rtc-data-across-platforms">Send and Receive RTC Data Across Platforms</h3>
+			</div>
+			<p>To allow players to access your game from different game client platforms (for example, to allow players on PC to send data messages to players on Nintendo Switch), you must handle the different byte orders of the different platforms. We recommend that you send the multibyte number in network order.<br>
+				<br>
+				<strong>Note</strong>: The network order might not be the same as the native order for a platform. The operating system provides the following functions that you can use to translate between native and network order:</p>
+			<ul>
+				<li>
+					<code>htonl</code>
+					- Host to network for long integer (f.e. 32-bit integer).</li>
+				<li>
+					<code>nltoh</code>
+					- Network ordered to host (native) order for long integer.</li>
+			</ul>
+			<div>
+				<h3 id="multithreading">Multithreading</h3>
+			</div>
+			<p>Your game must call functions from the game thread; if you don't, RTC-data service returns an
+				<code>EOS_InvalidRequest</code>
+				error. The exception to this rule is
+				<code>EOS_RTCData_SendData</code>. You can call
+				<code>EOS_RTCData_SendData</code>
+				from any thread.<br>
+				<br>
+				Your game can receive notifications in any thread. However, the EOS SDK does not send notifications when your game receives RTC data in the game thread. This means that multithread access to the same memory might occur in the game thread while your players send or receive data messages, which can result in errors. To prevent errors, we recommend you lock the game thread while your players send or receive data messages in the game session.</p>
+			<div id="tag_list">
+				<a aria-label="Tag Interface" aria-hidden="false" tabindex="0" href="/docs/site-map">Interface</a>
+				<a aria-label="Tag  RTC" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					RTC</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#set-up-the-rtc-data-service">Set up the RTC-data Service</a>
+					</li>
+					<li>
+						<a href="#enable-data-for-a-voice-chat-room">Enable Data for a Voice Chat Room</a>
+					</li>
+					<li>
+						<a href="#data-message-sample-code">Data Message Sample Code</a>
+					</li>
+					<li>
+						<a href="#rtc-data-service-limits">RTC-data Service Limits</a>
+					</li>
+					<li>
+						<a href="#recommendations-for-how-to-add-custom-protocols">Recommendations for How to Add Custom Protocols</a>
+					</li>
+					<li>
+						<a href="#send-large-data-messages">Send Large Data Messages</a>
+					</li>
+					<li>
+						<a href="#send-data-messages-to-a-specific-player">Send Data Messages to a Specific Player</a>
+					</li>
+					<li>
+						<a href="#send-and-receive-rtc-data-across-platforms">Send and Receive RTC Data Across Platforms</a>
+					</li>
+					<li>
+						<a href="#multithreading">Multithreading</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

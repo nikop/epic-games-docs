@@ -22,7 +22,7 @@
 		<section role="main">
 			<p>The
 				<strong>Epic Online Services (EOS)</strong>
-				<a href="/docs/game-services/voice">Voice interface</a>
+				<a href="/docs/game-services/real-time-communication-interface/voice">Voice interface</a>
 				helps you create and manage voice chat rooms between your users. They can communicate one-on-one or in groups across multiple platforms, during a match, or in your application’s lobby.</p>
 			<p>You can use the Voice Web APIs in place of the EOS C SDK to create trusted server applications that implement custom room management and authorization. Before calling the Voice Web APIs, check out the following documentation:
 				<a href="/docs/web-api-ref/web-api-introduction">Web API Introduction</a>
@@ -30,8 +30,8 @@
 				<a href="/docs/web-api-ref/connect-web-api">authentication</a>, and
 				<a href="/docs/web-api-ref/web-api-error-codes-responses">error codes</a>.</p>
 			<p>Just like the
-				<a href="/docs/game-services/voice">Voice C Interface</a>, the Voice Web APIs are intended for use on a
-				<a href="/docs/game-services/voice#voice-with-a-trusted-server-application">trusted server</a>
+				<a href="/docs/game-services/real-time-communication-interface/voice">Voice C Interface</a>, the Voice Web APIs are intended for use on a
+				<a href="/docs/game-services/real-time-communication-interface/voice#voice-with-a-trusted-server-application">trusted server</a>
 				and require a policy with
 				<strong>userRequired</strong>
 				disabled.</p>
@@ -57,7 +57,7 @@
 				<h3 id="policy">Policy</h3>
 			</div>
 			<p>The client must have the
-				<a href="/docs/game-services/voice#policy-configurations">Voice:createRoomToken policy</a>.</p>
+				<a href="/docs/game-services/real-time-communication-interface/voice#policy-configurations">Voice:createRoomToken policy</a>.</p>
 			<div>
 				<h3 id="room-tokens">Room Tokens</h3>
 			</div>
@@ -227,7 +227,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>curl -X "POST" \ "https://api.epicgames.dev/rtc/v1/&lt;deploymentId&gt;/room/&lt;roomId&gt;" \-H "accept: application/json" \-H "Authorization: Bearer &lt;EOSAccessToken&gt;" \-H "Content-Type: application/json" \-d "{ \"participants\": [ { \"puid\": \"&lt;ProductUserId&gt;\",\"clientIp\": \"&lt;ClientIp&gt;\", \"hardMuted\": false } ] }"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -370,7 +372,8 @@
 			</div>
 			<div>
 				<section>
-					<pre>{  "roomId": "&lt;RoomId&gt;",  "participants": [    {      "puid": "&lt;ProductUserId&gt;",      "token": "&lt;AccessToken&gt;",      "hardMuted": false    }  ],  "clientBaseUrl": "&lt;MediaServerUrl&gt;",  "deploymentId": "&lt;DeploymentId&gt;"}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -470,7 +473,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>curl -X "DELETE" \ "https://api.epicgames.dev/rtc/v1/&lt;deploymentId&gt;/room/&lt;roomId&gt;/participants/&lt;ProductUserId&gt;" \-H "Authorization: Bearer&lt;EOSAccessToken&gt;"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -490,7 +495,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>204 No Content</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -604,7 +611,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>curl -X "POST" \ "https://api.epicgames.dev/rtc/api/v1/&lt;deploymentId&gt;/room/&lt;roomId&gt;/participants/&lt;ProductUserId&gt;" \-H "Content-Type: application/json" \-d "{\"hardMuted\":true}"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -624,7 +633,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>204 No Content</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div id="tag_list">

@@ -1,0 +1,184 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>BuildPatch Tool Release Notes</h1>
+			<h2>What's changed in updates to the BuildPatch Tool.</h2>
+			<div>
+				<div>1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<h2 id="160-2024-february-23">1.6.0: 2024-february-23</h2>
+			</div>
+			<div>
+				<h3 id="important-information">Important Information</h3>
+			</div>
+			<ul>
+				<li>
+					<p>Development environment system requirements:</p>
+					<ul>
+						<li>
+							<strong>macOS</strong>
+							(Updated)
+							<ul>
+								<li>High Sierra 10.13 or higher</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Other operating systems</strong>
+							(No change)
+							<ul>
+								<li>Windows (No change)
+									<ul>
+										<li>Win 7 64-bit or higher</li>
+									</ul>
+								</li>
+								<li>Linux (No change)
+									<ul>
+										<li>CentOS 7 64-bit or higher</li>
+										<li>Debian 10 64-bit or higher</li>
+										<li>Fedora 32 64-bit or higher</li>
+										<li>Ubuntu 16.04 64-bit or higher</li>
+										<li>Any Linux distribution that meets Docker`s prerequisites for a Docker Engine install. (See
+											<a href="https://docs.docker.com/desktop/install/linux-install/">docs.docker.com/~/linux-install</a>
+											for further information.)</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Argument
+						<code>FileAttributeList</code>
+					</p>
+					<p>When you use
+						<code>FileAttributeList</code>
+						to list file paths,  you must use double quotation marks around the file path and filename.</p>
+					<ul>
+						<li>Example use:
+							<ul>
+								<li>
+									<code>"Relative/Path/To/My/file.bin" executable tag:my_tag</code>
+								</li>
+								<li>
+									<code>"Second/Path/To/A/file.txt" tag:txt_files
+									</code>
+								</li>
+							</ul>
+						</li>
+						<li>Documentation:
+							<a href="https://dev.epicgames.com/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160#setting-special-file-attributes">Build Patch Tool Instructions 1.6.0: Setting Special File Attributes</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="new-features">New Features</h3>
+			</div>
+			<div>
+				<h4 id="new-mode">New Mode</h4>
+			</div>
+			<ul>
+				<li>Use the command-line argument
+					<code>GetBinaryMetadata</code>to see information about a
+					<span>
+						<span aria-label="tooltip binary" tabindex="0" role="button">binary</span>
+					</span>. The information is in human-readable or
+					<code>json</code>
+					format.</li>
+			</ul>
+			<div>
+				<h4 id="bug-fixes-and-improvements">Bug Fixes and Improvements</h4>
+			</div>
+			<ul>
+				<li>File uploads:
+					<ul>
+						<li>Improved performance to ensure the BuildPatch Tool triggers high priority upload requests quicker.</li>
+						<li>Improved error messaging.</li>
+						<li>Fixed an issue which caused some modes to hang during file uploads. This no longer happens.</li>
+					</ul>
+				</li>
+				<li>Command-line arguments:
+					<ul>
+						<li>
+							<code>UnlabelBinary</code>
+							and
+							<code>LabelBinary</code>
+							modes: Improved error messaging for missing permissions response.</li>
+						<li>
+							<code>ListBinaries</code>
+							mode: Now displays sandbox information.</li>
+						<li>
+							<code>DiffBinaries</code>
+							mode: Improved performance.</li>
+						<li>
+							<code>FileAttributeList</code>
+							and
+							<code>FileIgnoreList</code>
+							files:
+							<ul>
+								<li>Added support for regex and wildcards so you don’t need to explicitly list all files in a build.</li>
+								<li>Added additional verification and error reporting when you use these arguments.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Reduced log noise:
+					<ul>
+						<li>Fixed an issue where retry requests during chunk upload created logs excessively.  Verbose logging now shows on the last attempt before retries are exhausted.</li>
+					</ul>
+				</li>
+				<li>Set language locale default:
+					<ul>
+						<li>The  BuildPatch tool’s language locale now defaults to
+							<code>en</code>. This avoids crashes when the  BuildPatch tool runs on PCs with unsupported language locales.</li>
+					</ul>
+				</li>
+				<li>Performance improvements:
+					<ul>
+						<li>Faster SHA1 hash-based file verification implementation.</li>
+					</ul>
+				</li>
+			</ul>
+			<div id="tag_list">
+				<a aria-label="Tag Epic Games Store Only" aria-hidden="false" tabindex="0" href="/docs/site-map">Epic Games Store Only</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#160-2024-february-23">1.6.0: 2024-february-23</a>
+					</li>
+					<li>
+						<a href="#important-information">Important Information</a>
+					</li>
+					<li>
+						<a href="#new-features">New Features</a>
+					</li>
+					<li>
+						<a href="#new-mode">New Mode</a>
+					</li>
+					<li>
+						<a href="#bug-fixes-and-improvements">Bug Fixes and Improvements</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

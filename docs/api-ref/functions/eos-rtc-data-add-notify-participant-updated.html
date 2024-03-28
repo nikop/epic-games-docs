@@ -11,8 +11,8 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS_RTCData_UpdateReceiving</h1>
-			<h2>EOS API reference page for EOS_RTCData_UpdateReceiving</h2>
+			<h1>EOS_RTCData_AddNotifyParticipantUpdated</h1>
+			<h2>EOS API reference page for EOS_RTCData_AddNotifyParticipantUpdated</h2>
 			<div>
 				<div>1 min to read</div>
 			</div>
@@ -33,25 +33,23 @@
 							<div>
 								<h2 id="remarks">Remarks</h2>
 							</div>
-							<p>Use this function to tweak incoming data options for a room.</p>
+							<p>Register to receive notifications when a room participant data status is updated (f.e when connection state changes). The notification is raised when the participant's data status is updated. In order not to miss any participant status changes, applications need to add the notification before joining a room. If the returned NotificationId is valid, you must call EOS_RTCData_RemoveNotifyParticipantUpdated when you no longer wish to have your CompletionDelegate called.</p>
 							<div>
 								<h2 id="return-value">Return Value</h2>
 							</div>
-							<ul>
-								<li>
-									<p>EOS_Success if the operation succeeded</p>
-								</li>
-								<li>
-									<p>EOS_InvalidParameters if any of the parameters are incorrect</p>
-								</li>
-								<li>
-									<p>EOS_NotFound if either the local user or specified participant are not in the room</p>
-								</li>
-							</ul>
+							<p>Notification ID representing the registered callback if successful, an invalid NotificationId if not</p>
+							<div>
+								<h2 id="see-also">See Also</h2>
+							</div>
+							<p>EOS_INVALID_NOTIFICATIONID,
+								<a href="/docs/api-ref/functions/eos-rtc-data-remove-notify-participant-updated">EOS_RTCData_RemoveNotifyParticipantUpdated</a>,
+								<a href="/docs/api-ref/structs/eos-rtc-data-participant-updated-callback-info">EOS_RTCData_ParticipantUpdatedCallbackInfo</a>,
+								<a href="/docs/api-ref/enums/eos-ertc-data-status">EOS_ERTCDataStatus</a>
+							</p>
 							<div>
 								<h2 id="parameters">Parameters</h2>
 							</div>
-							<p>EOS_RTCData_UpdateReceiving</p>
+							<p>EOS_RTCData_AddNotifyParticipantUpdated</p>
 							<table>
 								<thead>
 									<tr>
@@ -66,7 +64,7 @@
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/structs/eos-rtc-data-update-receiving-options">EOS_RTCData_UpdateReceivingOptions</a>* Options</td>
+											<a href="/docs/api-ref/structs/eos-rtc-data-add-notify-participant-updated-options">EOS_RTCData_AddNotifyParticipantUpdatedOptions</a>* Options</td>
 										<td>structure containing the parameters for the operation.</td>
 									</tr>
 									<tr>
@@ -75,9 +73,9 @@
 									</tr>
 									<tr>
 										<td>const
-											<a href="/docs/api-ref/callbacks/eos-rtc-data-on-update-receiving-callback">EOS_RTCData_OnUpdateReceivingCallback</a>
+											<a href="/docs/api-ref/callbacks/eos-rtc-data-on-participant-updated-callback">EOS_RTCData_OnParticipantUpdatedCallback</a>
 											CompletionDelegate</td>
-										<td>The callback to be fired when the operation completes, either successfully or in error</td>
+										<td>The callback to be fired when a participant changes data status</td>
 									</tr>
 								</tbody>
 							</table>
@@ -86,10 +84,10 @@
 							</div>
 							<ul>
 								<li>
-									<a href="/docs/api-ref/structs/eos-rtc-data-update-receiving-options">EOS_RTCData_UpdateReceivingOptions</a>
+									<a href="/docs/api-ref/structs/eos-rtc-data-add-notify-participant-updated-options">EOS_RTCData_AddNotifyParticipantUpdatedOptions</a>
 								</li>
 								<li>
-									<a href="/docs/api-ref/callbacks/eos-rtc-data-on-update-receiving-callback">EOS_RTCData_OnUpdateReceivingCallback</a>
+									<a href="/docs/api-ref/callbacks/eos-rtc-data-on-participant-updated-callback">EOS_RTCData_OnParticipantUpdatedCallback</a>
 								</li>
 							</ul>
 						</div>
@@ -107,6 +105,9 @@
 					</li>
 					<li>
 						<a href="#return-value">Return Value</a>
+					</li>
+					<li>
+						<a href="#see-also">See Also</a>
 					</li>
 					<li>
 						<a href="#parameters">Parameters</a>

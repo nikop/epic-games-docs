@@ -1,0 +1,643 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Voice Interface Sample - C SDK</h1>
+			<h2>The Voice C interface sample demonstrates implementation and basically functionality of using Voice.</h2>
+			<div>
+				<div>
+					<div>
+						<span>Preview</span>
+					</div>
+				</div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>This Voice Sample demonstrates how to implement a secure
+				<a href="/docs/game-services/real-time-communication-interface/voice">voice chat system</a>
+				using a client and server application for the C SDK.</p>
+			<p>The sample includes the following features:</p>
+			<ul>
+				<li>Requesting a token to allow a user to join a room with other users (via Server)</li>
+				<li>Joining a room with friends or other users</li>
+				<li>Leaving a room</li>
+				<li>Muting your own audio</li>
+				<li>Muting other user’s audio (via Server and only allowed by the room owner)</li>
+				<li>Kicking another user from the room (via Server and only allowed by the room owner)</li>
+				<li>Showing status updates when a user is speaking or muted</li>
+				<li>Changing audio input and output devices</li>
+			</ul>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h2 id="voice-client">Voice Client</h2>
+			</div>
+			<div>
+				<h3 id="setup-for-windows-3264-bit">Setup for Windows 32/64-bit</h3>
+			</div>
+			<p>This section covers building and running the Voice Client sample app for both 32-bit and 64-bit Windows operating systems.</p>
+			<div>
+				<h4 id="building-the-voice-client-sample-app-for-win64win32">Building the Voice Client Sample App for Win64/Win32</h4>
+			</div>
+			<ol>
+				<li>Unzip
+					<code>EOS-SDK.zip</code>
+					into your location of choice.</li>
+				<li>Navigate to
+					<strong>EOS-SDK &gt; Samples</strong>.</li>
+				<li>Double-click
+					<code>Samples.sln</code>. Visual Studio will open with it in the
+					<strong>Solution Explorer</strong>.</li>
+				<li>Set the
+					<strong>StartUp Project</strong>
+					to
+					<strong>Voice</strong>.</li>
+				<li>Open
+					<code>SampleConstants.h</code>
+					and update the
+					<strong>ProductId</strong>,
+					<strong>SandboxId</strong>,
+					<strong>DeploymentId</strong>,
+					<strong>ClientCredentialsId</strong>, and
+					<strong>ClientCredentialsSecret</strong>
+					based on the values for your Test App.</li>
+				<li>Select the solution configuration:
+					<code>Release_DX</code>
+					or
+					<code>Debug_DX</code>.</li>
+				<li>Select the solution platform: x64 (Win64) or x86 (Win32).</li>
+				<li>In the
+					<strong>Solution Explorer</strong>, right-click the
+					<strong>Voice</strong>
+					project and select
+					<strong>Build</strong>.</li>
+				<li>After a successful build, you should have
+					<code>Voice.exe</code>
+					available under
+					<code>\EOS-SDK\Samples\Voice\Client\Bin\Win64\Release_DX\</code>
+				</li>
+			</ol>
+			<p>You can now run the sample application.</p>
+			<div>
+				<h4 id="running-the-voice-client-sample-app-win64win32">Running the Voice Client Sample App (Win64/Win32)</h4>
+			</div>
+			<p>To run the Voice Client sample app:</p>
+			<ol>
+				<li>Navigate to e.g.
+					<code>\EOS-SDK\Samples\Voice\Client\Bin\Win64\Release_DX\</code>
+				</li>
+				<li>Run
+					<code>Voice.exe</code>
+				</li>
+				<li>Add
+					<code>-serverport &lt;port&gt;</code>
+					to change the server listen port.</li>
+				<li>Add
+					<code>-serverurl &lt;url&gt;</code>
+					to change the server URL.</li>
+			</ol>
+			<div>
+				<h3 id="setup-for-macos-or-linux">Setup for MacOS or Linux</h3>
+			</div>
+			<div>
+				<h4 id="setup-prerequisites">Setup Prerequisites</h4>
+			</div>
+			<p>To build the Voice Client sample application on MacOS, you will need to install the following dependencies:</p>
+			<ul>
+				<li>
+					<a href="https://wiki.libsdl.org/Introduction">SDL2</a>
+				</li>
+				<li>
+					<a href="https://www.libsdl.org/projects/SDL_ttf/">SDL2_ttf</a>
+				</li>
+				<li>
+					<a href="http://glew.sourceforge.net/">GLEW</a>
+				</li>
+				<li>
+					<a href="https://cmake.org/">cmake</a>
+				</li>
+				<li>
+					<a href="https://gcc.gnu.org/">gcc</a>
+					(through Command Line Tools for Xcode for Mac)</li>
+			</ul>
+			<div>
+				<h4 id="building-the-voice-client-sample-app-for-macos-or-linux">Building the Voice Client Sample App for MacOS or Linux</h4>
+			</div>
+			<ol>
+				<li>Unzip
+					<code>EOS-SDK.zip</code>
+					into your location of choice.</li>
+				<li>In Terminal, navigate to
+					<code>/EOS-SDK/Samples/Voice/Client/</code>
+				</li>
+				<li>Open
+					<code>SampleConstants.h</code>
+					and update
+					<strong>ProductId</strong>,
+					<strong>SandboxId</strong>,
+					<strong>DeploymentId</strong>,
+					<strong>ClientCredentialsId</strong>, and
+					<strong>ClientCredentialsSecret</strong>
+					based on the values for your Test App.</li>
+				<li>Run:
+					<code>./Build.sh</code>
+					(or you can run
+					<code>Build.command</code>
+					from
+					<strong>Finder</strong>
+					on Mac).</li>
+				<li>Once the build successfully completes, you will have newly created files under:
+					<code>/EOS-SDK/Samples/Voice/Client/Build/</code>
+				</li>
+			</ol>
+			<p>You are now ready to run the sample application.</p>
+			<div>
+				<h4 id="running-the-voice-client-sample-app-macos-or-linux">Running the Voice Client Sample App (MacOS or Linux)</h4>
+			</div>
+			<p>To open the sample app:</p>
+			<ol>
+				<li>Navigate to
+					<code>/EOS-SDK/Samples/Voice/Client/</code>
+				</li>
+				<li>Run:
+					<code>./Run.sh</code>
+					(or you can run
+					<code>Run.command</code>
+					from
+					<strong>Finder</strong>
+					on Mac).</li>
+				<li>Add
+					<code>-serverport &lt;port&gt;</code>
+					to change the server port.</li>
+				<li>Add
+					<code>-serverurl &lt;url&gt;</code>
+					to change the server URL.</li>
+			</ol>
+			<div>
+				<h3 id="using-the-voice-client-sample-app">Using the Voice Client Sample App</h3>
+			</div>
+			<p>To log in with the
+				<a href="/docs/epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>, select the
+				<strong>Dev Auth</strong>
+				option and choose
+				<strong>Log In</strong>. Once you have logged in, the Voice Client sample app includes the following options:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h4 id="join">JOIN</h4>
+			</div>
+			<p>Click on
+				<strong>JOIN</strong>
+				to start the join room process. A request will be made via the Server application to get a join room token which will then be used to join the room.</p>
+			<p>Since there are no other players in the current room a new room will be created and you will be added to the room. The room ID will be shown in the “Room:” box and the “ROOM MEMBERS” table will be updated to show you added to the room:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h4 id="leave">LEAVE</h4>
+			</div>
+			<p>Use
+				<strong>LEAVE</strong>
+				room to leave the current room you are currently a member of.</p>
+			<div>
+				<h4 id="mute">MUTE</h4>
+			</div>
+			<p>
+				<strong>MUTE</strong>
+				is available only for the local user and it can be used to mute your audio. When your audio is muted you will see the audio status icon change to a red color as shown below:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h4 id="owner-only">OWNER-ONLY</h4>
+			</div>
+			<p>If you are the owner of the room you will have the option of muting another user or kicking them from the current room:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h5 id="remote-mute">REMOTE MUTE</h5>
+			</div>
+			<p>Click
+				<strong>REMOTE MUTE</strong>
+				to mute that user.</p>
+			<div>
+				<h5 id="kick">KICK</h5>
+			</div>
+			<p>Click
+				<strong>KICK</strong>
+				to kick that user from the current room, they will not be able to rejoin unless a new room join token is requested and granted.</p>
+			<div>
+				<h4 id="chat">CHAT</h4>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Click
+				<strong>CHAT</strong>
+				next to a friend’s name in the friends list and you will be added to their room to allow you to chat with them.</p>
+			<div>
+				<p>You can also join the same room as another player who is not your friend using the
+					<strong>JOIN</strong>
+					<a href="#console-commands">console command</a>.</p>
+			</div>
+			<div>
+				<h4 id="audio-devices">AUDIO DEVICES</h4>
+			</div>
+			<p>You can change the output and input audio devices using the dropdowns in the
+				<strong>SETUP</strong>
+				dialog:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h4 id="speaking-status">SPEAKING STATUS</h4>
+			</div>
+			<p>When a user is speaking the audio status icon will change to a green color and a full speaker:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h3 id="console-commands">Console Commands</h3>
+			</div>
+			<div>
+				<h4 id="join-1">JOIN</h4>
+			</div>
+			<ul>
+				<li>Usage: “JOIN ROOM_NAME”.</li>
+				<li>Starts the join room process for the local user.</li>
+				<li>If
+					<code>ROOM_NAME</code>
+					is supplied that room will be joined if allowed.</li>
+				<li>If
+					<code>ROOM_NAME</code>
+					is not supplied a new room will be created and joined.</li>
+			</ul>
+			<div>
+				<h4 id="leave-1">LEAVE</h4>
+			</div>
+			<ul>
+				<li>Usage: “LEAVE”</li>
+				<li>The local user will leave the current room.</li>
+			</ul>
+			<div>
+				<h4 id="kick-1">KICK</h4>
+			</div>
+			<ul>
+				<li>Usage: “KICK USER_ID”.</li>
+				<li>Kicks a user from the current room.</li>
+				<li>Will do nothing if you are not the room owner.</li>
+				<li>
+					<code>USER_ID</code>
+					is a ProductUserId.</li>
+			</ul>
+			<div>
+				<h4 id="remotemute">REMOTEMUTE</h4>
+			</div>
+			<ul>
+				<li>Usage: “REMOTEMUTE USER_ID MUTE”.</li>
+				<li>Sets remote mute state for a user.</li>
+				<li>Will do nothing if you are not the room owner.</li>
+				<li>
+					<code>USER_ID</code>
+					is a ProductUserId.</li>
+				<li>
+					<strong>MUTE</strong>
+					is
+					<code>1</code>
+					to mute and
+					<code>0</code>
+					to unmute.</li>
+			</ul>
+			<div>
+				<h2 id="voice-server">Voice Server</h2>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h3 id="setup-for-windows-3264-bit-1">Setup for Windows 32/64-bit</h3>
+			</div>
+			<p>This section covers building and running the Voice Server sample app for both 32-bit and 64-bit Windows operating systems.</p>
+			<div>
+				<h4 id="building-the-voice-server-sample-app-for-win64win32">Building the Voice Server Sample App for Win64/Win32</h4>
+			</div>
+			<ol>
+				<li>Unzip
+					<code>EOS-SDK.zip</code>
+					into your location of choice.</li>
+				<li>Navigate to
+					<code>\EOS-SDK\Samples\</code>.</li>
+				<li>Double-click
+					<code>Samples.sln</code>. Visual Studio will open with it in the
+					<strong>Solution Explorer</strong>.</li>
+				<li>Set the
+					<strong>StartUp Project</strong>
+					to
+					<strong>VoiceServer</strong>.</li>
+				<li>Open
+					<code>SampleConstants.h</code>
+					and update
+					<strong>ProductId</strong>,
+					<strong>SandboxId</strong>,
+					<strong>DeploymentId</strong>,
+					<strong>ClientCredentialsId</strong>, and
+					<strong>ClientCredentialsSecret</strong>
+					based on the values for your Test App.</li>
+				<li>Select the solution configuration. Use either
+					<code>Release</code>
+					or
+					<code>Debug</code>.</li>
+				<li>Select the solution platform:  x64 (Win64) or x86 (Win32).</li>
+				<li>In the
+					<strong>Solution Explorer</strong>, right-click the
+					<strong>VoiceServer</strong>
+					project and select
+					<strong>Build</strong>.</li>
+				<li>After a successful build, you should have
+					<code>VoiceServer.exe</code>
+					available under
+					<code>\EOS-SDK\Samples\Voice\Server\Bin\Win64\Release\</code>
+				</li>
+			</ol>
+			<p>You can now run the sample application.</p>
+			<div>
+				<h4 id="running-the-voice-server-sample-app-win64win32">Running the Voice Server Sample App (Win64/Win32)</h4>
+			</div>
+			<p>To run the Voice Server sample app:</p>
+			<ol>
+				<li>Navigate to e.g.
+					<code>\EOS-SDK\Samples\Voice\Server\Bin\Win64\Release\</code>
+				</li>
+				<li>Run
+					<code>VoiceServer.exe</code>
+				</li>
+				<li>Add
+					<code>-voiceserverport &lt;port&gt;</code>
+					to change the server listen port.</li>
+				<li>Add
+					<code>-voiceserverurl &lt;url&gt;</code>
+					to change the server URL.</li>
+			</ol>
+			<div>
+				<h3 id="setup-for-macos-or-linux-1">Setup for MacOS or Linux</h3>
+			</div>
+			<div>
+				<h4 id="setup-prerequisites-1">Setup Prerequisites</h4>
+			</div>
+			<p>To build the Voice Server sample application on MacOS, you will need to install the following dependencies:</p>
+			<ul>
+				<li>cmake</li>
+				<li>gcc (through Command Line Tools for Xcode for Mac)</li>
+			</ul>
+			<div>
+				<h4 id="building-the-voice-client-sample-app-for-macos-or-linux-1">Building the Voice Client Sample App for MacOS or Linux</h4>
+			</div>
+			<ol>
+				<li>Unzip
+					<code>EOS-SDK.zip</code>
+					into your location of choice.</li>
+				<li>In
+					<strong>Terminal</strong>, navigate to
+					<code>/EOS-SDK/Samples/Voice/Server/</code>
+				</li>
+				<li>Open
+					<code>SampleConstants.h</code>
+					and update
+					<strong>ProductId</strong>,
+					<strong>SandboxId</strong>,
+					<strong>DeploymentId</strong>,
+					<strong>ClientCredentialsId</strong>, and
+					<strong>ClientCredentialsSecret</strong>
+					based on the values for your Test App.</li>
+				<li>Run:
+					<code>./Build.sh</code>
+					(or you can run
+					<code>Build.command</code>
+					from
+					<strong>Finder</strong>
+					on Mac).</li>
+				<li>Once the build successfully completes, you will have newly created files under:
+					<code>/EOS-SDK/Samples/Voice/Server/Build/</code>
+				</li>
+			</ol>
+			<p>You are now ready to run the sample application.</p>
+			<div>
+				<h4 id="running-the-voice-server-sample-app-macos">Running the Voice Server Sample App (MacOS)</h4>
+			</div>
+			<p>To open the sample app:</p>
+			<ol>
+				<li>Navigate to
+					<code>/EOS-SDK/Samples/Voice/Server/</code>
+				</li>
+				<li>Run:
+					<code>./Run.sh</code>
+					(or you can run
+					<code>Run.command</code>
+					from
+					<strong>Finder</strong>
+					on Mac).</li>
+				<li>Add
+					<code>-voiceserverport &lt;port&gt;</code>
+					to change the server listen port.</li>
+				<li>Add
+					<code>-voiceserverurl &lt;url&gt;</code>
+					to change the server URL.</li>
+			</ol>
+			<div>
+				<h3 id="using-the-voice-server-sample-app">Using the Voice Server Sample App</h3>
+			</div>
+			<p>The Voice Server is a console-based application so there are no GUI elements, debug text will be printed to the console and to the debug log file (default:
+				<code>DebugOutput.log</code>). Errors will be printed out as
+				<strong>red</strong>
+				text and warnings as
+				<strong>yellow</strong>
+				text.</p>
+			<p>Once the Voice Server application has been started it can be left running and will process requests from multiple clients.</p>
+			<p>Use
+				<code>Ctrl+C</code>
+				to stop the Server application.</p>
+			<div id="tag_list">
+				<a aria-label="Tag Interface" aria-hidden="false" tabindex="0" href="/docs/site-map">Interface</a>
+				<a aria-label="Tag  Voice" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Voice</a>
+				<a aria-label="Tag  Lobbies" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Lobbies</a>
+				<a aria-label="Tag  Chat" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Chat</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#voice-client">Voice Client</a>
+					</li>
+					<li>
+						<a href="#setup-for-windows-3264-bit">Setup for Windows 32/64-bit</a>
+					</li>
+					<li>
+						<a href="#building-the-voice-client-sample-app-for-win64win32">Building the Voice Client Sample App for Win64/Win32</a>
+					</li>
+					<li>
+						<a href="#running-the-voice-client-sample-app-win64win32">Running the Voice Client Sample App (Win64/Win32)</a>
+					</li>
+					<li>
+						<a href="#setup-for-macos-or-linux">Setup for MacOS or Linux</a>
+					</li>
+					<li>
+						<a href="#setup-prerequisites">Setup Prerequisites</a>
+					</li>
+					<li>
+						<a href="#building-the-voice-client-sample-app-for-macos-or-linux">Building the Voice Client Sample App for MacOS or Linux</a>
+					</li>
+					<li>
+						<a href="#running-the-voice-client-sample-app-macos-or-linux">Running the Voice Client Sample App (MacOS or Linux)</a>
+					</li>
+					<li>
+						<a href="#using-the-voice-client-sample-app">Using the Voice Client Sample App</a>
+					</li>
+					<li>
+						<a href="#join">JOIN</a>
+					</li>
+					<li>
+						<a href="#leave">LEAVE</a>
+					</li>
+					<li>
+						<a href="#mute">MUTE</a>
+					</li>
+					<li>
+						<a href="#owner-only">OWNER-ONLY</a>
+					</li>
+					<li>
+						<a href="#remote-mute">REMOTE MUTE</a>
+					</li>
+					<li>
+						<a href="#kick">KICK</a>
+					</li>
+					<li>
+						<a href="#chat">CHAT</a>
+					</li>
+					<li>
+						<a href="#audio-devices">AUDIO DEVICES</a>
+					</li>
+					<li>
+						<a href="#speaking-status">SPEAKING STATUS</a>
+					</li>
+					<li>
+						<a href="#console-commands">Console Commands</a>
+					</li>
+					<li>
+						<a href="#join-1">JOIN</a>
+					</li>
+					<li>
+						<a href="#leave-1">LEAVE</a>
+					</li>
+					<li>
+						<a href="#kick-1">KICK</a>
+					</li>
+					<li>
+						<a href="#remotemute">REMOTEMUTE</a>
+					</li>
+					<li>
+						<a href="#voice-server">Voice Server</a>
+					</li>
+					<li>
+						<a href="#setup-for-windows-3264-bit-1">Setup for Windows 32/64-bit</a>
+					</li>
+					<li>
+						<a href="#building-the-voice-server-sample-app-for-win64win32">Building the Voice Server Sample App for Win64/Win32</a>
+					</li>
+					<li>
+						<a href="#running-the-voice-server-sample-app-win64win32">Running the Voice Server Sample App (Win64/Win32)</a>
+					</li>
+					<li>
+						<a href="#setup-for-macos-or-linux-1">Setup for MacOS or Linux</a>
+					</li>
+					<li>
+						<a href="#setup-prerequisites-1">Setup Prerequisites</a>
+					</li>
+					<li>
+						<a href="#building-the-voice-client-sample-app-for-macos-or-linux-1">Building the Voice Client Sample App for MacOS or Linux</a>
+					</li>
+					<li>
+						<a href="#running-the-voice-server-sample-app-macos">Running the Voice Server Sample App (MacOS)</a>
+					</li>
+					<li>
+						<a href="#using-the-voice-server-sample-app">Using the Voice Server Sample App</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

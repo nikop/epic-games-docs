@@ -14,7 +14,7 @@
 			<h1>Manage Discounts</h1>
 			<h2>Create and manage discount campaigns for your product offers.</h2>
 			<div>
-				<div>16 mins to read</div>
+				<div>18 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -32,8 +32,8 @@
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
-			<p>In the Developer Portal (Dev Portal), you can create and manage discounts for your
-				<a href="/docs/epic-games-store/store-presence/manage-offers">offers</a>.</p>
+			<p>In the Developer Portal (Dev Portal), you can create and manage discounts for your offers.  (See the following documentation for guidance on managing offers:
+				<a href="/docs/epic-games-store/store-presence/manage-offers">Manage Offers</a>.)</p>
 			<p>When you apply a discount to an offer, the storefront displays strikethrough pricing. This means that the storefront displays the discounted price alongside the regular price to highlight the comparison to users.</p>
 			<p>In the Epic Games Store publishing tools, discounts are defined by two primary elements:</p>
 			<ul>
@@ -61,17 +61,7 @@
 				<li>You must submit the discount at least 24 hours before the discount start date and time.</li>
 				<li>The discount rate must be a value between 5<i>%</i>
 					and 95<i>%</i>.</li>
-				<li>For post-launch discounts, the duration cannot exceed 30 consecutive days. For introductory offers, the following guidelines apply:
-					<ul>
-						<li>The duration cannot exceed seven consecutive days.</li>
-						<li>The discount amount must be a maximum of 40<i>%</i>.</li>
-						<li>
-							<strong>Note:</strong>
-							An introductory offer is a discount applied to your product offer at the time of its release. To learn more, see
-							<a href="#create-introductory-offer">Create Introductory Offer</a>
-							on this page.</li>
-					</ul>
-				</li>
+				<li>Post-launch discounts cannot exceed 30 consecutive days.</li>
 				<li>You cannot discount a product offer cannot for more than 45 days total during any 90-day window.</li>
 				<li>You must allow a minimum 30-day cooldown period between discounts that you apply to a specific product offer.</li>
 				<li>You cannot schedule discounts within the following time windows:
@@ -80,14 +70,64 @@
 						<li>Within 30 days of the end of an introductory offer.</li>
 					</ul>
 				</li>
-				<li>Products in a pre-purchase state can have discounts, but the discounts start together with pre-purchase and end when the product launches. You can schedule a continuation of your pre-purchase discount to covert it to an introductory offer. However, the following guidelines apply:
-					<ul>
-						<li>The discount must be the same discount value as the introductory offer.</li>
-						<li>You must configure the discount at the same time as you configure the pre-purchase discount. Notify the Epic Games Store team before the pre-purchase discount goes live. To do so, create a private discussion on our
-							<a href="https://eoshelp.epicgames.com/s/?language=en_US">Developer Support site</a>.</li>
-					</ul>
-				</li>
-				<li>You cannot schedule a discount for a date within 30 days of a price change. In other words, you must schedule discounts for a date at least 31 days after a price change.</li>
+				<li>You cannot schedule a discount for a date within 30 days of a price change. This means that you must schedule discounts for a date at least 31 days after a price change.</li>
+			</ul>
+			<div>
+				<h3 id="offers">Offers</h3>
+			</div>
+			<p>The Epic Games Store supports two types of offer where you can choose to reduce the purchase price of your product. These areas follows:</p>
+			<ul>
+				<li>Pre-Purchase Offer</li>
+				<li>Introductory Offer</li>
+			</ul>
+			<p>You can also run a Pre-Purchase Offer into an Introductory Offer. This type of offer is as follows:</p>
+			<ul>
+				<li>Special Offer</li>
+			</ul>
+			<p>You can apply these offers to your products based on the criteria below.</p>
+			<div>
+				<h4 id="pre-purchase-offer">Pre-Purchase Offer</h4>
+			</div>
+			<p>The following criteria apply to this offer:</p>
+			<ul>
+				<li>It is only for products that are not yet launched.</li>
+				<li>It must start when a product’s pre-purchase period starts (it cannot start any earlier than the start date and time of the pre-purchase period) and it must end when the product launches.</li>
+				<li>Its reduction amount must be between 5<i>%</i>
+					and 40<i>%</i>.</li>
+			</ul>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>Once you have set up your Pre-Purchase Offer, you must change its start and end date if you change your product’s launch date.</li>
+				<li>An offer start date is known as an offer "launch date” in the Developer Portal.</li>
+			</ul>
+			<div>
+				<h4 id="introductory-offer">Introductory Offer</h4>
+			</div>
+			<p>The following criteria apply to this offer:</p>
+			<ul>
+				<li>It is only for newly released products.</li>
+				<li>It must start at the exact same date and time as the product launch date and time.</li>
+				<li>Its duration cannot exceed seven consecutive days.</li>
+				<li>Its reduction amount must be between 5<i>%</i>
+					and 40<i>%</i>.</li>
+				<li>You must submit an Introductory offer before your product’s launch date or before the start date of any Pre-Purchase Offer you have applied to your product.</li>
+			</ul>
+			<p>For further information, see the following section on this page:
+				<a href="#create-introductory-offer">Create Introductory Offer</a>.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>Once you have set up your Introductory Offer, you must change its start and end date if you change your product’s launch date.</li>
+				<li>An offer start date is known as an offer "launch date” in the Developer Portal.</li>
+			</ul>
+			<div>
+				<h4 id="special-offer">Special Offer</h4>
+			</div>
+			<p>You can run a Pre-Purchase Offer into an Introductory Offer. This is a Special Offer. To do this, you must adhere to the following requirements:</p>
+			<ul>
+				<li>The Introductory Offer must have the same reduction amount as the Pre-Purchase Offer.</li>
+				<li>You must submit the Introductory Offer before the Pre-Purchase Offer starts.</li>
 			</ul>
 			<div>
 				<h2 id="create-and-submit-discounts">Create and Submit Discounts</h2>
@@ -160,7 +200,27 @@
 							<i>%</i>
 							field. This value is automatically applied to all selected offers.</li>
 						<li>
-							<strong>Note</strong>: The Offers section only contains offers in the Live sandbox, excluding any Demo-type offers or those with a base price of $0.</li>
+							<strong>Note</strong>: The Offers section only contains offers in your Live sandbox. It does not include any demo-type offers or offers with a base price of $0.
+							<br>
+							The table shows the following fields:
+							<ul>
+								<li>
+									<strong>Launch date</strong>: the start date of the offer.</li>
+								<li>
+									<strong>Offer label</strong>: the current offer state. The states can be any of the following:
+									<ul>
+										<li>
+											<strong>Released</strong>: An offer (that is not a Pre-Purchase Offer) is live on the Epic Games Store.</li>
+										<li>
+											<strong>Coming soon</strong>: An offer (that is not a Pre-Purchase Offer) is set up with a specified start date.</li>
+										<li>
+											<strong>Pre-purchase</strong>: A Pre-Purchase Offer is live on the Epic Games Store. Users can pre-purchase this product before it launches.</li>
+										<li>
+											<strong>Coming soon &amp; Pre-purchase</strong>: A Pre-Purchase Offer is set up with a specified start date.</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 				<li>
@@ -642,6 +702,18 @@
 					</li>
 					<li>
 						<a href="#discount-guidelines">Discount Guidelines</a>
+					</li>
+					<li>
+						<a href="#offers">Offers</a>
+					</li>
+					<li>
+						<a href="#pre-purchase-offer">Pre-Purchase Offer</a>
+					</li>
+					<li>
+						<a href="#introductory-offer">Introductory Offer</a>
+					</li>
+					<li>
+						<a href="#special-offer">Special Offer</a>
 					</li>
 					<li>
 						<a href="#create-and-submit-discounts">Create and Submit Discounts</a>

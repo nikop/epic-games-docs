@@ -77,6 +77,29 @@
 				<h1 id="2024">2024</h1>
 			</div>
 			<div>
+				<h2 id="1163-cl32303053---2024-apr-09">1.16.3-CL32303053 - 2024-apr-09</h2>
+			</div>
+			<div>
+				<h4 id="sony-playstation">Sony PlayStation</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Added support for Sony's PlayStation 4 SDK version 11.5.
+					<ul>
+						<li>For a full list of the PlayStation 4 SDK versions supported, see:
+							<a href="/docs/epic-online-services/platforms/ps-4">EOS SDK for PlayStation 4</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>New</strong>: Added support for Sony's PlayStation 5 SDK version 9.0.
+					<ul>
+						<li>For a full list of the PlayStation 5 SDK versions supported, see:
+							<a href="/docs/epic-online-services/platforms/ps-5">EOS SDK for PlayStation 5</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<hr>
+			<div>
 				<h2 id="1162-cl32273396---2024-mar-19">1.16.2-CL32273396 - 2024-mar-19</h2>
 			</div>
 			<div>
@@ -905,9 +928,7 @@
 			</ul>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_HLobbyModification LobbyModificationHandle = nullptr;EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &amp;ModifyOptions, &amp;LobbyModificationHandle);assert(LobbyModificationHandle != nullptr); //Create a lobby level modification (lobby attributes or lobby settings) using the LobbyModification handle created above //Now add a member attribute change to the same LobbyModificationHandle used to make the lobby level modificationFLobbyAttribute WorkaroundAttribute;WorkaroundAttribute.Key = "WorkaroundKey";WorkaroundAttribute.ValueType = FLobbyAttribute::Int64;WorkaroundAttribute.AsInt64 = 0;	EOS_Lobby_AttributeData AttributeData = WorkaroundAttribute.ToAttributeData();EOS_LobbyModification_AddMemberAttributeOptions AddAttrOptions = {};AddAttrOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;AddAttrOptions.Attribute = &amp;AttributeData;AddAttrOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PRIVATE; EOS_EResult Result = EOS_LobbyModification_AddMemberAttribute(LobbyModificationHandle, &amp;AddAttrOptions); assert(Result != EOS_EResult::EOS_Success); //Now apply lobby update which includes both the lobby level modification //and the workaround member attribute addition EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;UpdateOptions.LobbyModificationHandle = LobbyModificationHandle;EOS_Lobby_UpdateLobby(LobbyHandle, &amp;UpdateOptions, nullptr, OnLobbyUpdateFinished);</pre>
 				</section>
 			</div>
 			<hr>
@@ -1012,7 +1033,8 @@
 					</ul>
 				</li>
 			</ul>
-			<p>#<strong>Sony PlayStation</strong>
+			<p>
+				<strong>Sony PlayStation</strong>
 			</p>
 			<ul>
 				<li>
@@ -2141,9 +2163,7 @@
 			</ul>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_HLobbyModification LobbyModificationHandle = nullptr;EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &amp;ModifyOptions, &amp;LobbyModificationHandle);assert(LobbyModificationHandle != nullptr); //Create a lobby level modification (lobby attributes or lobby settings) using the LobbyModification handle created above //Now add a member attribute change to the same LobbyModificationHandle used to make the lobby level modificationFLobbyAttribute WorkaroundAttribute;WorkaroundAttribute.Key = "WorkaroundKey";WorkaroundAttribute.ValueType = FLobbyAttribute::Int64;WorkaroundAttribute.AsInt64 = 0;	EOS_Lobby_AttributeData AttributeData = WorkaroundAttribute.ToAttributeData();EOS_LobbyModification_AddMemberAttributeOptions AddAttrOptions = {};AddAttrOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;AddAttrOptions.Attribute = &amp;AttributeData;AddAttrOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PRIVATE; EOS_EResult Result = EOS_LobbyModification_AddMemberAttribute(LobbyModificationHandle, &amp;AddAttrOptions); assert(Result != EOS_EResult::EOS_Success); //Now apply lobby update which includes both the lobby level modification //and the workaround member attribute addition EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;UpdateOptions.LobbyModificationHandle = LobbyModificationHandle;EOS_Lobby_UpdateLobby(LobbyHandle, &amp;UpdateOptions, nullptr, OnLobbyUpdateFinished);</pre>
 				</section>
 			</div>
 			<hr>
@@ -4429,6 +4449,12 @@
 					</li>
 					<li>
 						<a href="#2024">2024</a>
+					</li>
+					<li>
+						<a href="#1163-cl32303053---2024-apr-09">1.16.3-CL32303053 - 2024-apr-09</a>
+					</li>
+					<li>
+						<a href="#sony-playstation">Sony PlayStation</a>
 					</li>
 					<li>
 						<a href="#1162-cl32273396---2024-mar-19">1.16.2-CL32273396 - 2024-mar-19</a>

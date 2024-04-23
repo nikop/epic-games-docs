@@ -1,0 +1,323 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Protocol Activation</h1>
+			<h2>Activate game clients to launch the Epic Games Store or specific product pages with protocol activation (deep linking).</h2>
+			<div>
+				<div>
+					<div>
+						<span>Activation Protocol</span>
+					</div>
+				</div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<h2 id="overview">Overview</h2>
+			</div>
+			<p>The Epic Games Store (EGS) Launcher can be launched via protocol activation by game clients. Activation parameters can be used to launch directly to specific Product Details Pages (PDPs), a process also known as deep-linking. Game clients can request themselves or other game clients to be (re)launched directly.</p>
+			<p>All of these protocol activations can be accomplished using OS-provided functionality.</p>
+			<p>Protocol activation is particularly useful for titles that have an in-game store that do not want or are unable to integrate with the Purchase Overlay in the EOS SDK.</p>
+			<p>
+				<strong>Note</strong>: Use
+				<a href="/docs/api-ref/functions/eos-ecom-checkout">ecom checkout</a>
+				where possible before resorting to protocol activation.</p>
+			<p>Protocol activation as a means to restart the game client is also a useful way to get a new
+				<code>exchange_code</code>
+				in cases where the game was not launched properly or the
+				<code>exchange_code</code>
+				has expired.</p>
+			<div>
+				<h2 id="technical-details">Technical Details</h2>
+			</div>
+			<p>The EGS Launcher is registered via the OS to handle
+				<code>com.epicgames.launcher</code>
+				protocol activations. Any time a request is made to the OS to handle the com.epicgames.launcher URI, the EGS Launcher will receive the request (assuming the EGS Launcher is installed). The EGS Launcher accepts additional parameters to further control how it is launched.</p>
+			<div>
+				<h3 id="usage">Usage</h3>
+			</div>
+			<p>EGS Launcher protocol activation supports a number of launch options.</p>
+			<p>Parameters:</p>
+			<ul>
+				<li>
+					<p>
+						<code>path</code>
+					</p>
+					<p>Launches a specific PDP or app on the store</p>
+				</li>
+				<li>
+					<p>
+						<code>action</code>
+					</p>
+					<ul>
+						<li>
+							<p>
+								<code>launch</code>
+								-launches an app</p>
+						</li>
+						<li>
+							<p>
+								<code>updatecheck</code>
+								- polls for available updates</p>
+						</li>
+						<li>
+							<p>
+								<code>installer</code>
+								- opens any installation options screen for the application</p>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<code>silent</code>
+					</p>
+					<p>
+						<strong>true</strong>
+						- used with the action=launch parameter to launch the app in question without visibly popping up the EGS Launcher. The silent option is suggestive, if the launcher determines UI is required to complete the request, it will be shown.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="examples">Examples:</h3>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					The specific strings to use for your app and offers are determined by back end configuration. Please work with the Service Delivery team to configure these appropriately.</div>
+			</div>
+			<p>The path portion of a store URI will match the product slug that is available on the web.</p>
+			<p>Example:</p>
+			<p>
+				<code>https://www.epicgames.com/store/product/[product slug] → com.epicgames.launcher://store/product/[product slug]</code>
+			</p>
+			<p>The path portion of an app’s URI is a combination Sandbox ID (also called Namespace ID), Catalog ID (also called Item ID), and Artifact ID , Separated by URL-encoded colons.</p>
+			<p>Example:</p>
+			<p>
+				<code>com.epicgames.launcher://apps/[SandboxID]%3A[CatalogID]%3A[ArtifactId]?action=launch&amp;silent=true</code>
+			</p>
+			<p>You might encounter a deprecated format that uses only
+				<code>Artifact ID</code>
+				and is still supported for backwards compatibility.</p>
+			<p>Alternatively, instead of the
+				<code>SandboxID:CatalogID:ArtifactId</code>
+				for the app’s URI, a url encoded installation path to the app’s install directory on the machine (or any location inside of it) may be used. This may be easier for game client code to construct, particularly when it is used across multiple different ArtifactIds.</p>
+			<p>Example:</p>
+			<p>
+				<code>com.epicgames.launcher://apps/D%3A%2FGames%2FMyGame?action=launch&amp;silent=true</code>
+			</p>
+			<div>
+				<h4 id="launch-game-pdp">Launch Game PDP</h4>
+			</div>
+			<p>To launch to the Product Details Page in the store for a specific game:</p>
+			<p>
+				<code>com.epicgames.launcher://store/product/fortnite</code>
+			</p>
+			<div>
+				<h4 id="launch-add-on-pdp">Launch Add-On PDP</h4>
+			</div>
+			<p>To launch to the Product Details Page in the store for an add-on beneath a game:</p>
+			<p>
+				<code>com.epicgames.launcher://store/product/fortnite/vox-hunters-quest-pack</code>
+			</p>
+			<div>
+				<h4 id="launch-game">Launch Game</h4>
+			</div>
+			<p>To launch the game itself while moving the EGS Launcher to the background:</p>
+			<p>
+				<code>com.epicgames.launcher://apps/fn%3A4fe75bbc5a674f4f9b356b5c90567da5%3AFortnite?action=launch&amp;silent=true</code>
+			</p>
+			<div>
+				<h2 id="making-a-protocol-activation-request">Making a protocol activation request</h2>
+			</div>
+			<p>Windows supports a number of ways to initiate a protocol activation request.</p>
+			<ul>
+				<li>
+					<p>From a command line: Use the start command with the appropriate URI</p>
+					<p>
+						<br>Example:</p>
+					<ul>
+						<li>
+							<code>start com.epicgames.launcher://store/product/fortnite</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>From the shell: Windows+R, place the URI in the “Open:” text field, and press Enter</p>
+					<p>
+						<br>Example:</p>
+					<ul>
+						<li>
+							<code>com.epicgames.launcher://store/product/fortnite</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Within an application: Via OS provided APIs</p>
+					<p>
+						<br>
+						For example (C++):</p>
+					<div>
+						<section>
+							<pre>wchar_t uriW[ MAX_PATH ];std::copy( uriA, uriA + lstrlenA( uriA ) + 1, uriW );::ShellExecuteW( NULL, L"open", uriW, NULL, NULL, SW_SHOWNORMAL );```</pre>
+						</section>
+					</div>
+				</li>
+			</ul>
+			<p>On Mac, you can run this from a terminal window or using Spotlight Search</p>
+			<ul>
+				<li>
+					<p>From a terminal window: Use the open command with the appropriate URI</p>
+					<p>
+						<br>Example:</p>
+					<ul>
+						<li>
+							<code>open com.epicgames.launcher://store/product/fortnite</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>For Spotlight Search: Paste the URI in the search text field, and press Enter</p>
+					<p>
+						<br>Example:</p>
+					<ul>
+						<li>
+							<code>com.epicgames.launcher://store/product/fortnite</code>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="checking-to-see-if-the-egs-launcher-is-installed">Checking to see if the EGS Launcher is installed</h2>
+			</div>
+			<p>Before making an API call to protocol activate the EGS Launcher, it is advisable to validate that the EGS Launcher is installed. On Windows, this can be done by checking the registry.</p>
+			<p>C++ example:</p>
+			<div>
+				<section>
+					<pre>bool bRes = false;  HKEY hKey;  if (RegOpenKeyEx(HKEY_CLASSES_ROOT, TEXT("com.epicgames.launcher"), 0, KEY_READ, &amp;hKey) == ERROR_SUCCESS)  {    RegCloseKey(hKey);    bRes = true;  }  return bRes;</pre>
+				</section>
+			</div>
+			<p>On Mac, this can be done by checking for a registered URL Scheme.</p>
+			<p>Objective-C example:</p>
+			<p>
+				<code>BOOL Result = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@“com.epicgames.launcher:”]];</code>
+			</p>
+			<div>
+				<h2 id="best-practices">Best Practices</h2>
+			</div>
+			<p>It is best practice to test the protocol activation. You can test the whole thing end-to-end, or simply unit test certain aspects of protocol activation. Use the following steps for testing.</p>
+			<div>
+				<h3 id="testing-protocol-activation-end-to-end">Testing Protocol Activation End-to-End</h3>
+			</div>
+			<p>Testing protocol activation end-to-end requires a number of steps:</p>
+			<ol>
+				<li>Get a store-capable Product ID and associated upload credentials</li>
+				<li>Write the game client code</li>
+				<li>Upload the game client using BPT or Dev Portal</li>
+				<li>Configure product slugs and other associated strings</li>
+				<li>Create a PDP</li>
+				<li>Install the EGS Launcher</li>
+				<li>Acquire the audience for the game (usually via key)</li>
+				<li>Install the game</li>
+				<li>Make a protocol activation request</li>
+			</ol>
+			<div>
+				<h3 id="unit-testing-certain-aspects-of-protocol-activation">Unit Testing Certain Aspects of Protocol Activation</h3>
+			</div>
+			<p>It is possible to unit test certain aspects of protocol activation with fewer steps:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Testing URI only</strong>
+					</p>
+					<p>To test the URI itself, simply use the Windows+R run command with the desired protocol activation and parameters.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Testing Game Client Code</strong>
+					</p>
+					<p>To test game client code, consider pointing to an existing offer or game instead. It can be any game in the EGS Launcher.</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="related">Related</h2>
+			</div>
+			<p>Check out the latest documentation for:</p>
+			<ul>
+				<li>
+					<p>
+						<a href="/docs/dev-portal/product-management">Content ingestion</a>
+					</p>
+				</li>
+				<li>
+					<p>
+						<a href="/docs/dev-portal/product-management">Purchase Overlay</a>
+					</p>
+				</li>
+			</ul>
+			<div id="tag_list">
+				<a aria-label="Tag activation protocol" aria-hidden="false" tabindex="0" href="/docs/site-map">activation protocol</a>
+				<a aria-label="Tag  deep linking" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					deep linking</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#overview">Overview</a>
+					</li>
+					<li>
+						<a href="#technical-details">Technical Details</a>
+					</li>
+					<li>
+						<a href="#usage">Usage</a>
+					</li>
+					<li>
+						<a href="#examples">Examples:</a>
+					</li>
+					<li>
+						<a href="#launch-game-pdp">Launch Game PDP</a>
+					</li>
+					<li>
+						<a href="#launch-add-on-pdp">Launch Add-On PDP</a>
+					</li>
+					<li>
+						<a href="#launch-game">Launch Game</a>
+					</li>
+					<li>
+						<a href="#making-a-protocol-activation-request">Making a protocol activation request</a>
+					</li>
+					<li>
+						<a href="#checking-to-see-if-the-egs-launcher-is-installed">Checking to see if the EGS Launcher is installed</a>
+					</li>
+					<li>
+						<a href="#best-practices">Best Practices</a>
+					</li>
+					<li>
+						<a href="#testing-protocol-activation-end-to-end">Testing Protocol Activation End-to-End</a>
+					</li>
+					<li>
+						<a href="#unit-testing-certain-aspects-of-protocol-activation">Unit Testing Certain Aspects of Protocol Activation</a>
+					</li>
+					<li>
+						<a href="#related">Related</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

@@ -726,13 +726,16 @@
 							<code>SocketId*OutSocketId</code>
 							has changed to a ref parameter.</li>
 					</ul>
-					<p>The P2P Interface’s
+					<p>The P2P Interface's
 						<code>SendPacket</code>
-						method signature has not changed. However, make sure you use the same
+						method signature has not changed. However, be sure to create as few
 						<code>SendPacketOptions</code>
-						reference for all send requests to avoid continually creating a new
+						objects as possible. Reuse references when appropriate to avoid continually creating new
 						<code>SocketId</code>
-						reference for each request.</p>
+						references. We recommend that you use one
+						<code>SendPacketOptions</code>
+						for each unique
+						<code>SocketId</code>.</p>
 					<p>The minimum lines of code to upgrade to this version would be, initialize a
 						<code>ProductUserId</code>
 						and
@@ -755,16 +758,17 @@
 							<code>ProductUserId</code>
 							and
 							<code>SocketId</code>
-							on each call.</li>
-						<li>Compare
-							<code>ProductUserId</code>'s by the inner handle inside of it.  Looking at the string value causes a string to be allocated. A
-							<code>Dictionary&lt;IntPtr, string&gt;</code>
-							is a good way to reduce memory cost and still track
-							<code>PeerId</code>s. For example:
+							on each call when possible.</li>
+						<li>Do not compare product user IDs (<code>ProductUserId</code>) by their string values.  Looking at the string value causes a string to be allocated. A
+							<code>Dictionary&lt;ProductUserId, string&gt;</code>
+							is a good way to reduce memory cost and still track peer IDs (<code>PeerId</code>). For example:
 							<ul>
 								<li>
 									<code>lastPeerId.InnerHandle == outPeerId.InnerHandle</code>
 								</li>
+								<li>
+									<strong>Note</strong>: All product user IDs (<code>ProductUserId</code>) that resolve to the same string have the same
+									<code>InnerHandle</code>.</li>
 							</ul>
 						</li>
 						<li>
@@ -937,7 +941,9 @@
 			</ul>
 			<div>
 				<section>
-					<pre>EOS_HLobbyModification LobbyModificationHandle = nullptr;EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &amp;ModifyOptions, &amp;LobbyModificationHandle);assert(LobbyModificationHandle != nullptr); //Create a lobby level modification (lobby attributes or lobby settings) using the LobbyModification handle created above //Now add a member attribute change to the same LobbyModificationHandle used to make the lobby level modificationFLobbyAttribute WorkaroundAttribute;WorkaroundAttribute.Key = "WorkaroundKey";WorkaroundAttribute.ValueType = FLobbyAttribute::Int64;WorkaroundAttribute.AsInt64 = 0;	EOS_Lobby_AttributeData AttributeData = WorkaroundAttribute.ToAttributeData();EOS_LobbyModification_AddMemberAttributeOptions AddAttrOptions = {};AddAttrOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;AddAttrOptions.Attribute = &amp;AttributeData;AddAttrOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PRIVATE; EOS_EResult Result = EOS_LobbyModification_AddMemberAttribute(LobbyModificationHandle, &amp;AddAttrOptions); assert(Result != EOS_EResult::EOS_Success); //Now apply lobby update which includes both the lobby level modification //and the workaround member attribute addition EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;UpdateOptions.LobbyModificationHandle = LobbyModificationHandle;EOS_Lobby_UpdateLobby(LobbyHandle, &amp;UpdateOptions, nullptr, OnLobbyUpdateFinished);</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<hr>
@@ -2172,7 +2178,9 @@
 			</ul>
 			<div>
 				<section>
-					<pre>EOS_HLobbyModification LobbyModificationHandle = nullptr;EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &amp;ModifyOptions, &amp;LobbyModificationHandle);assert(LobbyModificationHandle != nullptr); //Create a lobby level modification (lobby attributes or lobby settings) using the LobbyModification handle created above //Now add a member attribute change to the same LobbyModificationHandle used to make the lobby level modificationFLobbyAttribute WorkaroundAttribute;WorkaroundAttribute.Key = "WorkaroundKey";WorkaroundAttribute.ValueType = FLobbyAttribute::Int64;WorkaroundAttribute.AsInt64 = 0;	EOS_Lobby_AttributeData AttributeData = WorkaroundAttribute.ToAttributeData();EOS_LobbyModification_AddMemberAttributeOptions AddAttrOptions = {};AddAttrOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;AddAttrOptions.Attribute = &amp;AttributeData;AddAttrOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PRIVATE; EOS_EResult Result = EOS_LobbyModification_AddMemberAttribute(LobbyModificationHandle, &amp;AddAttrOptions); assert(Result != EOS_EResult::EOS_Success); //Now apply lobby update which includes both the lobby level modification //and the workaround member attribute addition EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;UpdateOptions.LobbyModificationHandle = LobbyModificationHandle;EOS_Lobby_UpdateLobby(LobbyHandle, &amp;UpdateOptions, nullptr, OnLobbyUpdateFinished);</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<hr>

@@ -1,0 +1,133 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Cloud Saves</h1>
+			<h2>Enable and test Cloud Save for your Epic-managed product</h2>
+			<div>
+				<div>
+					<div>
+						<span>Epic-managed distribution on the Epic Games Store</span>
+					</div>
+				</div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>This article covers functionality for products using
+						<a href="/docs/docs/epic-games-store/epic-managed/is-this-for-me">Epic-managed distribution</a>. If the options described are not available to you, you might be using self-managed distribution. For documentation applicable to your experience, refer to the
+						<a href="/docs/docs/epic-games-store">Epic Games Store</a>
+						section in Developer Resources.</p>
+				</div>
+			</div>
+			<p>The Cloud Save feature enables users to continue their game progress whenever and wherever they play next by automatically storing their save files in the cloud. This guide explains how to set up Cloud Saves for your
+				<span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
+				</span>
+				and provides test cases to ensure the feature is working as expected.</p>
+			<div>
+				<h2 id="cloud-saves-setup">Cloud Saves Setup</h2>
+			</div>
+			<p>Cloud Saves are enabled by default for users, however, they must be configured by your Release Manager for each product before you begin testing. Your Release Manager will configure the cloud saves on your Staging artifact so that you can test the feature. You need to provide your Release Manager with the following information:</p>
+			<ul>
+				<li>Save folder location: This is where your game saves locally on a user's machine. If your game runs on both Mac and Windows, provide both locations.</li>
+				<li>Exclusions: Any files that you want to exclude from the cloud save.</li>
+				<li>Maximum folder size: The maximum size of the save folder. If exceeded, a user gets the error "<em>The save files are too large to upload</em>."
+					<strong>Learn more</strong>:
+					<a href="/docs/epic-games-store/services/cloud-save#cloud-save-error-codes">Cloud Save Error Codes</a>
+				</li>
+			</ul>
+			<p>To remove Cloud Save support from your product,
+				<a href="https://eos-docs-devdocs-1433-v2-dyan.team-dev-portal.epicgames-gamedev.ol.epicgames.net/docs/epic-games-store/epic-managed/contact-us-epic-managed">contact your Release Manager</a>.</p>
+			<div>
+				<h2 id="cloud-saves-testing-and-error-codes">Cloud Saves Testing and Error Codes</h2>
+			</div>
+			<p>To ensure that Cloud Saves are working optimally for your product, carry out our recommended Cloud Saves Test Cases. These test cases include instructions and expected results for each scenario.</p>
+			<p>
+				<strong>Learn more</strong>:</p>
+			<ul>
+				<li>
+					<a href="https://dev.epicgames.com/docs/epic-games-store/services/cloud-save#cloud-save-test-cases">Cloud Saves Test Cases</a>
+				</li>
+				<li>Potential error scenarios and their codes:
+					<a href="https://dev.epicgames.com/docs/epic-games-store/services/cloud-save#cloud-save-error-codes">Cloud Saves Error Codes</a>.</li>
+			</ul>
+			<p>If you need help with any other Cloud Saves testing issues that are not covered in our test cases,
+				<a href="https://eos-docs-devdocs-1433-v2-dyan.team-dev-portal.epicgames-gamedev.ol.epicgames.net/docs/epic-games-store/epic-managed/contact-us-epic-managed">contact your Release Manager</a>.</p>
+			<p>When you finish testing Cloud Saves on your Staging artifact, let your Release Manager know so they can enable the Cloud Saves on the Production artifact.</p>
+			<div>
+				<h1 id="cloud-saves-conflicts-in-the-epic-games-launcher">Cloud Saves conflicts in the Epic Games Launcher</h1>
+			</div>
+			<p>A user of your product might run into Cloud Saves conflicts if they use your product on more than one device. If this happens, they can resolve the conflict with the following Epic Games online support page:
+				<a href="https://www.epicgames.com/help/en-US/epic-games-store-c5719341124379/launcher-support-c5719357217435/how-do-i-handle-cloud-save-conflicts-in-the-epic-games-launcher-a5720246108827">How do I handle Cloud Save conflicts in the Epic Games Launcher?</a>
+			</p>
+			<div>
+				<h2 id="faq">FAQ</h2>
+			</div>
+			<div>
+				<h3 id="how-do-cloud-saves-work-for-users">How do Cloud Saves work for users?</h3>
+			</div>
+			<p>See the Epic Games Player Support documentation:</p>
+			<ul>
+				<li>
+					<a href="https://www.epicgames.com/help/en-US/epic-games-store-c5719341124379/launcher-support-c5719357217435/enable-cloud-saves-in-the-epic-games-launcher-a5720216928283">Enable cloud saves</a>
+				</li>
+				<li>
+					<a href="https://www.epicgames.com/help/en-US/epic-games-store-c5719341124379/launcher-support-c5719357217435/disable-cloud-saves-in-the-epic-games-launcher-a5720254266267">Disable cloud saves</a>
+				</li>
+				<li>
+					<a href="https://www.epicgames.com/help/en-US/epic-games-store-c5719341124379/launcher-support-c5719357217435/how-do-i-handle-cloud-save-conflicts-in-the-epic-games-launcher-a5720246108827">Resolve cloud save conflicts</a>
+				</li>
+			</ul>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>This article covers functionality for products using
+						<a href="/docs/docs/epic-games-store/epic-managed/is-this-for-me">Epic-managed distribution</a>. If the options described are not available to you, you might be using self-managed distribution. For documentation applicable to your experience, refer to the
+						<a href="/docs/docs/epic-games-store">Epic Games Store</a>
+						section in Developer Resources.</p>
+				</div>
+			</div>
+			<div id="tag_list">
+				<a aria-label="Tag Getting Started" aria-hidden="false" tabindex="0" href="/docs/site-map">Getting Started</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#cloud-saves-setup">Cloud Saves Setup</a>
+					</li>
+					<li>
+						<a href="#cloud-saves-testing-and-error-codes">Cloud Saves Testing and Error Codes</a>
+					</li>
+					<li>
+						<a href="#cloud-saves-conflicts-in-the-epic-games-launcher">Cloud Saves conflicts in the Epic Games Launcher</a>
+					</li>
+					<li>
+						<a href="#faq">FAQ</a>
+					</li>
+					<li>
+						<a href="#how-do-cloud-saves-work-for-users">How do Cloud Saves work for users?</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

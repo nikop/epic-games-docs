@@ -12,58 +12,70 @@
 	<section>
 		<div>
 			<h1>EOS Player Search</h1>
-			<h2>Player search, account linking, user data requests, and user data deletion.</h2>
+			<h2>Player search, linked accounts, user data retrieval, and user data deletion.</h2>
 			<div>
-				<div>5 mins to read</div>
+				<div>6 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="searching-and-managing-player-data">Searching and managing player data</h2>
-			</div>
-			<p>Through the
-				<strong>Player Search</strong>
-				dashboard, you can view and manage data stored on your behalf for your players on the Epic Online Services (EOS) backend. This page provides a guide on what to expect and how to use these tools on the Developer Portal.</p>
+			<p>Use the Player Search page to view and manage the data that Epic Online Services (EOS) stores about your product users on your behalf.</p>
 			<p>
-				<strong>Note</strong>: See the
-				<a href="/docs/dev-portal/ticketing-system">Ticketing System</a>
-				documentation for additional information if you use player ticketing.</p>
+				<strong>Note</strong>: For information on the ticketing system (known as "player ticketing") to manage support for users of your product, see the following documentation:
+				<a href="/docs/dev-portal/ticketing-system">Ticketing System</a>.</p>
 			<div>
-				<h3 id="player-search-on-the-developer-portal">Player Search on the Developer Portal</h3>
+				<h2 id="the-player-search-page">The Player Search Page</h2>
 			</div>
 			<div tabindex="0" aria-label="Searching for a player on the Developer Portal image, press Enter to open full size">
 				<div>
 					<span>
-						<img alt="Searching for a player on the Developer Portal" src="https://static-assets-prod.epicgames.com/eos-docs/dev-portal/player-search/player-search.png" decoding="async" data-nimg="fill">
+						<img alt="Searching for a player on the Developer Portal" src="https://static-assets-prod.epicgames.com/eos-docs/dev-portal/player-search/player-search-updated.png" decoding="async" data-nimg="fill">
 						<noscript></noscript>
 					</span>
 				</div>
 				<figcaption>
-					<p>Click image for full size.</p>
+					<p>The Developer Portal home page, showing the
+						<strong>Player Search</strong>
+						button. Click image for full size.</p>
 				</figcaption>
 			</div>
-			<p>From your organization’s home page, click
-				<strong>Player Search</strong>
-				to search for players using different user ID types:</p>
+			<p>To access the Player Search page:</p>
+			<ol>
+				<li>In the Developer Portal (dev.epicgames.com/portal), make sure you are in the correct organization relating to your product.<br>
+					To do this:
+					<ul>
+						<li>a) Select Organization from the top of the left navigation’s dropdown menu (in the image above, the organization name is  “Your…”).</li>
+						<li>b) Follow the onscreen instructions to choose your organization.</li>
+					</ul>
+				</li>
+				<li>From the left navigation, click
+					<strong>Dashboard</strong>
+					to see the Developer Portal home page, and on that page, click
+					<strong>Player Search</strong>.</li>
+			</ol>
+			<p>On the Player Search page, you can search users through different user ID types. These are:</p>
 			<ul>
 				<li>
-					<strong>Product User ID</strong>
-					(PUID)</li>
+					<code>Product User ID</code>
+					- PUID (Glossary:
+					<span>
+						<span aria-label="tooltip ProductUserId" tabindex="0" role="button">ProductUserId</span>
+					</span>)</li>
 				<li>
-					<strong>Player Account ID</strong>
-					- a unique ID from an external platform, for example, a player's Epic Games account ID or Steam ID.</li>
+					<code>Player Account ID</code>
+					- a unique ID from an external platform, for example, a user's Epic Games account ID or Steam ID.</li>
 				<li>
-					<strong>Epic Account for development</strong>
+					<code>Epic Account for development</code>
 					- an Epic account linked with a console development account.</li>
 			</ul>
-			<p>The search results will let you review the player’s
-				<strong>Player Profile</strong>, their
-				<strong>Linked Accounts</strong>
-				used to play the game, and a
-				<strong>Data Rights</strong>
-				section allowing you to export and delete all stored data about the player.</p>
+			<p>The search results provide the following data about a user:</p>
+			<ul>
+				<li>Player Profile</li>
+				<li>Linked Accounts</li>
+				<li>Data Rights</li>
+			</ul>
+			<p>You can export or delete all stored data about a user.</p>
 			<div>
 				<h3 id="player-profile">Player Profile</h3>
 			</div>
@@ -75,12 +87,10 @@
 					</span>
 				</div>
 				<figcaption>
-					<p>Click image for full size.</p>
+					<p>The Player Profile tab on the Player Search page. Click image for full size.</p>
 				</figcaption>
 			</div>
-			<p>In the
-				<strong>Player Profile</strong>
-				tab, you can see various game service features that your product has enabled and the player data for each feature. The interfaces currently available are:</p>
+			<p>In the Player Profile tab, you can see user-related EOS features that are enabled for your product and the user data for each feature. The features are:</p>
 			<ul>
 				<li>Achievements</li>
 				<li>Stats</li>
@@ -98,51 +108,70 @@
 						<noscript></noscript>
 					</span>
 				</div>
-				<figcaption></figcaption>
+				<figcaption>
+					<p>The Linked Account tab on the Player Search page. Click image for full size.</p>
+				</figcaption>
 			</div>
-			<p>In the
-				<strong>Linked Accounts</strong>
-				tab, you can find external accounts the player has linked to their Product User ID. This section is intended to be used by your organization's player support to resolve end-user issues, such as unlinking an accidentally linked external account. You can also review the full account linking history for the player.</p>
-			<p>Note: The
-				<strong>Linked Accounts</strong>
-				tab can also give options for console development accounts. For more information, see the
+			<p>The Linked Accounts tab displays any external accounts a user has linked to their Product User ID using the EOS Connect Interface (documentation:
+				<a href="/docs/game-services/eos-connect-interface">Connect Interface</a>). This information is useful for your organization's user or player support. Use it to resolve user or player issues, such as unlinking an accidentally-linked external account. Here you can also review the full account linking history for a user.</p>
+			<p>
+				<strong>Note</strong>: The Linked Accounts tab can also give options for console-development accounts. For more information, see the
 				<a href="/docs/dev-portal/player-search#console-development-accounts">Console Development Accounts</a>
 				section below.</p>
 			<div>
-				<h4 id="unlink-a-players-account">Unlink a Player's Account</h4>
+				<h4 id="unlink-a-users-account">Unlink a User's Account</h4>
 			</div>
-			<p>Players may wish to change which external accounts they have linked through EOS Connect for various reasons. Some examples are:</p>
+			<p>Users might want to change which external accounts they have linked through the EOS Connect Interface.  The following are examples of why users might want to do this:</p>
 			<ul>
-				<li>If the player no longer wants to maintain an account for a given identity provider.</li>
-				<li>If the player wants to link a different identity provider account with a different username.</li>
-				<li>If you have to unlink a player’s account with a specific identity provider for security or fraud prevention measures.</li>
+				<li>The user no longer wants to maintain an account for a particular identity provider.</li>
+				<li>The user wants to link a different identity provider account with a different username.</li>
+				<li>You have to unlink a user's account with a specific identity provider for security reasons or fraud-prevention measures.</li>
 			</ul>
-			<p>The
-				<strong>Unlink Account</strong>
-				button will remove a linked account for an identity provider. Once you unlink an account, your organization will no longer track it, and the player can no longer sign in to your products using that identity provider unless they re-link.</p>
-			<p>When you unlink an account, it is instantaneous, as it does not necessarily remove other linked accounts or remove the player from EOS. If you unlink an external account from an Epic account, and you try to unlink the last linked account, or the only linked account for a player, you will be presented with a warning alerting you that you cannot unlink the only sign-in method.</p>
+			<p>To remove a linked account for an identity provider, click
+				<strong>Unlink Account</strong>.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>Once you unlink an account, your organization no longer tracks it, and the user can no longer sign in to your products using that identity provider unless they re-link.</li>
+				<li>When you unlink an account, it is instantaneous but unlinking does not necessarily remove other linked accounts or remove the user from the EOS service.</li>
+				<li>If you unlink an external account from an Epic Games account, and you try to unlink either the last-linked account for a user, or the only linked account for a user, you see a warning. The warning alerts you that you cannot unlink the user's only sign-in method.</li>
+			</ul>
 			<div>
 				<h4 id="console-development-accounts">Console Development Accounts</h4>
 			</div>
-			<p>If your product uses Epic Account Services (EAS), when you sign up to your product on a console development environment, your console development account will be associated to a new Epic Games account. When you search for an Epic Games account using
-				<strong>Player Search</strong>, the results will return the Epic Games account as well as the console developer accounts associated with it.</p>
-			<p>In the
-				<strong>Linked Accounts</strong>
-				tab, you can delete the associated Epic Games account. This can be used, for example, to enable testing the Epic accounts sign-in flow again, re-using the same console development account.</p>
+			<p>If your product uses
+				<span>
+					<span aria-label="tooltip Epic Account Services" tabindex="0" role="button">Epic Account Services</span>
+				</span>, when you sign up your product for console development with EOS, your console-development account is associated with new console-Epic-Games account. When you search for an Epic Games account using Player Search, the results return the new console-Epic-Games account as well as the console-development accounts associated with it.</p>
+			<p>In the Linked Accounts tab, you can delete the console-Epic-Games account. You can use this to test the Epic Games accounts sign-in flow again, re-using the same console-development account.</p>
 			<p>
-				<strong>Note</strong>: When you have an Epic Games account that has been created on a console development environment, you cannot:</p>
+				<strong>Note</strong>: When you have a console-Epic-Games account, the following applies:</p>
 			<ul>
-				<li>Unlink the console development account.</li>
-				<li>Access the created Epic Games account outside of the console device. This is because the linked console development account cannot be used for signing in outside the console devkit device.</li>
+				<li>You cannot unlink its console-development account.</li>
+				<li>Access to your console-Epic-Games account has restrictions:
+					<ul>
+						<li>By default, you cannot access the console-Epic-Games account outside of the console device.<br>
+							This is because you cannot use the linked console-development account to sign-in outside the console development environment.</li>
+						<li>You can amend this as follows:
+							<ul>
+								<li>When you sign into Epic Games on a web browser using a console-development account, the sign-in prompts you to assign an email and a password to the new console-Epic-Games account.<br>
+									After you do this, you can access the console-Epic-Games account outside of the console development environment. This enables you to connect additional external accounts to the console-Epic-Games account.<br>
+									<strong>Tip</strong>: Connect accounts in Epic Games's account management website (go to
+									<em>your account icon, top right of any page in the Developer Portal</em>
+									&gt;
+									<strong>Manage Account</strong>
+									&gt;
+									<strong>Account Settings</strong>
+									&gt;
+									<strong>APPS AND ACCOUNTS</strong>).</li>
+								<li>After you have assigned a username and password to the console-Epic-Games account, you can only unlink the console-Epic-Games account from your console-development account. You cannot delete the console-Epic-Games account itself.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 			</ul>
-			<p>When you sign into Epic Games on a web browser using a console development account, you will be prompted to assign an email and a password to the linked Epic Games account. After you do this, the Epic Games account can be accessed outside of the console development environment. This allows you to connect additional external accounts to the Epic Games account, under the
-				<strong>Apps</strong>
-				and
-				<strong>Accounts</strong>
-				section of
-				<strong>Account Settings</strong>.</p>
-			<p>
-				<strong>Note</strong>: After you assigned username and password to the Epic Games account, you can only unlink the Epic Games account from your Organization or the external accounts from the Epic Games account. You will not be able to delete the Epic Games account itself.</p>
+			<p>For information on how to become a console developer with EOS, see the following documentation:
+				<a href="/docs/en-USepic-online-services/eos-get-started/services-quick-start#access-to-the-sdk-for-consoles">EOS Get Started Steps: Access the SDK for Consoles</a>.</p>
 			<div>
 				<h3 id="data-rights">Data Rights</h3>
 			</div>
@@ -154,52 +183,86 @@
 					</span>
 				</div>
 				<figcaption>
-					<p>Click image for full size.</p>
+					<p>The Data Rights tab on the Player Search page.</p>
 				</figcaption>
 			</div>
-			<p>The
-				<strong>Data Rights</strong>
-				section allows exporting and deleting all data stored for the player in the game services backend. You can also export and delete player data for a specific product, if they have used multiple products published by your organization.</p>
+			<p>Use the Data Rights tab to export or delete data stored for a user by EOS on your behalf. You can also export and delete user data for a specific product, if a user has used multiple products created by your organization.</p>
+			<p>
+				<strong>Note</strong>: You cannot export data while a delete is in progress and you cannot delete data while an export is in progress.</p>
 			<div>
 				<h4 id="export-player-data">Export Player Data</h4>
 			</div>
-			<p>You can click the
-				<strong>Export Product Data</strong>
-				button for any product to request the player's progression and player data for that specific product (this does not include organization data associated with that
-				<code>userId</code>). This request is linked with the player's
-				<strong>product user ID</strong>, which is unique to each of your products. Alternatively, the
-				<strong>Export All Data</strong>
-				button at the top of the page will request the player’s data for all products your organization manages, including all organization data associated with that
-				<code>userId</code>. You, the requester at your organization, will be emailed a link to a bundle containing the requested data. This bundle will be accessible for 30 days, after which you must make a new request to obtain up-to-date data. You can issue requests to export data for an individual player once every 10 days. The maximum expected time to process a request is 14 days, though requests are usually processed more quickly. The bundle might contain encrypted information, as in the case of
-				<a href="/docs/game-services/player-data-storage">Player Data Storage</a>
-				info. Use the
-				<a href="/docs/game-services/file-decryption-tool">File Decryption Tool</a>
-				to read encrypted data from
-				<a href="/docs/game-services/player-data-storage">Player Data Storage</a>
-				or
-				<a href="/docs/game-services/title-storage">Title Storage</a>
-				services.</p>
+			<p>There are two export requests. These are as follows:</p>
+			<ul>
+				<li>
+					<p>Export Product Data</p>
+					<ul>
+						<li>To request a user's player progression and user data for a specific product, click
+							<strong>Export Product Data</strong>
+							for any product. (Note that this does not include organization data associated with that user ID.)</li>
+						<li>This request is linked with the user's Product User ID (PUID) which is unique to each of your products (Glossary:
+							<span>
+								<span aria-label="tooltip ProductUserId" tabindex="0" role="button">ProductUserId</span>
+							</span>).</li>
+					</ul>
+				</li>
+				<li>
+					<p>Export All Data</p>
+					<ul>
+						<li>To request a user's player progression and user data for all products your organization manages, including all data associated with a user ID, click
+							<strong>Export All Data</strong>.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>After you have made either request, EOS emails you, the requester at your organization, a link to a bundle containing the data. This bundle is accessible for 30 days, after which you must make a new request to obtain up-to-date data. You can issue requests to export data for a user once every 10 days. The maximum expected time to process a request is 14 days, though requests are usually processed more quickly.</p>
+			<p>The bundle might contain encrypted information. See the following documentation for guidance:</p>
+			<ul>
+				<li>
+					<a href="/docs/game-services/player-data-storage">Player Data Storage</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/title-storage">Title Storage</a>
+				</li>
+				<li>
+					<a href="/docs/game-services/file-decryption-tool">File Decryption Tool</a>
+					- for information on how to decrypt data.</li>
+			</ul>
 			<div>
 				<h4 id="delete-player-data">Delete Player Data</h4>
 			</div>
-			<p>Some circumstances may require deleting a player's data completely. For example:</p>
+			<p>Some circumstances might require deleting a user's data completely. For example:</p>
 			<ul>
-				<li>You want to permanently remove the player due to a violation.</li>
-				<li>The player's account data may become corrupted or compromised.</li>
-				<li>The player may specifically request that their account data be removed.</li>
+				<li>You want to permanently remove a user due to a violation.</li>
+				<li>A user's account data might become corrupted or compromised.</li>
+				<li>A user might specifically request removal of their account data.</li>
 			</ul>
-			<p>Clicking
-				<strong>Delete Product Data</strong>
-				for a given product will permanently delete the user's player and progression data for that product.</p>
-			<p>The
-				<strong>Delete User</strong>
-				button at the top of the page will delete the player's data across all products managed by your organization. It will also unlink all their accounts for all identity providers and remove any organization data about that player not explicitly associated with any single product. This request has a 10-day grace period in case the deletion request is canceled, for example, in the case of a compromised account. During the grace period, the account remains searchable, but the player won’t be able to sign in through EOS Connect.</p>
-			<p>The
-				<strong>Delete Product Data</strong>
-				button can delete player progression data on a single product. Be aware that linked accounts and organization-level data associated with that userId are not affected by this operation and will remain in this case.</p>
-			<div>
-				<p>You cannot export data while a delete is in progress or vice versa.</p>
-			</div>
+			<p>There are three deletion options:</p>
+			<ul>
+				<li>
+					<p>Delete Product Data</p>
+					<ul>
+						<li>To permanently delete a user's player progression and user data for that product, click
+							<strong>Delete Product Data</strong>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Delete User</p>
+					<ul>
+						<li>To delete a user's data across all products managed by your organization, click
+							<strong>Delete User</strong>
+							at the top of the page.</li>
+						<li>Delete User also unlinks all their accounts for all identity providers and removes any organization data about the user not explicitly associated with any single product. This request  has a 10-day grace period in case the deletion request is canceled. During the grace period, the account remains searchable, but the user won’t be able to sign in through EOS Connect.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Delete Product Data</p>
+					<ul>
+						<li>To delete a user's player progression data on a single product, click
+							<strong>Delete Product Data</strong>.</li>
+						<li>Be aware that linked accounts and organization-level data associated with that user are not affected by this delete and remain stored.</li>
+					</ul>
+				</li>
+			</ul>
 			<div id="tag_list">
 				<a aria-label="Tag DevPortal" aria-hidden="false" tabindex="0" href="/docs/site-map">DevPortal</a>
 				<a aria-label="Tag  Identity Provider" aria-hidden="false" tabindex="0" href="/docs/site-map">
@@ -214,14 +277,8 @@
 					Account</a>
 				<a aria-label="Tag  Account Linking" aria-hidden="false" tabindex="0" href="/docs/site-map">
 					Account Linking</a>
-				<a aria-label="Tag  File Decryption Tool" aria-hidden="false" tabindex="0" href="/docs/site-map">
-					File Decryption Tool</a>
-				<a aria-label="Tag  Encryption" aria-hidden="false" tabindex="0" href="/docs/site-map">
-					Encryption</a>
-				<a aria-label="Tag  Decryption" aria-hidden="false" tabindex="0" href="/docs/site-map">
-					Decryption</a>
-				<a aria-label="Tag  Featured" aria-hidden="false" tabindex="0" href="/docs/site-map">
-					Featured</a>
+				<a aria-label="Tag  Player Data" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Player Data</a>
 			</div>
 		</section>
 		<aside>
@@ -229,10 +286,7 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#searching-and-managing-player-data">Searching and managing player data</a>
-					</li>
-					<li>
-						<a href="#player-search-on-the-developer-portal">Player Search on the Developer Portal</a>
+						<a href="#the-player-search-page">The Player Search Page</a>
 					</li>
 					<li>
 						<a href="#player-profile">Player Profile</a>
@@ -241,7 +295,7 @@
 						<a href="#linked-accounts">Linked Accounts</a>
 					</li>
 					<li>
-						<a href="#unlink-a-players-account">Unlink a Player's Account</a>
+						<a href="#unlink-a-users-account">Unlink a User's Account</a>
 					</li>
 					<li>
 						<a href="#console-development-accounts">Console Development Accounts</a>

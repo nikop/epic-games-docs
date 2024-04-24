@@ -12,55 +12,67 @@
 	<section>
 		<div>
 			<h1>Ticketing System</h1>
-			<h2>Provides support for your products using an automatically generated, preassigned email address and public web API key.</h2>
+			<h2>Provides support for your product's users through an automatically generated, preassigned email address and public web API key.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<p>Epic Online Services (EOS) provides a ticketing system to support your products from a centralized location using an automatically generated, pre-assigned email address and a public web API key. The ticketing system supports:</p>
+			<p>Epic Online Services (EOS) provides a ticketing system for you to manage support for users of your products (games or other software applications). The EOS ticketing system, known as "Player Ticketing", provides a centralized location for your user support: it provides an automatically generated, pre-assigned email address and a public web API key.</p>
+			<p>You manage the ticketing system in the Player Ticketing page of the Developer Portal. It provides you with the following functions:</p>
 			<ul>
-				<li>Tracking open, in-progress, and closed tickets</li>
-				<li>Merging related tickets</li>
-				<li>Replying to end-users who have submitted a ticket and receiving replies</li>
+				<li>You can tracking open, in-progress, and closed tickets.</li>
+				<li>You can merging related tickets.</li>
+				<li>You can reply to users who have submitted a ticket and want to receive replies.</li>
 			</ul>
 			<div>
-				<h2 id="get-started">Get Started</h2>
+				<h2 id="set-up-the-ticketing-system-with-your-product">Set Up The Ticketing System With Your Product</h2>
 			</div>
-			<p>To use the ticketing system, you need to integrate it with your
-				<span>
-					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
-				</span>
-				through the Developer Portal.</p>
+			<p>To manage player ticketing for your product, go to the your product's Game Services page, scroll down the page and click
+				<strong>Player Ticketing</strong>.</p>
+			<p>To do this:</p>
 			<ol>
-				<li>On the Developer Portal, select your product under the
-					<strong>Your Products</strong>
-					section in the left sidebar. If you haven't added your product to the Developer Portal yet, use the
-					<strong>Create Product</strong>
-					option to set it up first.</li>
-				<li>Select
+				<li>Go to your product page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), from the left navigation, under
+							<strong>Your Products</strong>,  click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>Once you are in your product page, from the left navigation, click
+					<strong>Game Services</strong>.</li>
+				<li>Scroll down the left navigation under
 					<strong>Game Services</strong>
-					and then
-					<strong>Player Ticketing</strong>
-					from the sidebar or the
-					<strong>Player Ticketing</strong>
-					tile from your product's main page to open the Player Ticketing page.</li>
-				<li>
-					<strong>This step is only required for a new product</strong>: Click the
+					and click
+					<strong>Player Ticketing</strong>.</li>
+				<li>Click
+					<strong>Integrate APIs</strong>.<br>
+					<strong>Note</strong>: The first time you use player ticketing for a product, there is an
 					<strong>Integrate APIs</strong>
-					button for integration before moving on to the next step.</li>
-				<li>Click the
-					<strong>Show API Key</strong>
-					button to view the public web API key for the product. You need this key to implement the API. Each product has its own public web API key, but the system uses the same email address for all your products.</li>
+					button. You must click
+					<strong>Integrate APIs</strong>
+					before you can use player ticketing with your product. You only need to do this once for a product. After you have clicked it, the Developer Portal replaces it with
+					<strong>Show API key</strong>.</li>
+				<li>Click
+					<strong>Show API key</strong>
+					and follow the onscreen instructions to view the public web API key for the product.<br>
+					You use this key to implement the API. Each product has its own public web API key, but the ticketing system uses the same email address for all your products.</li>
 			</ol>
+			<p>
+				<strong>Note</strong>: The Player Ticketing page in the Developer Portal is also where you see your user's support tickets. You use this page to track and manage the tickets.</p>
 			<div>
-				<h2 id="using-the-api">Using the API</h2>
+				<h2 id="how-to-use-the-api">How to Use the API</h2>
 			</div>
-			<p>The ticketing system sends emails from your end-users to your dedicated mailbox. To trigger this process, send a POST request to
-				<a href="https://dev.epicgames.com/portal/api/v1/services/tickets/submit/">https://dev.epicgames.com/portal/api/v1/services/tickets/submit/</a>
-				with your product's API key in the HTTP authorization field and the information that you want to report. The following fields are supported:</p>
+			<p>The ticketing system sends emails from your end-users to your dedicated mailbox. To trigger this process do the following:</p>
+			<ul>
+				<li>Send a POST request to
+					<code>https://dev.epicgames.com/portal/api/v1/services/tickets/submit</code>.</li>
+				<li>Include your product's API key in the HTTP authorization field and the information that you want to report.</li>
+			</ul>
+			<p>The ticketing system supports the following fields:</p>
 			<table>
 				<thead>
 					<tr>
@@ -83,49 +95,49 @@
 					<tr>
 						<td>message</td>
 						<td>Yes</td>
-						<td>The email text, written by the end-user</td>
+						<td>The email text, written by the user.</td>
 					</tr>
 					<tr>
 						<td>sender_email</td>
 						<td>Yes</td>
-						<td>The end-user's email address</td>
+						<td>The user's email address.</td>
 					</tr>
 					<tr>
 						<td>sender_name</td>
 						<td>No</td>
-						<td>The end-user's name</td>
+						<td>The user's name.</td>
 					</tr>
 					<tr>
 						<td>guid</td>
 						<td>No</td>
-						<td>Your game's unique identifier for the end-user (e.g. the
-							<code>productUserId</code>)
+						<td>Your game's unique identifier for the user (for example, the
+							<code>productUserId</code>).
 							<strong>Note</strong>:  Any type of unique identifier works, there are no restrictions enforced regarding the guid.</td>
 					</tr>
 					<tr>
 						<td>error_code</td>
 						<td>No</td>
-						<td>An error code for technical support emails</td>
+						<td>An error code for technical support emails.</td>
 					</tr>
 					<tr>
 						<td>system_os</td>
 						<td>No</td>
-						<td>The end-user's operating system</td>
+						<td>The user's operating system.</td>
 					</tr>
 					<tr>
 						<td>system_antimalware</td>
 						<td>No</td>
-						<td>The end-user's anti-malware system</td>
+						<td>The user's anti-malware system.</td>
 					</tr>
 					<tr>
 						<td>system_other</td>
 						<td>No</td>
-						<td>Other information about the end-user's system</td>
+						<td>Other information about the user's system.</td>
 					</tr>
 				</tbody>
 			</table>
 			<div>
-				<h3 id="placing-a-request">Placing a Request</h3>
+				<h3 id="place-a-request">Place a Request</h3>
 			</div>
 			<p>To generate a ticket through cURL, place your request in the following format:</p>
 			<div>
@@ -135,7 +147,7 @@
 					</pre>
 				</section>
 			</div>
-			<p>Once the system accepts the request, you will receive a response like this:</p>
+			<p>Once the ticketing system accepts the request, you will receive a response like this:</p>
 			<div>
 				<section>
 					<pre>
@@ -143,18 +155,28 @@
 					</pre>
 				</section>
 			</div>
-			<p>The system then creates a new ticket, which you can see by navigating to the ticketing system.</p>
+			<p>The ticketing system then creates a new ticket, which you can see on the Developer Portal on your product's Player Ticketing page.</p>
 			<div>
-				<h3 id="export-user-data">Export user data</h3>
+				<h3 id="export-user-data">Export User Data</h3>
 			</div>
-			<p>In order to export a user’s data, for example to fulfill a
+			<p>To export a user’s data, for example to fulfill a
 				<span>
 					<span aria-label="tooltip GDPR" tabindex="0" role="button">GDPR</span>
 				</span>
-				request, send a GET request to
-				<code>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/{email}</code>
-				with your product's API key in the HTTP authorization field and the user’s email for whom you wish to export the data in the URL path.</p>
-			<p>For example to export a user’s data through cURL, place your request in the following format:</p>
+				request, do the following actions:</p>
+			<ul>
+				<li>Send a GET request to
+					<code>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/{email}</code>
+					(where
+					<code>{email}</code>
+					is a user's email address).</li>
+				<li>Include your product's API key in the HTTP authorization field.</li>
+				<li>In the URL path, include the email address for the user you wish to export the data for.</li>
+			</ul>
+			<p>
+				<strong>Example</strong>
+				<br>
+				To export a user’s data through cURL, place your request in the following format:</p>
 			<div>
 				<section>
 					<pre>
@@ -162,7 +184,7 @@
 					</pre>
 				</section>
 			</div>
-			<p>Once the system accepts the request, you will receive a response like this with HTTP status code 200:</p>
+			<p>After the ticketing system accepts the request, you receive a response like this with HTTP status code 200:</p>
 			<div>
 				<section>
 					<pre>
@@ -171,12 +193,21 @@
 				</section>
 			</div>
 			<div>
-				<h3 id="delete-user-data">Delete user data</h3>
+				<h3 id="delete-user-data">Delete User Data</h3>
 			</div>
-			<p>In order to delete a user’s data, for example to fulfill a GDPR request, send a DELETE request to
-				<code>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/{email}</code>
-				with your product's API key in the HTTP authorization field and the user’s email for whom you wish to delete the data in the URL path.</p>
-			<p>For example to delete a user’s data through cURL, place your request in the following format:</p>
+			<p>To delete a user’s data, for example to fulfill a GDPR request, do the following actions:</p>
+			<ul>
+				<li>Send a DELETE request to
+					<code>https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/{email}</code>(where
+					<code>{email}</code>
+					is a user's email address).</li>
+				<li>Include your product's API key in the HTTP authorization field.</li>
+				<li>In the URL path, include the email address for the user you wish to export the data for.</li>
+			</ul>
+			<p>
+				<strong>Example</strong>
+				<br>
+				To delete a user’s data through cURL, place your request in the following format:</p>
 			<div>
 				<section>
 					<pre>
@@ -184,21 +215,24 @@
 					</pre>
 				</section>
 			</div>
-			<p>Once the system accepts the request, you will receive a response with HTTP status code 204.</p>
+			<p>After the ticketing system accepts the request, you receive a response with HTTP status code 204.</p>
 			<div>
 				<h3 id="usage-patterns-restrictions-and-limitations">Usage Patterns, Restrictions, and Limitations</h3>
 			</div>
-			<p>When placing requests through this system, observe the following limitations:</p>
+			<p>When you make requests through the ticketing system, observe the following limitations:</p>
 			<ul>
-				<li>Requests must come from websites or the game client.</li>
-				<li>All requests must contain written material from the end-user.</li>
+				<li>Requests must come from websites or the product client (game client).</li>
+				<li>All requests must contain written material from the user.</li>
 				<li>The number of requests produced in a day must not exceed 10,000, or 5 per 100 Daily Active Users.</li>
-				<li>User data in this system has to be exported/deleted separately from other
-					<a href="/docs/dev-portal/player-search">EOS services</a>
-					via the Export user data and Delete user data endpoints as described above.</li>
+				<li>User data in the ticketing system is separate from user data associated with your product that you manage through EOS Player Search. You cannot export or delete user data in the ticketing system through EOS Player Search. (For information on EOS Player Search, see documentation:
+					<a href="/docs/dev-portal/player-search">EOS Player Search</a>.)</li>
 			</ul>
 			<div id="tag_list">
-				<a aria-label="Tag Services" aria-hidden="false" tabindex="0" href="/docs/site-map">Services</a>
+				<a aria-label="Tag Player Ticketing" aria-hidden="false" tabindex="0" href="/docs/site-map">Player Ticketing</a>
+				<a aria-label="Tag  GDPR" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					GDPR</a>
+				<a aria-label="Tag  User Support" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					User Support</a>
 			</div>
 		</section>
 		<aside>
@@ -206,19 +240,19 @@
 			<div>
 				<ul>
 					<li>
-						<a href="#get-started">Get Started</a>
+						<a href="#set-up-the-ticketing-system-with-your-product">Set Up The Ticketing System With Your Product</a>
 					</li>
 					<li>
-						<a href="#using-the-api">Using the API</a>
+						<a href="#how-to-use-the-api">How to Use the API</a>
 					</li>
 					<li>
-						<a href="#placing-a-request">Placing a Request</a>
+						<a href="#place-a-request">Place a Request</a>
 					</li>
 					<li>
-						<a href="#export-user-data">Export user data</a>
+						<a href="#export-user-data">Export User Data</a>
 					</li>
 					<li>
-						<a href="#delete-user-data">Delete user data</a>
+						<a href="#delete-user-data">Delete User Data</a>
 					</li>
 					<li>
 						<a href="#usage-patterns-restrictions-and-limitations">Usage Patterns, Restrictions, and Limitations</a>

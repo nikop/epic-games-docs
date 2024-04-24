@@ -1,0 +1,420 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Developer Portal Introduction</h1>
+			<h2>Overview of the Epic Online Services (EOS) and Epic Games Store data hierarchy used in the Developer Portal.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Epic Games Developer Portal is a browser-based tool. Use the Developer Portal to set up and configure your game or other software application with the following Epic Games developer resources: Epic Games Store and Epic Online Services (EOS).</p>
+			<p>
+				<strong>Note</strong>: The Epic Games Developer Portal (known as the "Developer Portal") does not provide configuration support for Kids Web Services (KWS).</p>
+			<p>Find out more about these developer resources in the documentation on:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-games-store">Epic Games Store</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services">Epic Online Services (EOS)</a>
+					<ul>
+						<li>
+							<a href="/docs/game-services">EOS Games Services</a>
+						</li>
+						<li>
+							<a href="/docs/epic-account-services">EOS Epic Account Services</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>Epic Tools</strong>
+				<br>
+				You can also use the Developer Portal to set up and manage your user access to other Epic Games tools: Unreal Engine, Twinmotion, MetaHuman, or RealityCapture. The Developer Portal guides in this set of developer resources documentation does not provide information about these Epic Games tools.
+				<br>
+				See the documentation on the Developer Portal or the documentation for the tools:
+				<br>
+				<br>
+				Epic Tools documentation:</p>
+			<ul>
+				<li>Unreal Engine:
+					<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/">dev.epicgames.com/~/unreal-engine</a>
+				</li>
+				<li>Twinmotion:
+					<a href="https://dev.epicgames.com/documentation/en-us/twinmotion">dev.epicgames.com/~/en-us/twinmotion</a>
+				</li>
+				<li>MetaHuman:
+					<a href="https://dev.epicgames.com/documentation/en-us/metahuman/metahuman-documentation">dev.epicgames.com/~/metahuman</a>
+				</li>
+				<li>RealityCapture:
+					<a href="https://dev.epicgames.com/community/capturing-reality/getting-started/reality-capture">dev.epicgames.com/community/~/reality-capture</a>
+					(community content)</li>
+			</ul>
+			<p>You do not need these tools to use Epic Games Store for the distribution of your product, either of the sets of Epic Online Services (EOS) -  EOS Epic Games Services, EOS Epic Account Services,  or to see your product’s analytics.</p>
+			<p>
+				<strong>Your Products Using Epic Games Store or EOS</strong>
+				<br>
+				Once you have signed in to the Developer Portal, you can use the Portal to manage your game or software application (known as a “product” in the Developer Portal) with Epic Games developer resources.</p>
+			<p>You can configure services, and define settings for identity providers (such as Steam, PlayStation Network, Xbox Live, and others) and the platforms your product’s clients run on (the platforms might be PC, mobile, or games console).</p>
+			<p>In addition, in the Developer Portal, you can set up your product for distribution on the Epic Games Store, support your players, or other software application users (known as “users” in the Developer Portal), manage game finances, and provide usage reports and other statistical data.</p>
+			<div>
+				<h2 id="sign-in">Sign In</h2>
+			</div>
+			<p>To access the Developer Portal, go to the Developer Portal website at
+				<a href="https://dev.epicgames.com/portal">dev.epicgames/portal</a>
+				and follow the instructions to sign in. There are different ways to sign in:</p>
+			<ul>
+				<li>Create a new Epic Games account.</li>
+				<li>Sign in with your existing Epic Games account.</li>
+				<li>Sign in with one of the third-party accounts listed.</li>
+			</ul>
+			<p>
+				<strong>Note</strong>: However you sign in to the Developer Portal, this document refers to the account you signed in with as your “Epic Games account”.</p>
+			<div>
+				<h2 id="your-organization-and-products">Your Organization and Products</h2>
+			</div>
+			<p>In Epic Games Store and Epic Online Services (EOS), data relating to your Epic Games account is organized in a hierarchy, with “organization” at the top to  represent the group of people (usually a company or other business) responsible for your product.</p>
+			<p>There is a main data hierarchy and an additional set of data relating to
+				<span>
+					<span aria-label="tooltip Epic Account Services" tabindex="0" role="button">Epic Account Services</span>
+				</span>.  Both are described below.</p>
+			<div>
+				<h3 id="the-main-data-hierarchy">The Main Data Hierarchy</h3>
+			</div>
+			<div>
+				<h4 id="example-use">Example Use</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>Organization</strong>:
+					<code>My Game Studio Ltd</code>
+					<ul>
+						<li>
+							<strong>Product</strong>:
+							<code>Jazz Jackrabbit</code>
+							<ul>
+								<li>
+									<strong>Sandboxes</strong>
+									<ul>
+										<li>
+											<strong>Sandbox</strong>: Dev
+											<ul>
+												<li>
+													<strong>Deployment</strong>:
+													<code>DevGame01</code>
+												</li>
+												<li>
+													<strong>Deployment</strong>:
+													<code>DevGame02</code>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<strong>Sandbox</strong>: Stage
+											<ul>
+												<li>
+													<strong>Deployment</strong>:
+													<code>QATestGame01</code>
+												</li>
+												<li>
+													<strong>Deployment</strong>:
+													<code>AlphaGame</code>
+												</li>
+												<li>
+													<strong>Deployment</strong>:
+													<code>BetaGame</code>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<strong>Sandbox</strong>: Live
+											<ul>
+												<li>
+													<strong>Deployment</strong>:
+													<code>LiveGame</code>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<strong>Clients</strong>
+									<ul>
+										<li>
+											<strong>Client:
+												<code>PlayerBinaryForPlaystation45XboxSSwitch</code>
+											</strong>
+										</li>
+										<li>
+											<strong>Client</strong>:
+											<code>TrustedServerAsClient</code>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="organization">Organization</h4>
+			</div>
+			<p>A group (usually a company or other business, such as a game studio or publisher) that creates and owns products. In the Developer Portal, you associate your Epic Games account with an organization. Each Epic Games account associated with an organization is a “member” of the organization.</p>
+			<p>Members of an organization manage products that you add to the Developer Portal on behalf of the  organization. Your organization can have multiple members.</p>
+			<div>
+				<h4 id="product">Product</h4>
+			</div>
+			<p>A game or other software application that uses one or more EOS service, Epic Games Store distribution, or Epic Games Store service. A product is owned by an organization and contains all information relevant to that software application, such as add-ons, mods, editors, development builds, and distributions on different platforms.</p>
+			<p>Your organization can have multiple products. You can have multiple versions of a product.</p>
+			<div>
+				<h4 id="sandbox">Sandbox</h4>
+			</div>
+			<p>An environment for versions of a product.  You can use sandboxes to keep the different stages of your product's development and release cycle separate.</p>
+			<p>As well as a public sandbox (“Live”), for deployments of your live product accessible to users, you can have private sandboxes (“Dev”, “Stage”). You can use private sandboxes to ensure that your product’s deployments for development and testing are not visible to people outside your organization.</p>
+			<p>A sandbox contains Epic Games Store-related information, mod configurations, and one or more deployments of a game.</p>
+			<div>
+				<h5 id="sandbox-types">Sandbox Types</h5>
+			</div>
+			<p>When you set up a product in the Developer Portal, by default, there is one public sandbox called “Live”. You can get two additional sandboxes, “Dev” and “Stage” that default to private to your organization.
+				<br>
+				Typically you use “Dev” for development deployments and “Stage” for QA testing deployments.</p>
+			<div>
+				<h5 id="get-additional-sandboxes">Get Additional Sandboxes</h5>
+			</div>
+			<p>To get the two additional default sandboxes, apply for either of the following:</p>
+			<ul>
+				<li>Distribute your product on the Epic Games Store.
+					<br>
+					Documentation:
+					<a href="/docs/epic-games-store/publishing-tools">Publishing Tools</a>.</li>
+				<li>Use Epic Games Store achievements.
+					<br>
+					Documentation:
+					<a href="/docs/epic-games-store/services/epic-achievements">Epic Games Store Achievements</a>.</li>
+			</ul>
+			<p>To get additional sandboxes for a different use, for example to test identity providers related to using the Auth Interface and Connect Interface:</p>
+			<ul>
+				<li>Contact Epic Games Support using a private discussion.
+					<br>
+					See the support page section:
+					<a href="/docs/support#using-the-eos-developer-support-website">Using the EOS Developer Support Website</a>.</li>
+			</ul>
+			<div>
+				<h4 id="deployment">Deployment</h4>
+			</div>
+			<p>An iteration of your game that contains a unique set of player progression data, such as achievements, statistics, and matchmaking. This player progression data includes achievement statuses, statistics, and any ongoing matches in matchmaking.</p>
+			<div>
+				<h4 id="client">Client</h4>
+			</div>
+			<p>Clients are any software program that accesses EOS services for your product. A client can be:</p>
+			<ul>
+				<li>User clients:
+					<ul>
+						<li>Game clients used by players on their local devices to play your game.</li>
+						<li>Software clients used by software users on their local devices to run your software application.</li>
+					</ul>
+				</li>
+				<li>Trusted servers as clients:
+					<ul>
+						<li>Your product might use non-EOS services that are complementary to EOS services. These non-EOS services are known as “trusted servers”. Trusted servers require access to your product's user data, so you must add them as a "client".</li>
+					</ul>
+				</li>
+				<li>Any other use for a client you choose.</li>
+			</ul>
+			<p>You must associate a client with client policies. You cannot create a client without a client policy in place.</p>
+			<p>For further information, see documentation: Developer Portal -
+				<a href="/docs/dev-portal/client-credentials">Client Credentials and Client Policy Management</a>.</p>
+			<div>
+				<h3 id="the-set-of-data-relating-to-epic-account-services">The Set of Data Relating to Epic Account Services</h3>
+			</div>
+			<p>In addition to the main data hierarchy, described above, there is an additional set of data relating to Epic Account Services.</p>
+			<div>
+				<h4 id="example-use">Example Use</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>Organization</strong>:
+					<code>My Game Studio Ltd</code>
+					<ul>
+						<li>
+							<strong>Product</strong>:
+							<code>Jazz Jackrabbit</code>
+							<ul>
+								<li>
+									<strong>Sandboxes</strong>
+									<ul>
+										<li>
+											<strong>Deployments</strong>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<strong>Clients</strong>
+								</li>
+								<li>
+									<strong>Applications</strong>
+									<ul>
+										<li>
+											<strong>Application</strong>:
+											<code>Jazz Jackrabbit A1</code>
+											<br>
+											Brand:
+											<code>My Game Studio Ltd</code>
+											<br>
+											User permissions (consent):
+											<code>Basic Profile, Online Presence</code>
+											<br>
+											Linked clients:
+											<code>PlayStation 4, PlayStation 5, Switch</code>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h4 id="application">Application</h4>
+			</div>
+			<p>When you use EOS Epic Account Services in your game, you must configure Epic Account Services settings as an “application” of your product. You only need to configure these application settings if you use Epic Account Services.</p>
+			<p>The application settings specify what user permissions (consent) your product requests.  The settings are as follows:</p>
+			<ul>
+				<li>
+					<strong>Brand</strong>
+					<br>
+					(Known as “Brand Settings” in the Developer Portal.)
+					<br>
+					You must configure how your product’s users see your brand details when they give consent for Epic Games to share their data with your product and with other users. The brand details include product name, brand icon, website, and privacy policy URL.
+					<br>
+					(Documentation: EOS Epic Account Services -
+					<a href="/docs/epic-account-services/brand-review">Brand Review</a>.)</li>
+				<li>
+					<strong>User permissions (consent)</strong>
+					<br>
+					(Known as “Permissions” in the Developer Portal.)
+					<br>
+					You must configure what data-sharing consent your product requests from users. The data your product requests includes basic profile, online presence, friends, and country information.
+					<br>
+					(Documentation: EOS Epic Account Services -
+					<a href="/docs/epic-account-services/brand-review">Brand Review</a>.)</li>
+				<li>
+					<strong>Linked clients</strong>
+					<br>
+					Linked clients associate your product’s
+					<a href="/docs/en-USglossary.link">clients</a>
+					with the user permissions (consent) your product requires.
+					<br>
+					You can add one or more linked clients to your product. These linked clients determine the consent dialog that  users see when they launch your product.
+					<br>
+					(Documentation: EOS Epic Account Services -
+					<a href="/docs/epic-account-services/getting-started">Get Started: Linked Clients</a>.)</li>
+			</ul>
+			<div>
+				<h2 id="further-information">Further Information</h2>
+			</div>
+			<p>For further information, see the following Developer Portal documentation:</p>
+			<ul>
+				<li>Developer Portal -
+					<a href="/docs/dev-portal/organization-management">Organizations</a>
+				</li>
+				<li>Developer Portal -
+					<a href="/docs/dev-portal/product-management">Product Settings, Sandbox, and Deployment</a>
+				</li>
+				<li>Developer Portal -
+					<a href="/docs/dev-portal/client-credentials">Client Credential and Client Policy Management</a>
+				</li>
+				<li>EOS Epic Account Services -
+					<a href="/docs/epic-account-services/brand-review">Brand Review</a>
+					(for brand settings and user permissions)</li>
+				<li>EOS Epic Account Services -
+					<a href="/docs/epic-account-services/getting-started">Get Started: Linked Clients</a>.</li>
+			</ul>
+			<div id="tag_list">
+				<a aria-label="Tag DevPortal" aria-hidden="false" tabindex="0" href="/docs/site-map">DevPortal</a>
+				<a aria-label="Tag  Epic Tools" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Epic Tools</a>
+				<a aria-label="Tag  Sign In" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Sign In</a>
+				<a aria-label="Tag  Organization" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Organization</a>
+				<a aria-label="Tag  Product" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Product</a>
+				<a aria-label="Tag  Sandbox" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Sandbox</a>
+				<a aria-label="Tag  Client" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Client</a>
+				<a aria-label="Tag  Deployment" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Deployment</a>
+				<a aria-label="Tag  Application" aria-hidden="false" tabindex="0" href="/docs/site-map">
+					Application</a>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#sign-in">Sign In</a>
+					</li>
+					<li>
+						<a href="#your-organization-and-products">Your Organization and Products</a>
+					</li>
+					<li>
+						<a href="#the-main-data-hierarchy">The Main Data Hierarchy</a>
+					</li>
+					<li>
+						<a href="#example-use">Example Use</a>
+					</li>
+					<li>
+						<a href="#organization">Organization</a>
+					</li>
+					<li>
+						<a href="#product">Product</a>
+					</li>
+					<li>
+						<a href="#sandbox">Sandbox</a>
+					</li>
+					<li>
+						<a href="#sandbox-types">Sandbox Types</a>
+					</li>
+					<li>
+						<a href="#get-additional-sandboxes">Get Additional Sandboxes</a>
+					</li>
+					<li>
+						<a href="#deployment">Deployment</a>
+					</li>
+					<li>
+						<a href="#client">Client</a>
+					</li>
+					<li>
+						<a href="#the-set-of-data-relating-to-epic-account-services">The Set of Data Relating to Epic Account Services</a>
+					</li>
+					<li>
+						<a href="#example-use">Example Use</a>
+					</li>
+					<li>
+						<a href="#application">Application</a>
+					</li>
+					<li>
+						<a href="#further-information">Further Information</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

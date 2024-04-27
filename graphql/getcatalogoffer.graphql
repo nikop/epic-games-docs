@@ -117,6 +117,14 @@ query getCatalogOffer($sandboxId: String!, $offerId: String!, $locale: String, $
             }
           }
         }
+        priceDetails {
+          promotions {
+            type
+            promotionId
+            membershipId
+            amount
+          }
+        }
       }
       allDependNsOfferIds
       majorNsOffers {

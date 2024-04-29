@@ -136,9 +136,7 @@
 			<p>To obtain a token:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>POST https://auth.kidswebservices.com/auth/realms/kws/protocol/openid-connect/tokenContent-Type: application/x-www-form-urlencodedAuthorization: basic &lt;base64 of client-id:client-secret&gt;Request:grant_type=client_credentials&amp;scope=verificationResponse (OAuth2 Token Response):{    "access_token": "..."    "expires_in": 3600}</pre>
 				</section>
 			</div>
 			<div>
@@ -165,9 +163,7 @@
 								<a href="/docs/kids-web-services/set-up-pv-service/config-pv-webhook">webhook that you configured</a>:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>Body{    "name": "parent-verified",    "time": "ISO8601 timestamp",    "orgId": "uuid",    "productId": "uuid",    "environmentId": "uuid",    "payload": {        "parentEmail": "...",        "externalPayload": "...",        "status: {            "verified": true,            "transactionId": "..."        }    }}</pre>
 								</section>
 							</div>
 						</li>

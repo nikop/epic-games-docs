@@ -14,7 +14,7 @@
 			<h1>EOS SDK and Game Engines</h1>
 			<h2>An overview of how to use Epic Online Services (EOS) in your game engine.</h2>
 			<div>
-				<div>3 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -24,64 +24,77 @@
 			<div>
 				<h2 id="any-game-engine">Any Game Engine</h2>
 			</div>
-			<p>You can use the EOS SDK in your game, regardless of the engine you choose to develop your game in (even if you've written the engine yourself). To get started, download the EOS SDK for your programming language and set up your product on the Developer Portal. See the
+			<p>You can use the EOS SDK in your game, regardless of the engine you choose to develop your game in (even if you've written the engine yourself).</p>
+			<p>To get started, download the EOS SDK for your programming language and set up your game (or other software application) as a product on the Developer Portal. See the
 				<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
 				documentation for more information.</p>
 			<div>
 				<h2 id="unreal-engine">Unreal Engine</h2>
 			</div>
-			<p>If you develop your game in Unreal Engine, you can use the following options to integrate the EOS SDK into your game.</p>
+			<p>If you develop your game in Unreal Engine, you can use the following options to integrate the EOS SDK into your game:</p>
 			<ul>
-				<li>
-					<strong>Manual configuration</strong>: See the
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
-					documentation for more information. After you've completed these steps, you can use the EOS SDK interfaces in your game's code.
-					<ul>
-						<li>
-							<strong>Note</strong>: You must initialize the EOS SDK in a project plugin (See Unreal Engine's documentation:
-							<a href="https://docs.unrealengine.com/plugins-in-unreal-engine/">Plugins</a>). If you add the code to a game object, the
-							<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
-							might not load.</li>
-					</ul>
-				</li>
+				<li>Manual configuration</li>
+				<li>The Online Subsystem (OSS) plugins</li>
+				<li>The Online Services plugins</li>
+			</ul>
+			<p>
+				<strong>Which Set of Plugins to Use</strong>
+			</p>
+			<ul>
+				<li>If you use an Unreal Engine version lower than 5.1, we recommend you use the Online Subsystem (OSS) plugins.</li>
+				<li>If you use Unreal Engine 5.1 or higher, the Online Services plugins provide several improvements over the OSS plugins (see the notes below on Online Services plugins for more information).</li>
+			</ul>
+			<p>Both the Online Subsystem (OSS) plugins and Online Services plugins provide several interfaces that you can implement in your game's code to let your players access online services in your game. The services your game can access include lobbies, sessions, leaderboards, and stats, among others. See the Unreal Engine documentation on
+				<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-online-services-in-unreal-engine#usingonlineservicesoronlinesubsystem">Using Online Subsystem or Online Services</a>
+				to help decide which plugin is right for your game.</p>
+			<p>
+				<strong>Note</strong>: You can only access console-specific OSS implementations if you have the appropriate permissions. Contact Epic Games support for assistance. See the
+				<a href="https://dev.epicgames.com/docs/support">Support</a>
+				documentation for a list of support resources.</p>
+			<p>For information on how to upgrade the EOS SDK for Unreal Engine, see Unreal Engine's
+				<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/upgrading-the-eos-sdk-in-unreal-engine">Upgrading the EOS SDK</a>
+				documentation.</p>
+			<div>
+				<h3 id="manual-configuration">Manual Configuration</h3>
+			</div>
+			<p>See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
+				documentation for more information. After you've completed these steps, you can use the EOS SDK interfaces in your game's code.</p>
+			<p>
+				<strong>Note</strong>: You must initialize the EOS SDK in a project plugin (See Unreal Engine's documentation:
+				<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/plugins-in-unreal-engine">Plugins</a>). If you add the code to a game object, the
+				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
+				might not load.</p>
+			<div>
+				<h3 id="the-online-subsystem-oss-plugins-ue-427-and-higher">The Online Subsystem (OSS) plugins (UE 4.27 and higher)</h3>
+			</div>
+			<p>Unreal Engine provides the following Online Subsystem (OSS) plugins that you can use to integrate the EOS SDK into your game:</p>
+			<ul>
 				<li>
 					<strong>The EOS Online Subsystem plugin (UE 4.27 and higher)</strong>:
 					<ul>
 						<li>Configure your game's EOS settings in the Unreal Editor (no code required). See Unreal Engine's
-							<a href="https://docs.unrealengine.com/online-subsystem-eos-plugin-in-unreal-engine/">Online Subsystem EOS Plugin</a>
+							<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/online-subsystem-eos-plugin-in-unreal-engine">Online Subsystem EOS Plugin</a>
 							documentation for more information.</li>
 						<li>Use the Online Subsystem interfaces to include EOS services in your game. See Unreal Engine's
-							<a href="https://docs.unrealengine.com/online-subsystem-in-unreal-engine/#interfaces">Online Subsystem Interfaces</a>
+							<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/online-subsystem-in-unreal-engine#interfaces">Online Subsystem Interfaces</a>
 							documentation for more information.</li>
 					</ul>
 				</li>
 				<li>
-					<strong>The EOS Online Services plugins (UE 5.1 and higher)</strong>:
+					<strong>The EOS Plus Online Subsystem plugin (UE 4.27 and higher)</strong>:
 					<ul>
-						<li>EOS functionality is split into two plugins based on what you want to use:
-							<ul>
-								<li>Online Services EOS: this provides access to Epic Account Services. See the
-									<a href="/docs/epic-account-services">Epic Account Services</a>
-									documentation for more information.</li>
-								<li>Online Services EOSGS: this provides access to EOS Game Services. See the
-									<a href="/docs/game-services">EOS Game Services</a>
-									documentation for more information.</li>
-							</ul>
-						</li>
-						<li>Use the Online Services interfaces to include EOS services in your game. See Unreal Engine's
-							<a href="https://docs.unrealengine.com/overview-of-online-services-in-unreal-engine/#interfaces">Online Services Interfaces</a>
-							documentation for more information.</li>
-						<li>See Unreal Engine's
-							<a href="https://docs.unrealengine.com/online-services-in-unreal-engine/">Online Services</a>
+						<li>
+							<strong>Note</strong>: You don't need this plugin if you only ship your game on the Epic Games Store.</li>
+						<li>Use this plugin to combine the EOS Online Subsystem with another platform OSS (for example, Xbox Live or Steam).</li>
+						<li>Configure your game's EOS Plus settings in the Unreal Editor. See Unreal Engine's
+							<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/online-subsystem-eos-plugin-in-unreal-engine">Online Subsystem EOS Plus Settings</a>
 							documentation for more information.</li>
 					</ul>
 				</li>
 			</ul>
-			<p>If you want to use either the Online Subsystem EOS plugin or the Online Services EOS plugins, see the
-				<a href="https://docs.unrealengine.com/overview-of-online-services-in-unreal-engine/#usingonlineservicesoronlinesubsystem">Using Online Subsystem or Online Services</a>
-				documentation to help decide which plugin is right for your project.</p>
 			<p>
-				<strong>Note</strong>: The EOS Online Subsystem plugin exposes EOS SDK interfaces with the Online Subsystem interfaces. However, the list of interfaces below aren't currently included in the EOS Online Subsystem. Therefore, you have to use the following EOS SDK interfaces to use the corresponding services in your game:</p>
+				<strong>Note</strong>: The EOS Online Subsystem plugin exposes EOS SDK interfaces through the Online Subsystem interfaces. However, the list of interfaces listed below are not currently included in the EOS Online Subsystem. Therefore, you must use the following EOS SDK interfaces to use the corresponding services in your game:</p>
 			<ul>
 				<li>Anti-Cheat: See the
 					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces">Anti-Cheat Interfaces</a>
@@ -96,41 +109,70 @@
 					<a href="/docs/game-services/sanctions-interface">Sanctions Interface</a>
 					documentation for more information.</li>
 			</ul>
-			<p>For information on how to upgrade the EOS SDK for Unreal Engine, see Unreal Engine's
-				<a href="https://docs.unrealengine.com/en-US/upgrading-the-eos-sdk-in-unreal-engine/">Upgrading the EOS SDK</a>
-				documentation.</p>
+			<div>
+				<h3 id="the-online-services-plugins-ue-51-and-higher">The Online Services plugins (UE 5.1 and higher)</h3>
+			</div>
+			<p>
+				<strong>Note</strong>:</p>
+			<ul>
+				<li>We have not tested these plugins in production. They are for testing purposes only.</li>
+				<li>We recommend that you use these plugins in either of the following circumstances:
+					<ul>
+						<li>You use your own (non EOS) services.</li>
+						<li>You plan to incorporate Unreal Engine upgrades beyond UE 5.1 into your game before you ship.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>The Online Services plugins split EOS functionality into two plugins based on which services you want to use:</p>
+			<ul>
+				<li>For EOS Game Services:
+					<strong>The Online Services EOSGS plugin (UE 5.1 and higher)</strong>.<br>
+					See the
+					<a href="/docs/game-services">EOS Game Services</a>
+					documentation for more information.</li>
+				<li>For EOS Epic Account Services:
+					<strong>The Online Services EOS plugin (UE 5.1 and higher)</strong>.<br>
+					See the
+					<a href="/docs/epic-account-services">Epic Account Services</a>
+					documentation for more information.</li>
+			</ul>
+			<p>Use the Online Services interfaces to include EOS services in your game.
+				<br>
+				For more information:</p>
+			<ul>
+				<li>See Unreal Engine's
+					<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-online-services-in-unreal-engine#interfaces">Online Services Interfaces</a>
+					documentation.</li>
+				<li>See Unreal Engine's
+					<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/online-services-in-unreal-engine">Online Services</a>
+					documentation.</li>
+			</ul>
 			<div>
 				<h2 id="unity">Unity</h2>
 			</div>
-			<p>If you develop your game in Unity, you can use the following options to integrate the EOS SDK into your game:</p>
+			<p>If you develop your game in Unity, you can use the following options to integrate the EOS SDK into your game.</p>
+			<div>
+				<h3 id="manual-configuration-1">Manual configuration</h3>
+			</div>
+			<p>See the
+				<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
+				documentation for more information. After you've completed these steps, you can use the EOS SDK interfaces in your game's code.</p>
+			<div>
+				<h3 id="the-eos-plugin-for-unity-third-party-developed-by-playeveryware">The EOS Plugin for Unity (third-party, developed by PlayEveryWare)</h3>
+			</div>
+			<p>Configure your game's EOS settings in the Unity editor (no code required). See PlayEveryWare's documentation (<a href="https://eospluginforunity.playeveryware.com/">eospluginforunity.playeveryware.com</a>) for more information on how to configure the EOS Plugin for Unity.</p>
+			<p>To integrate the EOS SDK into your game's code, use one of the following options:</p>
 			<ul>
 				<li>
-					<strong>Manual configuration</strong>: See the
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
-					documentation for more information. After you've completed these steps, you can use the EOS SDK interfaces in your game's code.</li>
+					<strong>The interface wrappers demoed in the EOS for Unity plugin's EOS samples</strong>: Note that you must install the EOS samples separately with the UPM (Unity Plugin Manager). See the Samples section of PlayEveryWare's documentation for more information:(<a href="https://eospluginforunity.playeveryware.com/#samples">eospluginforunity.playeveryware.com/~samples</a>).</li>
 				<li>
-					<strong>The EOS Plugin for Unity (third-party, developed by PlayEveryWare)</strong>:
-					<ul>
-						<li>Configure your game's EOS settings in the Unity editor (no code required). See
-							<a href="https://eospluginforunity.playeveryware.com/">PlayEveryWare's documentation</a>
-							for more information on how to configure the EOS Plugin for Unity.</li>
-						<li>To implement the interfaces in your code, you have two options:
-							<ul>
-								<li>Use the interface wrappers demoed in the EOS for Unity plugin's EOS samples. Note that you must install the EOS samples separately with the UPM (Unity Plugin Manager). See the
-									<a href="https://eospluginforunity.playeveryware.com/#samples">Samples</a>
-									section of PlayEveryWare's documentation for more information.</li>
-								<li>
-									<strong>Standard EOS SDK implementation</strong>: See the
-									<a href="/docs/game-services#interfaces">Interface</a>
-									documentation for more information on how to use each interface and the
-									<a href="/docs/epic-online-services/samples">Samples</a>
-									documentation for examples of how to use each interface. See the
-									<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eossdkc-sharp-getting-started">EOS SDK in C#</a>
-									documentation for general guidance on how to work with EOS in C#.</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+					<strong>Standard EOS SDK implementation</strong>: See the
+					<a href="/docs/game-services#interfaces">Interface</a>
+					documentation for more information on how to use each interface and the
+					<a href="/docs/epic-online-services/samples">Samples</a>
+					documentation for examples of how to use each interface. See the
+					<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eossdkc-sharp-getting-started">EOS SDK in C#</a>
+					documentation for general guidance on how to work with EOS in C#.</li>
 			</ul>
 			<p>
 				<strong>Note</strong>: If you use the wrappers demoed in the Unity EOS samples, the implementation is not exactly the same as what we describe in our EOS SDK interface documentation. If you use Unity's wrappers for the EOS SDK, you must follow their naming conventions to use EOS services in your game.</p>
@@ -151,7 +193,22 @@
 						<a href="#unreal-engine">Unreal Engine</a>
 					</li>
 					<li>
+						<a href="#manual-configuration">Manual Configuration</a>
+					</li>
+					<li>
+						<a href="#the-online-subsystem-oss-plugins-ue-427-and-higher">The Online Subsystem (OSS) plugins (UE 4.27 and higher)</a>
+					</li>
+					<li>
+						<a href="#the-online-services-plugins-ue-51-and-higher">The Online Services plugins (UE 5.1 and higher)</a>
+					</li>
+					<li>
 						<a href="#unity">Unity</a>
+					</li>
+					<li>
+						<a href="#manual-configuration-1">Manual configuration</a>
+					</li>
+					<li>
+						<a href="#the-eos-plugin-for-unity-third-party-developed-by-playeveryware">The EOS Plugin for Unity (third-party, developed by PlayEveryWare)</a>
 					</li>
 				</ul>
 			</div>

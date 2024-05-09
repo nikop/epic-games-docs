@@ -1590,11 +1590,11 @@
 					list must be checked manually</em>. See
 				<a href="#enforcing-sanctions">Enforcing Sanctions</a>
 				for more details. EOS does not provide notification when a player joins a session, so you must notify the owner when you join, or provide the owner with a way to detect when a player has successfully joined the session.</p>
-			<p>After a user registers with a publicly visible session (a session configured with
+			<p>After a user registers with a session configured with the
 				<code>EOS_OSPF_PublicAdvertised</code>
-				or
-				<code>EOS_OSPF_JoinViaPresence</code>), others can find the session with
-				<code>EOS_SessionSearch_SetTargetUserId</code>.</p>
+				permission level, other users can find the session with
+				<code>EOS_SessionSearch_SetTargetUserId</code>. For more information on the permission levels that you can set for a session, see the section on
+				<a href="#permission-levels">permission levels</a>.</p>
 			<div role="alert">
 				<div></div>
 				<div>
@@ -1965,6 +1965,9 @@
 				<strong>Note</strong>: If you have security concerns about exposing the host IP address, you can use
 				<code>EOS_SessionModification_SetHostAddress</code>
 				to set the host address to something else, such as the P2P socket ID if you use the P2P Interface.</p>
+			<div>
+				<h3 id="permission-levels">Permission Levels</h3>
+			</div>
 			<p>When you create a session you can specify a
 				<strong>permission level</strong>
 				for the session using
@@ -2147,6 +2150,9 @@
 					</li>
 					<li>
 						<a href="#matchmaking-security-considerations">Matchmaking Security Considerations</a>
+					</li>
+					<li>
+						<a href="#permission-levels">Permission Levels</a>
 					</li>
 					<li>
 						<a href="#best-practices">Best Practices</a>

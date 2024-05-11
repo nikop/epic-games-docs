@@ -387,9 +387,7 @@
 			<p>For example, to login via the account portal on a PC, your login call may appear as follows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_Auth_Credentials Credentials = { 0 };Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;Credentials.Type = EOS_LCT_AccountPortal; EOS_Auth_LoginOptions LoginOptions = { 0 };LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;LoginOptions.ScopeFlags = EOS_AS_BasicProfile | EOS_AS_FriendsList | EOS_AS_Presence;LoginOptions.Credentials = &amp;Credentials; EOS_Auth_Login(AuthHandle, &amp;LoginOptions, NULL, OnLoginCallback);</pre>
 				</section>
 			</div>
 			<p>This opens a default system web browser that prompts the Epic Games account user to login and review the game's access requests.</p>
@@ -409,9 +407,7 @@
 			<p>Redirect your Epic Games users to this authorization URL:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>https://www.epicgames.com/id/authorize?client_id={client_id}&amp;response_type=code&amp;scope=basic_profile&amp;redirect_uri=https://www.example.com&amp;state=rfGWJux2WL86Zxr6nKApCAnDo8KexEUE</pre>
 				</section>
 			</div>
 			<p>To request additional permissions, modify the scope parameter in the authorization request with a space-delimited list of the required permissions. For example,
@@ -427,9 +423,7 @@
 			<p>The following is an example redirect URL after a user is authenticated:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>https://www.example.com/?code=cfd1de1a8d224203b0445fe977838d81&amp;state=rfGWJux2WL86Zxr6nKApCAnDo8KexEUE</pre>
 				</section>
 			</div>
 			<div>
@@ -448,16 +442,12 @@
 			<p>The following snippet shows a sample request (using password grant type):</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>POST /epic/oauth/v2/token HTTP/1.1Host: api.epicgames.devContent-Type: application/x-www-form-urlencodedAuthorization: Basic Zm9vOmJhcg==</pre>
 				</section>
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>grant_type=authorization_code&amp;deployment_id=foo&amp;scope=basic_profile&amp;code=cfd1de1a8d224203b0445fe977838d81&amp;redirect_uri=https://www.example.com</pre>
 				</section>
 			</div>
 			<p>The response contains the following fields:</p>
@@ -543,8 +533,7 @@
 			<p>The following snippet shows a sample response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "scope": "basic_profile",  "token_type": "bearer",  "access_token": "eyJ0IjoiZXBpY19pZCIsImFsZyI6IlJTMjU2Iiwia2lkIjoibldVQzlxSFVldWRHcnBXb3FvVXVHZkFIYmVWM2NsRnlsdFRYMzhFbXJKSSJ9.eyJhdWQiOiJ4eXphNzg5MWxoeE1WWUdDT043TGduS1paOEhRR0Q1SCIsInN1YiI6Ijk2MjZmNDQxMDU1MzQ5Y2U4Y2I3ZDdkNWE0ODNlYWEyIiwidCI6ImVwaWNfaWQiLCJzY29wZSI6ImJhc2ljX3Byb2ZpbGUgZnJpZW5kc19saXN0IHByZXNlbmNlIiwiYXBwaWQiOiJmZ2hpNDU2N08wM0hST3hFandibjdrZ1hwQmhuaFd3diIsImlzcyI6Imh0dHBzOlwvXC9hcGkuZXBpY2dhbWVzLmRldlwvZXBpY1wvb2F1dGhcL3YxIiwiZG4iOiJLcm5icnkiLCJleHAiOjE1ODgyODYwODMsImlhdCI6MTU4ODI3ODg4Mywibm9uY2UiOiJuLUI1cGNsSXZaSkJaQU1KTDVsNkdvUnJDTzNiRT0iLCJqdGkiOiI2NGMzMGQwMjk4YTM0MzdjOGE3NGU1OTAxYzM0ODZiNSJ9.MZRoCRpjIb--dD7hxoo2GvjSPhUSNpOq1FhtShTBmzMJ1qlHFPzNaUiAEETAc3mabGPKyOxUP6Q1FBadr_P_UtbtB7kf34hN2VTv5czW6WOx1HdpjwUQZuxFyDc_aix7FCS0Egu4rZlC65b-B0FUVlial_s_FrH8ou5L_d-4I0KVpIwtv-b_M6EQ9jtLdQRfMaP6aV0rIerrbqFZ617Pe7XT4IO9jZFwM8F5aDTeDHkkOO41wyVibrm38799lP4B65RIv9CwbAL-TVmV1L5gFYITaZhi5ShfZzTvxAk-3Dxwp8c5JvcO68zpbya5gFSAfhsd7vt9YLU0gQR2uXq3Vw",  "refresh_token": "eyJ0IjoiZXBpY19pZCIsImFsZyI6IlJTMjU2Iiwia2lkIjoibldVQzlxSFVldWRHcnBXb3FvVXVHZkFIYmVWM2NsRnlsdFRYMzhFbXJKSSJ9.eyJhdWQiOiJ4eXphNzg5MWxoeE1WWUdDT043TGduS1paOEhRR0Q1SCIsInN1YiI6Ijk2MjZmNDQxMDU1MzQ5Y2U4Y2I3ZDdkNWE0ODNlYWEyIiwidCI6ImVwaWNfaWQiLCJhcHBpZCI6ImZnaGk0NTY3TzAzSFJPeEVqd2JuN2tnWHBCaG5oV3d2Iiwic2NvcGUiOiJiYXNpY19wcm9maWxlIGZyaWVuZHNfbGlzdCBwcmVzZW5jZSIsImlzcyI6Imh0dHBzOlwvXC9hcGkuZXBpY2dhbWVzLmRldlwvZXBpY1wvb2F1dGhcL3YxIiwiZG4iOiJLcm5icnkiLCJleHAiOjE1ODgzMDc2ODMsImlhdCI6MTU4ODI3ODg4MywianRpIjoiYzczYjA2NmUyZDU4NGVkNTk0NjZiOThiNzI3NzJiMjAifQ.O-eVa46NimubKwxe9SwlHxciivu0XWe1-DSL74mMiA_PpPoW0yKL9DfmsLxiPCwsRB5_hQTc6_FM7G1FyfKtX_VVAp90MZPkhCbAbfKmTpQVcL0Ya6kve4KMG8KxeLVfLLhubCbJTYlnDNVHobbpvpQtHd8Ys321ZNDJj05l_tnZzdgus-xmCO6orX4UP4wDd1jAOXXeqRT47OXuLCgSE0q6Osfh-ENPwh6ph1i7ld759xPV0oNcQb8XiPxnT6_FUmFugzG1YS1z9bTnVWmbP2RmYluue5VQm5EKGJZ91Alve8s2eNEtDfUqaBLZ45pqGkc1KjbYTtP0a_1ue2BpkQ",  "expires_in": 7200,  "expires_at": "2020-04-30T22:34:43.549Z",  "refresh_expires_in": 28800,  "refresh_expires_at": "2020-05-01T04:34:43.549Z",  "account_id": "9626f441055349ce8cb7d7d5a483eaa2",  "client_id": "xyza7891lhxMVYGCON7LgnKZZ8HQGD5H",  "application_id": "fghi4567O03HROxEjwbn7kgXpBhnhWwv"}
 					</pre>
 				</section>
 			</div>
@@ -602,13 +591,6 @@
 					</tr>
 				</tbody>
 			</table>
-			<div id="tag_list">
-				<a aria-label="Tag Epic Games account" aria-hidden="false" tabindex="0" href="/docs/site-map">Epic Games account</a>
-				<a aria-label="Tag  Epic Account Services" aria-hidden="false" tabindex="0" href="/docs/site-map">
-					Epic Account Services</a>
-				<a aria-label="Tag  brand review" aria-hidden="false" tabindex="0" href="/docs/site-map">
-					brand review</a>
-			</div>
 		</section>
 		<aside>
 			<div>Contents</div>

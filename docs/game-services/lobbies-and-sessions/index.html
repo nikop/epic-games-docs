@@ -1,0 +1,328 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Lobbies and Sessions Introduction</h1>
+			<h2>An overview of lobbies and sessions, including the similarities and differences between the two.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Epic Online Services (EOS) SDK provides two different services that you can use for multiplayer matchmaking:</p>
+			<ul>
+				<li>Lobbies
+					<ul>
+						<li>Use the Lobby Interface to access the lobby service. See the
+							<a href="/docs/game-services/lobbies-and-sessions/lobbies">Lobby Interface</a>
+							documentation for more information.</li>
+					</ul>
+				</li>
+				<li>Sessions
+					<ul>
+						<li>Use the Sessions Interface to access the session service. See the
+							<a href="/docs/game-services/lobbies-and-sessions/sessions">Sessions Interface</a>
+							documentation for more information.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Lobbies and sessions have similar features, but lobbies provide built-in features that sessions do not (for a comparison, see the section on:
+				<a href="#features-of-lobbies-and-sessions">features</a>). If your game doesn't require the built-in features that lobbies provide, or if you prefer to implement these features yourself, you might want to use only sessions. Depending on your game's needs and configuration, you can use lobbies, sessions, or a combination of both.</p>
+			<p>
+				<strong>Note</strong>: If your game uses dedicated servers, you must use sessions. Dedicated servers cannot use lobbies.</p>
+			<div>
+				<h2 id="features-of-lobbies-and-sessions">Features of Lobbies and Sessions</h2>
+			</div>
+			<p>Lobbies and sessions have some shared features and some unique features. The sections below lists the features of lobbies and sessions and the shared features they have in common.</p>
+			<div>
+				<h3 id="player-connection">Player Connection</h3>
+			</div>
+			<p>Lobbies:</p>
+			<ul>
+				<li>Players have a persistent connection to the lobby with WebSocket.
+					<ul>
+						<li>Game clients in the lobby stay in sync with each other and do not need to send an HTTP request each time they query for updated information.</li>
+						<li>Players in the lobby can continue to chat with each other and share updates while they play your game.</li>
+						<li>Players can share real-time data (member data) updates with each other.</li>
+					</ul>
+				</li>
+				<li>Doesn't require players to connect to a game server to access the lobby. Players can select game options directly from your game's main menu, and they don't need to worry about NAT or firewall issues preventing them from connecting to the lobby.</li>
+				<li>Only authenticated players can join a lobby.</li>
+			</ul>
+			<p>Sessions:</p>
+			<ul>
+				<li>Players do not have a persistent connection. Each call your game makes, such as when your game registers a new player to the session, requires a new HTTP request.
+					<ul>
+						<li>Your game must push session updates to the EOS session service manually and keep each player's remote view of the session up to date.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="player-registration">Player Registration</h3>
+			</div>
+			<p>Lobbies:</p>
+			<ul>
+				<li>Automatically registers players when they join the lobby and unregisters players when they leave the lobby.</li>
+			</ul>
+			<p>Sessions:</p>
+			<ul>
+				<li>Your game must register players when they join the session and unregister players when they leave the session.<br>
+					This keeps the player count accurate for the session and prevents other players from trying to join the session if it is already at the maximum player capacity.</li>
+			</ul>
+			<div>
+				<h3 id="built-in-features">Built-in Features</h3>
+			</div>
+			<p>Lobbies:</p>
+			<ul>
+				<li>Voice chat integration. For more information, see the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies#voice-communications">Voice Communications</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>Host migration: the owner can transfer ownership when they leave or if their connection drops.</li>
+				<li>The owner can remove (kick) players from the lobby.</li>
+			</ul>
+			<p>Sessions: None.</p>
+			<div>
+				<h3 id="shared-features">Shared Features</h3>
+			</div>
+			<p>Lobbies and sessions share these features:</p>
+			<ul>
+				<li>Fixed attributes and user attributes that you can populate to best suit your game's needs.</li>
+				<li>Players can search for a lobby or session by the fixed attributes and user attributes that you've marked as public.</li>
+				<li>Players already in the lobby or session can invite other players to join them.</li>
+				<li>Players can join the
+					<span>
+						<span aria-label="tooltip presence" tabindex="0" role="button">presence</span>
+					</span>
+					lobby or presence session that a friend is in.<br>
+					For more information, see the section on:
+					<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay#allow-friends-to-join-via-presence">Allow Friends to Join Via Presence</a>
+					in the
+					<em>Social Overlay for Crossplay</em>
+					page.</li>
+				<li>Players can join multiple lobbies and sessions at the same time.</li>
+			</ul>
+			<div>
+				<h2 id="performance-recommendations">Performance Recommendations</h2>
+			</div>
+			<p>When you integrate lobbies or sessions in your game, follow these recommendations:</p>
+			<ul>
+				<li>Set lobby or session attributes that you don't want to be publicly searchable to local only.
+					<ul>
+						<li>
+							<strong>Note</strong>: Local only attributes for lobbies are not shared with other lobby members.</li>
+					</ul>
+				</li>
+				<li>Assign both lobbies and sessions a bucket ID. You can assign the same bucket ID to a group of lobbies or a group of sessions that share the same criteria, such as the same region or the same game type. You can then use the bucket ID as a filter to search for lobbies or sessions that match only that criteria and return just the relevant lobbies or sessions that match. This significantly improves search performance, especially if you have a large number of lobbies and sessions.
+					<ul>
+						<li>To run a session search, use
+							<a href="/docs/api-ref/functions/eos-session-search-set-parameter">
+								<code>EOS_SessionSearch_SetParameter</code>
+							</a>, where the key is
+							<code>EOS_SESSIONS_SEARCH_BUCKET_ID</code>
+							and the value is the string supplied as the bucket ID when the session is created or updated. For an example, see the example in the section on:
+							<a href="/docs/game-services/lobbies-and-sessions/sessions#reserved-attribute-constants">Reserved Attribute Constants</a>
+							in the
+							<em>Sessions Interface</em>
+							page.</li>
+						<li>To run a lobby search, use
+							<a href="/docs/api-ref/functions/eos-lobby-search-set-parameter">
+								<code>EOS_LobbySearch_SetParameter</code>
+							</a>, where the key is
+							<code>EOS_LOBBY_SEARCH_BUCKET_ID</code>
+							and the value is the string supplied as the bucket ID when the session is created or updated. For more information, see the section on:
+							<a href="/docs/game-services/lobbies-and-sessions/lobbies#searching-for-a-lobby">Searching for a Lobby</a>
+							in the Lobby Interface page.</li>
+					</ul>
+				</li>
+				<li>If you need players to only be able to search for and find a public game session for your game, use sessions instead of lobbies.</li>
+				<li>Use invites when possible for lobbies and sessions. This ensures that players can join the lobby or session as soon as they accept the invite, instead of having to search for them.</li>
+			</ul>
+			<div>
+				<h2 id="lobby-and-session-example-use-cases">Lobby and Session Example Use Cases</h2>
+			</div>
+			<p>Players can use a combination of lobbies and sessions to connect to and play your game on the server, including:</p>
+			<ul>
+				<li>Join a lobby and connect to a session on your dedicated server from that lobby.</li>
+				<li>Connect to a session on your dedicated server.</li>
+				<li>Connect to a session that one of your players hosts on a listen server.</li>
+				<li>Join a lobby and connect peer-to-peer with a player to play a game that one of your players hosts.</li>
+			</ul>
+			<p>Below are some example use cases that a player might follow to play your game. These examples are not exhaustive nor prescriptive. You should use lobbies and sessions to match your particular use cases.</p>
+			<div>
+				<h3 id="example-use-case-join-a-lobby-and-connect-to-a-session-from-it">Example Use Case: Join a Lobby and Connect to a Session from it</h3>
+			</div>
+			<ol>
+				<li>A dedicated server is available to host a game and has registered a session.</li>
+				<li>Player A and Player B are in a lobby together.</li>
+				<li>Player A selects a game mode and indicates that they are ready to play. The EOS Lobby service then shares this update, as a lobby attribute, with Player B in real-time.</li>
+				<li>Player B indicates that they are ready to play. The EOS Lobby service notifies Player A that Player B is ready.</li>
+				<li>Player A searches for a game session and finds the registered session on the dedicated server.</li>
+				<li>Player A adds the dedicated server's IP address as a new value to the lobby attribute data. The EOS Lobby service shares this data update with all players in the lobby (Player B in this case). For more information on how to update lobby data, see the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies#lobby-and-lobby-member-properties">Lobby and Lobby Member Properties</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>Both players connect to the dedicated server, which registers them both to the session.</li>
+				<li>Player A and B start the game.</li>
+				<li>The dedicated server updates the session state to “In Game”. Other players that search for a session can see that players are in the game.  For more information, see the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/sessions#modifying-a-session">Modifying a Session</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+			</ol>
+			<div>
+				<h3 id="example-use-case-connect-to-a-session">Example Use Case: Connect to a Session</h3>
+			</div>
+			<ol>
+				<li>A dedicated server creates a session.</li>
+				<li>Player A, B, and C's game clients search for a session.</li>
+				<li>The search returns the session on the dedicated server.</li>
+				<li>Players A, B, and C join the session.</li>
+				<li>Player A, B, and C's game clients connect to the dedicated server with the session's IP address.</li>
+				<li>The dedicated server registers players A, B, and C to the session.</li>
+				<li>Players A, B, and C start the game.</li>
+			</ol>
+			<div>
+				<h3 id="example-use-case-connect-to-a-session-on-a-player-hosted-listen-server">Example Use Case: Connect to a Session on a Player-hosted Listen Server</h3>
+			</div>
+			<ol>
+				<li>Player A's game client, acting as a listen server, creates a session.</li>
+				<li>Player B's game client searches for a session and finds Player A's session.</li>
+				<li>Player B's game client joins the session.</li>
+				<li>Player B's game client connects to player A's listen server with the session's IP address.</li>
+				<li>Players A and B start the game.</li>
+			</ol>
+			<div>
+				<h3 id="example-use-case-join-a-lobby-and-connect-peer-to-peer-on-a-listen-server">Example Use Case: Join a Lobby and Connect Peer-to-Peer on a Listen Server</h3>
+			</div>
+			<ol>
+				<li>Player A and B are in a lobby.</li>
+				<li>Player A's game client is acting as a listen server.</li>
+				<li>Player A and B have a peer-to-peer connection.</li>
+				<li>Player A shares their IP address with Player B through the EOS Lobby service.</li>
+				<li>Player B connects to Player A's listen server.</li>
+				<li>Players A and B start the game.</li>
+			</ol>
+			<div>
+				<h2 id="further-information">Further Information</h2>
+			</div>
+			<p>How to create:</p>
+			<ul>
+				<li>A lobby. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies#creating-and-destroying-a-lobby">Creating and Destroying a Lobby</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>A session. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/sessions#creating-a-session">Creating a Session</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+			</ul>
+			<p>How to configure attributes:</p>
+			<ul>
+				<li>For a lobby. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies#lobby-and-lobby-member-properties">Lobby and Lobby Member Properties</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>For a session. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/sessions#custom-attributes">Custom Attributes</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+			</ul>
+			<p>How to search:</p>
+			<ul>
+				<li>For a lobby. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies#searching-for-a-lobby">Searching for a Lobby</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>For a session. see the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/sessions#configuring-a-search">Configuring a Search</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+			</ul>
+			<p>How to invite players:</p>
+			<ul>
+				<li>To a lobby. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies#inviting-users-to-a-lobby">Inviting Users to a Lobby</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>To a session. See the section on:
+					<a href="/docs/game-services/lobbies-and-sessions/sessions#inviting-players-to-a-session">Inviting Players to a Session</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+			</ul>
+			<p>Methods to join:</p>
+			<ul>
+				<li>A lobby or session, see the section on:
+					<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay#how-players-join-a-game-instance">How Players Join a Game Instance</a>
+					in the
+					<em>Social Overlay for Crossplay</em>
+					page.</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#features-of-lobbies-and-sessions">Features of Lobbies and Sessions</a>
+					</li>
+					<li>
+						<a href="#player-connection">Player Connection</a>
+					</li>
+					<li>
+						<a href="#player-registration">Player Registration</a>
+					</li>
+					<li>
+						<a href="#built-in-features">Built-in Features</a>
+					</li>
+					<li>
+						<a href="#shared-features">Shared Features</a>
+					</li>
+					<li>
+						<a href="#performance-recommendations">Performance Recommendations</a>
+					</li>
+					<li>
+						<a href="#lobby-and-session-example-use-cases">Lobby and Session Example Use Cases</a>
+					</li>
+					<li>
+						<a href="#example-use-case-join-a-lobby-and-connect-to-a-session-from-it">Example Use Case: Join a Lobby and Connect to a Session from it</a>
+					</li>
+					<li>
+						<a href="#example-use-case-connect-to-a-session">Example Use Case: Connect to a Session</a>
+					</li>
+					<li>
+						<a href="#example-use-case-connect-to-a-session-on-a-player-hosted-listen-server">Example Use Case: Connect to a Session on a Player-hosted Listen Server</a>
+					</li>
+					<li>
+						<a href="#example-use-case-join-a-lobby-and-connect-peer-to-peer-on-a-listen-server">Example Use Case: Join a Lobby and Connect Peer-to-Peer on a Listen Server</a>
+					</li>
+					<li>
+						<a href="#further-information">Further Information</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

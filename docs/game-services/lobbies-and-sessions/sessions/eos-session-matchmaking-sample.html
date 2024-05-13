@@ -1,0 +1,151 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Session Matchmaking Sample</h1>
+			<h2>Overview of the Session Matchmaking Sample.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="https://static-assets-prod.epicgames.com/eos-docs/game-services/lobbies-and-sessions/sessions/sample/session-matchmaking_-01.png" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>The Session Matchmaking sample from EOS SDK demonstrates game session management. It allows users to create sessions, view information about local sessions, modify them, search for sessions, join and invite friends to the current session.</p>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>The sample application uses
+				<strong>Epic Account Services</strong>
+				to authenticate the local user for demonstration purposes. This requires that the Client Credentials used to initialize the SDK have been assigned to an
+				<strong>Application</strong>
+				used for
+				<strong>Epic Account Services</strong>.</p>
+			<p>The demonstrated SDK functionality can be used with any of the supported identity providers for user authentication.</p>
+			<div>
+				<h2 id="session-creation">Session Creation</h2>
+			</div>
+			<p>To start with the sample you'll probably want to create a session. Press the 'Create New Session' button to bring up a new dialog:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Pick a name for your session. Choose a value for the 'Level' attribute in the dropdown list. Choose how many players can be in the session. Choose if you want the session to be joinable after its start (Join In Progress flag). Choose if you want this session to be publicly available (when true other users will be able to find it using search and join; otherwise session will only be available via session invites). Choose if the newly created session is going to be a Presence Session (see next section to know more about it). In case of a
+				<span>
+					<span aria-label="tooltip presence" tabindex="0" role="button">presence</span>
+				</span>
+				session, choose if invites should be allowed for the session.</p>
+			<p>Press the 'Create' button after you are done. The new session will be added to the list of sessions in the main dialog upon successful creation.</p>
+			<div>
+				<h3 id="presence-session">Presence Session</h3>
+			</div>
+			<p>You can mark a session as the one associated with "presence" to be used when updating the Social Overlay. This will enable interaction via Social Overlay (e.g. sending invites, joining your friend's session).  There can only be one Presence Session at a time for the player. See
+				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay</a>
+				Page for more info.</p>
+			<div>
+				<h2 id="session-list">Session List</h2>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>In the main dialog, you are able to see the list of local sessions (created, joined or found via search).</p>
+			<p>The table contains a number of columns with information about the sessions and actions to interact with the sessions.</p>
+			<ol>
+				<li>Session name - is the name of the session. It may not be available in case you join someone else's session (session will be named "JoinedSession" in the latter case).</li>
+				<li>Status: None/Started/Finished.</li>
+				<li>Players: Current Players / Max Players.</li>
+				<li>Level: user-created attribute that is specific to this sample. Level name.</li>
+				<li>Presence: Is this session a Presence Session associated with the Social Overlay?</li>
+				<li>JIP: Join In Progress flag.</li>
+				<li>Public - Is this session publicly available to anyone to find via search and join?</li>
+				<li>Invites: For Presence Session. Are invites allowed?</li>
+			</ol>
+			<p>Actions:</p>
+			<ol>
+				<li>Start - to start the session;</li>
+				<li>End - to finish it;</li>
+				<li>Mod - to modify it with some predefined set of parameters.</li>
+			</ol>
+			<p>You can also use the session list to select a session by clicking on the row with the corresponding session. This can be used after a session search or to invite a friend to your session.</p>
+			<div>
+				<h2 id="session-search">Session Search</h2>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>The user is also able to search for sessions by level name. Type in the name of a level in the search field and press Enter. After the search is done you'll be able to see all public sessions with this level. Note that you won't see any ongoing sessions that don't have the 'Join In Progress' flag set. Note that not all information is available for found sessions. Actions are disabled obviously. Clicking a row within the search result initiates join automatically. You can clear search results by pressing the 'Clear search' (button with a cross).</p>
+			<div>
+				<h2 id="inviting-friends-to-a-session">Inviting Friends to a Session</h2>
+			</div>
+			<p>After creating a session you can invite friends to join you. Select your session in the list by clicking the corresponding row. Now find your friend in the 'Friends' dialog on the right and press 'Invite to session'. Session invitation is sent. Your friend will get a popup allowing him to accept the invitation and join your session.</p>
+			<div>
+				<h2 id="registering-friends-with-session">Registering Friends with Session</h2>
+			</div>
+			<p>You can also register friends with a session the same way you invite them. Registered friends will be able to send invites to your session as well.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#before-you-begin">Before You Begin</a>
+					</li>
+					<li>
+						<a href="#session-creation">Session Creation</a>
+					</li>
+					<li>
+						<a href="#presence-session">Presence Session</a>
+					</li>
+					<li>
+						<a href="#session-list">Session List</a>
+					</li>
+					<li>
+						<a href="#session-search">Session Search</a>
+					</li>
+					<li>
+						<a href="#inviting-friends-to-a-session">Inviting Friends to a Session</a>
+					</li>
+					<li>
+						<a href="#registering-friends-with-session">Registering Friends with Session</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

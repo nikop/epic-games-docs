@@ -177,7 +177,9 @@
 				parameter, then your client secret should be passed verbatim as the value of the parameter:</p>
 			<div>
 				<section>
-					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe  -ClientId="&lt;YourClientId&gt;"  -ClientSecret="&lt;YourClientSecret&gt;"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>When using the
@@ -185,7 +187,9 @@
 				parameter, then you pass the name of an OS environment variable which contains the client secret:</p>
 			<div>
 				<section>
-					<pre>Engine\Binaries\Win64&gt;set MyEpicSecret=&lt;YourClientSecret&gt;Engine\Binaries\Win64&gt;BuildPatchTool.exe -ClientId="&lt;YourClientId&gt;"-ClientSecretEnvVar="MyEpicSecret"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>We recommend using the
@@ -201,7 +205,9 @@
 				mode, and point it at your build (see CLI argument details below). This will process your build, upload it to our cloud storage, and register the build with our backend:</p>
 			<div>
 				<section>
-					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe   -OrganizationId="&lt;YourOrg&gt;"  -ProductId="&lt;YourProduct&gt;"  -ArtifactId="&lt;YourArtifact&gt;"  -ClientId="&lt;YourClientId&gt;"  -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"  -mode=PatchGeneration  -BuildRoot="&lt;LocationOfLocalBuild&gt;"  -CloudDir="&lt;YourCloudDir&gt;"  -BuildVersion="&lt;YourBuildVersion&gt;"  -AppLaunch="&lt;AppToRun&gt;"  -AppArgs="&lt;LaunchArguments&gt;"  -FileAttributeList="&lt;LocationOfAttributesFile&gt;"  -FileIgnoreList="&lt;LocationOfIgnoreFile&gt;"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>Descriptions for each of the parameters that you have to specify are below. You can also add the
@@ -316,7 +322,9 @@
 			<p>Your custom FileAttributeList file must be a text file with one or more newline-separated entries. Each line must contain a quoted (BuildRoot-relative) filepath, followed by one or more space-delimited attributes to be applied to the referenced file:</p>
 			<div>
 				<section>
-					<pre>"&lt;QuotedRelativePathToFile&gt;" &lt;list of attributes&gt;</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
@@ -324,7 +332,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>"Relative/Path/To/My/file.bin" executable tag:my_tag"Second/Path/To/A/file.txt" tag:txt_files</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>The following file attribute flags are supported:</p>
@@ -361,7 +371,9 @@
 				Mode:</p>
 			<div>
 				<section>
-					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe   -OrganizationId="&lt;YourOrg&gt;"  -ProductId="&lt;YourProduct&gt;"  -ArtifactId="&lt;YourArtifact&gt;"  -ClientId="&lt;YourClientId&gt;"  -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"  -mode=ListBinaries</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -422,7 +434,9 @@
 			<p>The following is a sample command line to improve delta patching between two builds:</p>
 			<div>
 				<section>
-					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe  -OrganizationId="&lt;YourOrg&gt;"  -ProductId="&lt;YourProduct&gt;"  -ArtifactId="&lt;YourArtifact&gt;"  -ClientId="&lt;YourClientId&gt;"  -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"  -mode=ChunkDeltaOptimise  -CloudDir="&lt;YourCloudDir&gt;"  -BuildVersionA="&lt;YourSourceBuildVersion&gt;"  -BuildVersionB="&lt;YourDestinationBuildVersion&gt;"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>When running in
@@ -442,7 +456,9 @@
 				was already run between the two provided BuildVersion values, the process will succeed short circuiting the operation, indicated in the output.</p>
 			<div>
 				<section>
-					<pre>Running optimization for patching 1.3.0-Windows -&gt; 1.3.1-Windows...** Chunk delta optimization already completed for provided manifests. **Loaded optimised delta file E:/CloudDir/Deltas/jd63jdu7-jsg58dh58dki8dk323/a5nbd0jbweof98fvytsvnthcsvf.delta</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>Once the processing is completed, the output will show the improvement achieved.</p>
@@ -471,7 +487,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>Final unknown compressed bytes, plus meta 400000  Original unknown compressed bytes         1000000  Improvement: 60%</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -560,7 +578,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>Please check your provided %OrganizationId%, %ProductId% and ArtifactId arecorrect, and that you should have access to create binaries for thisartifact.Tool exited with: 6</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
@@ -571,7 +591,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>CloudDir, BuildRoot, ArtifactId, BuildVersion, AppLaunch, and AppArgsare required parametersTool exited with: 2</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
@@ -582,7 +604,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>Please ensure you have specified ClientId and also one of ClientSecret orClientSecretEnvVar. If using ClientSecretEnvVar, ensure the env variableis properly set.Tool exited with: 9</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
@@ -593,7 +617,9 @@
 			</div>
 			<div>
 				<section>
-					<pre>An authentication error occurred - Check you have specified ClientId, andeither ClientSecret or ClientSecretEnvVar parameters correctly.Message: Sorry the client credentials you are using are invalidTool exited with: 10</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
@@ -604,15 +630,14 @@
 			</div>
 			<div>
 				<section>
-					<pre>An unexpected error occurred. Error code: errors.com.epicgames.common.missing_permission;Error message: Sorry your login does not possess the permissions'artifact:o-7kyv8uwtz74njnl544kbxzt5xqephw:3bc138d96fb24d9597d4bbff23b9ecee:asdfasd READ'needed to perform the requested operationTool exited with: 5</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>
 				<em>What it means</em>
 				–  The Client credentials you are using do not have access to the artifact you have specified. Ensure you are using the correct BPT Client as indicated on your Product Settings page.</p>
-			<div id="tag_list">
-				<a aria-label="Tag Epic Games Store Only" aria-hidden="false" tabindex="0" href="/docs/site-map">Epic Games Store Only</a>
-			</div>
 		</section>
 		<aside>
 			<div>Contents</div>

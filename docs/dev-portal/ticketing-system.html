@@ -142,13 +142,16 @@
 			<p>To generate a ticket through cURL, place your request in the following format:</p>
 			<div>
 				<section>
-					<pre>curl -X POST \https://dev.epicgames.com/portal/api/v1/services/tickets/submit/ \-H 'Authorization: Token your_product_api_key_here' \-H 'Content-Type: application/json' \-d '{"subject": "technical-support","message": "Example message.","sender_email": "example.user@example.domain","sender_name": "Example User","guid": "example_user_guid","error_code": "example error code","system_os": "example OS","system_antimalware": "example antimalware","system_other": "example system other"}'</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>Once the ticketing system accepts the request, you will receive a response like this:</p>
 			<div>
 				<section>
-					<pre>{  "data": {    "prod_name": "example_game",    "prod_slug": "example_game_slug",    "guid": "example_user_guid",    "sender_name": "Example User",    "sender_email": "example.user@example.domain",    "subject": "Technical Support",    "message": "Example message.",    "error_code": "example error code",    "system_os": "example OS",    "system_antimalware": "example antimalware",    "system_other": "example system other",    "timestamp": "2019-03-07T14:20:10.933689Z"  }}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -176,13 +179,16 @@
 				To export a user’s data through cURL, place your request in the following format:</p>
 			<div>
 				<section>
-					<pre>curl --location --request GET \https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/example@example.com \-H 'Authorization: Token your_product_api_key_here' \-H 'Content-Type: application/json'</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>After the ticketing system accepts the request, you receive a response like this with HTTP status code 200:</p>
 			<div>
 				<section>
-					<pre>{  "data": [    {      "guid": "example_guid",      "subject": "technical-support: example game",      "message": "Example ticket message",      "sender_name": "Example User",      "sender_email": "example@example.com",      "timestamp": "2019-04-11T12:49:21.349000Z",      "messages": [        {          "ticket_id": 1,          "message": "Example reply 2",          "sender_name": "Example User",          "sender_email": "example@example.com",          "timestamp": "2019-04-11T12:54:21.463000Z"        },        {          "ticket_id": 1,          "message": "Example reply 1",          "sender_name": "Example Org Support",          "sender_email": "example_org@eos-external-support.mail.on.epicgames.com",          "timestamp": "2019-04-11T12:52:02.514000Z"        }      ]    }  ]}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -204,7 +210,9 @@
 				To delete a user’s data through cURL, place your request in the following format:</p>
 			<div>
 				<section>
-					<pre>curl --location --request DELETE \https://dev.epicgames.com/portal/api/v1/services/tickets/datarights/example@example.com \-H 'Authorization: Token your_product_api_key_here'</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>After the ticketing system accepts the request, you receive a response with HTTP status code 204.</p>

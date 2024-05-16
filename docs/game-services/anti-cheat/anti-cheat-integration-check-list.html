@@ -14,7 +14,7 @@
 			<h1>Anti-Cheat Integration Checklist</h1>
 			<h2>Before going live, ensure your product is running the  Anti-Cheat interfaces correctly with this checklist.</h2>
 			<div>
-				<div>3 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -158,6 +158,24 @@
 				<li>Your game should function normally.</li>
 				<li>(<em>For Windows</em>) The command sc query EasyAntiCheat_EOS reports that the service is in state STOPPED while the game is running.</li>
 				<li>The player should be able to join protected multiplayer game sessions with other players successfully and remain connected for more than 10 minutes.</li>
+				<li>The EOS SDK should trigger the proper callback functions:
+					<ul>
+						<li>In a client-server game, the EOS SDK triggers the
+							<a href="/docs/api-ref/functions/eos-anti-cheat-client-add-notify-message-to-server">
+								<code>EOS_AntiCheatClient_AddNotifyMessageToServer</code>
+							</a>
+							callback on the client and the EOS SDK triggers the
+							<a href="/docs/api-ref/functions/eos-anti-cheat-server-add-notify-message-to-client">
+								<code>EOS_AntiCheatServer_AddNotifyMessageToClient</code>
+							</a>
+							callback on the server. The game's networking layer doesn't modify messages in transit sent between client and server.</li>
+						<li>In a peer-to-peer game, the EOS SDK triggers the
+							<a href="/docs/api-ref/functions/eos-anti-cheat-client-add-notify-message-to-peer">
+								<code>EOS_AntiCheatClient_AddNotifyMessageToPeer</code>
+							</a>
+							callback on all peers. The game's networking layer doesn't modify messages in transit sent between peers.</li>
+					</ul>
+				</li>
 				<li>The player should be able to disconnect from one protected multiplayer game session and join a different one successfully.</li>
 			</ul>
 			<p>9. Go to your

@@ -14,7 +14,7 @@
 			<h1>EOS API Interface List</h1>
 			<h2>List of all interfaces in the EOS API</h2>
 			<div>
-				<div>8 mins to read</div>
+				<div>11 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -23,212 +23,387 @@
 			<div>
 				<h2 id="achievements-interface">Achievements Interface</h2>
 			</div>
-			<p>The following EOS_Achievements_* functions allow you to query existing achievement definitions that have been defined for your application. You can also query achievement progress data for users. In addition, you can also unlock one or more achievements directly. You can also receive notifications when achievements are unlocked.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/achievements">Achievements Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Use the Achievements Interface to do the following:</p>
+			<ul>
+				<li>Retrieve data about the state of a specific player's achievements.</li>
+				<li>Unlock achievements manually via calls.</li>
+				<li>Retrieve data about all of the achievements belonging to an application.</li>
+			</ul>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/achievements">Achievements Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/achievements">Achievements Interface documentation</a>
+					for more information on the Achievements Interface.</li>
+			</ul>
 			<div>
-				<h2 id="anticheatclient-interface">AntiCheatClient Interface</h2>
+				<h2 id="anti-cheat-interfaces">Anti-Cheat Interfaces</h2>
 			</div>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/anti-cheat-client">AntiCheatClient Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
-			<div>
-				<h2 id="anticheatserver-interface">AntiCheatServer Interface</h2>
-			</div>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/anti-cheat-server">AntiCheatServer Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>You can use the Anti-Cheat interfaces to help reduce cheating in online multiplayer play. They provide tools to start your game client in an anti-cheat protected mode which is then validated by either a game server (using the Anti-Cheat Server Interface) or another game client (using the Anti-Cheat Client Interface). These interfaces are not digital rights management (DRM) or code obfuscation tools and are not useful for offline or solo play.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the Anti-Cheat Interface API references for more information on the APIs:
+					<ul>
+						<li>See the
+							<a href="/docs/api-ref/interfaces/anti-cheat-server">Anti-Cheat Server Interface API Reference</a>
+							for more information on the Anti-Cheat Server APIs.</li>
+						<li>See the
+							<a href="/docs/api-ref/interfaces/anti-cheat-client">Anti-Cheat Client Interface API Reference</a>
+							for more information on the Anti-Cheat Client APIs.</li>
+					</ul>
+				</li>
+				<li>See the
+					<a href="/docs/game-services/anti-cheat/anti-cheat-interfaces">Anti-Cheat Interfaces documentation</a>
+					for more information on the Anti-Cheat interfaces.</li>
+			</ul>
 			<div>
 				<h2 id="auth-interface">Auth Interface</h2>
 			</div>
-			<p>The Auth Interface is used to manage local user permissions and access to backend services through the verification of various forms of credentials. All Auth Interface calls take a handle of type EOS_HAuth as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetAuthInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/auth">Auth Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>You can use the Auth Interface to let players sign in to their Epic Games account directly from your game. Use the interface to authenticate players, get access tokens, and handle other account-related interactions with Epic Online Services. When a player signs in to their Epic Games account, you can give them access to other Epic Account Services such as Friends, Presence, User Info and Ecom Interfaces.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/auth">Auth Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface documentation</a>
+					for more information on the Auth Interface.</li>
+			</ul>
 			<div>
 				<h2 id="connect-interface">Connect Interface</h2>
 			</div>
-			<p>The Connect Interface is used to manage local user permissions and access to backend services through the verification of various forms of credentials. It creates an association between third party providers and an internal mapping that allows Epic Online Services to represent a user agnostically. All Connect Interface calls take a handle of type EOS_HConnect as the first parameter. This handle can be retrieved from a EOS_HPlatform handle by using the EOS_Platform_GetConnectInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/connect">Connect Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>You can use the Connect Interface to let players sign in to your game through a supported identity provider.</p>
+			<p>The Connect Interface:</p>
+			<ul>
+				<li>Provides access to the Epic Online Services (EOS) Game Services.</li>
+				<li>Generates a common unique player identifier within the cross-platform services.</li>
+				<li>Links external identity providers' accounts to our services.</li>
+			</ul>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/connect">Connect Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/eos-connect-interface">Connect Interface documentation</a>
+					for more information on the Connect Interface.</li>
+			</ul>
 			<div>
-				<h2 id="custominvites-interface">CustomInvites Interface</h2>
+				<h2 id="custom-invites-interface">Custom Invites Interface</h2>
 			</div>
-			<p>The Custom Invites Interface is designed to allow developers to have custom game Invite and Join operations driven by the Notification Service and supported by the Overlay (if desired). All Custom Invites Interface calls take a handle of type EOS_HCustomInvites as the first parameter. This handle can be retrieved from a EOS_HPlatform handle by using the EOS_Platform_GetCustomInvitesInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/custom-invites">CustomInvites Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Custom Invites interface is designed to allow titles to use the built-in Epic Online Services (EOS) Connect messaging to send and receive invites with an arbitrary payload. This should be considered the only viable invite interface for titles which already have an existing, robust invitation system and want players to be able to integrate sending and receiving those invites through the EOS Social Overlay UI.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/custom-invites">Custom Invites Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/custom-invites-interface">Custom Invites Interface documentation</a>
+					for more information on the Custom Invites Interface.</li>
+			</ul>
 			<div>
 				<h2 id="ecom-interface">Ecom Interface</h2>
 			</div>
-			<p>The Ecom Interface exposes all catalog, purchasing, and ownership
-				<em>entitlement</em>
-				features available with the Epic Games store All Ecom Interface calls take a handle of type EOS_HEcom as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetEcomInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/ecom">Ecom Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Ecom Interface gives developers using Epic Online Services the ability to interact with the Epic Games Store. With this interface, you can manage products ranging from full games and downloadable content (DLC) to virtual goods and in-game currency. This includes making offers, completing purchase transactions, verifying ownership, and redeeming purchased items.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/ecom">Ecom Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-games-store/services/ecom">Ecom Interface documentation</a>
+					for more information on the Ecom Interface.</li>
+			</ul>
 			<div>
 				<h2 id="friends-interface">Friends Interface</h2>
 			</div>
-			<p>The Friends Interface is used to manage a user's friends list, by interacting with the backend services, and to retrieve the cached list of friends, blocked users and pending invitations. All Friends Interface calls take a handle of type EOS_HFriends as the first parameter. This handle can be retrieved from a EOS_HPlatform handle by using the EOS_Platform_GetFriendsInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/friends">Friends Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Playing games with your friends and meeting new players online are important parts of many online services. The Epic Online Services (EOS) SDK uses the Friends Interface to retrieve the friends list for a signed-in player.</p>
+			<p>Friends lists are stored by the online service's servers. Friends lists can change during a session as friends are added or removed or if friends grant or revoke consent for the game to use their information.</p>
+			<p>Upon successful completion of a friends list query, the Friends Interface creates a local cache that is used by all other Friends Interface functions. Additionally the SDK receives notifications from other Epic Games services about events that lead to mutations of the friends list, such as a friend being removed, an invite being accepted or a friend revoking their consent to have their information used by the game.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/friends">Friends Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface documentation</a>
+					for more information on the Friends Interface.</li>
+			</ul>
 			<div>
-				<h2 id="integratedplatform-interface">IntegratedPlatform Interface</h2>
+				<h2 id="integrated-platform-interface">Integrated Platform Interface</h2>
 			</div>
-			<p>To add integrated platforms, you must call EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer to create an integrated platform options container. To modify that handle, call EOS_IntegratedPlatformOptionsContainer_* methods. Once you are finished, call EOS_Platform_Create with your handle. You must then release your integrated platform options container handle by calling EOS_IntegratedPlatformOptionsContainer_Release.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/integrated-platform">IntegratedPlatform Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>If you want to release your game with Epic Online Services (EOS) on multiple platforms and allow players to use the Social Overlay across these platforms, then you need to use the Integrated Platform API and register a number of callbacks when you initialize the EOS SDK. This allows players to use the Social Overlay across platforms to invite other players to join their game or allow other players to request to join their game.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/integrated-platform">Integrated Platform Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the documentation for more information on native platform integration:
+					<ul>
+						<li>See the
+							<a href="/docs/game-services/eos-platform-interface#native-platform-integration">Native Platform Integration</a>
+							documentation for more information on the Platform Interface.</li>
+						<li>See the
+							<a href="/docs/epic-account-services/social-overlay-overview/social-overlay-for-crossplay">How to Use the Social Overlay for Crossplay</a>
+							documentation for more information on how to integrate the Social Overlay into your game.</li>
+					</ul>
+				</li>
+			</ul>
 			<div>
 				<h2 id="kws-interface">KWS Interface</h2>
 			</div>
-			<p>This interface is not available for general access at this time. The KWS Interface exists as an integration for age gating functionality provided by Kids Web Services from SuperAwesome, using the EOS Connect interface. All KWS Interface calls take a handle of type EOS_HKWS as the first parameter. This handle can be retrieved from a EOS_HPlatform handle by using the EOS_Platform_GetKWSInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/kws">KWS Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>This interface is not available for general access at this time. Instead, you can integrate Kids Web Services into your game using a dedicated API that is separate from the EOS SDK.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the Kids Web Services website at
+					<a href="https://www.kidswebservices.com/">www.kidswebservices.com</a>
+					for more information.</li>
+			</ul>
 			<div>
 				<h2 id="leaderboards-interface">Leaderboards Interface</h2>
 			</div>
-			<p>The following EOS_Leaderboards_* functions allow you to query existing leaderboard definitions that have been defined for your application. You can retrieve a list of scores for the top users for each Leaderboard. You can also query scores for one or more users.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/leaderboards">Leaderboards Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Use the Leaderboards Interface to rank scores from your entire player base, so that players can compete with their friends or other players worldwide for the top score. Each game using EOS leaderboards can support multiple leaderboards, collecting scores from different sources, and ranking them with different scoring modes.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/leaderboards">Leaderboards Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/leaderboards">Leaderboards Interface documentation</a>
+					for more information on the Leaderboards Interface.</li>
+			</ul>
 			<div>
 				<h2 id="lobby-interface">Lobby Interface</h2>
 			</div>
-			<p>The Lobby Interface is used to manage lobbies that provide a persistent connection between users and notifications of data sharing/updates.  Lobbies may also be found by advertising and searching with the backend service. All Lobby Interface calls take a handle of type EOS_HLobby as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetLobbyInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/lobby">Lobby Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Lobbies provide a persistent connection between players for the purpose of sharing game and user states with real-time updates. Typically, players can create or join lobbies to form teams, select pre-game options, and wait for additional players to join in before playing together. Using the Lobby Interface, your players can create, join, leave, and manage lobbies.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/lobby">Lobby Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/lobbies-and-sessions/lobbies">Lobby Interface documentation</a>
+					for more information on the Lobby Interface.</li>
+			</ul>
 			<div>
 				<h2 id="metrics-interface">Metrics Interface</h2>
 			</div>
-			<p>The Metrics Interface tracks your application's usage and populates the Game Analytics dashboard in the Developer Portal. This data includes active, online instances of the game's client and server, and past sessions played by local players. All Metrics Interface calls take a handle of type EOS_HMetrics as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetMetricsInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/metrics">Metrics Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Metrics Interface tracks your game's usage and populates the Game Analytics dashboard in the Developer Portal. This data includes active, online instances of the game's client and server, and past sessions played by local players. To access the Game Analytics dashboard, sign in to the Developer Portal at
+				<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>, and select
+				<strong>Analytics</strong>
+				in the left-hand navigation.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/metrics">Metrics Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/eos-metrics-interface">Metrics Interface documentation</a>
+					for more information on the Metrics Interface.</li>
+			</ul>
 			<div>
 				<h2 id="mods-interface">Mods Interface</h2>
 			</div>
-			<p>The Mods Interface is used to manage a user's mods. Allowing a user to install/uninstall/enumerate mods. All Mods Interface calls take a handle of type EOS_HMods as the first parameter. This handle can be retrieved from a EOS_HPlatform handle by using the EOS_Platform_GetModsInterface function. NOTE: At this time, this feature is only available for desktop platforms and for products that are part of the Epic Games store.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/mods">Mods Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Use the Epic Online Services (EOS) Mods Interface to manage mods. You can only use this interface to manage mods that are on the Mod Marketplace of the Epic Games Store.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/mods">Mods Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-games-store/services/mods">Mods Interface documentation</a>
+					for more information on the Mods Interface.</li>
+			</ul>
 			<div>
 				<h2 id="p2p-interface">P2P Interface</h2>
 			</div>
-			<p>P2P functions to help manage sending and receiving of messages to peers. These functions will attempt to punch through NATs, but will fallback to using Epic relay servers if a direct connection cannot be established.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/p-2-p">P2P Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The P2P Interface enables games implementing the Epic Online Services (EOS) SDK to set up and manage peer-to-peer (P2P) connections between players. This enables them to send and receive data between one another directly, typically for the purpose of a multiplayer game. Connections made with the EOS P2P Interface are only established between authenticated players, and are secure-by-default using DTLS, which provides two distinct advantages. First, the speed of handling peer-to-peer connections is significantly increased, in that EOS's authentication greatly reduces the need for connections to be re-negotiated. Second, the process of securely handling connections is itself greatly simplified for the SDK user, abstracting out the need for detailed network socket management and condensing most functions to what data needs to be sent and to whom.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/p-2-p">P2P Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/p-2-p">P2P Interface documentation</a>
+					for more information on the P2P Interface.</li>
+			</ul>
 			<div>
-				<h2 id="playerdatastorage-interface">PlayerDataStorage Interface</h2>
+				<h2 id="player-data-storage-interface">Player Data Storage Interface</h2>
 			</div>
-			<p>The following EOS_PlayerDataStorage_* functions allow you to query file metadata; create/upload files; and duplicate, read, and delete existing files</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/player-data-storage">PlayerDataStorage Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Player Data Storage Interface enables developers using Epic Online Services (EOS) to save encrypted, player-specific, game-specific data to cloud servers. Data that you store through this interface is accessible to the player on any device where they can sign in. The Player Data Storage Interface supports any file format; typical use cases would include saved games and replay data.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/player-data-storage">Player Data Storage Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/player-data-storage">Player Data Storage Interface documentation</a>
+					for more information on the Player Data Storage Interface.</li>
+			</ul>
 			<div>
 				<h2 id="presence-interface">Presence Interface</h2>
 			</div>
-			<p>The Presence methods enable you to query and read other player's
-				<em>presence</em>
-				information, or modify your own. QueryPresence must be called once per login, per remote user, before data will be available. It is currently only possible to query presence for users that are on your friends list, all other queries will return no results.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/presence">Presence Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>With the Presence Interface, your game can share a local player's status, known as
+				<span>
+					<span aria-label="tooltip presence" tabindex="0" role="button">presence</span>
+				</span>, and query the presence of other players online. A game can also share transient data of the player with others, in order to share more detailed information about the state of the local player. Players can only receive presence information about other players with whom they are friends.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/presence">Presence Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-account-services/eos-presence-interface">Presence Interface documentation</a>
+					for more information on the Presence Interface.</li>
+			</ul>
 			<div>
-				<h2 id="progressionsnapshot-interface">ProgressionSnapshot Interface</h2>
+				<h2 id="progression-snapshot-interface">Progression Snapshot Interface</h2>
 			</div>
-			<p>Progression Snapshots allow you to store player specific game state. BeginSnapshot must be called to obtain a handle for a given player. AddProgression allows you to add Key/Value pairs that represent some state for that player in the game. SubmitSnapshot sends all the progression data you have added (via AddProgression) to the service. EndSnapshot cleans up internal resources allocated for that snapshot. DeleteSnapshot wipes out all data associated with a particular player.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/progression-snapshot">ProgressionSnapshot Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Progression Snapshot Interface allows storing player-specific game data for the purposes of supporting an end-user experience for Epic Games
+				<span>
+					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
+				</span>
+				merging. As of today, the concept of merging two separate Epic Games accounts, owned by the same player, into a single Epic Games account does not exist. However, this type of account merging is a feature that will be made available to players with Epic Games accounts in the future.</p>
+			<p>The progression snapshot feature becomes relevant for players in cases where they have two separate Epic Games accounts, and have played the same game on both of the accounts. In such a case, if the player chooses to merge their Epic Games accounts into a single account, the EOS Overlay will be able to present a snapshot view of their game progress for both accounts. This allows players to choose their preferred game progression to preserve as a result of the account merge operation.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/progression-snapshot">Progression Snapshot Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-account-services/progression-snapshot">Progression Snapshot Interface documentation</a>
+					for more information on the Progression Snapshot Interface.</li>
+			</ul>
 			<div>
 				<h2 id="reports-interface">Reports Interface</h2>
 			</div>
-			<p>The following EOS_Reports_* functions allow you to send reports directly from the players to the back-end services without having to route these through a game server.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/reports">Reports Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Reports Interface stores in-game player behavior reports. You can query these player reports from your Developer Portal to view the details of reported player behaviors, for example, cheating, verbal abuse, offensive profiles, and so on. This interface provides information that you can then use with the Sanctions Interface to conduct any punitive actions.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/reports">Reports Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/reports-interface">Reports Interface documentation</a>
+					for more information on the Reports Interface.</li>
+				<li>See the
+					<a href="/docs/game-services/sanctions-interface">Sanctions Interface documentation</a>
+					for more information on the Sanctions Interface.</li>
+			</ul>
 			<div>
-				<h2 id="rtc-interface">RTC Interface</h2>
+				<h2 id="real-time-communication-rtc-interface">Real-Time Communication (RTC) Interface</h2>
 			</div>
-			<p>The RTC Interface is used to manage joining and leaving rooms.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/rtc">RTC Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Real-Time Communication (RTC) Interface is used to manage voice chat rooms.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/rtc">Real-Time Communication (RTC) Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/real-time-communication-interface">Real-Time Communication (RTC) Interface documentation</a>
+					for more information on the RTC Interface.</li>
+			</ul>
 			<div>
 				<h2 id="sanctions-interface">Sanctions Interface</h2>
 			</div>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/sanctions">Sanctions Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Sanctions Interface manages punitive actions taken against your players. Actions might include temporary or permanent bans from gameplay or communication bans that limit the social aspects of your
+				<span>
+					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
+				</span>
+				for a particular player. You define the disciplinary actions for your product to handle negative behavior based on your use cases.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/sanctions">Sanctions Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/sanctions-interface">Sanctions Interface documentation</a>
+					for more information on the Sanctions Interface.</li>
+			</ul>
 			<div>
 				<h2 id="sessions-interface">Sessions Interface</h2>
 			</div>
-			<p>The Session Interface is used to manage sessions that can be advertised with the backend service All Session Interface calls take a handle of type EOS_HSessions as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetSessionsInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/sessions">Sessions Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Epic Online Services (EOS) gives players the ability to host, find, and interact with online gaming sessions through the Sessions Interface. A session can be short, for example, filling a certain number of player slots before starting a game, then disbanding after the game ends. It can also be longer, for example, keeping track of a game that cycles through matches on multiple maps or levels. The Sessions Interface also manages game-specific data that supports the EOS service searching and matchmaking functionality.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/sessions">Sessions Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/lobbies-and-sessions/sessions">Sessions Interface documentation</a>
+					for more information on the Sessions Interface.</li>
+			</ul>
 			<div>
 				<h2 id="stats-interface">Stats Interface</h2>
 			</div>
-			<p>The Stats Interface manages user stats like number of items collected, fastest completion time for a level, number of wins/losses, number of times that a user has performed a certain action, and so on. You can use stats to determine when to unlock achievements and how to use rank users in leaderboards. All Stats Interface calls take a handle of type EOS_HStats as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetStatsInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/stats">Stats Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Stats Interface provides the ability for developers to manage players' stats for an application, which can include any statistical data that a developer wishes to track, such as the number of items collected, the player's fastest completion time for a level, the total number of victories or losses, or the number of times that a player has performed a certain action. You can use stats to determine when to unlock achievements and how to rank players in leaderboards.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/stats">Stats Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/eos-stats-interface">Stats Interface documentation</a>
+					for more information on the Stats Interface.</li>
+				<li>See the
+					<a href="/docs/game-services/achievements">Achievements Interface documentation</a>
+					for more information on the Achievements Interface.</li>
+				<li>See the
+					<a href="/docs/game-services/leaderboards">Leaderboards Interface documentation</a>
+					for more information on the Leaderboards Interface.</li>
+			</ul>
 			<div>
-				<h2 id="titlestorage-interface">TitleStorage Interface</h2>
+				<h2 id="title-storage-interface">Title Storage Interface</h2>
 			</div>
-			<p>The following EOS_TitleStorage_* functions allow you to query metadata for available files from title storage as well as download and read their contents.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/title-storage">TitleStorage Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>The Title Storage Interface enables developers using Epic Online Services (EOS) to retrieve encrypted data from cloud servers. Data that you store through this interface is accessible to any player on any device where they can log in. While similar to the
+				<a href="/docs/game-services/player-data-storage">Player Data Storage Interface</a>, this interface is specialized to handle game-specific data rather than player-specific data, and can provide different versions of files based on the player's platform, region, or other conditions.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/title-storage">Title Storage Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/game-services/title-storage">Title Storage Interface documentation</a>
+					for more information on the Title Storage Interface.</li>
+				<li>See the
+					<a href="/docs/game-services/title-storage#differences-from-player-data-storage">Differences from Player Data Storage</a>
+					section of the Title Storage Interface documentation for more specific information about the differences between the Title Storage Interface and the Player Data Storage Interface.</li>
+			</ul>
 			<div>
 				<h2 id="ui-interface">UI Interface</h2>
 			</div>
-			<p>The UI Interface is used to access the Social Overlay UI.  Each UI component will have a function for opening it.  All UI Interface calls take a handle of type EOS_HUI as the first parameter. This handle can be retrieved from an EOS_HPlatform handle by using the EOS_Platform_GetUIInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/ui">UI Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Epic Online Services (EOS) supports product-independent overlay windows through the EOS Overlay. The UI Interface is used to access the EOS Overlay UI and its components. The overlays give players product-independent access to various features. The UI Interface manages interactions with the overlays by providing status updates, showing or hiding the overlays, and adjusting display and hotkey preferences.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/ui">UI Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-account-services/eosui-interface">UI Interface documentation</a>
+					for more information on the UI Interface.</li>
+				<li>See the
+					<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eos-overlay-overview">EOS Overlay Overview documentation</a>
+					for more information on the EOS Overlay.</li>
+			</ul>
 			<div>
-				<h2 id="userinfo-interface">UserInfo Interface</h2>
+				<h2 id="user-info-interface">User Info Interface</h2>
 			</div>
-			<p>The UserInfo Interface is used to receive user information for Epic Account IDs from the backend services and to retrieve that information once it is cached. All UserInfo Interface calls take a handle of type EOS_HUserInfo as the first parameter. This handle can be retrieved from a EOS_HPlatform handle by using the EOS_Platform_GetUserInfoInterface function.</p>
-			<p>You can dive deeper into the
-				<a href="/docs/api-ref/interfaces/user-info">UserInfo Interface API Reference</a>
-				for a complete technical reference, or receive guidance and usage instructions from the
-				<a href="/docs/">main documentation site</a>.</p>
+			<p>Each Epic Online Services (EOS) player
+				<span>
+					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
+				</span>
+				has a unique identifier that the service uses internally to refer to the account. The User Info Interface bridges the gap between the player's account identifier and information about the player, such as display name, country and preferred language, and so on. You can retrieve this information for both remote players and signed-in, local players.</p>
+			<p>Further information:</p>
+			<ul>
+				<li>See the
+					<a href="/docs/api-ref/interfaces/user-info">User Info Interface API Reference</a>
+					for more information on the APIs.</li>
+				<li>See the
+					<a href="/docs/epic-account-services/eos-user-info-interface">User Info Interface documentation</a>
+					for more information on the User Info Interface.</li>
+			</ul>
 		</section>
 		<aside>
 			<div>Contents</div>
@@ -238,10 +413,7 @@
 						<a href="#achievements-interface">Achievements Interface</a>
 					</li>
 					<li>
-						<a href="#anticheatclient-interface">AntiCheatClient Interface</a>
-					</li>
-					<li>
-						<a href="#anticheatserver-interface">AntiCheatServer Interface</a>
+						<a href="#anti-cheat-interfaces">Anti-Cheat Interfaces</a>
 					</li>
 					<li>
 						<a href="#auth-interface">Auth Interface</a>
@@ -250,7 +422,7 @@
 						<a href="#connect-interface">Connect Interface</a>
 					</li>
 					<li>
-						<a href="#custominvites-interface">CustomInvites Interface</a>
+						<a href="#custom-invites-interface">Custom Invites Interface</a>
 					</li>
 					<li>
 						<a href="#ecom-interface">Ecom Interface</a>
@@ -259,7 +431,7 @@
 						<a href="#friends-interface">Friends Interface</a>
 					</li>
 					<li>
-						<a href="#integratedplatform-interface">IntegratedPlatform Interface</a>
+						<a href="#integrated-platform-interface">Integrated Platform Interface</a>
 					</li>
 					<li>
 						<a href="#kws-interface">KWS Interface</a>
@@ -280,19 +452,19 @@
 						<a href="#p2p-interface">P2P Interface</a>
 					</li>
 					<li>
-						<a href="#playerdatastorage-interface">PlayerDataStorage Interface</a>
+						<a href="#player-data-storage-interface">Player Data Storage Interface</a>
 					</li>
 					<li>
 						<a href="#presence-interface">Presence Interface</a>
 					</li>
 					<li>
-						<a href="#progressionsnapshot-interface">ProgressionSnapshot Interface</a>
+						<a href="#progression-snapshot-interface">Progression Snapshot Interface</a>
 					</li>
 					<li>
 						<a href="#reports-interface">Reports Interface</a>
 					</li>
 					<li>
-						<a href="#rtc-interface">RTC Interface</a>
+						<a href="#real-time-communication-rtc-interface">Real-Time Communication (RTC) Interface</a>
 					</li>
 					<li>
 						<a href="#sanctions-interface">Sanctions Interface</a>
@@ -304,13 +476,13 @@
 						<a href="#stats-interface">Stats Interface</a>
 					</li>
 					<li>
-						<a href="#titlestorage-interface">TitleStorage Interface</a>
+						<a href="#title-storage-interface">Title Storage Interface</a>
 					</li>
 					<li>
 						<a href="#ui-interface">UI Interface</a>
 					</li>
 					<li>
-						<a href="#userinfo-interface">UserInfo Interface</a>
+						<a href="#user-info-interface">User Info Interface</a>
 					</li>
 				</ul>
 			</div>

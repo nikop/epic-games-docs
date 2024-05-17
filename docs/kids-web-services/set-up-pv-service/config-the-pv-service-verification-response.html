@@ -1,0 +1,173 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Configure the PV service verification response</h1>
+			<h2>How to configure the PV service verification response that receives the successful verification event from KWS.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<h2 id="introduction">Introduction</h2>
+			</div>
+			<p>When a parent successfully verifies their identity using the PV service, KWS can notify your app or service by redirecting them to a URL (of your choice) with a 'verification response'.</p>
+			<p>The verification response will contain the verification status of the parent alongside a signature that you use to confirm the payload’s authenticity.</p>
+			<p>We recommend you use the verification response
+				<strong>in addition</strong>
+				to the
+				<a href="/docs/kids-web-services/set-up-pv-service/config-pv-webhook">‘parent-verified’</a>
+				webhook. Both contain the same information (parent verification status), but using both provides redundancy in case one fails to reach your app or service for any reason.</p>
+			<p>To receive verification responses, you must make the following updates to the PV service settings for each product:</p>
+			<ul>
+				<li>
+					<a href="#provide-a-redirect-url">Set up a redirect URL</a>
+					that the service will use for callbacks.</li>
+				<li>Use the
+					<strong>
+						<a href="#use-the-secret-code-to-verify-the-payload-signature">Verification Response secret code</a>
+					</strong>, which is shown in the service settings, to generate your own copy of the payload signature to confirm its authenticity. If the signatures match, the payload is genuine.</li>
+			</ul>
+			<div>
+				<p>NOTE: Your Test and Production environments use different Verification Response secret codes.</p>
+			</div>
+			<div>
+				<h2 id="provide-a-redirect-url">Provide a redirect URL</h2>
+			</div>
+			<ol>
+				<li>Log in to the
+					<a href="/docs/kids-web-services/kws-platform/about-kws-dev-portal">KWS Developer Portal</a>.</li>
+				<li>Select the
+					<strong>Product</strong>
+					you want to configure (in the
+					<strong>Dashboard</strong>).</li>
+				<li>Click the
+					<strong>Services</strong>
+					tab.</li>
+				<li>Click
+					<strong>View or Edit</strong>
+					in the
+					<strong>Parent Verification</strong>
+					panel.</li>
+				<li>The settings for your product are then displayed. Enter the
+					<strong>redirect URL</strong>. The redirect URL is where the service will redirect a user to after a successful verification.
+					<div>
+						<p>IMPORTANT:</p>
+						<ul>
+							<li>Do not include sensitive information in the redirect URL that an attacker might use (for example, numeric IDs that may be iterated over easily).</li>
+							<li>Do not include special characters in your URL.</li>
+						</ul>
+					</div>
+				</li>
+				<li>Click
+					<strong>Publish to Test</strong>.</li>
+			</ol>
+			<div>
+				<h2 id="use-the-secret-code-to-verify-the-payload-signature">Use the secret code to verify the payload signature</h2>
+			</div>
+			<p>When you activate the PV service, the
+				<strong>Verification Response secret code</strong>
+				is displayed in your product's integration details in the Parent Verification service settings:</p>
+			<div tabindex="0" aria-label="Secret code image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Secret code" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>Click image for full size.</p>
+				</figcaption>
+			</div>
+			<p>
+				<strong>Note</strong>: In the image above, the verification response secret code is intentionally blank, but your code will be displayed.</p>
+			<p>When KWS redirects to the redirect URL you provided, it will attach a query with a common structure wrapping the event-specific payload:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>The payload signature is generated via HMAC_SHA256 using the status and payload values in the query and the Verification Response secret code displayed in your product’s integration details in the Parent Verification service settings.</p>
+			<p>On your app or service’s side, you need to generate a matching signature using the algorithm shown below from the status, payload, and
+				<strong>Verification Response secret code</strong>. If the signature you created matches the v1 signature that was passed to you in the query, you can confirm that the redirection was sent by KWS.</p>
+			<div>
+				<p>NOTE: Both status and payload must be used as raw strings exactly as they are sent in the query. Do not parse and re-stringify the JSON as this may result in mismatched signatures due to inconsistencies in JSON library implementations.</p>
+			</div>
+			<div>
+				<h3 id="query-structure">Query structure</h3>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="signatures">Signatures</h3>
+			</div>
+			<p>Signatures are a HMAC_SHA256 hash in hex format (lowercase), where the secret key is the
+				<strong>Verification Response secret code</strong>
+				provided in the
+				<strong>Parent Verification service</strong>
+				settings. Signature key rotation is not currently supported.</p>
+			<p>The algorithm to generate v1 signatures is a HMAC_SHA256 of the status included in the query, followed by a colon (':'), followed by the payload included in the query. Initialize the HMAC with your Verification Response secret code.</p>
+			<p>For example:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<p>NOTE: The redirect URL is intentionally not part of the signature algorithm. This allows easier signature validation within services that might modify the request URL, such as reverse-proxies, load-balancers, among others.</p>
+			</div>
+			<div>
+				<h2 id="next-step">Next step</h2>
+			</div>
+			<p>
+				<a href="/docs/kids-web-services/set-up-pv-service/config-api">Integrate with the KWS API</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<ul>
+					<li>
+						<a href="#introduction">Introduction</a>
+					</li>
+					<li>
+						<a href="#provide-a-redirect-url">Provide a redirect URL</a>
+					</li>
+					<li>
+						<a href="#use-the-secret-code-to-verify-the-payload-signature">Use the secret code to verify the payload signature</a>
+					</li>
+					<li>
+						<a href="#query-structure">Query structure</a>
+					</li>
+					<li>
+						<a href="#signatures">Signatures</a>
+					</li>
+					<li>
+						<a href="#next-step">Next step</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</section>
+	<section></section>
+</section>

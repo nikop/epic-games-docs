@@ -80,9 +80,7 @@
 			<p>After you've enabled RTC data for a voice chat room, your game can send data. The sample code below gives an example of how to send data:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Void SendData(const std::vector&lt;uint8_t&gt; Data){  EOS_RTCData_SendDataOptions SendDataOptions{};  SendDataOptions.ApiVersion = EOS_RTCDATA_SENDDATA_API_LATEST;  SendDataOptions.LocalUserId = CurrentLocalUserId;  SendDataOptions.RoomName = CurrentRoomName;  SendDataOptions.Data = static_cast&lt;void*&gt;(Data.data());  SendDataOptions.DataLengthBytes = Data.length();   EOS_HRTC RTCHandle = EOS_Platform_GetRTCInterface(PlatformHandle);  EOS_HRTCData RTCDataHandle = EOS_RTC_GetDataInterface(RTCHandle);   EOS_EResult Result = EOS_RTCData_SendData(RTCDataHandle, &amp;SendDataOptions);   if (Result != EOS_EResult::EOS_Success)  {    LogError("Can't send data through data channel");  }}</pre>
 				</section>
 			</div>
 			<div>

@@ -14,7 +14,7 @@
 			<h1>Get Started</h1>
 			<h2>How to set up EOS Epic Account Services with your game.</h2>
 			<div>
-				<div>13 mins to read</div>
+				<div>14 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -414,9 +414,49 @@
 					</pre>
 				</section>
 			</div>
-			<p>To request additional permissions, modify the scope parameter in the authorization request with a space-delimited list of the required permissions. For example,
-				<code>scope=basic_profile friends_list</code>.</p>
-			<p>You then need to configure the redirect URL for the client in the Developer Portal.</p>
+			<p>To request additional permissions, there are two steps:</p>
+			<ul>
+				<li>Step 1: Modify the
+					<code>scope</code>
+					parameter in the authorization request with a space-delimited list of the permissions you require.<br>
+					For example,
+					<code>scope=basic_profile friends_list</code>.</li>
+				<li>Step 2: Configure the redirect URL for the client in the Developer Portal.</li>
+			</ul>
+			<p>To configure the redirect URL, go to the Clients tab on the Product Settings page of the Developer Portal.<br>
+				To do this:</p>
+			<ol>
+				<li>
+					<p>Go to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>Make sure you are in the correct organization relating to your product.<br>
+						To do this:</p>
+					<ul>
+						<li>Select the Organization icon and name from the top of the left navigation’s dropdown menu.</li>
+						<li>If you need to change organization, follow the onscreen instructions to choose the correct one.</li>
+					</ul>
+				</li>
+				<li>
+					<p>On the left navigation, select the name of your product and then
+						<strong>Product Settings</strong>.</p>
+				</li>
+				<li>
+					<p>On the Product Settings page, select the
+						<strong>Clients</strong>
+						tab.</p>
+				</li>
+				<li>
+					<p>Under the list of
+						<strong>Clients</strong>, locate the client you want to update and click on the three dots (...) to open the options menu.</p>
+				</li>
+				<li>
+					<p>Follow the onscreen instructions to edit the client.</p>
+					<p>When you click
+						<strong>Save edits</strong>, in this dialog, you are done.</p>
+				</li>
+			</ol>
 			<p>When a user logs in, they are asked to approve the requested permissions. After accepting, they are redirected back to your application with a
 				<code>code</code>
 				parameter. This code is used when requesting an access token.</p>

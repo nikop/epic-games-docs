@@ -34,29 +34,40 @@
 					<a href="#generate-your-signature-using-the-secret-code">Generate a signature</a>
 					using the
 					<strong>Webhook secret code</strong>
-					that KWS provides in your product's integration details in the
-					<strong>Parent Verification</strong>
-					tab. The secret code is used to sign the payload to confirm the webhook is a genuine call from KWS.</li>
+					which is shown in the service settings. The secret code is used to sign the payload to confirm the webhook is a genuine call from KWS.</li>
 			</ul>
 			<div>
-				<p>NOTE: Your Test environment and Production environment each come with their own unique webhook secret code.</p>
+				<p>NOTE: Your Test and Production environments use different Webhook secret codes.</p>
 			</div>
 			<div>
 				<h2 id="provide-a-webhook-url">Provide a webhook URL</h2>
 			</div>
 			<ol>
 				<li>
-					<p>To get to your PV service settings, select your product in the
-						<strong>Dashboard</strong>, then click the
-						<strong>Services</strong>
-						tab, and in the
-						<strong>Parent Verification</strong>
-						panel, click
-						<strong>View or Edit</strong>.</p>
+					<p>Log in to the
+						<a href="/docs/kids-web-services/kws-platform/about-kws-dev-portal">KWS Developer Portal</a>.</p>
 				</li>
 				<li>
-					<p>In your PV service settings, enter the
-						<strong>Successful verification webhook URL</strong>. This is where KWS sends the webhook that confirms successful verification.</p>
+					<p>Select the
+						<strong>Product</strong>
+						you want to configure (in the
+						<strong>Dashboard</strong>).</p>
+				</li>
+				<li>
+					<p>Click the
+						<strong>Services</strong>
+						tab.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>View or Edit</strong>
+						in the
+						<strong>Parent Verification</strong>
+						panel. This displays the settings for your product.</p>
+				</li>
+				<li>
+					<p>Enter the
+						<strong>Successful verification webhook URL</strong>. KWS will send a POST request to this URL to notify you of any successful verification.</p>
 					<div>
 						<p>IMPORTANT:</p>
 						<ul>
@@ -216,8 +227,9 @@
 			<div>
 				<h2 id="next-step">Next step</h2>
 			</div>
-			<p>
-				<a href="/docs/kids-web-services/set-up-pv-service/config-the-pv-service-verification-response">Configure the PV service verification response</a>.</p>
+			<p>We recommend that to add redundancy, you also configure your product to receive the PV service verification response. If you decide to only handle the webhook, then you must
+				<a href="/docs/kids-web-services/set-up-pv-service/config-api">integrate with the KWS API</a>
+				next.</p>
 		</section>
 		<aside>
 			<div>Contents</div>

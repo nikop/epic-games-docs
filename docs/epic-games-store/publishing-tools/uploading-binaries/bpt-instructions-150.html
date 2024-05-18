@@ -182,9 +182,7 @@
 				parameter, then your client secret should be passed verbatim as the value of the parameter:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecret="&lt;YourClientSecret&gt;"</pre>
 				</section>
 			</div>
 			<p>If using the
@@ -192,9 +190,7 @@
 				parameter, then you pass the name of an OS environment variable which contains the client secret:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;set MyEpicSecret=&lt;YourClientSecret&gt;	Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecretEnvVar="MyEpicSecret"</pre>
 				</section>
 			</div>
 			<p>
@@ -211,9 +207,7 @@
 			<p>This will process your binary , upload it to our cloud storage, and register the binary with our backend:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	        -OrganizationId="&lt;YourOrg&gt;"	        -ProductId="&lt;YourProduct&gt;"	        -ArtifactId="&lt;YourArtifact&gt;"	        -ClientId="&lt;YourClientId&gt;"	        -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	        -mode=UploadBinary	        -BuildRoot="&lt;LocationOfLocalBuild&gt;"	        -CloudDir="&lt;YourCloudDir&gt;"	        -BuildVersion="&lt;YourBuildVersion&gt;"	        -AppLaunch="&lt;AppToRun&gt;"	        -AppArgs="&lt;LaunchArguments&gt;" 	Optional:	        -FileList="&lt;LocationOfFileList&gt;"	        -FileAttributeList="&lt;LocationOfAttributesFile&gt;"	        -FileIgnoreList="&lt;LocationOfIgnoreFile&gt;"</pre>
 				</section>
 			</div>
 			<p>Descriptions for each of the parameters that you have to specify are below. You can also add the "-help" option after any mode (e.g.
@@ -370,9 +364,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	     -OrganizationId="&lt;YourOrg&gt;"	     -ProductId="&lt;YourProduct&gt;"	     -ArtifactId="&lt;YourArtifact&gt;"	     -ClientId="&lt;YourClientId&gt;"	     -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	     -mode=LabelBinary	     -BuildVersion="&lt;YourBuildVersion&gt;"	     -Label="&lt;LabelName&gt;"	     -Platform="&lt;Platform&gt;"		 -SandboxId="&lt;YourSandbox&gt;"</pre>
 				</section>
 			</div>
 			<div>
@@ -464,9 +456,7 @@
 				Mode:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -OrganizationId="&lt;YourOrg&gt;"	          -ProductId="&lt;YourProduct&gt;"	          -ArtifactId="&lt;YourArtifact&gt;"	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	          -mode=UnlabelBinary	          -BuildVersion="&lt;YourBuildVersion&gt;"	          -Label="&lt;LabelName&gt;"	          -Platform="&lt;Platform&gt;"			  -SandboxId="&lt;YourSandbox&gt;"</pre>
 				</section>
 			</div>
 			<div>
@@ -550,9 +540,7 @@
 				Mode:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -OrganizationId="&lt;YourOrg&gt;"	          -ProductId="&lt;YourProduct&gt;"	          -ArtifactId="&lt;YourArtifact&gt;"	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	          -mode=ListBinaries 	Optional:	          -OnlyLabeled	          -Num="&lt;NumberOfBinariesReturned&gt;"	          -OutputFile="&lt;OutputFileName&gt;"</pre>
 				</section>
 			</div>
 			<div>
@@ -690,9 +678,7 @@
 				to another without having to re-upload the binary. This is useful when you want to move a final binary from a Staging artifact to a Live artifact.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -OrganizationId="&lt;YourOrg&gt;"	          -ProductId="&lt;YourProduct&gt;"	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	          -mode=CopyBinary	          -BuildVersion="&lt;VersionToCopy&gt;"	          -SourceArtifactId="&lt;SourceArtifact&gt;"	          -DestArtifactId="&lt;DestArtifact&gt;"</pre>
 				</section>
 			</div>
 			<div>
@@ -768,9 +754,7 @@
 				Tool Mode calculates the difference between two binaries that were already uploaded and outputs statistics for applying the update between them.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -OrganizationId="&lt;YourOrg&gt;"	          -ProductId="&lt;YourProduct&gt;"	          -ArtifactId="&lt;YourArtifact&gt;"	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	          -mode=DiffBinaries	          -BuildVersionA="&lt;FirstBuildVersionToCompare&gt;"	          -BuildVersionB="&lt;SecondBuildVersionToCompare&gt;" 	          Optional:	          -InstallTagsA="&lt;FirstInstallTagSet&gt;"	          -InstallTagsB="&lt;SecondInstallTagSet&gt;"	          -CompareTagSet="&lt;DiffInstallTagSet&gt;"	          -OutputFile="&lt;OutputFileName&gt;"</pre>
 				</section>
 			</div>
 			<div>
@@ -873,9 +857,7 @@
 			<p>The following is a sample command line to improve delta patching between two binaries:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe	          -OrganizationId="&lt;YourOrg&gt;"	          -ProductId="&lt;YourProduct&gt;"	          -ArtifactId="&lt;YourArtifact&gt;"	          -ClientId="&lt;YourClientId&gt;"	          -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"	          -mode=BinaryDeltaOptimise	          -CloudDir="&lt;YourCloudDir&gt;"	          -BuildVersionA="&lt;YourSourceBuildVersion&gt;"	          -BuildVersionB="&lt;YourDestinationBuildVersion&gt;" 	          Optional	          -DiffAbortThreshold="&lt;UpperLimitInBytes&gt;"</pre>
 				</section>
 			</div>
 			<div>
@@ -966,9 +948,7 @@
 				was already run between the two provided BuildVersion values, the process will succeed short circuiting the operation, indicated in the output.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Running optimisation for patching 1.3.0-Windows -&gt; 1.3.1-Windows 	** Chunk delta optimization already completed for provided manifests. **	Loaded- optimised delta file E:/CloudDir/Deltas/jd63jdu7-jsg58dh58dki8dk323/a5nbd0jbweof98fvytsvnthcsvf.delta</pre>
 				</section>
 			</div>
 			<p>Once the processing is completed, the output will show the improvement achieved.</p>
@@ -1001,9 +981,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Final unknown compressed bytes, plus meta 400000	Original unknown compressed bytes         1000000	Improvement: 60%</pre>
 				</section>
 			</div>
 			<div>
@@ -1054,9 +1032,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Please check your provided %OrganizationId%, %ProductId% and ArtifactId are correct, and that you should have access to create binaries for this artifact.	Tool exited with: 6</pre>
 				</section>
 			</div>
 			<p>
@@ -1067,9 +1043,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>CloudDir, BuildRoot, ArtifactId, BuildVersion, AppLaunch, and AppArgs are required parameters	Tool exited with: 2</pre>
 				</section>
 			</div>
 			<p>
@@ -1080,9 +1054,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Please ensure you have specified ClientId and also one of ClientSecret or ClientSecretEnvVar. If using ClientSecretEnvVar, ensure the env variable is properly set.	Tool exited with: 9</pre>
 				</section>
 			</div>
 			<p>
@@ -1093,9 +1065,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>An authentication error occurred - Check you have specified ClientId, and either ClientSecret or ClientSecretEnvVar parameters correctly. Message: Sorry the client credentials you are using are invalid	Tool exited with: 10</pre>
 				</section>
 			</div>
 			<p>
@@ -1106,9 +1076,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>An unexpected error occurred. Error code: errors.com.epicgames.common.missing_permission; Error message: Sorry your login does not possess the permissions 'artifact:o-7kyv8uwtz74njnl544kbxzt5xqephw:3bc138d96fb24d9597d4bbff23b9ecee:asdfasd READ' needed to perform the requested operation	Tool exited with: 5</pre>
 				</section>
 			</div>
 			<p>

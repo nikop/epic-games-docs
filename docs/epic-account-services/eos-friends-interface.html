@@ -170,11 +170,7 @@
 				<code>EOS_AS_FriendsManagement</code>
 				scope controls whether the signed-in player can make changes or view pending changes to their social graph, such as their friend status. This scope is not enabled by default. When the scope is not enabled, the EOS SDK returns only the Friends (<code>EOS_FS_Friends</code>) and Not Friends (<code>EOS_FS_NotFriends</code>) statuses. It does not return the Invite Sent (<code>EOS_FS_InviteSent</code>) and Invite Received (<code>EOS_FS_InviteReceived</code>) statuses. However, you do not need to handle these statuses in your game, because the Social Overlay handles pending invites for you, which includes these statuses. For information on the Social Overlay, see
 				<a href="/docs/epic-account-services/social-overlay-overview">Social Overlay Overview</a>.</p>
-			<p>Friends lists can change at any time, both from in-game events like meeting new players, and from out-of-game events like the player modifying the
-				<span>
-					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
-				</span>
-				from a separate system. Games do not need and should not call
+			<p>Friends lists can change at any time, both from in-game events like meeting new players, and from out-of-game events like the player modifying the account from a separate system. Games do not need and should not call
 				<code>EOS_Friends_QueryFriends</code>
 				more than once per login of a player. However, after a player logs out, their friends list must be queried again if they log in again. To keep a game's local copy of the friends list up to date, subscribe to friend status update notifications.</p>
 			<div>

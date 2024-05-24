@@ -1,0 +1,50 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Troubleshooting Network Connection Issues</h1>
+			<h2>Recommendations for troubleshooting network connection issues for lobbies and player-hosted sessions.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Sometimes a player's network is restrictive and does not allow all traffic through their firewall. To help overcome this restriction, we recommend that you use the EOS Peer-to-Peer (P2P) Interface for player-hosted sessions and lobbies. The EOS P2P interface uses the following methods to try to establish the peer-to-peer connection between players:</p>
+			<ul>
+				<li>Direct local network connection:
+					<ul>
+						<li>EOS P2P attempts to connect players to each other using the local IP address of each player’s device. If the players are on the same subnet of the local network, or if the players are directly connected to the internet, this connection is likely to succeed. A direct local network connection has the least amount of latency. However, this type of connection is not common, since players are usually on different networks and behind networking devices (such as a router) that provide a firewall and a private IP subnet.</li>
+					</ul>
+				</li>
+				<li>Direct public internet connection:
+					<ul>
+						<li>If the EOS P2P Interface cannot establish a direct local network connection between players, EOS P2P communicates with a STUN (Session Traversal Utilities for NAT) server to determine the public IP address and port of each player’s device. EOS P2P uses this information to attempt to connect both players to each other. A direct public internet connection is the most common type of peer-to-peer connection. It doesn’t have the latency issues that exist on a relayed internet connection.</li>
+					</ul>
+				</li>
+				<li>Relayed internet connection:
+					<ul>
+						<li>If a player's firewall is too restrictive, the EOS P2P interface uses a secure relay to communicate data between players. Each player sends their data to a TURN (Traversal Using Relays around NAT) server, which then forwards that data to the other player’s game client. Since a TURN server must receive data and then relay that data, it can introduce additional latency when it relays the data. The amount of latency depends on how close both players are to the relay server.</li>
+					</ul>
+					For more information on how the EOS P2P interface uses relays to establish the peer-to-peer connection between players, see the section on:
+					<a href="/docs/game-services/p-2-p#relay-control">Relay Control</a>
+					in the
+					<em>NAT P2P Interface</em>
+					page.</li>
+			</ul>
+			<p>
+				<strong>Note</strong>: If you use the EOS P2P Interface, Epic Games handles the peer-to-peer connection for you, so you do not need to host your own relay servers. If you don't use the EOS P2P Interface and instead choose to handle your game's networking yourself, we still recommend that you implement STUN and or TURN for player-hosted sessions and lobbies yourself. However, due to the bandwidth costs and latency associated with TURN, we recommend you only use TURN as a last resort.</p>
+		</section>
+	</section>
+	<section></section>
+</section>

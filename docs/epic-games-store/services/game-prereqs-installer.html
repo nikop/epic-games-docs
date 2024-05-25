@@ -74,7 +74,9 @@
 			<p>The following batch file snippet example demonstrates how to run the UE3Redist installer as the first step.</p>
 			<div>
 				<section>
-					<pre>SET UE3_PREREQ_IDS="UE3Redist"    SET UE3_PREREQ_PATH="Binaries\Windows\UE3Redist.exe"    SET UE3_PREREQ_ARGS=""     BuildPatchTool … -mode=UploadBinary -PrereqIds=%UE3_PREREQ_IDS%      -PrereqPath=%UE3_PREREQ_PATH%      -PrereqArgs=%UE3_PREREQ_ARGS%</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>The prerequisite ID is an optional parameter, it is used to control if a prerequisite installer is to run again. Without the prerequisite ID, the installer will always run again if the file has changed. Using the prerequisite ID, the installer will only get called again for an update if the prerequisite ID set changes. This can be triggered by adding, removing, or changing an existing ID.</p>
@@ -98,13 +100,17 @@
 				installer in a Windows subdirectory.</p>
 			<div>
 				<section>
-					<pre>reg query HKEY_CLASSES_ROOT\Installer\Products\70140BF22CB7C94419A535B0925B0EEF     if %ERRORLEVEL% EQU 0 goto LAUNCH_UE3_GAME     .\Windows\UE3Redist.exe     :LAUNCH_UE3_GAME    UE3Game.com %*</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>The BuildPatchTool setup for this is as follows:</p>
 			<div>
 				<section>
-					<pre>BuildPatchTool … -mode=PatchGeneration -FeatureLevel=Latest -AppLaunch="Binaries\UE3Game.bat" …</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 		</section>

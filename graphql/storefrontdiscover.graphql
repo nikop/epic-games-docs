@@ -149,6 +149,55 @@ query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String
           type
           title
           modules {
+            ... on StorefrontCarouselV2 {
+              id
+              title
+              type
+              carouselOfferType
+              topicId
+              tagIdentifier
+              slideCount
+              slidesRef
+              carouselSlides {
+                title
+                eyebrow
+                offer {
+                  namespace
+                  id
+                }
+                description
+                videoRecipe
+                link {
+                  src
+                  linkText
+                }
+                image {
+                  src
+                  altText
+                }
+                mobileImage {
+                  src
+                  altText
+                }
+                thumbnail {
+                  src
+                  altText
+                }
+                regionRestrictions {
+                  filterType
+                  appliedCountries
+                }
+              }
+              topicOffers {
+                offerId
+                namespace
+                rank
+              }
+              catalogOffers {
+                offerId
+                namespace
+              }
+            }
             ... on StorefrontBreaker {
               id
               type

@@ -35,6 +35,55 @@ query getCategory($locale: String, $slug: String) {
         }
         title
       }
+      carousel {
+        id
+        title
+        type
+        carouselOfferType
+        topicId
+        tagIdentifier
+        slideCount
+        slidesRef
+        carouselSlides {
+          title
+          eyebrow
+          offer {
+            namespace
+            id
+          }
+          description
+          videoRecipe
+          link {
+            src
+            linkText
+          }
+          image {
+            src
+            altText
+          }
+          mobileImage {
+            src
+            altText
+          }
+          thumbnail {
+            src
+            altText
+          }
+          regionRestrictions {
+            filterType
+            appliedCountries
+          }
+        }
+        topicOffers {
+          offerId
+          namespace
+          rank
+        }
+        catalogOffers {
+          offerId
+          namespace
+        }
+      }
     }
   }
 }

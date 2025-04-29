@@ -1,9 +1,7 @@
 ﻿using AngleSharp;
-using AngleSharp.Html;
 
 using EpicDocSync;
 
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 using System.Globalization;

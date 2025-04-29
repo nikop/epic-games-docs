@@ -1,0 +1,11 @@
+query EulaGroupQuery($groupId: String!, $country: String) {
+  Eula {
+    getAgreementGroup(groupId: $groupId, country: $country) {
+      countries
+      groupId
+      key
+      updatedAt
+      createdAt
+    }
+  }
+}

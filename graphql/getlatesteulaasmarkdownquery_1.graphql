@@ -1,11 +1,17 @@
-query getLatestEulaAsMarkdownQuery($eulaId: String!, $accountId: String, $locale: String!) {
+query getLatestEulaAsMarkdownQuery($eulaId: String!, $accountId: String, $locale: String!, $country: String) {
   Eula {
-    getLatestEulaAsMarkdown(key: $eulaId, accountId: $accountId, locale: $locale) {
+    getLatestEulaAsMarkdown(
+      key: $eulaId
+      accountId: $accountId
+      locale: $locale
+      country: $country
+    ) {
       title
       body
       locale
       version
       accepted
+      key
     }
   }
 }

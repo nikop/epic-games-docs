@@ -113,6 +113,8 @@ query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String
                     decimals
                     symbol
                   }
+                  dualPrice
+                  dualOriginalPrice
                 }
                 lineOffers {
                   appliedRules {
@@ -226,6 +228,47 @@ query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String
               }
               videoRecipe
             }
+            ... on StorefrontAdvancedBanner {
+              __typename
+              id
+              title
+              type
+              bannerSize
+              eyebrow
+              description
+              legalSubtext
+              bannerLayout
+              ctaOrientation
+              secondaryCtaStyle
+              mainCtaLink {
+                  src
+                  linkText
+              }
+              secondaryCtaLink {
+                  src
+                  linkText
+              }
+              backgroundImage {
+                  src
+                  altText
+              }
+              mobileImage {
+                  src
+                  altText
+              }
+              logoImage {
+                  src
+                  altText
+              }
+              regionRestrictions {
+                  filterType
+                  appliedCountries
+              }
+              offer {
+                  namespace
+                  id
+              }
+            }
             ... on StorefrontCardGroup {
               id
               type
@@ -310,6 +353,8 @@ query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String
                         decimals
                         symbol
                       }
+                      dualPrice
+                      dualOriginalPrice
                     }
                     lineOffers {
                       appliedRules {
@@ -334,6 +379,132 @@ query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String
                     id
                   }
                 }
+              }
+            }
+            ... on StorefrontBrandedList {
+              __typename
+              id
+              title
+              type
+              offers {
+                namespace
+                id
+                offer {
+                  title
+                  id
+                  namespace
+                  description
+                  keyImages {
+                    type
+                    url
+                  }
+                  seller {
+                    id
+                    name
+                  }
+                  productSlug
+                  urlSlug
+                  items {
+                    id
+                    namespace
+                  }
+                  customAttributes {
+                    key
+                    value
+                  }
+                  categories {
+                    path
+                  }
+                  catalogNs {
+                    mappings(pageType: "productHome") {
+                      pageSlug
+                      pageType
+                    }
+                  }
+                  offerMappings {
+                    pageSlug
+                    pageType
+                  }
+                  price(country: $country) {
+                    totalPrice {
+                      discountPrice
+                      originalPrice
+                      voucherDiscount
+                      discount
+                      fmtPrice(locale: $locale) {
+                        originalPrice
+                        discountPrice
+                        intermediatePrice
+                      }
+                      currencyCode
+                      currencyInfo {
+                        decimals
+                        symbol
+                      }
+                    }
+                    lineOffers {
+                      appliedRules {
+                        id
+                        endDate
+                      }
+                    }
+                  }
+                  releaseDate
+                  pcReleaseDate
+                  effectiveDate
+                  viewableDate
+                  approximateReleasePlan {
+                    day
+                    month
+                    quarter
+                    year
+                    releaseDateType
+                  }
+                  prePurchase
+                  countriesBlacklist
+                  countriesWhitelist
+                  developerDisplayName
+                  publisherDisplayName
+                  tags {
+                    id
+                  }
+                }
+              }
+              offerCount
+              offerType
+              topicId
+              hideTitle
+              cardOrder
+              eyebrow
+              legalSubtext
+              mainCtaLink {
+                linkText
+                src
+              }
+              secondaryCtaLink {
+                linkText
+                src
+              }
+              secondaryCtaStyle
+              backgroundImage {
+                src
+                alt
+              }
+              logoImage {
+                src
+                alt
+              }
+              regionRestrictions {
+                filterType
+                appliedCountries
+              }
+              offer {
+                id
+                namespace
+              }
+              titleLink {
+                linkText
+                src
               }
             }
           }
@@ -367,17 +538,6 @@ query storefrontDiscover($layoutSlug: String, $locale: String!, $country: String
           type
           title
           content
-        }
-      }
-      pageTheme {
-        preferredMode
-        light {
-          theme
-          accent
-        }
-        dark {
-          theme
-          accent
         }
       }
       faq {

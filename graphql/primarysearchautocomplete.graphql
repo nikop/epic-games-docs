@@ -1,4 +1,4 @@
-query primarySearchAutocomplete($allowCountries: String, $category: String, $count: Int, $country: String, $keywords: String, $locale: String, $sortBy: String, $sortDir: String) {
+query primarySearchAutocomplete($allowCountries: String, $category: String, $count: Int, $country: String, $keywords: String!, $locale: String, $sortBy: String, $sortDir: String) {
   Catalog {
     searchStore(
       allowCountries: $allowCountries
@@ -11,15 +11,23 @@ query primarySearchAutocomplete($allowCountries: String, $category: String, $cou
       sortDir: $sortDir
     ) {
       elements {
-        countriesBlacklist
-        countriesWhitelist
-        customAttributes {
-          key
-          value
-        }
-        isCodeRedemptionOnly
         offerId: id
         sandboxId: namespace
+        title
+      }
+      paging {
+        total
+      }
+    }
+  }
+  ExternalCatalog {
+    externalCatalogSearch(keyword: $keywords, count: $count) {
+      elements {
+        gameId
+        title
+        coverImageUrl
+        url
+        developerDisplayName
       }
       paging {
         total

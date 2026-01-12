@@ -116,6 +116,8 @@ query collectionLayoutQuery($locale: String, $country: String!, $slug: String) {
               discountPrice
               intermediatePrice
             }
+            dualPrice
+            dualOriginalPrice
           }
           lineOffers {
             appliedRules {
@@ -126,17 +128,6 @@ query collectionLayoutQuery($locale: String, $country: String!, $slug: String) {
         }
         tags {
           id
-        }
-      }
-      pageTheme {
-        preferredMode
-        light {
-          theme
-          accent
-        }
-        dark {
-          theme
-          accent
         }
       }
       redirect {

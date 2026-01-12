@@ -1,0 +1,13 @@
+query getWebShopConfig($locale: String!, $sandboxId: String!, $templateId: String) {
+  Product {
+    sandbox(sandboxId: $sandboxId) {
+      configuration(locale: $locale, templateId: $templateId) {
+        ... on WebShopConfiguration {
+          configs {
+            webShopEnabled
+          }
+        }
+      }
+    }
+  }
+}

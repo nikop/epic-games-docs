@@ -68,18 +68,6 @@ query playerProfilePrivate($epicAccountId: String!, $locale: String!, $page: Int
       }
     }
   }
-  ContentControl {
-    get {
-      __typename
-      ... on ContentControlGetSuccess {
-        status
-        data {
-          controlsEnabled
-          maxEpicProfilePrivacy
-        }
-      }
-    }
-  }
   Friends {
     summary {
       outgoing {

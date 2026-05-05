@@ -1,0 +1,207 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Custom Invites Interface</h1>
+			<h2>Manage your game's player-invitation system through the EOS Overlay's Social Overlay UI.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				The
+				<strong>Custom Invites Interface</strong>
+				requires SDK 1.14.1 or higher.</p>
+			<p>If your game has its own player-invitation system, you can use the Custom Invites Interface to manage this through the Social Overlay UI (the Social Overlay is part of the EOS Overlay).</p>
+			<p>The Custom Invites Interface is an EOS Game Services interface that you use with Social Overlay. Note that the Social Overlay is a feature of the Accounts and Social group of services, which are EOS Epic Account Services and use the Auth Interface for player authentication, but the Custom Invites Interface is an EOS Game Service and uses the Connect Interface for player authentication.</p>
+			<p>
+				<strong>Custom Invites and the Social Overlay</strong>
+			</p>
+			<p>If you require players to send and receive invites through the Social Overlay’s UI using your game’s own player-invitation system, you must use the Custom Invites Interface. For more information on the Social Overlay, see the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/introduction">Social Overlay</a>
+				documentation.</p>
+			<p>
+				<strong>Custom Invites and the Epic Games Launcher</strong>
+			</p>
+			<p>EOS transports and delivers custom invites to the Epic Games Store and the Epic Games Launcher in the same way it transports and delivers session and lobby invites. When the Store or Launcher receives a custom invite, EOS prompts the player with a UI notification indicating the invite’s sender and the game they are sending it from. If the player accepts the invitation, the relevant game starts.</p>
+			<div>
+				<h3 id="send-a-custom-invite">Send a Custom Invite</h3>
+			</div>
+			<div>
+				<h4 id="prepare-custom-invite-payload">Prepare Custom Invite Payload</h4>
+			</div>
+			<p>A Custom Invite Payload is an FString that may be no longer than
+				<strong>
+					<code>EOS_CUSTOMINVITES_MAX_PAYLOAD_LENGTH</code>
+				</strong>
+				characters (currently 500). Its contents are opaque to the SDK and are delivered as-is to the receiving user.</p>
+			<div>
+				<h4 id="set-custom-invite-payload">Set Custom Invite Payload</h4>
+			</div>
+			<p>Before attempting to send a Custom Invite or allow the local player to use the Social Overlay to send a Custom Invite, use the
+				<strong>
+					<code>EOS_CustomInvites_SetCustomInvite</code>
+				</strong>
+				to set the Custom Invite Payload. All calls to
+				<strong>
+					<code>EOS_CustomInvites_SendCustomInvite</code>
+				</strong>
+				and all Invitations initiated by the player via the
+				<strong>Invite to game</strong>
+				button in the Social Overlay will use this payload.</p>
+			<div>
+				<h4 id="send-custom-invite-via-eossdk">Send Custom Invite via EOSSDK</h4>
+			</div>
+			<p>Once a payload has been set, you can use
+				<strong>
+					<code>EOS_CustomInvites_SendCustomInvite</code>
+				</strong>
+				to send an invite to the specified user or group of users.</p>
+			<div>
+				<h4 id="send-custom-invite-via-social-overlay">Send Custom Invite via Social Overlay</h4>
+			</div>
+			<p>Whenever a Custom Invite Payload has been set via
+				<strong>
+					<code>EOS_CustomInvites_SetCustomInvite</code>
+				</strong>, the Social Overlay will allow the local player to use the
+				<strong>Invite to game</strong>
+				button to send an invite with the currently set Custom Invite Payload to their friends.</p>
+			<p>For more information on the Social Overlay, see the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/sdk-integration">Social Overlay and SDK integration</a>
+				documentation.</p>
+			<div>
+				<h3 id="process-a-custom-invite">Process a Custom Invite</h3>
+			</div>
+			<div>
+				<p>
+					<strong>Note:</strong>
+					The EOS Overlay is installed by the Epic Games Launcher. Game applications can also install it as part of their prerequisites using the
+					<a href="/docs/epic-online-services/accounts-and-social/crossplay/redistributable-installer">EOS service redistributable installer</a>. For more information on custom invites in the Social Overlay, see the
+					<a href="/docs/epic-online-services/accounts-and-social/social-overlay/sdk-integration">Social Overlay and SDK integration</a>
+					documentation.</p>
+			</div>
+			<div>
+				<h4 id="custom-invite-callback-functions">Custom Invite Callback Functions</h4>
+			</div>
+			<p>You can register to these functions to receive notifications for custom invite events. This lets you detect and process custom invites, and create custom UI to respond to them. You should call these functions prior to login, as the act of logging in and initializing can discover pending custom invites that generate immediate notifications. The table below lists the available callback functions that you can register to for custom invite notifications:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Notification</th>
+						<th>Callback Function</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Invite Received</td>
+						<td>Call
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-custom-invite-received">
+								<code>EOS_CustomInvites_AddNotifyCustomInviteReceived</code>
+							</a>
+							to receive notifications when any logged in local user receives a custom invite. You must call
+							<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-custom-invite-received">
+								<code>EOS_CustomInvites_RemoveNotifyCustomInviteReceived</code>
+							</a>
+							to remove the notification.</td>
+					</tr>
+					<tr>
+						<td>Invited Accepted</td>
+						<td>Call
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-custom-invite-accepted">
+								<code>EOS_CustomInvites_AddNotifyCustomInviteAccepted</code>
+							</a>
+							to receive notifications when any logged in local user accepts a custom invite. You must call
+							<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-custom-invite-accepted">
+								<code>EOS_CustomInvites_RemoveNotifyCustomInviteAccepted</code>
+							</a>
+							to remove the notification.</td>
+					</tr>
+					<tr>
+						<td>Invite Rejected</td>
+						<td>Call
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-custom-invite-rejected">
+								<code>EOS_CustomInvites_AddNotifyCustomInviteRejected</code>
+							</a>
+							to receive notifications when any logged in local user rejects a custom invite. You must call
+							<a href="/docs/api-ref/functions/eos-custom-invites-remove-notify-custom-invite-rejected">
+								<code>EOS_CustomInvites_RemoveNotifyCustomInviteRejected</code>
+							</a>
+							to remove the notification.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>After you've handled the custom invite (accepted or rejected by the user), you must call
+				<a href="/docs/api-ref/functions/eos-custom-invites-finalize-invite">
+					<code>EOS_CustomInvites_FinalizeInvite</code>
+				</a>
+				to remove it from both the internal SDK and the Social Overlay's awareness.</p>
+			<div>
+				<h3 id="policy-configuration">Policy Configuration</h3>
+			</div>
+			<p>You must
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide#create-a-custom-client-policy">create a custom client policy</a>
+				and enable the Notification service with the
+				<code>userRequired</code>
+				checkbox selected and allow:</p>
+			<ul>
+				<li>
+					<strong>
+						<code>sendCustomInviteToAnyUser</code>
+					</strong>: Allows the user to send a custom invite to any user.</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#send-a-custom-invite">Send a Custom Invite</a>
+								</li>
+								<li>
+									<a href="#prepare-custom-invite-payload">Prepare Custom Invite Payload</a>
+								</li>
+								<li>
+									<a href="#set-custom-invite-payload">Set Custom Invite Payload</a>
+								</li>
+								<li>
+									<a href="#send-custom-invite-via-eossdk">Send Custom Invite via EOSSDK</a>
+								</li>
+								<li>
+									<a href="#send-custom-invite-via-social-overlay">Send Custom Invite via Social Overlay</a>
+								</li>
+								<li>
+									<a href="#process-a-custom-invite">Process a Custom Invite</a>
+								</li>
+								<li>
+									<a href="#custom-invite-callback-functions">Custom Invite Callback Functions</a>
+								</li>
+								<li>
+									<a href="#policy-configuration">Policy Configuration</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

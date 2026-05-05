@@ -1,0 +1,267 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Get Started With EOS — 4. Next Steps</h1>
+			<h2>Suggested next steps that you can take with the EOS SDK.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">3. Set Up the EOS SDK</a>
+			</p>
+			<p>This section of the guide provides some suggested next steps that you can take with the EOS SDK, along with available guides, general guidance, and workflow best practices.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you follow this section of the guide, complete section
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps">3. Set Up the EOS SDK</a>.</p>
+			<div>
+				<h2 id="next-steps">Next Steps</h2>
+			</div>
+			<p>You can complete the following steps in any order:</p>
+			<ul>
+				<li>
+					<a href="#step-a-follow-the-requirements-and-recommendations-to-run-the-eos-sdk">Step A: Follow the Requirements and Recommendations to Run the EOS SDK</a>
+				</li>
+				<li>
+					<a href="#step-b-review-additional-resources">Step B: Review Additional Resources</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="step-a-follow-the-requirements-and-recommendations-to-run-the-eos-sdk">Step A: Follow the Requirements and Recommendations to Run the EOS SDK</h3>
+			</div>
+			<p>To run the EOS SDK, you must call certain API functions (listed in
+				<a href="#required-api-calls">Required API Calls</a>). We recommend that you also set up logging for the EOS SDK (see
+				<a href="#set-up-logging">Set Up Logging</a>).</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>The EOS SDK is not thread-safe. You must make all EOS SDK API calls from the main thread. For details, see the
+					<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-safety">EOS SDK Conventions and Limitations &gt; Thread Safety</a>
+					documentation.</li>
+				<li>You must authenticate your players for them to use EOS services. For more information, see the following documentation:
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+							— Authenticate players using EOS Epic Account Services.</li>
+						<li>
+							<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>
+							— Authenticate players using EOS Game Services.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>To run the EOS SDK with our recommendations, see the
+				<a href="#eos-sdk-example-workflow">EOS SDK Example Workflow</a>
+				section below.</p>
+			<div>
+				<h4 id="required-api-calls">Required API Calls</h4>
+			</div>
+			<div>
+				<h5 id="set-up-ticking">Set Up Ticking</h5>
+			</div>
+			<p>For the EOS SDK to operate, you must regularly call EOS_Platform_Tick (also known as "Tick") on your Platform Interface instance. We recommend that you call Tick every frame, or at least often enough to target 30-60 FPS. For example, you could make one call to Tick every 16 milliseconds to target 60 FPS.</p>
+			<p>EOS SDK callbacks can only run when you call Tick, so all of your asynchronous operations depend on you calling Tick. Adjust the frequency of the call to suit the needs of your game.</p>
+			<p>For more information, see the EOS API
+				<a href="/docs/api-ref/functions/eos-platform-tick">
+					<code>EOS_Platform_Tick</code>
+					function</a>
+				documentation.</p>
+			<p>
+				<strong>Note:</strong>
+				To limit the amount of ticking per millisecond, set the
+				<code>TickBudgetInMilliseconds</code>
+				property of the
+				<a href="/docs/api-ref/structs/eos-platform-options">
+					<code>EOS_Platform_Options</code>
+					data structure</a>.</p>
+			<div>
+				<h5 id="shut-down-the-eos-sdk">Shut Down the EOS SDK</h5>
+			</div>
+			<p>There is a shutdown order that you must follow.</p>
+			<ul>
+				<li>If you have integrated the EOS SDK with a game that you distribute or run on a proprietary platform (such as Steam, macOS, Xbox, PlayStation or Nintendo Switch), you must shut down the EOS SDK before you shut down the platform's SDK.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							This does not apply to the Epic Games Store's Epic Games Launcher or mobile (iOS, Android) platforms.</li>
+					</ul>
+				</li>
+				<li>Make sure the memory reference in your callbacks is still valid, because the EOS SDK might call callbacks during shutdown.</li>
+			</ul>
+			<p>If you don't follow this shutdown order, your game might crash.</p>
+			<p>
+				<strong>Note:</strong>
+				On mobile (iOS, Android), we do not recommend programmatic shutdown.</p>
+			<p>When you're done using the EOS SDK (generally at game shutdown time), follow these steps to shut down the EOS SDK:</p>
+			<ol>
+				<li>Call the EOS API function to release your Platform Interface instance.
+					<ul>
+						<li>Documentation:
+							<a href="/docs/api-ref/functions/eos-platform-release">
+								<code>EOS_Platform_Release</code>
+							</a>
+							<ul>
+								<li>
+									<strong>Note:</strong>
+									This process is final. This function puts the EOS SDK into a finalized state, and you cannot acquire another Platform Interface handle or reinitialize the EOS SDK after that point. For this reason, we recommend that you do not shut down the EOS SDK until game shutdown.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Call the EOS API to complete the shutdown process.
+					<ul>
+						<li>Documentation:
+							<a href="/docs/api-ref/functions/eos-shutdown">
+								<code>EOS_Shutdown</code>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ol>
+			<p>
+				<strong>Warning:</strong>
+				<br>
+				Some editor environments, including Unity, load external libraries such as EOS during editor startup and do not unload them until the editor shuts down. This means that they use a continuous instance of the EOS SDK. In this situation, do not call the platform release or platform shutdown functions at the end of an in-editor play session.</p>
+			<p>If you call either of these functions at the end of an in-editor play session, the following happens:</p>
+			<ul>
+				<li>To initialize the EOS SDK successfully in any future session, you must restart the editor.</li>
+				<li>Operations that begin just before the end of a play session might continue to run and trigger callbacks in a subsequent play session.</li>
+			</ul>
+			<div>
+				<h4 id="set-up-logging">Set Up Logging</h4>
+			</div>
+			<p>The EOS SDK outputs useful log messages that contain debugging information. This information can give you insight into internal operations and help you identify the causes of unexpected behavior. To receive these log messages, you must integrate the EOS Logging Interface into your game to enable the EOS Logging service.</p>
+			<p>We recommend that you integrate the EOS Logging Interface into your game immediately after you initialize the EOS SDK. Use the "very verbose" log level for development, because it provides the most information. For more information, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>
+				documentation.</p>
+			<div>
+				<h4 id="eos-sdk-example-workflow">EOS SDK Example Workflow</h4>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				The EOS SDK is not thread-safe. You must make all EOS SDK API calls from the main thread. For details, see the
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-safety">EOS SDK Conventions and Limitations &gt; Thread Safety</a>
+				documentation.</p>
+			<p>Here is an example workflow that demonstrates the order you must use for the EOS API calls from the main thread of your game. You must call the EOS API
+				<a href="/docs/api-ref/functions/eos-platform-tick">
+					<code>EOS_Platform_Tick</code>
+					function</a>
+				in your main game loop to "tick" your Platform Interface instance on a regular interval. If you don't do this, the EOS API callback functions do not run (see
+				<em>Set Up Ticking</em>
+				section above). In the example, the main game loop is represented by the while loop
+				<code>while(bShouldTick)</code>.</p>
+			<p>
+				<strong>Note:</strong>
+				The following example is only pseudo-code, intended to demonstrate a broad overview of how to use the EOS SDK. Make sure you tailor the code to the unique circumstances of your game.</p>
+			<p>Example:</p>
+			<div>
+				<section>
+					<pre>// Note: The following is only pseudo-code. Make sure you tailor the code to the unique circumstances of your game. // Create an instance of your EOS SDK config struct.Config = new EOSSdkConfig(); // Initialize the EOS SDK using your platform manager class.InitializeEOSSdk(Config); // Enable EOS Logging (see Logging Interface documentation). // Create the platform instance using your platform manager class.CreatePlatformInstance(Config); // Sign in the local player with the Auth Interface using Epic Account Services. // Sign in the local player with the Connect Interface using Game Services.  // Initialize any other EOS SDK interfaces here, such as Stats, Leaderboards, or Achievements. // Main game loop.while(bShouldTick){    // Tick the platform here. This allows asynchronous EOS SDK functions to run and callback functions to be called. } // Shut down the EOS SDK here.</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="step-b-review-additional-resources">Step B: Review Additional Resources</h3>
+			</div>
+			<p>After you have integrated the EOS SDK into your game code, you can add different features to your game by implementing the interfaces for the EOS services. The guides, EOS Platform Interface documentation, and video overview listed below provide instructions and guidance on how to integrate EOS services into your game.</p>
+			<div>
+				<h4 id="how-to-guides">How-To Guides</h4>
+			</div>
+			<p>The how-to guides provide information on how to integrate EOS services with your game. They provide step-by-step instructions for both C++ and C#.
+			</p>
+			<p>For a full list of the available guides, see the
+				<a href="/docs/epic-online-services/how-to-guides">How-to Guides</a>
+				page.</p>
+			<p></p>
+			<div>
+				<h4 id="supplementary-eos-platform-interface-documentation">Supplementary EOS Platform Interface Documentation</h4>
+			</div>
+			<p>The
+				<em>Get Started With EOS Guide</em>
+				demonstrates how to integrate the EOS SDK into your game — this includes information about how to implement the EOS Platform Interface. For additional information about the EOS Platform Interface that is supplementary to the get started guide, see the documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">EOS Platform Interface</a>. (Note that you do not need this additional information to follow the get started guide.)</p>
+			<div>
+				<h4 id="video-overview-of-eos">Video Overview of EOS</h4>
+			</div>
+			<p>Watch the video below to get an overview of Epic Online Services (EOS), including how to add these features to your game:</p>
+			<ul>
+				<li>Cross-platform authentication</li>
+				<li>Voice chat</li>
+				<li>Matchmaking</li>
+			</ul>
+			<p>See the video on youtube.com:
+				<a href="https://www.youtube.com/watch?v=0P11Hy5ZnYs">Power Your Games with Free Epic Online Services | Unreal Fest 2022</a>.</p>
+			<div>
+				<div>
+					<iframe title="video" src="https://www.youtube-nocookie.com/embed/0P11Hy5ZnYs" width="500" height="300" frameborder="0" allowfullscreen="">Your browser does not support iframes!</iframe>
+				</div>
+				<p>
+					<em>Video: Power Your Games with Free Epic Online Services | Unreal Fest 2022</em>
+				</p>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#next-steps">Next Steps</a>
+								</li>
+								<li>
+									<a href="#step-a-follow-the-requirements-and-recommendations-to-run-the-eos-sdk">Step A: Follow the Requirements and Recommendations to Run the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#required-api-calls">Required API Calls</a>
+								</li>
+								<li>
+									<a href="#set-up-ticking">Set Up Ticking</a>
+								</li>
+								<li>
+									<a href="#shut-down-the-eos-sdk">Shut Down the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#set-up-logging">Set Up Logging</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-example-workflow">EOS SDK Example Workflow</a>
+								</li>
+								<li>
+									<a href="#step-b-review-additional-resources">Step B: Review Additional Resources</a>
+								</li>
+								<li>
+									<a href="#how-to-guides">How-To Guides</a>
+								</li>
+								<li>
+									<a href="#supplementary-eos-platform-interface-documentation">Supplementary EOS Platform Interface Documentation</a>
+								</li>
+								<li>
+									<a href="#video-overview-of-eos">Video Overview of EOS</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

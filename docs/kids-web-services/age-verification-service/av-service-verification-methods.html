@@ -1,0 +1,508 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Age Verification Service Verification Methods</h1>
+			<h2>How users can verify their age.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Age Verification (AV) Service supports several verification methods depending on the location you provide to the API. When configuring your AV Service settings, you can choose which verification methods to offer users depending on their location. KWS verification methods are designed to provide global coverage in all countries and regions recognized under the
+				<code>ISO 3166-1</code>
+				standard, unless otherwise specified for a particular method.</p>
+			<p>KWS supports the verification methods described below:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Verification Method</strong>
+						</th>
+						<th>
+							<strong>Availability</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Credit Card</td>
+						<td>Worldwide except in Belarus, Cuba, Iran, North Korea, Russia, Syria, and Ukraine</td>
+					</tr>
+					<tr>
+						<td>Debit Card</td>
+						<td>Worldwide except in Belarus, Cuba, Iran, North Korea, Russia, Syria, Ukraine, and the United Kingdom</td>
+					</tr>
+					<tr>
+						<td>ID Scan</td>
+						<td>Worldwide except in the Republic of Korea</td>
+					</tr>
+					<tr>
+						<td>Face Scan</td>
+						<td>Worldwide except in the United States and the Republic of Korea</td>
+					</tr>
+					<tr>
+						<td>Social Security Number (SSN)</td>
+						<td>United States and US territories</td>
+					</tr>
+					<tr>
+						<td>CPF</td>
+						<td>Brazil</td>
+					</tr>
+					<tr>
+						<td>CURP</td>
+						<td>Mexico</td>
+					</tr>
+					<tr>
+						<td>i-PIN</td>
+						<td>Republic of Korea</td>
+					</tr>
+					<tr>
+						<td>Cell Phone</td>
+						<td>Republic of Korea</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="credit-card">Credit Card</h2>
+			</div>
+			<p>
+				<strong>Credit card verification is available worldwide, except in Belarus, Cuba, Iran, North Korea, Russia, Syria, and Ukraine.</strong>
+			</p>
+			<p>A user in all regions except Belarus, Cuba, Iran, North Korea, Russia, Syria, and Ukraine can verify their age using a credit card. Stripe (<a href="https://stripe.com/">stripe.com</a>) verifies credit card details.</p>
+			<ul>
+				<li>For users in the United States, KWS temporarily charges $0.05 to their credit card and refunds the charge after verification is complete.</li>
+				<li>For users outside the United States, KWS authorizes a small charge in the local currency but does not withdraw the money from their credit card. For example, KWS authorizes a £0.05 charge for users in the United Kingdom.</li>
+			</ul>
+			<p>KWS uses GeoIP to determine the user's current location (country or region) and uses the local currency for these charges.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="credit-card-web-ui-screen">Credit Card Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Credit Card Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Credit Card Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompts a user to verify their age by entering their credit card details. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>You can test credit card verification using dummy card numbers in your test environment. See documentation:
+				<a href="/docs/kids-web-services/kws-testing#test-credit-or-debit-card-verification-using-test-card-numbers">Test Credit or Debit Card Verification Using Test Card Numbers</a>.</p>
+			<div>
+				<h2 id="debit-card">Debit Card</h2>
+			</div>
+			<p>
+				<strong>Debit card verification is available worldwide, except in Belarus, Cuba, Iran, North Korea, Russia, Syria, Ukraine, and the United Kingdom.</strong>
+			</p>
+			<p>A user in all regions except Belarus, Cuba, Iran, North Korea, Russia, Syria, Ukraine, and the United Kingdom can verify their age using a debit card. Stripe (<a href="https://stripe.com/">stripe.com</a>) verifies debit card details.</p>
+			<ul>
+				<li>For users in the United States, KWS temporarily charges $0.05 to their debit card and refunds the charge after verification is complete.</li>
+				<li>For users outside the United States, KWS authorizes a small charge in the local currency but does not withdraw the money from their debit card. For example, KWS authorizes a ¥0.05 charge for users in Japan.</li>
+			</ul>
+			<p>KWS uses GeoIP to determine the user's current location (country or region) and uses the local currency for these charges.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="debit-card-web-ui-screen">Debit Card Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Debit Card Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Debit Card Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompts a user to verify their age by entering their debit card details. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>You can test debit card verification using dummy card numbers in your test environment. See documentation:
+				<a href="/docs/kids-web-services/kws-testing#test-credit-or-debit-card-verification-using-test-card-numbers">Test Credit or Debit Card Verification Using Test Card Numbers</a>.</p>
+			<div>
+				<h2 id="id-scan">ID Scan</h2>
+			</div>
+			<p>
+				<strong>ID scan is available worldwide, except in the Republic of Korea.</strong>
+			</p>
+			<p>A user in all regions, except the Republic of Korea, can verify their age by scanning the front and back of their government-issued identification (ID) documentation. This method supports various forms of ID documentation from multiple jurisdictions, including passports, driver's licenses, and government-issued ID cards.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>In the United Kingdom, users will also be required to take a selfie to confirm their identity matches their ID documentation.</li>
+				<li>ID scan is available in the United States for the Age Verification Service only. It is not available in the United States for the Parent Verification Service.</li>
+			</ul>
+			<p>Contact KWS Support for a comprehensive list of permissible forms of identification at:
+				<a href="https://dev.epicgames.com/docs/en-US/kids-web-services/support">KWS Support</a>.</p>
+			<p>Veriff (<a href="https://www.veriff.com/">veriff.com</a>) verifies scanned ID documentation.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="id-scan-web-ui-screen">ID Scan Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="ID Scan Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="ID Scan Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompting a user to click a button to verify their age by taking a photo of their ID documentation. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h2 id="face-scan">Face Scan</h2>
+			</div>
+			<p>
+				<strong>Face scan is available worldwide, except in the United States and the Republic of Korea.</strong>
+			</p>
+			<p>A user in all regions, except the United States and the Republic of Korea, can verify their age using a face scan. KWS prompts the user to hold their device's camera in front of their face, and a machine-learning algorithm estimates their age.</p>
+			<p>Yoti (<a href="https://www.yoti.com/">yoti.com</a>) provides face scan verification.</p>
+			<div>
+				<h2 id="social-security-number-ssn">Social Security Number (SSN)</h2>
+			</div>
+			<p>
+				<strong>The Social Security number (SSN) verification method is only available in the United States and US territories.</strong>
+			</p>
+			<p>A user in the United States and US territories can verify their age by entering the last four digits of their Social Security number (SSN). An SSN is a 9-digit identification number issued to United States citizens and permanent residents for taxation and other purposes.</p>
+			<p>The user must enter the following information:</p>
+			<ul>
+				<li>First name</li>
+				<li>Last name</li>
+				<li>Date of birth</li>
+				<li>Address</li>
+				<li>The last four digits of their SSN</li>
+			</ul>
+			<p>Veratad (<a href="https://veratad.com/">veratad.com</a>) provides SSN verification.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="ssn-verification-web-ui-screen">SSN Verification Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="SSN Verification Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="SSN Verification Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompts a user to enter their first name, last name, date of birth, address, zip code, and the last four digits of their SSN to verify their age. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>You can test SSN verification using known 4-digit values in your test environment. See documentation:
+				<a href="/docs/kids-web-services/kws-testing#test-social-security-number-ssn-verification-using-known-values">Test Social Security Number (SSN) Verification Using Known Values</a>.</p>
+			<div>
+				<h2 id="cpf">CPF</h2>
+			</div>
+			<p>
+				<strong>The CPF number (Cadastro de Pessoas Físicas or Natural Persons Register) is available only in Brazil.</strong>
+			</p>
+			<p>A user in Brazil can verify their age using their CPF number. The CPF (Cadastro de Pessoas Físicas or Natural Persons Register) is an identification number that the Brazilian Revenue Agency assigns to Brazilian citizens and resident aliens subject to taxes in Brazil.</p>
+			<p>KWS prompts the user to enter their CPF number and date of birth.</p>
+			<p>Serpro (<a href="https://www.serpro.gov.br/">serpro.gov.br</a>) provides CPF verification.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="cpf-verification-web-ui-screen">CPF Verification Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="CPF Verification Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="CPF Verification Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompts a user to verify their age by entering their CPF number and date of birth. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>You can test CPF number verification using known values in your test environment. See documentation:
+				<a href="/docs/kids-web-services/kws-testing#test-cpf-number-using-known-values">Test CPF Number Using Known Values</a>.</p>
+			<div>
+				<h2 id="curp">CURP</h2>
+			</div>
+			<p>
+				<strong>The CURP number (Clave Única de Registro de Población, Unique Population Registry Code, or Personal ID Code Number) is available only in Mexico.</strong>
+			</p>
+			<p>A user in Mexico can verify their age using their CURP. The CURP (Clave Única de Registro de Población or Unique Population Registry Code or Personal ID Code Number) is an 18-character alphanumeric string used as a unique identification code for Mexican citizens and permanent residents.</p>
+			<p>The user must enter the following:</p>
+			<ul>
+				<li>Their 18-character CURP</li>
+				<li>First name</li>
+				<li>Last name</li>
+			</ul>
+			<p>Nubarium (<a href="https://nubarium.com/">nubarium.com</a>) provides CURP verification.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="curp-verification-web-ui-screen">CURP Verification Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="CURP Verification Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="CURP Verification Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompting a user to enter their CURP, first name, paternal last name, and maternal last name to verify their age. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h2 id="i-pin">i-PIN</h2>
+			</div>
+			<p>
+				<strong>i-PIN is available only in the Republic of Korea.</strong>
+			</p>
+			<p>A user in the Republic of Korea can verify their age using i-PIN authentication. i-PIN is a digital identification system used as an alternative to the Korean Resident Registration Number (RRN) for online services. KWS directs the user to enter their i-PIN ID and password.</p>
+			<p>The Korea Credit Bureau (KCB) (<a href="https://www.koreacb.com/">koreacb.com</a>) provides i-PIN verification.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="i-pin-verification-web-ui-screen">i-PIN Verification Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="i-PIN Verification Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="i-PIN Verification Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompting a user to click a button to verify their age using their i-PIN ID and password. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h2 id="cell-phone">Cell Phone</h2>
+			</div>
+			<p>
+				<strong>The cell phone verification method is only available in the Republic of Korea.</strong>
+			</p>
+			<p>A user in the Republic of Korea can verify their age using a cell phone number. KWS prompts the user to input additional information to confirm their age using the PASS authentication application or SMS.</p>
+			<p>For the PASS application, the user must enter the following:</p>
+			<ul>
+				<li>First name</li>
+				<li>Last name</li>
+				<li>Cell phone number</li>
+			</ul>
+			<p>For SMS, the user must enter the following:</p>
+			<ul>
+				<li>First name</li>
+				<li>Last name</li>
+				<li>First seven digits of their Korean resident registration number (RRN)</li>
+				<li>Cell phone number</li>
+			</ul>
+			<p>The Korea Credit Bureau (KCB) (<a href="https://www.koreacb.com/">koreacb.com</a>) provides cell phone verification.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="cell-phone-verification-web-ui-screen">Cell Phone Verification Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Cell Phone Verification Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Cell Phone Verification Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompting a user to click a button to verify their age using their cell phone number. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#credit-card">Credit Card</a>
+								</li>
+								<li>
+									<a href="#credit-card-web-ui-screen">Credit Card Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#debit-card">Debit Card</a>
+								</li>
+								<li>
+									<a href="#debit-card-web-ui-screen">Debit Card Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#id-scan">ID Scan</a>
+								</li>
+								<li>
+									<a href="#id-scan-web-ui-screen">ID Scan Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#face-scan">Face Scan</a>
+								</li>
+								<li>
+									<a href="#social-security-number-ssn">Social Security Number (SSN)</a>
+								</li>
+								<li>
+									<a href="#ssn-verification-web-ui-screen">SSN Verification Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#cpf">CPF</a>
+								</li>
+								<li>
+									<a href="#cpf-verification-web-ui-screen">CPF Verification Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#curp">CURP</a>
+								</li>
+								<li>
+									<a href="#curp-verification-web-ui-screen">CURP Verification Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#i-pin">i-PIN</a>
+								</li>
+								<li>
+									<a href="#i-pin-verification-web-ui-screen">i-PIN Verification Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#cell-phone">Cell Phone</a>
+								</li>
+								<li>
+									<a href="#cell-phone-verification-web-ui-screen">Cell Phone Verification Web UI Screen</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

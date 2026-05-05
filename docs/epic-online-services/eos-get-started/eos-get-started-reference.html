@@ -1,0 +1,225 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS Get Started Reference</h1>
+			<h2>Reference for getting started with Epic Online Services (EOS).</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Epic Online Services (EOS) is a free*, modular set of services that streamline implementing common game functionality. EOS services are scalable, so you can use them in your game (or other software application) whether you are an indie developer or a AAA studio. EOS services are game-engine-agnostic and available for PC (Windows, macOS, Linux), consoles, and mobile (iOS, Android).</p>
+			<p>You can integrate EOS services with your game using the EOS interfaces, whatever game engine you use, or if you use no game engine at all. If you use Unreal Engine or Unity, the EOS plugins are an optional alternative to using the EOS interfaces. (For more information:
+				<a href="/docs/epic-online-services/game-engines/game-engines-introduction">EOS SDK and Game Engines Introduction</a>.)</p>
+			<p>The EOS interfaces are available in C and C# and consist of two types of service: EOS Game Services and EOS Epic Account Services. (More information:
+				<a href="/docs/epic-online-services/eos-overview">EOS Overview</a>.)</p>
+			<p>This document provides reference information for specific use cases. For instructions to get started with EOS, see:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started with Epic Online Services</a>.</p>
+			<p>*The anti-cheat service, like all other services, is free. However, additional anti-cheat support and features are available with a paid enterprise agreement. (More information:
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-interfaces">Anti-Cheat Interfaces</a>.)</p>
+			<p>The how-to guides provide information on how to integrate EOS services with your game. They provide step-by-step instructions for both C++ and C#. For a list of the available guides, see the
+				<a href="/docs/epic-online-services/how-to-guides">How-To Guides</a>
+				page.</p>
+			<div>
+				<h2 id="eos-sdk-reference">EOS SDK Reference</h2>
+			</div>
+			<div>
+				<h3 id="eos-sdk-download-types">EOS SDK Download Types</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				If you use Unreal Engine, you do not need to download the EOS SDK. The EOS SDK is included with Unreal Engine by default.</p>
+			<p>Select a version of the EOS SDK for the platform your game client runs on. The EOS SDK is available for the following platforms:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Windows, macOS, Linux</strong>
+						<br>
+						The EOS SDK in C and the EOS SDK in C#.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Mobile</strong>
+						<br>
+						The EOS SDK for iOS and the EOS SDK for Android.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Consoles</strong>
+						<br>
+						To download the EOS SDK for game consoles, you must be a developer approved by both the platform holders and by Epic Games. The SDK is available in C and C#.<br>
+						The platform holders are Microsoft (Xbox One, Xbox Series), Sony (PlayStation 4, PlayStation 5), and Nintendo (Switch, Switch 2).</p>
+				</li>
+			</ul>
+			<p>For information about requesting approval, see the
+				<em>Access the EOS SDK for Consoles</em>
+				section below.</p>
+			<div>
+				<h3 id="access-the-eos-sdk-for-consoles">Access the EOS SDK for Consoles</h3>
+			</div>
+			<p>There are EOS SDK downloads for game consoles in C, and in C#.<br>
+				Only developers approved by the platform holders and by Epic Games can download the SDK for consoles. The platform holders are Microsoft (Xbox One, Xbox Series), Sony (PlayStation 4, PlayStation 5), and Nintendo (Switch and Switch 2).</p>
+			<p>You request access to the EOS SDK downloads for consoles and the associated documentation in the Developer Portal. To do this:</p>
+			<ol>
+				<li>Go to the Developer Portal at
+					<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</li>
+				<li>In the left navigation, click
+					<strong>Dashboard</strong>
+					if it isn't already selected.</li>
+				<li>On the Dashboard page, under the
+					<strong>Your products</strong>
+					heading, click
+					<strong>Downloads &amp; Release notes</strong>.</li>
+				<li>Select the
+					<strong>EOS SDK</strong>
+					tab.</li>
+				<li>To request access, scroll down and click
+					<strong>Request access</strong>. This takes you to guidance on how to apply for console developer access from the platform holders.</li>
+			</ol>
+			<p>After you have platform-holder approval, you can apply for Epic Games approval. To apply for Epic Games approval, complete the
+				<em>Console Developer Request for Epic Online Services</em>
+				form at
+				<a href="https://eoshelp.epicgames.com/s/console-access-request">eoshelp.epicgames.com</a>.</p>
+			<div>
+				<h3 id="eos-sdk-download-contents">EOS SDK Download Contents</h3>
+			</div>
+			<p>The EOS SDK download has the following directories:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Directory</th>
+						<th>Content</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>/Samples</code>
+						</td>
+						<td>Sample projects implementations demonstrating how the EOS SDK works.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/SDK</code>
+						</td>
+						<td>The libraries and header files you use in your game code to integrate the EOS SDK with your game so your game can use EOS services.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>/ThirdPartyNotices</code>
+						</td>
+						<td>Legal information about libraries that support EOS.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>We recommend that you review the samples in the
+				<code>/Samples</code>
+				directory because they demonstrate some of the platform's features. There is a list of the documentation which accompanies each sample on the
+				<a href="/docs/epic-online-services/samples">EOS SDK Samples</a>
+				page.</p>
+			<div>
+				<h3 id="additional-eos-sdk-information">Additional EOS SDK Information</h3>
+			</div>
+			<p>See the
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk">Working with the EOS SDK</a>
+				section of the documentation. This covers the following topics for the EOS SDK:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations">Conventions and Limitations</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/working-with-the-eos-sdk/eossdkc-sharp-getting-started">The EOS SDK in C#</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-overlay-overview">EOS Overlay Overview</a>.</li>
+			</ul>
+			<div>
+				<h2 id="eos-sdk-resources">EOS SDK Resources</h2>
+			</div>
+			<div>
+				<h3 id="faqs">FAQs</h3>
+			</div>
+			<p>See the Online Services website (<a href="https://onlineservices.epicgames.com/en-US/services#faq">onlineservices.epicgames.com</a>) for some helpful EOS FAQs.</p>
+			<div>
+				<h3 id="support">Support</h3>
+			</div>
+			<p>You can use the Epic developer resources support community at
+				<a href="https://eoshelp.epicgames.com/">eoshelp.epicgames.com</a>
+				to ask questions, get support, and become part of the Epic developer resources community.</p>
+			<p>Support covers:</p>
+			<ul>
+				<li>Developer Portal</li>
+				<li>Epic Games Store</li>
+				<li>Epic Online Services (EOS)</li>
+				<li>Kids Web Services (KWS)</li>
+			</ul>
+			<p>See the
+				<a href="/docs/support">Support page</a>
+				documentation for more information.</p>
+			<div>
+				<h3 id="new-features">New Features</h3>
+			</div>
+			<p>Keep up to date with new features in the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/whats-new">What's New</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#eos-sdk-reference">EOS SDK Reference</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-download-types">EOS SDK Download Types</a>
+								</li>
+								<li>
+									<a href="#access-the-eos-sdk-for-consoles">Access the EOS SDK for Consoles</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-download-contents">EOS SDK Download Contents</a>
+								</li>
+								<li>
+									<a href="#additional-eos-sdk-information">Additional EOS SDK Information</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-resources">EOS SDK Resources</a>
+								</li>
+								<li>
+									<a href="#faqs">FAQs</a>
+								</li>
+								<li>
+									<a href="#support">Support</a>
+								</li>
+								<li>
+									<a href="#new-features">New Features</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

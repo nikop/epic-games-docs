@@ -1,0 +1,228 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Metrics Interface</h1>
+			<h2>Set up the game analytics dashboard in the Developer Portal and track worldwide game activity, player retention, and online player counts.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>Integrate the Metrics Interface into your game (or other software application) to use the features of the Epic Online Services (EOS) Metrics service. The Metrics Interface tracks your game's usage and populates the Game Analytics dashboard in the Developer Portal.</p>
+			<p>This data includes active, online instances of the game's client and server, and past sessions played by local players. To access the Game Analytics dashboard, go to the Analytics page for your game in the Developer Portal./ (Note that your game is called "your product" in the Developer Portal.)/ To do this:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+				</li>
+				<li>
+					<p>In the left navigation, under
+						<strong>Your Products</strong>,  click the name of your game (or software application).</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Analytics</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h2 id="collecting-usage-metrics">Collecting Usage Metrics</h2>
+			</div>
+			<p>To enable data collection, acquire an
+				<code>EOS_HMetrics</code>
+				handle through the
+				<strong>
+					<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+				</strong>
+				function,
+				<code>EOS_Platform_GetMetricsInterface</code>. All Metrics Interface functions require this handle as their first parameter.</p>
+			<p>The
+				<strong>Epic Online Services</strong>
+				(EOS) SDK collects the data, while the backend service performs processing and storage. The aggregated results are available in the
+				<strong>Game Analytics dashboard</strong>, enabling you to monitor worldwide game activity, player retention, and online user counts.</p>
+			<div>
+				<h3 id="limitations">Limitations</h3>
+			</div>
+			<p>Metrics data updates every five minutes. While testing, your client may not show up in the dashboard immediately due to this update frequency. In addition, because user retention calculation requires a few days of historical data, the
+				<strong>Game Analytics dashboard</strong>
+				does not show player retention information for the first several days.</p>
+			<div>
+				<p>Performing metrics collection requires using EOS SDK's exposed API exclusively. The EOS SDK may not be used for metrics collection with any outside program or service.</p>
+			</div>
+			<div>
+				<h3 id="reporting-play-sessions">Reporting Play Sessions</h3>
+			</div>
+			<p>EOS data collection relies on the game reporting when each player begins and ends each play session. To record a session, call
+				<code>EOS_Metrics_BeginPlayerSession</code>
+				with an
+				<code>EOS_Metrics_BeginPlayerSessionOptions</code>
+				data structure for each player in the game. This will notify the SDK that the player has joined a game on a remote server, or is hosting a game on their own. Once the player leaves the server or ends the local session, call
+				<code>EOS_Metrics_EndPlayerSession</code>
+				with an
+				<code>EOS_Metrics_EndPlayerSessionOptions</code>
+				data structure to mark the end of the session.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>When using the Metrics Interface, you must pair calls to
+						<code>EOS_Metrics_BeginPlayerSession</code>
+						with calls to
+						<code>EOS_MetricsEndPlayerSession</code>. Failure to do so will cause inaccuracies in the reported metrics data. Making rapid calls to
+						<code>EOS_Metrics_BeginPlayerSession</code>
+						and
+						<code>EOS_Metrics_EndPlayerSession</code>
+						can cause the backend service to discard your data.</p>
+				</div>
+			</div>
+			<p>When calling
+				<code>EOS_Metrics_BeginPlayerSession</code>
+				initialize the
+				<code>EOS_Metrics_BeginPlayerSessionOptions</code>
+				structure with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>Set this to
+							<code>EOS_METRICS_BEGINPLAYERSESSION_API_LATEST</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AccountIdType</code>
+						</td>
+						<td>The type of account (<code>EOS_EMetricsAccountIdType</code>
+							Enum) for the player whose session is beginning. It can be either an Epic Games account (<code>EOS_MAIT_Epic</code>) or an external account (<code>EOS_MAIT_External</code>).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AccountId</code>
+						</td>
+						<td>The account ID for the player whose session is beginning.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>DisplayName</code>
+						</td>
+						<td>The player's in-game name, as a UTF-8 string.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ControllerType</code>
+						</td>
+						<td>The type of game controller that the player is using (<code>EOS_EUserControllerType</code>
+							Enum). It can be either unknown (<code>EOS_UCT_Unknown</code>), mouse and keyboard (<code>EOS_UCT_MouseKeyboard</code>), gamepad (<code>EOS_UCT_GamepadControl</code>), or touch controller (<code>EOS_UCT_TouchControl</code>).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ServerIp</code>
+						</td>
+						<td>IP address of the game server hosting the game session.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>GameSessionId</code>
+						</td>
+						<td>The game can set a custom match identifier string that will attach to the session record on the backend service. This data will be available in the future to associate game sessions with tracked events that occur during play.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When calling
+				<code>EOS_Metrics_EndPlayerSession</code>, initialize the
+				<code>EOS_Metrics_EndPlayerSessionOptions</code>
+				structure with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>Set this to
+							<code>EOS_METRICS_ENDPLAYERSESSION_API_LATEST</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AccountIdType</code>
+						</td>
+						<td>The type of account (<code>EOS_EMetricsAccountIdType</code>
+							Enum) of the player who began the session. This must match the
+							<code>AccountIdType</code>
+							used in the earlier call to
+							<code>EOS_Metrics_BeginPlayerSession</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AccountId</code>
+						</td>
+						<td>The account ID for the player who began the session. This must match the
+							<code>AccountId</code>
+							used in the earlier call to
+							<code>EOS_Metrics_BeginPlayerSession</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="collecting-concurrent-online-users-ccu-and-user-retention-data">Collecting Concurrent Online Users (CCU) and User Retention Data</h3>
+			</div>
+			<p>The EOS SDK automatically records the number of concurrent online users and game servers. This functionality becomes active when the SDK initializes on any online machine running the game's client or server. User retention data is calculated once the game has been live for a few days, and uses historical data based on reported play sessions.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#collecting-usage-metrics">Collecting Usage Metrics</a>
+								</li>
+								<li>
+									<a href="#limitations">Limitations</a>
+								</li>
+								<li>
+									<a href="#reporting-play-sessions">Reporting Play Sessions</a>
+								</li>
+								<li>
+									<a href="#collecting-concurrent-online-users-ccu-and-user-retention-data">Collecting Concurrent Online Users (CCU) and User Retention Data</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,46 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Integrate a Third-Party Launcher with Epic Games Store</h1>
+			<h2>Reference for how to integrate a third-party game launcher with the Epic Games Store.</h2>
+			<div>
+				<div>1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>If your game provides a launcher to include additional launch options, promotions or other news, then your launcher must manage the sign-in flow. The Epic Games Launcher generates exchange codes that expire after a short period of time. You must prevent the exchange codes from expiring. Use the following pattern if the Epic Games Launcher is not directly launching your game:</p>
+			<ol>
+				<li>The Epic Games Launcher starts the third-party launcher, passing the exchange code on the command line (Documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference">Auth Interface Reference &gt; Epic Games Launcher</a>).</li>
+				<li>The third-party launcher uses the Exchange Code to sign in the player by using the EOS_Auth_Login API. Initialize EOS_Auth_LoginOptions by setting the Type and Token fields of the EOS_Auth_Credentials struct to EOS_LCT_ExchangeCode and the exchange code from the command line respectively.</li>
+				<li>When the player launches the game, use the EOS_Auth_CopyUserAuthToken API to get a copy of the token details. Copy the RefreshToken from the EOS_Auth_Token and call the EOS_Auth_Token_Release API to free the memory allocated by the SDK.</li>
+				<li>Pass the refresh token to the game application by setting an environment variable that the game can read on startup. Do not sign the player out in the third-party launcher when it exits as this will invalidate the refresh token.</li>
+				<li>When the game process starts up, the game can sign the player in using the EOS_Auth_Login API. Initialize EOS_Auth_LoginOptions by setting the Type and Token fields of the EOS_Auth_Credentials struct to EOS_LCT_RefreshToken and the refresh token from the environment variable respectively.</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

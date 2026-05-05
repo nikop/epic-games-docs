@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -11,28 +11,34 @@
 	</div>
 	<section>
 		<div>
-			<h1>EOS Introduction</h1>
+			<h1>EOS Get Started Introduction</h1>
 			<h2>Key information when integrating Epic Online Services (EOS) into your game.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>8 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<p>Use the Epic Online Services (EOS) SDK to integrate the following services into your game:</p>
+			<p>Use the Epic Online Services (EOS) SDK to integrate the following groups of EOS services into your game:</p>
 			<ul>
-				<li>EOS Game Services</li>
-				<li>EOS Epic Account Services</li>
-				<li>Epic Game Store Services</li>
+				<li>Accounts and Social</li>
+				<li>Multiplayer</li>
+				<li>Player and Game Data</li>
+				<li>Trust and Safety</li>
+				<li>EOS Fundamentals</li>
 			</ul>
-			<p>Integrate these services into a game running on multiple platforms, including Windows, macOS, Linux, PlayStation, Xbox, and Switch. (Note you can only use Epic Games Store Services on Windows and macOS.)
-				<br>
-				For a full list of platforms and platform versions supported, see the
-				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+			<p>
+				<strong>Note:</strong>
+				Some Epic Games Store Services are also available through the EOS SDK (Documentation:
+				<a href="/docs/epic-games-store/services">Epic Games Store &gt; Epic Games Store Services</a>).</p>
+			<p>For more information on the available EOS services, see the
+				<a href="/docs/epic-online-services/eos-overview">EOS Overview</a>
 				documentation.</p>
-			<p>For an overview of the features available with each service, see the following documentation:
-				<a href="/docs">Epic Developer Resources: Overview</a>.</p>
+			<p>Integrate these groups of services into a game running on multiple platforms, including Windows, macOS, Linux, PlayStation, Xbox and Switch. (Note you can only use Epic Games Store Services on Windows and macOS.)</p>
+			<p>For a full list of platforms and platform versions supported, see the
+				<a href="/docs/epic-online-services/platform-support">Platforms Supported</a>
+				documentation.</p>
 			<div>
 				<h2 id="eos-sdk">EOS SDK</h2>
 			</div>
@@ -44,91 +50,321 @@
 			<ul>
 				<li>
 					<p>The Lobbies Interface integrates your game with the EOS lobbies service. This service manages the creation and interactions of your game’s lobbies. (Documentation:
-						<a href="/docs/game-services/lobbies-and-sessions/lobbies">Lobbies Interface</a>.)</p>
+						<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface">Lobbies Interface</a>.)</p>
 				</li>
 				<li>
 					<p>The Friends Interface integrates your game with the EOS friends service. This service manages the features associated with a player’s friends list. (Documentation:
-						<a href="/docs/epic-account-services/eos-friends-interface">Friends Interface</a>.)</p>
+						<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">Friends Interface</a>.)</p>
 				</li>
 			</ul>
 			<div>
-				<h4 id="eos-game-services-interfaces">EOS Game Services Interfaces</h4>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h4 id="accounts-and-social">Accounts and Social</h4>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>The Accounts and Social interfaces are as follows:</p>
+										<ul>
+											<li>
+												<strong>Friends:</strong>
+												Enable players to invite friends to join a game-play session. Retrieve and display friend information to players.</li>
+											<li>
+												<strong>Presence:</strong>
+												Display a player’s status (online, offline, playing) in a game.</li>
+											<li>
+												<strong>EOS Epic Account Services Authentication — Auth Interface:</strong>
+												Authenticate players, get authorization credentials (access tokens), and handle other Epic Games account-related interactions with Epic Online Services (EOS).</li>
+											<li>
+												<strong>Progression Snapshot:</strong>
+												Merge a player’s Epic Games account and proxy account.</li>
+											<li>
+												<strong>UI:</strong>
+												Implement a product-independent overlay window that displays status updates, shows or hides the overlay, and adjusts display and hotkey preferences.</li>
+											<li>
+												<strong>User Info:</strong>
+												Obtain information about a player, such as their display name or country.</li>
+										</ul>
+										<p>Accounts and Social also has the following features:</p>
+										<ul>
+											<li>
+												<strong>Epic's Account Ecosystem:</strong>
+												EOS Epic Account Services provide player accounts: either an Epic Games account or a proxy account. This enables your game to tap into a player account ecosystem of nearly a billion players across multiple platforms and stores.</li>
+											<li>
+												<strong>Crossplay:</strong>
+												Enable players accessing your game from different storefronts to play together using a combined friends list.</li>
+											<li>
+												<strong>Social Overlay:</strong>
+												Display to a player their achievements and friends information, including if their friends are playing the same game.</li>
+											<li>
+												<strong>Localized Rich Presence:</strong>
+												Localize the dynamic messages you display to players.</li>
+										</ul>
+										<p>Accounts and Social are EOS Epic Account Services — players can connect to these services in your game with an Epic Games account or proxy account. For details, see
+											<a href="/docs/epic-online-services/eos-overview#type-of-service">Epic Online Services (EOS) Overview &gt; Type of Service</a>.</p>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/accounts-and-social/">Accounts and Social</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<p>The interfaces in EOS Game Services consist of the following:</p>
-			<ul>
-				<li>
-					<strong>Multiplayer</strong>: lobbies, p2p, sessions, stats, title storage, voice chat</li>
-				<li>
-					<strong>Player progression</strong>: metrics, stats, achievements, leaderboards</li>
-				<li>
-					<strong>Game operations</strong>: anti-cheat, player sanctions, reports, ticketing for community-management</li>
-			</ul>
-			<p>Overview documentation:
-				<a href="/docs/epic-online-services#eos-game-services">Epic Online Services (EOS) Overview: EOS Game Services</a>
-			</p>
 			<div>
-				<h4 id="eos-epic-account-services-interfaces">EOS Epic Account Services Interfaces</h4>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h4 id="multiplayer">Multiplayer</h4>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>The interfaces are as follows:</p>
+										<ul>
+											<li>
+												<strong>Peer-to-Peer (P2P) (also known as "NAT P2P"):</strong>
+												Enable players to connect with other players in a game.</li>
+											<li>
+												<strong>Lobbies:</strong>
+												Enable players to create, remove, join, and leave lobbies.</li>
+											<li>
+												<strong>Sessions:</strong>
+												Allow players to host, find, and interact with online gaming sessions.</li>
+											<li>
+												<strong>Voice Interface and Real-Time Communication Interface:</strong>
+												Help players talk, strategize, and socialize. Voice chat enables you to create and manage cross-platform voice chat rooms between your players during matches or in lobbies. Real-time-communication (RTC) text chat is also available. To integrate voice or text chat, either use EOS Lobbies (through the Lobbies Interface) or your own trusted server.</li>
+										</ul>
+										<p>Multiplayer services are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see
+											<a href="/docs/epic-online-services/eos-overview#type-of-service">Epic Online Services (EOS) Overview &gt; Type of Service</a>.</p>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/multiplayer/">Multiplayer</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<p>The interfaces in EOS Epic Account Services consist of the following:</p>
-			<ul>
-				<li>
-					<strong>Crossplay</strong>: Enable players accessing your game from different storefronts to play together using  combined friends lists.</li>
-				<li>
-					<strong>Friends</strong>: Enable players to invite friends to join a game-play session. Retrieve and display friend information to players.</li>
-				<li>
-					<strong>Presence</strong>: Display a player’s status (online/offline/playing) in the game.</li>
-				<li>
-					<strong>Social Overlay</strong>: Display to a player their achievements and friends information, including if their friends are playing the same game.</li>
-			</ul>
-			<p>Overview documentation:
-				<a href="/docs/epic-online-services#eos-epic-account-services">Epic Online Services (EOS) Overview: EOS Epic Account Services</a>
-			</p>
 			<div>
-				<h4 id="platform-interface">Platform Interface</h4>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h4 id="player-and-game-data">Player and Game Data</h4>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>The interfaces are as follows:</p>
+										<ul>
+											<li>
+												<strong>Leaderboards:</strong>
+												Define leaderboards for your game, choose the stats to include, how you rank players, and the lifespan of the leaderboards.</li>
+											<li>
+												<strong>Stats:</strong>
+												Define the stats for your game in the Developer Portal. You can include any statistical data about a player that you want to track, for example the number of items the player has collected. You can use these stats to determine when to unlock achievements and how to rank players in leaderboards.</li>
+											<li>
+												<strong>Achievements:</strong>
+												Access data about player achievements, unlock them for a player, get data on a player's progression for an achievement, and send notifications to players when they unlock an achievement.</li>
+											<li>
+												<strong>Player Data Storage:</strong>
+												Save, download, copy, and delete player-related data for your game on cloud servers in encrypted form.</li>
+											<li>
+												<strong>Title Storage:</strong>
+												Use the Title Storage Interface to retrieve game-specific data that is stored in encrypted form on cloud servers.</li>
+											<li>
+												<strong>Custom Invites:</strong>
+												If your game has its own player-invitation system, you can manage this through the Social Overlay UI (the Social Overlay is part of the EOS Overlay).</li>
+											<li>
+												<strong>Metrics:</strong>
+												Use the Metrics Interface to set up the game analytics dashboard in the Developer Portal and track worldwide game activity, player retention, and online player counts. You can view your game’s usage data, including players’ active sessions and past sessions.</li>
+										</ul>
+										<p>Player and Game Data also has the following features:</p>
+										<ul>
+											<li>
+												<strong>Player Search:</strong>
+												View and manage the data that EOS stores about your players on your behalf.</li>
+											<li>
+												<strong>Ticketing System:</strong>
+												Manage support for your players with a pre-assigned email address and public web API key.</li>
+										</ul>
+										<p>Player and Game Data are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see
+											<a href="/docs/epic-online-services/eos-overview#type-of-service">Epic Online Services (EOS) Overview &gt; Type of Service</a>.</p>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/player-and-game-data/">Player and Game Data</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<p>To use any EOS services, you must integrate the Platform Interface into your game.</p>
-			<p>The Platform Interface does not provide a service, instead it facilitates your game’s integration with all other EOS services. EOS requires the Platform Interface as the first parameter to every API call that uses an interface. (Documentation:
-				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>.)</p>
-			<p>
-				<strong>Notes</strong>:</p>
-			<ul>
-				<li>The Platform Interface is an EOS Game Services interface. However both EOS Game Services and EOS Epic Account Services require the Platform Interface.</li>
-				<li>"Platform" in "Platform Interface" is the EOS platform. It does not relate to the games platform your game clients run on.</li>
-			</ul>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h4 id="trust-and-safety">Trust and Safety</h4>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>The interfaces are as follows:</p>
+										<ul>
+											<li>
+												<strong>Anti-Cheat (also known as "Easy Anti-Cheat"):</strong>
+												Prevent and detect players cheating within your game.</li>
+											<li>
+												<strong>Reports (also known as “Player Reports”):</strong>
+												Collect and publish player behavior to player reports. View details about player cheating, verbal abuse and offensive profiles.</li>
+											<li>
+												<strong>Sanctions:</strong>
+												Define and manage sanctions for your game. In the Developer Portal, you can view the details of all sanctions placed on a player.</li>
+										</ul>
+										<p>Trust and Safety are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see
+											<a href="/docs/epic-online-services/eos-overview#type-of-service">Epic Online Services (EOS) Overview &gt; Type of Service</a>.</p>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/trust-and-safety/">Trust and Safety</a>
+											</li>
+										</ul>
+										<p>
+											<strong>About Kids Web Services (KWS)</strong>
+										</p>
+										<p>Kids Web Services (KWS) is also available but is a separate service set from EOS. KWS provides parent verification so you can manage youth audiences at scale. KWS greatly reduces the complexity and cost of global verification and consent management. (Documentation:
+											<a href="/docs/kids-web-services/">Kids Web Services (KWS)</a>)</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h4 id="eos-fundamentals">EOS Fundamentals</h4>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>The EOS Fundamentals interfaces are as follows:</p>
+										<ul>
+											<li>
+												<strong>Platform:</strong>
+												The Platform Interface facilitates your game’s integration with all other EOS services. You use the Platform Interface to retrieve handles to access the other EOS interfaces. To use any EOS services, you must integrate the Platform Interface into your game.</li>
+											<li>
+												<strong>Connect:</strong>
+												Log players into your game using either a supported external identity provider (such as a Steam or PlayStation account, among many others) or an Epic Games account to access EOS Game Services. (Note that players do not need an Epic Games account to log-in through the Connect Interface and access EOS Game Services.)</li>
+											<li>
+												<strong>Logging:</strong>
+												Receive log messages about the EOS SDK services that run in your game. These log messages can help you diagnose technical issues, both while you develop your game and after you have shipped it.</li>
+										</ul>
+										<p>EOS Fundamentals also has the following features:</p>
+										<ul>
+											<li>
+												<strong>Client &amp; Client Policy:</strong>
+												Define and manage the software-clients that can access EOS services in your game.</li>
+											<li>
+												<strong>Identity Provider Management:</strong>
+												Configure which identity provider accounts can participate in the EOS cross-platform features of your game.</li>
+											<li>
+												<strong>Tools:</strong>
+												Tools to help you configure and manage EOS services in your game, such as stats and achievements.</li>
+										</ul>
+										<p>EOS Fundamentals are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see
+											<a href="/docs/epic-online-services/eos-overview#type-of-service">Epic Online Services (EOS) Overview &gt; Type of Service</a>.</p>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>
+											</li>
+											<li>
+												<a href="/docs/epic-online-services/eos-fundamentals/">EOS Fundamentals</a>
+											</li>
+										</ul>
+										<p>
+											<strong>Note:</strong>
+										</p>
+										<ul>
+											<li>"Platform" in "Platform Interface" is the EOS platform. It does not relate to the games platform your game clients run on.</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div>
 				<h3 id="coding-languages-and-game-platforms">Coding Languages and Game Platforms</h3>
 			</div>
 			<p>The EOS SDK is available in C, and also has a C# wrapper.</p>
 			<p>By focusing on C, we can provide stable application binary interfaces (ABI) to ensure integration functionality, regardless of compiler choice, implementation, calling conventions, data sizes, or alignments.</p>
-			<p>This also allows independent code patching for the SDK to limit interruptions in your own development, and helps maintain the life of the SDK without recompiling the application after distributing fixes and updates. Additionally, focusing on C APIs enforces a more deliberate exposure of the public API.</p>
-			<p>There are different types of SDK download to use, depending on the game platform your game clients run on:</p>
+			<p>This also allows independent code patching for the EOS SDK to limit interruptions in your own development, and helps maintain the life of the EOS SDK without recompiling the application after distributing fixes and updates. Additionally, focusing on C APIs enforces a more deliberate exposure of the public API.</p>
+			<p>There are different types of EOS SDK download to use, depending on the game platform your game clients run on:</p>
 			<ul>
 				<li>
 					<strong>Windows, macOS, Linux</strong>
-					-  the EOS SDK in C, and the EOS SDK in C#.</li>
+					— the EOS SDK in C, and the EOS SDK in C#.</li>
 				<li>
 					<strong>Mobile</strong>
-					-  the EOS SDK for iOS, and the EOS SDK for Android.</li>
+					— the EOS SDK for iOS, and the EOS SDK for Android.</li>
 				<li>
 					<strong>Consoles</strong>
-					- there are EOS SDK downloads for game consoles in C, and in C#.
+					— there are EOS SDK downloads for game consoles in C, and in C#.
 					<br>
-					The SDK downloads for consoles are only available to developers approved by the platform holders and approved by Epic Games.
+					The EOS SDK downloads for consoles are only available to developers approved by the platform holders and approved by Epic Games.
 					<br>
-					The platform holders are: Microsoft (Xbox One, Xbox Series X), Sony (PlayStation 4, PlayStation 5), Nintendo (Switch).
+					The platform holders are: Microsoft (Xbox One, Xbox Series), Sony (PlayStation 4, PlayStation 5), Nintendo (Switch and Switch 2).
 					<br>
-					To get access to the SDK downloads for consoles and associated documentation, you must apply for platform-holder approval. You can do this once you have set up an Epic Games account and organization in the Developer Portal. See the EOS
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
-					page for information on this.</li>
+					To get access to the EOS SDK downloads for consoles and associated documentation, you must apply for platform-holder approval. You can do this after you have set up an Epic Games account and organization in the Developer Portal. See the
+					<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+					documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</li>
 			</ul>
 			<p>For details of which EOS SDK release versions support which game-client platform release versions, see the
-				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+				<a href="/docs/epic-online-services/platform-support">Platforms Supported</a>
 				documentation.</p>
 			<div>
 				<h3 id="release-versioning">Release Versioning</h3>
 			</div>
 			<p>EOS SDK versioning guarantees backwards compatibility with games using an older version of the EOS SDK, even with API changes.</p>
-			<p>Every interface, function, and data type has a version associated with it.  When a new EOS SDK version is released, the new EOS SDK recognizes and supports games using older versions of the EOS SDK and reacts appropriately to data and function calls coming from them. This reaction might include calling the original version of the function internally, migrating the original input structures to newer forms, or setting up defaults.</p>
+			<p>Every interface, function, and data type has a version associated with it. When a new EOS SDK version is released, the new EOS SDK recognizes and supports games using older versions of the EOS SDK and reacts appropriately to data and function calls coming from them. This reaction might include calling the original version of the function internally, migrating the original input structures to newer forms, or setting up defaults.</p>
 			<p>If your game uses an older version of the EOS SDK, you do not need to update it to the latest version to continue to use Epic Online Services.</p>
 			<div>
 				<h2 id="more-information">More Information</h2>
@@ -136,21 +372,24 @@
 			<p>For more information, see the following pages:</p>
 			<ul>
 				<li>
-					<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>
+					<a href="/docs/epic-online-services/platform-support">Platforms Supported</a>
 				</li>
 				<li>
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start">Get Started Steps</a>
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/game-engines">Game Engines</a>
 				</li>
 				<li>Working with the EOS SDK:
 					<ul>
 						<li>
-							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/conventions-and-limitations">Conventions and Limitations</a>
+							<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations">Conventions and Limitations</a>
 						</li>
 						<li>
-							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eossdkc-sharp-getting-started">EOS SDK in C#</a>
+							<a href="/docs/epic-online-services/working-with-the-eos-sdk/eossdkc-sharp-getting-started">EOS SDK in C#</a>
 						</li>
 						<li>
-							<a href="/docs/epic-online-services/eos-get-started/working-with-the-eos-sdk/eos-sdk-and-game-engines">Game Engines</a>
+							<a href="/docs/epic-online-services/accounts-and-social/eos-overlay-overview">EOS Overlay Overview</a>
 						</li>
 					</ul>
 				</li>
@@ -159,34 +398,45 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#eos-sdk">EOS SDK</a>
-					</li>
-					<li>
-						<a href="#interfaces">Interfaces</a>
-					</li>
-					<li>
-						<a href="#eos-game-services-interfaces">EOS Game Services Interfaces</a>
-					</li>
-					<li>
-						<a href="#eos-epic-account-services-interfaces">EOS Epic Account Services Interfaces</a>
-					</li>
-					<li>
-						<a href="#platform-interface">Platform Interface</a>
-					</li>
-					<li>
-						<a href="#coding-languages-and-game-platforms">Coding Languages and Game Platforms</a>
-					</li>
-					<li>
-						<a href="#release-versioning">Release Versioning</a>
-					</li>
-					<li>
-						<a href="#more-information">More Information</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#eos-sdk">EOS SDK</a>
+								</li>
+								<li>
+									<a href="#interfaces">Interfaces</a>
+								</li>
+								<li>
+									<a href="#accounts-and-social">Accounts and Social</a>
+								</li>
+								<li>
+									<a href="#multiplayer">Multiplayer</a>
+								</li>
+								<li>
+									<a href="#player-and-game-data">Player and Game Data</a>
+								</li>
+								<li>
+									<a href="#trust-and-safety">Trust and Safety</a>
+								</li>
+								<li>
+									<a href="#eos-fundamentals">EOS Fundamentals</a>
+								</li>
+								<li>
+									<a href="#coding-languages-and-game-platforms">Coding Languages and Game Platforms</a>
+								</li>
+								<li>
+									<a href="#release-versioning">Release Versioning</a>
+								</li>
+								<li>
+									<a href="#more-information">More Information</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

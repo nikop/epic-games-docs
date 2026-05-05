@@ -1,0 +1,190 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Get Information About a Session</h1>
+			<h2>How to access session information.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>You can access both session details and player details from the active session. For more information on active sessions, see the section on:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/sessions-intro#active-sessions">Active sessions</a>
+				in the
+				<em>Sessions Introduction</em>
+				page.</p>
+			<div>
+				<h2 id="session-details">Session Details</h2>
+			</div>
+			<p>Active sessions that you create locally or discover through searches, invitations, or other users'
+				<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface">presence</a>
+				data store an internal data structure called
+				<code>EOS_SessionDetails_Info</code>, which contains basic details about the session:</p>
+			<ul>
+				<li>Session ID</li>
+				<li>Host address</li>
+				<li>Number of open slots in the session</li>
+			</ul>
+			<p>The structure also contains a pointer to another structure,
+				<code>EOS_SessionDetails_Settings</code>, which provides more detail about the state of a session, including:</p>
+			<ul>
+				<li>Top-level filtering criteria, called the
+					<strong>Bucket ID</strong>, which is specific to your game; often formatted like "GameMode:Region:MapName"</li>
+				<li>Total number of connections allowed on the session</li>
+				<li>Join-in-progress settings</li>
+				<li>Privacy setting</li>
+			</ul>
+			<div>
+				<h3 id="access-session-details">Access Session Details</h3>
+			</div>
+			<p>If you have an
+				<code>EOS_ActiveSession_Info</code>
+				data structure, its
+				<code>SessionDetails</code>
+				variable gives you access to the
+				<code>EOS_SessionDetails_Info</code>
+				for that session. If not, you can use an
+				<code>EOS_HSessionDetails</code>
+				handle to call
+				<code>EOS_SessionDetails_CopyInfo</code>
+				to acquire a copy of the
+				<code>EOS_SessionDetails_Info</code>
+				data. Call
+				<code>EOS_SessionDetails_CopyInfo</code>
+				with an
+				<code>EOS_SessionDetails_CopyInfoOptions</code>
+				structure containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONDETAILS_COPYINFO_API_LATEST</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>On success, this will return a copy of the session's
+				<code>EOS_SessionDetails_Info</code>, which contains the session's ID, the address of the host, and the number of open slots in the session. When you no longer need this information, call
+				<code>EOS_SessionDetails_Info_Release</code>
+				to free it.</p>
+			<div>
+				<h2 id="player-details">Player Details</h2>
+			</div>
+			<p>You can retrieve the following player data from the active session:</p>
+			<ul>
+				<li>The total number of registered players.</li>
+				<li>The product user ID (PUID) of each registered player.</li>
+			</ul>
+			<div>
+				<h3 id="access-player-details">Access Player Details</h3>
+			</div>
+			<p>
+				<strong>Total Number of Registered Players</strong>
+			</p>
+			<p>You can call
+				<code>EOS_ActiveSession_GetRegisteredPlayerCount</code>
+				to get the total number of registered players associated with the active session. To do this, call
+				<code>EOS_ActiveSession_GetRegisteredPlayerCount</code>
+				with an
+				<code>ActiveSessionGetRegisteredPlayerCountOptions</code>
+				structure that contains the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_ACTIVESESSION_GETREGISTEREDPLAYERCOUNT_API_LATEST</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Product User ID of Each Registered Player</strong>
+			</p>
+			<p>You can iterate through the registered players for the active session to get the product user ID (PUID) of each registered player. To do this, call
+				<code>EOS_ActiveSession_GetRegisteredPlayerByIndex</code>
+				with an
+				<code>ActiveSessionGetRegisteredPlayerByIndexOptions</code>
+				structure that contains the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_ACTIVESESSION_GETREGISTEREDPLAYERBYINDEX_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PlayerIndex</code>
+						</td>
+						<td>Index of the registered player to retrieve.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>On success, this returns the product user ID (PUID) of the player at the specified index for the active session.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#session-details">Session Details</a>
+								</li>
+								<li>
+									<a href="#access-session-details">Access Session Details</a>
+								</li>
+								<li>
+									<a href="#player-details">Player Details</a>
+								</li>
+								<li>
+									<a href="#access-player-details">Access Player Details</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

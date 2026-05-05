@@ -1,0 +1,140 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Logging Interface Reference</h1>
+			<h2>Reference for the Logging Interface.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the Epic Online Services (EOS) Logging Interface to receive log messages about the EOS SDK services that run in your game (or other software application). These log messages can help you diagnose technical issues, both while you develop your game and after you have shipped it.</p>
+			<p>See the Logging Interface guide and Logging Interface API documentation for details on how to integrate the EOS Logging service into your game (or software application).</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>Logging
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/logging-intro">Guide: View EOS SDK Log Messages</a>
+						</li>
+						<li>
+							<a href="/docs/api-ref/interfaces/logging">EOS SDK API Reference &gt; EOS Logging Interface API Reference</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="log-levels">Log Levels</h2>
+			</div>
+			<p>You can set the log level to filter the EOS SDK log messages that you receive (<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/enable-eos-logging#step-4-set-the-log-level">Guide: View EOS SDK Log Messages &gt; Step 4: Set the Log Level</a>). This allows you to specify the type of information that you want to receive and how detailed (verbose) you want that information to be. You can set the log level for an individual log category, or you can set the log level for all log categories at once. You can also disable log messages for log categories, so you only receive the log messages you require. For the full list of log categories, see the API reference documentation:
+				<a href="/docs/api-ref/enums/eos-e-log-category">
+					<code>EOS_ELogCategory</code>
+				</a>.</p>
+			<p>Log levels are ranked in the following order:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Log Level</th>
+						<th align="left">Description</th>
+						<th align="left">Integer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_VeryVerbose</code>
+						</td>
+						<td align="left">Includes the most information. Set this log level if you need to share logs with support.</td>
+						<td align="left">600</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Verbose</code>
+						</td>
+						<td align="left">Includes more detailed information about EOS SDK processes than the Info level.</td>
+						<td align="left">500</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Info</code>
+						</td>
+						<td align="left">Includes general information about EOS SDK processes. This is the default log level for most categories.</td>
+						<td align="left">400</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Warning</code>
+						</td>
+						<td align="left">Includes information that might be indicative of issues but it is not an immediate cause for alarm.</td>
+						<td align="left">300</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Error</code>
+						</td>
+						<td align="left">Includes errors that prevent proper functionality of the EOS SDK.</td>
+						<td align="left">200</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Fatal</code>
+						</td>
+						<td align="left">Includes errors that prevent the EOS SDK from running.</td>
+						<td align="left">100</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Off</code>
+						</td>
+						<td align="left">Set the level to this to hide all logs for the specified category.</td>
+						<td align="left">0</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Your registered callback can only receive log messages for a category that match the set log level for that category and lower. For example, if your log level for a category is set to
+				<code>EOS_LOG_Warning</code>, then your registered callback function will receive log messages for that category that have the log level
+				<code>EOS_LOG_Warning</code>,
+				<code>EOS_LOG_Error</code>, or
+				<code>EOS_LOG_Fatal</code>.</p>
+			<p>
+				<strong>Note:</strong>
+				Do not set the log level to
+				<code>EOS_LOG_VeryVerbose</code>
+				in the shipped version of your game. Instead, set the log level to
+				<code>EOS_LOG_Info</code>. We recommend that you use a command line parameter to control the log level when you start the game. This approach lets you change your log level to
+				<code>EOS_LOG_VeryVerbose</code>
+				in the shipped version of your game if you need to.</p>
+			<p>
+				<strong>Note</strong>: The default log level for most log categories is
+				<code>EOS_LOG_Info</code>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#log-levels">Log Levels</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

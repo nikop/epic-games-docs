@@ -1,0 +1,697 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Connect Interface Reference</h1>
+			<h2>The Connect Interface handles connections between users' accounts under different identity providers.</h2>
+			<div>
+				<div>20 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the Connect Interface to let players log in directly from your game using either a supported external identity provider (such as a Steam or PlayStation account) or an Epic Games account to access EOS Game Services. Players don’t need to have an Epic Games account to access EOS Game Services. For more information about supported identity providers, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+				documentation.</p>
+			<p>The Connect Interface:</p>
+			<ul>
+				<li>Provides access to EOS Game Services.</li>
+				<li>Generates a unique user identifier that players can use to access EOS Game Services across different platforms.</li>
+				<li>Links external identity providers' accounts to the unique user identifier, so they access EOS Game Services.</li>
+			</ul>
+			<p>A player can associate one or more external user accounts with a unique player ID called a Product User ID (PUID). This Product User ID is a unique ID for each product under the same organization.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						If your game requires players to use both type of service (both EOS Game Services and EOS Epic Account Services), they must log in to EOS Game Services with their Epic Games account or a proxy account. If players use EOS Epic Account Services in your game, they cannot log in to EOS Game Services with a supported external identity provider.</p>
+				</div>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				This service is also available as a web API. See the
+				<a href="/docs/web-api-ref/connect-web-api">Connect Web APIs</a>
+				documentation for more information.</p>
+			<p>For details on how to integrate the EOS Connect service into your game, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Guide: Access Game Services With the Connect Interface</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/interfaces/connect">EOS SDK API Reference &gt; EOS Connect Interface API Reference</a>
+				</li>
+			</ul>
+			<p>The Connect Interface logs in the player to give them access to EOS Game Services. For details on how to log in the player to give them access to Epic Account Services, see the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+				documentation.</p>
+			<div>
+				<h2 id="login-flow-for-organizations-with-multiple-products">Login Flow for Organizations With Multiple Products</h2>
+			</div>
+			<p>A player's saved data (including stats, achievements, leaderboard rankings, and stored data such as game save data) on one platform might not be accessible on a different platform. This might affect your game if it meets all of the following criteria:</p>
+			<ul>
+				<li>In the Developer Portal, you have multiple products in the same organization that use Epic Online Services (EOS).</li>
+				<li>One or more of your products allow players to log in with a number of different accounts.</li>
+				<li>One or more of your products support crossplay across multiple platforms.</li>
+			</ul>
+			<p>Before the player logs in through the Connect Interface, we recommend that you display a message like, "Have you previously played one of our games while logged in to an existing account?"</p>
+			<ul>
+				<li>
+					<p>If the player selects "Yes", respond with a message like, "If you want to keep the data saved to your existing account, log in with that account now."</p>
+				</li>
+				<li>
+					<p>If the player selects "No", follow the standard login flow to create a new account. (See the guide:
+						<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/log-in-with-an-epic-games-account#step-e-implement-your-create-user-callback-function">1. Log In With an Epic Games Account &gt; Step E: Implement Your Create User Callback Function</a>.)</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="login-flow-across-platforms-with-different-accounts">Login Flow Across Platforms with Different Accounts</h2>
+			</div>
+			<p>In some cases, players might not be able to log in to the same account across different platforms. For example, the player might play your game on their PSN account on PlayStation and then they might play the same game using their Nintendo account on Nintendo Switch. In this case, the player can't log in to their PSN account on Nintendo Switch.</p>
+			<p>To solve this, the player must link both accounts to a common identity provider, such as an Epic Games account. The player can then log in to the game with that linked common identity provider across all platforms. The player's saved data (stats, achievements, leaderboard rankings, and stored data such as game save data) connected to that common identity provider persists across all platforms that the player uses the common identity provider on.</p>
+			<p>
+				<strong>Note:</strong>
+				Because the platform account is linked to the common identity provider, the player might be able to log in with the platform account instead of the linked common identity provider. (See the documentation:
+				<a href="/docs/epic-online-services/platforms">EOS SDK for Platforms</a>.)</p>
+			<p>Before the player logs in through the Connect Interface, we recommend that you display a message like, "If you want to play our game across different platforms and keep your saved data, you must link your account to an Epic Games account. Then, return to this login screen and log in with your linked Epic Games account."</p>
+			<p>
+				<strong>Note:</strong>
+				The common identity provider can be an Epic Games account (as in the example message) or another common identity provider, including your own proprietary account system. Either way, to access their saved data across accounts, your players must link each account to a common identity provider.</p>
+			<p>If you do not follow the recommended login flow above, separate accounts might have different saved data. This means that players cannot access their saved data (like stats, achievements, leaderboard rankings, and game save data) across different platforms.</p>
+			<div>
+				<h2 id="player-authentication-with-external-credentials">Player Authentication With External Credentials</h2>
+			</div>
+			<p>When a player logs in using a set of external credentials, and if the player exists for this product, the Connect Interface grants an access token that lasts for a set period of time (currently one hour). The game is notified prior to the token expiration and must refresh the existing token, given a valid external credential at that time.</p>
+			<p>Epic Online Services interfaces cannot control the access permissions of the external provider.</p>
+			<p>Connect Interface does the following:</p>
+			<ul>
+				<li>Verify the player is still valid with the external account provider</li>
+				<li>Extend the time the player is able to access our services</li>
+			</ul>
+			<p>Connect Interface does
+				<em>not</em>
+				do any of the following:</p>
+			<ul>
+				<li>Implicitly refresh tokens</li>
+				<li>Grant lengthy access</li>
+			</ul>
+			<p>The external account provider is expected to have authoritative access to the application.</p>
+			<div tabindex="0" aria-label="Connect Interface Account Flow image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Connect Interface Account Flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Access to services available via this player identifier requires external account identification via the
+				<code>EOS_ProductUserId</code>
+				data structure. All interfaces clearly indicate this usage and type safety should be assured. It is separate from
+				<code>EOS_EpicAccountId</code>
+				that is associated with the authentication interface provided for Epic Account Services.</p>
+			<div>
+				<h3 id="player-authentication-status-change-notification">Player Authentication Status Change Notification</h3>
+			</div>
+			<p>The Connect Interface provides a callback to make sure your application knows when a player's authentication status changes.</p>
+			<p>The callback function you provide to
+				<a href="/docs/api-ref/functions/eos-connect-add-notify-login-status-changed">
+					<code>EOS_Connect_AddNotifyLoginStatusChanged</code>
+				</a>
+				runs whenever a local player's authentication status changes. This only occurs if the expiration notification is ignored, the external provider credentials are unable to refresh the access token, or the access is revoked explicitly by the backend service for some administrative reason. This callback fires only when other calls in the EOS ecosystem detect that this auth token is invalid and does not automatically fire otherwise.</p>
+			<p>You must handle any error messages in specific calls that fail because of authentication. You might be able to resolve failures by calling
+				<code>EOS_Connect_Login</code>
+				and then (on success) retrying the original call.</p>
+			<p>Use the
+				<a href="/docs/api-ref/functions/eos-connect-remove-notify-login-status-changed">
+					<code>EOS_Connect_RemoveNotifyLoginStatusChanged</code>
+				</a>
+				function to stop listening for notifications.</p>
+			<div>
+				<h3 id="check-current-player-authentication-status">Check Current Player Authentication Status</h3>
+			</div>
+			<p>To check the player's current status on demand, use the
+				<code>EOS_Connect_GetLoginStatus</code>
+				function. This function determines authentication status based on the most recent communication with the online service, so the result is returned instantly and does not use a callback function.</p>
+			<div>
+				<h3 id="link-an-external-account">Link an External Account</h3>
+			</div>
+			<p>If the player is able to log in with a secondary set of external credentials during the application login flow, store the
+				<code>EOS_ContinuanceToken</code>
+				from the first login call and reattempt to log in via
+				<code>EOS_Connect_Login</code>. After the player successfully logs in, immediately call
+				<code>EOS_Connect_LinkAccount</code>.  This associates the player's two external accounts to the same Product User ID.  As the capabilities of our services grow, it might be possible to link more than two accounts.</p>
+			<p>To link a new external account with an existing Product User ID, call
+				<code>EOS_Connect_LinkAccount</code>
+				with the
+				<code>EOS_Connect_LinkAccountOptions</code>
+				that contains the following options:</p>
+			<ul>
+				<li>The
+					<code>EOS_ContinuanceToken</code>
+					from the previous call to
+					<code>EOS_Connect_Login</code>.</li>
+				<li>The Product User ID for the player who was logged in with a successful call to
+					<code>EOS_Connect_Login</code>.</li>
+			</ul>
+			<p>Pass the
+				<code>EOS_HConnect</code>
+				handle, your
+				<code>EOS_Connect_LinkAccountOptions</code>
+				structure, and your callback information to the
+				<code>EOS_Connect_LinkAccount</code>
+				function. The callback you provided executes when the operation finishes.</p>
+			<p>You can search for players who have logged in using the EOS Connect service by either their external account IDs or by their Product User ID through the Accounts dashboard in the Developer Portal. Because the keychain of a player's linked external accounts is managed at the Organization level, the Accounts dashboard is next to the Organization management menu items. Through the Accounts dashboard, you can find players and your customer support will be able to help remove account linkings by player request. You can also use this dashboard to remove a player, or any of their linked accounts, during EOS SDK integration testing. Along with this, we will provide web REST APIs for developers to integrate EOS player management into their existing internal dashboards.</p>
+			<div>
+				<h3 id="unlink-an-external-account">Unlink an External Account</h3>
+			</div>
+			<p>During the first-time player login flow, if the player has existing game progression from playing on another platform or using other external account credentials, they might inadvertently create a new Product User ID for the logged-in account (typically the local platform account), instead of reusing their existing game progression. The player might not be aware of the crossplay capabilities of the game.</p>
+			<p>If this happens, the player skips any early login dialogs and continues with their default platform account credentials (the logged-in account) to create a new
+				<code>EOS_ProductUserId</code>
+				through the flow with
+				<code>EOS_Connect_Login</code>
+				and
+				<code>EOS_Connect_CreateUser</code>
+				APIs. As a consequence, their logged-in account that is used with
+				<code>EOS_Connect_Login</code>
+				at game start is now tied with an unintended Product User ID. To recover from this state, the player must unlink the logged-in account from the newly created keychain, so that they can enter the first-time player login flow again.</p>
+			<p>After the player has unlinked their logged-in account, they can log in using another set of external account credentials linked with another existing keychain. On success, they can then link the default logged-in account with the desired existing keychain using the flow described above in
+				<em>Linking an External Account</em>.</p>
+			<p>The player might also simply want to disassociate the logged-in account from its current keychain to separate game progressions between platforms or link it to another keychain.</p>
+			<p>To unlink an external account from a keychain that owns the Product User ID currently logged in, call
+				<code>EOS_Connect_UnlinkAccount</code>
+				with the
+				<code>EOS_Connect_UnlinkAccountOptions</code>, specifying
+				<code>LocalUserId</code>
+				as the
+				<code>EOS_ProductUserId</code>
+				that was returned by a previous call to
+				<code>EOS_Connect_Login</code>. If the external account is not associated with any other Product User IDs, the external account will be removed from the keychain. This means that the next attempt to log in with
+				<code>EOS_Connect_Login</code>
+				using credentials associated with the same external account will return an
+				<code>EOS_InvalidUser</code>
+				result with an
+				<code>EOS_ContinuanceToken</code>. If the external account is associated with other Product User IDs, the operation removes the external account from the currently logged-in Product User ID but does not remove the external account from the keychain. This means that the external account is no longer returned in query APIs for the product, but the external account can still be used with the remaining Product User IDs.</p>
+			<p>Similarly to the account linking creation operations, history of unlinking operations can be audited through the Accounts dashboard in the Developer Portal.</p>
+			<p>
+				<strong>External Account Unlinking Restrictions</strong>
+			</p>
+			<p>To protect against account theft and related attacks, the following restrictions are in place:</p>
+			<ul>
+				<li>Only accounts that the local player is currently logged in to can unlink accounts from a keychain.
+					<ul>
+						<li>This prevents a malicious actor from gaining access to one of the linked accounts and using it to remove all other accounts linked with the keychain.</li>
+					</ul>
+				</li>
+				<li>Any existing authentication session cannot be used to re-link and overwrite the entry without authenticating with one of the other linked accounts in the keychain.
+					<ul>
+						<li>This prevents a malicious actor from replacing the unlinked account with their own corresponding account on the same platform.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="device-ids">Device IDs</h2>
+			</div>
+			<div>
+				<p>This feature is relevant for Mobile personal devices and PC Desktop only. Device ID cannot be used with the Anti-Cheat Interfaces, which require an external account.</p>
+			</div>
+			<p>If you don't believe that a player is invested enough to create a new account or link an existing account yet, you can create a new persistent pseudo-account for them using the EOS Connect Device ID feature. This feature allows your game to create a persistent access credential for the local player's device without using any external login credentials. The EOS services can then remember the current player on the local device across game sessions. The EOS Connect Device ID feature is especially useful on mobile devices because it automatically logs in the player without prompting them for account credentials. This allows them to start playing the game without immediately needing to log in to preserve their game progression.</p>
+			<p>However, because the Device ID is not tied to a real player account and can only be used to uniquely identify the local device, we strongly recommend that you ask the player to link an external authentication method to their Device ID account after they have progressed through an early progression milestone. This keeps them from losing the credential and, consequently, their account.</p>
+			<p>Until the Device ID account is linked to a real player identity, all progress and game data is at risk of permanent loss if something happens to the device itself. The EOS SDK stores the Device ID credential locally in the keychain of the currently logged-in player of the local device. If the local player's profile is reset or otherwise lost, the Device ID is lost and cannot be recovered.</p>
+			<div>
+				<h3 id="create-a-new-device-id">Create a New Device ID</h3>
+			</div>
+			<p>To create a new Device ID, your game code must call the
+				<code>EOS_Connect_CreateDeviceId</code>
+				function with a valid
+				<code>EOS_Connect_CreateDeviceIdOptions</code>
+				structure containing the player's DeviceModel. This call will eventually trigger a callback to the function bound to the
+				<code>EOS_Connect_OnCreateDeviceIdCallback</code>. If a new Device ID was successfully created and stored in the keychain for the logged-in player of the local device, the
+				<code>ResultCode</code>
+				parameter in the callback parameters will be set to
+				<code>EOS_EResult::EOS_Success</code>. If an existing Device ID was already present,
+				<code>EOS_EResult::EOS_DuplicateNotAllowed</code>
+				is returned. Otherwise, the
+				<code>ResultCode</code>
+				parameter identifies the reason for the operation failure.</p>
+			<div>
+				<h3 id="log-in-the-local-player">Log in the Local Player</h3>
+			</div>
+			<p>To log in the local player with their unique Device ID, call the
+				<code>EOS_Connect_Login</code>
+				API with the
+				<code>EOS_EExternalCredentialType::EOS_ECT_DEVICEID_ACCESS_TOKEN</code>
+				external credential type. As the SDK manages the stored Device ID credential automatically, the
+				<code>Token</code>
+				parameter of the input
+				<code>EOS_Connect_Credentials</code>
+				struct must be null. However, as the Device ID is not tied to a real player identity, the
+				<code>EOS_Connect_UserLoginInfo</code>
+				input struct needs to be provided with a valid
+				<code>DisplayName</code>
+				for the player.</p>
+			<div>
+				<h3 id="link-the-local-device-id-with-an-external-account">Link the Local Device ID With an External Account</h3>
+			</div>
+			<p>To link the local Device ID with a real external player account, first have the game log in the local player normally using the Device ID credential type. Then, ask the player to log in with a real identity and after
+				<code>EOS_Connect_Login</code>
+				returns back with an
+				<code>EOS_ContinuanceToken</code>, link the external account using the
+				<code>EOS_Connect_Link</code>
+				API to associate the local device with the player's real account. This will allow logging in the player automatically each time the game is started, as the Device ID can still be used as intended to automatically log in the player without prompting for external player account credentials.</p>
+			<div>
+				<h3 id="delete-device-id-credentials">Delete Device ID Credentials</h3>
+			</div>
+			<p>You may also delete the Device ID for the current player's profile of the local device by calling the
+				<code>EOS_Connect_DeleteDeviceId</code>
+				API. The deletion operation is a permanent and nonrecoverable operation. However, it is always possible to create a new Device ID and link it with an existing external player account to restore the automated login functionality.</p>
+			<p>On Android and iOS devices, uninstalling the application will automatically delete any local Device ID credentials created by the application.</p>
+			<p>On desktop platforms (Linux, macOS, Windows), Device ID credentials are not automatically deleted. Applications may re-use existing Device ID credentials for the local player when the application is re-installed, or call the
+				<strong>EOS_Connect_DeleteDeviceId</strong>
+				API on the first run to ensure a fresh start for the player.</p>
+			<div>
+				<h3 id="link-device-id-based-game-progression-with-an-existing-linked-account-keychain">Link Device ID-Based Game Progression With an Existing Linked Account Keychain</h3>
+			</div>
+			<p>In some cases, the common path to link a Device ID pseudo-account with a real external player account is not possible. If this is the case, the real player account that is logged in already belongs to an existing keychain under the same EOS organization. When the game first automatically logs in the player using the local Device ID login type and then the player logs in with real external player account credentials, the
+				<code>EOS_Connect_Login</code>
+				API will return an existing
+				<code>EOS_ProductUserId</code>
+				instead of an
+				<code>EOS_ContinuanceToken</code>. To handle this specific use case, use the EOS API
+				<code>EOS_Connect_TransferDeviceIdAccount</code>
+				function.</p>
+			<p>The Device ID pseudo-account cannot be linked into the existing keychain, as the
+				<code>EOS_Connect_Link</code>
+				API requires the use of an
+				<code>EOS_ContinuanceToken</code>. Additionally, as the player is now faced with two separate
+				<code>EOS_ProductUserIds</code>, the player needs to be given a choice by the game on whether to discard one of the
+				<code>EOS_ProductUserIds</code>
+				(i.e. game profiles) as obsolete and continue to play with the other one. If the player chooses to discard one of the profiles, the game can link the local Device ID account into the existing keychain of linked accounts that is persistent on the backend.</p>
+			<p>To handle the scenario of two
+				<code>EOS_ProductUserIds</code>, the game needs to recognize when it has logged in the local player using the Device ID login type and then the player, in the same game session, logs in using an external account and receives another
+				<code>EOS_ProductUserId</code>
+				session for it. When this happens, the game should attempt to automatically check whether one of the
+				<code>EOS_ProductUserIds</code>
+				does not have any meaningful game progression on the backend side. In this case, it should automatically discard it and link the local Device ID pseudo-account with the existing keychain of the real external player account.</p>
+			<p>In case the game is unable to determine this trivial case that can be automated on behalf of the player, it should prompt the player to make a choice on how to proceed. In this dialog, the player should be able to review the game progression as a comparison format for each
+				<code>EOS_ProductUserId</code>
+				and select which one to keep. It should be made very clear to the player that the discarded game progression will be lost forever and cannot be recovered afterwards. The game may also offer the player the option to not discard either profile, and to choose which one to continue playing with for the current game session.</p>
+			<p>If the player chooses to discard one of their game profiles and switch to another permanently, the game should call the
+				<code>EOS_Connect_TransferDeviceIdAccount</code>
+				API to transfer the local Device ID pseudo-account into the keychain that is linked with the real external player accounts. In the API, input struct
+				<code>EOS_Connect_TransferDeviceIdAccountOptions</code>
+				and set the
+				<code>ProductUserIdToPreserve</code>
+				parameter to point to the correct
+				<code>EOS_ProductUserId</code>
+				value to preserve in the Device ID transfer operation.</p>
+			<div>
+				<h2 id="product-user-ids">Product User IDs</h2>
+			</div>
+			<div>
+				<h3 id="retrieve-product-user-id-mappings">Retrieve Product User ID Mappings</h3>
+			</div>
+			<p>Other interfaces will expect the
+				<code>EOS_ProductUserId</code>
+				for remote or otherwise external players; say a list of friends or players on the same server.  It is possible to convert external player account identifiers to the
+				<code>EOS_ProductUserId</code>
+				via the mapping API.</p>
+			<p>
+				<code>EOS_Connect_QueryExternalAccountMappings</code>
+				is an asynchronous call that will convert external account IDs to the SDK representation.  Simply set the
+				<code>EOS_EExternalAccountType</code>
+				and provide a contiguous list of external account IDs in string form.</p>
+			<p>Pass the
+				<code>EOS_HConnect</code>
+				handle, your
+				<code>EOS_Connect_QueryExternalAccountMappingsOptions</code>
+				structure, and your callback information to the function. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided will execute when the operation finishes.</p>
+			<p>When the callback has successfully returned, you can retrieve the mappings with
+				<code>EOS_Connect_GetExternalAccountMapping</code>.  This function takes the
+				<code>EOS_EExternalAccountType</code>
+				as before and returns a single
+				<code>EOS_ProductUserId</code>
+				for each call that provides an external account ID in string form.</p>
+			<div>
+				<p>A common use case is to query other players who are connected through the same account system as the player (for example, a player on Steam who queries another player on Steam for matchmaking). Queries using external account IDs of another account system are never available. For example, someone playing on Xbox can't access another player's Steam ID.</p>
+			</div>
+			<div>
+				<h3 id="retrieve-external-account-mappings">Retrieve External Account Mappings</h3>
+			</div>
+			<p>Just as you can retrieve the Product User ID for an external account, you can also retrieve the external accounts for a Product User ID.</p>
+			<p>
+				<code>EOS_Connect_QueryProductUserIdMappings</code>
+				is an asynchronous call that will convert
+				<code>EOS_ProductUserIds</code>
+				to their external counterpart on a given platform, along with additional account data including the display name and the last login time.  Simply provide a contiguous list of Product User IDs.</p>
+			<p>Pass the
+				<code>EOS_HConnect</code>
+				handle, your
+				<code>EOS_Connect_QueryProductUserIdMappingsOptions</code>
+				structure, and your callback information to the function. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided will execute when the operation finishes.</p>
+			<p>Once the callback has successfully returned, it is possible to retrieve the mappings via
+				<code>EOS_Connect_GetProductUserIdMapping</code>. This function takes the
+				<code>EOS_EExternalAccountType</code>, an input buffer, and buffer length to fill with the external account ID.  If the buffer is too small, the proper size of the buffer will be returned.</p>
+			<p>You can access the following data:</p>
+			<ul>
+				<li>
+					<p>To retrieve the number of linked external accounts for a player, use
+						<code>EOS_Connect_GetProductUserExternalAccountCount</code>.</p>
+				</li>
+				<li>
+					<p>To fetch information about an external account linked to a player using the index, use
+						<code>EOS_Connect_CopyProductUserExternalAccountByIndex</code>.</p>
+				</li>
+				<li>
+					<p>To fetch information about an external account of a specific type linked to a player, use
+						<code>EOS_Connect_CopyProductUserExternalAccountByAccountType</code>.</p>
+				</li>
+				<li>
+					<p>To fetch information about an external account linked to a player using the account ID, use
+						<code>EOS_Connect_CopyProductUserExternalAccountByAccountId</code>.</p>
+				</li>
+				<li>
+					<p>To fetch information about a player, using the external account that they most recently logged in with as the reference,
+						<code>EOS_Connect_CopyProductUserInfo</code>.</p>
+				</li>
+			</ul>
+			<p>If the Product User ID does not map to the given external platform, then the data will not be present in the results returned for the above.  This means that the player has never connected that external account type to their Product User ID.</p>
+			<p>
+				<strong>Note:</strong>
+				If you are using Epic Account Services in your game, only the display name is returned for platform accounts.</p>
+			<div>
+				<h2 id="id-tokens">ID Tokens</h2>
+			</div>
+			<p>ID Tokens are part of the
+				<a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">OpenID Connect</a>
+				protocol and can be used to verify a player's identity on the server side. An ID Token is a JSON Web Token (JWT) that contains information about the authenticated player, such as the Product User ID. This allows backend services and game servers to securely verify player identifiers it receives from clients.</p>
+			<div>
+				<p>ID Tokens can not be used to execute actions on behalf of a player. They are only intended for the use of player identity verification.</p>
+			</div>
+			<div>
+				<p>The ID Token returned by your OpenId provider must have the
+					<code>kid</code>
+					parameter value set in its header.</p>
+			</div>
+			<div>
+				<h4 id="retrieve-an-id-token-for-a-player">Retrieve an ID Token for a Player</h4>
+			</div>
+			<p>Game clients can obtain ID Tokens for local players by calling the
+				<code>EOS_Connect_CopyIdToken</code>
+				SDK API after the player has been authenticated with EOS Connect, passing in a
+				<code>EOS_Connect_CopyIdTokenOptions</code>
+				structure containing the
+				<code>EOS_ProductUserId</code>
+				of the player.</p>
+			<p>The outputted
+				<code>EOS_Connect_IdToken</code>
+				structure contains the
+				<code>EOS_ProductUserId</code>
+				of the player and a JWT representing the ID Token data. Note that you must call
+				<code>EOS_Connect_IdToken_Release</code>
+				to release the ID Token structure when you are done with it.</p>
+			<p>Once retrieved, the game client can then provide the ID Token to another party. A new ID Token is provided after each successful
+				<code>EOS_Connect_Login</code>
+				call.</p>
+			<p>The ID Token is valid for the lifetime of the local player's EOS Connect authentication session. When the game client refreshes the authentication session, it should expect any earlier used ID Token to expire soon after, and a new ID Token to be used if needed.</p>
+			<div>
+				<h4 id="validate-id-tokens-on-a-game-server-using-the-eos-sdk">Validate ID Tokens on a Game Server Using the EOS SDK</h4>
+			</div>
+			<p>The JSON Web Key Set (JWKS) endpoint for EOS Connect ID Tokens is:
+				<a href="https://api.epicgames.dev/auth/v1/oauth/jwks">https://api.epicgames.dev/auth/v1/oauth/jwks</a>.</p>
+			<p>Game servers can validate ID Tokens by calling the
+				<code>EOS_Connect_VerifyIdToken</code>
+				SDK API and passing in a
+				<code>EOS_Connect_VerifyIdTokenOptions</code>
+				containing the
+				<code>EOS_Connect_IdToken</code>. Note that game servers should use
+				<code>EOS_ProductUserId_FromString</code>
+				to populate the
+				<code>EOS_ProductUserId</code>
+				part of the
+				<code>EOS_Connect_IdToken</code>
+				structure before calling verify, because the server's user handles are different from the user handles on the client.</p>
+			<div>
+				<h4 id="validate-id-tokens-on-backend-without-the-eos-sdk">Validate ID Tokens on Backend Without the EOS SDK</h4>
+			</div>
+			<p>Backend services can verify the validity of ID Tokens and extract the token claims using any of the publicly available standard JWT libraries. See
+				<a href="https://jwt.io/">https://jwt.io/</a>
+				for a list of libraries for this purpose. The used library should allow automatic caching of the retrieved JWKS information for the best performance and to reduce networking overhead.</p>
+			<p>The EOS SDK and other support libraries take care of the needed steps for securely validating the ID Token before its containing claims can be securely trusted. These steps include the following:</p>
+			<ol>
+				<li>Verify that the token signature algorithm ("alg") is present and is not set to "none".</li>
+				<li>Verify the JWT signature against the expected public certificate using the JWKS endpoint hosted by Epic Online Services.</li>
+				<li>Verify that the token issuer ("iss") is present and starts with the base URL of
+					<a href="https://api.epicgames.dev">https://api.epicgames.dev</a>.</li>
+				<li>Verify that the token issue time ("iat") is in the past.</li>
+				<li>Verify that the token expiration time ("exp") is in the future.</li>
+				<li>Verify that the Client ID ("aud") matches the Client ID that you are using to initialize the EOS SDK with game clients or otherwise to authenticate players with EOS Connect.</li>
+			</ol>
+			<p>After successfully verifying the ID Token, you can trust the Product User ID ("sub") value.</p>
+			<div>
+				<h4 id="id-token-structure">ID Token structure</h4>
+			</div>
+			<p>The ID Token contains the following JSON structures:</p>
+			<p>
+				<strong>Header</strong>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>alg</td>
+						<td>string</td>
+						<td>Signature algorithm.</td>
+					</tr>
+					<tr>
+						<td>kid</td>
+						<td>string</td>
+						<td>This is required. Identifier for the key that was used to sign the token.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Payload</strong>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>aud</td>
+						<td>string</td>
+						<td>Client ID used to authenticate the player with EOS Connect.</td>
+					</tr>
+					<tr>
+						<td>exp</td>
+						<td>integer</td>
+						<td>Expiration time of the token, seconds since the epoch.</td>
+					</tr>
+					<tr>
+						<td>iat</td>
+						<td>integer</td>
+						<td>Issue time of the token, seconds since the epoc.</td>
+					</tr>
+					<tr>
+						<td>iss</td>
+						<td>string</td>
+						<td>Token issuer. Always starts with
+							<code>https://api.epicgames.dev</code>.</td>
+					</tr>
+					<tr>
+						<td>pfdid</td>
+						<td>string</td>
+						<td>EOS Deployment ID.</td>
+					</tr>
+					<tr>
+						<td>pfpid</td>
+						<td>string</td>
+						<td>EOS Product ID.</td>
+					</tr>
+					<tr>
+						<td>pfsid</td>
+						<td>string</td>
+						<td>EOS Sandbox ID.</td>
+					</tr>
+					<tr>
+						<td>sub</td>
+						<td>string</td>
+						<td>Product User ID of the authenticated player.</td>
+					</tr>
+					<tr>
+						<td>act</td>
+						<td>json object</td>
+						<td>Identifies the external account that was used to authenticate the connected player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h5 id="external-account-information-act">External account information (<code>act</code>)</h5>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>eat</td>
+						<td>string</td>
+						<td>Identifies the external account type. Possible values include:
+							<code>amazon</code>,
+							<code>apple</code>,
+							<code>discord</code>,
+							<code>epicgames</code>,
+							<code>gog</code>,
+							<code>google</code>,
+							<code>itchio</code>,
+							<code>nintendo_id</code>,
+							<code>nintendo_nsa_id</code>,
+							<code>oculus</code>,
+							<code>openid</code>,
+							<code>psn</code>,
+							<code>steam</code>,
+							<code>xbl</code>
+						</td>
+					</tr>
+					<tr>
+						<td>eaid</td>
+						<td>string</td>
+						<td>External account ID.</td>
+					</tr>
+					<tr>
+						<td>pltfm</td>
+						<td>string</td>
+						<td>Platform that the player is connected from. Possible values include:
+							<code>other</code>,
+							<code>playstation</code>,
+							<code>steam</code>,
+							<code>switch</code>,
+							<code>xbox</code>
+						</td>
+					</tr>
+					<tr>
+						<td>dty</td>
+						<td>string</td>
+						<td>Device Type. Identifies the device that the player is connected from. Can be used to securely verify that the player is connected through a real Console device. Possible values include:
+							<code>PSVITA</code>,
+							<code>PS3</code>,
+							<code>PS4</code>,
+							<code>PS5</code>,
+							<code>Switch</code>,
+							<code>Xbox360</code>,
+							<code>XboxOne</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#login-flow-for-organizations-with-multiple-products">Login Flow for Organizations With Multiple Products</a>
+								</li>
+								<li>
+									<a href="#login-flow-across-platforms-with-different-accounts">Login Flow Across Platforms with Different Accounts</a>
+								</li>
+								<li>
+									<a href="#player-authentication-with-external-credentials">Player Authentication With External Credentials</a>
+								</li>
+								<li>
+									<a href="#player-authentication-status-change-notification">Player Authentication Status Change Notification</a>
+								</li>
+								<li>
+									<a href="#check-current-player-authentication-status">Check Current Player Authentication Status</a>
+								</li>
+								<li>
+									<a href="#link-an-external-account">Link an External Account</a>
+								</li>
+								<li>
+									<a href="#unlink-an-external-account">Unlink an External Account</a>
+								</li>
+								<li>
+									<a href="#device-ids">Device IDs</a>
+								</li>
+								<li>
+									<a href="#create-a-new-device-id">Create a New Device ID</a>
+								</li>
+								<li>
+									<a href="#log-in-the-local-player">Log in the Local Player</a>
+								</li>
+								<li>
+									<a href="#link-the-local-device-id-with-an-external-account">Link the Local Device ID With an External Account</a>
+								</li>
+								<li>
+									<a href="#delete-device-id-credentials">Delete Device ID Credentials</a>
+								</li>
+								<li>
+									<a href="#link-device-id-based-game-progression-with-an-existing-linked-account-keychain">Link Device ID-Based Game Progression With an Existing Linked Account Keychain</a>
+								</li>
+								<li>
+									<a href="#product-user-ids">Product User IDs</a>
+								</li>
+								<li>
+									<a href="#retrieve-product-user-id-mappings">Retrieve Product User ID Mappings</a>
+								</li>
+								<li>
+									<a href="#retrieve-external-account-mappings">Retrieve External Account Mappings</a>
+								</li>
+								<li>
+									<a href="#id-tokens">ID Tokens</a>
+								</li>
+								<li>
+									<a href="#retrieve-an-id-token-for-a-player">Retrieve an ID Token for a Player</a>
+								</li>
+								<li>
+									<a href="#validate-id-tokens-on-a-game-server-using-the-eos-sdk">Validate ID Tokens on a Game Server Using the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#validate-id-tokens-on-backend-without-the-eos-sdk">Validate ID Tokens on Backend Without the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#id-token-structure">ID Token structure</a>
+								</li>
+								<li>
+									<a href="#external-account-information-act">External account information (act)</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,152 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Template Options (Localized Rich Presence)</h1>
+			<h2>The available options for localized rich presence templats.</h2>
+			<div>
+				<div>Under 1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Use localized rich presence templates to define localized text for custom status messages (rich presence) that your product displays to your users' friends. For more information, see
+						<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-intro">Localize Your Game's Rich Presence Messages—Introduction</a>.</p>
+				</div>
+			</div>
+			<p>The available options for a localized rich presence template are as follows:</p>
+			<ul>
+				<li>
+					<strong>Template ID*:</strong>
+					A short name for the template. Choose a name that describes the event or status that triggers the message, such as
+					<code>onEnterMenu</code>.
+					<ul>
+						<li>In your product code, specify this template ID. For more information, see documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-how-to">Display Localized Presence in Your Game</a>.</li>
+						<li>The template ID must be unique per deployment.</li>
+						<li>You can enter between 1 and 200 characters.</li>
+						<li>After you create a template, you cannot change its ID later. This is a safeguard feature in case the ID is already in use in a user client. However, you can create a copy of the template and choose a new ID for the copy. To do this, click
+							<strong>Save as new template</strong>
+							next to
+							<strong>Template ID</strong>:</li>
+					</ul>
+				</li>
+			</ul>
+			<center>
+				<div tabindex="0" aria-label=" image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>Save as new template.
+					</figcaption>
+				</div>
+			</center>
+			<ul>
+				<li>
+					<strong>Default locale*:</strong>
+					Select the main locale for your product.
+					<ul>
+						<li>If you do not provide localized text for a locale, then message recipients in that locale see messages in the language of the default locale. For example, if your default locale is English and you don't provide localized text for Italian, then users in the Italian locale see the message in English.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Variables:</strong>
+					In your template, you can include dynamic content that your user client provides during runtime. For each piece of dynamic content, you must add a variable instance to the template.
+					<ul>
+						<li>You can only add a variable instance to your template if you have already created a matching variable definition in the
+							<strong>Variable definitions</strong>
+							tab. For more information, see
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/variable-definitions-intro">Variable Definitions—Introduction</a>.</li>
+						<li>You can add up to eight variable instances to a template.</li>
+						<li>You can only use a variable instance name once in the same template.</li>
+						<li>For each variable you want to add:
+							<ul>
+								<li>a. Click
+									<strong>Add variable</strong>.</li>
+								<li>b. Set the options as follows:
+									<ul>
+										<li>
+											<strong>Variable definition ID:</strong>
+											Select the variable definition you want to base this variable instance on.
+											<ul>
+												<li>The variable definition determines the allowed values in the variable instance.</li>
+												<li>To create a variable definition, see
+													<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/create-variable-definition">Create a Variable Definition</a>.</li>
+											</ul>
+										</li>
+										<li>
+											<strong>Variable instance name:</strong>
+											Enter a name for the variable instance. To include the variable instance in your message text (in
+											<strong>Localized values</strong>
+											below), use this variable instance name inside curly braces.
+											<ul>
+												<li>For example, if the variable instance name is
+													<code>current_map</code>, the message text might be
+													<code>Playing in {current_map}</code>.</li>
+												<li>In your code, use the variable instance name that you enter here. For more information, see documentation:
+													<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-how-to">Display Localized Presence in Your Game</a>.</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>To delete a variable instance from the template, click the trash can icon next to it.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Localized values</strong>
+					<ul>
+						<li>A localized value is a translation of the template text for a specific locale.</li>
+						<li>For each localized value, set the following options:
+							<ul>
+								<li>
+									<strong>Locale*:</strong>
+									Select the locale where this translation will appear.</li>
+								<li>
+									<strong>Value*:</strong>
+									Enter the translated text for this locale. For example, if you select Arabic as the
+									<strong>Locale</strong>, then the
+									<strong>Value</strong>
+									is a translation in Arabic of the message text.
+									<ul>
+										<li>To include dynamic content in the text, enter an appropriate variable name in curly braces. For example
+											<code>Playing in {current_map}</code>.
+											<ul>
+												<li>You must also add this variable to the template. For more information, see
+													<strong>Variables</strong>
+													above.</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>For each additional localized value you want to add, click
+									<strong>Add locale</strong>, and set
+									<strong>Locale</strong>
+									and
+									<strong>Value</strong>
+									for the localized value.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+	</section>
+</section>

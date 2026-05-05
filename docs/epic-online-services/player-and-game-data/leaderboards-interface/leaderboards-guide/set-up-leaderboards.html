@@ -1,0 +1,235 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Leaderboards to Your Game — 1. Set Up Leaderboards</h1>
+			<h2>Overview of how to add leaderboards to your game.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/leaderboards-intro">Introduction</a>
+			</p>
+			<p>To rank your players on leaderboards, you must first create the leaderboards in the Developer Portal.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start, you must complete these steps:</p>
+			<ul>
+				<li>Integrate the EOS SDK into your code. (Documentation:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+				<li>Create stats in the Developer Portal. (Documentation:
+					<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide/set-up-stats">Guide: Add Stats to Your Game — 1. Set Up Stats</a>.)</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				We recommend that you set up the Logging Interface to receive useful messages that can help you diagnose technical issues with the EOS SDK. (Documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</p>
+			<div>
+				<h2 id="configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</h2>
+			</div>
+			<p>Complete the following steps in the Developer Portal to set up the available EOS leaderboards for your game:</p>
+			<ul>
+				<li>
+					<a href="#step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</a>.</li>
+				<li>
+					<a href="#step-2-configure-your-games-leaderboards">Step 2: Configure Your Game's Leaderboards</a>.</li>
+			</ul>
+			<div>
+				<h3 id="step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				This guide uses a preset client policy type for simplicity. For a game in a production environment, we recommend that you create your own custom client policy to ensure your game is secure. For more information on client policies, see the following documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</p>
+			<p>You configure your game's client policy in the Developer Portal, on the Product Settings page's
+				<strong>Clients</strong>
+				tab. To do this, follow the steps below. (Note that in the Developer Portal, your game is usually known as a "product".)</p>
+			<p>
+				<strong>To go to the Clients tab:</strong>
+			</p>
+			<p>A. Go to your game's product page in the Developer Portal.</p>
+			<ul>
+				<li>To do this:<br>
+					a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).<br>
+					b. In the left navigation, under
+					<strong>Your Products</strong>,  click the name of your game (or software application).
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>B. In the left navigation, click
+				<strong>Product Settings</strong>.<br>
+				C. From the default tab (<strong>SDK Download &amp; Credentials</strong>), click
+				<strong>Clients</strong>.</p>
+			<p>Note that the
+				<strong>Clients</strong>
+				tab might show new agreements to accept.</p>
+			<p>
+				<strong>On the Clients tab:</strong>
+			</p>
+			<p>A. Scroll down to the
+				<strong>Client policies</strong>
+				section. (This is below the
+				<strong>Clients</strong>
+				section.)<br>
+				B. Either create a new client policy or enable the Stats feature for an existing client policy.</p>
+			<ul>
+				<li>
+					<p>To create a new client policy:<br>
+						a. Click
+						<strong>Add new client policy</strong>. (Do not click “Add new client”.)<br>
+						b. For
+						<strong>Client policy name</strong>, enter a name of your choice.<br>
+						c. For
+						<strong>Client policy type</strong>, select
+						<strong>GameClient w/ Unlock Achievements</strong>
+						if you plan to use EOS achievements for your game. For more information about achievements, see the
+						<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Achievements Interface documentation</a>.<br>
+						d. Leave the default options and click
+						<strong>Add new client policy</strong>. The preset client policy enables the Leaderboards feature by default.</p>
+				</li>
+				<li>
+					<p>To enable the Leaderboards feature for an existing client policy:<br>
+						a. Locate the client policy and click the three dots (<strong>...</strong>) next to it, then select
+						<strong>Edit</strong>.<br>
+						b. In the
+						<strong>Edit client policy</strong>
+						pane, scroll down to
+						<strong>Features</strong>
+						and use the
+						<strong>Leaderboards</strong>
+						toggle to enable the leaderboards feature.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="step-2-configure-your-games-leaderboards">Step 2: Configure Your Game’s Leaderboards</h3>
+			</div>
+			<p>You configure your game's leaderboards in the Developer Portal on the Leaderboards page. To do this, follow the steps below.</p>
+			<p>
+				<strong>To go to the Leaderboards page:</strong>
+			</p>
+			<p>A. Go to your game's product page in the Developer Portal.</p>
+			<ul>
+				<li>To do this:<br>
+					a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).<br>
+					b. In the left navigation, under
+					<strong>Your products</strong>,  click the name of your game.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>B. In the left navigation, click
+				<strong>Epic Online Services</strong>.<br>
+				C. In the
+				<strong>Player &amp; Game Data</strong>
+				section, click
+				<strong>Leaderboards</strong>.</p>
+			<p>
+				<strong>On the Leaderboards page:</strong>
+			</p>
+			<p>A. From the
+				<strong>Deployment</strong>
+				dropdown, select a deployment that is attached to the same sandbox where you created your stats. Stats and leaderboards you create are shared for all deployments in a sandbox.<br>
+				B. Click
+				<strong>Create Leaderboard</strong>.<br>
+				C. In the
+				<strong>Leaderboard Name</strong>
+				field, enter a name for the new leaderboard. Choose a name that is meaningful to you, because you will refer to this leaderboard name in your game code.</p>
+			<ul>
+				<li>
+					<strong>Note</strong>: The name can include only letters, numbers, or the underscore character (<code>_</code>) with no spaces.</li>
+			</ul>
+			<p>D. From the
+				<strong>Stat</strong>
+				dropdown, select the stat to track for the leaderboard.<br>
+				E. Under
+				<strong>Timespan</strong>, set the
+				<strong>Start Date</strong>
+				and (optional)
+				<strong>End Date</strong>
+				for the leaderboard.</p>
+			<ul>
+				<li>
+					<strong>Notes</strong>:
+					<ul>
+						<li>Stat values ingested outside the start and end timespan that you specify for the leaderboard are not included in the leaderboard.</li>
+						<li>Use the
+							<strong>Never expire this leaderboard</strong>
+							toggle to create a leaderboard without an end date.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Repeat these steps to create as many leaderboards as your game requires.</p>
+			<div>
+				<h2 id="results">Results</h2>
+			</div>
+			<p>You can see the leaderboards on your game’s Leaderboards page in the Developer Portal.</p>
+			<div>
+				<h2 id="notes">Notes</h2>
+			</div>
+			<p>The total number of leaderboards you can create depends on how many stat milestones you have left to use for your deployment. For more information on usage limitations, including stat milestones, see the documentation:
+				<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-reference#usage-limitations">Leaderboards Reference &gt; Usage Limitations</a>.</p>
+			<p>Next section:
+				<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/retrieve-leaderboards-for-your-game">2. Retrieve Leaderboards for Your Game</a>
+			</p>
+			<p>
+				<strong>Note:</strong>
+				This guide follows an order. However, only section 1. Set Up Leaderboards is a prerequisite to provide leaderboards in your game. You can follow any section of this guide from section 2 onwards independently of each other and in any order.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</a>
+								</li>
+								<li>
+									<a href="#step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</a>
+								</li>
+								<li>
+									<a href="#step-2-configure-your-games-leaderboards">Step 2: Configure Your Game’s Leaderboards</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

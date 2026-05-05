@@ -1,0 +1,123 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Get Information About a Lobby</h1>
+			<h2>How to access lobby information.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>To get information about a lobby, users can request an
+				<code>EOS_HLobbyDetails</code>
+				handle. There are three functions that provide this information, based on the local user's connection to the lobby:</p>
+			<ul>
+				<li>
+					<code>EOS_Lobby_CopyLobbyDetailsHandle</code>
+					is available to users currently connected to the lobby.</li>
+				<li>
+					<code>EOS_Lobby_CopyLobbyDetailsHandleByInviteId</code>
+					requires an invitation to the lobby.</li>
+				<li>
+					<code>EOS_LobbySearch_CopySearchResultByIndex</code>
+					works with lobbies that a local user found in a search.</li>
+			</ul>
+			<p>After successfully completing any of the preceding operations, you will receive an
+				<code>EOS_HLobbyDetails</code>
+				handle, which gives access to the following information:</p>
+			<ul>
+				<li>
+					<strong>Lobby ID</strong>: The unique identifier for the lobby</li>
+				<li>
+					<strong>Lobby Owner</strong>: The current owner of the lobby</li>
+				<li>
+					<strong>Lobby Members</strong>: The current members of the lobby</li>
+				<li>
+					<strong>Permission level</strong>: Restrictions on who can find or join the lobby; see "Permission Levels" below</li>
+				<li>
+					<strong>Space Available</strong>: The number of open slots currently available</li>
+				<li>
+					<strong>Max Members</strong>: The maximum number of users who can be in the lobby at any time</li>
+				<li>
+					<strong>Member Count</strong>: The current number of members in the lobby</li>
+				<li>
+					<strong>Lobby Attributes</strong>: Key-value pairs associated with the lobby</li>
+				<li>
+					<strong>Lobby Member Attributes</strong>: Key-value pairs associated with each individual user</li>
+				<li>
+					<strong>Lobby Member Platform</strong>: The hardware platform for an individual user as identified by the server. Note that this value is only provided for lobby members on console platforms; otherwise it returns a placeholder value. This placeholder value indicates it is not possible to reliably identify the hardware platform for the given user.</li>
+			</ul>
+			<div>
+				<h2 id="work-with-data-while-in-an-active-lobby">Work With Data While in an Active Lobby</h2>
+			</div>
+			<p>To find the ID of the lobby's owner, call
+				<code>EOS_LobbyDetails_GetLobbyOwner</code>. To find the IDs of the lobby's members, first call
+				<code>EOS_LobbyDetails_GetMemberCount</code>
+				to retrieve the current member count, then iterate over the current member count and call
+				<code>EOS_LobbyDetails_GetMemberByIndex</code>. Details about the lobby, in the form of an
+				<code>EOS_LobbyDetails_Info</code>
+				data structure, are available through the
+				<code>EOS_LobbyDetails_CopyInfo</code>
+				function. The
+				<code>EOS_LobbyDetails_Info</code>
+				that you receive will be a copy of the EOS SDK's cached information. You own this data and must release it with the
+				<code>EOS_LobbyDetails_Info_Release</code>
+				function to avoid leaking memory. The data is a snapshot and will not update if any information about the lobby changes after you receive it.</p>
+			<p>
+				<strong>Search result limitations note:</strong>
+			</p>
+			<p>You can use the same functionality described in this section, except when you use the functions below.</p>
+			<p>These functions are not available for search results and are only available if you are actively in the lobby:</p>
+			<ul>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-by-index">
+						<code>EOS_LobbyDetails_GetMemberByIndex</code>
+					</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-attribute-count">
+						<code>EOS_LobbyDetails_GetMemberAttributeCount</code>
+					</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-copy-member-attribute-by-index">
+						<code>EOS_LobbyDetails_CopyMemberAttributeByIndex</code>
+					</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-copy-member-attribute-by-key">
+						<code>EOS_LobbyDetails_CopyMemberAttributeByKey</code>
+					</a>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#work-with-data-while-in-an-active-lobby">Work With Data While in an Active Lobby</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

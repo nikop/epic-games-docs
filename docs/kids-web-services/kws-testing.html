@@ -1,0 +1,216 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Testing</h1>
+			<h2>How to test your KWS integration in your test environment.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>You can test your KWS integration end-to-end using the API integration and authentication credentials from the Developer Portal.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>We strongly recommend that you test each service thoroughly, following success and failure paths in your test environment, before you set up your production environment.</li>
+				<li>Additionally, although thorough testing in the test environment should suffice, we recommend that you also perform an end-to-end test run of your flow in the production environment and leave ample time to address any issues you may discover at this stage.</li>
+			</ul>
+			<p>To test your KWS integration, you must:</p>
+			<ol>
+				<li>
+					<p>Initiate a KWS verification flow using a test user email address.</p>
+				</li>
+				<li>
+					<p>When prompted to verify your age, use known test values to test your integration in various scenarios.</p>
+				</li>
+			</ol>
+			<p>See the sections below for guidance on input values.</p>
+			<p>
+				<strong>Note:</strong>
+				Rate limits are fixed to ten requests per hour per unique user email address in both the test and production environments.</p>
+			<div>
+				<h2 id="restrictions-on-test-environment-user-email-addresses">Restrictions on Test Environment User Email Addresses</h2>
+			</div>
+			<p>The email address that you use for testing must be either:</p>
+			<ul>
+				<li>An email address that belongs to a developer or admin within your organization. The developer or admin must have appropriate access to the relevant product — for example,
+					<code>test.user@domain.com</code>.</li>
+				<li>An alias of an email address that belongs to a developer or admin within your organization. The developer or admin must have appropriate access to the relevant product. For example,
+					<code>test.user+1@domain.com</code>.</li>
+			</ul>
+			<p>In the test environment, KWS does not add verified user email addresses to the AgeGraph. For this reason, you will test the pre-verified user flow by adding the ‘+verified’ alias to the test email address. For example,
+				<a href="mailto:test.user+verified@domain.com">test.user+verified@domain.com</a>. For more information about the pre-verified user flow, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/kids-web-services/age-verification-service/av-service-flow#pre-verified-users">The Age Verification Service Flow &gt; Pre-Verified Users</a>
+				</li>
+				<li>
+					<a href="/docs/kids-web-services/parent-verification-service/pv-service-flow#pre-verified-parents-or-guardians">The Parent Verification Service Flow &gt; Pre-Verified Parents or Guardians</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="test-social-security-number-ssn-verification-using-known-values">Test Social Security Number (SSN) Verification Using Known Values</h2>
+			</div>
+			<p>Each known value tests a different SSN verification scenario. Use the following values to test Social Security Number (SSN) verification:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Last four digits of SSN</strong>
+						</th>
+						<th>
+							<strong>Scenario</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1111</td>
+						<td>Age Not Verified (Failure)</td>
+					</tr>
+					<tr>
+						<td>2222</td>
+						<td>Individual Deceased (Failure)</td>
+					</tr>
+					<tr>
+						<td>3333</td>
+						<td>Multiple Dates of Birth for Individual (Failure)</td>
+					</tr>
+					<tr>
+						<td>4444</td>
+						<td>Individual Underage (Failure)</td>
+					</tr>
+					<tr>
+						<td>5555</td>
+						<td>General Verification Error (Failure)</td>
+					</tr>
+					<tr>
+						<td>(any other value)</td>
+						<td>Verification Success</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="test-credit-or-debit-card-verification-using-test-card-numbers">Test Credit or Debit Card Verification Using Test Card Numbers</h2>
+			</div>
+			<p>KWS uses Stripe to perform credit or debit card verification. For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<p>On how KWS performs credit card verification, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/kids-web-services/age-verification-service/av-service-verification-methods#credit-card">Age Verification Service Verification Methods &gt; Credit Card</a>
+						</li>
+						<li>
+							<a href="/docs/kids-web-services/parent-verification-service/pv-service-verification-methods#credit-card">Parent Verification Service Verification Methods &gt; Credit Card</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>On how KWS performs debit card verification, see:</p>
+					<ul>
+						<li>
+							<a href="/docs/kids-web-services/age-verification-service/av-service-verification-methods#credit-card">Age Verification Service Verification Methods &gt; Debit Card</a>
+						</li>
+						<li>
+							<a href="/docs/kids-web-services/parent-verification-service/pv-service-verification-methods#debit-card">Parent Verification Service Verification Methods &gt; Debit Card</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p>To test credit or debit card verification, use the test card numbers provided by Stripe (see Stripe’s developer documentation:
+				<a href="https://docs.stripe.com/testing">docs.stripe.com/testing</a>).</p>
+			<p>Each test card number tests a different payment scenario. For example, you can test successful payment, payment declined, and expired card scenarios.</p>
+			<p>To test 3D Secure flows, use Stripe’s 3D Secure test card numbers (see Stripe’s developer documentation:
+				<a href="https://docs.stripe.com/payments/3d-secure#three-ds-cards">docs.stripe.com/payments/3d-secure#three-ds-cards</a>).</p>
+			<div>
+				<h2 id="test-cpf-number-using-known-values">Test CPF Number Using Known Values</h2>
+			</div>
+			<p>KWS uses Serpro to perform CPF number verification. For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/kids-web-services/age-verification-service/av-service-verification-methods#cpf">Age Verification Service Verification Methods &gt; CPF</a>
+				</li>
+				<li>
+					<a href="/docs/kids-web-services/parent-verification-service/pv-service-verification-methods#cpf">Parent Verification Service Verification Methods &gt; CPF</a>
+				</li>
+			</ul>
+			<p>Each test value tests a different CPF number verification scenario. Use the following values to test CPF number verification:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Test Value</strong>
+						</th>
+						<th>
+							<strong>Scenario</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>40442820135</td>
+						<td>Pass</td>
+					</tr>
+					<tr>
+						<td>40532176871</td>
+						<td>Fail (Suspended)</td>
+					</tr>
+					<tr>
+						<td>05137518743</td>
+						<td>Fail (Deceased)</td>
+					</tr>
+					<tr>
+						<td>20803407009</td>
+						<td>Fail (Under 16)</td>
+					</tr>
+					<tr>
+						<td>30272095079</td>
+						<td>Fail (Under 18)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note:</strong>
+				You must use November 14, 1970 as the Date of Birth in all test cases.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#restrictions-on-test-environment-user-email-addresses">Restrictions on Test Environment User Email Addresses</a>
+								</li>
+								<li>
+									<a href="#test-social-security-number-ssn-verification-using-known-values">Test Social Security Number (SSN) Verification Using Known Values</a>
+								</li>
+								<li>
+									<a href="#test-credit-or-debit-card-verification-using-test-card-numbers">Test Credit or Debit Card Verification Using Test Card Numbers</a>
+								</li>
+								<li>
+									<a href="#test-cpf-number-using-known-values">Test CPF Number Using Known Values</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

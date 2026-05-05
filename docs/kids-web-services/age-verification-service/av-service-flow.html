@@ -1,0 +1,404 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Age Verification Service Flow</h1>
+			<h2>How you can use Age Verification Service.</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The verification flow has two parts. These are as follows:</p>
+			<ul>
+				<li>Flow and UI built by you.</li>
+				<li>Flow and UI provided by the Age Verification (AV) Service.</li>
+			</ul>
+			<p>The Age Verification Service uses KWS' AgeGraph, a database of hashed email addresses of users who have completed the age verification process. The AgeGraph enables KWS to determine if a user has been pre-verified the next time they encounter the AV Service.</p>
+			<center>
+				<div tabindex="0" aria-label="Age Verification Service Flow image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Age Verification Service Flow" src="https://static-assets-prod.epicgames.com/eos-docs/kids-web-services/age-verification-service/flow/av-service-av-workflow.png" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>A diagram displaying the Age Verification Service flow. Click image for full size.</figcaption>
+				</div>
+			</center>
+			<div>
+				<h2 id="set-up-your-products-user-interface">Set Up Your Product's User Interface</h2>
+			</div>
+			<p>Your product's (game or other software application) user interface must capture the required user details and trigger the AV flow.</p>
+			<p>You must set up your product's user interface as follows:</p>
+			<ol>
+				<li>
+					<p>To begin the verification process and allow the user to complete the age verification flow, configure your product's user interface to collect the following information:</p>
+					<ul>
+						<li>The user's email address.
+							<ul>
+								<li>
+									<strong>Note:</strong>
+									We recommend validating the email domain before submitting the email address to KWS.</li>
+							</ul>
+						</li>
+						<li>The user's language that KWS uses for emails and verification Web UI screens. For a complete list of supported languages, see documentation:
+							<a href="/docs/kids-web-services/kws-localization">Localization in Kids Web Services</a>.</li>
+						<li>The user's location. This can be either:
+							<ul>
+								<li>A two-letter country code using the
+									<code>ISO 3166-1 alpha-2 format</code>
+									(Wikipedia:
+									<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO_3166-1_alpha-2</a>). For example, 'US', 'GB', 'CA'.</li>
+								<li>A region code using the
+									<code>ISO 31660-2 subdivision</code>
+									format (Wikipedia:
+									<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO_3166-2</a>). For example, 'US-NY', 'GB-ENG', 'CA-BC'.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Ensure you verify ownership of the user's email address before passing it to KWS.</p>
+				</li>
+				<li>
+					<p>To trigger the AV flow, submit the user's email address to KWS using an authenticated call to the
+						<code>generate-verification-url</code>
+						API endpoint.</p>
+				</li>
+			</ol>
+			<div>
+				<h2 id="first-time-verification">First-Time Verification</h2>
+			</div>
+			<p>If either of the following situations applies, the Age Verification (AV) Service follows the first-time verification steps below:</p>
+			<ul>
+				<li>KWS has never verified the user.</li>
+				<li>KWS has verified the user, but they used a verification method that your product (game or other software application) does not have enabled.</li>
+				<li>KWS has verified the user, but they opted out of allowing KWS to keep their hashed email address in AgeGraph.</li>
+			</ul>
+			<p>The flow is as follows:</p>
+			<ol>
+				<li>
+					<p>You verify ownership of the user's email address.</p>
+				</li>
+				<li>
+					<p>You pass the user's email address to KWS using an authenticated call to the
+						<code>generate-verification-url</code>
+						API endpoint.</p>
+				</li>
+				<li>
+					<p>KWS directs the user to a Web UI screen that initiates the verification flow and offers a choice of verification methods.</p>
+				</li>
+			</ol>
+			<p>The user's location (which you pass to the API) and the methods you choose to display when configuring your AV Service settings determine the verification methods available. See documentation:
+				<a href="/docs/kids-web-services/age-verification-service/av-service-verification-methods">Age Verification Service Verification Methods</a>.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="verification-method-selection-web-ui-screen">Verification Method Selection Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Verification Method Selection Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Verification Method Selection Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompts users to choose their preferred verification method. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ol start="4">
+				<li>
+					<p>If the verification is successful:</p>
+					<ul>
+						<li>KWS returns the
+							<code>adult-verified</code>
+							event to your product (game or other software application) using the webhook you configured. See documentation:
+							<a href="/docs/kids-web-services/age-verification-service/set-up/av-service-configure-webhook">Configure the Age Verification Service Webhook</a>.</li>
+					</ul>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+			<ul>
+				<li>The AgeGraph stores a hash of the user's email address, along with their verified status, to pre-verify a user. See documentation:
+					<a href="/docs/kids-web-services/age-verification-service/av-service-flow#pre-verified-users">Pre-Verified Users</a>.</li>
+				<li>KWS sends a confirmation email to the user, informing them that they have been successfully verified and added to the AgeGraph.</li>
+				<li>The email also contains a link to opt out of the AgeGraph. If the user clicks this link, KWS displays a confirmation Web UI screen:</li>
+			</ul>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="agegraph-opt-out-web-ui-screen">AgeGraph Opt-Out Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="AgeGraph Opt-Out Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="AgeGraph Opt-Out Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>The Web UI screen KWS displays to ask a user to confirm their opt-out of the AgeGraph. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul>
+				<li>For the credit or debit card verification method, the email also includes details about authorization, capture, and refunds, depending on the country or region's specific requirements.</li>
+				<li>KWS sends the user to the URL you provided (the "Redirect URL"), if you provide one, and attaches a query that notifies your product that the user was verified successfully. See documentation:
+					<a href="/docs/kids-web-services/age-verification-service/set-up/av-service-configure-verification-response">Configure the Age Verification Service Verification Response</a>.</li>
+			</ul>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<ul>
+				<li>If you do not provide a URL, KWS displays a verification success message on the AV Service Web UI screen.</li>
+			</ul>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="successful-verification-message-web-ui-screen">Successful Verification Message Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Successful Verification Message Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Successful Verification Message Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>An example of the verification success message. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ol start="5">
+				<li>If verification fails, KWS displays an error on the Web UI screen. The user can then re-enter their verification credentials or choose another available verification method:</li>
+			</ol>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="error-message-web-ui-screen">Error Message Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Error Message Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Error Message Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>An example of the error message. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h2 id="pre-verified-users">Pre-Verified Users</h2>
+			</div>
+			<p>KWS follows the pre-verified user flow when the user's hashed email address exists in the AgeGraph. This means KWS has already verified the user through the AV Service or Parent Verification (PV) Service using a verification method enabled for the current product.</p>
+			<p>Pre-verified users don’t need to provide their verification credentials again, reducing friction for users and benefiting completion rates. The completion rate refers to the percentage of users who complete the age verification flow out of the total number of users who initiate the flow.</p>
+			<center>
+				<div tabindex="0" aria-label="Pre-Verified Flow image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Pre-Verified Flow" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>The verification flow for pre-verified users. Click image for full size.</figcaption>
+				</div>
+			</center>
+			<p>For pre-verified users, the AV flow is as follows:</p>
+			<ol>
+				<li>
+					<p>Your product (game or other software application) collects and verifies ownership of the user's email address.</p>
+				</li>
+				<li>
+					<p>Your product passes the ownership-verified email address to KWS.</p>
+				</li>
+				<li>
+					<p>KWS checks to see if the AgeGraph includes a hash of the user's email address.</p>
+				</li>
+				<li>
+					<p>If the user is pre-verified, they don’t receive a verification request. Instead, they will see a Web UI screen that informs them they have already verified with KWS.</p>
+				</li>
+			</ol>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="pre-verified-message-web-ui-screen">Pre-Verified Message Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Pre-Verified Message image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Pre-Verified Message" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>An example of the message shown to pre-verified users. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ol start="5">
+				<li>KWS sends the user a confirmation email informing them they have successfully verified their age. Note that there may be an intentional random delay of up to two hours before KWS sends this email.</li>
+			</ol>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="successful-pre-verification-email">Successful Pre-Verification Email</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Successful Pre-Verification Email image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Successful Pre-Verification Email" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>An example of the message shown to pre-verified users. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#set-up-your-products-user-interface">Set Up Your Product's User Interface</a>
+								</li>
+								<li>
+									<a href="#first-time-verification">First-Time Verification</a>
+								</li>
+								<li>
+									<a href="#verification-method-selection-web-ui-screen">Verification Method Selection Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#agegraph-opt-out-web-ui-screen">AgeGraph Opt-Out Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#successful-verification-message-web-ui-screen">Successful Verification Message Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#error-message-web-ui-screen">Error Message Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#pre-verified-users">Pre-Verified Users</a>
+								</li>
+								<li>
+									<a href="#pre-verified-message-web-ui-screen">Pre-Verified Message Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#successful-pre-verification-email">Successful Pre-Verification Email</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

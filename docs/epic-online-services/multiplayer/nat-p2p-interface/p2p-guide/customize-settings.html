@@ -1,0 +1,1315 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Peer-to-Peer to Your Game — 3. Customize Peer-to-Peer Settings With EOS P2P</h1>
+			<h2>Overview of how to customize the P2P settings for your game.</h2>
+			<div>
+				<div>54 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/establish-connections">2. Establish Peer-to-Peer Connections With EOS P2P</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>You can customize settings for P2P to meet the requirements of your game.</p>
+							<p>Note that when this guide refers to "player" connections, data sharing, and notifications, it means connections, data sharing, and notifications between each player’s game client.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete the following steps:</p>
+							<ul>
+								<li>Complete the prerequisites listed in the
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/p2p-intro">Introduction</a>
+									section of this guide.</li>
+								<li>Register for P2P notifications. (Section of this guide:
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/notify-players">1. Notify Players About P2P Connections</a>.)</li>
+								<li>Establish a connection between players. (Section of this guide:
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/establish-connections">2. Establish Peer-to-Peer Connections With EOS P2P</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="customize-p2p-settings">Customize P2P Settings</h2>
+							</div>
+							<p>Complete the following steps to customize the EOS P2P settings:</p>
+							<ul>
+								<li>
+									<a href="#step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-set-packet-queue-size">Step B: Set Packet Queue Size</a>
+								</li>
+								<li>
+									<a href="#step-c-find-nat-type">Step C: Find NAT Type</a>
+								</li>
+								<li>
+									<a href="#step-d-set-port-range">Step D: Set Port Range</a>
+								</li>
+								<li>
+									<a href="#step-e-set-relay-control">Step E: Customize Relay Control</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								The default settings for P2P might cover the requirements of your game. However, we recommend that you follow the steps in this section to familiarize yourself with the available settings and customize them if you need to.</p>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</h3>
+							</div>
+							<p>Modify your
+								<code>P2PManager.h</code>
+								file to include the declarations for the functions and variables that you need to customize EOS P2P settings.</p>
+							<p>
+								<strong>Note:</strong>
+								The example code below is not the complete code. It includes only the additions that you must make to your
+								<code>P2PManager.h</code>
+								file. For the complete code, see the complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// P2PManager.h...class P2PManager{public:...    /**     * Get information about the incoming and outgoing packet queues.     *     * @return A data structure to hold the packet queue information.     */    EOS_P2P_PacketQueueInfo GetPacketQueueInfoExample();     /**     * Set the maximum size in bytes of the incoming and outgoing packet queues.     *     * @param IncomingQueueMaxSize - The maximum size in bytes of the incoming packet queue.     *     * @param OutgoingQueueMaxSize = The maximum size in bytes of the outgoing packet queue.     */    void SetPacketQueueSizeExample(uint64_t IncomingQueueMaxSize, uint64_t OutgoingQueueMaxSize);     /** Get the current port setting for P2P connections. */    void GetPortRangeExample();     /** Getter for the preferred port variable. */    uint16_t GetPreferredPort() { return PreferredPort; }     /** Getter for the max additional ports to try variable. */    uint16_t GetMaxAdditionalPortsToTry() { return MaxAdditionalPortsToTry; }     /**     * Set the port to use, and the number of additional ports to try if the requested port is unavailable.     *     * @param Port - The port to request for P2P connections.     *     * @param MaxAdditionalPortsToTry - The maximum number of other ports to try if the requested port isn't available.     */    void SetPortRangeExample(uint16_t Port, uint16_t MaxAdditionalPortsToTry);     /**     * Get the current settings for whether relays are used for P2P connections.     *     * @return An enum indicating whether relays are allowed, disallowed, or forced.     */    EOS_ERelayControl GetRelayControlExample();     /**     * Set the options for whether to use relays for P2P connections.     *     * @param RelayControl - An enum indicating whether relays are allowed, disallowed, or forced.     */    void SetRelayControlExample(EOS_ERelayControl RelayControl);     /** Queries and then copies the local player's NAT type. */    void RetrieveNATTypeExample();     /**     * Get the size of the next packet in the incoming queue.     *     * @param Channel - An optional flag to filter packets by channel. If set to nullptr, no packets are filtered.     *     * @return The size in bytes of the next packet in the incoming queue.     */    uint32_t GetNextPacketSizeExample(uint8_t* Channel = nullptr); private:...    /** A struct holding the current packet queue info. */    EOS_P2P_PacketQueueInfo PacketQueueInfo = {};     /** The maximum queue size for the incoming queue. */    uint64_t IncomingQueueMaxSize = 65535;     /** The maximum queue size for the outgoing queue. */    uint64_t OutgoingQueueMaxSize = 65535;     /**      * The preferred port to use for P2P connections.     * If set to 0, the local player's OS chooses the port.     */    uint16_t PreferredPort = 0;     /** The maximum number of additional ports to try if the preferred port is not available. */    uint16_t MaxAdditionalPortsToTry = 0;     /** An enum indicating the current relay control setting. */    EOS_ERelayControl RelayControl = EOS_ERelayControl::EOS_RC_AllowRelays;     /** The NAT type of the local player. */    EOS_ENATType NATType = EOS_ENATType::EOS_NAT_Unknown;     /**     * Callback function that executes when a NAT type query is completed.     *      * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnQueryNATTypeComplete(const EOS_P2P_OnQueryNATTypeCompleteInfo* Data);     /** Gets the local player's NAT type after a query. */    void GetNATTypeExample(); };</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.h</code>
+																	file, declare a public function to get information about the incoming and outgoing packet queues. In the example, it's called
+																	<code>GetPacketQueueInfoExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_PacketQueueInfo GetPacketQueueInfoExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to set the maximum size in bytes of the incoming and outgoing packet queues. In the example, it's called
+																	<code>SetPacketQueueSizeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SetPacketQueueSizeExample(uint64_t IncomingQueueMaxSize, uint64_t OutgoingQueueMaxSize);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to get the current port setting for P2P connections. In the example, it's called
+																	<code>GetPortRangeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void GetPortRangeExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare two getters (one to return the preferred port variable, one to return the maximum additional ports to try variable):</p>
+																<div>
+																	<section>
+																		<pre>uint16_t GetPreferredPort() { return PreferredPort; } uint16_t GetMaxAdditionalPortsToTry() { return MaxAdditionalPortsToTry; }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to set the port to use and the number of additional ports to try if the requested port is unavailable. In the example, it's called
+																	<code>SetPortRangeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SetPortRangeExample(uint16_t Port, uint16_t MaxAdditionalPortsToTry);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to get the current relay control setting for P2P connections. In the example, it's called GetRelayControlExample():</p>
+																<div>
+																	<section>
+																		<pre>void GetRelayControlExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to set the options for whether to use relays for P2P connections. In the example, it's called
+																	<code>SetRelayControlExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SetRelayControlExample(EOS_ERelayControl RelayControl);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to query and then copy the local player's NAT type. In the example, it's called
+																	<code>RetrieveNATTypeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void RetrieveNATTypeExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to get the size of the next packet in the incoming queue. In the example, it's called
+																	<code>GetNextPacketSizeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>uint32_t GetNextPacketSizeExample(uint8_t* Channel = nullptr);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare the following private variables:</p>
+																<ul>
+																	<li>A struct to hold the current packet queue info.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>PacketQueueInfo</code>.</li>
+																		</ul>
+																	</li>
+																	<li>The maximum queue size for the incoming queue.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>IncomingQueueMaxSize</code>.</li>
+																		</ul>
+																	</li>
+																	<li>The maximum queue size for the outgoing queue.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>OutgoingQueueMaxSize</code>.</li>
+																		</ul>
+																	</li>
+																	<li>The preferred port to use for P2P connections.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>PreferredPort</code>.</li>
+																		</ul>
+																	</li>
+																	<li>The maximum number of additional ports to try if the preferred port is not available.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>MaxAdditionalPortsToTry</code>.</li>
+																		</ul>
+																	</li>
+																	<li>An enum indicating the current relay control setting.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>RelayControl</code>.</li>
+																		</ul>
+																	</li>
+																	<li>The NAT type of the local player.
+																		<ul>
+																			<li>In the example, it's called
+																				<code>NATType</code>.</li>
+																		</ul>
+																	</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_PacketQueueInfo PacketQueueInfo = {}; uint64_t IncomingQueueMaxSize = 65535; uint64_t OutgoingQueueMaxSize = 65535; uint16_t PreferredPort = 0; uint16_t MaxAdditionalPortsToTry = 0; EOS_ERelayControl RelayControl = EOS_ERelayControl::EOS_RC_AllowRelays; EOS_ENATType NATType = EOS_ENATType::EOS_NAT_Unknown;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<code>EOS_P2P_QueryNATType</code>
+																	function completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-p-2-p-on-query-nat-type-complete-callback">
+																		<code>EOS_P2P_OnQueryNATTypeCompleteCallback</code>
+																		callback</a>
+																	that receives a
+																	<a href="/docs/api-ref/structs/eos-p-2-p-on-query-nat-type-complete-info">
+																		<code>EOS_P2P_OnQueryNATTypeCompleteInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryNatTypeComplete()</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnQueryNATTypeComplete(const EOS_P2P_OnQueryNATTypeCompleteInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private function to get the local player's NAT type after a query. In the example, it's called
+																	<code>GETNATTypeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void GetNATTypeExample();</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-set-packet-queue-size">Step B: Set Packet Queue Size</h3>
+							</div>
+							<p>This setting determines how many packets your game can send while establishing a connection.</p>
+							<div>
+								<h4 id="get-packet-queue-size">Get Packet Queue Size</h4>
+							</div>
+							<p>In your P2P manager class, implement the function to get information about the current packet queue settings.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>EOS_P2P_PacketQueueInfo P2PManager::GetPacketQueueInfoExample(){    // Set the options for getting information about the packet queues.    EOS_P2P_GetPacketQueueInfoOptions GetQueueInfoOptions = {};    GetQueueInfoOptions.ApiVersion = EOS_P2P_GETPACKETQUEUEINFO_API_LATEST;     // Call the EOS SDK to get information about the packet queues.    EOS_EResult GetQueueInfoResult = EOS_P2P_GetPacketQueueInfo(P2PHandle, &amp;GetQueueInfoOptions, &amp;PacketQueueInfo);     if (GetQueueInfoResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully got packet queue info." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting packet queue info! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetQueueInfoResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetQueueInfoResult) &lt;&lt; std::endl;    }     return PacketQueueInfo;}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to get information about the current packet queue settings. In the example, it's called
+																	<code>GetPacketQueueInfoExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_PacketQueueInfo P2PManager::GetPacketQueueInfoExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your get packet info function, create an instance of the
+																	<code>EOS_P2P_GetPacketQueueInfoOptions</code>
+																	data structure to hold the options for getting the packet queue information. In the example, it's called
+																	<code>GetQueueInfoOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_GetPacketQueueInfoOptions GetQueueInfoOptions = {};GetQueueInfoOptions.ApiVersion = EOS_P2P_GETPACKETQUEUEINFO_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API function
+																	<code>EOS_P2P_GetPacketQueueInfo</code>
+																	to get the packet queue information.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the options for getting the packet queue.</li>
+																	<li>The current information of the incoming and outgoing packet queues.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult GetQueueInfoResult = EOS_P2P_GetPacketQueueInfo(P2PHandle, &amp;GetQueueInfoOptions, &amp;PacketQueueInfo);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	enum to confirm that the packet queue information is retrieved successfully. If the information is retrieved successfully, notify the player. In the example, the console prints a success statement:</p>
+																<div>
+																	<section>
+																		<pre>if (GetQueueInfoResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Successfully got packet queue info." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the packet queue information is not retrieved successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error getting packet queue info! Error code: "        &lt;&lt; static_cast&lt;int&gt;(GetQueueInfoResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetQueueInfoResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Return the packet queue information:</p>
+																<div>
+																	<section>
+																		<pre>return PacketQueueInfo;</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="set-packet-queue-size">Set Packet Queue Size</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the set packet queue size function to set the maximum incoming and outgoing packet queue sizes.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SetPacketQueueSizeExample(uint64_t IncomingQueueMaxSize, uint64_t OutgoingQueueMaxSize){    // Set the options for setting the maximum sizes of the packet queues.    EOS_P2P_SetPacketQueueSizeOptions SetQueueSizeOptions = {};    SetQueueSizeOptions.ApiVersion = EOS_P2P_SETPACKETQUEUESIZE_API_LATEST;     // Set the maximum size of the incoming packet queue in bytes.    SetQueueSizeOptions.IncomingPacketQueueMaxSizeBytes = IncomingQueueMaxSize;     // Set the maximum size of the outgoing packet queue in bytes.    SetQueueSizeOptions.OutgoingPacketQueueMaxSizeBytes = OutgoingQueueMaxSize;     // Call the EOS SDK to set the max sizes of the packet queues.    EOS_EResult SetQueueSizeResult = EOS_P2P_SetPacketQueueSize(P2PHandle, &amp;SetQueueSizeOptions);     if (SetQueueSizeResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully set maximum size of packet queues." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error setting packet queue size! Error code: "            &lt;&lt; static_cast&lt;int&gt;(SetQueueSizeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetQueueSizeResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.cpp</code>
+																	file, implement the function to configure the maximum packet queue size. In the example, it's called
+																	<code>SetPacketQueueSizeExample()</code>:</p>
+																<p>The example function takes the following parameters:</p>
+																<ul>
+																	<li>The maximum size in bytes for the incoming packet queue.</li>
+																	<li>The maximum size in bytes for the outgoing packet queue.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SetPacketQueueSizeExample(uint64_t IncomingQueueMaxSize, uint64_t OutgoingQueueMaxSize){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your set packet queue size function, create an instance of the
+																	<code>EOS_P2P_SetPacketQueueSizeOptions</code>
+																	data structure to hold the options for setting the maximum sizes of the packet queues. In the example, it's called
+																	<code>SetQueueSizeOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_SetPacketQueueSizeOptions SetQueueSizeOptions = {};SetQueueSizeOptions.ApiVersion = EOS_P2P_SETPACKETQUEUESIZE_API_LATEST;SetQueueSizeOptions.IncomingPacketQueueMaxSizeBytes = IncomingQueueMaxSize;SetQueueSizeOptions.OutgoingPacketQueueMaxSizeBytes = OutgoingQueueMaxSize;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_SetPacketQueueSize</code>
+																	function to set the maximum packet queue size.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the queue size options.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult SetQueueSizeResult = EOS_P2P_SetPacketQueueSize(P2PHandle, &amp;SetQueueSizeOptions);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	enum to confirm that the packet queue size is set successfully:</p>
+																<div>
+																	<section>
+																		<pre>if (SetQueueSizeResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Successfully set maximum size of packet queues." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the packet queue size is not set successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error setting packet queue size! Error code: "        &lt;&lt; static_cast&lt;int&gt;(SetQueueSizeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetQueueSizeResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-find-nat-type">Step C: Find NAT Type</h3>
+							</div>
+							<p>Under certain circumstances (for example, to obtain metadata for matchmaking), you might need to identify your players' NAT type. You can call the P2P Interface's
+								<code>EOS_P2P_QueryNATType</code>
+								function to retrieve the NAT type of the local player's current connection. This function asynchronously sends multiple packets of data to remote servers, and those servers respond with the IP address and ports the local player uses for your game.</p>
+							<p>
+								<strong>Note</strong>: If you call
+								<code>EOS_P2P_QueryNATType</code>
+								while a request is already in progress, the EOS SDK groups additional calls into the first request. It does not start a new request.</p>
+							<div>
+								<h4 id="query-nat-type">Query NAT Type</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the function to retrieve the player's NAT type.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::RetrieveNATTypeExample(){	// Set the options for querying the NAT type.	EOS_P2P_QueryNATTypeOptions QueryNATTypeOptions = {};	QueryNATTypeOptions.ApiVersion = EOS_P2P_QUERYNATTYPE_API_LATEST; 	// Call the EOS SDK to query the NAT type of the local player.	// The callback function will be called when the query is complete.	EOS_P2P_QueryNATType(P2PHandle, &amp;QueryNATTypeOptions, this, OnQueryNATTypeComplete);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2Panager.cpp</code>
+																	file, implement the function to query the NAT type of the local player. In the example, it's called
+																	<code>RetrieveNATTypeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::RetrieveNATTypeExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your retrieve NAT type function, create an instance of the
+																	<a href="https://dev.epicgames.com/docs/api-ref/structs/eos-p-2-p-query-nat-type-options">
+																		<code>EOS_P2P_QueryNATTypeOptions</code>
+																		data structure</a>
+																	to hold the options for querying the NAT type:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_QueryNATTypeOptions QueryNATTypeOptions = {};QueryNATTypeOptions.ApiVersion = EOS_P2P_QUERYNATTYPE_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-p-2-p-query-nat-type">
+																		<code>EOS_P2P_QueryNATType</code>
+																		function</a>.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the options for the NAT type query.</li>
+																	<li>(Optional)
+																		<code>ClientData</code>.
+																		<ul>
+																			<li>In the example, we pass the P2P manager (<code>this</code>
+																				in the example) for the ClientData field, so we can access it in the callback.<br>
+																				If you don't need to pass any additional data to the callback, pass a
+																				<code>nullptr</code>
+																				instead.</li>
+																		</ul>
+																	</li>
+																	<li>A callback function to receive the
+																		<a href="https://dev.epicgames.com/docs/api-ref/structs/eos-p-2-p-on-query-nat-type-complete-info">
+																			<code>EOS_P2P_OnQueryNATTypeCompleteInfo</code>
+																			data structure</a>
+																		when the EOS P2P service is finished querying the user's NAT type.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_QueryNATType(P2PHandle, &amp;QueryNATTypeOptions, this, OnQueryNATTypeComplete);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="retrieve-nat-type">Retrieve NAT Type</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the callback function
+								<code>OnQueryNATTypeComplete</code>.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL P2PManager::OnQueryNATTypeComplete(const EOS_P2P_OnQueryNATTypeCompleteInfo* Data){	if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)	{		// Retrieve the P2PManager pointer from from the client data passed to the callback function.		P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData); 		// Get the player's NAT type from the cache.		Self-&gt;GetNATTypeExample();	}	else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)	{		// If the code gets here, the operation is retrying and is not yet complete.		return;	}	else	{		// If the code gets here, there was an error. 		// Handle this however you need for your game.		std::cerr &lt;&lt; "Error querying NAT type! Error code: "			&lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - "&lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;	}}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-4">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.cpp</code>
+																	file, implement the callback function that executes when the
+																	<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-p-2-p-query-nat-type">
+																		<code>EOS_P2P_QueryNATType</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="https://dev.epicgames.com/docs/api-ref/callbacks/eos-p-2-p-on-query-nat-type-complete-callback">
+																		<code>EOS_P2P_OnQueryNATTypeCompleteCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="https://dev.epicgames.com/docs/api-ref/structs/eos-p-2-p-on-query-nat-type-complete-info">
+																		<code>EOS_P2P_OnQueryNATTypeCompleteInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryNATTypeComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL P2PManager::OnQueryNATTypeComplete(const EOS_P2P_OnQueryNATTypeCompleteInfo* Data)</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-p-2-p-query-nat-type">
+																			<code>EOS_P2P_QueryNATType</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="https://dev.epicgames.com/docs/en-US/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the query is successful. If the query is successful, retrieve the P2P manager pointer from the client data and call your function to get the NAT type from the cache:</p>
+																<div>
+																	<section>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     Self-&gt;GetNATTypeExample();}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="https://dev.epicgames.com/docs/en-US/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the query is complete yet. If the query is not complete yet, return. The callback is called again when the query is complete:</p>
+																<div>
+																	<section>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){return;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the query is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error querying NAT type! Error code: "        &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="get-nat-type-from-cache">Get NAT Type from Cache</h4>
+							</div>
+							<p>After EOS_P2P_QueryNATType completes at least once, the EOS SDK caches the value of the player's NAT type. You can then call the function EOS_P2P_GetNATType to return the player's NAT type value immediately.</p>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the function to retrieve the cached NAT type.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::GetNATTypeExample(){	// Set the options for getting the cached NAT type.	EOS_P2P_GetNATTypeOptions GetNATTypeOptions = {};	GetNATTypeOptions.ApiVersion = EOS_P2P_GETNATTYPE_API_LATEST; 	// Create a variable to temporarily store the retrieved NAT type.	EOS_ENATType RetrievedNATType = EOS_ENATType::EOS_NAT_Unknown; 	// Call the EOS SDK to get the cached NAT type.	EOS_EResult GetNATTypeResult = EOS_P2P_GetNATType(P2PHandle, &amp;GetNATTypeOptions, &amp;RetrievedNATType); 	if (GetNATTypeResult == EOS_EResult::EOS_Success)	{		// Save the retrieved NAT type.		NATType = RetrievedNATType; 		if (NATType == EOS_ENATType::EOS_NAT_Open)		{			std::cout &lt;&lt; "NAT type is: Open." &lt;&lt; std::endl;		}		else if (NATType == EOS_ENATType::EOS_NAT_Moderate)		{			std::cout &lt;&lt; "NAT type is: Moderate." &lt;&lt; std::endl;		}		else if (NATType == EOS_ENATType::EOS_NAT_Strict)		{			std::cout &lt;&lt; "NAT type is: Strict." &lt;&lt; std::endl;		}		else		{			std::cout &lt;&lt; "NAT type is: Unknown." &lt;&lt; std::endl;		} 	}	else	{		// If the code gets here, there was an error.		// Handle this however you need for your game.		std::cerr &lt;&lt; "Error getting NAT type! Error code: "			&lt;&lt; static_cast&lt;int&gt;(GetNATTypeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetNATTypeResult) &lt;&lt; std::endl; 	}}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-5">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2Panager.cpp</code>
+																	file, implement the function to retrieve the cached NAT type. In the example, it's called GetNATTypeExample():</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::GetNATTypeExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your get NAT type function, create an instance of the
+																	<code>EOS_P2P_GetNATTypeOptions</code>
+																	data structure to hold the options for getting the NAT type:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_GetNATTypeOptions GetNATTypeOptions = {};GetNATTypeOptions.ApiVersion = EOS_P2P_GETNATTYPE_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create a variable to temporarily store the NAT type from the cache:</p>
+																<div>
+																	<section>
+																		<pre>EOS_ENATType RetrievedNATType = EOS_ENATType::EOS_NAT_Unknown;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_GetNATType</code>
+																	function to get the player's NAT type from the local cache.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the get NAT type options data structure.</li>
+																	<li>A reference to the out variable to store the retrieved NAT type.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult GetNATTypeResult = EOS_P2P_GetNATType(P2PHandle, &amp;GetNATTypeOptions, &amp;RetrievedNATType);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<code>EOS_P2P_GetNATType</code>
+																	function call is successful, save the retrieved NAT type so you can reference it when you need it. In the example, the console prints the retrieved NAT type:</p>
+																<div>
+																	<section>
+																		<pre>if (GetNATTypeResult == EOS_EResult::EOS_Success){    NATType = RetrievedNATType;     if (NATType == EOS_ENATType::EOS_NAT_Open)    {        std::cout &lt;&lt; "NAT type is: Open." &lt;&lt; std::endl;    }    else if (NATType == EOS_ENATType::EOS_NAT_Moderate)    {        std::cout &lt;&lt; "NAT type is: Moderate." &lt;&lt; std::endl;    }    else if (NATType == EOS_ENATType::EOS_NAT_Strict)    {        std::cout &lt;&lt; "NAT type is: Strict." &lt;&lt; std::endl;    }    else    {        std::cout &lt;&lt; "NAT type is: Unknown." &lt;&lt; std::endl;    }}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<code>EOS_P2P_GetNATType</code>
+																	function call is not successful, handle any errors:</p>
+																<div>
+																	<section>
+																		<pre>else{std::cerr &lt;&lt; "Error getting NAT type! Error code: "        &lt;&lt; static_cast&lt;int&gt;(GetNATTypeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetNATTypeResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-set-port-range">Step D. Set Port Range</h3>
+							</div>
+							<p>By default, EOS P2P uses port 7777 and, if that connection fails, will try up to 99 additional ports. If necessary – for example, to meet platform requirements or avoid port conflicts – you can specify a different preferred port and how many additional ports to try.</p>
+							<div>
+								<h4 id="get-port-range">Get Port Range</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the function to get the current port settings.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::GetPortRangeExample(){    // Set the options for getting the port settings.    EOS_P2P_GetPortRangeOptions GetPortRangeOptions = {};    GetPortRangeOptions.ApiVersion = EOS_P2P_GETPORTRANGE_API_LATEST;     // Call the EOS SDK to get the current port settings.    EOS_EResult GetPortRangeResult = EOS_P2P_GetPortRange(P2PHandle, &amp;GetPortRangeOptions, &amp;PreferredPort, &amp;MaxAdditionalPortsToTry);     if (GetPortRangeResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully got port range settings." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting port range settings! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetPortRangeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetPortRangeResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-6">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.cpp</code>
+																	file, implement the function to get the current port settings. In the example, it's called
+																	<code>GetPortRangeExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::GetPortRangeExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your get port range function, create an instance of the
+																	<code>EOS_P2P_GetPortRangeOptions</code>
+																	data structure to hold the options for getting the port settings:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_GetPortRangeOptions GetPortRangeOptions = {};GetPortRangeOptions.ApiVersion = EOS_P2P_GETPORTRANGE_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_GetPortRange</code>
+																	function to get the current port range settings.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the options for getting the port range.</li>
+																	<li>A pointer to the port that will be tried first.</li>
+																	<li>A pointer to the maximum number of additional ports to try.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult GetPortRangeResult = EOS_P2P_GetPortRange(P2PHandle, &amp;GetPortRangeOptions, &amp;PreferredPort, &amp;MaxAdditionalPortsToTry);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	enum to confirm that the port range settings are retrieved successfully:</p>
+																<div>
+																	<section>
+																		<pre>if (GetPortRangeResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Successfully got port range settings." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the port range settings are not retrieved successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error getting port range settings! Error code: "        &lt;&lt; static_cast&lt;int&gt;(GetPortRangeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetPortRangeResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="set-port-range">Set Port Range</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the function to set the port range.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SetPortRangeExample(uint16_t Port, uint16_t MaxAdditionalPortsToTry){    // Set the options for which ports to use for P2P connections.    EOS_P2P_SetPortRangeOptions SetPortRangeOptions = {};    SetPortRangeOptions.ApiVersion = EOS_P2P_SETPORTRANGE_API_LATEST;     // Set the preferred port to request for P2P connections. The default is 7777.    // If set to 0, the OS will choose a port, and MaxAdditionalPortsToTry must also be 0.    SetPortRangeOptions.Port = Port;     // Set the maximum number of additional ports to try using if the preferred port is not available.    SetPortRangeOptions.MaxAdditionalPortsToTry = MaxAdditionalPortsToTry;     // Call the EOS SDK to set the options for which ports to use for P2P connections.    EOS_EResult SetPortRangeResult = EOS_P2P_SetPortRange(P2PHandle, &amp;SetPortRangeOptions);     if (SetPortRangeResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully set port options." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error setting port options! Error code: "            &lt;&lt; static_cast&lt;int&gt;(SetPortRangeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetPortRangeResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-7">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.cpp</code>
+																	file, implement the function to set the port range. In the example, it's called
+																	<code>SetPortRangeExample()</code>.<br>
+																	The example function takes the following parameters:</p>
+																<ul>
+																	<li>The port to try first. By default, this is
+																		<code>7777</code>.</li>
+																	<li>The maximum number of additional ports to try if the first port is not available.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SetPortRangeExample(uint16_t Port, uint16_t MaxAdditionalPortsToTry){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your set port range, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-p-2-p-set-port-range-options">
+																		<code>EOS_P2P_SetPortRangeOptions</code>
+																		data structure</a>
+																	to hold the options to set the range of ports to check. In the example, it's called
+																	<code>SetPortRangeOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_SetPortRangeOptions SetPortRangeOptions = {};SetPortRangeOptions.ApiVersion = EOS_P2P_SETPORTRANGE_API_LATEST;SetPortRangeOptions.Port = Port;SetPortRangeOptions.MaxAdditionalPortsToTry = MaxAdditionalPortsToTry;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-set-port-range">
+																		<code>EOS_P2P_SetPortRange</code>
+																		function</a>
+																	to set the range of ports to check when establishing a P2P connection.<br>
+																	This function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the set port range options data structure.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult SetPortRangeResult = EOS_P2P_SetPortRange(P2PHandle, &amp;SetPortRangeOptions);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the port range was set successfully:</p>
+																<div>
+																	<section>
+																		<pre>if (SetPortRangeResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Successfully set port options." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the port range was not set successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error setting port options! Error code: "        &lt;&lt; static_cast&lt;int&gt;(SetPortRangeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetPortRangeResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-e-set-relay-control">Step E: Set Relay Control</h3>
+							</div>
+							<p>The P2P Interface's relay control setting determines if the P2P Interface uses relays to establish the peer-to-peer connection. If the P2P Interface cannot connect with NAT traversal (Wikipedia:
+								<a href="https://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a>), it uses a secure relay to transfer data between players. For more information about the relay control options, see the documentation:
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-reference">Reference: Peer-to-Peer Interface &gt; Relay Control</a>.</p>
+							<div>
+								<h4 id="get-relay-control">Get Relay Control</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the function to get the current relay control setting.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>EOS_ERelayControl P2PManager::GetRelayControlExample(){    // Set the options for getting the current relay control setting.    EOS_P2P_GetRelayControlOptions GetRelayControlOptions = {};    GetRelayControlOptions.ApiVersion = EOS_P2P_GETRELAYCONTROL_API_LATEST;     // Call the EOS SDK to get the current relay control setting.    EOS_EResult GetRelayControlResult = EOS_P2P_GetRelayControl(P2PHandle, &amp;GetRelayControlOptions, &amp;RelayControl);     if (GetRelayControlResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully got relay control setting." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting relay control setting! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetRelayControlResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetRelayControlResult) &lt;&lt; std::endl;    }     return RelayControl;}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-8">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.cpp</code>
+																	file, implement the function to get the current relay control setting. In the example, it's called
+																	<code>GetRelayControlExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_ERelayControl P2PManager::GetRelayControlExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your get relay control function, create an instance of the
+																	<code>EOS_P2P_GetRelayControlOptions</code>
+																	data structure to hold the options for getting the relay control setting. In the example, it's called
+																	<code>GetRelayControlOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_GetRelayControlOptions GetRelayControlOptions = {};GetRelayControlOptions.ApiVersion = EOS_P2P_GETRELAYCONTROL_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_GetRelayControl</code>
+																	function. This function gets the current relay control setting.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the options for getting the relay control setting.</li>
+																	<li>A reference to the out variable to store the retrieved relay control setting.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult GetRelayControlResult = EOS_P2P_GetRelayControl(P2PHandle, &amp;GetRelayControlOptions, &amp;RelayControl);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	enum to confirm that the relay control setting is retrieved successfully:</p>
+																<div>
+																	<section>
+																		<pre>if (GetRelayControlResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Successfully got relay control setting." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the relay control setting is not retrieved successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error getting relay control setting! Error code: "        &lt;&lt; static_cast&lt;int&gt;(GetRelayControlResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetRelayControlResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="set-relay-control">Set Relay Control</h4>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the function to set the relay control options.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SetRelayControlExample(EOS_ERelayControl RelayControl){    // Set the options for whether to use relays.    EOS_P2P_SetRelayControlOptions SetRelayControlOptions = {};    SetRelayControlOptions.ApiVersion = EOS_P2P_SETRELAYCONTROL_API_LATEST;     // Set an enum indicating whether relays are allowed, disallowed, or forced.    SetRelayControlOptions.RelayControl = RelayControl;     // Call the EOS SDK to set the options for whether to use relays for P2P connections.    EOS_EResult SetRelayControlResult = EOS_P2P_SetRelayControl(P2PHandle, &amp;SetRelayControlOptions);     if (SetRelayControlResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully set relay control options." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error setting relay control options! Error code: "            &lt;&lt; static_cast&lt;int&gt;(SetRelayControlResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetRelayControlResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-9">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.cpp</code>
+																	file, implement the function to set the relay control options:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SetRelayControlExample(EOS_ERelayControl RelayControl)</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your relay control function, create an instance of the
+																	<code>EOS_P2P_SetRelayControlOptions</code>
+																	data structure to hold the options for whether to use relays. In the example, it's called
+																	<code>SetRelayControlOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_SetRelayControlOptions SetRelayControlOptions = {};SetRelayControlOptions.ApiVersion = EOS_P2P_SETRELAYCONTROL_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_SetRelayControl</code>
+																	function to set the relay control options.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the set relay control options data structure.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult SetRelayControlResult = EOS_P2P_SetRelayControl(P2PHandle, &amp;SetRelayControlOptions);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	enum to confirm that the relay control options are set successfully:</p>
+																<div>
+																	<section>
+																		<pre>if (SetRelayControlResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Successfully set relay control options." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the relay control options are not set successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error setting relay control options! Error code: "        &lt;&lt; static_cast&lt;int&gt;(SetRelayControlResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetRelayControlResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// P2PManager.h#pragma once #include &lt;eos_p2p.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;string&gt; class P2PManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the EOS Platform Interface obtained during EOS Platform Interface setup.     *     * @param InLocalProductUserId - The Product User ID of the local player obtained during Connect login.     */    P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**     * Get information about the incoming and outgoing packet queues.     *     * @return A data structure to hold the packet queue information.     */    EOS_P2P_PacketQueueInfo GetPacketQueueInfoExample();     /**     * Set the maximum size in bytes of the incoming and outgoing packet queues.     *     * @param IncomingQueueMaxSize - The maximum size in bytes of the incoming packet queue.     *     * @param OutgoingQueueMaxSize = The maximum size in bytes of the outgoing packet queue.     */    void SetPacketQueueSizeExample(uint64_t IncomingQueueMaxSize, uint64_t OutgoingQueueMaxSize);     /** Get the current port setting for P2P connections. */    void GetPortRangeExample();     /** Getter for the preferred port variable. */    uint16_t GetPreferredPort() { return PreferredPort; }     /** Getter for the max additional ports to try variable. */    uint16_t GetMaxAdditionalPortsToTry() { return MaxAdditionalPortsToTry; }     /**     * Set the port to use, and the number of additional ports to try if the requested port is unavailable.     *     * @param Port - The port to request for P2P connections.     *     * @param MaxAdditionalPortsToTry - The maximum number of other ports to try if the requested port isn't available.     */    void SetPortRangeExample(uint16_t Port, uint16_t MaxAdditionalPortsToTry);     /**     * Get the current settings for whether relays are used for P2P connections.     *     * @return An enum indicating whether relays are allowed, disallowed, or forced.     */    EOS_ERelayControl GetRelayControlExample();     /**     * Set the options for whether to use relays for P2P connections.     *     * @param RelayControl - An enum indicating whether relays are allowed, disallowed, or forced.     */    void SetRelayControlExample(EOS_ERelayControl RelayControl);     /** Queries and then copies the local player's NAT type. */    void RetrieveNATTypeExample();     /**     * Get the size of the next packet in the incoming queue.     *     * @param Channel - An optional flag to filter packets by channel. If set to nullptr, no packets are filtered.     *     * @return The size in bytes of the next packet in the incoming queue.     */    uint32_t GetNextPacketSizeExample(uint8_t* Channel = nullptr); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The P2P Interface handle. */    EOS_HP2P P2PHandle = nullptr;     /** A struct holding the current packet queue info. */    EOS_P2P_PacketQueueInfo PacketQueueInfo = {};     /** The maximum queue size for the incoming queue. */    uint64_t IncomingQueueMaxSize = 65535;     /** The maximum queue size for the outgoing queue. */    uint64_t OutgoingQueueMaxSize = 65535;     /**      * The preferred port to use for P2P connections.     * If set to 0, the local player's OS chooses the port.     */    uint16_t PreferredPort = 0;     /** The maximum number of additional ports to try if the preferred port is not available. */    uint16_t MaxAdditionalPortsToTry = 0;     /** An enum indicating the current relay control setting. */    EOS_ERelayControl RelayControl = EOS_ERelayControl::EOS_RC_AllowRelays;     /** The NAT type of the local player. */    EOS_ENATType NATType = EOS_ENATType::EOS_NAT_Unknown;     /**     * Callback function that executes when a NAT type query is completed.     *      * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnQueryNATTypeComplete(const EOS_P2P_OnQueryNATTypeCompleteInfo* Data);     /** Gets the local player's NAT type after a query. */    void GetNATTypeExample(); };</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// P2PManager.cpp EOS_P2P_PacketQueueInfo P2PManager::GetPacketQueueInfoExample(){    // Set the options for getting information about the packet queues.    EOS_P2P_GetPacketQueueInfoOptions GetQueueInfoOptions = {};    GetQueueInfoOptions.ApiVersion = EOS_P2P_GETPACKETQUEUEINFO_API_LATEST;     // Call the EOS SDK to get information about the packet queues.    EOS_EResult GetQueueInfoResult = EOS_P2P_GetPacketQueueInfo(P2PHandle, &amp;GetQueueInfoOptions, &amp;PacketQueueInfo);     if (GetQueueInfoResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully got packet queue info." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting packet queue info! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetQueueInfoResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetQueueInfoResult) &lt;&lt; std::endl;    }     return PacketQueueInfo;} void P2PManager::SetPacketQueueSizeExample(uint64_t IncomingQueueMaxSize, uint64_t OutgoingQueueMaxSize){    // Set the options for setting the maximum sizes of the packet queues.    EOS_P2P_SetPacketQueueSizeOptions SetQueueSizeOptions = {};    SetQueueSizeOptions.ApiVersion = EOS_P2P_SETPACKETQUEUESIZE_API_LATEST;     // Set the maximum size of the incoming packet queue in bytes.    SetQueueSizeOptions.IncomingPacketQueueMaxSizeBytes = IncomingQueueMaxSize;     // Set the maximum size of the outgoing packet queue in bytes.    SetQueueSizeOptions.OutgoingPacketQueueMaxSizeBytes = OutgoingQueueMaxSize;     // Call the EOS SDK to set the max sizes of the packet queues.    EOS_EResult SetQueueSizeResult = EOS_P2P_SetPacketQueueSize(P2PHandle, &amp;SetQueueSizeOptions);     if (SetQueueSizeResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully set maximum size of packet queues." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error setting packet queue size! Error code: "            &lt;&lt; static_cast&lt;int&gt;(SetQueueSizeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetQueueSizeResult) &lt;&lt; std::endl;    }} void P2PManager::RetrieveNATTypeExample(){    // Set the options for querying the NAT type.    EOS_P2P_QueryNATTypeOptions QueryNATTypeOptions = {};    QueryNATTypeOptions.ApiVersion = EOS_P2P_QUERYNATTYPE_API_LATEST;     // Call the EOS SDK to query the NAT type of the local player.    // The callback function will be called when the query is complete.    EOS_P2P_QueryNATType(P2PHandle, &amp;QueryNATTypeOptions, this, OnQueryNATTypeComplete);} void EOS_CALL P2PManager::OnQueryNATTypeComplete(const EOS_P2P_OnQueryNATTypeCompleteInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // Retrieve the P2PManager pointer from from the client data passed to the callback function.        P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);         // Get the player's NAT type from the cache.        Self-&gt;GetNATTypeExample();    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.         // Handle this however you need for your game.        std::cerr &lt;&lt; "Error querying NAT type! Error code: "            &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }} void P2PManager::GetNATTypeExample(){    // Set the options for getting the cached NAT type.    EOS_P2P_GetNATTypeOptions GetNATTypeOptions = {};    GetNATTypeOptions.ApiVersion = EOS_P2P_GETNATTYPE_API_LATEST;     // Create a variable to temporarily store the retrieved NAT type.    EOS_ENATType RetrievedNATType = EOS_ENATType::EOS_NAT_Unknown;     // Call the EOS SDK to get the cached NAT type.    EOS_EResult GetNATTypeResult = EOS_P2P_GetNATType(P2PHandle, &amp;GetNATTypeOptions, &amp;RetrievedNATType);     if (GetNATTypeResult == EOS_EResult::EOS_Success)    {        // Save the retrieved NAT type.        NATType = RetrievedNATType;         if (NATType == EOS_ENATType::EOS_NAT_Open)        {            std::cout &lt;&lt; "NAT type is: Open." &lt;&lt; std::endl;        }        else if (NATType == EOS_ENATType::EOS_NAT_Moderate)        {            std::cout &lt;&lt; "NAT type is: Moderate." &lt;&lt; std::endl;        }        else if (NATType == EOS_ENATType::EOS_NAT_Strict)        {            std::cout &lt;&lt; "NAT type is: Strict." &lt;&lt; std::endl;        }        else        {            std::cout &lt;&lt; "NAT type is: Unknown." &lt;&lt; std::endl;        }     }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting NAT type! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetNATTypeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetNATTypeResult) &lt;&lt; std::endl;     }} void P2PManager::GetPortRangeExample(){    // Set the options for getting the port settings.    EOS_P2P_GetPortRangeOptions GetPortRangeOptions = {};    GetPortRangeOptions.ApiVersion = EOS_P2P_GETPORTRANGE_API_LATEST;     // Call the EOS SDK to get the current port settings.    EOS_EResult GetPortRangeResult = EOS_P2P_GetPortRange(P2PHandle, &amp;GetPortRangeOptions, &amp;PreferredPort, &amp;MaxAdditionalPortsToTry);     if (GetPortRangeResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully got port range settings." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting port range settings! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetPortRangeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetPortRangeResult) &lt;&lt; std::endl;    }}  void P2PManager::SetPortRangeExample(uint16_t Port, uint16_t MaxAdditionalPortsToTry){    // Set the options for which ports to use for P2P connections.    EOS_P2P_SetPortRangeOptions SetPortRangeOptions = {};    SetPortRangeOptions.ApiVersion = EOS_P2P_SETPORTRANGE_API_LATEST;     // Set the preferred port to request for P2P connections. The default is 7777.    // If set to 0, the OS will choose a port, and MaxAdditionalPortsToTry must also be 0.    SetPortRangeOptions.Port = Port;     // Set the maximum number of additional ports to try using if the preferred port is not available.    SetPortRangeOptions.MaxAdditionalPortsToTry = MaxAdditionalPortsToTry;     // Call the EOS SDK to set the options for which ports to use for P2P connections.    EOS_EResult SetPortRangeResult = EOS_P2P_SetPortRange(P2PHandle, &amp;SetPortRangeOptions);     if (SetPortRangeResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully set port options." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error setting port options! Error code: "            &lt;&lt; static_cast&lt;int&gt;(SetPortRangeResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetPortRangeResult) &lt;&lt; std::endl;    }} EOS_ERelayControl P2PManager::GetRelayControlExample(){    // Set the options for getting the current relay control setting.    EOS_P2P_GetRelayControlOptions GetRelayControlOptions = {};    GetRelayControlOptions.ApiVersion = EOS_P2P_GETRELAYCONTROL_API_LATEST;     // Call the EOS SDK to get the current relay control setting.    EOS_EResult GetRelayControlResult = EOS_P2P_GetRelayControl(P2PHandle, &amp;GetRelayControlOptions, &amp;RelayControl);     if (GetRelayControlResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully got relay control setting." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error getting relay control setting! Error code: "            &lt;&lt; static_cast&lt;int&gt;(GetRelayControlResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(GetRelayControlResult) &lt;&lt; std::endl;    }     return RelayControl;} void P2PManager::SetRelayControlExample(EOS_ERelayControl RelayControl){    // Set the options for whether to use relays.    EOS_P2P_SetRelayControlOptions SetRelayControlOptions = {};    SetRelayControlOptions.ApiVersion = EOS_P2P_SETRELAYCONTROL_API_LATEST;     // Set an enum indicating whether relays are allowed, disallowed, or forced.    SetRelayControlOptions.RelayControl = RelayControl;     // Call the EOS SDK to set the options for whether to use relays for P2P connections.    EOS_EResult SetRelayControlResult = EOS_P2P_SetRelayControl(P2PHandle, &amp;SetRelayControlOptions);     if (SetRelayControlResult == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Successfully set relay control options." &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error setting relay control options! Error code: "            &lt;&lt; static_cast&lt;int&gt;(SetRelayControlResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SetRelayControlResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<code>[EOS_P2P_SetPacketQueueSize</code>
+									function](/api-ref/functions/eos-p-2-p-set-packet-queue-size)
+									<ul>
+										<li>
+											<code>[EOS_P2P_SetPacketQueueSizeOptions</code>
+											data structure](/api-ref/structs/eos-p-2-p-set-packet-queue-size-options)</li>
+									</ul>
+								</li>
+								<li>
+									<code>[EOS_P2P_QueryNATType</code>
+									function](/api-ref/functions/eos-p-2-p-query-nat-type)
+									<ul>
+										<li>
+											<code>[EOS_P2P_OnQueryNATTypeCompleteCallback</code>
+											function](/api-ref/callbacks/eos-p-2-p-on-query-nat-type-complete-callback)</li>
+										<li>
+											<code>[EOS_P2P_QueryNATTypeOptions</code>
+											data structure](/api-ref/structs/eos-p-2-p-query-nat-type-options)</li>
+									</ul>
+								</li>
+								<li>
+									<code>[EOS_P2P_SetRelayControl</code>
+									function](/api-ref/functions/eos-p-2-p-set-relay-control)
+									<ul>
+										<li>
+											<code>[EOS_P2P_SetRelayControlOptions</code>
+											data structure](/api-ref/structs/eos-p-2-p-set-relay-control-options)</li>
+									</ul>
+								</li>
+								<li>
+									<code>[EOS_P2P_GetPortRange</code>
+									function](/api-ref/functions/eos-p-2-p-get-port-range)
+									<ul>
+										<li>
+											<code>[EOS_P2P_GetPortRangeOptions</code>
+											data structure](/api-ref/structs/eos-p-2-p-get-port-range-options)</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/send-data">4. Send and Receive Data With EOS P2P</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#customize-p2p-settings">Customize P2P Settings</a>
+								</li>
+								<li>
+									<a href="#step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-set-packet-queue-size">Step B: Set Packet Queue Size</a>
+								</li>
+								<li>
+									<a href="#get-packet-queue-size">Get Packet Queue Size</a>
+								</li>
+								<li>
+									<a href="#set-packet-queue-size">Set Packet Queue Size</a>
+								</li>
+								<li>
+									<a href="#step-c-find-nat-type">Step C: Find NAT Type</a>
+								</li>
+								<li>
+									<a href="#query-nat-type">Query NAT Type</a>
+								</li>
+								<li>
+									<a href="#retrieve-nat-type">Retrieve NAT Type</a>
+								</li>
+								<li>
+									<a href="#get-nat-type-from-cache">Get NAT Type from Cache</a>
+								</li>
+								<li>
+									<a href="#step-d-set-port-range">Step D. Set Port Range</a>
+								</li>
+								<li>
+									<a href="#get-port-range">Get Port Range</a>
+								</li>
+								<li>
+									<a href="#set-port-range">Set Port Range</a>
+								</li>
+								<li>
+									<a href="#step-e-set-relay-control">Step E: Set Relay Control</a>
+								</li>
+								<li>
+									<a href="#get-relay-control">Get Relay Control</a>
+								</li>
+								<li>
+									<a href="#set-relay-control">Set Relay Control</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,188 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Leaderboards Sample</h1>
+			<h2>Overview of the Leaderboards Sample.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Leaderboards sample demonstrates features that you can add to your game when you implement the EOS Leaderboards Interface. The Leaderboards sample is one of the code samples included in the Epic Online Services (EOS) SDK download. For more information, see the following documentation:</p>
+			<ul>
+				<li>For information on the Leaderboards Interface, see:
+					<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface">Leaderboards Interface</a>.</li>
+				<li>For guidance on how to access the EOS SDK download, see:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk#step-c-download-the-eos-sdk">Guide: Get Started With Epic Online Services &gt; 1. Set Up Your Account and Download the EOS SDK</a>.</li>
+			</ul>
+			<p>This sample demonstrates the following features that you can add to your game when you implement the EOS Leaderboards Interface:</p>
+			<ul>
+				<li>Query leaderboard definitions.</li>
+				<li>Query leaderboard ranking data.</li>
+				<li>Query leaderboard scores of friends.</li>
+			</ul>
+			<p>The sample provides a user interface that you can use to test these leaderboard features and view the player data for your game's leaderboards.</p>
+			<div tabindex="0" aria-label="The Leaderboards interface image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="The Leaderboards interface" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>The Leaderboards Sample displays player ranking and player score data for your game's leaderboards.</p>
+				</figcaption>
+			</div>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>The sample program uses the Auth Interface to authenticate the local player for demonstration purposes. To use the Auth Interface, you must set up your game (or program in this case) as an EOS Epic Account Services application and assign client credentials to the application. You can use the SDK functionality that the sample program demonstrates with any of the supported identity providers for player authentication. You can use the SDK functionality that the sample program demonstrates with any of the supported identity providers for player authentication.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Clients and Client Policy</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="sign-in">Sign In</h2>
+			</div>
+			<p>From the right-side panel, click one of these options to sign in:</p>
+			<ul>
+				<li>
+					<strong>Dev Auth</strong>: Enter the host port and credentials that you configured for the Developer Authentication Tool (for example,
+					<code>127.0.0.1:8080</code>
+					if you set
+					<code>8080</code>
+					for the host port) and click
+					<strong>LOG IN</strong>. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					documentation for more information on the Developer Authentication Tool.</li>
+				<li>
+					<strong>Account Portal</strong>: Click
+					<strong>LOG IN</strong>
+					to sign in through the Account Portal with your Epic Games account credentials or a supported identity provider. See the
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					documentation for more information on identity providers.</li>
+			</ul>
+			<div>
+				<h2 id="leaderboard-definitions">Leaderboard Definitions</h2>
+			</div>
+			<p>When you start the sample, the EOS SDK retrieves your game's leaderboard definitions you created in the
+				<a href="/docs/dev-portal">Developer Portal</a>
+				and displays them in a list. The sample displays the definition names in a column on the right, under the header
+				<strong>Leaderboard</strong>.</p>
+			<div>
+				<h3 id="select-a-leaderboard">Select a Leaderboard</h3>
+			</div>
+			<p>Click a leaderboard definition to select it. The sample highlights the definition:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h2 id="global-rankings">Global Rankings</h2>
+			</div>
+			<p>After you have selected a leaderboard definition, click
+				<strong>SHOW GLOBAL</strong>
+				to display the global ranking data for all players who have scores in the leaderboard.</p>
+			<div>
+				<h2 id="friend-scores">Friend Scores</h2>
+			</div>
+			<p>After you have selected a leaderboard definition, click
+				<strong>SHOW FRIENDS</strong>
+				to display the scores for all friends who have scores in the leaderboard.</p>
+			<div>
+				<h2 id="console-commands">Console Commands</h2>
+			</div>
+			<p>This sample supports the console commands in the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/sample-overview">Auth and Friends Sample</a>
+				as well as the following additional commands:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Console Command</th>
+						<th>Usage</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>GETDEFS</strong>
+						</td>
+						<td>
+							<code>GETDEFS</code>
+						</td>
+						<td>Makes a request to retrieve the leaderboard definitions for this application.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>INGEST</strong>
+						</td>
+						<td>
+							<code>INGEST &lt;STAT_NAME&gt; &lt;INGEST_AMOUNT&gt;</code>
+						</td>
+						<td>Ingests a stat with the name supplied in
+							<code>STAT_NAME</code>, with an ingest value of
+							<code>INGEST_AMOUNT</code>. See the documentation:
+							<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide/update-values-for-stats">Guide: Add Stats to Your Game &gt; 2. Update Values for Stats</a>.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#sign-in">Sign In</a>
+								</li>
+								<li>
+									<a href="#leaderboard-definitions">Leaderboard Definitions</a>
+								</li>
+								<li>
+									<a href="#select-a-leaderboard">Select a Leaderboard</a>
+								</li>
+								<li>
+									<a href="#global-rankings">Global Rankings</a>
+								</li>
+								<li>
+									<a href="#friend-scores">Friend Scores</a>
+								</li>
+								<li>
+									<a href="#console-commands">Console Commands</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,200 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>P2P Interface Reference</h1>
+			<h2>Reference for the P2P Interface.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the Epic Online Services (EOS) Peer-to-Peer (P2P) Interface to manage peer-to-peer networking for your multiplayer game (or other software application). With peer-to-peer networking, your players' game clients can connect to other game clients to send and receive data. EOS P2P establishes the connections between players' game clients (peers) for you, but you can customize what data is sent, how it is sent, and to whom.</p>
+			<p>See the guide and API documentation for details on how to integrate the service into your game:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/p2p-intro">Guide: Add P2P to Your Game</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/interfaces/p-2-p">EOS SDK API Reference &gt; EOS P2P Interface API Reference</a>
+				</li>
+			</ul>
+			<p>Note that when this guide refers to "player" connections, data sharing, and notifications, it means connections, data sharing, and notifications between each player’s game client.</p>
+			<div>
+				<h2 id="peer-connection-establishment">Peer Connection Establishment</h2>
+			</div>
+			<p>Typically, a game client runs on a device connected to a home network behind a consumer router. The router provides Network Address Translation (NAT) services, which assign private IP addresses to all devices within the home network. Each device uses the same public IP address, with the router translating incoming public IP requests to internal private IP addresses via port mapping.</p>
+			<p>Because private IP addresses are not reachable from peers outside of the home network, you cannot use them to advertise game sessions for peer-to-peer multiplayer. Instead, EOS SDK uses ICE (Wikipedia:
+				<a href="https://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment">ICE</a>) for NAT traversal. ICE uses STUN (Wikipedia:
+				<a href="https://en.wikipedia.org/wiki/STUN">STUN</a>) to identify the public-facing IP address for a game client on an internal network and shares it with peers through the signaling channel.</p>
+			<div>
+				<h3 id="comparison-of-p2p-connection-types">Comparison of P2P Connection Types</h3>
+			</div>
+			<p>Sometimes a player's network is restrictive and does not allow all traffic through their firewall. To overcome this restriction, we recommend that you use the EOS Peer-to-Peer (P2P) Interface for player-hosted sessions and lobbies.</p>
+			<p>By default, the EOS P2P Interface moves through the following methods to try to establish the peer-to-peer connection between players. (You can customize whether and when EOS P2P uses a relay. For more information, see the
+				<a href="#relay-control">Relay Control</a>
+				section.)</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Description</th>
+						<th>Latency</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>Direct local network connection</strong>
+						</td>
+						<td>The EOS P2P service attempts to connect players to each other using the local IP address of each player's device.
+							<br>
+							If the players are on the same subnet of the local network, or if the players are directly connected to the internet, this connection is likely to succeed.</td>
+						<td>Very low</td>
+						<td>Rarely used, because players are usually on different networks and behind networking devices (like routers) that provide a firewall and a private IP subnet.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Direct public internet connection</strong>
+						</td>
+						<td>If the EOS P2P service cannot establish a direct local network connection between players, EOS P2P communicates with a STUN server to determine the public IP address and port of each player's device. EOS P2P uses this information to attempt to connect both players to each other.</td>
+						<td>Low</td>
+						<td>A direct public internet connection is the most common type of peer-to-peer connection.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Relayed internet connection</strong>
+						</td>
+						<td>If a player's firewall is too restrictive, the EOS P2P service uses a secure relay to communicate data between players. Each player sends their data to a TURN server (Wikipedia:
+							<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a>), which then forwards that data to the other player.
+							<br>
+							Because a TURN server receives data and then relays that data, it can introduce additional latency when it relays the data. The amount of latency depends on how close both players are to the server.</td>
+						<td>High (potentially)</td>
+						<td>Your player's firewalls must be configured to allow UDP packets for a relayed connection to succeed. Most firewalls allow UDP packets, but if a player's firewall is restrictive, it might block UDP packets or require specific port whitelisting.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note</strong>: If you don't use the EOS P2P Interface and instead choose to handle your game's networking yourself, we still recommend that you implement either or both a STUN server and a TURN server for player-hosted sessions and lobbies. However, due to the bandwidth costs and latency associated with TURN, we recommend you only use TURN as a last resort.</p>
+			<div>
+				<h3 id="relay-control">Relay Control</h3>
+			</div>
+			<p>The P2P Interface's relay control setting determines if the P2P Interface uses relays to establish the peer-to-peer connection. Each game-client platform (game consoles, PC, mobile), except Xbox, has three relay modes available. For more information on the Xbox-specific peer-to-peer requirements, see the
+				<a href="/docs/epic-online-services/platforms/xbox#using-peer-to-peer-p2p">EOS SDK for Xbox &gt; Using Peer-to-peer</a>
+				documentation.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>
+				<strong>Note</strong>: Epic Games relays are hosted in AWS data centers by Amazon. The specific relay server that a player connects to depends on Amazon's GEOIP DNS routing.</p>
+			<p>The table below lists the available relay modes for the P2P Interface:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Mode</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Allow Relays</td>
+						<td>First, the P2P Interface attempts a direct peer-to-peer connection between players through a Session Traversal Utilities for NAT (STUN) server. The STUN server reports what the players' IP addresses and ports are, so the P2P Interface can establish the connection. If a direct connection through the STUN server fails, the P2P Interface attempts to use relays. This is the default mode.</td>
+					</tr>
+					<tr>
+						<td>No Relays</td>
+						<td>The P2P Interface does not use relays to attempt to establish a peer-to-peer connection. It attempts only a direct peer-to-peer connection (through a STUN server). Players with restrictive NATs might not be able to connect to other players with this mode.</td>
+					</tr>
+					<tr>
+						<td>Force Relays</td>
+						<td>The P2P Interface uses only relays to attempt to establish the peer-to-peer connection. This adds latency to all connections, but it hides your players' IP Addresses from each other.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>See the
+				<a href="/docs/api-ref/enums/eos-e-relay-control">EOS_ERelayControl</a>
+				API documentation for more information.</p>
+			<p>
+				<strong>Note</strong>: Your player's firewalls must be configured to allow UDP packets in order to use the relay connection. Typically, most firewalls allow UDP packets. However, if a player's firewall is restrictive, it might block UDP packets or it might require specific whitelisting of ports to allow UDP packets. In either of these cases, the relay fails.</p>
+			<div>
+				<h2 id="socket-id-recommendations">Socket ID Recommendations</h2>
+			</div>
+			<p>The socket ID is a name you define that acts as a key to establish the connection between peers for your game. We recommend that you follow these rules when you define and accept connections with a socket name:</p>
+			<ul>
+				<li>
+					<p>Only accept connections with a known socket name or from a known player (peer).</p>
+					<p>This helps prevent leaking of private information, such as the player's IP address.</p>
+				</li>
+				<li>
+					<p>Make the socket name a secret key that is only known to the players establishing the connection. A secret key can help prevent leaks.</p>
+					<p>For example, use shared private data like a private match's session ID as the socket name. The session ID is only valid as long as the session is valid, so a player cannot reuse it to reconnect to an old session.</p>
+				</li>
+				<li>
+					<p>Associate the socket name with something ephemeral.</p>
+					<p>Do not set the socket name to a static keyword that someone could easily identify and reuse. Peers receive the socket name and will be able to reuse it if it is still available to establish a connection.</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="system-clock-requirements">System Clock Requirements</h2>
+			</div>
+			<p>Players must have their system clock set to an accurate Coordinated Universal Time (UTC) for peer-to-peer connections to succeed.</p>
+			<p>Peer-to-peer uses encrypted traffic that requires time-limited credentials. If a player's UTC for their system clock is out of sync with the actual UTC by several hours or more, their credentials are no longer valid and the peer-to-peer handshake fails. This failure is subtle because even though the players connect to the same lobby or session successfully, their data packets fail when they try to send them to each other.</p>
+			<p>
+				<strong>Note:</strong>
+				This requirement applies to the player's UTC system clock, not their system's configured time zone. If their system has the wrong time zone but it has the correct UTC time, the peer-to-peer connection still works.</p>
+			<div>
+				<h3 id="detect-an-incorrect-system-clock">Detect an Incorrect System Clock</h3>
+			</div>
+			<p>To prevent peer-to-peer connections from failing due to incorrect system clocks, compare the player's system clock against a trusted time source. For example, you can compare the player's system clock against the following time sources:</p>
+			<ul>
+				<li>The
+					<code>Date</code>
+					header of an HTTP response from your game's backend.</li>
+				<li>A Network Time Protocol (NTP) query to a trusted NTP server.</li>
+			</ul>
+			<p>If the difference between the player's system clock and the trusted time source is several hours or more, prompt the player to correct their system clock before they attempt to start a peer-to-peer match.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#peer-connection-establishment">Peer Connection Establishment</a>
+								</li>
+								<li>
+									<a href="#comparison-of-p2p-connection-types">Comparison of P2P Connection Types</a>
+								</li>
+								<li>
+									<a href="#relay-control">Relay Control</a>
+								</li>
+								<li>
+									<a href="#socket-id-recommendations">Socket ID Recommendations</a>
+								</li>
+								<li>
+									<a href="#system-clock-requirements">System Clock Requirements</a>
+								</li>
+								<li>
+									<a href="#detect-an-incorrect-system-clock">Detect an Incorrect System Clock</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

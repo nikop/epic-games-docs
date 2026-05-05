@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -20,40 +20,58 @@
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="overview">Overview</h2>
-			</div>
 			<p>For products published to the Epic Games Store, you can enhance your users’ experience with Epic Games Store achievements. These achievements extend the functionality of
-				<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
+				<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Epic Online Services achievements</a>
 				and can be used to reward users with experience points (XP) for interacting with your product.</p>
 			<div>
-				<p>Products that support achievements through other PC storefronts that sell third-party products must also support Epic Games Store achievements. The achievements available to users on the Epic Games Store must be substantially similar to those offered through other storefronts.</p>
+				<p>Products that support achievements on other PC storefronts must also support Epic Games Store achievements. The achievements available to users on the Epic Games Store must be substantially similar to those offered on other PC storefronts. The following product types are exempted from having achievements on the Epic Games Store:</p>
 				<br>
 				<ul>
-					<li>Web-based and HTML products are currently exempt from this requirement as they are not currently supported by the Epic Online Services (EOS) SDK.</li>
-					<li>If a product in Early Access does not yet have a finalized set of base game achievements defined, you only need to implement
-						<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
-						at the time of early release. Once ready for full release, Epic Games Store achievements must enabled.</li>
+					<li>Mobile (iOS, Android) products.</li>
+					<li>Web-based and HTML products because they are not currently supported by the Epic Online Services (EOS) SDK.</li>
+					<li>Products that are distributed on macOS because this operating system is not currently supported by the Epic Online Services (EOS) Overlay.</li>
+					<li>If a product in early access does not yet have a finalized set of base product achievements defined, you only need to implement Epic Online Services achievements for the early access release. When your product is ready for release, Epic Games Store achievements must be enabled. For information, see the documentation:
+						<ul>
+							<li>
+								<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">EOS Achievements Interface</a>
+							</li>
+							<li>
+								<a href="/docs/epic-games-store/services/epic-achievements/achievements-setup">EGS Achievements Setup Guide</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 				<p>
 					<strong>Note</strong>: This requirement does
 					<strong>not</strong>
-					retroactively apply to any existing products available on the Epic Games Store or any products that were onboarded in the Dev Portal prior to March 9, 2023. However, enabling achievements is recommended to promote an optimal user experience.</p>
+					retroactively apply to any existing products available on the Epic Games Store or any products that were onboarded in the Developer Portal prior to March 9, 2023. However, enabling achievements is recommended to promote an optimal user experience.</p>
 			</div>
-			<p>Users can review both their own and their friends' achievements through the My Achievements page of the Epic Games Store. Additionally, products with Epic Games Store achievements enabled feature a dedicated Achievements page on their store presence that highlights the achievements available to users. Users can also choose to browse games with achievements on the Epic Games Store, promoting greater visibility for your product.</p>
-			<p>Once Epic Online Services achievements have been implemented in your product, adding Epic Games Store achievements to your product can be done directly through Dev Portal - additional code is not required.</p>
+			<p>Product users can review both their own and their friends' achievements through the My Achievements page of the Epic Games Store. Additionally, products with Epic Games Store achievements enabled feature a dedicated Achievements page on their store presence that highlights the achievements available to users. Users can also choose to browse games with achievements on the Epic Games Store, promoting greater visibility for your product.</p>
+			<p>When you implement Epic Online Services achievements in your product, you can add  Epic Games Store achievements directly in the Developer Portal. Additional code is not required.</p>
 			<p>
-				<strong>Note</strong>: If Epic Games Store achievements are added to your product, these achievements display in users’ in-game social overlays in place of any Epic Online Services achievements.</p>
-			<p>The process for enabling Epic Games Store achievements for your product includes the following steps:</p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>If Epic Games Store achievements are added to your product on PC, these achievements display in users’ in-game social overlays in place of any Epic Online Services achievements.</li>
+				<li>The EOS Overlay is not available on mobile (iOS, Android) or macOS, which means achievements do not display on mobile or macOS unless you render them in your in-game UI.</li>
+			</ul>
+			<div>
+				<h2 id="publish-epic-games-store-achievements">Publish Epic Games Store Achievements</h2>
+			</div>
+			<p>To publish Epic Games Store achievements, you need to do the following:</p>
 			<ol>
-				<li>Preparing your product for Epic Games Store achievements.</li>
-				<li>Defining your Epic Games Store achievements in the Dev sandbox.</li>
-				<li>Pushing your achievements to the Stage sandbox.</li>
-				<li>Submitting your achievements for review by the Epic Games Store team.</li>
-				<li>Pushing your Epic Games Store achievements to the Live sandbox.</li>
+				<li>Push the achievements to the Stage sandbox.</li>
+				<li>Submit the achievements for review.</li>
+				<li>Push the achievements to the Live sandbox.</li>
 			</ol>
-			<p>For detailed instructions, review the
-				<a href="/docs/epic-games-store/services/epic-achievements/achievements-setup">Epic Games Store achievements setup guide</a>.</p>
+			<p>For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-games-store/publishing-tools/publishing-process/publishing-workflow">Publishing Tools Workflow</a>
+				</li>
+				<li>
+					<a href="/docs/epic-games-store/services/epic-achievements/achievements-setup">Epic Games Store Achievements Setup Guide</a>
+				</li>
+			</ul>
 			<div>
 				<h2 id="epic-games-store-achievements-examples">Epic Games Store Achievements Examples</h2>
 			</div>
@@ -98,22 +116,27 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#epic-games-store-achievements-examples">Epic Games Store Achievements Examples</a>
-					</li>
-					<li>
-						<a href="#store-presence-example">Store Presence Example</a>
-					</li>
-					<li>
-						<a href="#in-product-examples">In-Product Examples</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#publish-epic-games-store-achievements">Publish Epic Games Store Achievements</a>
+								</li>
+								<li>
+									<a href="#epic-games-store-achievements-examples">Epic Games Store Achievements Examples</a>
+								</li>
+								<li>
+									<a href="#store-presence-example">Store Presence Example</a>
+								</li>
+								<li>
+									<a href="#in-product-examples">In-Product Examples</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

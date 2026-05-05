@@ -1,0 +1,901 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Client and Client Policy Reference</h1>
+			<h2>Reference information about clients and client policies.</h2>
+			<div>
+				<div>12 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>A client is software that accesses any Epic Online Services (EOS) service. Players download and run a client to play a game that uses EOS services. (Note that throughout this guide "game" also means "non-game software application" and "player" also means "user"). In addition, a trusted server can be a client. See for details on types of clients.</p>
+			<p>Before you set up clients, you must first set up a client policy. A client policy defines what EOS services and other EOS features a client can access, such as Achievements, Stats, Leaderboards, and more. You set up both clients and client policies in the Developer Portal. You also apply a client policy to a client in the Developer Portal.</p>
+			<p>For details on how to manage clients and client policies for your game, see the documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</p>
+			<div>
+				<h2 id="client-types">Client Types</h2>
+			</div>
+			<p>The following are examples of clients:</p>
+			<ul>
+				<li>User clients
+					<ul>
+						<li>Game clients used by players on their local devices to play your game.</li>
+						<li>Software clients used by software users on their local devices to run your software application.</li>
+					</ul>
+				</li>
+				<li>Trusted servers as clients
+					<ul>
+						<li>Your product might use non-EOS services that are complementary to EOS services. These non-EOS services are known as “trusted servers”. Trusted servers require access to your product's user data, so you must add them as a "client".</li>
+					</ul>
+				</li>
+				<li>Any other use for a client you choose.</li>
+			</ul>
+			<div>
+				<h3 id="trusted-and-untrusted-clients">Trusted and Untrusted Clients</h3>
+			</div>
+			<p>Clients can be trusted or untrusted.</p>
+			<ul>
+				<li>Trusted clients<br>
+					These are under your control and are not released publicly. For example, these could be dedicated servers in your datacenter. A trusted client can have more access than an untrusted client. Because it runs only in your environment, you can assume it is not running modified code, and so it is not a security risk.</li>
+				<li>Untrusted clients<br>
+					These are usually publicly released software applications, such as your product's game client. Do not treat the following as trusted clients:
+					<ul>
+						<li>Community-run servers.</li>
+						<li>Peer-to-peer clients acting as product servers. Players might run tampered versions of your released code when connecting to EOS services with this policy.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="add-new-client-settings">Add New Client Settings</h2>
+			</div>
+			<div>
+				<h3 id="trusted-servers-ip-allow-list">Trusted Server's IP allow list</h3>
+			</div>
+			<p>If your game uses a trusted server client policy, you must specify the IP address that the trusted server uses. EOS only allows trusted server clients to access EOS servers from the CIDR of the IP address you provide.</p>
+			<div>
+				<h3 id="epic-account-service-redirect-url">Epic Account Service Redirect URL</h3>
+			</div>
+			<p>Depending on your client setup, you might need a redirect URL to send an authorization code to an EOS service. For more information, see documentation:
+				<a href="/docs/web-api-ref/authentication#web-applications">Web API Reference &gt; Auth Web APIs</a>.</p>
+			<div>
+				<h2 id="client-policy-features">Client Policy Features</h2>
+			</div>
+			<p>Client policies control which EOS services and other EOS features your game's clients can access.</p>
+			<p>This page section describes the EOS services and other features you can add to your custom client polices. You cannot amend pre-defined client polices.<br>
+				For guidance, on client policy types and how to set up custom client polices, see documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</p>
+			<p>You can view which EOS services and other features your client policy can access in the Developer Portal, on the Product Settings page. To view the features and actions for your client policy, follow the steps below.</p>
+			<p>
+				<strong>To go to the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>, click the name of your product.<br>
+							(<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are in your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+			</ol>
+			<p>
+				<strong>On the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>The default tab is SDK Download &amp; Credentials. Click
+					<strong>Clients</strong>.</li>
+				<li>Scroll down to
+					<strong>Client policies</strong>, click the ellipsis (<strong>...</strong>) icon next to your client policy and select
+					<strong>Edit</strong>.
+					<br>
+					(Note that the Clients tab might show new agreements to accept. To see the
+					<strong>Client policies</strong>
+					section, scroll down.)</li>
+				<li>Scroll down to
+					<strong>Features</strong>
+					and select an EOS service or other feature (for example,
+					<strong>Ecom</strong>) to see the actions for that EOS service or other feature.</li>
+			</ol>
+			<p>
+				<strong>Note</strong>: Some EOS services and other features (including Anti-Cheat and Ecom) require you, or the appropriate person in your organization, to sign specific agreements. These EOS services or other features are not listed unless you have signed these agreements. You can check your agreements in the Developer Portal on the Agreements tab of the Organization page. To do this:</p>
+			<ol>
+				<li>Sign in to the Developer Portal at
+					<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</li>
+				<li>In the left navigation, click
+					<strong>Organization</strong>.</li>
+				<li>The default tab is Members. Click the
+					<strong>Agreements</strong>
+					tab.</li>
+				<li>Follow the on-page instructions.</li>
+			</ol>
+			<p>The following tables list the EOS services and other features that a client policy can give your game's clients access to. The tables also show the actions associated with each EOS service or other feature.</p>
+			<div>
+				<h3 id="achievements">Achievements</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>findAchievementDefinitions</td>
+						<td>Read multiple achievement definitions at once.</td>
+					</tr>
+					<tr>
+						<td>findAchievementsForLocalUser</td>
+						<td>Read player achievement progress for the signed-in player. Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>findAchievementsForAnyUser</td>
+						<td>Read player achievement progress for any player.</td>
+					</tr>
+					<tr>
+						<td>readAchievementDefinition</td>
+						<td>Read a single achievement definition by name.</td>
+					</tr>
+					<tr>
+						<td>unlockAchievementForLocalUser</td>
+						<td>Directly unlock an achievement for the signed-in player. Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>unlockAchievementForAnyUser</td>
+						<td>Directly unlock an achievement for any player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="anti-cheat">Anti-Cheat</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>authenticateForLocalUser</td>
+						<td>Authenticate current player with anti-cheat. Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>authenticateForAnyUser</td>
+						<td>Authenticate any players with anti-cheat.</td>
+					</tr>
+					<tr>
+						<td>sendTrustedGamePlayDataForAnyUser</td>
+						<td>Send trusted gameplay data. Make this available to official servers only. Never make this data available to community servers, which might have potentially malicious operators. Requires a trusted server.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="connect">Connect</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>queryExternalAccountsForAnyUser</td>
+						<td>Query Product User IDs associated with the signed-in player from a list of external account IDs. Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>queryProductUsersForAnyUser</td>
+						<td>Query associated accounts from a list of Product User IDs. Requires a trusted server.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="ecom">Ecom</h3>
+			</div>
+			<p>
+				<strong>Note</strong>: The Ecom actions only apply when you use EOS SDK v1.16.4 (or higher) or Ecom Web API v3. They don't affect the Ecom API for EOS SDK 1.16.3 (or lower) or Ecom Web API v1 and v2. API calls in your code that use these older versions continue to work.</p>
+			<p>For more information, see documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/web-api-ref/">Ecom Web APIs</a>
+				</li>
+				<li>
+					<a href="/docs/web-api-ref/ecom-web-apis">Ecom Interface Overview</a>
+				</li>
+			</ul>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>findOffers</td>
+						<td>Find offers available to the signed-in player's Epic Games account.</td>
+					</tr>
+					<tr>
+						<td>findEntitlements</td>
+						<td>Find information about entitlements.</td>
+					</tr>
+					<tr>
+						<td>redeemEntitlements</td>
+						<td>Redeem entitlements.</td>
+					</tr>
+					<tr>
+						<td>findEntitlementClawbacks</td>
+						<td>Find information about entitlement clawbacks. Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>createEntitlementToken</td>
+						<td>Create a JWT token with information about entitlements.</td>
+					</tr>
+					<tr>
+						<td>findOwnerships</td>
+						<td>Find information about item ownership.</td>
+					</tr>
+					<tr>
+						<td>createOwnershipToken</td>
+						<td>Create a JWT token with information about item ownership.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="leaderboards">Leaderboards</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>findLeaderboardDefinitions</td>
+						<td>Read leaderboard definitions.</td>
+					</tr>
+					<tr>
+						<td>findLeaderboardEntries</td>
+						<td>Read leaderboard entries.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="lobbies">Lobbies</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>connect</td>
+						<td>Allows the signed-in player to create and join lobbies.</td>
+					</tr>
+					<tr>
+						<td>readLobby</td>
+						<td>Get the lobby data.</td>
+					</tr>
+					<tr>
+						<td>findLobbies</td>
+						<td>Search for all public lobbies.</td>
+					</tr>
+					<tr>
+						<td>findLobbiesByUserId</td>
+						<td>Search lobbies the signed in player is in.</td>
+					</tr>
+					<tr>
+						<td>findInvitesByUserId</td>
+						<td>Find invites that the signed-in player has sent.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="matchmaking-eos-sessions">Matchmaking (EOS Sessions)</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>status</td>
+						<td>Get global capacity information for a deployment.</td>
+					</tr>
+					<tr>
+						<td>findInvitesByUserId</td>
+						<td>Read all pending invites for the signed-in player.</td>
+					</tr>
+					<tr>
+						<td>findSessions</td>
+						<td>Find all public sessions.</td>
+					</tr>
+					<tr>
+						<td>findSessionsByUserId</td>
+						<td>Read all sessions the signed-in player is in.</td>
+					</tr>
+					<tr>
+						<td>sendInvite</td>
+						<td>Send an invite.</td>
+					</tr>
+					<tr>
+						<td>declineInvite</td>
+						<td>Decline an invite.</td>
+					</tr>
+					<tr>
+						<td>join</td>
+						<td>Test to see if player can join the session.</td>
+					</tr>
+					<tr>
+						<td>managePlayers</td>
+						<td>Add players to or remove players from a session.</td>
+					</tr>
+					<tr>
+						<td>createSession</td>
+						<td>Create a new session.</td>
+					</tr>
+					<tr>
+						<td>readSession</td>
+						<td>Read public data for sessions.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="metrics">Metrics</h3>
+			</div>
+			<p>The Metrics service does not have any configurable actions.</p>
+			<div>
+				<h3 id="notifications">Notifications</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>sendCustomInviteToAnyUser</td>
+						<td>Allows the signed-in player to send a custom invite to any player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>sendRequestToJoinToAnyUser</td>
+						<td>Allows the signed-in  player to send a request to any player to join their private game.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="player-data-storage">Player Data Storage</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>access</td>
+						<td>Allows the signed-in player to upload and download their private files.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>delete</td>
+						<td>Delete a private file for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>copy</td>
+						<td>Copy a signed-in player's file.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="player-reports">Player Reports</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>sendReportForLocalUser</td>
+						<td>Allows the player to submit a report on their own behalf regarding another player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>sendReportForAnyUser</td>
+						<td>Allows the player to submit a report on any player's behalf regarding another player.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>findReportsForLocalUser</td>
+						<td>Get reports reported by the current player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>findReportsForAnyUser</td>
+						<td>Get reports reported by any player.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="progression-snapshot">Progression Snapshot</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>postSnapshotForLocalUser</td>
+						<td>Write a progression snapshot for the signed-in player.</td>
+					</tr>
+					<tr>
+						<td>deleteSnapshotForLocalUser</td>
+						<td>Delete a progression snapshot for the signed-in player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="sanctions">Sanctions</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>findActiveSanctionsForLocalUser</td>
+						<td>Find active sanctions for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>findActiveSanctionsForAnyUser</td>
+						<td>Find active sanctions for any player.</td>
+					</tr>
+					<tr>
+						<td>findSanctionsForLocalUser</td>
+						<td>Find all sanctions for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>findSanctionsForAnyUser</td>
+						<td>Find all sanctions for any player.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>findAllSanctions</td>
+						<td>Find all sanctions.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>createSanction</td>
+						<td>Create sanctions.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>updateSanction</td>
+						<td>Update sanctions.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>deleteSanction</td>
+						<td>Delete sanctions.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>syncSanctionEvents</td>
+						<td>Sync all sanction events.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>findAppealsForLocalUser</td>
+						<td>Find all sanction appeals for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>findAppealsForAnyUser</td>
+						<td>Find all sanction appeals for any player.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>createAppealsForLocalUser</td>
+						<td>Create a sanction appeal for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>createAppealsForAnyUser</td>
+						<td>Create a sanction appeal for any player.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>updateAppealsForAnyUser</td>
+						<td>Update a sanction appeal for any player.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="stats">Stats</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>findStats</td>
+						<td>Find stats.</td>
+					</tr>
+					<tr>
+						<td>readStat</td>
+						<td>Get the stat data.</td>
+					</tr>
+					<tr>
+						<td>findStatsForLocalUser</td>
+						<td>Read stats for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+					<tr>
+						<td>findStatsForAnyUser</td>
+						<td>Read stats for any user.</td>
+					</tr>
+					<tr>
+						<td>ingestForAnyUser</td>
+						<td>Write stats for any user.</td>
+					</tr>
+					<tr>
+						<td>ingestForLocalUser</td>
+						<td>Write stats for the signed-in player.
+							<br>
+							Requires an authenticated player.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="title-storage">Title Storage</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>list</td>
+						<td>List all files.</td>
+					</tr>
+					<tr>
+						<td>access</td>
+						<td>Get matched links.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="voice">Voice</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Action Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>createRoomToken</td>
+						<td>Create tokens for players to join or create a voice room.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>mute</td>
+						<td>Mute a participant.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>kick</td>
+						<td>Remove a participant and revoke their token.
+							<br>
+							Requires a trusted server.</td>
+					</tr>
+					<tr>
+						<td>createLobbyConference</td>
+						<td>Create lobbies with voice conferencing.
+							<br>
+							Requires an authenticated user.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="predefined-client-policy-types">Predefined Client Policy Types</h2>
+			</div>
+			<p>The table below lists the predefined client policies.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Description</th>
+						<th>User Requirements</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Peer2Peer</td>
+						<td>Policy for untrusted client software that wants to enable peer-to-peerhost multiplayer matches.</td>
+						<td>Requires an authenticated user.</td>
+					</tr>
+					<tr>
+						<td>TrustedServer</td>
+						<td>Policy for dedicated servers or trusted software applications. Includes the ability to create matchmaking sessions and ingest stats on behalf of users.</td>
+						<td>Does not require an authenticated user.</td>
+					</tr>
+					<tr>
+						<td>GameClient</td>
+						<td>Policy for untrusted client software.</td>
+						<td>Requires an authenticated user.</td>
+					</tr>
+					<tr>
+						<td>GameClient /w UnlockAchievements</td>
+						<td>Like GameClient, but allows the client to unlock player achievements.</td>
+						<td>Requires an authenticated user.</td>
+					</tr>
+					<tr>
+						<td>CREATE CUSTOM POLICY</td>
+						<td>Creates a new policy that allows a customized set of actions for each service.</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="troubleshooting">Troubleshooting</h2>
+			</div>
+			<div>
+				<h3 id="general">General</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Issue</th>
+						<th>Explanation</th>
+						<th>Resolution</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Check boxes are disabled when editing policy.</td>
+						<td>You selected a predefined policy. These cannot be changed.</td>
+						<td>Create and assign a custom policy instead.</td>
+					</tr>
+					<tr>
+						<td>Client policies are not visible.</td>
+						<td>Certain policies (such as  Anti-Cheat) require a signed agreement.</td>
+						<td>Sign the agreement in the Developer Portal on the Agreements tab of the Organization page. (See below for guidance.)</td>
+					</tr>
+					<tr>
+						<td>User Required checkbox not explained.</td>
+						<td>This checkbox marks the policy as a trusted server configuration.</td>
+						<td>Only check this box if the client is a secure server. Never ship a client ID and client secret tied to a trusted server policy with a public game build.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>To sign an agreement:</p>
+			<ol>
+				<li>Sign in to the Developer Portal at
+					<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</li>
+				<li>In the left navigation, click
+					<strong>Organization</strong>.</li>
+				<li>The default tab is Members. Click the
+					<strong>Agreements</strong>
+					tab.</li>
+				<li>Follow the on-page instructions.</li>
+			</ol>
+			<div>
+				<h3 id="error-handling">Error Handling</h3>
+			</div>
+			<p>When troubleshooting any errors, check the logs for more details about your issue.</p>
+			<p>For EOS SDK versions 1.10 and earlier, all errors with this service return as
+				<code>EOS_Unexpected_Error</code>.<br>
+				For EOS SDK versions 1.10 and later, see the following table:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Error</th>
+						<th>Description</th>
+						<th>Resolution</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>EOS_ClientPolicyMissingAction</td>
+						<td>The client permission is not set up for this call: your client policy does not have the required features.</td>
+						<td>To set up the missing client permission, go to the Developer Portal and configure the custom client policy for this client. For guidance on client policy types and how to set up custom client polices, see documentation:
+							<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</td>
+					</tr>
+					<tr>
+						<td>EOS_NotConfigured</td>
+						<td>You tried to complete an invalid operation: you passed a bad or not fully configured option into a function. For example, you tried to display the EOS Overlay after disabling it when initializing the EOS SDK.</td>
+						<td>Enable the missing EOS service or other feature, and complete the appropriate actions for the EOS service or other feature.</td>
+					</tr>
+					<tr>
+						<td>EOS_AccessDenied</td>
+						<td>The client permission is set up for this call, but the call fails a check (for example, you used a correctly set-up client, but tried to access another user's private player data storage).</td>
+						<td>Check the logs for more details about your issue and contact support.</td>
+					</tr>
+					<tr>
+						<td>EOS_InvalidAuth</td>
+						<td>The client is configured to require a signed-in user, but the client's credentials are not allowed.</td>
+						<td>Check the logs for more details about your issue and contact support.</td>
+					</tr>
+					<tr>
+						<td>EOS_AccessDenied</td>
+						<td>The client policy forbids this client from calling. It is likely that the Developer Portal is configured to not allow the client access to the call.</td>
+						<td>Go to the Developer Portal and modify the client configuration. You can also set up a new client policy that allows the required permission.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#client-types">Client Types</a>
+								</li>
+								<li>
+									<a href="#trusted-and-untrusted-clients">Trusted and Untrusted Clients</a>
+								</li>
+								<li>
+									<a href="#add-new-client-settings">Add New Client Settings</a>
+								</li>
+								<li>
+									<a href="#trusted-servers-ip-allow-list">Trusted Server's IP allow list</a>
+								</li>
+								<li>
+									<a href="#epic-account-service-redirect-url">Epic Account Service Redirect URL</a>
+								</li>
+								<li>
+									<a href="#client-policy-features">Client Policy Features</a>
+								</li>
+								<li>
+									<a href="#achievements">Achievements</a>
+								</li>
+								<li>
+									<a href="#anti-cheat">Anti-Cheat</a>
+								</li>
+								<li>
+									<a href="#connect">Connect</a>
+								</li>
+								<li>
+									<a href="#ecom">Ecom</a>
+								</li>
+								<li>
+									<a href="#leaderboards">Leaderboards</a>
+								</li>
+								<li>
+									<a href="#lobbies">Lobbies</a>
+								</li>
+								<li>
+									<a href="#matchmaking-eos-sessions">Matchmaking (EOS Sessions)</a>
+								</li>
+								<li>
+									<a href="#metrics">Metrics</a>
+								</li>
+								<li>
+									<a href="#notifications">Notifications</a>
+								</li>
+								<li>
+									<a href="#player-data-storage">Player Data Storage</a>
+								</li>
+								<li>
+									<a href="#player-reports">Player Reports</a>
+								</li>
+								<li>
+									<a href="#progression-snapshot">Progression Snapshot</a>
+								</li>
+								<li>
+									<a href="#sanctions">Sanctions</a>
+								</li>
+								<li>
+									<a href="#stats">Stats</a>
+								</li>
+								<li>
+									<a href="#title-storage">Title Storage</a>
+								</li>
+								<li>
+									<a href="#voice">Voice</a>
+								</li>
+								<li>
+									<a href="#predefined-client-policy-types">Predefined Client Policy Types</a>
+								</li>
+								<li>
+									<a href="#troubleshooting">Troubleshooting</a>
+								</li>
+								<li>
+									<a href="#general">General</a>
+								</li>
+								<li>
+									<a href="#error-handling">Error Handling</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

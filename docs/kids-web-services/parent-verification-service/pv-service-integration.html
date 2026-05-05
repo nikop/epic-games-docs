@@ -1,0 +1,331 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Integrate the Parent Verification Service API</h1>
+			<h2>How to call the API to trigger Parent Verification flow.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>You require several important credentials for the Parent Verification (PV) Service related to API integration and authentication. These credentials are in the Developer Portal. The steps to obtain them are as follows:</p>
+			<div>
+				<h2 id="api-integration">API Integration</h2>
+			</div>
+			<p>In the Developer Portal, you receive credentials in the form of two codes you use to verify the authenticity of the calls from KWS. They are:</p>
+			<ul>
+				<li>Webhook secret</li>
+				<li>Verification secret</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				Your test and production environments use different sets of credentials. Ensure that you are using the correct set.</p>
+			<div>
+				<h2 id="authentication">Authentication</h2>
+			</div>
+			<p>To call the Parent Verification Service API, you must first generate a Developer Access Token to authenticate your product (game or other software application). To do this, use the OAuth token endpoint (see the
+				<a href="#obtain-a-token">Obtain a Token</a>
+				section on this page).</p>
+			<p>You find the two credentials to generate the token from the Developer Portal. The credentials are:</p>
+			<ul>
+				<li>
+					<strong>KWS organization ID</strong>
+					— The KWS ID for your product.</li>
+				<li>
+					<strong>KWS client ID</strong>
+					— Used for authentication.</li>
+				<li>
+					<strong>API key</strong>
+					— The client secret required to generate the Developer Access Token.</li>
+				<li>
+					<strong>Service API host URL</strong>
+					— The PV Service is located at this URL. You make API queries against this URL.</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				Your test and production environments use different sets of credentials. Ensure that you are using the correct set.</p>
+			<p>You can find the credentials in two ways. Either:</p>
+			<ul>
+				<li>Option A — For all the products in your organization.</li>
+				<li>Option B — For an individual product.</li>
+			</ul>
+			<p>For more information about these options, see the documentation:
+				<a href="/docs/kids-web-services/kws-get-started#step-3--choose-to-set-up-kws-for-your-organization-or-product">Choose to Set Up KWS for Your Organization or Product</a>.</p>
+			<p>For both options, you can get the credentials in the Developer Portal, on the
+				<strong>Parent Verification</strong>
+				page’s
+				<strong>Integration Information</strong>
+				tab, but the way you access the tab depends on which option you use.</p>
+			<p>To get the credentials, follow the steps below:</p>
+			<div>
+				<h3 id="step-1--go-to-the-parent-verification-page">Step 1 — Go to the Parent Verification Page</h3>
+			</div>
+			<div>
+				<h4 id="option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Parent Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h4 id="option-b-for-an-individual-product">Option B: For an individual product</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation under
+						<strong>Your Products</strong>, select the name of the product you want to configure.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							If you can’t see the product you want, make sure you are working in the correct organization.</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Parent Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-2--configure-the-verification-response">Step 2 — Configure the Verification Response</h3>
+			</div>
+			<ul>
+				<li>On the
+					<strong>Parent Verification</strong>
+					page, click the
+					<strong>Integration Information</strong>
+					tab.</li>
+			</ul>
+			<center>
+				<div tabindex="0" aria-label=" image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>The credentials displayed on the Integration Information page. Click image for full size.</figcaption>
+				</div>
+			</center>
+			<p>This endpoint returns an access token from the KWS authentication service with a
+				<code>client_credentials</code>
+				OAuth grant.</p>
+			<p>
+				<strong>Note:</strong>
+				Keep these credentials and tokens confidential. Do not pass them to client apps.</p>
+			<div>
+				<h2 id="obtain-a-token">Obtain a Token</h2>
+			</div>
+			<p>Use your credentials with the following to obtain a Developer Access Token:</p>
+			<div>
+				<section>
+					<pre>POST https://auth.kidswebservices.com/auth/realms/kws/protocol/openid-connect/tokenContent-Type: application/x-www-form-urlencodedAuthorization: basic &lt;base64 of client-id:client-secret&gt;</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="request">Request</h4>
+			</div>
+			<div>
+				<section>
+					<pre>grant_type=client_credentials&amp;scope=verification</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="response">Response</h4>
+			</div>
+			<div>
+				<section>
+					<pre>{   "access_token": "..."   "expires_in": 3600}</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="response-parameters">Response Parameters</h4>
+			</div>
+			<ul>
+				<li>
+					<code>access_token</code>: You must include this in the Authorization header when you call the Parent Verification (PV) Service API.</li>
+				<li>
+					<code>expires_in</code>: The time (in seconds) the token remains valid.</li>
+			</ul>
+			<div>
+				<h3 id="access-token-expiry">Access Token Expiry</h3>
+			</div>
+			<p>Developer Access Tokens expire after a short time, which can change depending on your product’s (game or other software application) usage patterns. When the token expires, API calls return 401
+				<code>Unauthorized</code>
+				response codes. In this situation, obtain a new Developer Access Token and retry your request.</p>
+			<div>
+				<h3 id="api-call-retry-behavior">API Call Retry Behavior</h3>
+			</div>
+			<p>Any system integrating the PV Service API should implement a retry mechanism for API calls. If the status code indicates a failure, the call retry mechanism must perform exponential backoff, which means periodically retrying the call with increasing delays between requests up to a maximum length of time.</p>
+			<p>The status code indicates a failure if it is any value other than 200 to 299.</p>
+			<div>
+				<h2 id="call-the-parent-verification-service-api-endpoint">Call the Parent Verification Service API Endpoint</h2>
+			</div>
+			<p>To trigger the KWS parent verification flow, send the user details collected by your product’s user interface to KWS. An authenticated call to the
+				<code>send-email</code>
+				API endpoint triggers the KWS flow.</p>
+			<p>For more information, see the following documentation:</p>
+			<ul>
+				<li>Set up your product’s user interface (see documentation:
+					<a href="/docs/kids-web-services/parent-verification-service/pv-service-flow#set-up-your-products-user-interface">Set Up Your Product's User Interface</a>)</li>
+				<li>Parent Verification Service API reference (see documentation:
+					<a href="/docs/kids-web-services/parent-verification-service/pv-service-api-reference">Parent Verification Service API Reference</a>)</li>
+			</ul>
+			<div>
+				<h3 id="user-details">User Details</h3>
+			</div>
+			<p>The user details you send with the
+				<code>send-email</code>
+				API correspond to the parameters as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Parameter</strong>
+						</th>
+						<th>
+							<strong>Necessity</strong>
+						</th>
+						<th>
+							<strong>Value</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>email</code>
+						</td>
+						<td>Required</td>
+						<td>The parent or guardian's email address.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>location</code>
+						</td>
+						<td>Required</td>
+						<td>The child’s location. The value must be:<ul>
+								<li>A two-letter country code using the
+									<code>ISO 3166-1 alpha 2</code>
+									format (Wikipedia:
+									<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO_3166-1_alpha-2</a>). For example, ‘US’, ‘GB’, ‘CA’.</li>
+								<li>A region code using the
+									<code>ISO 31660-2 subdivision</code>
+									format (Wikipedia:
+									<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO_3166-2</a>). For example, ‘US-NY’, ‘GB-ENG’, ‘CA-BC’.</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>language</code>
+						</td>
+						<td>Required</td>
+						<td>The parent or guardian's language. The default is
+							<code>en</code>.<br>This is the language that KWS uses for emails and verification Web UI screens presented to the parent or guardian. For a complete list of supported languages, see:
+							<a href="/docs/kids-web-services/kws-localization">Localization in Kids Web Services</a>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>externalPayload</code>
+						</td>
+						<td>Optional</td>
+						<td>A value you pass when initiating a verification that must be a JSON or UTF-8 string no longer than 250 characters.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>userContext</code>
+						</td>
+						<td>Required</td>
+						<td>Must be set to
+							<code>parent</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#api-integration">API Integration</a>
+								</li>
+								<li>
+									<a href="#authentication">Authentication</a>
+								</li>
+								<li>
+									<a href="#step-1--go-to-the-parent-verification-page">Step 1 — Go to the Parent Verification Page</a>
+								</li>
+								<li>
+									<a href="#option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</a>
+								</li>
+								<li>
+									<a href="#option-b-for-an-individual-product">Option B: For an individual product</a>
+								</li>
+								<li>
+									<a href="#step-2--configure-the-verification-response">Step 2 — Configure the Verification Response</a>
+								</li>
+								<li>
+									<a href="#obtain-a-token">Obtain a Token</a>
+								</li>
+								<li>
+									<a href="#request">Request</a>
+								</li>
+								<li>
+									<a href="#response">Response</a>
+								</li>
+								<li>
+									<a href="#response-parameters">Response Parameters</a>
+								</li>
+								<li>
+									<a href="#access-token-expiry">Access Token Expiry</a>
+								</li>
+								<li>
+									<a href="#api-call-retry-behavior">API Call Retry Behavior</a>
+								</li>
+								<li>
+									<a href="#call-the-parent-verification-service-api-endpoint">Call the Parent Verification Service API Endpoint</a>
+								</li>
+								<li>
+									<a href="#user-details">User Details</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

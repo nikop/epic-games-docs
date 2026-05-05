@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,34 +14,35 @@
 			<h1>Epic Games Launcher Invites</h1>
 			<h2>Facilitate game invites by linking Epic Games Store artifacts to Epic Online Services deployments.</h2>
 			<div>
-				<div>1 min to read</div>
+				<div>2 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="overview">Overview</h2>
-			</div>
 			<p>To promote an optimal player experience, the Epic Games Store supports session invites from Epic Online Services (EOS) integrated games via an explicit opt-in system. This allows users from outside the store ecosystem to invite Epic Games Store users to their game session.</p>
 			<p>This functionality is facilitated by mapping your
 				<a href="/docs/dev-portal/product-management#deployments">deployments</a>
-				to your Epic Games Store artifacts. In the context of the Epic Games Store, an
-				<span>
-					<span aria-label="tooltip artifact" tabindex="0" role="button">artifact</span>
-				</span>
-				represents your product's downloadable content, such as game clients. By mapping deployments to your artifacts, EOS-initiated invites are routed through the Epic Games Store ecosystem to users in the Epic Games Launcher.</p>
+				to your Epic Games Store artifacts. In the context of the Epic Games Store, an artifact represents your product's downloadable content, such as game clients. By mapping deployments to your artifacts, EOS-initiated invites are routed through the Epic Games Store ecosystem to users in the Epic Games Launcher.</p>
 			<div>
-				<p>Leveraging your artifacts to expose game invites on the Epic Games Launcher requires use of the EOS SDK 1.11 or higher.</p>
+				<p>To leverage your artifacts to expose game invites on the Epic Games Launcher, you must use EOS SDK 1.11 or higher.</p>
 			</div>
 			<div>
-				<h2 id="mapping-artifacts-to-deployments">Mapping Artifacts to Deployments</h2>
+				<h2 id="map-artifacts-to-deployments">Map Artifacts to Deployments</h2>
 			</div>
-			<p>To map your artifacts to deployments, follow the steps below.</p>
+			<p>To map your artifacts to deployments in the Developer Portal, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Product Settings</strong>
-					and select the
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are on your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+				<li>Select the
 					<strong>Sandboxes</strong>
 					tab.</li>
 				<li>Locate the appropriate sandbox to work in and click
@@ -55,7 +56,7 @@
 					to arrange the artifacts in priority order.
 					<ul>
 						<li>
-							<strong>Note</strong>: When multiple artifacts are mapped to a single deployment, the Launcher routes the game invite to the first locally-installed artifact it finds following the priority order specified.</li>
+							<strong>Note</strong>: When multiple artifacts are mapped to a single deployment, the Launcher routes the game invite to the first locally installed artifact it finds following the priority order specified.</li>
 					</ul>
 				</li>
 			</ol>
@@ -71,16 +72,18 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#mapping-artifacts-to-deployments">Mapping Artifacts to Deployments</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#map-artifacts-to-deployments">Map Artifacts to Deployments</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

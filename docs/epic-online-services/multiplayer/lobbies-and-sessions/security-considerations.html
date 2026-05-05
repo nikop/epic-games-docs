@@ -1,0 +1,140 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Security Considerations</h1>
+			<h2>Security considerations for lobbies and sessions.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>A player can use different methods to join a lobby or session. You can control which players can find the lobby or session and the methods they can use to find it by setting the permission level for the lobby or session. There are three different permission levels that you can set:</p>
+			<ul>
+				<li>
+					<strong>Public advertised</strong>: Any player can search for and find the lobby or session.</li>
+				<li>
+					<strong>Join via presence</strong>: A friend can join their friend in the lobby or session through the Social Overlay. Also, any player or game client that knows the lobby ID or the session ID can join it. Note that lobbies that have the Join via presence permission level set do not appear in searches.</li>
+				<li>
+					<strong>Invite only</strong>: The lobby or session does not appear in searches. A player or game client can only join the lobby or session if an existing player invites them to join.</li>
+			</ul>
+			<p>For more information, see the documentation:</p>
+			<ul>
+				<li>How to set permission levels for lobbies:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/modify-a-lobby#permission-levels">Permission Levels</a>
+					in the
+					<em>Lobby Interface</em>
+					page.</li>
+				<li>How to set permission levels for sessions:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session#permission-levels">Permission Levels</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+			</ul>
+			<p>There are types of data that you might expose for a lobby or session to allow players to join it. However, you can follow best practices to make sure that you don’t expose too much data. For more information, see the sections below.</p>
+			<div>
+				<h2 id="types-of-data-that-you-might-expose">Types of Data That You Might Expose</h2>
+			</div>
+			<p>When you set the permission level for a lobby or session to public advertised, you might expose the following information:</p>
+			<ul>
+				<li>Player IP addresses (for peer-to-peer sessions only).</li>
+				<li>Host IP address (dedicated servers for sessions only).</li>
+				<li>User ID of the owner of the lobby or session.</li>
+				<li>User ID of each member of the lobby or session.</li>
+				<li>Any public attributes that the owner of the lobby or session has added.</li>
+				<li>Any public lobby member attributes (lobbies only).</li>
+			</ul>
+			<div>
+				<h2 id="best-practices">Best Practices</h2>
+			</div>
+			<p>Here are some best practices that you should follow for lobbies and sessions to ensure that you don't expose too much data:</p>
+			<ul>
+				<li>Set the permission level so that the lobby or session is visible to the least number of players necessary. For example, if you want all players to be able to find your lobby or session and access the data for it, you should set the permission level to public advertised. However, if you don’t require that level of exposure, you should set the permission level to a level that provides less exposure, such as the invite only permission level.</li>
+				<li>Don't add information to attributes with public visibility that you don't want players to be able to use as search criteria to find the lobby or session.</li>
+				<li>If you set the permission level to Join via presence, make sure you don’t include the lobby ID or session ID as an attribute with public visibility. If you expose the lobby ID or session ID, someone can use it to access the lobby data or session data.</li>
+				<li>If your game doesn't allow other players to join the session after it has already started (also known as "join in progress"), make sure your server starts the session with
+					<a href="/docs/api-ref/functions/eos-sessions-start-session">
+						<code>EOS_Sessions_StartSession</code>
+					</a>. This removes the session from search results while the game is in progress.</li>
+				<li>If you have security concerns about exposing the host IP address, you can use
+					<a href="/docs/api-ref/functions/eos-session-modification-set-host-address">
+						<code>EOS_SessionModification_SetHostAddress</code>
+					</a>
+					to set the host address to something else. For example, you can set the host address to the P2P socket ID if you use the P2P Interface. For more information, see the section on:
+					<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-overview#managing-p2p-connections">Managing P2P Connections</a>
+					in the
+					<em>NAT P2P Interface Overview</em>
+					page.</li>
+			</ul>
+			<div>
+				<h2 id="more-information">More Information</h2>
+			</div>
+			<p>See the documentation for more information:</p>
+			<ul>
+				<li>How to set permission levels for lobbies:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/modify-a-lobby#permission-levels">Permission Levels</a>
+					in the
+					<em>Modify a Lobby</em>
+					page.</li>
+				<li>How to set permission levels for sessions:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session#permission-levels">Permission Levels</a>
+					in the
+					<em>Modify a Session</em>
+					page.</li>
+				<li>How to add attributes with public visibility to lobbies:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/modify-a-lobby#lobby-and-lobby-member-properties">Lobby and Lobby Member Properties</a>
+					in the
+					<em>Modify a Lobby</em>
+					page.</li>
+				<li>How to add attributes with public visibility to sessions:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session#custom-attributes">Custom Attributes</a>
+					in the
+					<em>Sessions Interface</em>
+					page.</li>
+				<li>Join via presence:
+					<a href="/docs/epic-online-services/accounts-and-social/social-overlay/social-overlay-for-crossplay#allow-friends-to-join-via-presence">Allow Friends to Join Via Presence</a>
+					in the
+					<em>Social Overlay for Crossplay</em>
+					page.</li>
+				<li>Join in progress:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session">Modify a Session</a>. See the function
+					<a href="/docs/api-ref/functions/eos-session-modification-set-join-in-progress-allowed">
+						<code>EOS_SessionModification_SetJoinInProgressAllowed</code>
+					</a>.</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#types-of-data-that-you-might-expose">Types of Data That You Might Expose</a>
+								</li>
+								<li>
+									<a href="#best-practices">Best Practices</a>
+								</li>
+								<li>
+									<a href="#more-information">More Information</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

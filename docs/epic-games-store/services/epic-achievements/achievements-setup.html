@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,301 +14,227 @@
 			<h1>Achievements Setup Guide</h1>
 			<h2>Implement Epic Games Store achievements for your product.</h2>
 			<div>
-				<div>16 mins to read</div>
+				<div>25 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="overview">Overview</h2>
-			</div>
-			<p>For products published to the Epic Games Store, you can enhance your product’s user experience with Epic Games Store achievements. These achievements extend the functionality of
-				<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
-				and can be used to reward users with experience points (XP) for interacting with your product.</p>
-			<p>The process for implementing Epic Games Store achievements for your product is outlined below. For general information about Epic Games Store achievements, review
-				<a href="/docs/epic-games-store/services/epic-achievements/overview">Achievements Overview</a>.</p>
-			<div>
-				<p>Products that support achievements through other PC storefronts that sell third-party products must also support Epic Games Store achievements. The achievements available to users on the Epic Games Store must be substantially similar to those offered through other storefronts.</p>
-				<br>
-				<ul>
-					<li>Web-based and HTML products are currently exempt from this requirement as they are not currently supported by the Epic Online Services (EOS) SDK.</li>
-					<li>If a product in Early Access does not yet have a finalized set of base game achievements defined, you only need to implement
-						<a href="/docs/game-services/achievements">Epic Online Services achievements</a>
-						at the time of early release. Once ready for full release, Epic Games Store achievements must enabled.</li>
-				</ul>
-				<p>
-					<strong>Note</strong>: This requirement does
-					<strong>not</strong>
-					retroactively apply to any existing products available on the Epic Games Store or any products that were onboarded in the Dev Portal prior to March 9, 2023. However, enabling achievements is recommended to promote an optimal user experience.</p>
-				<p>To learn more about our distribution requirements, review the
-					<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview">Store Requirements Overview</a>.</p>
-			</div>
-			<div>
-				<h2 id="getting-started">Getting Started</h2>
-			</div>
-			<p>To begin, follow the steps below to prepare your product for Epic Games Store achievements:</p>
-			<ol>
+			<p>For products published to the Epic Games Store, you can enhance your product’s user experience with Epic Games Store achievements.</p>
+			<p>These achievements extend the functionality of Epic Online Services (EOS) achievements and you can use them to reward users with experience points (XP) for interacting with your product. As part of the Epic Games Store achievement setup, you link every Epic Games Store achievement to an Epic Online Services (EOS) achievement.</p>
+			<p>This page describes the process to implement Epic Games Store achievements for your product, including linking Epic Games Store achievements with EOS achievements.</p>
+			<p>Related documentation:</p>
+			<ul>
+				<li>Background information on Epic Games Store achievements:
+					<a href="/docs/epic-games-store/services/epic-achievements/overview">Achievements Overview</a>.</li>
+			</ul>
+			<p>
+				<strong>Epic Games Store Requirements</strong>
+			</p>
+			<p>Products that support achievements through other PC storefronts that sell third-party products must also support Epic Games Store achievements. The Epic Games Store achievements available to users on the Epic Games Store must be substantially similar to those offered through other storefronts.</p>
+			<p>Exceptions:</p>
+			<ul>
 				<li>
-					<a href="#step-1-sign-the-epic-online-services-developer-agreement">Sign the Epic Online Services Developer Agreement</a>.
+					<p>Epic Games Store achievements are not mandatory for mobile (iOS, Android) products.</p>
+				</li>
+				<li>Web-based and HTML products are exempt from this requirement because EOS does not support them.</li>
+				<li>If a product in Early Access does not yet have a finalized set of base game achievements defined, you only need to implement EOS achievements at the time of early release (documentation:
+					<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">EOS &gt; Achievements Interface</a>). When your product is ready for full release, you must enable Epic Games Store achievements.</li>
+				<li>This requirement does
+					<strong>not</strong>
+					retroactively apply to any existing products available on the Epic Games Store or any products that onboarded in the Developer Portal prior to March 9, 2023. However, we recommend that you add Epic Games Store achievements to your product for an optimal user experience.</li>
+			</ul>
+			<p>For information on the distribution requirements, see the documentation:
+				<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview">Store Requirements Overview</a>.</p>
+			<p>
+				<strong>Setup Steps</strong>
+			</p>
+			<p>There are multiple steps to set up Epic Games Store achievements. These are as follows:</p>
+			<ul>
+				<li>A: Set up Epic Games Store achievements in the Developer Portal</li>
+				<li>B. Create Epic Games Store achievements for your product<br>
+					Options:
 					<ul>
-						<li>Note: This step is only required once for your organization.</li>
+						<li>Single definition</li>
+						<li>Bulk import</li>
 					</ul>
 				</li>
+				<li>C: Additional setup options<br>
+					Options:
+					<ul>
+						<li>Edit an Epic Game Store achievement's XP value</li>
+						<li>Delete an Epic Games Store achievement</li>
+					</ul>
+				</li>
+				<li>D. Preview your live Epic Games Store achievements</li>
+				<li>E. Epic Games review, approval, and publish</li>
+			</ul>
+			<p>Follow steps A to E to set up Epic Games Store Achievements.</p>
+			<p>This page also has additional information:</p>
+			<ul>
 				<li>
-					<a href="#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Generate Dev and Stage sandboxes and deployments</a>.</li>
+					<a href="#xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</a>
+				</li>
 				<li>
-					<a href="#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Choose a deployment in each sandbox to use with Epic Games Store achievements</a>.</li>
-			</ol>
+					<a href="#request-additional-xp-for-epic-games-store-achievements">Request Additional XP for Epic Games Store Achievements</a>
+				</li>
+			</ul>
 			<div>
-				<h3 id="step-1-sign-the-epic-online-services-developer-agreement">Step 1: Sign the Epic Online Services Developer Agreement</h3>
+				<h2 id="before-you-start">Before You Start</h2>
 			</div>
-			<p>The owner of your organization must read and sign the updated Developer Agreement. You cannot use Epic Games Store achievements until this agreement has been accepted.</p>
-			<p>To read and sign the agreement, the owner of your organization follows the steps below. Only the organization owner can complete this process. :</p>
+			<p>You can set up Epic Games Store achievements before you have set up EOS achievements in your product's code. However, you cannot publish an Epic Games Store achievement to make it live to users if it is not linked to a corresponding EOS achievement. You set up EOS achievements by integrating EOS with your product code. See the documentation listed below for guidance on integrating EOS and EOS achievements with your product.</p>
+			<p>EOS documentation:</p>
+			<ul>
+				<li>Get started:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started with Epic Online Services</a>.</li>
+				<li>Add EOS achievements to your product:  see
+					<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide">EOS &gt; Guide: How to Add Achievements to Your Game</a>.</li>
+				<li>Add EOS stats to your product:
+					<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide">EOS &gt; Guide: How to Add Stats to Your Game</a>.<br>
+					(You might choose to base each EOS achievement on a stat. For example, to create an Epic Games Store achievement that rewards users for traveling a certain distance in a game, first create a stat using the EOS Stats Interface to track user travel distance.)</li>
+			</ul>
+			<div>
+				<h2 id="a-set-up-epic-games-store-achievements-in-the-developer-portal">A: Set up Epic Games Store Achievements in the Developer Portal</h2>
+			</div>
+			<p>Follow the steps below to prepare your product for Epic Games Store achievements.</p>
+			<div>
+				<h3 id="step-1-accept-the-epic-online-services-developer-agreement">Step 1: Accept the Epic Online Services Developer Agreement</h3>
+			</div>
+			<p>The owner of your organization must read and sign the updated Developer Agreement. Only the organization owner can complete this step. You cannot use Epic Games Store achievements until the owner has accepted this agreement. (Note that you only do this step once for your organization.)</p>
+			<p>Accept the agreement on the Achievements page in the Developer Portal. To do this, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Games Store Achievements</strong>.</li>
-				<li>In the Developer Agreement section, click
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Epic Online Services</strong>.</li>
+				<li>In the left navigation, in the
+					<strong>Player &amp; Game Data</strong>
+					section, click
+					<strong>Achievements</strong>.</li>
+				<li>Select the
+					<strong>Epic Games Store</strong>
+					tab.</li>
+				<li>In the
+					<strong>Developer Agreement</strong>
+					section, click
 					<strong>See Agreement</strong>.</li>
 				<li>Review the Epic Online Services Developer Agreement and click
 					<strong>Accept</strong>.</li>
 			</ol>
-			<p>Once the agreement has been signed, continue to Steps 2 and 3 below.</p>
+			<p>After the owner has signed the agreement, continue to step 2. below. You do not have to be the organization owner to complete step 2.</p>
 			<div>
-				<h3 id="steps-2-and-3-generate-and-select-sandboxes-and-deployments">Steps 2 and 3: Generate and Select Sandboxes and Deployments</h3>
+				<h3 id="step-2-generate-sandboxes-and-deployments-select-deployments">Step 2: Generate Sandboxes and Deployments, Select Deployments.</h3>
 			</div>
-			<p>The next step in setting up Epic Games Store achievements includes generating Dev and Stage sandboxes and deployments in your product. Once generated, you then select one
-				<span>
-					<span aria-label="tooltip deployment" tabindex="0" role="button">deployment</span>
-				</span>
-				in each
-				<span>
-					<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
-				</span>
-				as the primary deployment for use with Epic Games Store achievements. Epic Online Services associates all user data for a product, including achievement data, with a specific deployment.</p>
-			<p>
-				<strong>Note</strong>: To learn more about sandboxes and deployments, review
-				<a href="/docs/dev-portal/product-management">Product Management</a>.</p>
-			<p>To generate and select your sandboxes and deployments, follow the steps below:</p>
+			<p>In this step, you generate a Dev sandbox and a Stage sandbox and generate a deployment in each sandbox and in the Live sandbox. These are the deployments you will use for your Epic Games Store Achievements.</p>
+			<p>After you have generated these, you select a deployment in each sandbox as the primary deployment for use with Epic Games Store achievements. Epic Online Services (EOS) associates all user data for a product, including Epic Games Store achievement data and EOS achievement data, with a specific deployment.</p>
+			<p>You generate and select your sandboxes and deployments in the Developer Portal, on the Epic Games Store tab of the Game Services' Achievements page. To do this, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Games Store Achievements</strong>.</li>
-				<li>In the Generate Sandboxes and Deployments section, click
+				<li>In the Developer Portal, go to the Epic Games Store tab of the Game Services' Achievements page:
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the Developer Portal's left navigation, click
+							<strong>Game Services</strong>.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>e. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+						<li>f. Select the
+							<strong>Epic Games Store</strong>
+							tab.</li>
+					</ul>
+				</li>
+				<li>In the
+					<strong>Generate Sandboxes and Deployments</strong>
+					section, click
 					<strong>Generate</strong>
 					to create new Dev and Stage sandboxes and associated deployments.
 					<ul>
 						<li>
-							<strong>Note</strong>: If Dev and Stage sandboxes containing one or more deployments already exist for your product, skip this step and proceed to step 3.</li>
-					</ul>
-				</li>
-				<li>In the Select a Primary Deployment per Sandbox section, choose a primary deployment for each sandbox to contain your Epic Games Store achievements.
-					<ul>
-						<li>
-							<strong>Tip</strong>: For Dev and Stage, select the deployments you are using for pre-production QA. For Live, select the deployment associated with your live product.</li>
-					</ul>
-				</li>
-				<li>Review your primary deployment selections. Then, click
-					<strong>Submit</strong>
-					to complete this process.</li>
-			</ol>
-			<p>Once the setup process is complete, you are ready to create your Epic Games Store achievements!</p>
-			<div>
-				<h2 id="create-epic-games-store-achievements-for-your-product">Create Epic Games Store Achievements for Your Product</h2>
-			</div>
-			<p>There are two ways to create Epic Games Store achievements for your product, as follows:</p>
-			<ul>
-				<li>
-					<a href="#upload-epic-games-store-achievements-in-bulk">Define multiple Epic Games Store achievements at once using bulk import</a>.
-					<ul>
-						<li>
-							<strong>Tip</strong>:This method is recommended if you have already added Epic Online Services achievements to your product.</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#create-and-link-a-single-epic-games-store-achievement">Define Epic Games Store achievements one at a time using the Dev Portal interface</a>.</li>
-			</ul>
-			<p>The sections below further describe each of these methods.</p>
-			<div>
-				<h3 id="upload-epic-games-store-achievements-in-bulk">Upload Epic Games Store Achievements in Bulk</h3>
-			</div>
-			<p>To add multiple Epic Games Store achievements to your product at once, use the bulk import process. This process involves defining your achievements in a downloaded file, then uploading that information to the Dev Portal.</p>
-			<p>
-				<strong>Notes</strong>:</p>
-			<ul>
-				<li>The bulk import process must be completed in the deployment linked to Epic Games Store achievements in your Dev sandbox.</li>
-				<li>The bulk import process only allows you to upload either EOS achievements or Epic Games Store (EGS) achievements in a single import. You can't upload both EOS achievements and EGS achievements together in a single import.</li>
-			</ul>
-			<p>To begin this process, select one of the following methods to retrieve your starting file:</p>
-			<ul>
-				<li>
-					<a href="#method-1-export-your-current-epic-online-services-achievements">Method 1</a>: Export your current Epic Online Services achievements from your Live deployment to a zip file. This option is recommended if you already have achievements defined for your product.</li>
-				<li>
-					<a href="#method-2-download-the-epic-games-store-achievements-template">Method 2</a>: Download the Epic Games Store achievements template to create new achievements.</li>
-			</ul>
-			<p>When you have your file, you can
-				<a href="#define-and-upload-your-achievements">define and upload your achievements</a>.</p>
-			<div>
-				<h4 id="method-1-export-your-current-epic-online-services-achievements">Method 1: Export your Current Epic Online Services Achievements</h4>
-			</div>
-			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Online Services Achievements</strong>.</li>
-				<li>In the Deployment drop-down, select your Live sandbox.</li>
-				<li>To the top right, click
-					<strong>Bulk Import / Export</strong>.</li>
-				<li>On the Bulk Export form, select
-					<strong>Export Current EOS Achievements</strong>
-					to download your file. Then, close the form.</li>
-			</ol>
-			<p>Once you have your zip file, review the
-				<a href="#define-and-upload-your-achievements">Define and Upload your Achievements</a>
-				section below for next steps.</p>
-			<div>
-				<h4 id="method-2-download-the-epic-games-store-achievements-template">Method 2: Download the Epic Games Store Achievements Template</h4>
-			</div>
-			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Online Services Achievements</strong>.</li>
-				<li>In the Deployment drop-down, select your Dev sandbox.</li>
-				<li>To the top right, click
-					<strong>Bulk Import / Export</strong>
-					to open the form. Then, click
-					<strong>Next</strong>.</li>
-				<li>Select
-					<strong>Download Epic Games Store Achievements Zip Template</strong>
-					to download your file. Then, close the form.
-					<ul>
-						<li>
-							<strong>Note</strong>: If the Epic Games Store Achievements option is not available, ensure you have fully completed the
-							<a href="#getting-started">setup process</a>.</li>
-					</ul>
-				</li>
-			</ol>
-			<p>Once you have your zip file, review the
-				<a href="#define-and-upload-your-achievements">Define and Upload your Achievements</a>
-				section below for next steps.</p>
-			<div>
-				<h4 id="define-and-upload-your-achievements">Define and upload your achievements</h4>
-			</div>
-			<p>Regardless of which starting method you chose, the next step consists of defining your Epic Games Store achievements in the downloaded file. The updated file is then uploaded to the Dev Portal to create your Epic Games Store achievements.</p>
-			<p>To define and upload your Epic Games Store achievements, follow the process below:</p>
-			<ol>
-				<li>On your computer, extract the zip file you downloaded.</li>
-				<li>Open the file labeled
-					<em>achievementDefinitions.csv</em>.</li>
-				<li>In the CSV file, ensure the last column is labeled
-					<em>user_epic_achievements_xp</em>. If this column is not available, add it to the file.</li>
-				<li>Populate the CSV file with the appropriate values for your achievements.
-					<ul>
-						<li>Ensure that you include any live Epic Online Services achievements in the file. If you
-							<a href="#method-1-export-your-current-epic-online-services-achievements">exported your achievements from the Live sandbox</a>, these achievements should already be included.</li>
-						<li>
-							<a href="/docs/game-services/achievements">Learn more about usage limitations for achievements</a>.</li>
+							<strong>Note</strong>: If Dev and Stage sandboxes containing one or more deployments already exist for your product, skip this step and go to the next one.</li>
 					</ul>
 				</li>
 				<li>In the
-					<em>user_epic_achievements_xp</em>
-					column, add the desired experience point (XP) value for each achievement.
+					<strong>Please Select a Primary Deployment per Sandbox</strong>
+					section, choose a primary deployment for each sandbox to contain your Epic Games Store achievements.
 					<ul>
 						<li>
-							<strong>Note</strong>: When defining XP values, ensure the appropriate
-							<a href="#xp-requirements-for-epic-games-store-achievements">XP requirements</a>
-							are followed.</li>
+							<strong>Tip</strong>: For the Dev sandbox and Stage sandbox, select the deployments you are using for pre-production QA. For the Live sandbox, select the deployment associated with your live product.</li>
 					</ul>
 				</li>
-			</ol>
-			<div tabindex="0" aria-label="Example achievement definition in the CSV file image, press Enter to open full size">
-				<div>
-					<span>
-						<img alt="Example achievement definition in the CSV file" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
-						<noscript></noscript>
-					</span>
-				</div>
-				<figcaption></figcaption>
-			</div>
-			<p>
-				<em>An example achievement definition in the CSV file.</em>
-			</p>
-			<ol start="6">
-				<li>(Optional) Add localized text and associate images with your achievements by editing the
-					<em>achievementLocalizations.csv</em>
-					file.
-					<ul>
-						<li>
-							<a href="/docs/game-services/bulk-importer-exporter-tool#csv-format-requirements">Learn more about achievementLocalizations.csv</a>.</li>
-					</ul>
-				</li>
-				<li>Compile your files, including your modified
-					<em>achievementDefinitions.csv</em>
-					file, into a new zip archive. Place all the files at the root level of the zip archive.</li>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Online Services Achievements</strong>.</li>
-				<li>In the Deployment drop-down, select your Dev sandbox.</li>
-				<li>To the top right, click
-					<strong>Bulk Import / Export</strong>
-					to open the form. Then, click
-					<strong>Next</strong>
-					to advance to the Bulk Import page.</li>
-				<li>Locate the Upload Achievement section at the bottom of the page. Then, review and accept the warning message.</li>
 				<li>Click
-					<strong>Choose File to Upload</strong>
-					and select your zip archive. Then, click
-					<strong>Next</strong>
-					to upload the file.</li>
+					<strong>Submit</strong>.</li>
 			</ol>
+			<p>You are now ready to create your Epic Games Store achievements.</p>
 			<div>
-				<h3 id="review-your-achievements-import">Review your Achievements Import</h3>
+				<h2 id="b-create-epic-games-store-achievements-for-your-product">B. Create Epic Games Store Achievements for Your Product</h2>
 			</div>
-			<p>After you import your achievements, ensure they satisfy the criteria specified in the
-				<a href="#xp-requirements-for-epic-games-store-achievements">XP (Experience Points) requirements for achievements</a>.</p>
-			<p>To review your achievements import, follow the steps below:</p>
-			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Games Store Achievements</strong>.</li>
-				<li>Locate the
-					<strong>Push to Stage</strong>
-					button at the top of the page.
-					<ul>
-						<li>If the button is enabled, your achievements passed validation and satisfy the XP requirements.</li>
-						<li>If the button is disabled, your achievements do not meet the XP requirements. Expand the message to review the details of the failed validation. Common errors include missing or incorrect XP values, an XP total that does not equal 1000, incorrect icon file sizes, or exceeded character limits.</li>
-					</ul>
-				</li>
-				<li>If one or more errors are present in your achievements, resolve those issues in your CSV file. Then, update your zip archive and reupload the archive following the bulk import process.</li>
-			</ol>
-			<p>You can validate your Epic Games Store achievements in your product before you push them to Stage. To do so, create a build of your product using the Dev sandbox and deployment associated with your achievements during
-				<a href="/docs/game-services/eos-platform-interface#platform-interface">SDK initialization</a>.</p>
-			<p>If you push your achievements to Live, you can preview them on the Product Detail Page and Achievement Details Page. To do so, first push your achievements to Stage for
-				<a href="#understand-the-publishing-review-and-approval-process">review and approval</a>.</p>
+			<p>From the Developer Portal, you must retrieve a starting file to define your Epic Games Store achievements in, define them in it, and then upload it to the Developer Portal.</p>
+			<p>There are two methods to create this. These are as follows:</p>
+			<ul>
+				<li>Single definition:<br>
+					Define Epic Games Store achievements one at a time in the Developer Portal.</li>
+				<li>Bulk import:<br>
+					Define multiple Epic Games Store achievements in one action using bulk import to the Developer Portal./ We recommend this method if you have already added Epic Online Services (EOS) achievements to your product.</li>
+			</ul>
 			<div>
-				<h3 id="create-and-link-a-single-epic-games-store-achievement">Create and Link a Single Epic Games Store Achievement</h3>
+				<h3 id="single-definition">Single Definition</h3>
 			</div>
-			<p>When you create an Epic Games Store achievement, you link it to an Epic Online Services achievement and assign it an experience point (XP) value. If you do not have a corresponding Epic Online Service achievement available, you can create one through the Dev Portal.</p>
+			<p>When you create an Epic Games Store achievement, you link it to an EOS achievement and assign it an XP value. If you do not have a corresponding EOS achievement available, you can create one in the Developer Portal.</p>
 			<p>
 				<strong>Note:</strong>
-				This section explains how to create and link a single Epic Games Store achievement. If you already have Epic Online Services achievements in your product or wish to create multiple achievements, following the process for
-				<a href="#upload-epic-games-store-achievements-in-bulk">bulk uploading Epic Games Store achievements</a>
-				is strongly recommended.</p>
+				This section describes how to create a single Epic Games Store achievement and link it to a single EOS achievement. If you already have EOS achievements in your product or wish to create multiple achievements, we recommend you follow the bulk import process (see section of this page
+				<a href="#bulk-import">Bulk Import</a>).</p>
 			<div>
-				<h4 id="create-a-corresponding-epic-online-services-achievement">Create a Corresponding Epic Online Services Achievement</h4>
+				<h4 id="step-1-add-a-corresponding-eos-achievement">Step 1: Add a Corresponding EOS Achievement</h4>
 			</div>
-			<p>Before you can create an Epic Games Store achievement, you must have a corresponding Epic Online Services achievement to associate it with. There are two ways to define Epic Online Services achievements:</p>
+			<p>Before you can create an Epic Games Store achievement, you must have a corresponding EOS achievement to link it with.<br>
+				There are two ways to define EOS achievements:</p>
 			<ul>
-				<li>Write some corresponding code in your product before you launch. To learn more, review
-					<a href="/docs/game-services/achievements">Epic Online Services achievements</a>.</li>
-				<li>Base each Epic Online Services achievement on a
-					<a href="/docs/game-services/eos-stats-interface">stat</a>. For example, to create an achievement that rewards users for traveling a certain distance in a game, first create a stat to track player travel distance. Then, associate the achievement with that stat.</li>
+				<li>EOS Achievements Interface<br>
+					In your product's code, add an EOS Game Services' Achievements Interface integration.<br>
+					For guidance, see documentation:
+					<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">EOS &gt; Achievements Interface</a>.</li>
+				<li>EOS Stats Interface<br>
+					You might choose to base each EOS achievement on a stat. For example, to create an Epic Games Store achievement that rewards users for traveling a certain distance in a game, first create a stat using the EOS Stats Interface to track user travel distance. Then, link the Epic Games Store achievement with that stat.<br>
+					For guidance, see documentation:
+					<a href="/docs/epic-online-services/player-and-game-data/stats-interface">EOS &gt; Stats Interface</a>
+				</li>
 			</ul>
-			<p>To create an Epic Online Services achievement, follow the steps below:</p>
+			<p>To prepare an EOS achievement for linking to an Epic Games Store achievement, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Online Services Achievements</strong>.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Online Services</strong>
+					tab.</li>
 				<li>In the Deployment drop-down, select the deployment associated with your Dev sandbox.</li>
 				<li>From the options in the top right, click
 					<strong>Create New</strong>.</li>
@@ -346,18 +272,36 @@
 					to save your new achievement.</li>
 			</ol>
 			<div>
-				<h4 id="create-and-link-an-epic-games-store-achievement">Create and Link an Epic Games Store Achievement</h4>
+				<h4 id="step-2-create-and-link-an-epic-games-store-achievement">Step 2: Create and Link an Epic Games Store Achievement</h4>
 			</div>
-			<p>Once you have an Epic Online Services achievement available, you can create your Epic Games Store achievement and link the two achievements together. To do so, follow the steps below:</p>
+			<p>Once you have an EOS achievement prepared in the Developer Portal, you can create your Epic Games Store achievement and link the two achievements together.</p>
+			<p>To link the achievements in the Developer Portal, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>. Then, select
-					<strong>Epic Online Services Achievements</strong>.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Online Services</strong>
+					tab.</li>
 				<li>In the Deployment drop-down, select the deployment associated with your Dev sandbox.</li>
-				<li>In the list of achievements, locate the Epic Online Services achievement you wish to link to your new Epic Games Store achievement.</li>
-				<li>Click the
-					<strong>menu icon (...)</strong>
-					to the right of the achievement’s row, then select
+				<li>In the list of achievements, locate the EOS achievement you wish to link to your new Epic Games Store achievement.</li>
+				<li>Click the three dots (
+					<strong>…</strong>
+					) to the right of the achievement’s row, then select
 					<strong>Link Achievements</strong>.</li>
 				<li>Enter an XP value for the achievement.
 					<ul>
@@ -371,19 +315,280 @@
 					to finalize and save your new Epic Games Store achievement.</li>
 			</ol>
 			<div>
-				<h2 id="edit-an-epic-games-store-achievements-xp-value">Edit an Epic Games Store Achievement’s XP Value</h2>
+				<h3 id="bulk-import">Bulk Import</h3>
+			</div>
+			<p>To add multiple Epic Games Store achievements to your product in one action, use the bulk import process.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>You must complete the bulk import process in the deployment linked to Epic Games Store achievements in your Dev sandbox.</li>
+				<li>The bulk import process only allows you to upload either EOS achievements or Epic Games Store achievements in one upload. You cannot upload both EOS achievements and Epic Games Store achievements together in one import.</li>
+			</ul>
+			<div>
+				<h4 id="step-1-retrieve-a-starting-file">Step 1: Retrieve a Starting File</h4>
+			</div>
+			<p>To begin this process, you must retrieve a starting file to define your Epic Games Store achievements in. Select one of the following options to retrieve a starting file:</p>
+			<ul>
+				<li>
+					<a href="#option-1-export-your-current-eos-achievements-as-zip-file">Option 1</a>: Export your current EOS achievements as a zip file.<br>
+					You do this from your Live deployment in the Developer Portal. We recommend this option if you already have EOS achievements defined for your product.</li>
+				<li>
+					<a href="#option-2-download-the-epic-games-store-achievements-template-as-a-zip-file">Option 2</a>: Download the Epic Games Store achievements template.<br>
+					You add to this template file to create new achievements.</li>
+			</ul>
+			<p>After you have retrieved a starting file, you define and upload your achievements.</p>
+			<div>
+				<h5 id="option-1-export-your-current-eos-achievements-as-a-zip-file">Option 1: Export Your Current EOS Achievements as a Zip File</h5>
+			</div>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Online Services</strong>
+					tab.</li>
+				<li>In the Deployment drop-down, select your Live sandbox.</li>
+				<li>To the top right, click
+					<strong>Bulk Import / Export</strong>.</li>
+				<li>On the Bulk Export form, select
+					<strong>Export Current EOS Achievements</strong>
+					to download your file. Then, close the form.</li>
+			</ol>
+			<p>When you have your zip file, go to the next step.</p>
+			<div>
+				<h5 id="option-2-download-the-epic-games-store-achievements-template-in-a-zip-file">Option 2: Download the Epic Games Store Achievements Template in a Zip File</h5>
+			</div>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Online Services</strong>
+					tab.</li>
+				<li>In the Deployment drop-down, select your Dev sandbox.</li>
+				<li>To the top right, click
+					<strong>Bulk Import / Export</strong>
+					to open the form. Then, click
+					<strong>Next</strong>.</li>
+				<li>Select
+					<strong>Download Epic Games Store Achievements Zip Template</strong>
+					to download your file. Then, close the form.
+					<ul>
+						<li>
+							<strong>Note</strong>: If the Epic Games Store Achievements option is not available, ensure you have fully completed the
+							<a href="#getting-started">setup process</a>.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>When you have your zip file, go to the next step.</p>
+			<div>
+				<h4 id="step-2-define-and-upload-your-achievements">Step 2: Define and Upload Your Achievements</h4>
+			</div>
+			<p>Define your Epic Games Store achievements in the downloaded file and upload it to the Developer Portal to create your Epic Games Store achievements.</p>
+			<p>To define your Epic Games Store achievements, follow the process below:</p>
+			<ol>
+				<li>On your computer, extract the zip file you downloaded.</li>
+				<li>Open the file labeled
+					<code>achievementDefinitions.csv</code>.</li>
+				<li>In the CSV file, ensure the last column is labeled
+					<code>user_epic_achievements_xp</code>. If this column is not available, add it to the file.</li>
+				<li>Populate the CSV file with the appropriate values for your achievements.
+					<ul>
+						<li>Ensure that you include any live EOS achievements in the file. If you used
+							<em>Option 1: Export Your Current EOS Achievements as a Zip File</em>
+							these EOS achievements are already included.</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-reference#usage-limitations">Learn more about usage limitations for achievements</a>.</li>
+					</ul>
+				</li>
+				<li>In the
+					<em>user_epic_achievements_xp</em>
+					column, add the desired experience point (XP) value for each achievement.
+					<ul>
+						<li>
+							<strong>Note</strong>: When defining XP values, ensure you follow the appropriate XP requirements. See the section of this page:
+							<a href="#xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</a>.</li>
+					</ul>
+				</li>
+			</ol>
+			<div tabindex="0" aria-label="Example achievement definition in the CSV file image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Example achievement definition in the CSV file" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>
+				<em>An example achievement definition in the CSV file.</em>
+			</p>
+			<ol start="6">
+				<li>(Optional) Add localized text and associate images with your achievements by editing the
+					<code>achievementLocalizations.csv</code>
+					file.
+					<ul>
+						<li>For guidance on
+							<code>achievementLocalizations.csv</code>, see documentation:
+							<a href="/docs/epic-online-services/eos-fundamentals/tools/bulk-importer-exporter-tool#csv-format-requirements">EOS &gt; Tool: Bulk Import / Export</a>.</li>
+					</ul>
+				</li>
+				<li>Compile your files, including your modified
+					<em>achievementDefinitions.csv</em>
+					file, into a new zip archive. Place all the files at the root level of the zip archive.</li>
+			</ol>
+			<p>To upload your Epic Games Store achievements, follow the process below:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Games Store</strong>
+					tab.</li>
+				<li>In the Deployment drop-down, select your Dev sandbox.</li>
+				<li>To the top right, click
+					<strong>Bulk Import / Export</strong>
+					to open the form. Then, click
+					<strong>Next</strong>
+					to advance to the Bulk Import page.</li>
+				<li>Locate the Upload Achievement section at the bottom of the page. Then, review and accept the warning message.</li>
+				<li>Click
+					<strong>Choose File to Upload</strong>
+					and select your zip archive. Then, click
+					<strong>Next</strong>
+					to upload the file.</li>
+			</ol>
+			<div>
+				<h4 id="step-3-review-your-achievements-upload">Step 3: Review Your Achievements Upload</h4>
+			</div>
+			<p>After you import your achievements, Epic Games checks whether they satisfy the criteria specified in the XP requirements for achievements. See the section on this page:
+				<a href="#xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</a>.</p>
+			<p>Review your achievements upload in the Developer Portal. To do this follow the steps below:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Games Store</strong>
+					tab.</li>
+				<li>Locate
+					<strong>Push to Stage</strong>
+					at the top of the page.
+					<ul>
+						<li>If
+							<strong>Push to Stage</strong>
+							is enabled, your achievements passed validation and satisfy the XP requirements.</li>
+						<li>If
+							<strong>Push to Stage</strong>
+							is disabled, your achievements do not meet the XP requirements.<br>
+							Expand the message to review the details of the failed validation.<br>
+							<strong>Tip:</strong>
+							Common errors include missing or incorrect XP values, an XP total that does not equal 1000, incorrect icon file sizes, or exceeded character limits.</li>
+					</ul>
+				</li>
+				<li>If one or more errors are present in your achievements, resolve those issues in your CSV file. Then, update your zip archive and reupload the archive following the bulk import process.</li>
+			</ol>
+			<p>
+				<strong>Tips:</strong>
+			</p>
+			<ul>
+				<li>You can validate your Epic Games Store achievements in your product before you push them to Stage. To do this, create a build of your product that, during EOS SDK initialization, uses the Dev sandbox and deployment associated with your achievements. (For guidance on how to get started with the EOS SDK and SDK initialization, see documentation:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide/get-started-intro">EOS &gt; Get Started Guide</a>.)</li>
+				<li>If you push your achievements to Live, you can preview them on the Product Detail Page and Achievement Details Page. To do so, first push your achievements to Stage for review and approval. (See the section of this page:
+					<a href="#e-epic-games-review-approval-and-publish">E:Epic Games Review, Approval, and Publish</a>.)</li>
+			</ul>
+			<div>
+				<h2 id="c-additional-setup-options">C: Additional Setup Options</h2>
+			</div>
+			<p>You have the option to edit an Epic Games Store achievement’s XP value before you push it to Live. You can also delete an Epic Games Store achievement before you push it to Live.</p>
+			<div>
+				<h3 id="edit-an-epic-games-store-achievements-xp-value">Edit an Epic Games Store Achievement’s XP Value</h3>
 			</div>
 			<p>Before an Epic Games Store achievement is pushed to Live, you can edit its XP value. Once the achievement is live, this value cannot be modified.</p>
-			<p>To edit the XP awarded by an Epic Games Store achievement:</p>
+			<p>To edit the XP awarded by an Epic Games Store achievement, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Online Services</strong>
+					tab.</li>
 				<li>In the drop-down above your Epic Online Services achievements, select the deployment associated with your Dev sandbox.</li>
 				<li>Click
 					<strong>Epic Games Store achievements</strong>. Then, locate the achievement you wish to update.</li>
-				<li>To the right of the achievement’s row, click the
-					<strong>menu icon (...)</strong>
-					and choose
+				<li>To the right of the achievement’s row, click the three dots (
+					<strong>…</strong>
+					) and choose
 					<strong>Edit XP</strong>.</li>
 				<li>Enter the desired XP value for the achievement.</li>
 				<li>Click
@@ -391,41 +596,58 @@
 					to finalize your changes.</li>
 			</ol>
 			<div>
-				<h2 id="delete-an-epic-games-store-achievement">Delete an Epic Games Store Achievement</h2>
+				<h3 id="delete-an-epic-games-store-achievement">Delete an Epic Games Store Achievement</h3>
 			</div>
-			<p>To delete an Epic Games Store achievement, you unlink the achievement from the associated Epic Online Services achievement. This action removes the Epic Games Store achievement from your product. It does
+			<p>To delete an Epic Games Store achievement, you unlink the achievement from the associated EOS achievement. This action removes the Epic Games Store achievement from your product. It does
 				<strong>not</strong>
-				delete the Epic Online Services achievement.</p>
-			<div>
-				<p>If an Epic Games Store achievement has been pushed to Live, you cannot unlink the achievement in the Dev Portal. To delete an Epic Games Store achievement in this situation, create a private discussion using this support website:
-					<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</p>
-			</div>
-			<p>To unlink and delete an Epic Games Store achievement, follow the steps below:</p>
+				delete the EOS achievement.</p>
+			<p>After an Epic Games Store achievement has been pushed to Live, you cannot unlink the achievement in the Dev Portal. To delete an Epic Games Store achievement in this situation, contact Support. To do this, create a private discussion using this support website:
+				<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</p>
+			<p>To unlink and delete an Epic Games Store achievement in the Developer Portal, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Online Services</strong>
+					tab.</li>
 				<li>In the drop-down above your Epic Online Services achievements, select the deployment associated with your Dev sandbox.</li>
 				<li>Click
 					<strong>Epic Games Store achievements</strong>. Then, locate the achievement you wish to remove.</li>
-				<li>To the right of the achievement’s row, click the
-					<strong>menu icon (...)</strong>
-					and choose
+				<li>To the right of the achievement’s row, click the three dots (
+					<strong>…</strong>
+					) and choose
 					<strong>Unlink</strong>.</li>
 				<li>Select
 					<strong>Remove Link</strong>
 					to unlink and delete your Epic Games Store achievement.</li>
 			</ol>
 			<div>
-				<h2 id="preview-your-live-epic-games-store-achievements">Preview your Live Epic Games Store Achievements</h2>
+				<h2 id="d-preview-your-live-epic-games-store-achievements">D: Preview Your Live Epic Games Store Achievements</h2>
 			</div>
-			<p>In the Epic Games Store, information about your achievements displays on both your Product Details Page and on the dedicated Achievements page available for your product. To preview this information, first ensure the following:</p>
+			<p>In the Epic Games Store, information about your achievements displays on both your Product Details Page and on the dedicated Achievements page available for your product. You can preview this information before you push your Epic Games Store achievements to Live.</p>
+			<p>To preview this information, first ensure the following:</p>
 			<ul>
-				<li>Your product has been pushed to Live.</li>
-				<li>Your product has a catalog item.</li>
-				<li>Your product has an
-					<a href="/docs/epic-games-store/store-presence/manage-offers">offer</a>.</li>
+				<li>You have pushed your product to the Live sandbox.</li>
+				<li>Your product has an audience item (also known as a "catalog item").</li>
+				<li>Your product has an offer. (Documentation:
+					<a href="/docs/epic-games-store/store-presence/manage-offers">Manage Offers</a>.)</li>
 			</ul>
-			<p>Then, use the following URL to preview your product’s achievements before pushing them live. Replace &lt;product-name&gt; with the name of your product:
+			<p>Then, use the following URL to preview your product’s Epic Games Store achievements before pushing them live. Replace &lt;product-name&gt; with the name of your product:
 				<code>/store/en-US/achievements/&lt;product-name&gt;</code>
 			</p>
 			<div tabindex="0" aria-label=" image, press Enter to open full size">
@@ -441,42 +663,70 @@
 				<em>An example achievement details page.</em>
 			</p>
 			<div>
-				<h2 id="understand-the-publishing-review-and-approval-process">Understand the Publishing, Review, and Approval Process</h2>
+				<h2 id="e-epic-games-review-approval-and-publish">E: Epic Games Review, Approval, and Publish</h2>
 			</div>
-			<p>To make your Epic Games Store achievements available to users, the following workflow should be followed:</p>
-			<ol>
-				<li>In your Dev sandbox,
-					<a href="#create-epic-games-store-achievements-for-your-product">create your achievements</a>.</li>
-				<li>Push your achievements to your Stage sandbox and submit them for review by the Epic Games Store team.</li>
-				<li>Once approved, push your achievements to the Live sandbox.</li>
-			</ol>
+			<p>To publish your Epic Games Store achievements so they are live and available to users: after you have created Epic Games Store Achievements in your Dev sandbox, you take the following steps:</p>
+			<ul>
+				<li>Step 1:  Push to Stage.<br>
+					Push your Epic Games Store achievements to the Stage sandbox and submit them for review by the Epic Games Store team.</li>
+				<li>Step 2: Wait for Epic Games approval.</li>
+				<li>Step 3: Push to Live.<br>
+					Once approved, push your achievements to the Live sandbox.</li>
+			</ul>
 			<p>
-				<strong>Notes</strong>:</p>
+				<strong>Notes:</strong>
+			</p>
 			<ul>
 				<li>When you push Epic Games Store achievements from one sandbox to another, they replace any achievements in the deployment linked to the destination sandbox.</li>
-				<li>After an Epic Games Store achievement is live, you cannot adjust its XP value or remove the achievement through the Dev Portal. To delete a published achievement, create a private discussion using this support website:
-					<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</li>
-				<li>To update any text or images associated with your achievements, follow the normal publishing flow as described in this section.</li>
+				<li>After you have pushed an Epic Games Store achievement to the live sandbox, it is published and you cannot adjust its XP value or delete it through the Developer Portal.<br>
+					To delete a published (live) Epic Games Store achievement, contact Support. To do this, create a private discussion using this support website:
+					<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</li>
+				<li>To update any text or images associated with your Epic Games Store achievements, follow the publishing flow as described in this section.</li>
+			</ul>
+			<p>
+				<strong>Tip:</strong>
+			</p>
+			<ul>
+				<li>Because you push to the Dev, Stage, and Live sandboxes sequentially during the publishing process, your product’s build has different sandbox IDs and different deployment IDs at different steps in the process. To ensure that your product’s build is using the correct IDs for each step in the process, pass the IDs as command-line arguments to the Epic Games Launcher.<br>
+					For guidance see:
+					<a href="/docs/epic-games-store/store-presence/manage-artifacts#step-5-select-deployment-id-for-epic-online-services-only">Manage Artifacts &gt; Step 5: Select Deployment ID (for Epic Online Services Only)</a>.</li>
 			</ul>
 			<div>
-				<h3 id="push-achievements-to-stage">Push Achievements to Stage</h3>
+				<h3 id="step-1-push-to-stage">Step 1: Push to Stage</h3>
 			</div>
-			<p>To push your achievements to Stage, follow the steps below:</p>
+			<p>Push your achievements to Stage in the Developer Portal. To do this, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>
-					and select
-					<strong>Epic Games Store Achievements</strong>.</li>
-				<li>From the options to the top right, click
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your Products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Games Store</strong>
+					tab.</li>
+				<li>From the options at the top right, click
 					<strong>Push to Stage</strong>.</li>
 			</ol>
-			<p>If the Push to Stage button is disabled and cannot be clicked, it indicates that your achievements contain one or more errors. An alert box on the page lists any available errors; these issues must be resolved before you can proceed.</p>
+			<p>If the Push to Stage button is grayed-out so you cannot click it, your achievements contain one or more errors. An alert box on the page lists the errors. You must resolve the errors before you proceed.</p>
 			<div>
-				<h4 id="submit-achievements-for-review">Submit Achievements for Review</h4>
+				<h3 id="step-2-wait-for-epic-games-review">Step 2: Wait for Epic Games Review</h3>
 			</div>
-			<p>When your achievements are pushed to Stage, the Epic Games Store team reviews your achievements for any inappropriate content such as mature content, profanity, and asset flips. Note that Epic Games does not moderate unlinked achievements (i.e., Epic Online Services achievements); only Epic Games Store achievements are reviewed. Epic Games Store achievements must abide by the Epic Games Store
-				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/content-guidelines">content guidelines</a>.</p>
-			<p>If the Epic Games Store team approves your achievements, a message displays at the top of the screen along with a button to push your achievements live.</p>
+			<p>After you push your Epic Games Store achievements to Stage, the Epic Games Store team reviews your achievements for any inappropriate content such as mature content, profanity, and asset flips. You do not have to take any additional action to submit your product for review: the Developer Portal submits it automatically when you push to Stage.</p>
+			<p>Note that Epic Games team does not moderate non-Epic-Games-Store achievements (the team does not review EOS achievements, for example): The team only moderates Epic Games Store achievements. Epic Games Store achievements must abide by the Epic Games Store content guidelines (documentation:
+				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/content-guidelines">Content Guidelines</a>).</p>
+			<p>If the Epic Games Store team approves your Epic Games Store achievements, a message displays at the top of the Developer Portal Game Services Achievements page, along with a button to push your Epic Games Store achievements live.</p>
 			<p>If the Epic Games Store team rejects any of your Epic Games Store achievements during the review process, a rejection message displays in the Stage sandbox, as shown in the example below:</p>
 			<div tabindex="0" aria-label=" image, press Enter to open full size">
 				<div>
@@ -488,7 +738,7 @@
 				<figcaption></figcaption>
 			</div>
 			<p>To view more information about the rejection, click
-				<strong>See Details</strong>.</p>
+				<strong>SEE DETAILS</strong>.</p>
 			<div tabindex="0" aria-label=" image, press Enter to open full size">
 				<div>
 					<span>
@@ -507,37 +757,95 @@
 				<li>If you make any changes to an achievement set, you must resubmit the full set of achievements to Stage for review.</li>
 			</ul>
 			<div>
-				<h3 id="push-achievements-to-live">Push Achievements to Live</h3>
+				<h3 id="step-3-push-to-live">Step 3: Push to Live</h3>
 			</div>
-			<p>Once your Epic Games Store achievements have been reviewed and approved, you can push them live to make them available to users. To do so, follow the steps below:</p>
+			<p>Once your Epic Games Store achievements have been reviewed and approved, you can push them live to make them available to users.</p>
+			<p>To push them live in the Developer Portal, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Game Services &gt; Progression &gt; Achievements</strong>
-					and select
-					<strong>Epic Games Store Achievements</strong>.</li>
-				<li>In the Deployment drop-down, select the Stage sandbox.</li>
-				<li>From the options to the top right, click
+				<li>In the Developer Portal, go to the
+					<strong>Achievements</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your Products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the
+					<strong>Epic Games Store</strong>
+					tab.</li>
+				<li>In the
+					<strong>Deployment</strong>
+					drop-down, select the Stage sandbox.</li>
+				<li>From the options at the top right, click
+					<strong>Push to Live</strong>.</li>
+				<li>In the list of entities (artifacts and binaries, store settings, offers, pages, and web shop items), select the entities that you want to publish.
+					<ul>
+						<li>At a minimum, you must push the following entities, if they are not already in your Live sandbox:
+							<ul>
+								<li>A base product offer</li>
+								<li>A set of store settings</li>
+								<li>A product home page</li>
+								<li>An artifact for the base product offer (you do not need to do this for a "coming soon" offer).</li>
+								<li>Any other entities that are mandatory for your product (for example, an FAQ page if your product is a PC (Windows, macOS) product in Early Access).
+									<ul>
+										<li>For information on mandatory entities, see documentation:
+											<a href="https://dev.epicgames.com/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview">Epic Games Store Requirements</a>.</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>At the top right, click
 					<strong>Push to Live</strong>.</li>
 			</ol>
 			<p>
 				<strong>Note</strong>: After an Epic Games Store achievement is live, you cannot adjust its XP value or remove the achievement through the Dev Portal.</p>
 			<ul>
-				<li>To delete a published achievement, create a private discussion using this support website:
-					<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</li>
-				<li>To update any text or images associated with your achievements, follow the normal publishing flow.</li>
+				<li>To delete a published achievement, contact Support. To do this: create a private discussion using this support website:
+					<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</li>
+				<li>To update any text or images associated with your achievements, follow the publishing flow.</li>
 			</ul>
 			<div>
-				<h2 id="xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</h2>
+				<h2 id="additional-information">Additional Information</h2>
+			</div>
+			<div>
+				<h3 id="xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</h3>
 			</div>
 			<p>When setting XP (experience point) values for Epic Games Store achievements, you must adhere to the following guidelines:</p>
 			<ul>
-				<li>Each product must have exactly 1,000 XP* in total, regardless of how many achievements are defined. The total XP currently used for a product displays in the Dev Portal under Your Product &gt; Games Services &gt; Progression &gt; Achievements &gt; Epic Games Store Achievements.
+				<li>Each product must have exactly 1,000 XP in total, regardless of how many achievements are defined.<br>
+					The total XP currently used for a product displays in the Developer Portal on the Achievements page:
 					<ul>
 						<li>An error message displays if you try to add more or less than 1,000 XP for a specific product.</li>
 						<li>Achievements cannot be pushed from Dev to Stage if the product’s total XP does not exactly equal 1,000 (i.e., the total XP cannot be more or less than 1,000).</li>
+						<li>To go to the Developer Portal's Achievements page:
+							<ul>
+								<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+								<li>b. In the left navigation, under
+									<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+									<strong>Back to organization</strong>
+									before you can do this.)</li>
+								<li>c. When you are on your product's Developer Portal page, in the left navigation, click
+									<strong>Game Services</strong>
+									&gt;
+									<strong>Progression</strong>
+									&gt;
+									<strong>Achievements</strong>.</li>
+							</ul>
+						</li>
 					</ul>
 				</li>
-				<li>The XP value for individual achievements must be a multiple of 5 (e.g.,  5, 10, 15, 100, 110, 200, etc.).</li>
+				<li>The XP value for individual achievements must be a multiple of 5 (for example,  5, 10, 15, 100, 110, 200, ...).</li>
 				<li>The minimum XP for a single achievement is 5, and the maximum is 200.</li>
 				<li>Epic Games Store achievements are classified in bronze, silver, and gold tiers, as follows:
 					<ul>
@@ -552,80 +860,161 @@
 				</li>
 			</ul>
 			<div>
-				<p>*If you plan to add DLC with achievements or require more than 1,000 total XP across your achievements, contact your Technical Account Manager or create a private discussion using this support website:
-					<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</p>
+				<h3 id="request-additional-xp-for-epic-games-store-achievements">Request Additional XP for Epic Games Store Achievements</h3>
 			</div>
+			<p>You can request to increase the total amount of XP of your product. One reason to do this for example is when your product has more than 1000 XP on another storefront.</p>
+			<p>The following conditions list how many XP you can request for your product:</p>
+			<ul>
+				<li>You can add up to a maximum of 2000 XP for every year your product has been on the Epic Games Store. The year start counts from when you launch your game on the Epic Games Store.</li>
+				<li>There is a maximum of 5000 XP for each product.</li>
+			</ul>
+			<p>You request additional XP in the Developer Portal. To do this:</p>
+			<ol>
+				<li>
+					<p>In the Developer Portal, go to the
+						<strong>Achievements</strong>
+						page. To do this:</p>
+					<ul>
+						<li>a. Sign into the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Online Services</strong>.</li>
+						<li>d. In the left navigation, in the
+							<strong>Player &amp; Game Data</strong>
+							section, click
+							<strong>Achievements</strong>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Select the
+						<strong>Epic Games Store</strong>
+						tab.</p>
+				</li>
+				<li>
+					<p>Click the three dots (
+						<strong>…</strong>
+						) icon and select
+						<strong>Additional XP Request</strong>.</p>
+				</li>
+				<li>
+					<p>Follow the instructions to send the additional XP request with the following information:</p>
+					<ul>
+						<li>Title: Additional XP Request</li>
+						<li>Your Product ID. To find your Product ID:
+							<ul>
+								<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+								<li>b. On the left navigation, under
+									<strong>Your products</strong>, click the name of the product.</li>
+								<li>c. On the left navigation, click
+									<strong>Product Settings</strong>.</li>
+								<li>d. The
+									<strong>Product Settings</strong>
+									page defaults to the
+									<strong>SDK Download and Credentials</strong>
+									tab. Scroll down this tab to the
+									<strong>PRODUCT</strong>
+									section. Look for
+									<strong>Product ID</strong>.</li>
+							</ul>
+						</li>
+						<li>The new total XP you want to request. For example if you have 1000XP and would like an additional 500XP, you would request a new total of 1500XP.</li>
+						<li>A link to the product’s details page on another storefront showing the XP-equivalent value you're requesting, or a written justification as to why you're requesting additional XP for this product.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>For more information, contact Epic Games Support. To do this, create a private discussion on the support website:
+				<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</p>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#getting-started">Getting Started</a>
-					</li>
-					<li>
-						<a href="#step-1-sign-the-epic-online-services-developer-agreement">Step 1: Sign the Epic Online Services Developer Agreement</a>
-					</li>
-					<li>
-						<a href="#steps-2-and-3-generate-and-select-sandboxes-and-deployments">Steps 2 and 3: Generate and Select Sandboxes and Deployments</a>
-					</li>
-					<li>
-						<a href="#create-epic-games-store-achievements-for-your-product">Create Epic Games Store Achievements for Your Product</a>
-					</li>
-					<li>
-						<a href="#upload-epic-games-store-achievements-in-bulk">Upload Epic Games Store Achievements in Bulk</a>
-					</li>
-					<li>
-						<a href="#method-1-export-your-current-epic-online-services-achievements">Method 1: Export your Current Epic Online Services Achievements</a>
-					</li>
-					<li>
-						<a href="#method-2-download-the-epic-games-store-achievements-template">Method 2: Download the Epic Games Store Achievements Template</a>
-					</li>
-					<li>
-						<a href="#define-and-upload-your-achievements">Define and upload your achievements</a>
-					</li>
-					<li>
-						<a href="#review-your-achievements-import">Review your Achievements Import</a>
-					</li>
-					<li>
-						<a href="#create-and-link-a-single-epic-games-store-achievement">Create and Link a Single Epic Games Store Achievement</a>
-					</li>
-					<li>
-						<a href="#create-a-corresponding-epic-online-services-achievement">Create a Corresponding Epic Online Services Achievement</a>
-					</li>
-					<li>
-						<a href="#create-and-link-an-epic-games-store-achievement">Create and Link an Epic Games Store Achievement</a>
-					</li>
-					<li>
-						<a href="#edit-an-epic-games-store-achievements-xp-value">Edit an Epic Games Store Achievement’s XP Value</a>
-					</li>
-					<li>
-						<a href="#delete-an-epic-games-store-achievement">Delete an Epic Games Store Achievement</a>
-					</li>
-					<li>
-						<a href="#preview-your-live-epic-games-store-achievements">Preview your Live Epic Games Store Achievements</a>
-					</li>
-					<li>
-						<a href="#understand-the-publishing-review-and-approval-process">Understand the Publishing, Review, and Approval Process</a>
-					</li>
-					<li>
-						<a href="#push-achievements-to-stage">Push Achievements to Stage</a>
-					</li>
-					<li>
-						<a href="#submit-achievements-for-review">Submit Achievements for Review</a>
-					</li>
-					<li>
-						<a href="#push-achievements-to-live">Push Achievements to Live</a>
-					</li>
-					<li>
-						<a href="#xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#a-set-up-epic-games-store-achievements-in-the-developer-portal">A: Set up Epic Games Store Achievements in the Developer Portal</a>
+								</li>
+								<li>
+									<a href="#step-1-accept-the-epic-online-services-developer-agreement">Step 1: Accept the Epic Online Services Developer Agreement</a>
+								</li>
+								<li>
+									<a href="#step-2-generate-sandboxes-and-deployments-select-deployments">Step 2: Generate Sandboxes and Deployments, Select Deployments.</a>
+								</li>
+								<li>
+									<a href="#b-create-epic-games-store-achievements-for-your-product">B. Create Epic Games Store Achievements for Your Product</a>
+								</li>
+								<li>
+									<a href="#single-definition">Single Definition</a>
+								</li>
+								<li>
+									<a href="#step-1-add-a-corresponding-eos-achievement">Step 1: Add a Corresponding EOS Achievement</a>
+								</li>
+								<li>
+									<a href="#step-2-create-and-link-an-epic-games-store-achievement">Step 2: Create and Link an Epic Games Store Achievement</a>
+								</li>
+								<li>
+									<a href="#bulk-import">Bulk Import</a>
+								</li>
+								<li>
+									<a href="#step-1-retrieve-a-starting-file">Step 1: Retrieve a Starting File</a>
+								</li>
+								<li>
+									<a href="#option-1-export-your-current-eos-achievements-as-a-zip-file">Option 1: Export Your Current EOS Achievements as a Zip File</a>
+								</li>
+								<li>
+									<a href="#option-2-download-the-epic-games-store-achievements-template-in-a-zip-file">Option 2: Download the Epic Games Store Achievements Template in a Zip File</a>
+								</li>
+								<li>
+									<a href="#step-2-define-and-upload-your-achievements">Step 2: Define and Upload Your Achievements</a>
+								</li>
+								<li>
+									<a href="#step-3-review-your-achievements-upload">Step 3: Review Your Achievements Upload</a>
+								</li>
+								<li>
+									<a href="#c-additional-setup-options">C: Additional Setup Options</a>
+								</li>
+								<li>
+									<a href="#edit-an-epic-games-store-achievements-xp-value">Edit an Epic Games Store Achievement’s XP Value</a>
+								</li>
+								<li>
+									<a href="#delete-an-epic-games-store-achievement">Delete an Epic Games Store Achievement</a>
+								</li>
+								<li>
+									<a href="#d-preview-your-live-epic-games-store-achievements">D: Preview Your Live Epic Games Store Achievements</a>
+								</li>
+								<li>
+									<a href="#e-epic-games-review-approval-and-publish">E: Epic Games Review, Approval, and Publish</a>
+								</li>
+								<li>
+									<a href="#step-1-push-to-stage">Step 1: Push to Stage</a>
+								</li>
+								<li>
+									<a href="#step-2-wait-for-epic-games-review">Step 2: Wait for Epic Games Review</a>
+								</li>
+								<li>
+									<a href="#step-3-push-to-live">Step 3: Push to Live</a>
+								</li>
+								<li>
+									<a href="#additional-information">Additional Information</a>
+								</li>
+								<li>
+									<a href="#xp-requirements-for-epic-games-store-achievements">XP Requirements for Epic Games Store Achievements</a>
+								</li>
+								<li>
+									<a href="#request-additional-xp-for-epic-games-store-achievements">Request Additional XP for Epic Games Store Achievements</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

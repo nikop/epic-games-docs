@@ -1,0 +1,227 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Request to Join</h1>
+			<h2>How to allow players to request to join a game instance.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						The Social Overlay does not support the following platforms: macOS, Linux, Linux ARM64, Android, and iOS.<br>
+						Players must sign in with their Epic Games account or a proxy account to use the Social Overlay.</p>
+				</div>
+			</div>
+			<p>If a player is in a private game instance (only joinable via invite, as opposed to presence), their Epic friends can't automatically join them. In this case, the player's Epic friends can instead send them a request to join their private game through the Social Overlay. For more information on the Social Overlay, see the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay Overview</a>
+				documentation.</p>
+			<p>
+				<strong>Note</strong>: Request to Join isn't available for the Epic Games Launcher. It is only available through the Social Overlay. If you prefer not to use the Social Overlay and instead want to use your own custom UI to handle requests to join, you can use the methods listed in the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/request-to-join#requests-methods">Request Methods</a>
+				section below to handle requests.</p>
+			<div>
+				<h2 id="set-up-request-to-join">Set Up Request to Join</h2>
+			</div>
+			<p>To allow players to request to join game instances, you must set up your game in the Developer Portal:</p>
+			<ol>
+				<li>Sign in to the Developer Portal at
+					<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>.</li>
+				<li>Select the correct organization for your product.</li>
+				<li>In the left navigation, under
+					<strong>Your products</strong>, click the name of your product.</li>
+				<li>In the left navigation, click
+					<strong>Product Settings</strong>.</li>
+				<li>On the Product Settings page, click the
+					<strong>Clients</strong>
+					tab and scroll down to the
+					<strong>Client policies</strong>
+					section.</li>
+				<li>Either select an existing policy by selecting the three dots (...) and
+					<strong>Edit</strong>
+					from the dropdown menu, or select
+					<strong>Add new client policy</strong>.</li>
+				<li>Scroll down to
+					<strong>Features</strong>
+					&gt;
+					<strong>Notifications</strong>
+					and select the
+					<strong>sendRequestToJoinToAnyUser</strong>
+					checkbox.</li>
+			</ol>
+			<p>
+				<strong>Note</strong>: To allow players to request to join your lobby or session, it must have presence enabled. To enable presence for a lobby or session, set
+				<code>EOS_Bool bPresenceEnabled = EOS_TRUE</code>
+				in
+				<code>EOS_Sessions_CreateSessionModificationOptions</code>
+				(the struct of input parameters for
+				<code>EOS_Sessions_CreateSessionModification</code>).</p>
+			<div>
+				<h2 id="request-to-join-flow">Request to Join Flow</h2>
+			</div>
+			<p>When a player request to join their friend, this is the typical flow in the Social Overlay:</p>
+			<ol>
+				<li>Player A is in a private lobby that is presence enabled.</li>
+				<li>Player B (a friend of Player A) sees that Player A is in a lobby and wants to join but cannot join via presence since the lobby is private.</li>
+				<li>Player B clicks the
+					<strong>Request to Join</strong>
+					button on Player A's profile in the Social Overlay, which sends the request to join to Player A.
+					<center>
+						<div tabindex="0" aria-label="The Social Overlay displays Request to Join when Player B views Player A's profile. image, press Enter to open full size">
+							<div>
+								<span>
+									<img alt="The Social Overlay displays Request to Join when Player B views Player A's profile." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+									<noscript></noscript>
+								</span>
+							</div>
+							<figcaption></figcaption>
+						</div>
+					</center>
+					<center>
+						<em>The Social Overlay displays
+							<strong>Request to Join</strong>
+							when Player B views Player A's profile.</em>
+					</center>
+				</li>
+				<li>Player A clicks one of the following buttons:
+					<ul>
+						<li>
+							<strong>Accept join request</strong>: Sends an invite to Player B.</li>
+						<li>
+							<strong>Decline join request</strong>: Clears the request to join notification for Player A and sends a notification to Player B. Player B does not receive an indication via the Social Overlay of the rejection; this is intentional, to remove any potential negativity in this space.</li>
+					</ul>
+					<center>
+						<div tabindex="0" aria-label="When Player B requests to join Player A's game, Player A can click Accept join request or Decline join request to respond to their request. image, press Enter to open full size">
+							<div>
+								<span>
+									<img alt="When Player B requests to join Player A's game, Player A can click Accept join request or Decline join request to respond to their request." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+									<noscript></noscript>
+								</span>
+							</div>
+							<figcaption></figcaption>
+						</div>
+					</center>
+					<center>
+						<em>When Player B requests to join Player A's game, Player A can click
+							<strong>Accept join request</strong>
+							or
+							<strong>Decline join request</strong>
+							to respond to their request.</em>
+					</center>
+				</li>
+			</ol>
+			<p>After the requesting player receives and accepts an invitation, you can use the existing invitation workflows for lobbies and sessions to invite the requesting player to the private game. See the documentation for more information:</p>
+			<ul>
+				<li>Lobby:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/lobbies-intro#invite-users-to-a-lobby">Invite Users to a Lobby</a>
+				</li>
+				<li>Session:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/sessions-intro#invite-users-to-a-session">Invite Users to a Session</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="requests-methods">Requests Methods</h2>
+			</div>
+			<p>If you create your own custom UI to use instead of the Social Overlay, you can use the public methods shown in the table below to handle requests to join.</p>
+			<p>The table below uses these terms to refer to players for the request to join:</p>
+			<ul>
+				<li>Local Player: The player who requests to join the player in the private game.</li>
+				<li>Remote Player: The player in the private game lobby who receives the request.</li>
+			</ul>
+			<table>
+				<thead>
+					<tr>
+						<th>Action</th>
+						<th>Method</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>The local player requests to join the remote player's game instance.</td>
+						<td>
+							<a href="/docs/api-ref/functions/eos-custom-invites-send-request-to-join">
+								<code>EOS_CustomInvites_SendRequestToJoin</code>
+							</a>
+						</td>
+						<td>Sends the request to join to the remote player.</td>
+					</tr>
+					<tr>
+						<td>The remote player accepts the local player's request to join.</td>
+						<td>
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-request-to-join-accepted">
+								<code>EOS_CustomInvites_AddNotifyRequestToJoinAccepted</code>
+							</a>
+						</td>
+						<td>A callback that is triggered when the remote player accepts the local player's request to join. You can use this to send a notification to the local player that the request is accepted.</td>
+					</tr>
+					<tr>
+						<td>The remote player rejects the local player's request to join.</td>
+						<td>
+							<a href="/docs/api-ref/functions/eos-custom-invites-add-notify-request-to-join-rejected">
+								<code>EOS_CustomInvites_AddNotifyRequestToJoinRejected</code>
+							</a>
+						</td>
+						<td>A callback that is triggered when the remote player rejects the local player's request to join.</td>
+					</tr>
+					<tr>
+						<td>The local player receives and accepts the remote player's invitation to join their game session.</td>
+						<td>
+							<a href="/docs/api-ref/functions/eos-sessions-add-notify-session-invite-accepted">
+								<code>EOS_Sessions_AddNotifySessionInviteAccepted</code>
+							</a>
+						</td>
+						<td>A callback that is triggered when the local player accepts the remote player's invitation to join their private game session.</td>
+					</tr>
+					<tr>
+						<td>The local player receives and accepts the remote player's invitation to join their game lobby.</td>
+						<td>
+							<a href="/docs/api-ref/functions/eos-lobby-add-notify-lobby-invite-accepted">
+								<code>EOS_Lobby_AddNotifyLobbyInviteAccepted</code>
+							</a>
+						</td>
+						<td>A callback that is triggered when the local player accepts the remote player's invitation to join their private game lobby.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#set-up-request-to-join">Set Up Request to Join</a>
+								</li>
+								<li>
+									<a href="#request-to-join-flow">Request to Join Flow</a>
+								</li>
+								<li>
+									<a href="#requests-methods">Requests Methods</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

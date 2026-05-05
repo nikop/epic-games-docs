@@ -1,0 +1,275 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Lobby Sample</h1>
+			<h2>Overview of the Lobbies Sample.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Lobby Sample in the Epic Online Services (EOS) SDK demonstrates lobby management features, including the following:</p>
+			<ul>
+				<li>Creating new lobbies</li>
+				<li>Modifying lobby permissions for users</li>
+				<li>Changing lobby member attributes</li>
+				<li>Searching for and joining lobbies created by other users</li>
+				<li>Inviting friends to join a lobby</li>
+			</ul>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>Example of a lobby created with the Lobby Sample.</p>
+				</figcaption>
+			</div>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>The sample program uses the Auth Interface to authenticate the local player for demonstration purposes. To use the Auth Interface, you must set up your game (or program in this case) as an EOS Epic Account Services application and assign client credentials to the application. You can use the SDK functionality that the sample program demonstrates with any of the supported identity providers for player authentication. You can use the SDK functionality that the sample program demonstrates with any of the supported identity providers for player authentication.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Clients and Client Policy</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="sign-in">Sign In</h2>
+			</div>
+			<p>From the right-side panel, click one of these options to sign in:</p>
+			<ul>
+				<li>
+					<strong>Dev Auth</strong>: Enter the host port and credentials that you configured for the Developer Authentication Tool (for example,
+					<code>127.0.0.1:8080</code>
+					if you set
+					<code>8080</code>
+					for the host port) and click
+					<strong>LOG IN</strong>. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					documentation for more information on the Developer Authentication Tool.</li>
+				<li>
+					<strong>Account Portal</strong>: Click
+					<strong>LOG IN</strong>
+					to sign in through the Account Portal with your Epic Games account credentials or a supported identity provider. See the
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					documentation for more information on identity providers.</li>
+			</ul>
+			<div>
+				<h2 id="lobby-creation">Lobby Creation</h2>
+			</div>
+			<p>After you sign in to the sample, click
+				<strong>Create Lobby</strong>:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Use the
+				<strong>Level</strong>
+				dropdown to select a Level for the lobby. The
+				<strong>Max Players</strong>
+				dropdown will let you select how many players can be in the lobby at a time. If you check the
+				<strong>Public</strong>
+				checkbox then other users will be able to find it using the
+				<a href="#lobby-search">search and join functionality</a>. Otherwise, the lobby will be private, and users will only be able to
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/eos-lobbies-sample#inviting-friends-to-lobbies">join by invite</a>.</p>
+			<p>After you have configured these settings, clicking the
+				<strong>Create</strong>
+				button will finish creating the lobby. You will automatically quit any other lobbies and join the new lobby.</p>
+			<div>
+				<h2 id="current-lobby-dialog">Current Lobby Dialog</h2>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>The main dialog displays the following information about your current lobby:</p>
+			<ul>
+				<li>The
+					<strong>Owner</strong>
+					of the lobby</li>
+				<li>Whether the lobby is
+					<em>private</em>
+					or
+					<em>public</em>
+				</li>
+				<li>The current value of the
+					<strong>Level</strong>
+					attribute</li>
+				<li>A list of
+					<strong>Members</strong>
+					currently in the lobby</li>
+			</ul>
+			<p>The Members table contains columns with information about the members and actions to interact with them. Available information about lobby members includes:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Member Name</td>
+						<td>The member's username.</td>
+					</tr>
+					<tr>
+						<td>Is Owner</td>
+						<td>Whether or not the user is an owner for this lobby</td>
+					</tr>
+					<tr>
+						<td>Skin</td>
+						<td>What character skin the user currently has selected</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The available actions for each member include:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Action</th>
+						<th>Available To</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>Kick</strong>
+						</td>
+						<td>Lobby owner only</td>
+						<td>Remove a member from the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Promote</strong>
+						</td>
+						<td>Lobby owner only</td>
+						<td>Promote a member of the lobby to owner status.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Shuffle Skin</strong>
+						</td>
+						<td>User only</td>
+						<td>Shuffle the user's skin between available skins. Skins are an attribute associated with individual lobby members, and users are only allowed to shuffle their own skins.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The
+				<strong>Leave Lobby</strong>
+				button quits the current lobby. An empty lobby is removed automatically by the sample.</p>
+			<div>
+				<h2 id="lobby-search">Lobby Search</h2>
+			</div>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Users can search for lobbies by
+				<strong>level name</strong>
+				by typing the name of a level in the
+				<strong>search field</strong>
+				and press the
+				<strong>Enter</strong>
+				key. When the search completes, you will see all public sessions using the supplied level name, including the session owner, how many members are occupying the session, and the session's selected level. Information about individual members within a session is not available in this menu.</p>
+			<p>The user can join any of the listed sessions by clicking the
+				<strong>Join</strong>
+				button for that session. You can clear search results and return to the current lobby dialogue by clicking the
+				<strong>Clear Search</strong>
+				(cross) button.</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h2 id="inviting-friends-to-lobbies">Inviting Friends to Lobbies</h2>
+			</div>
+			<p>You can invite friends to join a lobby you have created by finding them in the
+				<strong>Friends</strong>
+				dialog on the right and clicking
+				<strong>Invite to Lobby</strong>
+				to send an invitation. Your friend will receive a popup with the option to accept the invitation and join your lobby.</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>Click image for full size</p>
+				</figcaption>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#sign-in">Sign In</a>
+								</li>
+								<li>
+									<a href="#lobby-creation">Lobby Creation</a>
+								</li>
+								<li>
+									<a href="#current-lobby-dialog">Current Lobby Dialog</a>
+								</li>
+								<li>
+									<a href="#lobby-search">Lobby Search</a>
+								</li>
+								<li>
+									<a href="#inviting-friends-to-lobbies">Inviting Friends to Lobbies</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

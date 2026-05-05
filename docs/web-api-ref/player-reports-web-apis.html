@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -20,6 +20,11 @@
 	</section>
 	<section>
 		<section role="main">
+			<p>
+				<strong>Note:</strong>
+				This service is also available through the Epic Online Services (EOS) SDK APIs. See
+				<a href="/docs/epic-online-services/trust-and-safety/reports-interface">EOS &gt; Reports Interface</a>
+				documentation for more information.</p>
 			<div>
 				<h2 id="api-endpoint">API Endpoint</h2>
 			</div>
@@ -41,7 +46,7 @@
 				<h3 id="authorization">Authorization</h3>
 			</div>
 			<p>This call requires Bearer Token authorization with an EOS Client Auth access token, obtained from the
-				<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</p>
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect interface</a>.</p>
 			<div>
 				<h3 id="request">Request</h3>
 			</div>
@@ -173,9 +178,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>curl --location --request POST 'https://api.epicgames.dev/player-reports/v1/report' \--header 'Content-Type: text/plain' \--data-raw '{  "time": "2020-04-02T00:00:00.000Z",  "reportingPlayerId": "player_1",  "reportedPlayerId": "player_2",  "reasonId": 1,  "message":"This player is cheating",  "context" : "{\"key\": \"value\"}"}'</pre>
 				</section>
 			</div>
 			<div>
@@ -205,7 +208,7 @@
 				<h3 id="authorization-1">Authorization</h3>
 			</div>
 			<p>This call requires Bearer Token authorization with an EOS Client Auth access token, obtained from the
-				<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</p>
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect interface</a>.</p>
 			<div>
 				<h3 id="request-1">Request</h3>
 			</div>
@@ -393,9 +396,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>curl --location --request GET 'https://api.epicgames.dev/player-reports/v1/report/deployment_0?reportingPlayerId=player_1&amp;reportingPlayerId=player_2&amp;reportingPlayerId=player_3&amp;reasonId=1&amp;reasonId=2&amp;pagination=true&amp;offset=0&amp;limit=10&amp;startTime=2018-05-01T00:00:00.000&amp;endTime=2020-06-01T00:00:00.000Z&amp;order=time:asc'</pre>
 				</section>
 			</div>
 			<div>
@@ -629,8 +630,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "paging": {    "offset": 0,    "limit": 1,    "total": 1  },  "elements": [    {      "productId": "product_0",      "sandboxId": "sandbox_0",      "deploymentId": "deployment_0",      "time": "2019-04-01T00:00:00.000Z",      "reportingPlayerId": "player_1",      "reportedPlayerId": "player_2",      "reasonId": 1,      "message": "This player is cheating",      "context": "{\"key\": \"value\"}"    }  ]}
 					</pre>
 				</section>
 			</div>
@@ -645,7 +645,7 @@
 				<h3 id="authorization-2">Authorization</h3>
 			</div>
 			<p>This call requires Bearer Token authorization with an EOS Client Auth access token, obtained from the
-				<a href="/docs/game-services/eos-connect-interface">Connect interface</a>.</p>
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect interface</a>.</p>
 			<div>
 				<h3 id="request-2">Request</h3>
 			</div>
@@ -664,9 +664,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>curl --location --request GET 'https://api.epicgames.dev/player-reports/v1/report/reason/definition'</pre>
 				</section>
 			</div>
 			<div>
@@ -777,8 +775,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "elements": [    {      "reasonId": 1,      "reasonString": "Cheating"    },    {      "reasonId": 2,      "reasonString": "Exploiting"    },    {      "reasonId": 3,      "reasonString": "Offensive profile"    },    {      "reasonId": 4,      "reasonString": "Verbal abuse"    },    {      "reasonId": 5,      "reasonString": "Scamming"    },    {      "reasonId": 6,      "reasonString": "Spamming"    },    {      "reasonId": 7,      "reasonString": "Other negative behavior"    }  ]}
 					</pre>
 				</section>
 			</div>
@@ -786,73 +783,78 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#api-endpoint">API Endpoint</a>
-					</li>
-					<li>
-						<a href="#sending-new-player-reports">Sending new player reports</a>
-					</li>
-					<li>
-						<a href="#policy">Policy</a>
-					</li>
-					<li>
-						<a href="#authorization">Authorization</a>
-					</li>
-					<li>
-						<a href="#request">Request</a>
-					</li>
-					<li>
-						<a href="#example-request">Example Request</a>
-					</li>
-					<li>
-						<a href="#response">Response</a>
-					</li>
-					<li>
-						<a href="#find-player-reports">Find Player Reports</a>
-					</li>
-					<li>
-						<a href="#policy-1">Policy</a>
-					</li>
-					<li>
-						<a href="#authorization-1">Authorization</a>
-					</li>
-					<li>
-						<a href="#request-1">Request</a>
-					</li>
-					<li>
-						<a href="#example-request-1">Example Request</a>
-					</li>
-					<li>
-						<a href="#response-1">Response</a>
-					</li>
-					<li>
-						<a href="#example-response">Example Response</a>
-					</li>
-					<li>
-						<a href="#get-report-reason-definition">Get Report Reason Definition</a>
-					</li>
-					<li>
-						<a href="#policy-2">Policy</a>
-					</li>
-					<li>
-						<a href="#authorization-2">Authorization</a>
-					</li>
-					<li>
-						<a href="#request-2">Request</a>
-					</li>
-					<li>
-						<a href="#example-request-2">Example Request</a>
-					</li>
-					<li>
-						<a href="#response-2">Response</a>
-					</li>
-					<li>
-						<a href="#example-response-1">Example Response</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#api-endpoint">API Endpoint</a>
+								</li>
+								<li>
+									<a href="#sending-new-player-reports">Sending new player reports</a>
+								</li>
+								<li>
+									<a href="#policy">Policy</a>
+								</li>
+								<li>
+									<a href="#authorization">Authorization</a>
+								</li>
+								<li>
+									<a href="#request">Request</a>
+								</li>
+								<li>
+									<a href="#example-request">Example Request</a>
+								</li>
+								<li>
+									<a href="#response">Response</a>
+								</li>
+								<li>
+									<a href="#find-player-reports">Find Player Reports</a>
+								</li>
+								<li>
+									<a href="#policy-1">Policy</a>
+								</li>
+								<li>
+									<a href="#authorization-1">Authorization</a>
+								</li>
+								<li>
+									<a href="#request-1">Request</a>
+								</li>
+								<li>
+									<a href="#example-request-1">Example Request</a>
+								</li>
+								<li>
+									<a href="#response-1">Response</a>
+								</li>
+								<li>
+									<a href="#example-response">Example Response</a>
+								</li>
+								<li>
+									<a href="#get-report-reason-definition">Get Report Reason Definition</a>
+								</li>
+								<li>
+									<a href="#policy-2">Policy</a>
+								</li>
+								<li>
+									<a href="#authorization-2">Authorization</a>
+								</li>
+								<li>
+									<a href="#request-2">Request</a>
+								</li>
+								<li>
+									<a href="#example-request-2">Example Request</a>
+								</li>
+								<li>
+									<a href="#response-2">Response</a>
+								</li>
+								<li>
+									<a href="#example-response-1">Example Response</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

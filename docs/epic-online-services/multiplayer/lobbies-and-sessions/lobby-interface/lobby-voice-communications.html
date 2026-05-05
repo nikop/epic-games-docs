@@ -1,0 +1,192 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Lobby Voice Communications</h1>
+			<h2>How to use EOS Voice in EOS Lobbies.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>You can host EOS Voice chat rooms on Epic servers using EOS Lobbies, or on your own backend servers. Users can communicate one-on-one or in groups across multiple platforms, during a match, or in your product’s lobby. See
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface/voice-overview#voice-with-lobbies">Voice Interface Overview &gt; Voice with Lobbies</a>
+				and
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface">Voice Interface</a>
+				for more information.</p>
+			<div>
+				<h2 id="maintain-a-connection">Maintain a Connection</h2>
+			</div>
+			<p>Applications that use the EOS Lobbies RTC rooms features do not need to manually join or leave voice rooms, this is automatically handled internally by the Lobby system.  If the lobby is successfully created with an RTC Room enabled, the lobby system will automatically join and maintain the connection to the RTC room as long as the local user remains in the lobby.</p>
+			<p>Applications may use the optional
+				<code>EOS_Lobby_IsRTCRoomConnected</code>,
+				<code>EOS_Lobby_AddNotifyRTCRoomConnectionChanged</code>, and
+				<code>EOS_Lobby_RemoveNotifyRTCRoomConnectionChanged</code>
+				functions for informational purposes if desired. An appropriate example would be showing a disconnected icon when disconnected from Lobby RTC services while in a multiplayer lobby.</p>
+			<div>
+				<h2 id="interact-with-rtc-functions">Interact with RTC Functions</h2>
+			</div>
+			<p>To interact with the the
+				<code>EOS_RTC_</code>* or
+				<code>EOS_RTCAudio_</code>* suites of functions, applications must first use the
+				<code>EOS_Lobby_GetRTCRoomName</code>
+				function to get the room name associated with their lobby.  The earliest that
+				<code>EOS_Lobby_GetRTCRoomName</code>
+				can be called successfully is inside of the
+				<code>EOS_Lobby_OnJoinLobbyCallback</code>
+				or
+				<code>EOS_Lobby_OnCreateLobbyCallback</code>, when the Result parameter is
+				<code>EOS_Success</code>.  It is also at this time an application should register for all RTC notifications specific to the Lobby’s RTC room, to avoid missing any notifications, such as existing members of the room, that can happen very shortly after these notifications.</p>
+			<p>Example uses of the RTC Room Name:</p>
+			<ul>
+				<li>When registering for notifications, such as talking status, or room membership</li>
+				<li>When muting or unmuting the local user's audio output for the room</li>
+				<li>When blocking or unblocking room participants</li>
+				<li>When setting local audio device settings.</li>
+			</ul>
+			<div>
+				<h2 id="lobby-rtc-replacement-functions">Lobby RTC-Replacement Functions</h2>
+			</div>
+			<p>The following functions are used to replace
+				<code>EOS_RTC_</code>* functions that would normally be used, but are incompatible with lobbies, either due to the feature being handled internally, the data no longer being application-provided, or the functionality being an
+				<code>EOS_RTCAdmin_</code>* function.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Effect</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_Lobby_GetRTCRoomName</code>
+						</td>
+						<td>Get the name of the RTC room associated with a specific lobby a local user belongs to.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Lobby_IsRTCRoomConnected</code>
+						</td>
+						<td>Get the current connection status of the RTC Room for a lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Lobby_AddNotifyRTCRoomConnectionChanged</code>
+						</td>
+						<td>Register to receive notifications when the RTC Room for any lobby has a connection status change. The notification callback info includes the RTC Room and local user which the notification refers to.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Lobby_RemoveNotifyRTCRoomConnectionChanged</code>
+						</td>
+						<td>Unregister from receiving notifications when an RTC Room's connection status changes.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Lobby_HardMuteMember</code>
+						</td>
+						<td>Allows a host of a lobby to mute or unmute a specific lobby member for the entire room.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="hard-mute">Hard Mute</h2>
+			</div>
+			<p>As a lobby owner you can hard-mute an existing lobby member by calling
+				<code>EOS_Lobby_HardMuteMember</code>
+				with an
+				<code>EOS_Lobby_HardMuteMemberOptions</code>
+				data structure. This structure holds information if the given member should be muted or not. Hard-muting changes the audibility of a lobby member for everyone, regardless of their local mute status.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_HARDMUTEMEMBER_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LobbyId</code>
+						</td>
+						<td>The ID of the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The user requesting the hard mute; this user must be the lobby owner.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The user to be hard (un)muted.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bHardMute</code>
+						</td>
+						<td>The user’s hard mute status (mute on or off).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation finishes, your
+				<code>EOS_Lobby_OnHardMuteMemberCallback</code>
+				runs with an
+				<code>EOS_Lobby_HardMuteMemberCallbackInfo</code>
+				data structure. If the data structure's
+				<code>ResultCode</code>
+				field indicates success, its
+				<code>LobbyId</code>
+				field contains the lobby's ID value and
+				<code>TargetUserId</code>
+				contains the member whose hard mute status has been updated.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#maintain-a-connection">Maintain a Connection</a>
+								</li>
+								<li>
+									<a href="#interact-with-rtc-functions">Interact with RTC Functions</a>
+								</li>
+								<li>
+									<a href="#lobby-rtc-replacement-functions">Lobby RTC-Replacement Functions</a>
+								</li>
+								<li>
+									<a href="#hard-mute">Hard Mute</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

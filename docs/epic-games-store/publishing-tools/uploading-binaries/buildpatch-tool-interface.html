@@ -1,0 +1,442 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>The BuildPatch Tool Interface</h1>
+			<h2>Use a GUI front end to upload your binaries to the Developer Portal.</h2>
+			<div>
+				<div>8 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The BuildPatch Tool Interface is a graphical user interface front-end to the BuildPatch Tool. You can use it to upload your binaries to the Developer Portal with the BuildPatch Tool, without using the command line.</p>
+			<p>For more information on the Buildpatch Tool, see
+				<a href="/docs/buildpatch-tool-latest">BuildPatch Tool Instructions (1.8.1)</a>.</p>
+			<div>
+				<h2 id="set-up">Set Up</h2>
+			</div>
+			<div>
+				<h3 id="download-and-extract-the-buildpatch-tool">Download and Extract the BuildPatch Tool</h3>
+			</div>
+			<p>Download the BuildPatch Tool from this link:
+				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">ol.epicgames.com/launcher/~/BuildPatchTool.zip
+				</a>
+			</p>
+			<p>When you download the BuildPatch Tool (version 1.7.3.1 or later), the BuildPatch Tool interface is included in the
+				<code>BPT.zip</code>
+				file.</p>
+			<p>Extract the contents of the BuildPatch Tool ZIP file to a machine that has access to the binary you want to upload. The machine will also need internet access to communicate with the Epic Games backend.</p>
+			<p>The filename of the BuildPatch Tool Interface executable is
+				<code>BuildPatch Tool Interface.exe</code>.</p>
+			<p>For more information on how to download the BuildPatch Tool, see
+				<a href="/docs/buildpatch-tool-latest#download-the-buildpatch-tool">BuildPatch Tool Instructions (1.8.1) &gt; Download the BuildPatch Tool</a>.</p>
+			<div>
+				<h3 id="select-a-buildpatch-tool-executable">Select a BuildPatch Tool Executable</h3>
+			</div>
+			<p>To upload binaries with the BuildPatch Tool Interface, you need to select the BuildPatch Tool executable you want to use. The BuildPatch Tool Interface runs this executable when you upload your binaries. We recommend that you use the most recent version of the BuildPatch Tool (currently 1.7.3.1).</p>
+			<p>To select a BuildPatch Tool executable:</p>
+			<ol>
+				<li>Open the BuildPatch Tool Interface.</li>
+				<li>Click
+					<strong>Select BPT Executable</strong>.</li>
+				<li>Select the BuildPatch Tool executable you want to use.</li>
+			</ol>
+			<div>
+				<h2 id="if-you-want-to-run-concurrent-instances-of-the-buildpatch-tool">If You Want to Run Concurrent Instances of the BuildPatch Tool</h2>
+			</div>
+			<p>You can run more than one instance of the BuildPatch Tool at the same time. For example, you might want to upload two builds simultaneously. If you want to run more than one instance at the same time, follow these guidelines:</p>
+			<ul>
+				<li>Use a different value in the
+					<code>CloudDir</code>
+					argument for each BuildPatch Tool instance.
+					<ul>
+						<li>The directory you specify in the
+							<code>CloudDir</code>
+							argument can be a temporary directory.</li>
+						<li>We recommend that you create an empty directory (in other words, containing no files) for each BuildPatch Tool instance.</li>
+						<li>For more information on the BuildPatch Tool arguments, see
+							<a href="#arguments-buildpatch-tool-options">Arguments (BuildPatch Tool Options)</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>If you call the BuildPatch Tool from scripts in your build pipeline, we recommend that you create a temporary directory and specify this directory with the
+					<code>CloudDir</code>
+					argument. You can delete this directory after the BuildPatch Tool has completed its task.</li>
+			</ul>
+			<div>
+				<h2 id="upload-a-binary-with-the-buildpatch-tool-interface">Upload a Binary with the BuildPatch Tool Interface</h2>
+			</div>
+			<p>To upload a binary with the BuildPatch Tool Interface:</p>
+			<ol>
+				<li>Open the BuildPatch Tool Interface.</li>
+				<li>You can load a set of options you have previously saved. This is called a "profile". If you want to do this, select the profile from the dropdown list.
+					<ul>
+						<li>For more information, see
+							<a href="#profiles">Profiles</a>
+							on this page.</li>
+					</ul>
+				</li>
+			</ol>
+			<center>
+				<div tabindex="0" aria-label="Select a profile image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Select a profile" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<ol start="3">
+				<li>Fill out
+					<code>ClientID</code>
+					and
+					<code>ClientSecret</code>.
+					<ul>
+						<li>For information on how to find out your Client ID and Client Secret, see
+							<a href="/docs/buildpatch-tool-latest#retrieve-credential-ids">BuildPatch Tool Instructions (1.8.1) &gt; Retrieve Credential IDs</a>.</li>
+					</ul>
+				</li>
+				<li>Fill out the mandatory arguments (<code>OrganizationId</code>,
+					<code>ProductId</code>,
+					<code>ArtifactId</code>,
+					<code>BuildRoot</code>,
+					<code>CloudDir</code>,
+					<code>BuildVersion</code>,
+					<code>AppLaunch</code>, and
+					<code>AppArgs</code>).
+					<ul>
+						<li>For information on these arguments, see
+							<a href="#arguments-buildpatch-tool-options">Arguments (BuildPatch Tool Options)</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>There are also some optional arguments that you might need to fill out.
+					<ul>
+						<li>For information on these arguments, see
+							<a href="#optional-arguments">Optional Arguments</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>Click
+					<strong>Submit</strong>.</li>
+			</ol>
+			<p>If you receive any error messages, see
+				<a href="/docs/buildpatch-tool-latest#troubleshooting-common-errors">BuildPatch Tool Instructions (1.8.1) &gt; Troubleshooting Common Errors</a>.</p>
+			<div>
+				<h2 id="arguments-buildpatch-tool-options">Arguments (BuildPatch Tool Options)</h2>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Field</strong>
+						</th>
+						<th>
+							<strong>Description</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ClientID</td>
+						<td>Use the Client ID provided in the Developer Portal. For information on how to find out your credentials, see
+							<a href="/docs/buildpatch-tool-latest#retrieve-credential-ids">BuildPatch Tool Instructions (1.8.1) &gt; Retrieve Credential IDs.</a>.</td>
+					</tr>
+					<tr>
+						<td>ClientSecret</td>
+						<td>Use the Client Secret provided in the Developer Portal. For information on how to find out your credentials, see
+							<a href="/docs/buildpatch-tool-latest#retrieve-credential-ids">BuildPatch Tool Instructions (1.8.1) &gt; Retrieve Credential IDs.</a>.</td>
+					</tr>
+					<tr>
+						<td>OrganizationId</td>
+						<td>The OrganizationId is a unique identifier provided by the Epic Games Store for your organization. To find your Organization ID:<br>1. Sign in to the
+							<a href="https://dev.epicgames.com/portal/">Developer Portal</a>.<br>2. In the left navigation, click
+							<strong>Organization</strong>.<br>3. Click the
+							<strong>Settings</strong>
+							tab. You can find your Organization ID in the
+							<strong>General Settings</strong>
+							section.</td>
+					</tr>
+					<tr>
+						<td>ProductId</td>
+						<td>The product ID is a unique identifier for your product. To find the product ID for a product:
+							<br>1. Sign in to the
+							<a href="https://dev.epicgames.com/portal/">Developer Portal</a>.<br>2. In the left navigation, under
+							<strong>Your products</strong>, click the name of the product.<br>3. In the left navigation, click
+							<strong>Product Settings</strong>.<br>4. The
+							<strong>Product Settings</strong>
+							page defaults to the
+							<strong>SDK Download and Credentials</strong>
+							tab. Scroll down this tab to the
+							<strong>EOS SDK Credentials</strong>
+							section and look for
+							<strong>PRODUCT ID</strong>.</td>
+					</tr>
+					<tr>
+						<td>ArtifactId</td>
+						<td>Use the Artifact ID provided in the Developer Portal. For information on how to find out your credentials, see
+							<a href="/docs/buildpatch-tool-latest#retrieve-credential-ids">BuildPatch Tool Instructions (1.8.1) &gt; Retrieve Credential IDs</a>.</td>
+					</tr>
+					<tr>
+						<td>BuildRoot</td>
+						<td>The path to the directory containing the binary to be read and processed. It can be an absolute path from the drive root or a relative path from the current working directory. Additionally, we recommend that you choose a path near the drive root, to avoid any files exceeding the
+							<code>OS MAX_PATH</code>
+							path length limit (typically 260 characters).</td>
+					</tr>
+					<tr>
+						<td>CloudDir</td>
+						<td>A directory where the BuildPatch Tool automatically saves temporary files to be uploaded. For example, the BuildPatch Tool caches manifests and chunks of the product here.<br>You can provide an absolute path from the drive root, or a relative path from the current working directory.<br>Do not set
+							<code>CloudDir</code>
+							to be the same directory as the one you use for
+							<code>BuildRoot</code>.<br>The
+							<code>CloudDir</code>
+							directory can be empty when you run the BuildPatch Tool.</td>
+					</tr>
+					<tr>
+						<td>BuildVersion</td>
+						<td>The version string for the build. This needs to be unique for each build of a specific artifact, independent of platform. For example,
+							<code>BuildVersion-1.0</code>
+							can only exist for Windows or Mac, not both. The build version string has the following restrictions: Must be between 1 and 100 chars in length, whitespace is not allowed, should only contain characters from the following sets:
+							<code>a-z</code>,
+							<code>A-Z</code>,
+							<code>0-9</code>, or
+							<code>.+-_</code>
+						</td>
+					</tr>
+					<tr>
+						<td>AppLaunch</td>
+						<td>The path to your product's executable. This is the executable that Epic Games Launcher runs when a user presses Launch. The path is relative to (and inside of) the BuildRoot. For macOS binaries, this should be the executable file contained within the
+							<code>.app</code>
+							folder, usually in the location
+							<code>Game.app/Contents/MacOS/Game</code>.</td>
+					</tr>
+					<tr>
+						<td>AppArgs</td>
+						<td>The command-line arguments to send to the executable specified in
+							<code>AppLaunch</code>. If you do not need to send command-line arguments, set
+							<code>AppArgs</code>
+							to "".</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="optional-arguments">Optional Arguments</h2>
+			</div>
+			<p>To set optional arguments, click
+				<strong>Show Optional Arguments</strong>.</p>
+			<p>The available optional arguments are as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Field</strong>
+						</th>
+						<th>
+							<strong>Description</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>FileList</td>
+						<td>A path to a text file containing a list of the files you want to include in the binary. The files must be
+							<code>BuildRoot</code>
+							relative. This is an alternative to using FileIgnoreList.</td>
+					</tr>
+					<tr>
+						<td>FileAttributeList</td>
+						<td>A path to a text file containing a list of files and corresponding special attributes (for example, executable bit) that should be set. See
+							<a href="/docs/buildpatch-tool-latest#setting-special-file-attributes">BuildPatch Tool Instructions (1.8.1) &gt; Setting Special File Attributes.</a>
+							for a description of the file contents. Note that the attributes file should not be inside your
+							<code>BuildRoot</code>
+							to ensure that it does not get erroneously included in your binary upload.</td>
+					</tr>
+					<tr>
+						<td>FileIgnoreList</td>
+						<td>A path to a text file containing a list of files that you want to exclude from the generated patch data. Each entry should be on a new line, and be a relative path from BuildRoot. A forward slash (<code>/</code>) separator should be used. Note that if the ignore file is located inside
+							<code>BuildRoot</code>
+							then its own relative file path needs to be included in the ignore list to avoid it being included in the patch data.</td>
+					</tr>
+					<tr>
+						<td>PrereqIds</td>
+						<td>A comma-separated list of identifiers, wrapped in double quotes, that the prerequisites satisfy. At install time, a machine that has all the prerequisites with these ids installed skips prerequisite installation. Documentation:
+							<a href="/docs/epic-games-store/services/game-prereqs-installer#epic-games-launcher-via-the-buildpatchtool-command-line">Game Prerequisites Installers &gt; Epic Games Launcher via the BuildPatch Tool Command Line</a>.</td>
+					</tr>
+					<tr>
+						<td>PrereqPath</td>
+						<td>The prerequisite installer that you want to launch on a successful product install. Specify a path, in double quotes, relative to the build root.</td>
+					</tr>
+					<tr>
+						<td>PrereqArgs</td>
+						<td>The command line, wrapped in double quotes, that you want to send on launch to the prerequisite installer specified in
+							<code>PrereqPath</code>. This parameter supports string replacements for
+							<code>"$[RootDirectory]"</code>
+							and
+							<code>"$[LogDirectory]"</code>. The replacements include trailing / symbols.
+							<code>RootDirectory</code>
+							is replaced with the root path of the installed product before the product executes. LogDirectory is the path to the program's log output directory. For example, you might specify this so that your prerequisite installer can create logs in that directory. You can use
+							<code>"$[Quote]"</code>
+							to get a quote character. This is important because the BuildPatch Tool command line already uses quotes for token parsing.</td>
+					</tr>
+					<tr>
+						<td>UninstallActionPath</td>
+						<td>A path to the custom uninstall action executable to launch right before product uninstall, relative to the build root.</td>
+					</tr>
+					<tr>
+						<td>UninstallActionArgs</td>
+						<td>Commandline to send to the custom uninstall action on launch.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="profiles">Profiles</h2>
+			</div>
+			<p>You can save your Buildpatch Tool Interface arguments to a profile and load the profile later to quickly set those arguments. This is useful if you have multiple Epic Games Store products. You can set up a profile for each product, then load the appropriate profile when you want to upload binaries for that product.</p>
+			<div>
+				<h3 id="load-a-saved-profile">Load a Saved Profile</h3>
+			</div>
+			<p>To load a saved profile, select it in the dropdown list:</p>
+			<div tabindex="0" aria-label="Select a profile image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Select a profile" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>The BuildPatch Tool Interface sets the arguments based on what you saved to the profile.</p>
+			<div>
+				<h3 id="create-a-profile">Create a Profile</h3>
+			</div>
+			<p>To create a profile:</p>
+			<ol>
+				<li>Click
+					<strong>Add Profile</strong>.</li>
+				<li>Type a new name for the profile.</li>
+				<li>Click
+					<strong>OK</strong>.</li>
+				<li>Set the arguments you want to save in this profile.
+					<ul>
+						<li>For information about the arguments, see
+							<a href="#arguments-buildpatch-tool-options">Arguments (BuildPatch Tool Options)</a>
+							and
+							<a href="#optional-arguments">Optional Arguments</a>
+							on this page.</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h3 id="rename-a-profile">Rename a Profile</h3>
+			</div>
+			<p>To rename a profile:</p>
+			<ol>
+				<li>In the dropdown list, select the profile you want to rename:</li>
+			</ol>
+			<center>
+				<div tabindex="0" aria-label="Select a profile image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Select a profile" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<ol start="2">
+				<li>Click
+					<strong>Rename Profile</strong>.</li>
+				<li>Type a new name for the profile.</li>
+				<li>Click
+					<strong>OK</strong>.</li>
+			</ol>
+			<div>
+				<h3 id="delete-a-profile">Delete a Profile</h3>
+			</div>
+			<p>To delete a profile:</p>
+			<ol>
+				<li>In the dropdown list, select the profile you want to delete:</li>
+			</ol>
+			<center>
+				<div tabindex="0" aria-label="Select a profile image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Select a profile" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<ol start="2">
+				<li>Click
+					<strong>Delete Profile</strong>.</li>
+				<li>Click
+					<strong>Yes</strong>.</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#set-up">Set Up</a>
+								</li>
+								<li>
+									<a href="#download-and-extract-the-buildpatch-tool">Download and Extract the BuildPatch Tool</a>
+								</li>
+								<li>
+									<a href="#select-a-buildpatch-tool-executable">Select a BuildPatch Tool Executable</a>
+								</li>
+								<li>
+									<a href="#if-you-want-to-run-concurrent-instances-of-the-buildpatch-tool">If You Want to Run Concurrent Instances of the BuildPatch Tool</a>
+								</li>
+								<li>
+									<a href="#upload-a-binary-with-the-buildpatch-tool-interface">Upload a Binary with the BuildPatch Tool Interface</a>
+								</li>
+								<li>
+									<a href="#arguments-buildpatch-tool-options">Arguments (BuildPatch Tool Options)</a>
+								</li>
+								<li>
+									<a href="#optional-arguments">Optional Arguments</a>
+								</li>
+								<li>
+									<a href="#profiles">Profiles</a>
+								</li>
+								<li>
+									<a href="#load-a-saved-profile">Load a Saved Profile</a>
+								</li>
+								<li>
+									<a href="#create-a-profile">Create a Profile</a>
+								</li>
+								<li>
+									<a href="#rename-a-profile">Rename a Profile</a>
+								</li>
+								<li>
+									<a href="#delete-a-profile">Delete a Profile</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

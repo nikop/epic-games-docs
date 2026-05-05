@@ -1,0 +1,545 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Tool: Bulk Import / Export</h1>
+			<h2>How to manage large quantities of stats and achievements.</h2>
+			<div>
+				<div>8 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>You can use the Bulk Import / Export tool to manage your game’s stats and achievements in large quantities. The tool uses .zip archives containing .csv-formatted data, so you can view and edit your stats and achievements in a wide variety of existing programs or your own tools. The tool is a panel on the Developer Portal that you access from your game’s (known as “product” in the Developer Portal) Achievements page.</p>
+			<p>The Bulk Export panel has three steps, which are as follows:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Step 1: Back Up Your Achievements</strong>
+						<br>
+						You can export existing achievements before you import any new ones. It is optional, but we recommend you do this.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Step 2: Prepare And Import Archived Achievements</strong>
+						<br>
+						You bulk import achievements in this step. Ensure the .zip file you upload and the files in it are in the required format. See the following section of this page for guidance:
+						<a href="#file-format-requirements">File Format Requirements</a>.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Step 3: Achievements And Stats Are Uploaded</strong>
+						<br>
+						This step confirms the number of successful uploads.</p>
+				</li>
+			</ul>
+			<p>
+				<strong>Note</strong>: The Bulk Import / Export tool only affects the definitions of your stats and achievements, it does not add, delete, or change your players' progress. If you delete and recreate your stats or achievements definitions, your players' stats and achievement progression remain intact.</p>
+			<p>
+				<strong>Related Documentation:</strong>
+			</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-reference">Stats Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-reference">Achievements Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<ul>
+				<li>Download the import file bulk template to use as a guide to the .zip file format required by the Bulk Import tool. Download it from Epic’s AWS link: (<a href="https://s3.amazonaws.com/epiccms_epiccms_bucket/DevPortal/N5utjC7EId3rAg/BulkTemplate.zip">amazonaws.com/~BulkTemplate.zip</a>). (You can also download it as part of the three-step process, but we recommend you download and use it before you start.)</li>
+				<li>For a successful import, ensure the files in the .zip file are in the format specified in the
+					<a href="#file-format-requirements">File Format Requirements</a>
+					section on this page.</li>
+			</ul>
+			<div>
+				<h2 id="access-the-bulk-import--export-tool">Access the Bulk Import / Export Tool</h2>
+			</div>
+			<p>You access the tool from the Developer Portal; go to your game’s (known as “product” in the Developer Portal) Achievements page.</p>
+			<p>To do this:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+				<li>In the left navigation, under
+					<strong>Your Products</strong>,  click the name of your game.</li>
+				<li>In the left navigation, click
+					<strong>Epic Online Services</strong>.</li>
+				<li>Under
+					<strong>Player &amp; Game Data</strong>, click
+					<strong>Achievements</strong>.</li>
+				<li>Between the search box and
+					<strong>Create Achievement</strong>, click the three dots (<strong>...</strong>).
+					<br>
+					This displays the
+					<strong>Bulk Export</strong>
+					panel and step 1 of the process:
+					<strong>Back Up Your Achievements</strong>. This step lets you export existing achievements before you import any new ones.</li>
+			</ol>
+			<div>
+				<h2 id="step-1-back-up-your-achievements">Step 1: Back Up Your Achievements</h2>
+			</div>
+			<p>The export process creates a .zip file and downloads it. This .zip file contains .csv and .png image files of all existing stats and achievements for your game. These files in .csv format are compatible with most spreadsheet software applications.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>You do not have to export existing achievements, but we recommend that you do not skip the export if you do not have a backup of your existing achievements.</li>
+				<li>The tool can only export image files in .png format.</li>
+			</ul>
+			<p>To export:</p>
+			<ol>
+				<li>Access the tool: follow the steps under the section
+					<a href="#access-the-bulk-import--export-tool">Access the Bulk Import / Export tool</a>.</li>
+				<li>In the
+					<strong>Bulk Export</strong>
+					panel and step 1 of the process:
+					<strong>Back Up Your Achievements</strong>, click
+					<strong>Export current EOS achievements</strong>.
+					<br>
+					<strong>Note</strong>: If you only want to export your data, you can stop here and click
+					<strong>Cancel</strong>
+					to leave the panel.</li>
+				<li>Click
+					<strong>Next</strong>.
+					<br>
+					This displays the
+					<strong>Bulk Import</strong>
+					panel and step 2 of the process:
+					<strong>Prepare And Import Archived Achievements</strong>.</li>
+			</ol>
+			<div>
+				<h2 id="step-2-prepare-and-import-archived-achievements">Step 2: Prepare and Import Archived Achievements</h2>
+			</div>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>Importing achievements and stats erases and overrides the current achievements and stats. Make sure you have a backup of your achievements and stats in case you need to revert your changes.</li>
+				<li>When you import to a live deployment, stats and achievements definitions might be in an incomplete state during the import. As a result, players might not be able to record stats or unlock achievements. To minimize disruption and unexpected behavior for your players, we recommend that you import data during your maintenance windows for live deployments.</li>
+			</ul>
+			<p>You add multiple achievements at once by uploading a .zip file filled with the appropriate data. To do this, you must use the same format as the import file bulk template. The template is available from Epic’s AWS link: (<a href="https://s3.amazonaws.com/epiccms_epiccms_bucket/DevPortal/N5utjC7EId3rAg/BulkTemplate.zip">amazonaws.com/~BulkTemplate.zip</a>). You can also download it as part of this step.</p>
+			<p>After completing
+				<strong>Step 1: Back Up Your Achievements</strong>, complete the following:</p>
+			<ol>
+				<li>Make sure your .csv and image files meet the requirements before you begin the import process: see the section on this page:
+					<a href="#file-format-requirements">File Format Requirements</a>.</li>
+				<li>You have the option to download the import file bulk template from this panel. It’s available under
+					<a href="#before-you-start">Before You Start</a>
+					on the panel: click
+					<strong>Download EOS achievements ZIP template</strong>. This is the same import file bulk template available from Epic’s AWS link: if you have already downloaded it and used it as a template, you do not need to download it again.</li>
+				<li>Next, upload achievements:
+					<ul>
+						<li>a. Click the checkbox next to
+							<strong>I have read and understood the statements above</strong>.</li>
+						<li>b. Follow the on-screen prompt to add files to upload.</li>
+						<li>c. Click
+							<strong>Next</strong>.
+							<br>
+							When complete, the tool deletes all your existing stats and achievements, then replaces them with the ones in your .zip file. This includes caching any icons that the new achievements use.</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h2 id="step-3-upload-and-view-achievements-and-stats">Step 3: Upload and View Achievements and Stats</h2>
+			</div>
+			<p>Step 3 of the process, the final
+				<strong>Bulk Import</strong>
+				panel, displays the number of uploaded achievements and stats. Click
+				<strong>Close</strong>
+				or
+				<strong>X</strong>
+				to exit.</p>
+			<div>
+				<h2 id="file-format-requirements">File Format Requirements</h2>
+			</div>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h3 id=""></h3>
+							<span>Click dropdown arrow to view.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>For a successful import, ensure your .zip file and the files in it are in the required format, specified below:</p>
+										<ul>
+											<li>File Names and Types</li>
+											<li>CSV Format Requirements</li>
+											<li>Icon Requirements</li>
+										</ul>
+										<div>
+											<h3 id="file-names-and-types">File Names and Types</h3>
+										</div>
+										<p>Your import .zip file must contain the following file names and contents:</p>
+										<p>
+											<strong>Note</strong>: Make sure that the files are located in the root of the .zip file, and not inside a sub-directory.</p>
+										<table>
+											<thead>
+												<tr>
+													<th>File Name</th>
+													<th>Contents</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<code>stats.csv</code>
+													</td>
+													<td>A list of "name and type" pairs that define each stat</td>
+												</tr>
+												<tr>
+													<td>
+														<code>achievementDefinitions.csv</code>
+													</td>
+													<td>A list of achievement names, along with the stats they reference</td>
+												</tr>
+												<tr>
+													<td>
+														<code>achievementLocalizations.csv</code>
+													</td>
+													<td>Achievement Localization locale keys and the files names of their icons</td>
+												</tr>
+												<tr>
+													<td>One or more .png files</td>
+													<td>The icons referenced in
+														<code>achievementDefinitions.csv</code>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<p>You can download the import file bulk template to use as a guide to the .zip file format required by the Bulk Import tool. Download it from Epic’s AWS link: (<a href="https://s3.amazonaws.com/epiccms_epiccms_bucket/DevPortal/N5utjC7EId3rAg/BulkTemplate.zip">amazonaws.com/~BulkTemplate.zip</a>). (You can also download it as part of the Bulk Import / Export tool's three-step process, but we recommend you download it before you start.)</p>
+										<div>
+											<h3 id="csv-format-requirements">CSV Format Requirements</h3>
+										</div>
+										<p>To ensure that the .csv files you upload pass the validation check, use the data format listed below for each file type and avoid leaving any blank lines. All .csv files must be UTF-8 encoded.</p>
+										<div>
+											<h4 id="statscsv-format">stats.csv Format</h4>
+										</div>
+										<p>The
+											<code>stats.csv</code>
+											file has two columns for each stat, these are:</p>
+										<ul>
+											<li>The name of the stat.</li>
+											<li>The stat's aggregation type.</li>
+										</ul>
+										<p>Supported values for aggregation type are
+											<code>SUM</code>,
+											<code>MIN</code>,
+											<code>MAX</code>, or
+											<code>LATEST</code>.</p>
+										<div role="alert">
+											<div></div>
+											<div>
+												<p>Stat names are in camel case, aggregation types are in all caps, and there are no spaces in each entire line.</p>
+											</div>
+										</div>
+										<p>Example
+											<code>stats.csv</code>
+											file:</p>
+										<div>
+											<section>
+												<pre>
+
+												</pre>
+											</section>
+										</div>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-reference">Stats Interface</a>.</li>
+										</ul>
+										<div>
+											<h4 id="achievementdefinitionscsv-format">achievementDefinitions.csv Format</h4>
+										</div>
+										<p>The
+											<code>achievementsDefinitions.csv</code>
+											uses three columns to define each achievement and the requirements for unlocking it, these are:</p>
+										<ul>
+											<li>
+												<strong>Achievement name</strong>:
+												<ul>
+													<li>The achievement's internal name.</li>
+													<li>The name must be in camel case.</li>
+												</ul>
+											</li>
+											<li>
+												<strong>Hidden status</strong>:
+												<ul>
+													<li>A Boolean value indicating whether the achievement is hidden or not.</li>
+													<li>Use either
+														<code>TRUE</code>
+														(hidden) or
+														<code>FALSE</code>
+														(not hidden).</li>
+												</ul>
+											</li>
+											<li>(Optional)
+												<strong>Stats names and their thresholds</strong>:
+												<ul>
+													<li>If empty, the achievement can only be unlocked by an explicit command from the EOS SDK.</li>
+													<li>If present, list stats names in camel case with a colon (:) and threshold criteria. Divide stats names and their thresholds with semi-colons (;). For example:
+														<code>Stat1:Threshold1;Stat2:Threshold2;StatN:ThresholdN</code>.</li>
+												</ul>
+											</li>
+										</ul>
+										<p>
+											<strong>Note</strong>: There must be no spaces in each entire line.</p>
+										<p>Example
+											<code>Achievements.csv</code>
+											file:</p>
+										<div>
+											<section>
+												<pre>
+
+												</pre>
+											</section>
+										</div>
+										<p>Documentation:</p>
+										<ul>
+											<li>
+												<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-reference">Achievements Interface</a>
+											</li>
+										</ul>
+										<div>
+											<h4 id="achievementlocalizationscsv-format">achievementLocalizations.csv Format</h4>
+										</div>
+										<p>
+											<strong>Note</strong>: All user-visible information about achievements can be subject to localization.</p>
+										<p>The
+											<code>achievementLocalizations.csv</code>
+											sets up all the data that the service needs to describe each achievement to users in different locales. This includes the following data:</p>
+										<ul>
+											<li>Internal name of the achievement and the locale.</li>
+											<li>Title and description when locked.</li>
+											<li>Title and description when unlocked.</li>
+											<li>Flavor text.</li>
+											<li>Locked and unlocked icons.</li>
+										</ul>
+										<p>The example
+											<code>achievementLocalizations.csv</code>
+											file below shows the default (with the second column empty) and German (with "de" in the second column) versions of the same set of achievements:</p>
+										<div>
+											<section>
+												<pre>
+
+												</pre>
+											</section>
+										</div>
+										<div role="alert">
+											<div></div>
+											<div>
+												<p>Be sure there are no spaces at the beginning or end of your values. Some values can contain spaces within the value, such as your locked and unlocked descriptions.</p>
+											</div>
+										</div>
+										<p>The text entered into the locale (second) column of the .csv file must match the tag formats below:</p>
+										<table>
+											<thead>
+												<tr>
+													<th>Locale</th>
+													<th>Tag</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<code>Arabic</code>
+													</td>
+													<td>ar</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Danish</code>
+													</td>
+													<td>da</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Dutch</code>
+													</td>
+													<td>nl</td>
+												</tr>
+												<tr>
+													<td>
+														<code>English (America)</code>
+													</td>
+													<td>en-US</td>
+												</tr>
+												<tr>
+													<td>
+														<code>English (United Kingdom)</code>
+													</td>
+													<td>en-GB</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Finnish</code>
+													</td>
+													<td>fi</td>
+												</tr>
+												<tr>
+													<td>
+														<code>French</code>
+													</td>
+													<td>fr</td>
+												</tr>
+												<tr>
+													<td>
+														<code>German</code>
+													</td>
+													<td>de</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Italian</code>
+													</td>
+													<td>it</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Japanese</code>
+													</td>
+													<td>ja</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Korean</code>
+													</td>
+													<td>ko</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Norwegian</code>
+													</td>
+													<td>no</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Polish</code>
+													</td>
+													<td>pl</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Portuguese (Brazil)</code>
+													</td>
+													<td>pt-BR</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Russian</code>
+													</td>
+													<td>ru</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Simplified Chinese</code>
+													</td>
+													<td>zh-Hans</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Spanish (Mexico)</code>
+													</td>
+													<td>es-MX</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Spanish (Spain)</code>
+													</td>
+													<td>es-ES</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Swedish</code>
+													</td>
+													<td>sv</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Thai</code>
+													</td>
+													<td>th</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Traditional Chinese</code>
+													</td>
+													<td>zh-Hant</td>
+												</tr>
+												<tr>
+													<td>
+														<code>Turkish</code>
+													</td>
+													<td>tr</td>
+												</tr>
+											</tbody>
+										</table>
+										<div>
+											<h3 id="icon-requirements">Icon Requirements</h3>
+										</div>
+										<p>Icons you reference in
+											<code>achievementDefinitions.csv</code>
+											must be in the .zip file you import because all existing content is erased when you import your new files. All icons must be in .png format and be at the root level of the .zip file. Do not have any sub-directories in your .zip file.</p>
+										<div>
+											<p>Icon filenames must not include the following characters (these characters result in Developer Portal errors:) \ { ^ } % ` ] &gt; [ ~ &lt; # | &amp; $ @ = ; : + , ? or spaces ' '</p>
+										</div>
+										<p>To eliminate redundant downloads for your users, achievements can share icons if they refer to the same icon file. Use this capability whenever multiple achievements use the same image, like the “locked” icon for hidden achievements.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#access-the-bulk-import--export-tool">Access the Bulk Import / Export Tool</a>
+								</li>
+								<li>
+									<a href="#step-1-back-up-your-achievements">Step 1: Back Up Your Achievements</a>
+								</li>
+								<li>
+									<a href="#step-2-prepare-and-import-archived-achievements">Step 2: Prepare and Import Archived Achievements</a>
+								</li>
+								<li>
+									<a href="#step-3-upload-and-view-achievements-and-stats">Step 3: Upload and View Achievements and Stats</a>
+								</li>
+								<li>
+									<a href="#file-format-requirements">File Format Requirements</a>
+								</li>
+								<li>
+									<a href="#"></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

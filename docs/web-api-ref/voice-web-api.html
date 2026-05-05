@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,24 +14,33 @@
 			<h1>Voice Web APIs</h1>
 			<h2>Use the Voice Web APIs to use Voice interface features with RESTful services.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<p>The
-				<strong>Epic Online Services (EOS)</strong>
-				<a href="/docs/game-services/real-time-communication-interface/voice">Voice interface</a>
-				helps you create and manage voice chat rooms between your users. They can communicate one-on-one or in groups across multiple platforms, during a match, or in your application’s lobby.</p>
-			<p>You can use the Voice Web APIs in place of the EOS C SDK to create trusted server applications that implement custom room management and authorization. Before calling the Voice Web APIs, check out the following documentation:
-				<a href="/docs/web-api-ref/web-api-introduction">Web API Introduction</a>
-				for standards,
-				<a href="/docs/web-api-ref/connect-web-api">authentication</a>, and
-				<a href="/docs/web-api-ref/web-api-error-codes-responses">error codes</a>.</p>
-			<p>Just like the
-				<a href="/docs/game-services/real-time-communication-interface/voice">Voice C Interface</a>, the Voice Web APIs are intended for use on a
-				<a href="/docs/game-services/real-time-communication-interface/voice#voice-with-a-trusted-server-application">trusted server</a>
+			<p>
+				<strong>Note:</strong>
+				This service is also available through the Epic Online Services (EOS) SDK APIs. See
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface">EOS &gt; Voice Interface</a>
+				documentation for more information.</p>
+			<p>The EOS Voice Interface helps you create and manage voice chat rooms between your users. They can communicate one-on-one or in groups across multiple platforms, during a match, or in your application’s lobby.</p>
+			<p>You can use the Voice Web APIs in place of the EOS SDK to create trusted server services that implement custom room management and authorization. Before calling the Voice Web APIs, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/web-api-ref/web-api-introduction">Web API Introduction</a>
+					for standards</li>
+				<li>
+					<a href="/docs/web-api-ref/connect-web-api">Connect Web APIs</a>
+					for authentication</li>
+				<li>
+					<a href="/docs/web-api-ref/web-api-error-codes-responses">Web API Error Codes and Responses</a>
+				</li>
+			</ul>
+			<p>Just like the EOS SDK Voice Interface (documentation:
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface">Voice Interface</a>), the Voice Web APIs are intended for use on a
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface/voice-overview#voice-with-a-trusted-server-application">trusted server</a>
 				and require a policy with
 				<strong>userRequired</strong>
 				disabled.</p>
@@ -57,7 +66,7 @@
 				<h3 id="policy">Policy</h3>
 			</div>
 			<p>The client must have the
-				<a href="/docs/game-services/real-time-communication-interface/voice#policy-configurations">Voice:createRoomToken policy</a>.</p>
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface/voice-overview#policy-configurations">Voice:createRoomToken policy</a>.</p>
 			<div>
 				<h3 id="room-tokens">Room Tokens</h3>
 			</div>
@@ -208,7 +217,7 @@
 					</tr>
 					<tr>
 						<td>
-							<code>clientIP</code>
+							<code>clientIp</code>
 						</td>
 						<td>String</td>
 						<td>IP address of the player (also known as the "participant"). The service uses this data to select a server for the voice session that is close to the player's location. If there is no IP address provided, the service chooses a server in a default location. This might result in a poor player experience: the server might not be close to the player's location which might result in the player experiencing high network latency during the voice session.</td>
@@ -642,67 +651,72 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#voice-web-api-endpoint">Voice Web API Endpoint</a>
-					</li>
-					<li>
-						<a href="#creating-room-tokens">Creating Room Tokens</a>
-					</li>
-					<li>
-						<a href="#policy">Policy</a>
-					</li>
-					<li>
-						<a href="#room-tokens">Room Tokens</a>
-					</li>
-					<li>
-						<a href="#authorization">Authorization</a>
-					</li>
-					<li>
-						<a href="#request">Request</a>
-					</li>
-					<li>
-						<a href="#example-request">Example Request</a>
-					</li>
-					<li>
-						<a href="#response">Response</a>
-					</li>
-					<li>
-						<a href="#example-response">Example Response</a>
-					</li>
-					<li>
-						<a href="#removing-a-participant">Removing a Participant</a>
-					</li>
-					<li>
-						<a href="#request-1">Request</a>
-					</li>
-					<li>
-						<a href="#example-request-1">Example Request</a>
-					</li>
-					<li>
-						<a href="#response-1">Response</a>
-					</li>
-					<li>
-						<a href="#example-response-1">Example Response</a>
-					</li>
-					<li>
-						<a href="#modifying-a-participant">Modifying a Participant</a>
-					</li>
-					<li>
-						<a href="#request-2">Request</a>
-					</li>
-					<li>
-						<a href="#example-request-2">Example Request</a>
-					</li>
-					<li>
-						<a href="#response-2">Response</a>
-					</li>
-					<li>
-						<a href="#example-response-2">Example Response</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#voice-web-api-endpoint">Voice Web API Endpoint</a>
+								</li>
+								<li>
+									<a href="#creating-room-tokens">Creating Room Tokens</a>
+								</li>
+								<li>
+									<a href="#policy">Policy</a>
+								</li>
+								<li>
+									<a href="#room-tokens">Room Tokens</a>
+								</li>
+								<li>
+									<a href="#authorization">Authorization</a>
+								</li>
+								<li>
+									<a href="#request">Request</a>
+								</li>
+								<li>
+									<a href="#example-request">Example Request</a>
+								</li>
+								<li>
+									<a href="#response">Response</a>
+								</li>
+								<li>
+									<a href="#example-response">Example Response</a>
+								</li>
+								<li>
+									<a href="#removing-a-participant">Removing a Participant</a>
+								</li>
+								<li>
+									<a href="#request-1">Request</a>
+								</li>
+								<li>
+									<a href="#example-request-1">Example Request</a>
+								</li>
+								<li>
+									<a href="#response-1">Response</a>
+								</li>
+								<li>
+									<a href="#example-response-1">Example Response</a>
+								</li>
+								<li>
+									<a href="#modifying-a-participant">Modifying a Participant</a>
+								</li>
+								<li>
+									<a href="#request-2">Request</a>
+								</li>
+								<li>
+									<a href="#example-request-2">Example Request</a>
+								</li>
+								<li>
+									<a href="#response-2">Response</a>
+								</li>
+								<li>
+									<a href="#example-response-2">Example Response</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

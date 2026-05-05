@@ -1,0 +1,301 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Modify a Lobby</h1>
+			<h2>How to modify lobby and lobby member properties.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>A lobby owner can modify a lobby or a member can change their user information by calling
+				<code>EOS_Lobby_UpdateLobbyModification</code>
+				to acquire a lobby modification handle (type
+				<code>EOS_HLobbyModification</code>).</p>
+			<div>
+				<h2 id="change-ownership">Change Ownership</h2>
+			</div>
+			<p>The owner may promote another member of the lobby to owner status by calling
+				<code>EOS_Lobby_PromoteMember</code>. A lobby can only have one owner, so the caller loses owner status in the process. All members will receive notification of this event.</p>
+			<div>
+				<h2 id="lobby-and-lobby-member-properties">Lobby and Lobby Member Properties</h2>
+			</div>
+			<p>The lobby and each member can have application-specific, key-value attributes, supported by the
+				<code>EOS_Lobby_Attribute</code>
+				data type. These attributes must be represented as numerical, string, or boolean data. The
+				<code>EOS_Lobby_Attribute</code>
+				data structure contains this information.</p>
+			<p>Each lobby attribute and each lobby member attribute can either have a public visibility or a private visibility. See the table below for more information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Visibility</th>
+						<th>Lobby Attribute</th>
+						<th>Lobby Member Attribute</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>Public</code>
+						</td>
+						<td>Data is visible to all players (including players outside the lobby).</td>
+						<td>Data is only visible to players inside the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Private</code>
+						</td>
+						<td>Data is visible to only the owner of the lobby. Note that if the lobby owner changes, the new owner does not inherit this data.</td>
+						<td>Data is visible to only the player that the lobby member attribute data belongs to.</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Contents</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>Key</code>
+						</td>
+						<td>This is the identifying string for the attribute. The system will compare against this string when you search for an attribute.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Value</code>
+						</td>
+						<td>This is the numerical, string, or boolean data associated with
+							<code>Key</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ValueType</code>
+						</td>
+						<td>This indicates the type of data that
+							<code>Value</code>
+							contains.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Visibility</code>
+						</td>
+						<td>This is the attribute advertised or simply stored locally with the session
+							<code>EOS_ELobbyAttributeVisibility</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>A single user within a lobby, or the lobby itself, can have at most
+				<code>EOS_LOBBYMODIFICATION_MAX_ATTRIBUTES</code>
+				attributes. Attribute names (in the
+				<code>Key</code>) field must not exceed<code>EOS_LOBBYMODIFICATION_MAX_ATTRIBUTE_LENGTH</code>
+				characters.</p>
+			<p>The current lobby owner can make changes to the lobby through the following functions:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Effect</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_LobbyModification_SetPermissionLevel</code>
+						</td>
+						<td>Use this to set the lobby's Permission Level.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LobbyModification_SetMaxMembers</code>
+						</td>
+						<td>This function changes the maximum number of users who can be in the lobby at the same time. The acceptable range for this value is between the number of users currently in the lobby and
+							<code>EOS_LOBBY_MAX_LOBBY_MEMBERS</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LobbyModification_AddAttribute</code>
+						</td>
+						<td>This adds a new key-value pair to the lobby data.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LobbyModification_RemoveAttribute</code>
+						</td>
+						<td>This removes a key-value pair from the lobby data.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Any connected user can modify their own data with the following functions:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Effect</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_LobbyModification_AddMemberAttribute</code>
+						</td>
+						<td>Add a new key-value pair to a specific member of the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LobbyModification_RemoveMemberAttribute</code>
+						</td>
+						<td>Remove a key-value pair to a specific member of the lobby.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>After making all desired attribute modifications, you must commit those changes to the lobby for them to take effect. Do so by calling
+				<code>EOS_Lobby_UpdateLobby</code>. When the operation finishes, the modifications will have been made and other lobby members will receive notification. You also receive a call to your callback function.</p>
+			<div>
+				<h2 id="event-notifications">Event Notifications</h2>
+			</div>
+			<p>Users have a persistent connection to the lobby and are notified of events that happen during a lobby's lifetime. Registering for a notification can be done at startup since enough information is provided with each callback to fully describe the lobby affected.</p>
+			<div>
+				<h3 id="lobby-data-update">Lobby Data Update</h3>
+			</div>
+			<p>Any time the lobby owner makes a change to the properties of the lobby, all lobby members receive a notification. The notification simply states that something has changed. The game should evaluate all the available data in the lobby and reapply it to the game.</p>
+			<div>
+				<h3 id="user-data-update">User Data Update</h3>
+			</div>
+			<p>Any time a lobby member makes a change to the properties of their own data, all lobby members receive a notification. The notification simply states that something has changed. The game should evaluate all the available data for the lobby member and reapply it to the game.</p>
+			<div>
+				<h3 id="lobby-member-status">Lobby Member Status</h3>
+			</div>
+			<p>The following activities of users in the lobby cause notifications to go out to all other users in the lobby as they occur:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Event type</th>
+						<th>Meaning</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_LMS_JOINED</code>
+						</td>
+						<td>A new user has joined the lobby; expect a lobby member update shortly afterward.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LMS_LEFT</code>
+						</td>
+						<td>An existing user has left the lobby and their specific data has been removed.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LMS_DISCONNECTED</code>
+						</td>
+						<td>An existing user unexpectedly left the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LMS_KICKED</code>
+						</td>
+						<td>The lobby owner removed a specific user from the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LSM_PROMOTED</code>
+						</td>
+						<td>An existing user was promoted either explicitly by the previous owner or implicitly when the lobby owner left the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LMS_CLOSED</code>
+						</td>
+						<td>The lobby has closed either because it was destroyed by the owner, or there was an error.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="permission-levels">Permission Levels</h2>
+			</div>
+			<p>A lobby's Permission Level controls the conditions that users can discover and join the lobby. The owner can change these at any time by calling
+				<code>EOS_LobbyModification_SetPermissionLevel</code>. The following settings are available:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Permission Level (macro)</th>
+						<th>Lobby Behavior</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_LPL_PUBLICADVERTISED</code>
+						</td>
+						<td>This is a public lobby; any user can find or use it at any time as long as it isn't full.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LPL_JOINVIAPRESENCE</code>
+						</td>
+						<td>This lobby is not private, and it does not appear in searches. A friend can join their friend in the lobby through the Social Overlay. Any user that knows the lobby ID can join the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_LPL_INVITEONLY</code>
+						</td>
+						<td>This type of lobby is private, and it does not appear in searches. Users can only join the lobby through an invitation from a user already inside.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#change-ownership">Change Ownership</a>
+								</li>
+								<li>
+									<a href="#lobby-and-lobby-member-properties">Lobby and Lobby Member Properties</a>
+								</li>
+								<li>
+									<a href="#event-notifications">Event Notifications</a>
+								</li>
+								<li>
+									<a href="#lobby-data-update">Lobby Data Update</a>
+								</li>
+								<li>
+									<a href="#user-data-update">User Data Update</a>
+								</li>
+								<li>
+									<a href="#lobby-member-status">Lobby Member Status</a>
+								</li>
+								<li>
+									<a href="#permission-levels">Permission Levels</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

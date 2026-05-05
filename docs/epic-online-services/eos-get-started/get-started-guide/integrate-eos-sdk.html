@@ -1,0 +1,802 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Get Started With EOS — 3. Set Up the EOS SDK</h1>
+			<h2>Step-by-step guide on how to integrate the EOS SDK into your game code.</h2>
+			<div>
+				<div>34 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-visual-studio">2. Create and Configure Your Visual Studio Project</a>
+			</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>To use Epic Online Services (EOS) in your game (or other software application), you must download and integrate the EOS SDK into your game.</p>
+							<p>You can integrate the EOS SDK into your game after you have completed the precursor steps listed in
+								<em>Before You Start</em>
+								below.</p>
+							<p>
+								<strong>Note</strong>: This guide does not cover authentication, and you do not have to set up player authentication to follow along with this guide. However, to use the full functionality of the EOS SDK, you must set up player authentication. For more information, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+								</li>
+								<li>
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>
+								</li>
+							</ul>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you follow this section of the guide, complete the following sections:</p>
+							<ol>
+								<li>
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk">Set Up Your Account and Download the SDK</a>
+								</li>
+								<li>
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-visual-studio">Create and Configure Your Visual Studio Project</a>
+									(optional but recommended)</li>
+							</ol>
+							<p>
+								<strong>Note</strong>: The EOS SDK is not thread-safe. You must make all EOS SDK API calls from the main thread. For details on the conventions and limitations of the EOS SDK, including thread safety, see the
+								<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-safety">EOS SDK Conventions and Limitations</a>
+								documentation.</p>
+							<div>
+								<h2 id="integrate-the-eos-sdk">Integrate the EOS SDK</h2>
+							</div>
+							<p>Complete the following steps to integrate the EOS SDK into your game:</p>
+							<ul>
+								<li>
+									<a href="#step-a-create-a-data-structure-to-hold-your-games-credentials">Step A: Create a Data Structure to Hold Your Game’s Credentials</a>
+								</li>
+								<li>
+									<a href="#step-b-create-a-class-to-manage-the-eos-sdk">Step B: Create a Class to Manage the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-initialize-eos-sdk-function">Step C: Implement Your Initialize EOS SDK Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-create-platform-instance-function">Step D: Implement Your Create Platform Instance Function</a>
+								</li>
+								<li>
+									<a href="#step-e-create-an-instance-of-your-data-structure-and-call-your-new-functions">Step E: Create an Instance of Your Data Structure and Call Your New Functions</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note</strong>: There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-create-a-data-structure-to-hold-your-games-credentials">Step A: Create a Data Structure to Hold Your Game’s Credentials</h3>
+							</div>
+							<p>Create a data structure to hold the credentials and other configuration data for your game.</p>
+							<p>Note that in the API, Developer Portal, and code snippets, your game is called a “product”.</p>
+							<p>You can find the credentials and configuration data that the data structure uses on the Developer Portal. See the
+								<a href="#where-to-find-the-credentials">Where to Find the Credentials</a>
+								section below for guidance.</p>
+							<p>Example:</p>
+							<p>
+								<code>EOSSdkConfig.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h4 id="where-to-find-the-credentials">Where to Find the Credentials</h4>
+							</div>
+							<p>
+								<strong>Developer Portal Product Settings Page</strong>
+								<br>
+								You can find the following credentials for your game in the Developer Portal’s Product Settings page:</p>
+							<ul>
+								<li>Product ID</li>
+								<li>Sandbox ID</li>
+								<li>Deployment ID</li>
+								<li>Client ID</li>
+								<li>Client secret</li>
+							</ul>
+							<p>To go to the Product Settings page:</p>
+							<ol>
+								<li>
+									<p>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+										<strong>Your Product</strong>, click the name of your product.</p>
+								</li>
+								<li>
+									<p>In the left navigation, click
+										<strong>Product Settings</strong>.</p>
+								</li>
+								<li>
+									<p>The
+										<strong>SDK Download &amp; Credentials</strong>
+										tab is selected by default. In this tab, scroll down to the
+										<strong>EOS SDK Credentials</strong>
+										heading.</p>
+									<p>
+										<strong>Note</strong>: There is no security risk if you store your game's client ID and client secret credentials locally in your game code. However, this is not the case for trusted server clients. Keep client secrets for trusted-server clients secure because they might expose functionality associated with your game to a broader audience than your game requires.</p>
+								</li>
+							</ol>
+							<p>
+								<strong>Encryption key</strong>
+								<br>
+								If you use the Player Data Storage Interface or the Title Data Storage Interface in your game, you must also specify the
+								<code>EncryptionKey</code>
+								platform option in the EOS API
+								<a href="/docs/api-ref/functions/eos-platform-create">
+									<code>EOS_Platform_Create()</code>
+									function</a>. You define this value.</p>
+							<p>For more information on the Player Data Storage Interface or the Title Data Storage Interface, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/player-and-game-data/player-data-storage-interface">Player Data Storage Interface</a>
+								</li>
+								<li>
+									<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">Title Storage Interface</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Epic Games Store Distribution: Sandbox IDs and Deployment IDs</strong>
+								<br>
+								If you distribute your game on the Epic Games Store, do not hardcode its sandbox ID or deployment ID in the credentials data structure. Instead, retrieve these from command-line arguments. You cannot distribute your game on the Epic Games Store using Dev Sandbox IDs or Dev Deployment IDs.</p>
+							<p>For guidance on using the command-line arguments provided by the Epic Games Store’s Epic Games Launcher, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-games-store/store-presence/manage-artifacts#step-5-select-deployment-id-for-epic-online-services-only">Epic Games Store &gt; Store Presence &gt; Manage Artifacts &gt; Step 5: Select Deployment ID (for Epic Online Services Only)</a>
+								</li>
+								<li>
+									<a href="/docs/epic-games-store/testing-guide#sandboxdeployment-id-handling-epic-games-store-publishing-tools-only">Epic Games Store &gt; Epic Games Store Testing Guide &gt; Sandbox/Deployment ID Handling (Epic Games Store publishing tools only)</a>
+								</li>
+							</ul>
+							<p>If you distribute your game on a different storefront, you can hardcode the live IDs in the credentials data structure.</p>
+							<div>
+								<h3 id="step-b-create-a-class-to-manage-the-eos-sdk">Step B: Create a Class to Manage the EOS SDK</h3>
+							</div>
+							<p>Create a class to manage the EOS SDK in your game. This class initializes the EOS SDK and integrates the EOS Platform Interface into your game by creating a Platform Interface instance. Your game must have a Platform Interface instance to access any EOS services.</p>
+							<p>The Platform Interface does not provide a service. Instead, it facilitates your game’s integration with all other EOS services. You use the Platform Interface to access the other EOS interfaces and each of the other interfaces provides a service.<br>
+								For more information, see the following documentation:</p>
+							<ul>
+								<li>For a list of the available EOS interfaces, see the documentation:
+									<a href="/docs/epic-online-services/eos-overview">EOS Overview</a>.</li>
+								<li>For additional information about the Platform Interface, see the documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">EOS Platform Interface</a>. (Note that you do not need this additional information to follow this guide.)</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+							</p>
+							<ul>
+								<li>To use any EOS service in your game, you must first integrate the Platform Interface.</li>
+								<li>The Platform Interface is not related to the games platforms your game clients run on (such as Xbox, PlayStation, or Nintendo Switch).</li>
+								<li>The EOS SDK is not thread-safe. You must make all EOS SDK API calls from the main thread. For details on the conventions and limitations of the EOS SDK, including thread safety, see the
+									<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-safety">EOS SDK Conventions and Limitations</a>
+									documentation.</li>
+								<li>For more information on the available EOS services, see the
+									<a href="/docs/epic-online-services/eos-overview">EOS Overview</a>
+									documentation.</li>
+							</ul>
+							<p>Example:</p>
+							<p>
+								<code>PlatformManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<code>PlatformManager.cpp</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's Happening in the Code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your platform manager’s .h file (<code>PlatformManager.h</code>
+																	in the example above), create a class to integrate the Platform Interface into your game.<br>
+																	In your platform manager class, declare a public getter function that returns
+																	<code>PlatformHandle</code>. You will use this to access the PlatformHandle outside of the PlatformManager class provided in this guide.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to initialize the EOS SDK in your game using your game’s credentials and other configuration data from the Developer Portal.<br>
+																	The example function includes a pointer to the
+																	<code>EOSSdkConfig</code>
+																	data structure that you created in
+																	<em>Step A: Create a Data Structure to Hold Your Game’s Credentials</em>, as a parameter. In the example, the function is called
+																	<code>InitializeEOSSdk</code>.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to create the platform instance using your game’s credentials and other configuration data from the Developer Portal.<br>
+																	The example function includes a pointer to the EOSSdkConfig data structure that you created in
+																	<em>Step A: Create a Data Structure to Hold Your Game’s Credentials</em>, as a parameter. In the example, the function is called
+																	<code>CreatePlatform</code>.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private variable to hold the Platform Interface handle. This platform handle is necessary to use any EOS services.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your platform manager’s .cpp file (<code>PlatformManager.cpp</code>
+																	in the example), define the destructor for the platform manager class. In it, call the EOS API
+																	<a href="/docs/api-ref/functions/eos-platform-release">
+																		<code>EOS_Platform_Release</code>
+																		function</a>. To release the platform instance, the function call must include the platform handle that you defined in the previous step.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-initialize-eos-sdk-function">Step C: Implement Your Initialize EOS SDK Function</h3>
+							</div>
+							<p>To integrate the EOS SDK into your game, you must initialize the EOS SDK. During initialization, you do the following:</p>
+							<ul>
+								<li>Identify your game details<br>
+									For example, provide your game’s name and version. Note that in the API, Developer Portal, and code snippets, your game is called a “product”.</li>
+								<li>Configure platform-specific initialization options.</li>
+							</ul>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note</strong>: We strongly recommend that you implement EOS Logging in your game immediately after you initialize the EOS SDK. This ensures that you receive all log messages from the EOS SDK. (Documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's Happening in the Code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your platform manager class, implement the function to initialize the EOS SDK. In the example, it's called
+																	<code>InitializeEOSSdk</code>. The example function includes a pointer to the EOSSdkConfig data structure that you created in
+																	<em>Step A: Create a Data Structure to Hold Your Game’s Credentials</em>, as a parameter.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-initialize-options">EOS_InitializeOptions data structure</a>
+																	to hold the initialization options for the EOS SDK.<br>
+																	In the example, it’s called
+																	<code>EOSSdkOptions</code>.The
+																	<code>EOSSdkOptions.ProductName</code>
+																	is assigned the
+																	<code>GameName</code>
+																	field from the
+																	<code>EOSSdkConfig</code>
+																	data structure passed by pointer to this function.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-initialize">EOS_Initialize function</a>
+																	to initialize the EOS SDK with your options. The function takes a reference to the initialize options for the EOS SDK as an argument. You must call this function to initialize the EOS SDK first, before you call any other EOS SDK functions. You can only call this function once.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your initialize EOS SDK function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">EOS_EResult Enum</a>
+																	to confirm that the initialization is successful.<br>
+																	The example prints a success statement if the EOS SDK is successfully initialized. If the
+																	<a href="/docs/api-ref/functions/eos-initialize">EOS_Initialize function</a>
+																	call is not successful, the example prints a failure statement.<br>
+																	If you get a failure statement when you run your code, you must handle any errors.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-implement-your-create-platform-instance-function">Step D: Implement Your Create Platform Instance Function</h3>
+							</div>
+							<p>After you initialize the EOS SDK, you must create a Platform Interface instance (also known as “create the platform instance”) to configure the options for your game. This lets you do several things, including the following:</p>
+							<ul>
+								<li>
+									<p>Retrieve handles to access the other EOS interfaces.</p>
+								</li>
+								<li>
+									<p>Control the EOS SDK lifecycle (for example, shut down the EOS SDK).</p>
+								</li>
+								<li>
+									<p>Keep the per-frame update code running (known as “ticking”). For more information on ticking, see the documentation:
+										<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps#set-up-ticking">EOS Get Started Guide &gt; Next Steps &gt; Set Up Ticking</a>.</p>
+								</li>
+							</ul>
+							<p>For more information on the EOS Platform Interface and its functionality, see the documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>.</p>
+							<p>In your platform manager class, implement the function to create the platform instance for your game.</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>EOS_PF_DISABLE_OVERLAY Flag</strong>
+								<br>
+								This guide provides information on how to set up a simple command-line project that demonstrates the implementation of EOS services without graphics.<br>
+								The EOS Overlay requires graphics. The
+								<code>EOS_PF_DISABLE_OVERLAY</code>
+								flag disables the EOS Overlay to prevent additional errors and warnings in the EOS SDK logs. If you choose to implement the EOS Overlay later, you must remove this flag.</p>
+							<p>If you want to use the EOS Overlay, your game requires graphics rendering, which is outside the scope of this guide.<br>
+								For more information, see the documentation:
+								<a href="/docs/epic-online-services/accounts-and-social/eos-overlay-overview">EOS Overlay Overview</a>.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's Happening in the Code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your platform manager class, implement the function to create a Platform Interface instance (also known as “create the platform instance”). In the example, it’s called
+																	<code>CreatePlatformInstance</code>. The example function includes a pointer to the
+																	<code>EOSSdkConfig</code>
+																	data structure that you created in
+																	<em>Step A: Create a Data Structure to Hold Your Game’s Credentials</em>, as a parameter.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-platform-options">EOS_Platform_Options data structure</a>
+																	to hold the platform options for the
+																	<a href="/docs/api-ref/functions/eos-platform-create">EOS_Platform_Create function</a>.<br>
+																	In the example, it’s called
+																	<code>PlatformOptions</code>. The example uses the configuration data from the
+																	<code>EOSSdkConfig</code>
+																	data structure parameter to assign several of these options.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-platform-create">EOS_Platform_Create function</a>
+																	to create the platform instance.<br>
+																	The function takes a reference to the platform options as an argument. This function returns a handle to the platform instance. Assign the handle to the class variable
+																	<code>PlatformHandle</code>.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<code>PlatformHandle</code>
+																	variable to confirm that the platform is created successfully. If
+																	<code>PlatformHandle</code>
+																	has been assigned a value and is not null, the platform instance is successfully created. The example prints a success statement if the platform handle has a value. If
+																	<code>PlatformHandle</code>
+																	is null, the example prints a failure message. If you get a failure statement when you run your code, you must handle any errors.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-e-create-an-instance-of-your-data-structure-and-call-your-new-functions">Step E: Create an Instance of Your Data Structure and Call Your New Functions</h3>
+							</div>
+							<p>After you define your
+								<code>EOSSdkConfig</code>
+								data structure and implement the
+								<code>InitializeEOSSdk</code>
+								and
+								<code>CreatePlatformInstance</code>
+								functions, you must create an instance of your data structure and call the functions in your game code.</p>
+							<p>If you followed section
+								<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-visual-studio">2. Create and Configure Your Visual Studio Project</a>
+								of this guide, you can call the
+								<code>InitializeEOSSdk</code>
+								and
+								<code>CreatePlatformInstance</code>
+								functions from your
+								<code>main</code>
+								function in your
+								<code>main.cpp</code>
+								file.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>After you call the
+								<a href="/docs/api-ref/functions/eos-platform-create">
+									<code>EOS_Platform_Create</code>
+									function</a>, on success,
+								<code>PlatformInterface</code>
+								contains the newly-created platform instance and a success message prints to the console. You must use the
+								<code>PlatformInterface</code>
+								property in your game code to access EOS interfaces.<br>
+								If the<code>PlatformInterface</code>
+								is null, a failure message prints to the console.</p>
+							<p>
+								<strong>Tip</strong>: If you see a failure message,  confirm that you have correctly defined the
+								<a href="/docs/api-ref/structs/eos-platform-options">
+									<code>EOS_Platform_Options</code>
+									data structure</a>
+								passed by reference into the
+								<a href="/docs/api-ref/functions/eos-platform-create">
+									<code>EOS_Platform_Create</code>
+									function</a>.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<p>
+								<code>EOSSdkConfig.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<code>PlatformManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<code>PlatformManager.cpp</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<code>main.cpp</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="troubleshooting">Troubleshooting</h2>
+							</div>
+							<p>If you followed the steps in this guide in section
+								<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-visual-studio">2. Create and Configure Your Visual Studio Project</a>
+								and experience issues with setting up the EOS SDK, here are some possible troubleshooting solutions.</p>
+							<table>
+								<thead>
+									<tr>
+										<th>Issue</th>
+										<th>Explanation</th>
+										<th>Resolution</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The build fails during the linking step with the error
+											<code>LNK1104: cannot open file &lt;FILE_NAME_ENTERED&gt;.lib</code>.</td>
+										<td>The library directory path or
+											<code>.lib</code>
+											filename is incorrect.</td>
+										<td>Confirm that the directory path and the
+											<code>.lib</code>
+											filename in the
+											<code>CMakeLists.txt</code>
+											file exactly matches the file in your EOS SDK’s
+											<code>Lib</code>
+											directory. Also, make sure the
+											<code>.lib</code>
+											you select corresponds to your operating system.</td>
+									</tr>
+									<tr>
+										<td>When including an EOS SDK header file ( for example,
+											<code>#include &lt;eos_sdk.h&gt;</code>), the compiler shows this error:
+											<code>E1696: cannot open source file "eos_sdk.h"</code>.</td>
+										<td>The include directory path is invalid or missing in the project properties.</td>
+										<td>Confirm that the path for the EOS SDK's
+											<code>Include</code>
+											directory is correctly listed in the
+											<code>target_include_directories</code>
+											call in the
+											<code>CMakeLists.txt</code>
+											file.</td>
+									</tr>
+									<tr>
+										<td>The project compiles and builds, but it crashes during runtime when your game code calls an EOS SDK function (for example, the
+											<a href="/docs/api-ref/functions/eos-initialize">
+												<code>EOS_Initialize</code>
+												function</a>). The crash gives a popup message similar to the following:
+											<code>The code execution cannot proceed because EOSSDK-Win64-Shipping.dll was not found. Reinstalling the program may fix this problem.</code>
+										</td>
+										<td>The EOS SDK
+											<code>.dll</code>
+											file (for example,
+											<code>EOSSDK-Win64-Shipping.dll</code>) is not copied into your output directory.</td>
+										<td>Confirm that both the EOS SDK directory path and the
+											<code>.dll</code>
+											file name exactly match the file in your EOS SDK’s
+											<code>SDK/Bin</code>
+											directory. Also, ensure that the CMake logic to automatically copy the
+											<code>.dll</code>
+											file in
+											<code>CMakeLists.txt</code>
+											matches the logic provided in
+											<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-visual-studio">2. Create and Configure Your Visual Studio Project</a>. Alternatively, manually copy and paste the
+											<code>.dll</code>
+											file into your project’s
+											<code>build</code>
+											directory.</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-initialize">
+										<code>EOS_Initialize()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-initialize-options">
+												<code>EOS_InitializeOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-platform-create">
+										<code>EOS_Platform_Create()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-platform-options">
+												<code>EOS_Platform_Options</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-platform-release">
+										<code>EOS_Platform_Release()</code>
+										function</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-shutdown">
+										<code>EOS_Platform_Shutdown()</code>
+										function</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-platform-tick">
+										<code>EOS_Platform_Tick()</code>
+										function</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps">4. Next Steps</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#integrate-the-eos-sdk">Integrate the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#step-a-create-a-data-structure-to-hold-your-games-credentials">Step A: Create a Data Structure to Hold Your Game’s Credentials</a>
+								</li>
+								<li>
+									<a href="#where-to-find-the-credentials">Where to Find the Credentials</a>
+								</li>
+								<li>
+									<a href="#step-b-create-a-class-to-manage-the-eos-sdk">Step B: Create a Class to Manage the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-initialize-eos-sdk-function">Step C: Implement Your Initialize EOS SDK Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-create-platform-instance-function">Step D: Implement Your Create Platform Instance Function</a>
+								</li>
+								<li>
+									<a href="#step-e-create-an-instance-of-your-data-structure-and-call-your-new-functions">Step E: Create an Instance of Your Data Structure and Call Your New Functions</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#troubleshooting">Troubleshooting</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

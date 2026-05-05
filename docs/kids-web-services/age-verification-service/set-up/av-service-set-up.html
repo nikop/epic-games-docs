@@ -1,0 +1,231 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Set Up the Age Verification Service</h1>
+			<h2>How to get started with the Age Verification Service.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<h2 id="accept-the-age-verification-service-terms">Accept the Age Verification Service Terms</h2>
+			</div>
+			<p>Before you can set up the Age Verification (AV) Service for your Epic Games account, your Technical Account Manager must first activate the service. This will enable you to configure the AV Service within the Developer Portal and prompt you to accept the terms of service.</p>
+			<p>For your reference, the terms are viewable on the Developer Terms Hub website at
+				<a href="https://www.kidswebservices.com/en-US/developer-terms-hub">kidswebservices.com/en-US/developer-terms-hub</a>. They are as follows:</p>
+			<ul>
+				<li>KWS General Terms: (<a href="https://www.kidswebservices.com/general-terms">kidswebservices.com/general-terms</a>) (including any terms incorporated therein by reference).</li>
+			</ul>
+			<p>The steps are as follows:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click the name of your organization (shown as "Your..." in the following image):</p>
+				</li>
+			</ol>
+			<center>
+				<div tabindex="0" aria-label="Dev Portal Organization Nav image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Dev Portal Organization Nav" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>Your organization name in the Developer Portal left navigation.
+					</figcaption>
+				</div>
+			</center>
+			<ol start="3">
+				<li>
+					<p>In the
+						<strong>Choose your organization</strong>
+						panel, click the name of your organization and click
+						<strong>Continue</strong>.</p>
+				</li>
+				<li>
+					<p>To customize a specific product, select the name of the product in the left navigation under
+						<strong>Your Products</strong>. Otherwise, proceed to the next step.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>On the Kids Web Services page, click
+						<strong>Get started now</strong>
+						in the
+						<strong>Age Verification</strong>
+						panel.</p>
+				</li>
+				<li>
+					<p>Read and follow the on-screen prompts to accept the service terms.</p>
+				</li>
+			</ol>
+			<p>In the Developer Portal, each organization has a test environment and a production environment, each with its own configuration and integration details. The test environment enables you to thoroughly test the AV Service before setting it up in the production environment.</p>
+			<div>
+				<h2 id="choose-verification-methods">Choose Verification Methods</h2>
+			</div>
+			<p>In your Age Verification Service configuration, you must choose which verification methods to make available to users (see documentation:
+				<a href="/docs/kids-web-services/age-verification-service/av-service-verification-methods">Age Verification Service Verification Methods</a>).</p>
+			<p>The methods KWS presents to the user on the verification Web UI screen also depend on the user's location, which you pass to the AV Service API.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>You must choose enough verification methods to provide global coverage.</li>
+				<li>Enabling more verification methods gives users more options to verify their age, increasing the chances of successful verification.</li>
+			</ul>
+			<p>The following example shows how the AV Service verification Web UI screen displays your selected methods to users:</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="verification-method-selection-web-ui-screen">Verification Method Selection Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Verification Method Selection Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Verification Method Selection Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>A Web UI screen prompts users to choose their preferred verification method. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>You can choose verification methods in two ways. Either:</p>
+			<ul>
+				<li>Option A — For all the products in your organization.</li>
+				<li>Option B — For an individual product.</li>
+			</ul>
+			<p>For more information about these options, see the documentation:
+				<a href="/docs/kids-web-services/kws-get-started#step-3--choose-to-set-up-kws-for-your-organization-or-product">Choose to Set Up KWS for Your Organization or Product</a>.</p>
+			<p>For both options, you choose the verification methods in the Developer Portal, on the
+				<strong>Age Verification</strong>
+				page's
+				<strong>Verification Methods</strong>
+				tab, but the way you access the tab depends on which option you use.</p>
+			<p>To configure the verification methods, follow the steps below:</p>
+			<div>
+				<h3 id="step-1--go-to-the-age-verification-page">Step 1 — Go to the Age Verification Page</h3>
+			</div>
+			<div>
+				<h4 id="option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Age Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h4 id="option-b-for-an-individual-product">Option B: For an individual product</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>On the left navigation under
+						<strong>Your Products</strong>, select the name of the product you want to configure.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							If you can’t see the product you want, make sure you are working in the correct organization.</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Age Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-2--choose-verification-methods">Step 2 — Choose Verification Methods</h3>
+			</div>
+			<p>On the
+				<strong>Age Verification</strong>
+				page, click the
+				<strong>Verification Methods</strong>
+				tab.</p>
+			<p>
+				<strong>Note:</strong>
+				All verification methods are enabled by default, but you must click Publish to Test to complete this step even if you make no changes.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#accept-the-age-verification-service-terms">Accept the Age Verification Service Terms</a>
+								</li>
+								<li>
+									<a href="#choose-verification-methods">Choose Verification Methods</a>
+								</li>
+								<li>
+									<a href="#verification-method-selection-web-ui-screen">Verification Method Selection Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#step-1--go-to-the-age-verification-page">Step 1 — Go to the Age Verification Page</a>
+								</li>
+								<li>
+									<a href="#option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</a>
+								</li>
+								<li>
+									<a href="#option-b-for-an-individual-product">Option B: For an individual product</a>
+								</li>
+								<li>
+									<a href="#step-2--choose-verification-methods">Step 2 — Choose Verification Methods</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,1022 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Presence Interface</h1>
+			<h2>Display a player's status (online, offline, playing) in a game.</h2>
+			<div>
+				<div>12 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Epic Account Service — authenticate players with the Auth Interface.</p>
+			</div>
+			<p>With the Presence Interface, an application can advertise its local player's status, known as presence, and query the presence of other players online. An application may also advertise transient data to others, in order to share more detailed information about the state of the local player. Users can only receive presence information about other users with whom they are
+				<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">friends</a>.</p>
+			<div>
+				<p>To use the Presence Interface, your game must be configured as an Epic Account Services application, and must obtain
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/eos-data-privacy-visibility">user consent</a>
+					to access Online Presence data. You can configure Epic Account Services on the
+					<a href="/docs/dev-portal">Developer Portal</a>, or learn more from the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services">EOS Epic Account Services</a>
+					documentation. Without Epic Account Services and user consent, you will still be able to initialize the EOS SDK and the Presence Interface, but all Presence Interface function calls to the back-end service will fail.</p>
+				<p>
+					<strong>Note</strong>: Your game is usually known as your "product" in the Developer Portal.</p>
+			</div>
+			<div>
+				<h2 id="manage-presence-information">Manage Presence Information</h2>
+			</div>
+			<p>To use the Presence Interface, you must acquire a handle of type
+				<code>EOS_HPresence</code>
+				from the
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+				function,
+				<code>EOS_Platform_GetPresenceInterface</code>. With this handle, you can download and cache presence information about other users on your friends list, or update your own presence.</p>
+			<div>
+				<h3 id="retrieve-and-cache-presence-information">Retrieve and Cache Presence Information</h3>
+			</div>
+			<p>To retrieve presence information about a user, call
+				<code>EOS_Presence_QueryPresence</code>
+				with an
+				<code>EOS_Presence_QueryPresenceOptions</code>
+				structure, an optional
+				<code>ClientData</code>
+				parameter, and a callback function. Initialize the
+				<code>EOS_Presence_QueryPresenceOptions</code>
+				with the following field values:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_QUERYPRESENCE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user making the request.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the user whose presence data you want to retrieve. This value must either match
+							<code>LocalUserId</code>, or be a friend of that user.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The callback function will receive the
+				<code>ClientData</code>
+				parameter you provide here, and will run following completion of the operation regardless of success or failure. The only exception to this is if the call fails locally due to the
+				<code>EOS_Presence_QueryPresenceOptions</code>
+				structure lacking any of the required information. In the event of failure due to lack of permission to view the target user's presence, the callback function's
+				<code>ResultCode</code>
+				field will be
+				<code>EOS_NotFound</code>. Any other value, aside from
+				<code>EOS_Success</code>, indicates an input or state failure, such as invalid parameters,
+				<code>LocalUserId</code>
+				not matching a local, logged-in user, or the local user being offline.</p>
+			<div>
+				<h3 id="update-presence-information">Update Presence Information</h3>
+			</div>
+			<p>There are two ways to update presence information in your local cache. The first is to call
+				<code>EOS_Presence_QueryPresence</code>
+				periodically, or shortly before accessing the cache. The second is to receive notification from the Presence Interface when a change has occurred. To enable this feature, call
+				<code>EOS_Presence_AddNotifyOnPresenceChanged</code>. This function requires an
+				<code>EOS_Presence_AddNotifyOnPresenceChangedOptions</code>
+				struct, a user-defined
+				<code>ClientData</code>
+				parameter, and a callback function of type
+				<code>EOS_Presence_OnPresenceChangedCallback</code>. The callback function will receive the
+				<code>ClientData</code>
+				parameter and the
+				<code>EOS_EpicAccountId</code>
+				of the user whose presence changed. Initialize the
+				<code>EOS_Presence_OnPresenceChangedCallback</code>
+				structure as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_ADDNOTIFYONPRESENCECHANGED_API_LATEST</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If successful,
+				<code>EOS_Presence_AddNotifyOnPresenceChanged</code>
+				will return a valid
+				<code>EOS_NotifcationId</code>. In the case of an error, it will return
+				<code>EOS_INVALID_NOTIFICATIONID</code>.</p>
+			<p>To deactivate this feature, call
+				<code>EOS_Presence_RemoveNotifyOnPresenceChanged</code>, passing the presence handle and notification ID as parameters. This function stops notifications to a handle previously registered with
+				<code>EOS_Presence_AddNotifyOnPresenceChanged</code>.</p>
+			<p>There can be multiple callbacks registered at a time. In this case all the callbacks will be called once the event occurs.</p>
+			<div>
+				<h3 id="examine-presence-information">Examine Presence Information</h3>
+			</div>
+			<p>Once
+				<code>EOS_Presence_QueryPresence</code>
+				has populated the cache with a user's presence information, you can begin examining it. To establish whether or not the cache contains a given user's presence information, call
+				<code>EOS_Presence_HasPresence</code>
+				with your
+				<code>EOS_HPresence handle</code>, and an
+				<code>EOS_Presence_HasPresenceOptions</code>
+				structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_HASPRESENCE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user making the request.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the user whose cached presence data you want to locate.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<code>EOS_Presence_HasPresence</code>
+				will return
+				<code>EOS_TRUE</code>
+				if it succeeds and finds data, or
+				<code>EOS_FALSE</code>
+				if it receives bad input or if the cache does not contain data for the target user.</p>
+			<p>
+				<code>EOS_Presence_CopyPresence</code>
+				provides copies of presence information from the cache. The Presence Interface will return data as a new
+				<a href="/docs/api-ref/structs/eos-presence-info">
+					<code>EOS_Presence_Info</code>
+				</a>
+				object. This function requires your Presence Interface handle, an
+				<code>EOS_Presence_CopyPresenceOptions</code>
+				structure, and an output parameter to hold your new
+				<code>EOS_Presence_Info</code>
+				object. Initialize the
+				<code>EOS_Presence_CopyPresenceOptions</code>
+				structure as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_COPYPRESENCE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user making the request.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the user whose cached presence data you want to copy.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If the Presence Interface successfully pulls a copy of the information from the cache,
+				<code>EOS_Presence_CopyPresence</code>
+				will return
+				<code>EOS_Success</code>
+				and fill out the
+				<code>EOS_Presence_Info</code>
+				pointer you provided with a copy of the target user's data. The caller owns this pointer, so the EOS SDK will never modify its contents or free the memory associated with it. Call
+				<code>EOS_Presence_Info_Release</code>
+				with the pointer when you no longer need this data to free it. Failure to do so will result in a memory leak.</p>
+			<p>
+				<code>EOS_Presence_GetJoinInfo</code>
+				provides an easy way to get the previously set Join Info string from a remote user's presence data.  For this function to succeed, the user's presence data must already be in the presence cache.  This function requires your Presence Interface handle, an
+				<code>EOS_Presence_GetJoinInfoOptions</code>
+				structure,
+				<code>OutBuffer</code>
+				set to a pointer to a char buffer, and
+				<code>InOutBufferLength</code>
+				set to the maximum length of the char buffer.  Initialize the
+				<code>EOS_Presence_GetJoinInfoOptions</code>
+				structure as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>Set this to EOS_PRESENCE_GETJOININFO_API_LATEST</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The EOS_EpicAccountId of the logged-in user making the request</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The EOS_EpicAccountId of the user whose Join Info you want to retrieve. This value must either be a logged-in Local User, or a Friend of LocalUserId.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The length of the
+				<code>OutBuffer</code>
+				char buffer is recommended to be
+				<code>EOS_PRESENCEMODIFICATION_JOININFO_MAX_LENGTH</code>, or it may be too short to store some values and will fail the request.</p>
+			<div>
+				<p>
+					<strong>Note:</strong>
+					Updates to presence information, even when using
+					<code>EOS_Presence_AddNotifyOnPresenceChanged</code>, will not be reflected in existing
+					<code>EOS_Presence_Info</code>
+					objects. This is because these objects are copies of cache data, not pointers to the cache, and because the Presence Interface does not own them and will not modify them after the initial copy.</p>
+			</div>
+			<div>
+				<h2 id="modify-local-presence">Modify Local Presence</h2>
+			</div>
+			<p>To modify a local user's presence, you must create an
+				<code>EOS_HPresenceModification</code>
+				handle, and set changes by calling one or more of the following functions:</p>
+			<ul>
+				<li>
+					<code>EOS_PresenceModification_SetStatus</code>
+				</li>
+				<li>
+					<code>EOS_PresenceModification_SetRawRichText</code>
+				</li>
+				<li>
+					<code>EOS_PresenceModification_SetData</code>
+				</li>
+				<li>
+					<code>EOS_PresenceModification_DeleteData</code>
+				</li>
+				<li>
+					<code>EOS_PresenceModification_SetJoinInfo</code>
+				</li>
+			</ul>
+			<div>
+				<p>
+					<strong>Note:</strong>
+					Changes are reflected after a call to
+					<code>EOS_Presence_SetPresence</code>
+					succeeds.</p>
+			</div>
+			<div>
+				<h3 id="create-a-presencemodification-handle">Create a PresenceModification Handle</h3>
+			</div>
+			<p>To modify a local user's presence, first create a
+				<code>PresenceModification</code>
+				handle by calling
+				<code>EOS_Presence_CreatePresenceModification</code>
+				with a valid
+				<code>EOS_HPresence</code>
+				handle, an initialized
+				<code>EOS_Presence_CreatePresenceModificationOptions</code>
+				struct, and a pointer to an invalid
+				<code>EOS_HPresenceModification</code>
+				handle. Initialize the
+				<code>EOS_Presence_CreatePresenceModificationOptions</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_CREATEPRESENCEMODIFICATION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>Valid local user in a logged-in state.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If successful, the
+				<code>EOS_Presence_CreatePresenceModification</code>
+				function returns
+				<code>EOS_EResult::EOS_Success</code>, and the
+				<code>OutPresenceModificationHandle</code>
+				will be initialized for use with functions in the
+				<code>EOS_PresenceModification</code>
+				sandbox. The resulting handle must also be released when it is no longer needed by calling the
+				<code>EOS_PresenceModification_Release</code>
+				method.</p>
+			<div>
+				<h3 id="make-changes-to-a-presencemodification">Make Changes to a PresenceModification</h3>
+			</div>
+			<p>With a valid EOS_HPresenceModification, you can build the update for a user's presence by calling functions within the
+				<code>EOS_PresenceModification</code>
+				function sandbox.</p>
+			<div>
+				<h4 id="modify-presence-status">Modify Presence Status</h4>
+			</div>
+			<p>To set a new status, invoke
+				<code>EOS_PresenceModification_SetStatus</code>
+				with a valid
+				<code>EOS_HPresenceModification</code>
+				handle, and initialize an
+				<code>EOS_PresenceModification_SetStatusOptions</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_SETSTATUS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Status</code>
+						</td>
+						<td>Valid
+							<code>EOS_Presence_EStatus</code>
+							value.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If successful,
+				<code>EOS_PresenceModification_SetStatus</code>
+				returns
+				<code>EOS_EResult::EOS_Success</code>. Otherwise, it returns an error code describing an issue with the request. Changes will not be reflected in a user's presence until a call to
+				<code>EOS_Presence_SetPresence</code>
+				completes with
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<div>
+				<h3 id="modify-a-rich-text-string">Modify A Rich Text String</h3>
+			</div>
+			<p>To set a new rich text string, invoke
+				<code>EOS_PresenceModification_SetRawRichText</code>
+				with a valid
+				<code>EOS_HPresenceModification</code>
+				handle, and initialize an
+				<code>EOS_PresenceModification_SetRawRichText</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_SETRAWRICHTEXT_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>RichText</code>
+						</td>
+						<td>Non-null string that is smaller than byte size of
+							<code>EOS_PRESENCE_RICH_TEXT_MAX_VALUE_LENGTH</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note:</strong>
+				<code>SetTemplateId</code>
+				and
+				<code>SetRawRichText</code>
+				are mutually exclusive. You cannot use them both on a single
+				<code>PresenceModification</code>. If you call
+				<code>SetRawRichText</code>
+				after you call
+				<code>SetTemplateId</code>,
+				<code>EOS_Presence_RichTextNotSupported</code>
+				is returned.</p>
+			<p>If successful,
+				<code>EOS_PresenceModification_SetRawRichText</code>
+				returns
+				<code>EOS_EResult::EOS_Success</code>; otherwise, it returns an error code describing an issue with the request. Changes will not be reflected in a user's presence until a call to
+				<code>EOS_Presence_SetPresence</code>
+				completes with
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<div>
+				<h3 id="localize-rich-presence-text">Localize Rich Presence Text</h3>
+			</div>
+			<p>You can define localized text for rich presence messages so that each rich presence message appears in the language of the player receiving it.</p>
+			<p>To do this:</p>
+			<ul>
+				<li>In the Developer Portal, define a localized presence template for each rich presence message. This template specifies the wording of the message in the original language, and the localized versions of the message.
+					<ul>
+						<li>If you want to include dynamic content in the message, such as the name of the map that a player is currently on, you can set up variables in the template to handle this dynamic content.</li>
+						<li>For information on how to set up a template and variables, see documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-intro">Localize Your Game's Rich User Presence</a>.</li>
+					</ul>
+				</li>
+				<li>In your game code, invoke the template for the message you want to display, as described below.
+					<ul>
+						<li>If your message has dynamic content, pass the appropriate values (such as a map name) to the variables in the template.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>Specify the template</strong>
+			</p>
+			<p>To specify which template to use for a localized rich presence message, invoke
+				<code>EOS_PresenceModification_SetTemplateId</code>
+				with a valid
+				<code>EOS_HPresenceModification</code>
+				handle. Initialize an
+				<code>EOS_PresenceModification_SetTemplateId</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_SETTEMPLATEID_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TemplateId</code>
+						</td>
+						<td>Non-null string that is 1 or more characters long.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note:</strong>
+				<code>SetTemplateId</code>
+				and
+				<code>SetRawRichText</code>
+				are mutually exclusive. You cannot use them both on a single
+				<code>PresenceModification</code>. If you call
+				<code>SetTemplateId</code>
+				after you call
+				<code>SetRawRichText</code>,
+				<code>EOS_Presence_TemplateNotSupported</code>
+				is returned.</p>
+			<p>If successful,
+				<code>EOS_PresenceModification_SetTemplateId</code>
+				returns
+				<code>EOS_EResult::EOS_Success</code>. Otherwise, it returns an error code describing an issue with the request. Changes are not reflected in a user's presence until a call to
+				<code>EOS_Presence_SetPresence</code>
+				completes with
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<p>
+				<strong>Pass values for dynamic content</strong>
+			</p>
+			<p>To pass values to the template for dynamic content, invoke
+				<code>EOS_PresenceModification_SetTemplateData</code>
+				with a valid
+				<code>EOS_HPresenceModification</code>
+				handle. Initialize an
+				<code>EOS_PresenceModification_SetTemplateData</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCEMODIFICATION_SETTEMPLATEDATA_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Key</code>
+						</td>
+						<td>A variable name. This must match the variable instance name in your localized presence template. Non-null string with a length &gt;= 1.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ValueType</code>
+						</td>
+						<td>Enumeration of
+							<code>EOS_EPresenceModificationTemplateType</code>. Permitted values are
+							<code>EOS_PMT_INT</code>
+							and
+							<code>EOS_PMT_STRING</code>. These correspond to the template types
+							<code>number</code>
+							and
+							<code>ENUM</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Value</code>
+						</td>
+						<td>A union that can be one of the following:<ul>
+								<li>
+									<code>Value.AsInt32</code>
+								</li>
+								<li>
+									<code>Value.AsStringId</code>: corresponds to an accepted value in an ENUM variable instance. You define ENUM variables for localized presence in the Developer Portal. For more information, see documentation:
+									<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/variable-definition-options">Variable Definition Options</a>.</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If successful,
+				<code>EOS_PresenceModification_SetTemplateData</code>
+				returns
+				<code>EOS_EResult::EOS_Success</code>. Otherwise, it returns an error code describing an issue with the request. Changes are not reflected in a user's presence until a call to
+				<code>EOS_Presence_SetPresence</code>
+				completes with
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<div>
+				<h3 id="add-or-replace-presence-data">Add or Replace Presence Data</h3>
+			</div>
+			<p>To add or replace existing presence data to a user's presence, invoke
+				<code>EOS_PresenceModification_SetData</code>
+				with a valid
+				<code>EOS_HPresenceModification</code>
+				handle, and initialize an
+				<code>EOS_PresenceModification_SetDataOptions</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_SETDATA_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>RecordsCount</code>
+						</td>
+						<td>How many
+							<code>EOS_Presence_DataRecord</code>
+							are present in
+							<code>Records</code>, and
+							<code>Records</code>
+							must be a pointer to an array of
+							<code>EOS_Presence_DataRecord</code>
+							that is at least
+							<code>RecordsCount</code>
+							long.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Initialize
+				<code>EOS_Presence_DataRecord</code>
+				with the following:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_DATARECORD_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Key</code>
+						</td>
+						<td>Non-null string that is smaller than the byte size of
+							<code>EOS_PRESENCE_DATA_MAX_KEY_LENGTH</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Value</code>
+						</td>
+						<td>Non-null string that is smaller than the byte size of
+							<code>EOS_PRESENCE_DATA_MAX_VALUE_LENGTH</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<p>
+					<strong>Note:</strong>
+					In the case of conflicting values, such as having multiple
+					<code>DataRecords</code>
+					with the same key, the last conflicting value in the
+					<code>Records</code>
+					array will be used.</p>
+			</div>
+			<p>If successful,
+				<code>EOS_PresenceModification_SetData</code>
+				returns
+				<code>EOS_EResult::EOS_Success</code>. Otherwise, it returns an error code describing an issue with the request. Changes will not be reflected in a user's presence until a call to
+				<code>EOS_Presence_SetPresence</code>
+				completes with
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<div>
+				<h3 id="delete-presence-data">Delete Presence Data</h3>
+			</div>
+			<p>Similar to
+				<code>EOS_PresenceModification_SetData</code>,
+				<code>EOS_PresenceModification_DeleteData</code>
+				removes presence data that matches the key of previously set data. To delete presence data, invoke
+				<code>EOS_PresenceModification_DeleteData</code>
+				with a valid
+				<code>EOS_HPresenceModification</code>
+				handle, and initialize an
+				<code>EOS_PresenceModification_DeleteDataOptions</code>
+				struct as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_DELETEDATA_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>RecordsCount</code>
+						</td>
+						<td>How many
+							<code>EOS_PresenceModification_DataRecordId</code>
+							are present in
+							<code>Records</code>, and
+							<code>Records</code>
+							must be a pointer to an array of
+							<code>EOS_PresenceModification_DataRecordId</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Initialize
+				<code>EOS_PresenceModification_DataRecordId</code>
+				with the following:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_DELETEDATA_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Key</code>
+						</td>
+						<td>Non-null string that is smaller than the byte size of
+							<code>EOS_PRESENCE_DATA_MAX_KEY_LENGTH</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If a key is marked for delete but does not exist, this part of the pending presence modification process is silently ignored. Additionally, if multiple keys are set to delete the same key, the extra keys will be silently ignored.</p>
+			<p>If successful,
+				<code>EOS_PresenceModification_DeleteData</code>
+				returns
+				<code>EOS_EResult::EOS_Success</code>; otherwise, it returns an error code describing an issue with the request. Changes will not be reflected in a user's presence until a call to
+				<code>EOS_Presence_SetPresence</code>
+				completes with an
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<div>
+				<h3 id="set-the-presence-joininfo-data">Set the Presence JoinInfo Data</h3>
+			</div>
+			<p>The helper function
+				<code>EOS_PresenceModification_SetJoinInfo</code>
+				sets the
+				<code>EOS_JoinInfo</code>
+				Presence data key with a specified Join Info string.  This data may also be retrieved through usage of the
+				<code>EOS_Presence_GetJoinInfo</code>
+				function. This data will be sent to games when invoking the Join Game feature of the EOS Social Overlay, and should contain whatever information is necessary for a game to find and join a user's match or party, depending on what makes sense for the title.</p>
+			<p>To invoke the
+				<code>EOS_PresenceModification_SetJoinInfo</code>
+				function successfully, it must be called with a valid
+				<code>EOS_HPresenceModification</code>
+				handle, and a valid
+				<code>EOS_PresenceModifcation_SetJoinInfoOptions</code>
+				struct initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>Set to
+							<code>EOS_PRESENCEMODIFICATION_SETJOININFO_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>JoinInfo</code>
+						</td>
+						<td>A null-terminated string of up to
+							<code>EOS_PRESENCEMODIFICATION_JOININFO_MAX_LENGTH</code>
+							bytes in length, not including the null-terminator.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="apply-presencemodification-changes">Apply PresenceModification Changes</h3>
+			</div>
+			<p>Once all changes to an
+				<code>EOS_HPresenceHandle</code>
+				have been made, they must be applied to a user by calling
+				<code>EOS_Presence_SetPresence</code>
+				with a valid
+				<code>EOS_HPresence</code>
+				handle, an optional
+				<code>ClientData</code>
+				field, and an
+				<code>EOS_Presence_SetPresenceCompleteCallback</code>
+				callback function. The Callback function will contain the value of the
+				<code>ClientData</code>
+				parameter. You will also need to provide an
+				<code>EOS_Presence_SetPresenceOptions</code>
+				struct, which you should initialize as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PRESENCE_SETPRESENCE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>Local user who created the presence modification.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PresenceModificationHandle</code>
+						</td>
+						<td>The
+							<code>EOS_HPresenceModification</code>
+							handle that has pending changes.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>It is safe to release the
+				<code>EOS_HPresenceModification</code>
+				handle immediately after the call to
+				<code>EOS_Presence_SetPresence</code>. However, if there is an error, these changes could be lost. We recommend you maintain this handle until the callback function returns a successful result code or at a time when you want to abandon the changes. Additionally, it is invalid for a single user to have more than
+				<code>EOS_PRESENCE_DATA_MAX_KEYS</code>
+				of unique presence data. If you attempt to set more than this many unique presence data keys, the attempt will fail.</p>
+			<p>When the call to
+				<code>EOS_Presence_SetPresence</code>
+				is complete, the callback function
+				<code>EOS_Presence_SetPresenceCompleteCallback</code>
+				is invoked with an
+				<code>EOS_Presence_SetPresenceCallbackInfo</code>
+				struct that contains the following:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ResultCode</code>
+						</td>
+						<td>This is the call's result code.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClientData</code>
+						</td>
+						<td>This is the client data from the
+							<code>ClientData</code>
+							parameter.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>This is the account identity value of the local user who invoked the call.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>RichPresenceResultCode</code>
+						</td>
+						<td>Result code for the rich presence operation. If the rich presence was successfully set,
+							<code>EOS_Success</code>
+							is returned. Any other result indicates an error.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If multiple calls to
+				<code>EOS_Presence_SetPresence</code>
+				happen during a single frame, they may be combined automatically. The callback function for all calls will still be invoked separately but they may share a
+				<code>ResultCode</code>. If there are conflicting modifications, such as a status being set twice across one (or multiple) modifications, the last-set field will overwrite previous changes.</p>
+			<div>
+				<h2 id="subscribe-to-social-overlay-notifications">Subscribe to Social Overlay Notifications</h2>
+			</div>
+			<p>It is also possible to subscribe to notifications related to the Social Overlay, such as
+				<code>JoinGameAccepted</code>
+				event, via a
+				<code>EOS_Presence_AddNotifyJoinGameAccepted</code>/<code>EOS_Presence_RemoveNotifyJoinGameAccepted</code>
+				pair. For more information see documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#manage-presence-information">Manage Presence Information</a>
+								</li>
+								<li>
+									<a href="#retrieve-and-cache-presence-information">Retrieve and Cache Presence Information</a>
+								</li>
+								<li>
+									<a href="#update-presence-information">Update Presence Information</a>
+								</li>
+								<li>
+									<a href="#examine-presence-information">Examine Presence Information</a>
+								</li>
+								<li>
+									<a href="#modify-local-presence">Modify Local Presence</a>
+								</li>
+								<li>
+									<a href="#create-a-presencemodification-handle">Create a PresenceModification Handle</a>
+								</li>
+								<li>
+									<a href="#make-changes-to-a-presencemodification">Make Changes to a PresenceModification</a>
+								</li>
+								<li>
+									<a href="#modify-presence-status">Modify Presence Status</a>
+								</li>
+								<li>
+									<a href="#modify-a-rich-text-string">Modify A Rich Text String</a>
+								</li>
+								<li>
+									<a href="#localize-rich-presence-text">Localize Rich Presence Text</a>
+								</li>
+								<li>
+									<a href="#add-or-replace-presence-data">Add or Replace Presence Data</a>
+								</li>
+								<li>
+									<a href="#delete-presence-data">Delete Presence Data</a>
+								</li>
+								<li>
+									<a href="#set-the-presence-joininfo-data">Set the Presence JoinInfo Data</a>
+								</li>
+								<li>
+									<a href="#apply-presencemodification-changes">Apply PresenceModification Changes</a>
+								</li>
+								<li>
+									<a href="#subscribe-to-social-overlay-notifications">Subscribe to Social Overlay Notifications</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

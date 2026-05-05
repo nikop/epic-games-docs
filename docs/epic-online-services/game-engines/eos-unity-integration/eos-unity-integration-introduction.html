@@ -1,0 +1,90 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Unity and EOS SDK — Introduction</h1>
+			<h2>Introduction to Unity and EOS SDK integration guides.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Epic Online Services (EOS) are free, games-platform-agnostic services to launch, operate, and scale your game. You can use them no matter what games platform your game clients run on, and no matter what game engine you use for development, or if you use no game engine at all. For more information on the available EOS services, see the
+				<a href="/docs/epic-online-services/eos-overview">EOS Overview</a>
+				documentation.</p>
+			<p>You must integrate the EOS SDK into your Unity project to use EOS.</p>
+			<p>You can do this in one of two ways:</p>
+			<ul>
+				<li>Use the EOS Plugin for Unity (recommended).
+					<ul>
+						<li>For information, see the EOS Plugin for Unity's documentation in its GitHub repository at
+							<a href="https://github.com/EOS-Contrib/eos_plugin_for_unity">github.com/EOS-Contrib/eos_plugin_for_unity</a>.</li>
+					</ul>
+				</li>
+				<li>Manually integrate the EOS SDK without the EOS Plugin for Unity. (Only do this if you can’t use the EOS Plugin for Unity.)</li>
+			</ul>
+			<p>This section of documentation shows you how to manually integrate the EOS SDK into your Unity project without the EOS Plugin for Unity.</p>
+			<div>
+				<h3 id="eos-sdk-limitations-in-the-unity-editor">EOS SDK Limitations in the Unity Editor</h3>
+			</div>
+			<p>Be aware of the following limitations when you use the EOS SDK in the Unity Editor:</p>
+			<ul>
+				<li>The EOS Overlay does not work in the Unity Editor.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							To test the EOS Overlay, you must create a standalone build in Unity. For more information on how to create a standalone build, see Unity’s documentation at
+							<a href="http://docs.unity3d.com">docs.unity3d.com</a>.</li>
+						<li>This is due to how rendering is set up in Unity.</li>
+					</ul>
+				</li>
+				<li>Dynamic libraries (DLL) remain in memory and do not automatically update when you make changes. (Windows only)
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							The Unity Editor only loads DLLs on startup so you must reboot the Unity Editor for changes you make to DLLs to take effect.
+							<ul>
+								<li>For example, If you make any changes to the values used to create and initialize the EOS Platform interface, the changes do not take effect until after you reboot the Unity Editor.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Callbacks might remain in memory.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You must properly dispose of callbacks and other objects that you obtain from the EOS SDK.</li>
+						<li>The garbage collector cleans up the allocations and deallocations correctly.</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#eos-sdk-limitations-in-the-unity-editor">EOS SDK Limitations in the Unity Editor</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

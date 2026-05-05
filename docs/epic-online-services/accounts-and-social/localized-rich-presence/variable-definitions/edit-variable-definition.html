@@ -1,0 +1,192 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Edit a Variable Definition (Localized Rich Presence)</h1>
+			<h2>How to edit a localized rich presence variable definition.</h2>
+			<div>
+				<div>Under 1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Use localized rich presence variables to display dynamic content in your rich presence messages, such as the map that a player is currently on. Create variable definitions to ensure that only valid content can appear in your presence messages. For more information, see
+						<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/variable-definitions-intro">Variable Definitions for Localized Rich Presence Messages — Introduction</a>.</p>
+				</div>
+			</div>
+			<p>To edit a variable definition:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Localized Presence</strong>
+					page. To do this:<br>
+					a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).<br>
+					b. Select the correct organization for your product.<br>
+					c. In the left navigation, under
+					<strong>Your products</strong>, click the name of your product.<br>
+					d. In the left navigation, click
+					<strong>Epic Online Services</strong>.<br>
+					e. In the left navigation, under
+					<strong>Accounts and Social</strong>, click
+					<strong>Localized Presence</strong>.<br>
+				</li>
+				<li>Click the
+					<strong>Variable Definitions</strong>
+					tab:</li>
+			</ol>
+			<center>
+				<div tabindex="0" aria-label="The Variable definitions tab image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Variable definitions tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<ol start="3">
+				<li>
+					<p>In
+						<strong>Deployment</strong>, select the appropriate deployment.</p>
+				</li>
+				<li>
+					<p>In the list of variable definitions, locate the variable definition you want to edit.</p>
+					<ul>
+						<li>You can search the list. See documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/find-variable-definition">Find a Specific Variable Definition</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>For that variable definition, click the three dots (
+						<strong>…</strong>
+						).</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Edit</strong>.</p>
+				</li>
+				<li>
+					<p>Fill out the variable definition options as follows. Options marked with an asterisk (*) are mandatory.</p>
+					<ul>
+						<li>
+							<strong>Variable definition ID*:</strong>
+							A name for the variable definition. Choose a name that succinctly describes the variable definition, such as Map.
+							<ul>
+								<li>The variable definition ID must be unique.</li>
+								<li>You can enter between 1 and 100 characters.</li>
+								<li>
+									<strong>Note:</strong>
+									After you create a variable definition, you cannot change its ID later. However, you can make a new variable definition based on the variable definition you are editing (to do so, click
+									<strong>Edit and save as new variable definition</strong>).</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Type*:</strong>
+							Select one of the following:
+							<ul>
+								<li>
+									<strong>NUMBER:</strong>
+									Accept a numeric value. You can define minimum and maximum accepted values in the range
+									<code>-2147484648</code>
+									to
+									<code>2147483647</code>.</li>
+								<li>
+									<strong>ENUM:</strong>
+									Accepts one or more string values. You can define a list of the accepted values. Each value can have translated text for multiple locales.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Accepted values:</strong>
+							<ul>
+								<li>If this is a number variable definition, set the value as follows:
+									<ul>
+										<li>
+											<strong>Min value:</strong>
+											The minimum accepted value. Values lower than this value will not be displayed in presence messages.</li>
+										<li>
+											<strong>Max value:</strong>
+											The maximum accepted value. Values higher than this value will not be displayed in presence messages.</li>
+									</ul>
+								</li>
+								<li>If this is an ENUM variable definition, you must define a series of possible values for the variable.  For example, if the variable definition accepts map names, then each value would be the name of a map in your product. Set up the values as follows:
+									<ul>
+										<li>
+											<strong>Add a value:</strong>
+											To add a value to the list, click
+											<strong>Add value</strong>.</li>
+										<li>
+											<strong>Delete a value:</strong>
+											To delete a value, click the trash can icon next to it.</li>
+										<li>For each value, set the following options (options marked with * are mandatory):
+											<ul>
+												<li>
+													<strong>Value ID*:</strong>
+													A single possible incoming value from your game code. For example, if the variable refers to map names, then each value ID refers to a specific map in your game. The value ID might be
+													<code>map_01</code>. You define the message text for each locale (in this example, the name of
+													<code>map_01</code>
+													in each language) in the locale options described below.
+													<ul>
+														<li>For each locale, the
+															<strong>Value</strong>
+															option, described below, defines the text that the social overlay displays for that locale. For example, if the value ID is
+															<code>map_01</code>, and the first map in your game is called
+															<code>Industrial Zone</code>
+															in English, then for French the
+															<strong>Value</strong>
+															might be
+															<code>Zone Industrielle</code>.</li>
+													</ul>
+												</li>
+												<li>
+													<strong>Default locale*:</strong>
+													The locale that is used for the value if you don't provide localized text for the presence message recipient's locale.
+													<ul>
+														<li>If you don't provide localized text for a locale, then message recipients in that locale see the default locale's value. For example, if your default locale is English and you don't provide localized text for Italian, then users in the Italian locale see the value in English.</li>
+													</ul>
+												</li>
+												<li>Define localized text for each locale, as follows:
+													<ul>
+														<li>To add a locale to the value, click
+															<strong>Add locale</strong>.</li>
+														<li>For each locale, set the following options:
+															<ul>
+																<li>
+																	<strong>Locale*:</strong>
+																	The locale that you want to support.</li>
+																<li>
+																	<strong>Value*:</strong>
+																	The translated text for the selected locale.</li>
+															</ul>
+														</li>
+														<li>To delete a locale, click the trash can icon next to it.</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Click
+						<strong>Save Changes</strong>.</p>
+				</li>
+			</ol>
+		</section>
+	</section>
+</section>

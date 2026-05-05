@@ -1,0 +1,487 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>SDK Integration</h1>
+			<h2>Accessing the EOS social overlay and friends list from in-game.</h2>
+			<div>
+				<div>9 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						The Social Overlay does not support the following platforms: macOS, Linux, Linux ARM64, Android, and iOS.<br>
+						Players must sign in with their Epic Games account or a proxy account to use the Social Overlay.</p>
+				</div>
+			</div>
+			<div>
+				<h1 id="overview">Overview</h1>
+			</div>
+			<div>
+				<h2 id="installation">Installation</h2>
+			</div>
+			<p>The Social Overlay is installed as part of the EOS Overlay. See the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-overlay-overview">EOS Overlay Overview</a>
+				documentation for more information.</p>
+			<div>
+				<h2 id="social-overlay">Social Overlay</h2>
+			</div>
+			<p>The Social Overlay is an Epic Online Services (EOS) UI that can be accessed in-game. The default integration accesses the Social Overlay using
+				<code>shift-F3</code>. The main feature that the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay</a>
+				provides is a friends list, which provides game management and player presence. Game management allows players to invite friends to their game session or to join friends who are already in a game session. Player presence provides details about their online state, active game, and any game-defined, rich presence text.</p>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay when the player selects the Social tab. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay when the player selects the Social tab." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay when the player selects the Social tab.</em>
+			</center>
+			<div>
+				<h3 id="handling-exclusive-input-mode">Handling Exclusive Input Mode</h3>
+			</div>
+			<p>While the Social Overlay (or any overlay managed by the EOS SDK such as checkout or authentication) is visible, there is a potential that all keyboard and mouse input will be consumed by the overlay. The overlay should only be visible due to user intent. Based on this intent, the user wishes to interact with the overlay rather than the game. This will result in the game not receiving the keyboard or mouse input.</p>
+			<p>Some system SDK user input methods (such as the Win32 API function
+				<code>ShowCursor</code>) will change behavior during this time. To support this and provide general user state information, the game can use
+				<code>EOS_UI_AddNotifyDisplaySettingsUpdated</code>
+				to register a callback. The
+				<a href="/docs/api-ref/structs/eos-ui-on-display-settings-updated-callback-info">
+					<code>EOS_UI_OnDisplaySettingsUpdatedCallbackInfo</code>
+					callback data</a>
+				will contain both a visible and an exclusive input flag. The callback will always fire on the next
+				<a href="/docs/api-ref/functions/eos-platform-tick">
+					<code>EOS_Platform_Tick</code>
+					function</a>
+				call to inform the game of the current state of any overlay.</p>
+			<p>Multiple browser instances can affect the visible flag at the same time, for example, receiving a social toast while making a purchase. The more important use case is if a visible browser instance desires user interaction. In this case, the exclusive input flag will be true. The browser instance must also be visible to have any impact on the exclusive input flag.</p>
+			<p>The game forwards controller input events to the EOS SDK through the
+				<a href="/docs/api-ref/functions/eos-ui-report-input-state">
+					<code>EOS_UI_ReportInputState(...)</code>
+				</a>
+				API. Your game must let the EOS SDK handle input exclusively when the EOS Overlay is visible. This prevents controller input navigating simultaneously within the EOS Overlay and your game's own menus. For more information, see the Route User Input to the EOS Overlay section of each console's documentation.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<div>
+				<h3 id="using-player-presence-in-the-friends-list">Using Player Presence in the Friends List</h3>
+			</div>
+			<p>The Presence service maintains a presence state that is shared with all of the user's friends who are online, and updated anytime it changes. A player's login state is used to initialize and clear their online state. The
+				<code>ProductName</code>
+				provided to the
+				<a href="/docs/api-ref/functions/eos-initialize">
+					<code>EOS_Initialize</code>
+					function</a>
+				is used to identify the game they are playing. The service will also share any
+				<code>RichText</code>
+				provided to the
+				<a href="/docs/api-ref/functions/eos-presence-modification-set-raw-rich-text">
+					<code>EOS_PresenceModification_SetRawRichText</code>
+					function</a>.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>You are in control of the presence information for your titles. We recommend that you set presence information to codenames during development as an additional safeguard for the most sensitive games. The
+						<code>ProductName</code>
+						field in the
+						<a href="/docs/api-ref/functions/eos-initialize">
+							<code>EOS_Initialize</code>
+							function</a>
+						determines the default game name that displays in the presence information for a title.</p>
+				</div>
+			</div>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay displays the presence information for the game the player is playing image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay displays the presence information for the game the player is playing" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay displays the presence information for the game the player is playing.</em>
+			</center>
+			<div>
+				<h4 id="online-state">Online State</h4>
+			</div>
+			<p>The player's online state is set to
+				<em>Online</em>
+				or
+				<em>Offline</em>
+				when a player connects or disconnects from the EOS services using the
+				<a href="/docs/api-ref/functions/eos-auth-login">
+					<code>EOS_Auth_Login</code>
+					function</a>
+				and
+				<a href="/docs/api-ref/functions/eos-auth-logout">
+					<code>EOS_Auth_Logout</code>
+					function</a>.  Use the
+				<a href="/docs/api-ref/functions/eos-presence-modification-set-status">
+					<code>EOS_PresenceModification_SetStatus</code>
+					function</a>
+				API to provide a more discrete status. The status of a player’s friends will be shown in the Social tab of the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay</a>.</p>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay displays the player's online status. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay displays the player's online status." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay displays the player's online status.</em>
+			</center>
+			<div>
+				<h4 id="active-game">Active Game</h4>
+			</div>
+			<p>Within the Status panel, the displayed app name will be shared directly from the
+				<code>ProductName</code>
+				provided to
+				<code>EOS_Initialize</code>. This should be the product name as defined by the host's language settings.</p>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay displays the player's active game. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay displays the player's active game." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay displays the player's active game.</em>
+			</center>
+			<div>
+				<h4 id="rich-presence-text">Rich Presence Text</h4>
+			</div>
+			<p>The rich presence text should provide some game context to other players. The string provided to
+				<code>EOS_PresenceModification_SetRawRichText</code>
+				will be shared as is. It will be displayed as part of a friends status within the Social tab.</p>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay display's rich presence text for the player's active game, if the game provides it. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay display's rich presence text for the player's active game, if the game provides it." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay displays rich presence text for the player's active game, if the game provides it.</em>
+			</center>
+			<br>
+			<br>
+			<p>For more console-specific game presence information, see the console documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/platforms/switch#game-presence-and-the-social-overlay">Nintendo Switch</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/switch2#game-presence-and-the-social-overlay">Nintendo Switch 2</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-4#game-presence-and-the-social-overlay">PlayStation 4</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/platforms/ps-5#game-presence-and-the-social-overlay">PlayStation 5</a>
+				</li>
+			</ul>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<div>
+				<h3 id="using-game-management-in-the-friends-list">Using Game Management in the Friends List</h3>
+			</div>
+			<p>The game management interface provides a
+				<strong>Join</strong>
+				button and an
+				<strong>Invite to game</strong>
+				button. The exact way these are integrated is up to the game and how it uses the
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface">Sessions Service</a>
+				or
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface">Lobby Service</a>. The game will also need to use the
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect</a>
+				APIs to associate the player's account with the
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface">Sessions Service</a>.</p>
+			<div>
+				<p>When using the Social Overlay, you have two implementation options:</p>
+				<ul>
+					<li>Use the Lobbies or Sessions interfaces with
+						<code>bPresenceEnabled = true</code>
+						<ul>
+							<li>You can use these features and EOS maintains the accuracy of joins and invites</li>
+						</ul>
+					</li>
+					<li>Do NOT use Lobbies or Sessions interfaces and use
+						<code>SetJoinInfo</code>
+						<ul>
+							<li>You are responsible to keep that value set/empty as appropriate to reflect joinability in your game</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h4 id="the-join-button">The Join Button</h4>
+			</div>
+			<p>The Join button enables players to join a friend's game. The integration with the EOS SDK depends on which game management service is being used. The button will be enabled if the presence for the remote player contains either a Lobby ID, Session ID, or a Join Info String. This data is transferred to all friends using the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface">Presence Service</a>. All three identifiers have an associated callback for when the user presses the Join button. It is expected that the game will honor this intent for the user after any cleanup of the current state.</p>
+			<div>
+				<h5 id="using-lobbies">Using Lobbies</h5>
+			</div>
+			<p>When using the Lobby Service, the Lobby ID is transmitted automatically. The game then uses the
+				<a href="/docs/api-ref/functions/eos-lobby-add-notify-join-lobby-accepted">
+					<code>EOS_Lobby_AddNotifyJoinLobbyAccepted</code>
+					function</a>
+				to know when the player clicks the Join button. After any cleanup, the game must use the provided
+				<code>UiEventId</code>
+				to retrieve the associated Lobby by using the
+				<a href="/docs/api-ref/functions/eos-lobby-copy-lobby-details-handle-by-ui-event-id">
+					<code>EOS_Lobby_CopyLobbyDetailsHandleByUiEventId</code>
+					function</a>
+				and then join it. If the join fails, the game is expected to call the
+				<a href="/docs/api-ref/functions/eos-ui-acknowledge-event-id">
+					<code>EOS_UI_AcknowledgeEventId</code>
+					function</a>
+				to allow the Social Overlay to refresh its state.</p>
+			<div>
+				<h5 id="using-sessions-matchmaking">Using Sessions Matchmaking</h5>
+			</div>
+			<p>When using the Sessions Matchmaking Service, the Session ID is transmitted automatically. The game then uses
+				<code>EOS_Sessions_AddNotifyJoinSessionAccepted</code>
+				to know when the player clicks the Join Button.  After any cleanup, the game must use the provided
+				<code>UiEventId</code>
+				to retrieve the associated Session by using
+				<code>EOS_Session_CopySessionHandleByUiEventId</code>
+				and then join it.  If the join fails then the game is expected to call
+				<code>EOS_UI_AcknowledgeEventId</code>
+				to allow the Social Overlay to refresh its state.</p>
+			<div>
+				<h5 id="using-custom-service">Using Custom Service</h5>
+			</div>
+			<p>To set up the
+				<strong>Join Info String</strong>
+				for the player manually, use
+				<code>EOS_PresenceModification_SetJoinInfo</code>. The developer is free to define the meaning of the
+				<strong>Join Info String</strong>
+				as needed.</p>
+			<p>The game then uses
+				<code>EOS_Presence_AddNotifyJoinGameAccepted</code>
+				to know when the player clicks the
+				<strong>Join</strong>
+				button. The callback data will contain the Join Info String.</p>
+			<div>
+				<h4 id="the-invite-to-game-button">The Invite to Game Button</h4>
+			</div>
+			<p>The
+				<strong>Invite to game</strong>
+				button enables players to invite friends to their game. The integration with the EOS SDK depends on which game management service is being used. Each will have an associated notify callback. Like
+				<strong>Join</strong>, the game should make the best effort to honor the intent of the user. For invite functionality with the Epic Games Launcher, be sure to map your deployments to your
+				<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>
+				as well.</p>
+			<center>
+				<div tabindex="0" aria-label="In the Social Overlay, to invite a friend to their active game, the player can go to their friend's profile and click Invite to game. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="In the Social Overlay, to invite a friend to their active game, the player can go to their friend's profile and click Invite to game." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>In the Social Overlay, to invite a friend to their active game, the player can go to their friend's profile and click
+					<strong>Invite to game</strong>.</em>
+			</center>
+			<div>
+				<h5 id="custom-invites">Custom Invites</h5>
+			</div>
+			<p>For titles that do not use EOS SDK Sessions and Lobbies,
+				<strong>
+					<a href="/docs/epic-online-services/player-and-game-data/custom-invites-interface">Custom Invites Interface</a>
+				</strong>
+				exists to send and receive invites with an arbitrary payload. When the Invite Button is clicked, the Social Overlay sends a custom invite using
+				<strong>
+					<code>EOS_CustomInvites_SendCustomInvite</code>
+				</strong>.
+				<strong>
+					<code>EOS_CustomInvites_AddNotifyCustomInviteReceived</code>
+				</strong>
+				and
+				<strong>
+					<code>EOS_CustomInvites_RemoveNotifyCustomInviteReceived</code>
+				</strong>
+				allows detection, custom UI indication, and processing of custom invites.</p>
+			<div>
+				<h5 id="using-lobbies-1">Using Lobbies</h5>
+			</div>
+			<p>When the Invite button is clicked, the Social Overlay transmits an invite through the Lobbies Service on behalf of the user and the game using
+				<code>EOS_Lobby_SendInvite</code>. The game uses
+				<code>EOS_Lobby_AddNotifyLobbyInviteAccepted</code>
+				to know when the player clicks Accept in the overlay. The callback data contains the Invite ID, which you can use to locate the information about the game within the Lobbies Interface.</p>
+			<div>
+				<h5 id="using-sessions-matchmaking-1">Using Sessions Matchmaking</h5>
+			</div>
+			<p>When the Invite button is clicked, the Social Overlay transmits an invite through the
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface">Sessions Interface</a>
+				on behalf of the user and the game using
+				<code>EOS_Sessions_SendInvite</code>. The game uses
+				<code>EOS_Sessions_AddNotifySessionInviteAccepted</code>
+				to know when the player clicks Accept in the overlay. The callback data contains the Session ID, which you can use to locate the information about the game within the Sessions Interface.</p>
+			<div>
+				<h4 id="invite-lifecycle-and-caveats">Invite Lifecycle and Caveats</h4>
+			</div>
+			<p>The lifetime of an invite is tied to the lobby or session it is a part of, not the player who sent the invite. Therefore, it is possible for a player to leave a lobby or session and have their friend join it long after they have gone. An invite is only destroyed on the backend service, not on the receiving game client. The invite is destroyed when the invite is used or the lobby/session for the invite is destroyed.</p>
+			<p>If an invite goes unused for too long, the lobby or session the invite was originally tied to may have been destroyed. In this case, the invite is stale. If a game client tries to access a stale invite, when it attempts to use it, the call fails. When an invite is stale, these are the kinds of errors a player may see:</p>
+			<ul>
+				<li>The invite is not found.</li>
+				<li>The game is full.</li>
+				<li>The session doesn't exist anymore.</li>
+			</ul>
+			<p>Errors recognized by the SDK immediately bubble up to the Social Overlay. However, the receiving game client must handle any errors/race conditions that occur. This should be done after the player of the receiving game client accepts the invite. For example, your game may notify the player that the session is no longer available for the invite. Your game must then let the Social Overlay know that the invite is processed, regardless of whether it succeeds or fails. To do this, your game must call
+				<code>EOS_UI_AcknowledgeEventId()</code>. In this API call, your game must include any error codes.</p>
+			<div>
+				<h4 id="sessions-matchmaking-caveats">Sessions Matchmaking Caveats</h4>
+			</div>
+			<p>The invite button is not available if the current session is full, and it is disabled if the invited player is already in the session they've been invited to. You can override the invite state by making session modifications that mutate the "allow invites" state of the session. All clients in the session must maintain the state of the session via the (Un)RegisterPlayer API calls.</p>
+			<div>
+				<h2 id="native-platform-friends">Native Platform Friends</h2>
+			</div>
+			<p>Players can use the Social Overlay for seamless interaction with both their Epic friends and their native platform friends. For showing native platform friends in the Social Overlay, the game needs to provide IntegratedPlatform options as part of the EOS SDK initialization. See the
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface#native-platform-integration">Platform Interface</a>
+				documentation for integration details.</p>
+			<div>
+				<h3 id="supporting-achievements">Supporting Achievements</h3>
+			</div>
+			<p>The
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay</a>
+				provides a user interface for achievements. To make use of this it is important to set up the data properly within the
+				<a href="/docs/dev-portal">Developer Portal</a>.</p>
+			<p>Localization of achievements follows the same rules as the rest of the Social Overlay, which is discussed briefly at the top of this document as well as within the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay Overview</a>.</p>
+			<p>If an achievement is marked as hidden then the locked icon will be used but the displayed text will be provided by the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Social Overlay page</a>.  If an icon is not provided within the dev portal, then a default icon will be provided by the Social Overlay page.</p>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay when the player selects the Achievements tab. This example displays EOS achievements. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay when the player selects the Achievements tab. This example displays EOS achievements." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay when the player selects the Achievements tab. This example displays EOS achievements.</em>
+			</center>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#overview">Overview</a>
+								</li>
+								<li>
+									<a href="#installation">Installation</a>
+								</li>
+								<li>
+									<a href="#social-overlay">Social Overlay</a>
+								</li>
+								<li>
+									<a href="#handling-exclusive-input-mode">Handling Exclusive Input Mode</a>
+								</li>
+								<li>
+									<a href="#using-player-presence-in-the-friends-list">Using Player Presence in the Friends List</a>
+								</li>
+								<li>
+									<a href="#online-state">Online State</a>
+								</li>
+								<li>
+									<a href="#active-game">Active Game</a>
+								</li>
+								<li>
+									<a href="#rich-presence-text">Rich Presence Text</a>
+								</li>
+								<li>
+									<a href="#using-game-management-in-the-friends-list">Using Game Management in the Friends List</a>
+								</li>
+								<li>
+									<a href="#the-join-button">The Join Button</a>
+								</li>
+								<li>
+									<a href="#using-lobbies">Using Lobbies</a>
+								</li>
+								<li>
+									<a href="#using-sessions-matchmaking">Using Sessions Matchmaking</a>
+								</li>
+								<li>
+									<a href="#using-custom-service">Using Custom Service</a>
+								</li>
+								<li>
+									<a href="#the-invite-to-game-button">The Invite to Game Button</a>
+								</li>
+								<li>
+									<a href="#custom-invites">Custom Invites</a>
+								</li>
+								<li>
+									<a href="#using-lobbies-1">Using Lobbies</a>
+								</li>
+								<li>
+									<a href="#using-sessions-matchmaking-1">Using Sessions Matchmaking</a>
+								</li>
+								<li>
+									<a href="#invite-lifecycle-and-caveats">Invite Lifecycle and Caveats</a>
+								</li>
+								<li>
+									<a href="#sessions-matchmaking-caveats">Sessions Matchmaking Caveats</a>
+								</li>
+								<li>
+									<a href="#native-platform-friends">Native Platform Friends</a>
+								</li>
+								<li>
+									<a href="#supporting-achievements">Supporting Achievements</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

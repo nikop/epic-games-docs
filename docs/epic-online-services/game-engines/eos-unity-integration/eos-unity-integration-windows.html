@@ -1,0 +1,423 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK and Your Unity Project on Windows</h1>
+			<h2>How to integrate the EOS SDK into your Unity project on Windows.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>To integrate the EOS SDK into your Unity project, we recommend that you use the EOS Plugin for Unity. For information, see documentation:
+						<a href="/docs/epic-online-services/game-engines/game-engines-introduction#unity">Introduction (EOS SDK &amp; Game Engines) &gt; Unity</a>.</p>
+					<p>Use this how-to guide only if you cannot use the EOS Plugin for Unity.</p>
+				</div>
+			</div>
+			<p>This guide shows you how to manually integrate the EOS SDK into your Unity project on Windows. The sample code in this guide is written in C#.</p>
+			<p>After you complete these steps, you will know how to:</p>
+			<ul>
+				<li>Download and install the EOS SDK into your Unity project</li>
+				<li>Initialize the EOS SDK</li>
+				<li>Create the Platform Interface</li>
+				<li>Shut down the EOS SDK</li>
+			</ul>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>Read the
+				<a href="/docs/epic-online-services/game-engines/eos-unity-integration/eos-unity-integration-introduction">How to Integrate the EOS SDK Into Your Unity Project &gt; Introduction</a>
+				page before you begin. It includes information on limitations that the EOS SDK has in the Unity Editor that you should be aware of.</p>
+			<p>To integrate the EOS SDK into your Unity project, you must first set up your Epic Games account and organization in the Developer Portal.<br>
+				If you have not already done this, follow the guidance in
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK</a>
+				to set these up.</p>
+			<div>
+				<h2 id="integrate-the-eos-sdk-into-your-unity-project">Integrate the EOS SDK into Your Unity Project</h2>
+			</div>
+			<p>To integrate the EOS SDK into your Unity project on Windows you must complete these steps:</p>
+			<ol>
+				<li>Download and install the EOS SDK into your Unity project.</li>
+				<li>In your game's code, initialize the EOS SDK when your game starts.</li>
+				<li>Create the EOS Platform Interface.</li>
+				<li>In your game's code, shut down the EOS SDK when your game closes.</li>
+			</ol>
+			<div>
+				<h3 id="step-1-download-and-install-the-eos-sdk-into-your-unity-project">Step 1: Download and Install the EOS SDK into Your Unity Project</h3>
+			</div>
+			<p>To download the EOS SDK for Windows and install it into your Unity Project, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Download the EOS SDK from the Developer Portal.</p>
+					<ul>
+						<li>a. Sign in to the Developer Portal at (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, click
+							<strong>Dashboard</strong>
+							if it isn't already selected.</li>
+						<li>c. On the Dashboard page, under the
+							<strong>Your products</strong>
+							heading, click
+							<strong>Downloads &amp; Release notes</strong>.</li>
+						<li>d. Select the
+							<strong>EOS SDK</strong>
+							tab.</li>
+						<li>e. In
+							<strong>SDK Type</strong>, select
+							<strong>C# SDK</strong>.</li>
+						<li>f. In
+							<strong>SDK Version</strong>, select the most recent version.</li>
+						<li>g. Click
+							<strong>Download</strong>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Unzip the EOS SDK download.</p>
+				</li>
+				<li>
+					<p>Organize the EOS SDK files in your Unity project as follows:</p>
+					<ul>
+						<li>
+							<p>a. Move all the files from
+								<code>/SDK/Source</code>
+								into the
+								<code>Assets</code>
+								directory.</p>
+							<p>
+								<strong>Tip:</strong>
+								Organize the
+								<code>SDK/Source</code>
+								files into a subdirectory of your
+								<code>Assets</code>
+								directory  to make them easier to manage.</p>
+						</li>
+						<li>
+							<p>b. Move the
+								<code>SDK/Bin/x64</code>
+								and
+								<code>SDK/Bin/x86</code>
+								directories into the
+								<code>Assets/Plugins/Windows</code>
+								directory in your Unity project.</p>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Verify that the binaries are configured to load for the correct platform.<br>
+						To do this, click the binary file and verify that the settings are for the correct Windows platform.<br>
+						Verify that the EOSSDK-Win32-Shipping.dll loads only on x86 versions of the Editor and standalone player, and that the x86-64 (Intel 64-bit) binary, EOSSDK-Win64-Shipping.dll loads only on x86-64 (Intel 64-bit).</p>
+					<p>
+						<strong>Note:</strong>
+						You can import binaries for different platforms into the same project, but you must make sure that they are configured to load on the proper platform. For more information, see Unity's documentation at
+						<a href="https://docs.unity3d.com/6000.0/Documentation/Manual/plug-in-inspector.html">docs.unity3d.com/~/plug-in-inspector</a>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-2-initialize-the-eos-sdk">Step 2: Initialize the EOS SDK</h3>
+			</div>
+			<p>To use the EOS SDK in your game's code, you must initialize the EOS SDK. During initialization, do the following:</p>
+			<ul>
+				<li>Identify your product details (for example, your product's name).</li>
+				<li>Configure platform-specific initialization options.</li>
+			</ul>
+			<p>To initialize the EOS SDK, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Create a
+						<code>EOSSDKManager</code>
+						class in your project to manage the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Set up the class to track and retrieve the EOS Platform Interface instance only when the code is run in the Unity Editor (note the
+						<code>UNITY_EDITOR</code>
+						scripting symbol).<br>
+						You use the Platform Interface in the next section (<a href="#step-3-create-the-eos-platform-interface">Step 3: Create the EOS Platform Interface</a>).</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>In the
+						<code>EOSSDKManager</code>
+						class, add a method to initialize the EOS SDK and configure the initialization options for your platform:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+					<p>For more information, see the following documentation:</p>
+					<ul>
+						<li>On the available initialization options, see
+							<a href="/docs/api-ref/structs/eos-initialize-options">
+								<code>EOS_InitializeOptions</code>
+								data structure</a>
+							API reference.</li>
+						<li>On thread affinity, see
+							<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-affinity">Conventions and Limitations &gt; Thread Affinity</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Awake()</code>
+						method to include the call to initialize the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-3-create-the-eos-platform-interface">Step 3: Create the EOS Platform Interface</h3>
+			</div>
+			<p>After you initialize the EOS SDK, you must create the Platform Interface to configure the options for your platform. This lets you do several things, including:</p>
+			<ul>
+				<li>Retrieve handles to access the other EOS Interfaces.</li>
+				<li>Control the EOS SDK lifecycle (for example, shut down the EOS SDK).</li>
+				<li>Keep the per-frame update code running (known as
+					<em>ticking</em>).</li>
+			</ul>
+			<p>For more information on the EOS Platform Interface and its functionality, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+				documentation.</p>
+			<p>To create the Platform Interface, follow these steps:</p>
+			<ol>
+				<li>
+					<p>In the
+						<code>EOSSDKManager</code>
+						class, add a method to create the Platform Interface:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Modify the
+						<code>CreatePlatformInterface()</code>
+						method to include the platform options for your platform:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+					<p>For more information on the available platform options, see the
+						<a href="/docs/api-ref/structs/eos-platform-options">EOS_Platform_Options data structure</a>
+						API reference documentation.</p>
+					<p>
+						<strong>Note:</strong>
+						You can find your product's credentials (<code>ProductId</code>,
+						<code>SandboxId</code>,
+						<code>DeploymentId</code>,
+						<code>ClientId</code>, and
+						<code>ClientSecret</code>
+						in the code snippet) under the
+						<strong>Product Settings</strong>
+						page for your product in the Developer Portal.<br>
+						To do this:</p>
+					<ul>
+						<li>a. In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>b. In the left navigation, click
+							<strong>Product Settings</strong>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Modify the
+						<code>CreatePlatformInterface()</code>
+						method to disable the EOS Overlay when you run the game in the Unity Editor.<br>
+						To do this, set the
+						<code>Flags</code>
+						platform option to
+						<code>Platformflags.LoadingInEditor</code>.</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						If you use the Player Data Storage Interface or the Title Data Storage Interface in your game, you must set the
+						<code>EncryptionKey</code>
+						platform option in the
+						<code>CreatePlatformInterface()</code>
+						method as well.<br>
+						For more information on the Player Data Storage Interface or the Title Data Storage Interface, see the following documentation:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/player-data-storage-interface">Player Data Storage Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">Title Storage Interface</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Awake()</code>
+						method to include the call to create the Platform:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						You must initialize the EOS SDK before you create the platform.</p>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Update()</code>
+						method to include the call to tick the platform, so the per-frame code for the EOS SDK runs correctly.</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						For more information on ticking, see the following documentation:
+						<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps#set-up-ticking">Guide: Get Started With EOS &gt; 4. Next Steps &gt; Set Up Ticking</a>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-4-shut-down-the-eos-sdk">Step 4: Shut Down the EOS SDK</h3>
+			</div>
+			<p>When you are ready to close your game, you must also shut down the EOS SDK. During shutdown, do the following:</p>
+			<ul>
+				<li>Release the memory held by the Platform Interface</li>
+				<li>Release the global state held by the EOS SDK</li>
+			</ul>
+			<p>To shut down the EOS SDK:</p>
+			<ol>
+				<li>
+					<p>Add the method to shut down the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Include a call to the
+						<a href="/docs/api-ref/functions/eos-platform-release">
+							<code>Epic.OnlineServices.Platform.PlatformInterface.Release()</code>
+							method</a>
+						to release the EOS Platform Interface instance.</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Include a call to the
+						<a href="/docs/api-ref/functions/eos-shutdown">
+							<code>Epic.OnlineServices.Platform.PlatformInterface.Shutdown()</code>
+							method</a>
+						to complete the process and shut down the EOS SDK.</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						After you shut down the EOS SDK, you can't reinitialize the EOS SDK, and any further calls to it fail.</p>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Update()</code>
+						method to call your
+						<code>ShutDownEOSSDK()</code>
+						method when you're ready to shut down your game. The example configuration below runs the shutdown code when
+						<code>timeToShutDownMyGame</code>
+						(not defined in this guide) is
+						<code>true</code>.</p>
+					<div>
+						<section>
+							<pre>
+
+							</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#integrate-the-eos-sdk-into-your-unity-project">Integrate the EOS SDK into Your Unity Project</a>
+								</li>
+								<li>
+									<a href="#step-1-download-and-install-the-eos-sdk-into-your-unity-project">Step 1: Download and Install the EOS SDK into Your Unity Project</a>
+								</li>
+								<li>
+									<a href="#step-2-initialize-the-eos-sdk">Step 2: Initialize the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#step-3-create-the-eos-platform-interface">Step 3: Create the EOS Platform Interface</a>
+								</li>
+								<li>
+									<a href="#step-4-shut-down-the-eos-sdk">Step 4: Shut Down the EOS SDK</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

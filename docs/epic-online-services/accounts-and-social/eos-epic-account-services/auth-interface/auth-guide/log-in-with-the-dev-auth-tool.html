@@ -1,0 +1,587 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Access EOS Epic Account Services With the Auth Interface — 2. Log In With the Developer Authentication Tool</h1>
+			<h2>Overview of how to log in to an Epic Games account in your game using the Developer Authentication Tool.</h2>
+			<div>
+				<div>22 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">1. Set Up Epic Account Services</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>While you develop your game, you can use the Developer Authentication Tool (Dev Auth Tool) to log in to your Epic Games account. You only have to log in to the Dev Auth Tool once, and then you remain logged in until you close the Dev Auth Tool. This allows you to test the Epic Account Services type of service without having to log in each time you close and relaunch your game. Also, the Dev Auth Tool can store credentials for multiple Epic Games accounts, so you can run multiple instances of a game to test multiplayer scenarios. To use the Dev Auth Tool in your game code, you must use the Auth Interface.</p>
+							<p>
+								<strong>Note:</strong>
+								The Dev Auth Tool is intended for developer use only. You must use another login method for your game when you publicly release it. Do not use the Dev Auth Tool in production. See the section of this guide:
+								<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/log-in-with-the-account-portal">3. Log in With the Account Portal</a>.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>Set Up Epic Account Services for your product in the Dev Portal (Section in this guide:
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">1. Set Up Epic Account Services</a>)</li>
+							</ul>
+							<div>
+								<h2 id="configure-the-dev-auth-tool-and-use-it-with-your-game">Configure the Dev Auth Tool and Use It With Your Game</h2>
+							</div>
+							<p>In this guide, you’ll complete these steps to use the Dev Auth Tool to log in to your Epic Games account in your game:</p>
+							<ul>
+								<li>
+									<a href="#step-a-configure-the-dev-auth-tool">Step A: Configure the Dev Auth Tool</a>
+								</li>
+								<li>
+									<a href="#step-b-create-a-class-to-manage-the-auth-interface">Step B: Create a Class to Manage the Auth Interface</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-dev-auth-tool-login-function">Step C: Implement Your Dev Auth Tool Login Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-dev-auth-tool-login-callback-function">Step D: Implement Your Dev Auth Tool Login Callback Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-configure-the-dev-auth-tool">Step A: Configure the Dev Auth Tool</h3>
+							</div>
+							<p>The Dev Auth Tool is included in your EOS SDK download in the
+								<code>SDK/Tools</code>
+								folder. To use the Dev Auth Tool to log in to Epic Account Services, you must configure it to use the proper local port and create a credential to remain logged in.</p>
+							<p>
+								<strong>Note:</strong>
+								After you set up the Dev Auth Tool, you must keep it running to remain logged in to Epic Account Services from your game.</p>
+							<p>
+								<strong>To set up the Dev Auth Tool:</strong>
+							</p>
+							<ol>
+								<li>
+									<p>Locate the Dev Auth Tool ZIP file in the
+										<code>SDK/Tools</code>
+										folder of the EOS SDK download folder and extract its contents:<br>
+										EOS_DevAuthTool-PLATFORM-VERSION.zip</p>
+								</li>
+								<li>
+									<p>Open the EOS_DevAuthTool-PLATFORM-VERSION folder and run the
+										<code>EOS_DevAuthTool</code>
+										application.</p>
+								</li>
+								<li>
+									<p>Enter a port number of your choice to serve developer authorization on. You will refer to this port number in your game code to log in with the Dev Auth Tool.</p>
+								</li>
+								<li>
+									<p>Click
+										<strong>Login</strong>
+										to log in to your Epic Games account.<br>
+										You only have to do this once. You remain logged in as long as the Dev Auth Tool is running.</p>
+									<p>
+										<strong>Note:</strong>
+										The Epic Games account that you use to log in to the Dev Auth Tool must be part of the organization that owns the product you want to test.</p>
+								</li>
+								<li>
+									<p>Enter a name for your credential. Choose a name that is meaningful to you. You will refer to this credential name in your game code to log in with the Dev Auth Tool.</p>
+								</li>
+							</ol>
+							<div>
+								<h3 id="step-b-create-a-class-to-manage-the-auth-interface">Step B: Create a Class to Manage the Auth Interface</h3>
+							</div>
+							<p>Create a class to manage the use of the Auth Interface to log in to the player’s Epic Games account and access Epic Account Services.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// AuthManager.h #pragma once #include &lt;eos_auth.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_sdk.h&gt; class AuthManager{public:    /**      * Constructor      *      * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     */    AuthManager(EOS_HPlatform InPlatformHandle);     /** Log in to the player's Epic Games account using the Dev Auth Tool. */    void LogInWithDevAuthToolExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Auth Interface handle. */    EOS_HAuth AuthHandle = nullptr;     /** Epic Account ID obtained on successful Auth login. */    EOS_EpicAccountId EpicId = nullptr;     /**     * Callback function that executes when Dev Auth Tool login is complete.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthLogInWithDevAuthToolComplete(const EOS_Auth_LoginCallbackInfo* Data);};</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// AuthManager.cpp #include "AuthManager.h"#include &lt;iostream&gt; AuthManager::AuthManager(EOS_HPlatform InPlatformHandle)    : PlatformHandle(InPlatformHandle){    AuthHandle = EOS_Platform_GetAuthInterface(PlatformHandle);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Create a class to manage the EOS Auth Interface for your players. In your auth manager class, declare a public function to log in using the Dev Auth Tool. In the example, it’s called
+																	<code>LogInWithDevAuthToolExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>void LogInWithDevAuthToolExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare two private variables to hold handles for the two interfaces required for the EOS Auth API calls (one for the Platform Interface, one for the Auth Interface). Also, declare a private variable to hold the Epic Games Account ID of the logged-in local player. The Epic Account ID is received after you log in with the Auth Interface.</p>
+																<div>
+																	<section>
+																		<pre>EOS_HPlatform PlatformHandle = nullptr;EOS_HAuth AuthHandle = nullptr;EOS_EpicAccountId EpicId = nullptr;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-auth-login">
+																		<code>EOS_Auth_Login</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-auth-on-login-callback">
+																		<code>EOS_Auth_OnLoginCallback</code>
+																		callback function</a>, which receives a
+																	<a href="/docs/api-ref/structs/eos-auth-login-callback-info">
+																		<code>EOS_Auth_LoginCallbackInfo</code>
+																		data structure</a>. In the example, the callback function is called
+																	<code>OnAuthLogInWithDevAuthToolComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnAuthLogInWithDevAuthToolComplete(const EOS_Auth_LoginCallbackInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your auth manager’s .cpp file (<code>AuthManager.cpp</code>
+																	in the example), define the constructor for the auth manager class. In it, pass the Platform Interface handle. Also, assign the Auth Interface handle as part of the constructor. You need this handle to make EOS Auth Interface API calls.</p>
+																<div>
+																	<section>
+																		<pre>AuthManager::AuthManager(EOS_HPlatform InPlatformHandle)    : PlatformHandle(InPlatformHandle){    AuthHandle = EOS_Platform_GetAuthInterface(PlatformHandle);}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-dev-auth-tool-login-function">Step C: Implement Your Dev Auth Tool Login Function</h3>
+							</div>
+							<p>In your auth manager class, implement the function to log in to an Epic Games account using the Dev Auth Tool. To do this, you must provide the credential name and host name that you configured for the Dev Auth Tool as the credentials’ token and ID respectively.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// AuthManager.cpp void AuthManager::LogInWithDevAuthToolExample(){    // Set the credentials for the Dev Auth Tool.     EOS_Auth_Credentials Credentials = {};    Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;    Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_Developer;    Credentials.Token = "YOUR_CREDENTIAL_NAME_HERE";    Credentials.Id = "YOUR_HOST_NAME_HERE";     // Set the options for logging in.    EOS_Auth_LoginOptions LoginOptions = {};    LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;    LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;    LoginOptions.Credentials = &amp;Credentials;     // Log into the player's Epic Games account using the Auth Interface.    EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithDevAuthToolComplete);}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note</strong>: The
+								<code>EOS_Auth_LoginOptions.ScopeFlags</code>
+								option must match the permissions you set for your Epic Account Services application in the Developer Portal. (Section in this guide:
+								<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">1. Set Up Epic Account Services</a>)</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your auth manager class, implement the function to log in using the Dev Auth Tool. In the example, the function is called
+																	<code>LogInWithDevAuthToolExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>void AuthManager::LogInWithDevAuthToolExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-auth-credentials">
+																		<code>EOS_Auth_Credentials</code>
+																		data structure</a>
+																	to hold the credentials to log in. Note that the
+																	<code>EOS_Auth_Credentials.Type</code>
+																	is set to the
+																	<code>EOS_LCT_Developer</code>
+																	type to use the Dev Auth Tool. Set the
+																	<code>EOS_Auth_Credentials.Token</code>
+																	to your credential name that you set in the Dev Auth Tool and set the
+																	<code>EOS_Auth_Credentials.Id</code>
+																	to the host name, which can be found under the
+																	<strong>Host</strong>
+																	heading in the Dev Auth Tool and contains the port number that you set in the Dev Auth Tool. In the example, the
+																	<code>EOS_Auth_Credentials</code>
+																	data structure is called
+																	<code>Credentials</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_Auth_Credentials Credentials = {};Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_Developer;Credentials.Token = "YOUR_CREDENTIAL_NAME_HERE";Credentials.Id = "YOUR_HOST_NAME_HERE";</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-auth-login-options">
+																		<code>EOS_Auth_LoginOptions</code>
+																		data structure</a>
+																	to hold the login options for the Auth Interface. In the example, the data structure is called
+																	<code>LoginOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_Auth_LoginOptions LoginOptions = {};LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;LoginOptions.Credentials = &amp;Credentials;</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note</strong>: The
+																	<code>EOS_Auth_LoginOptions.ScopeFlags</code>
+																	option must match the permissions you set for your Epic Account Services application in the Developer Portal. (Section in this guide:
+																	<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">1.Set Up Epic Account Services</a>)</p>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-auth-login">
+																		<code>EOS_Auth_Login</code>
+																		function</a>
+																	to log in using the Dev Auth Tool. This function takes the following arguments:</p>
+																<ul>
+																	<li>The Auth Interface handle.</li>
+																	<li>A reference to the login options data structure.</li>
+																	<li>(Optional) ClientData.<br>
+																		In the example, we pass the auth manager (<code>this</code>
+																		in the example) for the ClientData field so we can access it in the callback. If you don’t need to pass any additional data to the callback, pass a
+																		<code>nullptr</code>
+																		instead.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-auth-login-callback-info">
+																			<code>EOS_Auth_LoginCallbackInfo</code>
+																			data structure</a>
+																		when the Auth Interface completes the login process.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithDevAuthToolComplete);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-implement-your-dev-auth-tool-login-callback-function">Step D: Implement Your Dev Auth Tool Login Callback Function</h3>
+							</div>
+							<p>Implement the function that executes when the
+								<a href="/docs/api-ref/functions/eos-auth-login">
+									<code>EOS_Auth_Login</code>
+									function</a>
+								completes.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// AuthManager.cpp void EOS_CALL AuthManager::OnAuthLogInWithDevAuthToolComplete(const EOS_Auth_LoginCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Logged in with the Dev Auth Tool successfully!" &lt;&lt; std::endl;         // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);         // Retrieve the Epic Account ID.        Self-&gt;EpicId = Data-&gt;LocalUserId;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Failed to log in with the Dev Auth Tool. Error code: " &lt;&lt;             static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-auth-login">
+																		<code>EOS_Auth_Login</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-auth-on-login-callback">
+																		<code>EOS_Auth_OnLoginCallback</code>
+																		callback function</a>
+																	which receives an
+																	<a href="/docs/api-ref/structs/eos-auth-login-callback-info">
+																		<code>EOS_Auth_LoginCallbackInfo</code>
+																		data structure</a>. In the example, it’s called
+																	<code>OnAuthLogInWithDevAuthToolComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL AuthManager::OnAuthLogInWithDevAuthToolComplete(const EOS_Auth_LoginCallbackInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-auth-login">
+																			<code>EOS_Auth_Login</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the login is successful. If the login is successful, retrieve the auth manager pointer from the client data and set the variable for the Epic Account ID:</p>
+																<div>
+																	<section>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Logged in with the Dev Auth Tool successfully!" &lt;&lt; std::endl;     AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);     Self-&gt;EpicId = Data-&gt;LocalUserId;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the login is complete yet. If the login is not complete, return. The callback is called again when the login is complete:</p>
+																<div>
+																	<section>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the login is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Failed to log in with the Dev Auth Tool. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt;         " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>When you run your game with the Dev Auth Tool open, you are logged in to the Epic Games account that you have provided credentials for and are able to access Epic Account Services. After you have logged in to your Epic Games account, you receive an Epic Account ID from the EOS SDK. You can use this ID to access other services included as part of Epic Account Services, such as the Friends Interface and the Presence Interface. You can also use an Epic Account ID to receive an auth token that you can use to log in to the Connect Interface to access EOS Game Services (Documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>).</p>
+							<p>
+								<strong>Note:</strong>
+								Your player is logged out automatically when the game closes. To log out the player manually, use the
+								<a href="/docs/api-ref/functions/eos-auth-logout">
+									<code>EOS_Auth_Logout</code>
+									function</a>. For more information, see the
+								<a href="#notes">Notes</a>
+								section below.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// AuthManager.h #pragma once #include &lt;eos_auth.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_sdk.h&gt; class AuthManager{public:    /**      * Constructor      *      * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     */    AuthManager(EOS_HPlatform InPlatformHandle);     /** Log in to the player's Epic Games account using the Dev Auth Tool. */    void LogInWithDevAuthToolExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Auth Interface handle. */    EOS_HAuth AuthHandle = nullptr;     /** Epic Account ID obtained on successful Auth login. */    EOS_EpicAccountId EpicId = nullptr;     /**     * Callback function that executes when Dev Auth Tool login is complete.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthLogInWithDevAuthToolComplete(const EOS_Auth_LoginCallbackInfo* Data);};</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// AuthManager.cpp #include "AuthManager.h"#include &lt;iostream&gt; AuthManager::AuthManager(EOS_HPlatform InPlatformHandle)    : PlatformHandle(InPlatformHandle){    AuthHandle = EOS_Platform_GetAuthInterface(PlatformHandle);} void AuthManager::LogInWithDevAuthToolExample(){    // Set the credentials for the Dev Auth Tool.     EOS_Auth_Credentials Credentials = {};    Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;    Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_Developer;    Credentials.Token = "YOUR_CREDENTIAL_NAME_HERE";    Credentials.Id = "YOUR_HOST_NAME_HERE";     // Set the options for logging in.    EOS_Auth_LoginOptions LoginOptions = {};    LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;    LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;    LoginOptions.Credentials = &amp;Credentials;     // Log into the player's Epic Games account using the Auth Interface.    EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithDevAuthToolComplete);} void EOS_CALL AuthManager::OnAuthLogInWithDevAuthToolComplete(const EOS_Auth_LoginCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Logged in with the Dev Auth Tool successfully!" &lt;&lt; std::endl;         // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);         // Retrieve the Epic Account ID.        Self-&gt;EpicId = Data-&gt;LocalUserId;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Failed to log in with the Dev Auth Tool. Error code: " &lt;&lt;             static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<ul>
+								<li>The Logging Interface sends the following warning message if you have not enabled the friends list permission for your Epic Account Services application (section in this guide:
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">1. Set Up Epic Account Services</a>).</li>
+							</ul>
+							<div>
+								<code>Error response received from backend. ServiceName=[Friend], OperationName=[GetBlockList], Url=[&lt;Redacted&gt;], HttpStatus=[403], ErrorCode=[errors.com.epicgames.common.insufficient_scopes], NumericErrorCode=[1056], ErrorMessage=[Insufficient access scopes. Expected: [friends_list]], CorrId=[UNIQUE_ID_HERE]
+								</code>
+							</div>
+							<p>You are not required to enable the friends list permission for your Epic Account Services application if you do not use the friends list in your game. If this is the case, you can safely ignore this warning.</p>
+							<p>
+								<strong>Log the Player Out</strong>
+							</p>
+							<p>The EOS SDK automatically logs the player out when they close your game. To log the player out of your game while your game is running:</p>
+							<ol>
+								<li>
+									<p>Create an instance of the
+										<a href="/docs/api-ref/structs/eos-auth-logout-options">
+											<code>EOS_Auth_LogoutOptions</code>
+											data structure</a>
+										to hold the log-out options for the player. In the example, it’s called
+										<code>LogoutOptions</code>:</p>
+									<div>
+										<section>
+											<pre>EOS_Auth_LogoutOptions LogoutOptions = {};LogoutOptions.ApiVersion = EOS_AUTH_LOGOUT_API_LATEST;LogoutOptions.LocalUserId = EpicId;</pre>
+										</section>
+									</div>
+								</li>
+								<li>
+									<p>Call the EOS API
+										<a href="/docs/api-ref/functions/eos-auth-logout">
+											<code>EOS_Auth_Logout</code>
+											function</a>
+										to log the player out. This function takes the following arguments:</p>
+									<ul>
+										<li>The Auth Interface handle.</li>
+										<li>A reference to the log-out options data structure.</li>
+										<li>(Optional) ClientData. For example, you can pass a pointer to the auth manager for the ClientData field so you can access it in the callback. If you don’t need to pass any additional data to the callback, pass a
+											<code>nullptr</code>
+											instead.</li>
+										<li>A callback function to receive the
+											<a href="/docs/api-ref/structs/eos-auth-logout-callback-info">
+												<code>EOS_Auth_LogoutCallbackInfo</code>
+												data structure</a>
+											when the Auth Interface completes the log-out process.</li>
+									</ul>
+								</li>
+							</ol>
+							<p>
+								<strong>API reference documentation:</strong>
+							</p>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-auth-login">
+										<code>EOS_Auth_Login</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-auth-login-options">
+												<code>EOS_Auth_LoginOptions</code>
+												data structure</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-auth-credentials">
+														<code>EOS_Auth_Credentials</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-auth-on-login-callback">
+												<code>EOS_Auth_OnLoginCallback</code>
+												callback function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-auth-login-callback-info">
+														<code>EOS_Auth_LoginCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/log-in-with-the-account-portal">3. Log In With the Account Portal</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#configure-the-dev-auth-tool-and-use-it-with-your-game">Configure the Dev Auth Tool and Use It With Your Game</a>
+								</li>
+								<li>
+									<a href="#step-a-configure-the-dev-auth-tool">Step A: Configure the Dev Auth Tool</a>
+								</li>
+								<li>
+									<a href="#step-b-create-a-class-to-manage-the-auth-interface">Step B: Create a Class to Manage the Auth Interface</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-dev-auth-tool-login-function">Step C: Implement Your Dev Auth Tool Login Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-dev-auth-tool-login-callback-function">Step D: Implement Your Dev Auth Tool Login Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

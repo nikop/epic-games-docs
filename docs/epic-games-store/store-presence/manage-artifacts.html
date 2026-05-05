@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,94 +14,181 @@
 			<h1>Manage Artifacts</h1>
 			<h2>Create and manage product artifacts and binaries.</h2>
 			<div>
-				<div>4 mins to read</div>
+				<div>8 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<p>In the Epic Games Store publishing tools, an
-				<span>
-					<span aria-label="tooltip artifact" tabindex="0" role="button">artifact</span>
-				</span>
-				represents a group of binaries, metadata, and configurations used to fulfill user requests to download content. In the Dev Portal, the Artifacts and Binaries section allows you to review and upload binaries to your artifacts.</p>
-			<p>When you first create your product, an artifact for that product is automatically generated. Artifacts are also auto-generated for any additional offers you create that feature downloadable content, such as Demo type offers.</p>
-			<p>Note that artifacts are
-				<strong>not</strong>
-				automatically created for Add-On type offers as add-ons may or may not feature downloadable content. You can create artifacts for these offers as needed through the
-				<a href="/docs/epic-games-store/store-presence/manage-offers#artifact-settings">Offers section</a>
-				of the Dev Portal.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Mobile Early Adopter: If you are in the Mobile Early Adopter program and want to upload your app on mobile (iOS, Android), see the following documentation:
+						<a href="/docs/epic-games-store/mobile-early-adopter/upload-and-test-ios">Upload Your iOS Builds</a>,
+						<a href="/docs/epic-games-store/mobile-early-adopter/upload-and-test-android">Upload Your Android Builds</a>.</p>
+				</div>
+			</div>
+			<p>On the Epic Games Store, an artifact represents a single downloadable piece of content in your product, such as a game client or mod editor. For each artifact, you can upload and manage a set of files, known as a "binary" or "binaries" (note that these terms are interchangable in the Epic Games Store publishing tools).</p>
+			<p>A binary can contain various file types, such as executable files, metadata files, and configuration files. If you set the artifact as live in the Developer Portal, then purchasers can download the associated binary and use your product.</p>
+			<div>
+				<h2 id="overview-of-managing-artifacts-and-binaries">Overview of Managing Artifacts and Binaries</h2>
+			</div>
+			<p>You manage artifacts and binaries in the Artifacts and Binaries page of the Developer Portal.</p>
+			<p>When you first create your product offer, the Developer Portal automatically generates an artifact for it. It also automatically generates artifacts for any additional offers you create that feature downloadable content, such as Demo type offers.</p>
+			<p>The Developer Portal does not automatically create artifacts for add-on type offers because add-ons might not feature downloadable content (add-ons are additional content that a product user can acquire separately from the main product, such as maps, characters, weapons, or skins). You can create artifacts for add-ons as needed through the Offers page of the Developer Portal. (Documentation:
+				<a href="/docs/epic-games-store/store-presence/offer-details#artifact-settings">Offer Details &gt; Artifact Settings</a>.)</p>
 			<p>
-				<strong>Notes about Offer Dates</strong>
+				<strong>Notes About Offer Dates</strong>
 			</p>
-			<p>Depending on how the release date is configured for an offer determines when uploading a binary to that offer’s artifact is necessary.</p>
+			<p>When to upload a binary to an offer's artifact depends on how you configure the available date for an offer. See the following requirements:</p>
 			<ul>
 				<li>
-					<strong>Estimated or Unknown Release Date</strong>: If an offer is configured with an estimated or unknown release date, uploading a binary is not required to push your offer to the Stage or Live sandbox. Binaries are only required when preparing for launch with an exact release date.</li>
+					<strong>Available Date</strong>
+					<code>Estimated</code>
+					or
+					<code>Unknown</code>: You do not need to add a binary to the offer's artifact to push to the Stage sandbox. You only need binaries when you prepare for release with an exact available date.</li>
 				<li>
-					<strong>Exact Release Date</strong>: If the offer has been assigned an exact release date, the associated artifact must have an attached binary before it can be pushed to the Stage sandbox.</li>
+					<strong>Available Date</strong>
+					<code>Specific</code>:  You must add a binary to the offer's artifact before you can push it to the Stage sandbox.</li>
 			</ul>
-			<p>To learn more, review the Dates section of
-				<a href="/docs/epic-games-store/store-presence/manage-offers#dates">Manage Offers</a>.</p>
+			<p>For more information on offer dates, see
+				<a href="/docs/epic-games-store/store-presence/offer-details#dates">Offer Details &gt; Dates</a>.</p>
 			<div>
-				<h2 id="create-and-upload-your-build">Create and Upload Your Build</h2>
+				<h2 id="how-to-upload-binaries-and-configure-artifacts-and-binaries">How to Upload Binaries and Configure Artifacts and Binaries</h2>
 			</div>
 			<div>
-				<h3 id="before-you-begin">Before You Begin</h3>
+				<h3 id="step-1-download-and-use-the-buildpatch-tool">Step 1: Download and Use the BuildPatch Tool</h3>
 			</div>
-			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely package and upload binary files for your product to the Dev
-				<span>
-					<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
-				</span>. You must use this tool in order to upload binaries to your artifacts in the Dev Portal.</p>
-			<p>To download the tool, follow the steps below:</p>
+			<p>The BuildPatch tool (BPT) is a command-line tool you use to securely package and upload binary files for your product to the
+				<code>Dev</code>
+				sandbox. You must use this tool to upload binaries to your offer's artifacts in the Developer Portal.</p>
+			<p>For guidance, see the following documentation:
+				<a href="/docs/buildpatch-tool-latest">BuildPatch Tool Instructions</a>.</p>
+			<div>
+				<h3 id="step-2-set-the-binary-to-active">Step 2: Set the Binary to Active</h3>
+			</div>
+			<p>After you upload your binary with the BuildPatch Tool, you must set the binary to active on a sub-page of the Artifacts and Binaries main page of the Developer Portal.</p>
+			<p>To go to the Artifacts and Binaries main page, follow the instructions below:</p>
 			<ol>
-				<li>Navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
-				<li>To the top right, click
-					<strong>Download Tool</strong>.</li>
-				<li>Refer to the
-					<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160">BuildPatch Tool Instructions</a>
-					for more information.</li>
+				<li>Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>). Make sure you are in the correct organization for your product.<br>
+					(To check, see
+					<strong>Organization</strong>
+					at the top of the left navigation. To change organization, click
+					<strong>Organization</strong>
+					at the top of the left navigation and follow the on-screen instructions.)</li>
+				<li>In the left navigation, under
+					<strong>Your products</strong>, click the name of your product.</li>
+				<li>In the left navigation, click
+					<strong>Epic Games Store</strong>
+					and then click
+					<strong>Artifacts and Binaries</strong>.</li>
+			</ol>
+			<p>To go to the Artifacts and Binaries sub-page, follow the instructions below:</p>
+			<ol>
+				<li>In the Artifacts and Binaries main page, locate the
+					<strong>Artifacts and Binaries</strong>
+					tile and click
+					<strong>Edit</strong>.</li>
+				<li>Click the name of the artifact you want to edit and follow the onscreen instructions. (To see them, in the Manage Artifacts pane, click
+					<strong>Instructions</strong>.)</li>
 			</ol>
 			<div>
-				<h3 id="upload-the-binary">Upload the Binary</h3>
+				<h3 id="step-3-add-labels-to-the-artifact">Step 3: Add Labels to the Artifact</h3>
 			</div>
-			<p>Follow the steps below to attach binaries to your artifacts through the Manage Artifact screen. You can also review artifact details and active binaries from this screen.</p>
+			<p>After you have uploaded your binary and set it to active, you can add the appropriate labels to your artifact in the Artifacts and Binaries sub-page page of the Developer Portal. To do this, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
-				<li>Select an artifact to edit by clicking its name or the corresponding
-					<strong>menu (...) icon</strong>.</li>
-				<li>On the Manage Artifact screen, click
-					<strong>Upload Binary</strong>.</li>
-				<li>Use the
-					<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160">BuildPatch Tool Instructions</a>
-					to complete this process.</li>
-			</ol>
-			<p>After you upload your binary, you can add the appropriate labels to your artifact in the Dev Portal. To do so, follow the steps below:</p>
-			<ol>
-				<li>Navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>. Then, select the appropriate artifact from the list.</li>
-				<li>On the Manage Artifacts screen, click the
-					<strong>menu (...) icon</strong>
-					in the Active Binaries section. Then, select
+				<li>On the Artifacts and Binaries sub-page (the same page you used in step 2), click the name of the artifact you want to edit.</li>
+				<li>On the Binaries pane, in the Active Binaries section, click the menu (
+					<strong>…</strong>
+					) and select
 					<strong>Manage Platforms</strong>.</li>
-				<li>Select the appropriate platform for your build. Then, click
-					<strong>Save Changes</strong>.</li>
+				<li>Select the appropriate update type for your build, as follows:
+					<ul>
+						<li>
+							<strong>Bugfix:</strong>
+							For small updates that do not affect your product's age rating.
+							<ul>
+								<li>If you select Bugfix for all the binaries that you update in this artifact, then you can publish the artifact without putting it through review by the Epic Games Store team. More information:
+									<a href="/docs/epic-games-store/publishing-tools/publishing-process/patch-live-builds">Patch Your Live Builds</a>.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Minor update:</strong>
+							For modifications to existing functionality.
+							<ul>
+								<li>You can provide a set of patch notes to describe the changes to the product in this update, if you choose to. For instructions on how to add patch notes, see
+									<a href="#step-4-add-patch-notes-to-the-artifact">Add Patch Notes</a>
+									on this page.</li>
+								<li>You must submit the artifact for review by the Epic Games Store team. More information:
+									<a href="/docs/epic-games-store/get-started/get-started-steps/submit-for-final-review">Get Started Steps &gt; Submit for Review</a>.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Major update:</strong>
+							For new functionality or content added to your product.
+							<ul>
+								<li>You must provide a set of patch notes to describe the changes to the product in this update. For instructions on how to add patch notes, see
+									<a href="#step-4-add-patch-notes-to-the-artifact">Add Patch Notes</a>
+									on this page.</li>
+								<li>You must submit the artifact for review by the Epic Games Store team. More information:
+									<a href="/docs/epic-games-store/get-started/get-started-steps/submit-for-final-review">Get Started Steps &gt; Submit for Review</a>.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Select the appropriate platforms for your build.</li>
+				<li>Click
+					<strong>Save changes</strong>.</li>
 			</ol>
-			<p>Once a platform has been selected, the binary automatically receives the
-				<em>Live</em>
-				label. These labels allow your binary to be accessible from the Epic Games Launcher.</p>
-			<p>Applying a label to a binary associates a label name (e.g.,
-				<em>Live</em>) and a platform (e.g.,
-				<em>Win32</em>) with a single binary version. Multiple labels can be assigned to the same binary. The Epic Games Launcher only queries for binaries associated with the platform on which it is currently running. For example, the Win32 Launcher client only queries using a platform of Win32, preventing it from receiving binaries labeled with
-				<em>Windows</em>
-				or
-				<em>Mac</em>.</p>
+			<p>In the Artifact Info panel, if you need to add patch notes, you see a notification message.</p>
 			<div>
-				<h3 id="select-deployment-id">Select Deployment ID</h3>
+				<h3 id="step-4-add-patch-notes-to-the-artifact">Step 4: Add Patch Notes to the Artifact</h3>
 			</div>
-			<p>If your product uses the Epic Online Services (EOS) SDK, then your build must specify the correct deployment when it initializes the EOS SDK. To make sure that your build can identify the correct deployment, you must set a deployment ID on your artifact. When the Epic Games Launcher starts your build, it sends this deployment ID to your build as a command-line parameter.</p>
+			<p>If this binary is to patch your product, you can add a set of patch notes in the Artifacts and Binaries page of the Developer Portal.</p>
+			<p>Patch notes are required for major updates. Minor updates and bugfixes do not require patch notes, but including them in non-major updates can help you and your users tell the difference between different versions of your product. See the following section of this page for guidance on update types:
+				<a href="#step-3-add-labels-to-the-artifact">Step 3: Add Labels to the Artifact</a>.</p>
+			<p>For more information on patch note requirements, see
+				<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview#patch-notes">Epic Games Store Requirements &gt; Patch Notes</a>.</p>
+			<p>To add patch notes:</p>
+			<ol>
+				<li>On the
+					<strong>Artifacts and Binaries</strong>
+					page, locate the
+					<strong>Patch notes</strong>
+					tile and click
+					<strong>Edit</strong>.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							To get to the
+							<strong>Artifacts and Binaries</strong>
+							page, see
+							<a href="#step-2-set-the-binary-to-active">Step 2: Set the Binary to Active</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>Click
+					<strong>Add patch notes</strong>. The
+					<strong>New patch notes</strong>
+					pane displays.</li>
+				<li>In
+					<strong>Version</strong>, enter the version number of your update. This version number must be unique to these patch notes.</li>
+				<li>In
+					<strong>Patch notes</strong>, enter a description of the changes in this update. This description must be unique to these patch notes.
+					<ul>
+						<li>More information:
+							<a href="/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview#patch-note-requirements">Epic Games Store Requirements &gt; Patch Note Requirements</a>.</li>
+					</ul>
+				</li>
+				<li>Click
+					<strong>Submit</strong>.</li>
+			</ol>
+			<p>If your product does not use Epic Online Services (EOS), do not follow step 5. You have completed the steps required.</p>
+			<div>
+				<h3 id="step-5-select-deployment-id-for-epic-online-services-only">Step 5: Select Deployment ID (for Epic Online Services Only)</h3>
+			</div>
+			<p>If your product uses the Epic Online Services (EOS) SDK, then your game clients (build) must specify the correct deployment when they initialize the EOS SDK.</p>
+			<p>To make sure that your build can identify the correct deployment, you must set a deployment ID on your artifact. When the Epic Games Launcher starts your build, it sends this deployment ID to your build as a command-line parameter.</p>
 			<p>The Epic Games Launcher sends the deployment ID in the command-line parameter
 				<code>-epicdeploymentid</code>
 				and the ID of the sandbox that contains this deployment in the parameter
@@ -113,36 +200,40 @@
 				subdirectory of the game installation directory. The filename has the form
 				<code>&lt;artifactid&gt;appconfig.json</code>. Example:
 				<code>915f171a87bf4a75b3456c968b5fde4cappconfig.json</code>.</p>
-			<p>More information:</p>
+			<p>Documentation:</p>
 			<ul>
 				<li>
-					<a href="/docs/dev-portal/product-management#deployments">Deployments</a>
+					<a href="/docs/dev-portal/product-management#deployments">Developer Portal &gt; Deployments</a>
 				</li>
 				<li>
-					<a href="/docs/epic-account-services/auth/auth-interface#epic-games-launcher">Epic Games Launcher</a>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference#epic-games-launcher">EOS &gt; Auth Reference &gt; Epic Games Launcher</a>
 				</li>
 			</ul>
 			<div>
-				<h4 id="set-a-deployment-id-on-an-artifact">Set a Deployment ID on an Artifact</h4>
+				<h4 id="set-a-deployment-id-on-an-artifact-optional">Set a Deployment ID on an Artifact (Optional)</h4>
 			</div>
-			<p>To set a deployment ID on an artifact:</p>
+			<p>It is optional to set a deployment ID on an artifact. If you want to set a deployment ID, use the following guidance:</p>
 			<ol>
-				<li>In the Dev Portal, go to
-					<strong>Your Product</strong>
-					&gt;
+				<li>Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>). Make sure you are in the correct organization for your product.<br>
+					(To check, see
+					<strong>Organization</strong>
+					at the top of the left navigation. To change organization, click
+					<strong>Organization</strong>
+					at the top of the left navigation and follow the on-screen instructions.)</li>
+				<li>In the left navigation, under
+					<strong>Your products</strong>, click the name of your product.</li>
+				<li>In the left navigation, click
 					<strong>Epic Games Store</strong>
-					&gt;
+					and then click
 					<strong>Artifacts and Binaries</strong>.</li>
-				<li>Click the name of the artifact or the corresponding menu (<strong>...</strong>) icon.</li>
-				<li>In
-					<strong>Deployment ID</strong>, select the deployment you want to link to this artifact.</li>
+				<li>Click the name of the artifact you want to set the deployment ID for.</li>
+				<li>In the Manage Artifact pane, click the right-arrow beside
+					<strong>Deployment ID</strong>.</li>
+				<li>In the Deployment ID pane, follow the onscreen instructions to select the deployment you want to link to this artifact.</li>
 			</ol>
 			<div>
-				<h4 id="notes-about-deployment-ids-on-artifacts">Notes about Deployment IDs on Artifacts</h4>
+				<h4 id="notes-about-deployment-ids-on-artifacts">Notes About Deployment IDs on Artifacts</h4>
 			</div>
-			<p>
-				<strong>Note:</strong>
-			</p>
 			<ul>
 				<li>Deployment IDs are optional on artifacts.</li>
 				<li>You can only select a deployment ID that refers to an active deployment.</li>
@@ -154,38 +245,51 @@
 						<li>Set new deployment IDs on the artifacts.</li>
 					</ul>
 				</li>
-				<li>You can promote an artifact (move it from your Dev sandbox to your staging or Live sandbox, or move it from your Staging sandbox to your Live sandbox) without a deployment ID.</li>
-				<li>When you promote an artifact, any associated deployment ID is not promoted with it. As a result, the deployment ID in the destination sandbox is empty. For example, if you promote an artifact from your Dev sandbox to your Staging sandbox, then the associated deployment ID in your Staging sandbox is empty. If you want the artifact in the destination sandbox to have a deployment ID, then you must set the deployment ID manually after you promote the artifact.</li>
+				<li>You can promote an artifact (move it from your Dev sandbox to your staging or Live sandbox, or move it from your Stage sandbox to your Live sandbox) without a deployment ID.</li>
+				<li>When you promote an artifact, any associated deployment ID is not promoted with it. As a result, the deployment ID in the destination sandbox is empty. For example, if you promote an artifact from your Dev sandbox to your Stage sandbox, then the associated deployment ID in your Stage sandbox is empty. If you want the artifact in the destination sandbox to have a deployment ID, then you must set the deployment ID manually after you promote the artifact.</li>
 			</ul>
-			<p>See the
-				<a href="/docs/dev-portal/product-management#deployments">Deployments</a>
-				documentation for more information.</p>
+			<p>For more information see the following documentation:
+				<a href="/docs/dev-portal/product-management#deployments">Developer Portal &gt; Deployments</a>.</p>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#create-and-upload-your-build">Create and Upload Your Build</a>
-					</li>
-					<li>
-						<a href="#before-you-begin">Before You Begin</a>
-					</li>
-					<li>
-						<a href="#upload-the-binary">Upload the Binary</a>
-					</li>
-					<li>
-						<a href="#select-deployment-id">Select Deployment ID</a>
-					</li>
-					<li>
-						<a href="#set-a-deployment-id-on-an-artifact">Set a Deployment ID on an Artifact</a>
-					</li>
-					<li>
-						<a href="#notes-about-deployment-ids-on-artifacts">Notes about Deployment IDs on Artifacts</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#overview-of-managing-artifacts-and-binaries">Overview of Managing Artifacts and Binaries</a>
+								</li>
+								<li>
+									<a href="#how-to-upload-binaries-and-configure-artifacts-and-binaries">How to Upload Binaries and Configure Artifacts and Binaries</a>
+								</li>
+								<li>
+									<a href="#step-1-download-and-use-the-buildpatch-tool">Step 1: Download and Use the BuildPatch Tool</a>
+								</li>
+								<li>
+									<a href="#step-2-set-the-binary-to-active">Step 2: Set the Binary to Active</a>
+								</li>
+								<li>
+									<a href="#step-3-add-labels-to-the-artifact">Step 3: Add Labels to the Artifact</a>
+								</li>
+								<li>
+									<a href="#step-4-add-patch-notes-to-the-artifact">Step 4: Add Patch Notes to the Artifact</a>
+								</li>
+								<li>
+									<a href="#step-5-select-deployment-id-for-epic-online-services-only">Step 5: Select Deployment ID (for Epic Online Services Only)</a>
+								</li>
+								<li>
+									<a href="#set-a-deployment-id-on-an-artifact-optional">Set a Deployment ID on an Artifact (Optional)</a>
+								</li>
+								<li>
+									<a href="#notes-about-deployment-ids-on-artifacts">Notes About Deployment IDs on Artifacts</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

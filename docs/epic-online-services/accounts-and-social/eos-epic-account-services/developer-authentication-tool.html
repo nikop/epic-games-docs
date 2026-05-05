@@ -1,0 +1,137 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Tool: Developer Authentication</h1>
+			<h2>A tool to manage login status during development.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Developer Authentication Tool acts as a stand-in for the Epic Games Launcher during game development. It improves iteration time by enabling developers to log in once and remain logged in, even after closing and relaunching the game. Additionally, the Developer Authentication Tool can store credentials for multiple users, so developers can run multiple instances of a game to test multiplayer scenarios.</p>
+			<p>Conceptually, the tool is a combination of a web browser and a server. The web browser portion provides the user interface, including the account portal page. The server portion responds to requests initiated by the SDK, when the
+				<code>EOS_Auth_Login</code>
+				function is called with the
+				<code>EOS_LCT_Developer</code>
+				login credential type.</p>
+			<div>
+				<p>You can find the Developer Authentication Tool in the
+					<code>SDK/Tools</code>
+					folder within the Epic Online Services SDK download archive. See the
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk#step-c-download-the-eos-sdk">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK</a>
+					documentation for information about downloading and setting up the SDK.</p>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				To use Epic Online Services (EOS) SDK, your local network, router, and firewall must allow access to specific host addresses. For a complete list of these host addresses, see the
+				<a href="/docs/epic-online-services/firewall-considerations">Firewall Considerations</a>
+				documentation.</p>
+			<div>
+				<h2 id="tool-and-sdk-interaction">Tool and SDK Interaction</h2>
+			</div>
+			<ol>
+				<li>When launching the application, you must enter a TCP port number to listen for EOS SDK login requests.</li>
+				<li>Login using the Epic Games Account Portal, providing email, password, and multi-factor authentication when prompted.</li>
+				<li>After the Authentication Tool receives an Auth Token, give the credentials a name.</li>
+				<li>After you have one or more named credentials, you may repeatedly call
+					<code>EOS_Auth_Login</code>
+					using the
+					<code>EOS_LCT_Developer</code>
+					login credential type.
+					<ul>
+						<li>
+							<strong>Note</strong>: You can map only one named credential to an Epic Games account. Therefore, you must have at least two different Epic Games accounts if you want to test multiplayer features locally on the same system.</li>
+					</ul>
+				</li>
+			</ol>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h2 id="using-the-developer-login-credential-type">Using the Developer Login Credential Type</h2>
+			</div>
+			<p>Requests made through the tool use the
+				<strong>Developer Login Credential Type</strong>
+				(<code>EOS_LCT_Developer</code>). Call
+				<code>EOS_Auth_Login</code>
+				with the
+				<code>EOS_Auth_Credentials</code>
+				structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>Set this to
+							<code>EOS_AUTH_CREDENTIALS_API_LATEST</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Type</code>
+						</td>
+						<td>Set this to
+							<code>EOS_LCT_Developer</code>.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Id</code>
+						</td>
+						<td>This string should contain the host and port where your Authentication Tool is running. For example, if you chose port 6547 and the Authentication Tool is running locally,
+							<code>Id</code>
+							should be "localhost:6547".</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Token</code>
+						</td>
+						<td>This should be the name you provided for the credential after logging into the Authentication Tool.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#tool-and-sdk-interaction">Tool and SDK Interaction</a>
+								</li>
+								<li>
+									<a href="#using-the-developer-login-credential-type">Using the Developer Login Credential Type</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

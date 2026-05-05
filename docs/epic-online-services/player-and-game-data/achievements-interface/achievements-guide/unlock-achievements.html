@@ -1,0 +1,483 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Achievements to Your Game — 4. Unlock Achievements Manually</h1>
+			<h2>Overview of how to add player achievements to your game that you can access through the EOS API.</h2>
+			<div>
+				<div>15 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/retrieve-player-achievement-progress">3. Retrieve a Player's Achievement Progress</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>Players can unlock achievements automatically based on their stat progress, or you can unlock achievements for a player manually. For more information on how to create achievements that automatically unlock based on a player's stat progress, see the section in this guide:
+								<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/set-up-achievements">1. Set Up Achievements</a>. This guide shows how to unlock achievements manually through the EOS SDK API.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>Use the Connect Interface in your code to get the local player’s Product User ID. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Guide: Access Game Services With the Connect Interface</a>.)</li>
+								<li>Create achievements that can be manually unlocked. (Section in this guide:
+									<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/set-up-achievements">1. Set Up Achievements</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="manually-unlock-achievements">Manually Unlock Achievements</h2>
+							</div>
+							<p>Complete the following steps to manually unlock achievements for a player in your game:</p>
+							<ul>
+								<li>
+									<a href="#step-1-modify-your-achievements-manager-class">Step 1: Modify Your Achievements Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-unlock-achievements-function">Step 2: Implement Your Unlock Achievements Function</a>
+								</li>
+								<li>
+									<a href="#step-3-implement-your-unlock-achievements-callback-function">Step 3: Implement Your Unlock Achievements Callback Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-1-modify-your-achievements-manager-class">Step 1: Modify Your Achievements Manager Class</h3>
+							</div>
+							<p>Modify your achievements manager class
+								<code>.h</code>
+								file to include the declarations for the functions and variables that you need to manually unlock achievements.</p>
+							<p>
+								<strong>Note:</strong>
+								The example code below is not the complete code. It includes only the additions that you must make to your achievements manager class
+								<code>.h</code>
+								file. For the complete code, see the complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<p>Example:</p>
+							<p>
+								<code>AchievementsManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>// AchievementsManager.h... class AchievementsManager{public:...    /**     * Manually unlocks a list achievements.     *     * @param AchievementIds - An array of achievement IDs in the Dev Portal.     *     * @param AchievementCount - The size of the achievement IDs array.     */    void UnlockAchievementsExample(const char** AchievementIds, uint32_t AchievementsCount); private:...    /**      * Callback called by the EOS SDK whenever a request to manually unlock an achievement is processed.     *      * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAchievementUnlockComplete(const EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo* Data);};</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your achievements manager class, declare a public function to query the player's achievements. In the example, it's called
+																	<code>RetrievePlayerAchievementsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>void RetrievePlayerAchievementsExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to unlock the player's achievements. In the example, it's called
+																	<code>UnlockAchievementsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>void UnlockAchievementsExample(const char** AchievementIds, uint32_t AchievementsCount);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private callback function to execute after the unlock completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-achievements-on-unlock-achievements-complete-callback">
+																		<code>EOS_Achievements_OnUnlockAchievementsCompleteCallback</code>
+																		callback</a>. In the example, it's called
+																	<code>OnAchievementUnlockComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnAchievementUnlockComplete(const EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-2-implement-your-unlock-achievements-function">Step 2: Implement Your Unlock Achievements Function</h3>
+							</div>
+							<p>In your
+								<code>.cpp</code>
+								file, in your achievements manager class, implement the function to unlock the achievements manually for a player.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void AchievementsManager::UnlockAchievementsExample(const char** AchievementIds, uint32_t AchievementsCount){    EOS_Achievements_UnlockAchievementsOptions UnlockAchievementOptions = {};    UnlockAchievementOptions.ApiVersion = EOS_ACHIEVEMENTS_UNLOCKACHIEVEMENTS_API_LATEST;     // The Product User ID of the player whose achievement is being unlocked (the local player in this example).    UnlockAchievementOptions.UserId = LocalProductUserId;     // The IDs of the achievements in the Dev Portal to unlock.    UnlockAchievementOptions.AchievementIds = AchievementIds;     // The number of achievements to unlock.    UnlockAchievementOptions.AchievementsCount = AchievementsCount;     // Call the EOS SDK to manually unlock achievements.    // The callback function will be called when the unlock is processed.    EOS_Achievements_UnlockAchievements(AchievementsHandle, &amp;UnlockAchievementOptions, nullptr, OnAchievementUnlockComplete);}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								Your client policy configuration determines which player (<code>EOS_Achievements_UnlockAchievementsOptions.UserId</code>) you can unlock for the player. It can be either the local player (local user ID) or another player (non-local user ID). See this guide's section
+								<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/set-up-achievements#step-1-configure-your-games-client-policy">1. Set Up Achievements &gt; Step 1: Configure Your Game's Client Policy</a>
+								section for more information.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your achievements manager class, implement the function to unlock the player's achievements.<br>
+																	The example function includes the following parameters:</p>
+																<ul>
+																	<li>An array of achievement IDs for the achievements that you want to unlock for the player.</li>
+																	<li>An integer for the number of achievements that you want to unlock for the player.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>void AchievementsManager::UnlockAchievementsExample(const char** AchievementIds, uint32_t AchievementsCount){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your unlock function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-achievements-unlock-achievements-options">
+																		<code>EOS_Achievements_UnlockAchievementsOptions</code>
+																		data structure</a>
+																	to hold the unlock options for the achievements. In the example, it's called
+																	<code>UnlockAchievementOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_Achievements_UnlockAchievementsOptions UnlockAchievementOptions = {};UnlockAchievementOptions.ApiVersion = EOS_ACHIEVEMENTS_UNLOCKACHIEVEMENTS_API_LATEST;UnlockAchievementOptions.UserId = LocalProductUserId;UnlockAchievementOptions.AchievementIds = AchievementIds;UnlockAchievementOptions.AchievementsCount = AchievementsCount;</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	Your client policy configuration determines which player (<code>EOS_Achievements_UnlockAchievementsOptions.UserId</code>) you can unlock for the player. It can be either the local player (local user ID) or another player (non-local user ID). See this guide's section
+																	<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/set-up-achievements#step-1-configure-your-games-client-policy">1. Set Up Achievements &gt; Step 1: Configure Your Game's Client Policy</a>
+																	section for more information.</p>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-achievements-unlock-achievements">
+																		<code>EOS_Achievements_UnlockAchievements()</code>
+																		function</a>
+																	to unlock the passed in achievements manually for the player.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>Achievements Interface handle.</li>
+																	<li>A reference to the unlock options for the achievements.</li>
+																	<li>(Optional) ClientData - an argument must be present but it can be a
+																		<code>nullptr</code>.<br>
+																		In the example, we pass a
+																		<code>nullptr</code>
+																		because we don't need to pass any additional data to the callback.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-achievements-on-unlock-achievements-complete-callback-info">
+																			<code>EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo</code>
+																			data structure</a>
+																		when the EOS Achievements service completes the unlock achievements function call.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_Achievements_UnlockAchievements(AchievementsHandle, &amp;UnlockAchievementOptions, nullptr, OnAchievementUnlockComplete);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-3-implement-your-unlock-achievements-callback-function">Step 3: Implement Your Unlock Achievements Callback Function</h3>
+							</div>
+							<p>In your
+								<code>.cpp</code>
+								file, implement your query achievements callback function.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL AchievementsManager::OnAchievementUnlockComplete(const EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Manual achievement unlock succeeded" &lt;&lt; std::endl;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error unlocking achievement! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-achievements-unlock-achievements">
+																		<code>EOS_Achievements_UnlockAchievements()</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-achievements-on-unlock-achievements-complete-callback">
+																		<code>EOS_Achievements_OnUnlockAchievementsCompleteCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-achievements-on-unlock-achievements-complete-callback-info">
+																		<code>EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnAchievementUnlockComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL AchievementsManager::OnAchievementUnlockComplete(const EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>Notes:</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<code>EOS_Achievements_UnlockAchievements()</code>
+																		function completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		Enum</a>
+																	to confirm that the unlock is successful:</p>
+																<div>
+																	<section>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Manual achievement unlock succeeded" &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the unlock is not complete yet. If the unlock is not complete, return so the operation can complete:</p>
+																<div>
+																	<section>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the unlock is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error unlocking achievement! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the
+																	<code>EOS_EResult_ToString()</code>
+																	function to convert the
+																	<code>E_EResult</code>
+																	Enum to a string, which gives the name of the error type.</p>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>After you call the
+								<a href="/docs/api-ref/functions/eos-achievements-unlock-achievements">
+									<code>EOS_Achievements_UnlockAchievements()</code>
+									function</a>, on success the EOS Achievements service unlocks the player's achievements for the array of achievement IDs that you passed in the
+								<a href="/docs/api-ref/functions/eos-achievements-unlock-achievements">
+									<code>EOS_Achievements_UnlockAchievements()</code>
+									function</a>
+								call.</p>
+							<p>
+								<strong>Note:</strong>
+								Each achievement ID must match the achievement ID, exactly as you wrote it in the Developer Portal.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<p>
+								<code>AchievementsManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>// AchievementsManager.h #pragma once #include &lt;eos_achievements.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_common.h&gt;#include &lt;eos_sdk.h&gt;  class AchievementsManager{public:    /**      * Constructor     *     * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     *      * @param InLocalProductUserId - The ProductUserID of the local player obtained during login.     */    AchievementsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /** Deconstructor */    ~AchievementsManager();     /**     * Manually unlocks a list achievements.     *     * @param AchievementIds - An array of achievement IDs in the Dev Portal.     *     * @param AchievementCount - The size of the achievement IDs array.     */    void UnlockAchievementsExample(const char** AchievementIds, uint32_t AchievementsCount); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Achievements Interface handle. */    EOS_HAchievements AchievementsHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;        /**      * Callback called by the EOS SDK whenever a request to manually unlock an achievement is processed.     *      * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAchievementUnlockComplete(const EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo* Data);};</pre>
+								</section>
+							</div>
+							<p>
+								<code>AchievementsManager.cpp</code>
+							</p>
+							<div>
+								<section>
+									<pre>// AchievementsManager.cpp #include "AchievementsManager.h"#include &lt;iostream&gt; AchievementsManager::AchievementsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId){    // Get and save the handle to the Achievements Interface    AchievementsHandle = EOS_Platform_GetAchievementsInterface(PlatformHandle);} AchievementsManager::~AchievementsManager(){ } void AchievementsManager::UnlockAchievementsExample(const char** AchievementIds, uint32_t AchievementsCount){    EOS_Achievements_UnlockAchievementsOptions UnlockAchievementOptions = {};    UnlockAchievementOptions.ApiVersion = EOS_ACHIEVEMENTS_UNLOCKACHIEVEMENTS_API_LATEST;     // The Product User ID of the player whose achievement is being unlocked (the local player in this example).    UnlockAchievementOptions.UserId = LocalProductUserId;     // The IDs of the achievements in the Dev Portal to unlock.    UnlockAchievementOptions.AchievementIds = AchievementIds;     // The number of achievements to unlock.    UnlockAchievementOptions.AchievementsCount = AchievementsCount;     // Call the EOS SDK to manually unlock achievements.    // The callback function will be called when the unlock is processed.    EOS_Achievements_UnlockAchievements(AchievementsHandle, &amp;UnlockAchievementOptions, nullptr, OnAchievementUnlockComplete);} void EOS_CALL AchievementsManager::OnAchievementUnlockComplete(const EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Manual achievement unlock succeeded" &lt;&lt; std::endl;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error unlocking achievement! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>You can call the
+								<a href="/docs/api-ref/functions/eos-achievements-unlock-achievements">
+									<code>EOS_Achievements_UnlockAchievements()</code>
+									function</a>
+								more than once, even on every launch, as long as you respect proper retry rates and wait for the completion status to return before you try again (as demonstrated in this guide).</p>
+							<p>Subscribe to achievement unlocked notifications to be notified through your registered callback function when the player unlocks achievements (section in this guide:
+								<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/achievement-notifications">5. Send Notifications When a Player Unlocks an Achievement</a>).</p>
+							<p>The EOS SDK does not store achievement state locally or offline. If the player loses network connection to the EOS Stats service, the player can experience issues when they try to unlock an achievement. To mitigate issues, we recommend that you do the following:</p>
+							<ul>
+								<li>Always download the player's achievement status, including stat data, when they sign in.</li>
+								<li>Compare the EOS Achievements service unlock state of an achievement to your game's stats data. Unlock the achievement if the stats meet the conditions to unlock the achievement.</li>
+							</ul>
+							<p>Follow this same recommendation for new achievements that you introduce in an update that a player might have already completed.</p>
+							<p>
+								<strong>API reference documentation:</strong>
+							</p>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-achievements-unlock-achievements">
+										<code>EOS_Achievements_UnlockAchievements()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-achievements-unlock-achievements-options">
+												<code>EOS_Achievements_UnlockAchievementsOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-achievements-on-unlock-achievements-complete-callback">
+												<code>EOS_Achievements_OnUnlockAchievementsCompleteCallback</code>
+												function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-achievements-on-unlock-achievements-complete-callback-info">
+														<code>EOS_Achievements_OnUnlockAchievementsCompleteCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/achievement-notifications">5. Send Notifications When a Player Unlocks an Achievement</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#manually-unlock-achievements">Manually Unlock Achievements</a>
+								</li>
+								<li>
+									<a href="#step-1-modify-your-achievements-manager-class">Step 1: Modify Your Achievements Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-unlock-achievements-function">Step 2: Implement Your Unlock Achievements Function</a>
+								</li>
+								<li>
+									<a href="#step-3-implement-your-unlock-achievements-callback-function">Step 3: Implement Your Unlock Achievements Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

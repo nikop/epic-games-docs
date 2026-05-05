@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,7 +14,7 @@
 			<h1>Mods sample</h1>
 			<h2>Example demonstrating Mod Marketplace interactions.</h2>
 			<div>
-				<div>5 mins to read</div>
+				<div>4 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -37,8 +37,8 @@
 			<p>Before using the mods sample, you will need the following prerequisites:</p>
 			<ul>
 				<li>EOS-SDK.zip</li>
-				<li>The Epic Games Store Launcher client must be installed</li>
-				<li>An Epic Games Store test app with the following information configured on the Developer Portal:
+				<li>The Epic Games Launcher client must be installed</li>
+				<li>An Epic Games Store test app with the following information configured in the Developer Portal:
 					<ul>
 						<li>
 							<code>productid</code>
@@ -59,11 +59,11 @@
 				</li>
 			</ul>
 			<div>
-				<h2 id="setup-for-win64--win32">Setup for Win64 / Win32</h2>
+				<h2 id="setup-for-win64">Setup for Win64</h2>
 			</div>
 			<p>This section covers building and running the mods sample app for both 32-bit and 64-bit Windows operating systems.</p>
 			<div>
-				<h3 id="building-the-mods-sample-app-for-win64--win32">Building the Mods Sample App for Win64 / Win32</h3>
+				<h3 id="building-the-mods-sample-app-for-win64">Building the Mods Sample App for Win64</h3>
 			</div>
 			<ol>
 				<li>
@@ -114,9 +114,7 @@
 				<li>
 					<p>Select the solution platform:
 						<code>x64</code>
-						(Win64) or
-						<code>x86</code>
-						(Win32)</p>
+						(Win64)</p>
 					<div tabindex="0" aria-label="Select x64 for win64 or x86 for win32 image, press Enter to open full size">
 						<div>
 							<span>
@@ -160,7 +158,7 @@
 			</ol>
 			<p>You can now run the sample application.</p>
 			<div>
-				<h3 id="running-the-mods-sample-app-for-win64--win32">Running the Mods Sample App for Win64 / Win32</h3>
+				<h3 id="running-the-mods-sample-app-for-win64">Running the Mods Sample App for Win64</h3>
 			</div>
 			<p>To run the Mods sample app, you will need to have the prerequisites from
 				<a href="#before-you-begin">Before You Begin</a>, plus the test application must be built per the previous section. You must also have the Launcher installed and pointing to the test build. Follow these steps to prepare and launch the application:</p>
@@ -356,12 +354,30 @@
 				<a href="#running-the-mods-sample-app">Running the Mods Sample App</a>
 				for more information.</p>
 			<div>
+				<h2 id="sign-in">Sign In</h2>
+			</div>
+			<p>From the right-side panel, click one of these options to sign in:</p>
+			<ul>
+				<li>
+					<strong>Dev Auth</strong>: Enter the host port and credentials that you configured for the Developer Authentication Tool (for example,
+					<code>127.0.0.1:8080</code>
+					if you set
+					<code>8080</code>
+					for the host port) and click
+					<strong>LOG IN</strong>. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					documentation for more information on the Developer Authentication Tool.</li>
+				<li>
+					<strong>Account Portal</strong>: Click
+					<strong>LOG IN</strong>
+					to sign in through the Account Portal with your Epic Games account credentials or a supported identity provider. See the
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					documentation for more information on identity providers.</li>
+			</ul>
+			<div>
 				<h2 id="using-the-mods-sample-app">Using the Mods Sample App</h2>
 			</div>
-			<p>To log in with the Developer Authentication Tool, select the
-				<strong>Dev Auth</strong>
-				option and choose
-				<strong>Log In</strong>. Once you have logged in, the mods sample app includes the following options:</p>
+			<p>After you sign in, the mods sample app includes the following options:</p>
 			<div>
 				<h3 id="enumerate-all-mods">Enumerate All Mods</h3>
 			</div>
@@ -398,46 +414,54 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#before-you-begin">Before You Begin</a>
-					</li>
-					<li>
-						<a href="#setup-for-win64--win32">Setup for Win64 / Win32</a>
-					</li>
-					<li>
-						<a href="#building-the-mods-sample-app-for-win64--win32">Building the Mods Sample App for Win64 / Win32</a>
-					</li>
-					<li>
-						<a href="#running-the-mods-sample-app-for-win64--win32">Running the Mods Sample App for Win64 / Win32</a>
-					</li>
-					<li>
-						<a href="#setup-for-macos">Setup for MacOS</a>
-					</li>
-					<li>
-						<a href="#setup-prerequisites">Setup Prerequisites</a>
-					</li>
-					<li>
-						<a href="#building-the-mods-sample-app-for-macos">Building the Mods Sample App for MacOS</a>
-					</li>
-					<li>
-						<a href="#running-the-mods-sample-app">Running the Mods Sample App</a>
-					</li>
-					<li>
-						<a href="#using-the-mods-sample-app">Using the Mods Sample App</a>
-					</li>
-					<li>
-						<a href="#enumerate-all-mods">Enumerate All Mods</a>
-					</li>
-					<li>
-						<a href="#enumerate-installed-mods">Enumerate Installed Mods</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#overview">Overview</a>
+								</li>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#setup-for-win64">Setup for Win64</a>
+								</li>
+								<li>
+									<a href="#building-the-mods-sample-app-for-win64">Building the Mods Sample App for Win64</a>
+								</li>
+								<li>
+									<a href="#running-the-mods-sample-app-for-win64">Running the Mods Sample App for Win64</a>
+								</li>
+								<li>
+									<a href="#setup-for-macos">Setup for MacOS</a>
+								</li>
+								<li>
+									<a href="#setup-prerequisites">Setup Prerequisites</a>
+								</li>
+								<li>
+									<a href="#building-the-mods-sample-app-for-macos">Building the Mods Sample App for MacOS</a>
+								</li>
+								<li>
+									<a href="#running-the-mods-sample-app">Running the Mods Sample App</a>
+								</li>
+								<li>
+									<a href="#sign-in">Sign In</a>
+								</li>
+								<li>
+									<a href="#using-the-mods-sample-app">Using the Mods Sample App</a>
+								</li>
+								<li>
+									<a href="#enumerate-all-mods">Enumerate All Mods</a>
+								</li>
+								<li>
+									<a href="#enumerate-installed-mods">Enumerate Installed Mods</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

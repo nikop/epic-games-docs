@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -12,103 +12,423 @@
 	<section>
 		<div>
 			<h1>Create Custom Price Tiers</h1>
-			<h2>Create custom regional pricing for your product offers.</h2>
+			<h2>Create custom regional pricing for your offers.</h2>
 			<div>
-				<div>6 mins to read</div>
+				<div>12 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<p>When creating offers for your product, you set a base USD price tier for those offers. Price tiers for additional regions are then automatically calculated using the provided USD value. As needed, you can create custom price tiers to determine your own regional pricing in place of the Epic-delivered price tiers. See
-				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/pricing-overview#pricing-restrictions">Pricing Restrictions</a>, for more information.</p>
-			<p>Custom price tiers must be reviewed by the Epic Games Store team. Once reviewed, the price tier can be assigned to your product offers. Custom price tiers are not associated with any offers by default.</p>
+			<p>When you create an offer for your product, or a web shop item for your web shop, you set a base USD price for that offer or web shop item. By default, the Developer Portal calculates and applies prices for all other regions, based on the USD value you set.</p>
+			<p>As an alternative, you can create your own custom price tier to determine your own regional pricing in place of the automatically-calculated price tiers. For more information on how to set price tiers, see documentation:
+				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/pricing-overview#pricing-restrictions">Pricing Overview &gt; Pricing Restrictions</a>.</p>
+			<p>After you create a custom price tier, you must send it to the Epic Games Store team for review. After the price tier passes review, you can assign it to your offers and web shop items. The Developer Portal never automatically assigns your custom price tiers to offers or web shop items.</p>
 			<div>
-				<h2 id="create-custom-price-tier">Create Custom Price Tier</h2>
+				<h2 id="create-a-custom-price-tier">Create a Custom Price Tier</h2>
 			</div>
-			<p>To create a custom price tier, follow the steps below:</p>
+			<p>To create a custom price tier:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Custom Price Tiers</strong>.</li>
-				<li>Click
-					<strong>Create Price Tier</strong>. Then, enter a name and base USD price for the tier.</li>
-				<li>In the Regional Prices section, enter the desired price for each
-					<a href="#epic-games-store-region-list">region</a>
-					as needed.
+				<li>In the Developer Portal, go to the
+					<strong>Custom Price Tiers</strong>
+					page. To do this:
 					<ul>
 						<li>
-							<strong>Tip</strong>: For comparison purposes, the Standard Price column lists a default price for each region based on the provided USD value.</li>
+							<p>(a) Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+						</li>
+						<li>
+							<p>(b) Select the correct organization for your product.</p>
+							<p>(To check, see
+								<strong>Organization</strong>
+								at the top of the left navigation. To change organization, click
+								<strong>Organization</strong>
+								and follow the onscreen instructions.)</p>
+						</li>
+						<li>
+							<p>(c) In the left navigation, under
+								<strong>Your products</strong>, click the name of your product.</p>
+						</li>
+						<li>
+							<p>(d) In the left navigation, click
+								<strong>Epic Games Store</strong>
+								&gt;
+								<strong>Custom Price Tiers</strong>.</p>
+						</li>
 					</ul>
 				</li>
-				<li>Once you have entered the desired regional pricing, click
-					<strong>Submit</strong>
-					to send your custom price tier for review.</li>
-			</ol>
-			<p>Your custom price tier is then routed to the Epic Games Store team for confirmation. You can monitor its progress through the Status column on the Custom Price Tiers page.</p>
-			<ul>
-				<li>
-					<strong>Review Complete</strong>: This status indicates a custom price tier has successfully been created and can now be
-					<a href="#add-custom-price-tier-to-offer">assigned to one or more offers</a>.</li>
-				<li>
-					<strong>Confirmation Required</strong>: This status indicates the Epic Games Store team left feedback for your price tier (e.g., a potentially misplaced decimal was detected). To view details, select the price tier from the table and review the provided feedback towards the top of the page. You can then choose to update and resubmit your price tier based on that feedback, or you can click
-					<strong>Submit</strong>
-					to the top right to continue with your price tier as configured.</li>
-			</ul>
-			<p>Once your custom price tier has been created, you can assign it to your product offers. Custom price tiers are not associated with any offers by default.</p>
-			<div>
-				<h2 id="add-custom-price-tier-to-offer">Add Custom Price Tier to Offer</h2>
-			</div>
-			<p>To assign a custom price tier to an existing offer, follow the steps below. (To add a custom price tier to a
-				<em>new</em>
-				offer, follow the standard process for
-				<a href="/docs/epic-games-store/store-presence/manage-offers">creating offers</a>.)</p>
-			<ol>
-				<li>Navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>
-					and select an offer to update.</li>
-				<li>On the Offer Details screen, click
-					<strong>Price</strong>.</li>
-				<li>In the Price Tier drop-down, select your custom price tier.</li>
-				<li>Review your update, then click
-					<strong>Save Changes</strong>.</li>
-			</ol>
-			<p>To learn more about offers, review
-				<a href="/docs/epic-games-store/store-presence/manage-offers">Manage Offers</a>.</p>
-			<div>
-				<h2 id="manage-custom-price-tiers">Manage Custom Price Tiers</h2>
-			</div>
-			<p>To manage your custom price tiers, navigate to
-				<strong>Your Product &gt; Epic Games Store &gt; Custom Price Tiers</strong>. You can then complete the following actions:</p>
-			<ul>
-				<li>
-					<strong>Review</strong>: Click the name of the price tier to review its details, including pricing information and a list of the offers currently using this tier.</li>
-				<li>
-					<strong>Edit</strong>: Click the
-					<strong>menu (...) icon</strong>
-					for a price tier and select
-					<strong>Edit</strong>. You can then update pricing information for that tier and submit those changes for review.
+				<li>At the top right, click
+					<strong>Create price tier</strong>.</li>
+				<li>Enter details of the price tier as follows:
 					<ul>
 						<li>
-							<strong>Notes</strong>:
+							<strong>Enter tier name:</strong>
+							Type a name that describes your custom price tier.
 							<ul>
-								<li>Price tiers within certain statuses, such as
-									<em>Queued for Review</em>, cannot be edited.</li>
-								<li>You can edit price tiers currently assigned to offers in the Live sandbox. After the updated price tier is reviewed, changes to that price tier are automatically applied to associated offers, including those live on the storefront. Updates to price tiers are not applied until the review process is finished.</li>
+								<li>This name appears in the list of available price tiers when you set the prices on an offer and web shop items.
+									<ul>
+										<li>
+											<strong>TIP:</strong>
+											Enter a clear and descriptive name. Choose a name that makes it easy to identify the price tier when you set prices on your offers and web shop items.</li>
+									</ul>
+								</li>
+								<li>
+									<strong>Select base price:</strong>
+									Choose a base USD price for the tier.
+									<ul>
+										<li>The Developer Portal automatically populates the price tier with prices for the various regions based on the price you select here. You can leave these prices as the default values, or edit them.</li>
+									</ul>
+								</li>
+								<li>For each region, in the
+									<strong>Regional price</strong>
+									column you can keep the default price or enter a custom price.
+									<ul>
+										<li>The
+											<strong>Standard price</strong>
+											column lists the original price that the Developer Portal automatically generated for each region.</li>
+										<li>For more information on regions, see the
+											<a href="#epic-games-store-region-list">Epic Games Store Region List</a>
+											section on this page.</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Click
+					<strong>Submit</strong>.
+					<ul>
+						<li>The Developer Portal sends your custom price tier to the Epic Games Store for review. For more information about the review process, see the
+							<a href="#check-the-status-of-a-price-tiers-review">Check the Status of a Price Tier's Review</a>
+							section on this page.</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h2 id="check-the-status-of-a-price-tiers-review">Check the Status of a Price Tier's Review</h2>
+			</div>
+			<p>When your price tier is in review, you can check on its progress in the Status column on the Custom Price Tiers page.</p>
+			<p>To go to the Custom Price Tiers page:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+				</li>
+				<li>
+					<p>Select the correct organization for your product.</p>
+					<p>(To check, see
+						<strong>Organization</strong>
+						at the top of the left navigation. To change organization, click
+						<strong>Organization</strong>
+						and follow the onscreen instructions.)</p>
+				</li>
+				<li>
+					<p>In the left navigation, under
+						<strong>Your products</strong>, click the name of your product.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Epic Games Store</strong>
+						&gt;
+						<strong>Custom Price Tiers</strong>.</p>
+				</li>
+			</ol>
+			<p>Each price tier has one of the following statuses:</p>
+			<ul>
+				<li>
+					<strong>Draft:</strong>
+					You have not completely set up the price tier. Before you send it for review, you must edit it to add more detail. For information on how to edit a price tier, see the
+					<a href="#edit-a-custom-price-tier">Edit a Custom Price Tier</a>
+					section on this page.</li>
+				<li>
+					<strong>Ready for Review:</strong>
+					You can send the price tier for review. For information on how to create and submit a price tier for review, see the
+					<a href="#create-a-custom-price-tier">Create a Custom Price Tier</a>
+					section on this page.</li>
+				<li>
+					<strong>Queued for Review:</strong>
+					You submitted the price tier for review, but the review is not complete yet.
+					<ul>
+						<li>Price tier reviews usually take 1-2 business days.</li>
+						<li>
+							<strong>Note:</strong>
+							When the review is complete, the price tier has the status
+							<code>Live</code>
+							(if it passes review) or
+							<code>Confirmation required</code>
+							(if the Epic Games Store team found any issues with the price tier during the review).</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Confirmation Required:</strong>
+					The review is complete. However, during the review, the Epic Games Store team found issues with the price tier (for example, they found a misplaced decimal point).
+					<ul>
+						<li>To view the details of the review, select the price tier from the table and read the feedback at the top of the page.</li>
+						<li>You can do one of the following:
+							<ul>
+								<li>Update the price tier based on the feedback. Then, at the top right, click
+									<strong>Submit</strong>
+									to resubmit the price tier for review. For information on how to update a price tier, see the
+									<a href="#edit-a-custom-price-tier">Edit a Custom Price Tier section</a>
+									of this page.</li>
+								<li>Proceed with the price tier without making any changes. To do so, at the top right, click
+									<strong>Submit</strong>.</li>
 							</ul>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<strong>Delete</strong>: Click the
-					<strong>menu (...) icon</strong>
-					for a price tier and select
-					<strong>Delete</strong>. On the popup, confirm the deletion. This action cannot be undone.
+					<strong>Live:</strong>
+					The price tier passed review. You can assign the price tier to your offers and web shop items.
 					<ul>
 						<li>
-							<strong>Note</strong>: Price tiers currently assigned to one or more offers cannot be deleted. To delete a price tier, ensure it has been removed from any offers.</li>
+							<strong>Note:</strong>
+							the Epic Games Store does not automatically assign custom price tiers to offers or web shop items–you must assign them manually. For information, see the
+							<a href="#add-a-custom-price-tier-to-an-existing-offer">Add a Custom Price Tier to an Offer</a>
+							section on this page.</li>
 					</ul>
 				</li>
 			</ul>
+			<div>
+				<h2 id="add-a-custom-price-tier-to-a-new-offer-or-web-shop-item">Add a Custom Price Tier to a New Offer or Web Shop Item</h2>
+			</div>
+			<p>To add a custom price tier to a new offer or web shop item, follow the standard process to create the offer or web shop item. When you set the price, select the custom price tier.</p>
+			<p>For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-games-store/store-presence/manage-offers#create-additional-offers">Manage Offers &gt; Create Additional Offers</a>
+				</li>
+				<li>
+					<a href="/docs/epic-games-store/store-presence/web-shops/manage-web-shop-items">Manage Web Shop Items</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="add-a-custom-price-tier-to-an-existing-offer">Add a Custom Price Tier to an Existing Offer</h2>
+			</div>
+			<p>To assign a custom price tier to an existing offer:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Offers</strong>
+					page. To do this:
+					<ul>
+						<li>
+							<p>(a) Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+						</li>
+						<li>
+							<p>(b) Select the correct organization for your product.</p>
+							<p>(To check, see
+								<strong>Organization</strong>
+								at the top of the left navigation. To change organization, click
+								<strong>Organization</strong>
+								and follow the onscreen instructions.)</p>
+						</li>
+						<li>
+							<p>(c) In the left navigation, under
+								<strong>Your products</strong>, click the name of your product.</p>
+						</li>
+						<li>
+							<p>(d) In the left navigation, click
+								<strong>Epic Games Store</strong>
+								&gt;
+								<strong>Offers</strong>.</p>
+						</li>
+					</ul>
+				</li>
+				<li>Click the offer that you want to assign the custom price to.</li>
+				<li>On the
+					<strong>Offer Details</strong>
+					screen, click
+					<strong>Price</strong>.</li>
+				<li>In
+					<strong>Price tier</strong>, select your custom price tier.</li>
+				<li>Click
+					<strong>Save Changes</strong>.</li>
+			</ol>
+			<p>
+				<strong>Note: restrictions on price changes:</strong>
+			</p>
+			<p>When you want to change an existing price on an offer, there are some restrictions. For details, see documentation:
+				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/pricing-overview#pricing-restrictions">Pricing Overview &gt; Pricing Restrictions</a>.</p>
+			<p>To learn more about offers, see documentation:
+				<a href="/docs/epic-games-store/store-presence/manage-offers">Manage Offers</a>.</p>
+			<div>
+				<h2 id="add-a-custom-price-tier-to-an-existing-web-shop-item">Add a Custom Price Tier to an Existing Web Shop Item</h2>
+			</div>
+			<p>To assign a custom price tier to an existing web shop item:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Web Shop</strong>
+					page. To do this:
+					<ul>
+						<li>
+							<p>(a) Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+						</li>
+						<li>
+							<p>(b) Select the correct organization for your product.</p>
+							<p>(To check, see
+								<strong>Organization</strong>
+								at the top of the left navigation. To change organization, click
+								<strong>Organization</strong>
+								and follow the onscreen instructions.)</p>
+						</li>
+						<li>
+							<p>(c) In the left navigation, under
+								<strong>Your products</strong>, click the name of your product.</p>
+						</li>
+						<li>
+							<p>(d) In the left navigation, click
+								<strong>Epic Games Store</strong>
+								&gt;
+								<strong>Web Shop</strong>.</p>
+						</li>
+					</ul>
+				</li>
+				<li>Click the web shop item that you want to assign the custom price to.</li>
+				<li>On the
+					<strong>Web Shop Item Details</strong>
+					screen, click
+					<strong>Price</strong>.</li>
+				<li>In
+					<strong>Price tier</strong>, select your custom price tier.</li>
+				<li>Click
+					<strong>Save Changes</strong>.</li>
+			</ol>
+			<p>
+				<strong>Note</strong>: When you want to change an existing price on a web shop item, there are some restrictions. For details, see documentation:
+				<a href="/docs/epic-games-store/requirements-guidelines/content-ratings/pricing-overview#pricing-restrictions">Pricing Overview &gt; Pricing Restrictions</a>.</p>
+			<p>For information about web shops, see documentation:
+				<a href="/docs/epic-games-store/store-presence/web-shops/manage-web-shops">Manage Your Web Shop</a>.</p>
+			<div>
+				<h2 id="view-the-details-of-a-custom-price-tier">View the Details of a Custom Price Tier</h2>
+			</div>
+			<p>On the Custom Price Details page, you can view the details of a custom price tier, including pricing information and a list of the offers and web shop items that currently use that price tier.</p>
+			<p>To view the details of a custom price tier:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Custom Price Tiers</strong>
+					page. To do this:
+					<ul>
+						<li>
+							<p>(a) Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+						</li>
+						<li>
+							<p>(b) Select the correct organization for your product.</p>
+							<p>(To check, see
+								<strong>Organization</strong>
+								at the top of the left navigation. To change organization, click
+								<strong>Organization</strong>
+								and follow the onscreen instructions.)</p>
+						</li>
+						<li>
+							<p>(c) In the left navigation, under
+								<strong>Your products</strong>, click the name of your product.</p>
+						</li>
+						<li>
+							<p>(d) In the left navigation, click
+								<strong>Epic Games Store</strong>
+								&gt;
+								<strong>Custom Price Tiers</strong>.</p>
+						</li>
+					</ul>
+				</li>
+				<li>Click the price tier you want to view.</li>
+			</ol>
+			<div>
+				<h2 id="edit-a-custom-price-tier">Edit a Custom Price Tier</h2>
+			</div>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>You cannot edit a price tier that has the status
+					<code>Queued for Review</code>. If you want to edit it, wait until the review is complete and the status of the price tier changes. For more information on statuses, see the
+					<a href="#check-the-status-of-a-price-tiers-review">Check the Status of a Price Tier's Review</a>
+					section of this page.</li>
+				<li>You can edit price tiers that are currently assigned to offers and web shop items. After the review is complete, your edits automatically apply to any offers and web shop items that the price tier is assigned to. This includes offers and web shop items that are live on the storefront.</li>
+			</ul>
+			<p>To edit a custom price tier:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Custom Price Tiers</strong>
+					page. To do this:
+					<ul>
+						<li>
+							<p>(a) Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+						</li>
+						<li>
+							<p>(b) Select the correct organization for your product.</p>
+							<p>(To check, see
+								<strong>Organization</strong>
+								at the top of the left navigation. To change organization, click
+								<strong>Organization</strong>
+								and follow the onscreen instructions.)</p>
+						</li>
+						<li>
+							<p>(c) In the left navigation, under
+								<strong>Your products</strong>, click the name of your product.</p>
+						</li>
+						<li>
+							<p>(d) In the left navigation, click
+								<strong>Epic Games Store</strong>
+								&gt;
+								<strong>Custom Price Tiers</strong>.</p>
+						</li>
+					</ul>
+				</li>
+				<li>Click the price tier you want to edit.</li>
+				<li>Edit the pricing information for the price tier.</li>
+				<li>To submit your changes for review, click
+					<strong>Submit</strong>.</li>
+			</ol>
+			<div>
+				<h2 id="delete-a-custom-price-tier">Delete a Custom Price Tier</h2>
+			</div>
+			<p>You can delete a custom price tier. Note that you cannot undo this action.</p>
+			<p>
+				<strong>Note:</strong>
+				If a price tier is currently assigned to one or more offers or web shop items, then you must remove it from these offers and web shop items before you can delete it. To do so, select a different price tier on these offers and web shop items.</p>
+			<p>See the section above for information on how to select a price tier:</p>
+			<ul>
+				<li>
+					<a href="#add-a-custom-price-tier-to-an-existing-offer">Add a Custom Price Tier to an Existing Offer</a>
+				</li>
+				<li>
+					<a href="#add-a-custom-price-tier-to-an-existing-web-shop-item">Add a Custom Price Tier to an Existing Web Shop Item</a>
+				</li>
+			</ul>
+			<p>To delete a custom price tier:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Custom Price Tiers</strong>
+					page. To do this:
+					<ul>
+						<li>
+							<p>(a) Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+						</li>
+						<li>
+							<p>(b) Select the correct organization for your product.</p>
+							<p>(To check, see
+								<strong>Organization</strong>
+								at the top of the left navigation. To change organization, click
+								<strong>Organization</strong>
+								and follow the onscreen instructions.)</p>
+						</li>
+						<li>
+							<p>(c) In the left navigation, under
+								<strong>Your products</strong>, click the name of your product.</p>
+						</li>
+						<li>
+							<p>(d) In the left navigation, click
+								<strong>Epic Games Store</strong>
+								&gt;
+								<strong>Custom Price Tiers</strong>.</p>
+						</li>
+					</ul>
+				</li>
+				<li>In the list of price tiers, find the price tier you want to delete.</li>
+				<li>Click the menu (
+					<strong>…</strong>
+					) icon and select
+					<strong>Delete</strong>.</li>
+			</ol>
 			<div>
 				<h2 id="epic-games-store-region-list">Epic Games Store Region List</h2>
 			</div>
@@ -448,22 +768,42 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#create-custom-price-tier">Create Custom Price Tier</a>
-					</li>
-					<li>
-						<a href="#add-custom-price-tier-to-offer">Add Custom Price Tier to Offer</a>
-					</li>
-					<li>
-						<a href="#manage-custom-price-tiers">Manage Custom Price Tiers</a>
-					</li>
-					<li>
-						<a href="#epic-games-store-region-list">Epic Games Store Region List</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#create-a-custom-price-tier">Create a Custom Price Tier</a>
+								</li>
+								<li>
+									<a href="#check-the-status-of-a-price-tiers-review">Check the Status of a Price Tier's Review</a>
+								</li>
+								<li>
+									<a href="#add-a-custom-price-tier-to-a-new-offer-or-web-shop-item">Add a Custom Price Tier to a New Offer or Web Shop Item</a>
+								</li>
+								<li>
+									<a href="#add-a-custom-price-tier-to-an-existing-offer">Add a Custom Price Tier to an Existing Offer</a>
+								</li>
+								<li>
+									<a href="#add-a-custom-price-tier-to-an-existing-web-shop-item">Add a Custom Price Tier to an Existing Web Shop Item</a>
+								</li>
+								<li>
+									<a href="#view-the-details-of-a-custom-price-tier">View the Details of a Custom Price Tier</a>
+								</li>
+								<li>
+									<a href="#edit-a-custom-price-tier">Edit a Custom Price Tier</a>
+								</li>
+								<li>
+									<a href="#delete-a-custom-price-tier">Delete a Custom Price Tier</a>
+								</li>
+								<li>
+									<a href="#epic-games-store-region-list">Epic Games Store Region List</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

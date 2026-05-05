@@ -1,0 +1,36 @@
+query getCuratedOfferListsConfig($locale: String!, $sandboxId: String!) {
+  Product {
+    sandbox(sandboxId: $sandboxId) {
+      configuration(locale: $locale) {
+        ... on CuratedOfferListsConfiguration {
+          configs {
+            sandboxId
+            enabledSections
+            editions {
+              namespace
+              offerId
+              title
+              description
+              slug
+              image {
+                src
+                altText
+              }
+            }
+            addons {
+              namespace
+              offerId
+              title
+              description
+              slug
+              image {
+                src
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

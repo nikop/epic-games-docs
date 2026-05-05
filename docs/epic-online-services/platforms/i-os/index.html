@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,7 +14,7 @@
 			<h1>EOS SDK for iOS</h1>
 			<h2>How to implement EOS SDK in an iOS project using Xcode.</h2>
 			<div>
-				<div>3 mins to read</div>
+				<div>5 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -34,7 +34,17 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>EOS SDK 1.10.2 - 1.16.3</td>
+						<td>EOS SDK 1.17.0-CL43712763 - 1.19.0.7-CL52449437</td>
+						<td>supports</td>
+						<td>iOS 12 and 18</td>
+					</tr>
+					<tr>
+						<td>EOS SDK 1.16.4-CL36651368 - 1.17.0-CL39599718</td>
+						<td>supports</td>
+						<td>iOS 12 or higher</td>
+					</tr>
+					<tr>
+						<td>EOS SDK 1.10.2 - 1.16.3-CL35276460</td>
 						<td>supports</td>
 						<td>iOS 11 or higher</td>
 					</tr>
@@ -49,10 +59,29 @@
 			<div>
 				<h2 id="set-up-the-eos-sdk-for-ios">Set up the EOS SDK for iOS</h2>
 			</div>
-			<p>To use Epic Online Services (EOS) SDK in your project, you must use the EOS SDK framework for iOS (the framework). These instructions assume that you have an existing iOS project in Xcode.</p>
+			<p>To use Epic Online Services (EOS) SDK in your project, you must embed it in your project and link to it within your project. The EOS SDK download includes both
+				<code>.framework</code>
+				and
+				<code>.xcframework</code>
+				bundles in the
+				<code>/SDK/Bin/IOS</code>
+				directory. XCFrameworks contain multiple frameworks for different platforms and architectures. These instructions assume that you have an existing iOS project in Xcode, and they provide steps on how to embed the EOS SDK as
+				<code>.framework</code>.</p>
 			<p>Before you implement the SDK with iOS, see the documentation on
 				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
 				for information on platform implementation.</p>
+			<p>
+				<strong>Notes</strong>
+			</p>
+			<ul>
+				<li>The EOS SDK is not thread safe. You must make all calls to EOS from the same thread. For more information, see the following documentation:
+					<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-safety">Conventions and Limitations &gt; Thread Safety</a>.</li>
+				<li>You must call the
+					<a href="/docs/api-ref/functions/eos-platform-set-application-status">
+						<code>EOS_Platform_SetApplicationStatus</code>
+						function</a>
+					when you place your application into the background or foreground.</li>
+			</ul>
 			<p>
 				<strong>Objective-C and Swift iOS Projects</strong>
 			</p>
@@ -66,19 +95,26 @@
 			</div>
 			<p>Follow these steps to download the EOS SDK framework for iOS (the framework):</p>
 			<ol>
-				<li>Sign in to the Developer Portal at
-					<a href="https://dev.epicgames.com/portal/en-US">https://dev.epicgames.com</a>.</li>
+				<li>Sign in to the Developer Portal at (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+				<li>In the left navigation, click
+					<strong>Dashboard</strong>
+					if it isn't already selected.</li>
+				<li>On the Dashboard page, under the
+					<strong>Your products</strong>
+					heading, click
+					<strong>Downloads &amp; Release notes</strong>.</li>
+				<li>Select the
+					<strong>EOS SDK</strong>
+					tab.</li>
+				<li>For
+					<strong>SDK Type</strong>, select
+					<strong>SDK for iOS</strong>.</li>
+				<li>For
+					<strong>SDK Version</strong>, select the version with
+					<em>(Latest)</em>
+					next to the version number.</li>
 				<li>Click
-					<strong>DOWNLOAD SDK</strong>.</li>
-				<li>From the
-					<strong>SDK type</strong>
-					drop-down menu, select the
-					<strong>SDK for iOS</strong>
-					option.</li>
-				<li>From the
-					<strong>Version</strong>
-					drop-down menu, select the latest version, and click
-					<strong>DOWNLOAD</strong>.</li>
+					<strong>Download EOS SDK</strong>.</li>
 			</ol>
 			<div>
 				<h3 id="2--add-the-eos-sdk-framework-to-your-project">2.  Add the EOS SDK Framework to Your Project</h3>
@@ -181,12 +217,6 @@
 				<li>iOS 12+: Login flows.</li>
 				<li>iOS 13+: Sign in with Apple login.</li>
 			</ul>
-			<p>
-				<strong>Note</strong>: If your game supports iOS 11, you must also include
-				<code>SafariServices.framework</code>
-				for the login flows. Follow the same steps below to add
-				<code>SafariServices.framework</code>
-				to your project. Note that this API is deprecated and may be removed by Apple in the future. It is only supported for limited backwards compatibility.</p>
 			<p>Follow these steps to add the
 				<code>AuthenticationServices</code>
 				dependency to your project:</p>
@@ -227,39 +257,109 @@
 				</li>
 			</ol>
 			<div>
-				<h3 id="next-steps">Next Steps</h3>
+				<h3 id="4-initialize-the-eos-sdk">4. Initialize the EOS SDK</h3>
 			</div>
-			<p>Build and run the app on your device to ensure that it builds properly. Simulator support in Xcode is currently not available to test the EOS SDK. To run the EOS SDK framework in your project, you must have a physical, connected, device with iOS 11 or higher.</p>
+			<p>You must initialize the EOS SDK before you can use the EOS SDK interfaces. For more information on how to initialize the EOS SDK, see the following documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">Guide: Get Started With EOS &gt; 3. Set Up the EOS SDK</a>.</p>
+			<div>
+				<h3 id="5-build-and-run-the-application">5. Build and Run the Application</h3>
+			</div>
+			<p>Before you implement authentication in your application in the next step, build and run the application on your device to make sure everything runs properly.</p>
 			<p>
-				<strong>Note</strong>: You must initialize the EOS SDK before you can use the interfaces. See the
-				<a href="/docs/game-services/eos-platform-interface#initializing-the-sdk">Platform Interface</a>
-				documentation for more information on initializing the EOS SDK.</p>
+				<strong>Note:</strong>
+				Simulator support in Xcode is currently not available to test the EOS SDK. To run the EOS SDK framework in your project, you must have a physical, connected device with iOS 12 or higher.</p>
+			<div>
+				<h3 id="6-specify-the-window-for-sign-in">6. Specify the Window for Sign-In</h3>
+			</div>
+			<p>To allow players to sign-in, you must specify which UI window you want to display the sign-in view. The steps below demonstrate how to do this using Objective-C. For an example written in Swift, see the iOS sample in the
+				<a href="/docs/epic-online-services/platforms/i-os/eo-si-os-sample">EOS SDK for iOS Samples</a>
+				documentation.</p>
+			<p>To specify the UI window to use, follow these steps:</p>
+			<ol>
+				<li>Implement a
+					<code>NSObject</code>
+					that returns the
+					<code>UIWindow</code>
+					that you want to display the sign-in view.</li>
+			</ol>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<ol start="2">
+				<li>Initialize and retain the
+					<code>NSObject</code>
+					that you implemented and pass it to the
+					<a href="/docs/api-ref/structs/eos-auth-login-options">EOS_Auth_LoginOptions</a>
+					struct.</li>
+			</ol>
+			<p>
+				<strong>Note:</strong>
+				Below is an example implementation. The additional credentials options, credentials, and login options depend on the requirements of your game. For more information, see the documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/auth-intro">Guide: Access Epic Account Services With the Auth Interface</a>.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<ol start="3">
+				<li>Call
+					<a href="/docs/api-ref/functions/eos-auth-login">EOS_Auth_login()</a>
+					and pass the
+					<code>EOS_Auth_LoginOptions</code>
+					that you configured in step 2. For more information on how to use the Auth Interface, see the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+					documentation.</li>
+			</ol>
+			<div>
+				<h3 id="7-build-and-run-the-application">7. Build and Run the Application</h3>
+			</div>
+			<p>After you've implemented authentication in your application, build your application again to make sure it runs properly.</p>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#supported-ios-release-versions">Supported iOS Release Versions</a>
-					</li>
-					<li>
-						<a href="#set-up-the-eos-sdk-for-ios">Set up the EOS SDK for iOS</a>
-					</li>
-					<li>
-						<a href="#1-download-the-eos-sdk-framework-for-ios">1. Download the EOS SDK Framework for iOS</a>
-					</li>
-					<li>
-						<a href="#2--add-the-eos-sdk-framework-to-your-project">2.  Add the EOS SDK Framework to Your Project</a>
-					</li>
-					<li>
-						<a href="#3--add-framework-dependencies">3.  Add Framework Dependencies</a>
-					</li>
-					<li>
-						<a href="#next-steps">Next Steps</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#supported-ios-release-versions">Supported iOS Release Versions</a>
+								</li>
+								<li>
+									<a href="#set-up-the-eos-sdk-for-ios">Set up the EOS SDK for iOS</a>
+								</li>
+								<li>
+									<a href="#1-download-the-eos-sdk-framework-for-ios">1. Download the EOS SDK Framework for iOS</a>
+								</li>
+								<li>
+									<a href="#2--add-the-eos-sdk-framework-to-your-project">2.  Add the EOS SDK Framework to Your Project</a>
+								</li>
+								<li>
+									<a href="#3--add-framework-dependencies">3.  Add Framework Dependencies</a>
+								</li>
+								<li>
+									<a href="#4-initialize-the-eos-sdk">4. Initialize the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#5-build-and-run-the-application">5. Build and Run the Application</a>
+								</li>
+								<li>
+									<a href="#6-specify-the-window-for-sign-in">6. Specify the Window for Sign-In</a>
+								</li>
+								<li>
+									<a href="#7-build-and-run-the-application">7. Build and Run the Application</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

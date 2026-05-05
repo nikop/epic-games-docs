@@ -1,0 +1,253 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Get Started With Epic Online Services — 1. Set Up Your Account and Download the EOS SDK</h1>
+			<h2>Step-by-step guide on how to set up your Epic Games account and download the EOS SDK, so you can use EOS in your game.</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/get-started-intro">Introduction</a>
+			</p>
+			<p>To use EOS, you must set up both an Epic Games account and an organization in the Developer Portal at
+				<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>. (If you have an Epic Games account already, you can sign into your existing account through the Developer Portal. You don't need to create a new account.)</p>
+			<p>After you have set up your Epic Games account and organization, you can use the Developer Portal to set up your game to use EOS services, to configure how your game uses EOS services, and to access the EOS SDK download.</p>
+			<p>
+				<strong>Unreal Engine EOS plugins and EOS Plugin for Unity</strong>
+				<br>
+				Do not use this guide if you use one of the Unreal Engine EOS plugins or the EOS Plugin for Unity to integrate the EOS SDK into your game. This guide does not apply to these plugins.</p>
+			<p>This guide shows how to manually integrate the EOS SDK into your game, which is an alternative to using the plugins. For more information on the available options you have to integrate the EOS SDK into your game, including the plugins, see the documentation:
+				<a href="/docs/epic-online-services/game-engines/game-engines-introduction">EOS SDK and Game Engines Introduction</a>.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start, check that you meet the following prerequisites:</p>
+			<ul>
+				<li>Your development environment meets the
+					<a href="/docs/epic-online-services/system-requirements">System Requirements</a>.</li>
+				<li>You can access the host addresses on the
+					<a href="/docs/epic-online-services/firewall-considerations">Firewall Considerations</a>
+					page.</li>
+			</ul>
+			<div>
+				<h2 id="set-up-your-account-and-download-the-sdk">Set Up Your Account and Download the SDK</h2>
+			</div>
+			<p>Complete the following steps to access the EOS SDK:</p>
+			<ul>
+				<li>
+					<a href="#step-a-create-your-account-organization-and-product">Step A: Create Your Account, Organization, and Product</a>
+				</li>
+				<li>
+					<a href="#step-b-create-your-client-and-client-policy">Step B: Create Your Client and Client Policy</a>
+				</li>
+				<li>
+					<a href="#step-c-download-the-eos-sdk">Step C: Download the EOS SDK</a>
+				</li>
+			</ul>
+			<p>
+				<strong>About the Developer Portal</strong>
+				<br>
+				You will use the Developer Portal to complete this section of the guide. The Developer Portal is a browser-based tool which you use to set up and configure EOS for your game.</p>
+			<p>You can also use the Developer Portal to set up and configure other Epic services and tools. You do not need to set up or configure any other Epic services or tools to complete this or any other section of the guide, or to integrate any EOS services into your game.</p>
+			<p>In addition to setting up your game to use EOS, you can use the Developer Portal for the following purposes:</p>
+			<ul>
+				<li>Epic Games Store<br>
+					Set up and manage your game’s distribution.
+					<ul>
+						<li>Documentation:
+							<a href="/docs/epic-games-store/get-started/get-started-steps/introduction">Epic Games Store &gt; Get Started Steps &gt; Introduction</a>.</li>
+					</ul>
+				</li>
+				<li>Kids Web Services (KWS)<br>
+					Set up age gating and parent verification.
+					<ul>
+						<li>Documentation:
+							<a href="/docs/kids-web-services">Kids Web Services (KWS)</a>
+						</li>
+					</ul>
+				</li>
+				<li>Epic tools: Unreal Engine, Twinmotion, RealityScan<br>
+					Configure seat allocation and royalty reporting, for example.
+					<ul>
+						<li>Documentation:
+							<a href="/docs/dev-portal/dev-portal-intro">Developer Portal Introduction</a>
+							– information on the Developer Portal and links to Epic Tools documentation.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>You do not need to set up or configure any of the Epic services or tools listed above to complete this guide or use EOS.</p>
+			<div>
+				<h3 id="step-a-create-your-account-organization-and-product">Step A: Create Your Account, Organization, and Product</h3>
+			</div>
+			<ol>
+				<li>
+					<p>Go to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>) and click
+						<strong>Sign in</strong>.</p>
+					<ul>
+						<li>a. If you already have an Epic Games account, sign in to your existing account. Otherwise, click
+							<strong>Create an account</strong>
+							and follow the onscreen instructions to create and sign in to your new account.</li>
+						<li>b. When you first sign in or create an account, the Developer Portal prompts you to create an organization. This is a group (usually a business) that creates and owns games that use Epic services and tools.</li>
+					</ul>
+					<p>For guidance on organizations, see the documentation:
+						<a href="/docs/dev-portal/organization-management">Developer Portal &gt; Organizations</a>.</p>
+				</li>
+				<li>
+					<p>(Optional) Add team members to your organization.<br>
+						When you set up the organization, you become the owner of it. You can add additional team members in the Developer Portal’s Organization page.<br>
+						To do this:</p>
+					<ul>
+						<li>a. In the Developer Portal’s left navigation, click
+							<strong>Organization</strong>. The Organization page defaults to the Members tab.</li>
+						<li>b. In the Members tab, follow the onscreen instructions to invite new members to your organization and set their roles.<br>
+							For further guidance, see the documentation:
+							<a href="/docs/dev-portal/organization-management#members">Developer Portal &gt; Organizations &gt; Members</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the Developer Portal, your game is known as a “product”. You add your game to the Developer Portal by creating a product.<br>
+						To do this:</p>
+					<ul>
+						<li>a. In the Developer Portal’s left navigation, under
+							<strong>Your products</strong>, click
+							<strong>Create Product</strong>.</li>
+						<li>b. Follow the onscreen instructions.</li>
+					</ul>
+					<p>
+						<strong>Note</strong>: To create a product, you must have the
+						<strong>Owner</strong>
+						or
+						<strong>Admin</strong>
+						role in your organization. Members with other roles, including custom roles, cannot create products. For information on roles, see the documentation:
+						<a href="/docs/dev-portal/roles/list-of-roles">Available Roles in the Developer Portal</a>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-b-create-your-client-and-client-policy">Step B: Create Your Client and Client Policy</h3>
+			</div>
+			<p>A client is software that accesses any Epic Online Services (EOS) service. Players download and run a client to play a game that uses EOS services.</p>
+			<p>A client policy defines what EOS services and other EOS features a client can access, such as Achievements, Stats, Leaderboards, and more.</p>
+			<p>You set up both clients and client policies in the Developer Portal. You also assign a client policy to a client in the Developer Portal.</p>
+			<p>For more information, see the documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</p>
+			<div>
+				<h3 id="step-c-download-the-eos-sdk">Step C: Download the EOS SDK</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				If you use Unreal Engine, you do not need to download the EOS SDK. The EOS SDK is included with Unreal Engine by default.</p>
+			<p>Select a version of the EOS SDK for the platform your game client runs on. The EOS SDK is available for the following platforms:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Windows, macOS, Linux</strong>
+						<br>
+						The EOS SDK in C and the EOS SDK in C#.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Mobile</strong>
+						<br>
+						The EOS SDK for iOS and the EOS SDK for Android.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Consoles</strong>
+						<br>
+						To download the EOS SDK for game consoles, you must be a developer approved by both the platform holders and by Epic Games. The SDK is available in C and C#.<br>
+						The platform holders are Microsoft (Xbox One, Xbox Series), Sony (PlayStation 4, PlayStation 5), and Nintendo (Switch, Switch 2).</p>
+				</li>
+			</ul>
+			<p>For information about requesting approval, see the documentation:
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference">Get Started Reference &gt; Access to the EOS SDK for Consoles</a>.</p>
+			<p>You download the EOS SDK from the Developer Portal on the Dashboard page. To do this:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Dashboard</strong>
+						if it isn’t already selected.</p>
+				</li>
+				<li>
+					<p>On the Dashboard page, under the
+						<strong>Your products</strong>
+						heading, click
+						<strong>Downloads &amp; Release notes</strong>.</p>
+				</li>
+				<li>
+					<p>Select the
+						<strong>EOS SDK</strong>
+						tab.</p>
+					<p>
+						<strong>Note</strong>: You can only access the EOS SDK for consoles if you have the appropriate permissions. To request access, scroll down and click
+						<strong>Request access</strong>.  (Documentation:
+						<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference">Get Started Reference &gt; Access to the EOS SDK for Consoles</a>.)</p>
+				</li>
+				<li>
+					<p>For
+						<strong>SDK Type</strong>, select C, C#, or the EOS SDK for the platform that you want to download the EOS SDK for.</p>
+				</li>
+				<li>
+					<p>For
+						<strong>SDK Version</strong>, select the version with
+						<em>(Latest)</em>
+						next to the version number.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Download EOS SDK</strong>.</p>
+				</li>
+				<li>
+					<p>On your computer, move the download to a directory your project can access and unzip it.</p>
+				</li>
+			</ol>
+			<p>Next section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-visual-studio">2. Create and Configure Your Visual Studio Project</a>
+				(optional but recommended)</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#set-up-your-account-and-download-the-sdk">Set Up Your Account and Download the SDK</a>
+								</li>
+								<li>
+									<a href="#step-a-create-your-account-organization-and-product">Step A: Create Your Account, Organization, and Product</a>
+								</li>
+								<li>
+									<a href="#step-b-create-your-client-and-client-policy">Step B: Create Your Client and Client Policy</a>
+								</li>
+								<li>
+									<a href="#step-c-download-the-eos-sdk">Step C: Download the EOS SDK</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

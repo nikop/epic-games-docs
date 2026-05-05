@@ -1,0 +1,569 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Anti-cheat Samples</h1>
+			<h2>Overview of the Anti-cheat Samples.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						Anti-Cheat does not support the following platforms: Linux ARM64 (Anti-Cheat Client Interface), Android, iOS, and console platforms.<br>
+						Anti-Cheat requires EOS SDK 1.15 or higher, the
+						<code>start_protected_game.exe</code>
+						from EOS SDK 1.16 or higher, and a 64-bit operating system.</p>
+				</div>
+			</div>
+			<p>The anti-cheat Samples use the EOS SDK written in C. They demonstrate how to implement Easy Anti-Cheat with two different sample applications:</p>
+			<ul>
+				<li>Anti-Cheat Server</li>
+				<li>Anti-Cheat Client</li>
+			</ul>
+			<p>
+				<strong>Note</strong>: To test Easy Anti-Cheat, you must build and run both of these sample applications. The samples demonstrate these features:</p>
+			<ul>
+				<li>Join a protected game session.</li>
+				<li>Leave a protected game session.</li>
+				<li>Anti-cheat communication logs.</li>
+			</ul>
+			<p>See the
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-interfaces">Anti-Cheat Interfaces</a>
+				documentation for more information on anti-cheat.</p>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>To use these sample applications, you must meet these requirements:</p>
+			<ul>
+				<li>An existing game (referred to as "test game" below) with the following configurations:
+					<ul>
+						<li>Epic Account Services configured for your game. See the
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/getting-started#before-you-start">Epic Account Services</a>
+							documentation for more information on how to set up Epic Account Services for your game.</li>
+						<li>Easy Anti-Cheat configured for your game. See the
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-interfaces">Anti-Cheat Interfaces</a>
+							documentation for more information on how to configure anti-cheat for your game.</li>
+					</ul>
+				</li>
+				<li>The EOS SDK in C downloaded and unzipped. Download this from the Developer Portal. See the
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk#step-c-download-the-eos-sdk">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK</a>
+					documentation for more information on how to download the EOS SDK.</li>
+				<li>If you use macOS or Linux, you must have these items installed:
+					<ul>
+						<li>
+							<a href="https://wiki.libsdl.org/Introduction">SDL2</a>
+						</li>
+						<li>
+							<a href="https://www.libsdl.org/projects/SDL_ttf/">SDL2_ttf</a>
+						</li>
+						<li>
+							<a href="https://github.com/libsdl-org/SDL_net">SDL2_net</a>
+						</li>
+						<li>
+							<a href="http://glew.sourceforge.net/">GLEW</a>
+						</li>
+						<li>
+							<a href="https://cmake.org/">cmake</a>
+						</li>
+						<li>
+							<a href="https://gcc.gnu.org/">gcc</a>
+							(through Command Line Tools for Xcode for Mac)</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="step-1-configure-the-samples">Step 1: Configure the Samples</h2>
+			</div>
+			<p>Before you can use the samples, you must configure them to use your game's credentials. Follow the steps below for your operating system.</p>
+			<div>
+				<h3 id="windows">Windows</h3>
+			</div>
+			<p>Follow these steps on Windows to configure the sample applications to use your test game's credentials. Configure these settings for each sample application separately:</p>
+			<ol>
+				<li>In the
+					<code>\EOS-SDK-[version]\Samples\</code>
+					directory, open
+					<code>Samples.sln</code>. Visual Studio opens it in the Solution Explorer.</li>
+				<li>From the Solution Explorer, expand the sample application's file structure.</li>
+				<li>Open the sample application's
+					<code>\Source\SampleConstants.h</code>
+					file.</li>
+				<li>Replace the values for
+					<code>ProductId</code>,
+					<code>SandboxId</code>,
+					<code>DeploymentId</code>,
+					<code>ClientCredentialsId</code>
+					(Client ID in the Developer Portal), and
+					<code>ClientCredentialsSecret</code>
+					(Client Secret in the Developer Portal) with the values for your test game. You can find these values in the Developer Portal, under your Product's
+					<strong>Product Settings</strong>
+					&gt;
+					<strong>SDK Download &amp; Credentials</strong>
+					tab, listed beneath the
+					<code>EOS SDK Credentials</code>
+					heading.</li>
+			</ol>
+			<div>
+				<h3 id="macos-and-linux">MacOS and Linux</h3>
+			</div>
+			<p>On macOS and Linux, follow these steps for each sample application, separately, to configure the sample applications to use your test game's credentials:</p>
+			<ol>
+				<li>In Terminal, go to the sample application's directory:
+					<ul>
+						<li>Anti-Cheat Client:
+							<code>/EOS-SDK-[version]/Samples/AntiCheat/Client/</code>
+						</li>
+						<li>Anti-Cheat Server:
+							<code>/EOS-SDK-[version]/Samples/AntiCheat/Server/</code>
+						</li>
+					</ul>
+				</li>
+				<li>Open
+					<code>SampleConstants.h</code>
+					from the project and update
+					<code>ProductId</code>,
+					<code>SandboxId</code>,
+					<code>DeploymentId</code>,
+					<code>ClientCredentialsId</code>
+					(Client ID in the Developer Portal), and
+					<code>ClientCredentialsSecret</code>
+					(Client Secret in the Developer Portal) based on the values for your test game. You can find these values in the Developer Portal, under your Product's
+					<strong>Product Settings</strong>
+					&gt;
+					<strong>SDK Download &amp; Credentials</strong>
+					tab, listed beneath the
+					<strong>EOS SDK Credentials</strong>
+					heading.</li>
+			</ol>
+			<div>
+				<h2 id="step-2-build-the-samples">Step 2: Build the Samples</h2>
+			</div>
+			<p>To build the samples, follow the steps below for your system.</p>
+			<div>
+				<h3 id="windows-1">Windows</h3>
+			</div>
+			<p>Follow these steps for each app, separately, to build the sample applications on Windows:</p>
+			<ol>
+				<li>From the Solution Configurations dropdown in Visual Studio's toolbar, select:
+					<ul>
+						<li>Anti-Cheat Client:
+							<strong>Release_DX</strong>
+							or
+							<strong>Debug_DX</strong>.</li>
+						<li>Anti-Cheat Server:
+							<strong>Release</strong>
+							or
+							<strong>Debug</strong>.</li>
+					</ul>
+				</li>
+				<li>From the Solution Platforms dropdown in the toolbar, select
+					<strong>x64</strong>
+					(Win64).</li>
+				<li>In the Solution Explorer, right-click the sample application's project (shown below) and click
+					<strong>Build</strong>.
+					<ul>
+						<li>Anti-Cheat Client:
+							<strong>AntiCheat</strong>
+						</li>
+						<li>Anti-Cheat Server:
+							<strong>AntiCheatServer</strong>
+						</li>
+					</ul>
+				</li>
+				<li>After a successful build, the EXE is available under the corresponding directory:
+					<ul>
+						<li>Anti-Cheat Client:
+							<code>\EOS-SDK\Samples\AntiCheat\Client\Bin\Win64\Release_DX\AntiCheat.exe</code>
+						</li>
+						<li>Anti-Cheat Server:
+							<code>\EOS-SDK\Samples\AntiCheat\Server\Bin\Win64\Release\AntiCheatServer.exe</code>
+						</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h3 id="macos-and-linux-1">MacOS and Linux</h3>
+			</div>
+			<p>Follow these steps for each app, separately, to build the sample applications on macOS or Linux:</p>
+			<ol>
+				<li>Go to the project's directory:
+					<ul>
+						<li>Anti-Cheat Client:
+							<code>/EOS-SDK/Samples/AntiCheat/Client</code>
+						</li>
+						<li>Anti-Cheat Server:
+							<code>/EOS-SDK/Samples/AntiCheat/Server</code>
+						</li>
+					</ul>
+				</li>
+				<li>Run
+					<code>./Build.sh</code>
+					(or you can run
+					<code>Build.command</code>
+					from Finder on Mac). After the build successfully completes, the sample application is listed under the corresponding directory:
+					<ul>
+						<li>Anti-Cheat Client:
+							<code>/EOS-SDK/Samples/AntiCheat/Client/Build/</code>
+						</li>
+						<li>Anti-Cheat Server:
+							<code>/EOS-SDK/Samples/AntiCheat/Server/Build/</code>
+						</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h2 id="step-3-set-up-and-run-the-anti-cheat-integrity-tool">Step 3: Set up and Run the Anti-Cheat Integrity Tool</h2>
+			</div>
+			<p>To use the sample applications, you must install and configure the Anti-Cheat integrity tool for the Anti-Cheat Client sample application. After you set up the Anti-Cheat integrity tool, you can use it to generate an index file that the Easy Anti-Cheat module can validate against. For more information on how to configure the Anti-Cheat integrity tool for your game, see the
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#anti-cheat-integrity-tool-configuration">Anti-Cheat Integrity Tool Configuration</a>
+				section of the Using the Anti-Cheat Interfaces documentation.</p>
+			<p>Follow the steps below to configure and run the Anti-Cheat integrity tool for the sample applications for your system.</p>
+			<ol>
+				<li>Go to the anti-cheat tools directory for your operating system as follows:
+					<ul>
+						<li>
+							<strong>Windows</strong>:
+							<code>EOS-SDK\SDK\Tools\EOS_AntiCheatTools-win32-x64-[version]</code>
+						</li>
+						<li>
+							<strong>MacOS or Linux</strong>:
+							<code>EOS-SDK\SDK\Tools\EOS_AntiCheatTools-[linux/mac]-x64-[version]</code>
+						</li>
+					</ul>
+				</li>
+				<li>Unzip
+					<code>EOS_AntiCheatTools-[version]\dist</code>
+					into the Anti-Cheat Client sample application directory for your OS:
+					<ul>
+						<li>
+							<strong>Windows</strong>:
+							<code>[ClientSampleDir]\Bin\Win64\Release_DX</code>
+						</li>
+						<li>
+							<strong>MacOS and Linux</strong>:
+							<code>/EOS-SDK-[version]/Samples/Anti-Cheat/Client/</code>
+						</li>
+					</ul>
+				</li>
+				<li>In the
+					<code>EasyAntiCheat/Settings.json</code>
+					file, fill in
+					<code>ProductId</code>,
+					<code>SandboxId</code>, and
+					<code>DeploymentId</code>, and set the executable to the AntiCheat executable path:
+					<ul>
+						<li>
+							<strong>Windows</strong>:
+							<code>AntiCheat.exe</code>
+						</li>
+						<li>
+							<strong>MacOS</strong>:
+							<code>Build/AntiCheat.app/Contents/MacOS/AntiCheat</code>
+						</li>
+						<li>
+							<strong>Linux</strong>:
+							<code>Build/AntiCheat</code>
+						</li>
+					</ul>
+				</li>
+				<li>Unzip the integrity tool
+					<code>EOS_AntiCheatTools-[version]\devtools</code>
+					to a directory of your choice, excluding the game directory or any of its subdirectories.</li>
+				<li>Download your game's integrity tools from the Developer Portal. Follow these steps:
+					<ul>
+						<li>Go to the Developer Portal at
+							<a href="https://dev.epicgames.com/portal">https://dev.epicgames.com/portal</a>.</li>
+						<li>Select your product from the left-side menu and go to
+							<strong>Game Services</strong>
+							&gt;
+							<strong>OPERATIONS</strong>
+							&gt;
+							<strong>Anti-Cheat</strong>.</li>
+						<li>Click
+							<strong>DOWNLOAD INTEGRITY KEYS</strong>
+							at the top.</li>
+					</ul>
+				</li>
+				<li>Extract and move the
+					<code>base_private.key</code>
+					and
+					<code>base_public.cer</code>
+					files from the tooling zip file so that they are in the same directory as the
+					<code>anticheat_integritytool</code>
+					executable or app.</li>
+				<li>Open the command line or terminal for your system and run the command below (replace
+					<code>CLIENT_SAMPLE_DIRECTORY</code>
+					and
+					<code>YOUR_EOS_PRODUCTID</code>
+					with your own values):
+					<ul>
+						<li>
+							<strong>Windows</strong>:
+							<code>anticheat_integritytool.exe -target_game_dir CLIENT_SAMPLE_DIRECTORY\Bin\Win64\Release_DX -productid YOUR_EOS_PRODUCTID</code>
+						</li>
+						<li>
+							<strong>MacOS and Linux</strong>:
+							<code>./anticheat_integritytool -target_game_dir CLIENT_SAMPLE_DIRECTORY -productid YOUR_EOS_PRODUCTID</code>
+						</li>
+					</ul>
+				</li>
+				<li>Run
+					<code>EasyAntiCheat_EOS_Setup.exe install YOUR_EOS_PRODUCT_ID</code>
+					(replace
+					<code>YOUR_EOS_PRODUCTID</code>
+					with your own value).</li>
+				<li>On success, the tool outputs files to the
+					<code>EasyAntiCheat\Certificates</code>
+					subdirectory of the
+					<code>target_game_dir</code>
+					you specified.</li>
+			</ol>
+			<div>
+				<h2 id="step-4-use-the-samples">Step 4: Use the Samples</h2>
+			</div>
+			<p>To use the Anti-Cheat samples, you must do the following:</p>
+			<ol>
+				<li>If you are using ClientServer (client-server) mode, start the Anti-Cheat Server sample application.
+					<ul>
+						<li>For information on client-server mode, see
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-interfaces#game-network-architecture">Anti-Cheat Interfaces—Game Network Architecture</a>.</li>
+					</ul>
+				</li>
+				<li>Join a game in the Anti-Cheat Client sample application.</li>
+			</ol>
+			<div>
+				<h3 id="start-the-anti-cheat-server">Start the Anti-Cheat Server</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				You only need to follow this step if you are using the sample in ClientServer mode.</p>
+			<p>To run the Anti-Cheat Server sample application:
+				<br>
+				<strong>Windows</strong>:</p>
+			<ol>
+				<li>Open the Command Line.</li>
+				<li>Go to the Anti-Cheat Server directory:
+					<code>\EOS-SDK\Samples\AntiCheat\Server\Bin\Win64\Release\</code>.</li>
+				<li>Run
+					<code>AntiCheatServer.exe</code>.</li>
+			</ol>
+			<p>
+				<strong>MacOS and Linux</strong>:</p>
+			<ol>
+				<li>Open the Terminal.</li>
+				<li>Go to the Anti-Cheat Server directory:
+					<code>/EOS-SDK/Samples/AntiCheat/Server/</code>
+				</li>
+				<li>Run
+					<code>./Run.sh</code>
+					(or you can run
+					<code>Run.command</code>
+					from Finder on Mac).</li>
+			</ol>
+			<p>You can leave the Anti-Cheat Server running.</p>
+			<p>
+				<strong>Note</strong>: The Anti-Cheat Server prints debug text to the console and to the debug log file (<code>DebugOutput.log</code>
+				by default). It prints errors in red text and warnings in yellow text.</p>
+			<p>To stop the server, run this command from the Anti-Cheat Server's console:
+				<br>
+				<strong>Windows or Linux</strong>: Use
+				<code>Ctrl+C</code>
+				to stop the Server application.
+				<br>
+				<strong>MacOS</strong>: Use
+				<code>CMD+.</code>
+				(period) to stop the Server application.</p>
+			<p>The following screenshots show example console logs for the Anti-Cheat Server app:</p>
+			<div tabindex="0" aria-label="Console output for the Anti-Cheat Server sample image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Console output for the Anti-Cheat Server sample" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div tabindex="0" aria-label="Console output for the Anti-Cheat Server sample image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Console output for the Anti-Cheat Server sample" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h3 id="start-the-anti-cheat-client">Start the Anti-Cheat Client</h3>
+			</div>
+			<p>To run the Anti-Cheat Client sample application, follow these steps:
+				<br>
+				<strong>Windows</strong>:</p>
+			<ol>
+				<li>Open the Command Line.</li>
+				<li>Go to the Anti-Cheat Client sample directory:
+					<code>\EOS-SDK-[version]\Samples\AntiCheat\Client\Bin\Win64\Release_DX\</code>.</li>
+				<li>Run
+					<code>start_protected_game.exe</code>.</li>
+			</ol>
+			<p>
+				<strong>MacOS and Linux</strong>:</p>
+			<ol>
+				<li>Open the Terminal.</li>
+				<li>Go to the Anti-Cheat Client sample directory:
+					<code>/EOS-SDK-[version]/Samples/Anti-Cheat/Client/</code>.</li>
+				<li>Run
+					<code>./Run.sh</code>
+					(or you can run
+					<code>Run.command</code>
+					from Finder on Mac).</li>
+			</ol>
+			<div>
+				<h4 id="sign-in">Sign In</h4>
+			</div>
+			<p>From the right-side panel, click one of these options to sign in:</p>
+			<ul>
+				<li>
+					<strong>Dev Auth</strong>: Enter the host port and credentials that you configured for the Developer Authentication Tool (for example,
+					<code>127.0.0.1:8080</code>
+					if you set
+					<code>8080</code>
+					for the host port) and click
+					<strong>LOG IN</strong>. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					documentation for more information on the Developer Authentication Tool.</li>
+				<li>
+					<strong>Account Portal</strong>: Click
+					<strong>LOG IN</strong>
+					to sign in through the Account Portal with your Epic Games account credentials or a supported identity provider. See the
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					documentation for more information on identity providers.</li>
+			</ul>
+			<div>
+				<h4 id="options">Options</h4>
+			</div>
+			<p>After you sign in with the Anti-Cheat Client sample application, you can use these options in it:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Option</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Mode</td>
+						<td>Choose whether to use ClientServer or P2P mode for anti-cheat. For information on client-server and peer-to-peer modes, see
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-interfaces#game-network-architecture">Anti-Cheat Interfaces—Game Network Architecture</a>.</td>
+					</tr>
+					<tr>
+						<td>JOIN GAME SERVER</td>
+						<td>Start a protected game session. Use the IP and Port text fields to configure which game server to join. Default values of these fields correspond to the default configuration of the Anti-Cheat Server Sample. This option is only available in ClientServer mode.</td>
+					</tr>
+					<tr>
+						<td>LEAVE GAME SERVER</td>
+						<td>Leave the protected game session. This option is only available in ClientServer mode.</td>
+					</tr>
+					<tr>
+						<td>START P2P SESSION</td>
+						<td>Start a protected game session. Use the Listen Port text field to specify what port this instance of the sample will listen on for incoming peer connections. This option is only available in P2P mode.</td>
+					</tr>
+					<tr>
+						<td>END P2P SESSION</td>
+						<td>Leave the protected game session. This option is only available in P2P mode.</td>
+					</tr>
+					<tr>
+						<td>REGISTER PEER</td>
+						<td>Connect to another instance of the sample that has started a protected game session in P2P mode. Use the IP and Port text fields to configure which peer to connect to. For Port, use the value that was specified in the Listen Port text field for the other instance of the sample. This option is only available in P2P mode.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following screenshots show the Anti-Cheat Client sample application's UI:</p>
+			<div tabindex="0" aria-label="Console output for the Anti-Cheat Client sample image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Console output for the Anti-Cheat Client sample" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div tabindex="0" aria-label="Console output for the Anti-Cheat Client sample image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Console output for the Anti-Cheat Client sample" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#step-1-configure-the-samples">Step 1: Configure the Samples</a>
+								</li>
+								<li>
+									<a href="#windows">Windows</a>
+								</li>
+								<li>
+									<a href="#macos-and-linux">MacOS and Linux</a>
+								</li>
+								<li>
+									<a href="#step-2-build-the-samples">Step 2: Build the Samples</a>
+								</li>
+								<li>
+									<a href="#windows-1">Windows</a>
+								</li>
+								<li>
+									<a href="#macos-and-linux-1">MacOS and Linux</a>
+								</li>
+								<li>
+									<a href="#step-3-set-up-and-run-the-anti-cheat-integrity-tool">Step 3: Set up and Run the Anti-Cheat Integrity Tool</a>
+								</li>
+								<li>
+									<a href="#step-4-use-the-samples">Step 4: Use the Samples</a>
+								</li>
+								<li>
+									<a href="#start-the-anti-cheat-server">Start the Anti-Cheat Server</a>
+								</li>
+								<li>
+									<a href="#start-the-anti-cheat-client">Start the Anti-Cheat Client</a>
+								</li>
+								<li>
+									<a href="#sign-in">Sign In</a>
+								</li>
+								<li>
+									<a href="#options">Options</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

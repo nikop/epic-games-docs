@@ -1,0 +1,567 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Platform Interface</h1>
+			<h2>Facilitate your game's integration with all other EOS services.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The Platform Interface facilitates the integration of your game (or other software application) with all other EOS services: to use any EOS services, you must integrate the Platform Interface into your game first.</p>
+			<p>You must set up your game so when it starts up, it initializes an instance of the EOS SDK and gets a handle to the Platform Interface. Your game then uses this Platform Interface handle to retrieve handles to access the other EOS interfaces.</p>
+			<p>For details on how to initialize the EOS SDK and implement the EOS Platform Interface, see the step-by-step guide:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With Epic Online Services</a>.</p>
+			<p>This page has information about using the EOS Platform Interface that is supplementary to the step-by-step guide.</p>
+			<div>
+				<h2 id="multiple-platform-interface-instances">Multiple Platform Interface Instances</h2>
+			</div>
+			<p>Usually, you only use one instance of the EOS Platform Interface. If your game supports multiple views, such as editors, you might want to create multiple Platform Interface instances. The EOS SDK supports multiple Platform Interface instances, each with their own internal state and handle. When you use an EOS Platform Interface instance to retrieve other EOS interfaces, those interface instances are unique to the EOS Platform Interface instance that you retrieve them for.</p>
+			<p>
+				<strong>Note:</strong>
+				If your game supports multiple players that play on the same device together, such as splitscreen games, then you don’t need multiple Platform Interface instances.</p>
+			<p>
+				<strong>Warning:</strong>
+				Do not attempt to initialize more than one instance of the EOS SDK.</p>
+			<div>
+				<h2 id="eos-interface-handle-functions">EOS Interface Handle Functions</h2>
+			</div>
+			<p>When you have an EOS Platform Interface handle, you can use it to retrieve the other EOS SDK interfaces through the following EOS SDK handles:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Interface</th>
+						<th>Access Function</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Achievements</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetAchievementsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces">Anti-Cheat</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetAntiCheatClientInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<code>EOS_Platform_GetAntiCheatServerInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Authentication</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetAuthInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetConnectInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/custom-invites-interface">Custom Invites</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetCustomInvitesInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-games-store/services/ecom">Ecommerce</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetEcomInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">Friends</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetFriendsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface">Leaderboards</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetLeaderboardsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface">Lobby</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetLobbyInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/eos-metrics-interface">Metrics</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetMetricsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-games-store/services/mods">Mods</a>
+						</td>
+						<td>
+							<code>EOS_Platforms_GetModsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface">P2P</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetP2PInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/player-data-storage-interface">Player Data Storage</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetPlayerDataStorageInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface">Presence</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetPresenceInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/accounts-and-social/progression-snapshot">Progression Snapshot</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetProgressionSnapshotInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface">Real-time Communication (RTC)</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetRTCInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<code>EOS_Platform_GetRTCAdminInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/trust-and-safety/reports-interface">Reports</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetReportsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface">Sanctions</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetSanctionsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface">Sessions</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetSessionsInfoInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/stats-interface">Stats</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetStatsInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">Title Storage</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetTitleStorageInterface</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/epic-online-services/accounts-and-social/eos-user-info-interface">User Info</a>
+						</td>
+						<td>
+							<code>EOS_Platform_GetUserInfoInterface</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="restart-your-game-with-the-epic-games-launcher">Restart Your Game With the Epic Games Launcher</h3>
+			</div>
+			<p>If you have published your game on the Epic Games Store, players can play it through the Epic Games Launcher. If you prefer that players play your game through the Epic Games Launcher, you can call the EOS API
+				<a href="/docs/api-ref/functions/eos-platform-check-for-launcher-and-restart">
+					<code>EOS_Platform_CheckForLauncherAndRestart</code>
+					function</a>
+				to enforce it. This uses an environment variable to verify whether your game was launched with the Epic Games Launcher.</p>
+			<p>When you call the EOS API
+				<a href="/docs">
+					<code>EOS_Platform_Create</code>
+					function</a>, the EOS SDK inspects the command line used to launch your game. If the EOS SDK identifies that the command line is called from the Epic Games Launcher, the EOS SDK sets the environment variable
+				<code>EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR</code>
+				to
+				<code>1</code>.</p>
+			<p>You can force
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>
+				to relaunch your game by explicitly unsetting
+				<code>EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR</code>
+				before you call
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>.</p>
+			<p>
+				<strong>Note:</strong>
+				The APIs you use to interact with the environment variable,
+				<code>EOS_PLATFORM_CHECKFORLAUNCHERANDRESTART_ENV_VAR</code>, depend on the operating system you use:</p>
+			<ul>
+				<li>On Windows, you must use
+					<code>SetEnvironmentVariable</code>
+					and
+					<code>GetEnvironmentVariable</code>.</li>
+				<li>On other platforms, you must use
+					<code>setenv</code>
+					and
+					<code>getenv</code>.</li>
+			</ul>
+			<p>After the
+				<code>EOS_Platform_CheckForLauncherAndRestart</code>
+				API function completes, it returns an
+				<code>EOS_EResult</code>
+				with one of the following codes:</p>
+			<ul>
+				<li>
+					<code>EOS_Success</code>: The Epic Games Launcher is relaunching the app. You must terminate the current app process as soon as possible to make way for the newly launched process.</li>
+				<li>
+					<code>EOS_NoChange</code>: The Epic Games Launcher has already launched the app. You don't need to do anything.</li>
+				<li>
+					<code>EOS_UnexpectedError</code>: The
+					<code>LauncherCheck</code>
+					module failed to initialize, or the module tried and failed to restart the app.</li>
+			</ul>
+			<div>
+				<h2 id="application-and-network-status">Application and Network Status</h2>
+			</div>
+			<p>You must set your players' application (game) status and network status when you change either status. Setting these prompts the EOS SDK, ensuring that real-time communication (RTC) transitions properly for your game.</p>
+			<div>
+				<h3 id="application-status">Application Status</h3>
+			</div>
+			<p>The application status notifies the EOS SDK whether the game is currently suspended.</p>
+			<p>You must call
+				<code>EOS_Platform_SetApplicationStatus</code>
+				when the application status changes. You can set the application status using the
+				<code>NewStatus</code>
+				parameter.</p>
+			<p>The following application states are defined with the
+				<code>EOS_EApplicationStatus</code>
+				structure:</p>
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_AS_BackgroundSuspended</code>
+						</td>
+						<td>Notifies the EOS SDK that the platform has put the application into a suspended state. This is sometimes called "background mode."</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_AS_Foreground</code>
+						</td>
+						<td>Notifies the EOS SDK that the application has resumed from a suspended state. This is the default active state on all platforms.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>You can also use
+				<code>EOS_Platform_GetApplicationStatus</code>
+				to get the current application status.</p>
+			<p>The nature of these application status changes depends on the platform (see the platform-specific documentation for more information).</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>What your game does for RTC rooms when your game transitions between states is up to you. The common practice is for all platforms to leave all RTC rooms and disallow joining back while in a suspended state (background mode). You can control this default behavior with the
+				<code>BackgroundMode</code>
+				option. For more information on how to set
+				<code>BackgroundMode</code>, see the following documentation:
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface/using-voice#background-mode">Using the Voice Interface &gt; Background Mode</a>.</p>
+			<div>
+				<h3 id="network-status">Network Status</h3>
+			</div>
+			<p>The network status sets the status of the player's network connection.</p>
+			<p>You must call
+				<code>EOS_Platform_SetNetworkStatus</code>
+				when the network status changes. You can set the network status using the
+				<code>NewStatus</code>
+				parameter.</p>
+			<p>The following network states are defined with the
+				<code>EOS_ENetworkStatus</code>
+				structure:</p>
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_NS_Disabled</code>
+						</td>
+						<td>Network cannot be used.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_NS_Offline</code>
+						</td>
+						<td>The player might not be connected to the internet. The network can still be used, but is likely to fail.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_NS_Online</code>
+						</td>
+						<td>The player thinks they are connected to the internet.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>You can use
+				<code>EOS_Platform_GetNetworkStatus</code>
+				to get the current network status.</p>
+			<p>The nature of these network status changes depends on the platform. For more information, see the relevant documentation:
+				<a href="/docs/epic-online-services/platforms">EOS SDK for Platforms</a>.</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p>The common pattern is to clear resources and prevent further room joins when you change the network status to disabled (<code>EOS_NS_Disabled</code>) or offline (<code>EOS_NS_Offline</code>). The EOS SDK does this by default. This is the same for each platform. Lobby RTC restarts any paused RTC rooms when foregrounded and online. It does not try to reconnect otherwise.</p>
+			<p>
+				<strong>Note</strong>: When you turn the network on and off, RTC can run into network interruptions, as it has to reconfigure its webRTC threads.</p>
+			<p>
+				<strong>Platform Specific Network Status</strong>
+				<br>
+				For PlayStation 4, PlayStation 5, Nintendo Switch, Switch 2 and Xbox, the network status defaults to
+				<code>EOS_NS_Disabled</code>. When the network is online, you must update the network status to
+				<code>EOS_NS_Online</code>
+				with
+				<code>EOS_Platform_SetNetworkStatus</code>. For more information, see the relevant documentation:
+				<a href="/docs/epic-online-services/platforms">EOS SDK for Platforms</a>.</p>
+			<div>
+				<h4 id="configure-network-tasks-time-out">Configure Network Tasks Time-out</h4>
+			</div>
+			<p>By default, the EOS SDK times out network tasks after 30 seconds if the network is not available. If a task times out, the EOS SDK returns the error
+				<code>EOS_TimeOut</code>. You can override the default time-out (in seconds) by setting the
+				<code>TaskNetworkTimeoutSeconds</code>
+				property in
+				<code>EOS_Platform_Options</code>
+				when you create the Platform Interface. To override the default time-out, pass a pointer to a double containing the number of seconds that you want tasks to wait for the network to time out.</p>
+			<p>
+				<strong>Notes</strong>:</p>
+			<ul>
+				<li>The time-out applies when the network status is not
+					<code>EOS_NS_Online</code>.</li>
+				<li>Tasks that need the network queue for up to this time, until your game calls
+					<code>EOS_Platform_SetNetworkStatus</code>
+					to set the network status to online.</li>
+				<li>To use the default time-out of 30 seconds, pass a null pointer.</li>
+			</ul>
+			<div>
+				<h2 id="native-platform-integration">Native Platform Integration</h2>
+			</div>
+			<p>Note that "native platform" here means the machine and operating system a game client runs on, such as mobile (iOS, Android), PC (Windows, macOS, Linux), console (Xbox, PlayStation, Nintendo).</p>
+			<p>The SDK provides functionality to integrate automatically with the native platform. These integrations allow the game to:</p>
+			<ul>
+				<li>
+					<p>include platform friends in the EOS overlay’s friends list</p>
+				</li>
+				<li>
+					<p>mirror presence state of the local Epic user with their native platform presence</p>
+				</li>
+				<li>
+					<p>replicate game invites of EOS Lobbies and EOS Sessions with the native platform system</p>
+				</li>
+				<li>
+					<p>enable join-via-presence to the local user’s EOS lobby or session for platform friends</p>
+				</li>
+				<li>
+					<p>control system used to show game invite notifications (Game UI, Platform UI, EOS Overlay)</p>
+				</li>
+			</ul>
+			<p>To configure the platform integrations to use:</p>
+			<ol>
+				<li>
+					<p>Call
+						<code>EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer</code>
+						to create a new temporary container for the platform options.</p>
+				</li>
+				<li>
+					<p>Create the platform specific
+						<code>EOS_IntegratedPlatform_&lt;Platform&gt;_Options</code>
+						struct to specify the desired options to use. You can find the available options in the EOS SDK download for your platform in the
+						<code>/SDK/Include/PLATFORM_NAME/eos_PLATFORM_NAME.h</code>
+						file.</p>
+				</li>
+				<li>
+					<p>Call
+						<code>EOS_IntegratedPlatformOptionsContainer_Add</code>
+						to register the options for SDK initialization.</p>
+				</li>
+				<li>
+					<p>After a successful call to
+						<code>EOS_Platform_Create</code>, release the temporary container by calling
+						<code>EOS_IntegratedPlatformOptionsContainer_Release</code>.</p>
+				</li>
+				<li>
+					<p>Call
+						<code>EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged</code>
+						and wait for your callback function to fire with a
+						<code>CurrentLoginStatus</code>
+						of
+						<code>EOS_LS_LoggedIn</code>
+						before you attempt to access any EOS Game Services.</p>
+				</li>
+			</ol>
+			<p>More information:</p>
+			<ul>
+				<li>To find the filename and location of your native platform's options, see the relevant documentation:
+					<a href="/docs/epic-online-services/platforms">EOS SDK for Platforms</a>. (For consoles, see the
+					<em>Native Platform Integration</em>
+					section of the relevant documentation).</li>
+				<li>How to download the EOS SDK for your platform, see the
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk#step-c-download-the-eos-sdk">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK</a>
+					documentation.</li>
+				<li>How to integrate the EOS SDK with the Platform Interface, see the
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">Guide: Get Started With EOS &gt; 3. Set Up the EOS SDK</a>
+					documentation.</li>
+			</ul>
+			<div>
+				<h3 id="sample-code">Sample Code</h3>
+			</div>
+			<div>
+				<section>
+					<pre>static EOS_EResult CreateIntegratedPlatform(EOS_Platform_Options&amp; PlatformOptions){  // Create the generic container.  const EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainerOptions CreateOptions =  {    EOS_INTEGRATEDPLATFORM_CREATEINTEGRATEDPLATFORMOPTIONSCONTAINER_API_LATEST  };   const EOS_EResult Result = EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer(&amp;CreateOptions, &amp;PlatformOptions.IntegratedPlatformOptionsContainerHandle);  if (Result != EOS_EResult::EOS_Success)  {    return Result;  }   // Configure platform-specific options.  const EOS_IntegratedPlatform_Steam_Options PlatformSpecificOptions =  {      EOS_INTEGRATEDPLATFORM_STEAM_OPTIONS_API_LATEST,      nullptr  };   // Add the configuration to the SDK initialization options.  const EOS_IntegratedPlatform_Options Options =  {    EOS_INTEGRATEDPLATFORM_OPTIONS_API_LATEST,    EOS_IPT_Steam,    EOS_EIntegratedPlatformManagementFlags::EOS_IPMF_LibraryManagedByApplication | EOS_EIntegratedPlatformManagementFlags::EOS_IPMF_DisableSDKManagedSessions,    &amp;PlatformSpecificOptions  };   const EOS_IntegratedPlatformOptionsContainer_AddOptions AddOptions =  {    EOS_INTEGRATEDPLATFORMOPTIONSCONTAINER_ADD_API_LATEST,    &amp;Options  };   return EOS_IntegratedPlatformOptionsContainer_Add(PlatformOptions.IntegratedPlatformOptionsContainerHandle, &amp;AddOptions);} static void FreeIntegratedPlatform(EOS_Platform_Options&amp; PlatformOptions){  // Free the created container after SDK initialization.  if (PlatformOptions.IntegratedPlatformOptionsContainerHandle)  {    EOS_IntegratedPlatformOptionsContainer_Release(PlatformOptions.     IntegratedPlatformOptionsContainerHandle);    PlatformOptions.IntegratedPlatformOptionsContainerHandle = nullptr;  }} void InitializeEosSdk(){  EOS_Platform_Options PlatformOptions = {};  CreateIntegratedPlatform(PlatformOptions);  // ...  EOS_Platform_Create(&amp;PlatformOptions);   FreeIntegratedPlatform(PlatformOptions);}</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="block-list-enforcement">Block List Enforcement</h2>
+			</div>
+			<p>The EOS SDK does not automatically enforce the block list of players if blocked players are using a different type of authentication.<br>
+				If your game allows platform authentication or Epic Account Services authentication, you might need to implement block list management to enforce a player’s block list in your game.</p>
+			<p>The EOS SDK follows these rules for block list enforcement:</p>
+			<ul>
+				<li>If both players use Epic Account Services authentication, the EOS SDK enforces the Epic Account Services and platform block list.</li>
+				<li>If both players use platform authentication, the EOS SDK enforces the platform block list.</li>
+				<li>If both players use different authentication methods, the EOS SDK does not enforce block lists, and you must enforce them yourself.</li>
+			</ul>
+			<p>See the documentation for more information:</p>
+			<ul>
+				<li>To manage a player’s friend and block list using EAS, see the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">Friends Interface</a>
+					documentation.</li>
+				<li>To manage Epic Games friends and platform friends in your game, see the
+					<a href="/docs/epic-online-services/accounts-and-social/crossplay/manage-epic-and-platform-friends">Manage Epic Games Friends and Platform Friends</a>
+					documentation.</li>
+			</ul>
+			<p>
+				<strong>Note</strong>:</p>
+			<p>You can only access console documentation if you have the appropriate permissions. See the
+				<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
+				documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
+			<p></p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#multiple-platform-interface-instances">Multiple Platform Interface Instances</a>
+								</li>
+								<li>
+									<a href="#eos-interface-handle-functions">EOS Interface Handle Functions</a>
+								</li>
+								<li>
+									<a href="#restart-your-game-with-the-epic-games-launcher">Restart Your Game With the Epic Games Launcher</a>
+								</li>
+								<li>
+									<a href="#application-and-network-status">Application and Network Status</a>
+								</li>
+								<li>
+									<a href="#application-status">Application Status</a>
+								</li>
+								<li>
+									<a href="#network-status">Network Status</a>
+								</li>
+								<li>
+									<a href="#configure-network-tasks-time-out">Configure Network Tasks Time-out</a>
+								</li>
+								<li>
+									<a href="#native-platform-integration">Native Platform Integration</a>
+								</li>
+								<li>
+									<a href="#sample-code">Sample Code</a>
+								</li>
+								<li>
+									<a href="#block-list-enforcement">Block List Enforcement</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

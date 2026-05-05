@@ -1,0 +1,792 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Leaderboards to Your Game — 3. Retrieve Records for a Leaderboard</h1>
+			<h2>Overview of how to retrieve records for a leaderboard.</h2>
+			<div>
+				<div>30 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/retrieve-leaderboards-for-your-game">2. Retrieve Leaderboards for Your Game</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>You can add code to your game to retrieve the records for your leaderboards after you have completed the precursor steps in
+								<em>Before You Start</em>
+								below.</p>
+							<p>A leaderboard record consists of the following data for the player who set the record:</p>
+							<ul>
+								<li>The Product User ID of the player.</li>
+								<li>The display name of the player.</li>
+								<li>The score for the record.</li>
+								<li>The numerical ranking in the leaderboard for the record.</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								The EOS API refers to a leaderboard record as a “record” in most circumstances. However, in certain circumstances, the EOS API refers to a leaderboard record as a “rank” (these circumstances are noted below).</p>
+							<p>To add code to your game to retrieve the leaderboard records for your leaderboards, you query the record to save it to the local cache. Then you can copy the record data and access the leaderboard records. For example, you can query the records for the “CarsSmashedWorldwide” leaderboard and then display them to the player in a personal dashboard.</p>
+							<p>You can either copy the cached leaderboard records by user ID or copy them all. This guide shows how to copy all leaderboard records. For information on how to copy leaderboard records individually by user ID, see the
+								<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-record-by-user-id">
+									<code>EOS_Leaderboards_CopyLeaderboardRecordByUserId</code>
+									function</a>
+								API reference documentation.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>Use the Connect Interface in your code to get the local player’s Product User ID. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Guide: Access Game Services With the Connect Interface</a>.)</li>
+								<li>Create a leaderboard in the Developer Portal. (Section in this guide:
+									<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/set-up-leaderboards">1. Set Up Leaderboards</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="retrieve-a-leaderboards-records">Retrieve A Leaderboard’s Records</h2>
+							</div>
+							<p>Complete the following steps to retrieve the records for a leaderboard and save them so you can look them up later:</p>
+							<ul>
+								<li>
+									<a href="#step-1-modify-your-leaderboards-manager-class">Step 1: Modify Your Leaderboards Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-query-leaderboard-records-function">Step 2: Implement Your Query Leaderboard Records Function</a>
+								</li>
+								<li>
+									<a href="#step-3-implement-your-query-leaderboard-ranks-callback-function">Step 3: Implement Your Query Leaderboard Ranks Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-4-implement-your-copy-leaderboard-records-function">Step 4: Implement Your Copy Leaderboard Records Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-1-modify-your-leaderboards-manager-class">Step 1: Modify Your Leaderboards Manager Class</h3>
+							</div>
+							<p>Modify your leaderboards manager class to include the variables that you need to retrieve leaderboard records.</p>
+							<p>
+								<strong>Note:</strong>
+								The example code below is not the complete code. It includes only the additions that you must make to your leaderboards manager class .h file. For the complete code, see the complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<p>Example:</p>
+							<p>
+								<code>LeaderboardsManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In the
+																	<code>LeaderboardsManager.h</code>
+																	file, create a custom leaderboard record data structure to hold the leaderboard record data that you want to copy for your game. In the example, it’s called
+																	<code>LeaderboardRecordCopy</code>.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your LeaderboardsManager class, declare a public function to get read-only access to the leaderboards records map for a specific leaderboard ID. (<strong>Note:</strong>
+																	The map itself is declared as a private variable and described in more detail in a step below.) In the example, it's called
+																	<code>GetRetrievedLeaderboardRecords</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to query the records for a leaderboard. In the example, it’s called
+																	<code>RetrieveLeaderboardRecordsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private map to hold leaderboard records that you want to copy for your game.  The map holds leaderboard ID (<code>std::string</code>) and  nested map pairs. The nested map for each leaderboard ID holds numerical ranking (<code>uint32_t</code>) and custom leaderboard record data structure (<code>LeaderboardRecordCopy</code>) pairs. In the example, the map is called
+																	<code>RetrievedRecords</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-ranks">
+																		<code>EOS_Leaderboards_QueryLeaderboardRanks()</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-leaderboards-on-query-leaderboard-ranks-complete-callback">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-ranks-complete-callback-info">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryLeaderboardRanksComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private function to copy the queried leaderboard records from the local cache. In the example, it’s called
+																	<code>CopyLeaderboardRecordsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-2-implement-your-query-leaderboard-records-function">Step 2: Implement Your Query Leaderboard Records Function</h3>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
+							<p>In your .cpp file, in your leaderboards manager class, implement the query function to retrieve the records for a leaderboard.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your leaderboards manager class, implement the function to query the records for a leaderboard. In the example, it's called
+																	<code>RetrieveLeaderboardRecordsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your query function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-leaderboards-query-leaderboard-ranks-options">
+																		<code>EOS_Leaderboards_QueryLeaderboardRanksOptions</code>
+																		data structure</a>
+																	to hold the query options for the leaderboard records. In the example, it's called
+																	<code>QueryRankOptions</code>.</p>
+																<p>
+																	<strong>Note:</strong>
+																	In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create a
+																	<code>pair</code>
+																	object that will store both a pointer to the leaderboards manager class and the ID of the leaderboard that you want to query the ranks for.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-ranks">
+																		<code>EOS_Leaderboards_QueryLeaderboardRanks()</code>
+																		function</a>. This function saves the leaderboard records to the local cache.</p>
+																<p>
+																	<strong>Note:</strong>
+																	In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The Leaderboards Interface handle.</li>
+																	<li>A reference to the query options for the leaderboard ranks.</li>
+																	<li>(Optional) ClientData.<br>
+																		In the example, we pass the pointer to the
+																		<code>pair</code>
+																		that contains the class pointer and leaderboard ID. (<strong>Note:</strong>
+																		The leaderboard ID is the name of the leaderboard, exactly as you wrote it in the Developer Portal.)</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-ranks-complete-callback-info">
+																			<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo</code>
+																			data structure</a>
+																		when the EOS Leaderboards service completes the ranks query.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-3-implement-your-query-leaderboard-ranks-callback-function">Step 3: Implement Your Query Leaderboard Ranks Callback Function</h3>
+							</div>
+							<p>Implement the callback function that executes when the
+								<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+									<code>EOS_Leaderboards_QueryLeaderboardRanks()</code>
+									function</a>
+								completes.</p>
+							<p>
+								<strong>Note:</strong>
+								In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-ranks">
+																		<code>EOS_Leaderboards_QueryLeaderboardRanks()</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-leaderboards-on-query-leaderboard-ranks-complete-callback">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallback</code>
+																		callback function</a>
+																	which receives an
+																	<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-ranks-complete-callback-info">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryLeaderboardRanksComplete</code>.</p>
+																<p>
+																	<strong>Note:</strong>
+																	In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Notes</strong>:</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-ranks">
+																			<code>EOS_Leaderboards_QueryLeaderboardRanks()</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		Enum</a>
+																	to confirm that the query is successful. If the query is successful, do the following:</p>
+																<ul>
+																	<li>Cast the client data back to a
+																		<code>pair</code>
+																		to retrieve the leaderboards manager class pointer and the leaderboard ID from.</li>
+																	<li>Call your function to copy the leaderboard records (This function is covered in Step 4: Implement Your Copy Leaderboard Records Function).</li>
+																	<li>Call
+																		<code>delete</code>
+																		on the
+																		<code>pair</code>
+																		pointer to free the memory after you retrieve the data from it.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">EOS_EResult_IsOperationComplete function</a>
+																	to check if the query is not complete yet. if the query is not complete, return so the operation can complete:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the query is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-4-implement-your-copy-leaderboard-records-function">Step 4: Implement Your Copy Leaderboard Records Function</h3>
+							</div>
+							<p>In your
+								<code>.cpp</code>
+								file, implement your function to copy the leaderboard records currently saved to the cache.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the function to copy the records for a leaderboard and save those records to a map for retrieval later on. In the example, the copy function is called
+																	<code>CopyLeaderboardRecordsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your copy function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-leaderboards-copy-leaderboard-record-by-index-options">
+																		<code>EOS_Leaderboards_CopyLeaderboardRecordByIndexOptions</code>
+																		data structure</a>
+																	to hold the count options for the leaderboard records. You will use these options to get the total number of leaderboard records that are cached locally. In the example, it’s called
+																	<code>GetRecordCountOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-leaderboards-get-leaderboard-record-count">
+																		<code>EOS_Leaderboards_GetLeaderboardRecordCount</code>
+																		function</a>
+																	to get the total number of leaderboard records stored in the local cache, and assign the value to a variable to hold the returned count.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The Leaderboards Interface handle.</li>
+																	<li>A reference to the count options for the leaderboard records.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the record count to iterate through the list of queried records that you want to copy:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In the for loop, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-leaderboards-copy-leaderboard-record-by-index-options">
+																		<code>EOS_Leaderboards_CopyLeaderboardRecordByIndexOptions</code>
+																		data structure</a>
+																	to hold the copy options for the leaderboard records. In the example, it's called
+																	<code>CopyRecordOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Define a pointer to temporarily store the copied leaderboard record data. In the example, it's called
+																	<code>Record</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-record-by-index">
+																		<code>EOS_Leaderboards_CopyLeaderboardRecordByIndex()</code>
+																		function</a>
+																	to copy the leaderboard records from the local cache.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The Leaderboards Interface handle.</li>
+																	<li>A reference to the options for copying the leaderboard records.</li>
+																	<li>A reference to the leaderboard record pointer to hold the returned record.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-record-by-index">
+																		<code>EOS_Leaderboards_CopyLeaderboardRecordByIndex()</code>
+																		function</a>
+																	call is successful, do the following:</p>
+																<ul>
+																	<li>Find the nested map for the current leaderboard ID within the records map.</li>
+																	<li>Retrieve data for the leaderboard record from the record pointer variable that you passed in, and save the leaderboard ID and custom leaderboard record data structure pair to the nested map.</li>
+																	<li>Call the
+																		<a href="/docs/api-ref/functions/eos-leaderboards-leaderboard-record-release">
+																			<code>EOS_Leaderboards_LeaderboardRecord_Release</code>
+																			function</a>
+																		on the record pointer afterwards to free its memory.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-record-by-index">
+																		<code>EOS_Leaderboards_CopyLeaderboardRecordByIndex()</code>
+																		function</a>
+																	call is not successful, handle any errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>You can access the
+								<a href="/docs/api-ref/structs/eos-leaderboards-leaderboard-record">
+									<code>EOS_Leaderboards_LeaderboardRecord</code>
+									data structure</a>
+								through the leaderboard record pointer you passed into the function call. The
+								<a href="/docs/api-ref/structs/eos-leaderboards-leaderboard-record">
+									<code>EOS_Leaderboards_LeaderboardRecord</code>
+									data structure</a>
+								contains information about the record at the given index in the cached list of leaderboard records.</p>
+							<p>You can also call the
+								<code>LeaderboardsManager::GetRetrievedLeaderboardRecords()</code>
+								function in your game code to get a read-only reference to the leaderboard records map. Make sure there are no record queries in progress before you call
+								<code>LeaderboardsManager::GetRetrievedLeaderboardRecords()</code>. If there are queries in progress, the leaderboard records you retrieve might not include the latest updates from the active query and will therefore be outdated.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<p>
+								<code>LeaderboardsManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<code>LeaderboardsManager.cpp</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>
+								<strong>API reference documentation:</strong>
+							</p>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-ranks">
+										<code>EOS_Leaderboards_QueryLeaderboardRanks()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-query-leaderboard-ranks-options">
+												<code>EOS_Leaderboards_QueryLeaderboardRanksOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-leaderboards-on-query-leaderboard-ranks-complete-callback">
+												<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallback</code>
+												function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-ranks-complete-callback-info">
+														<code>EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-leaderboards-get-leaderboard-record-count">
+										<code>EOS_Leaderboards_GetLeaderboardRecordCount()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-get-leaderboard-record-count-options">
+												<code>EOS_Leaderboards_GetLeaderboardRecordCountOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-record-by-index">
+										<code>EOS_Leaderboards_CopyLeaderboardRecordByIndex()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-copy-leaderboard-record-by-index-options">
+												<code>EOS_Leaderboards_CopyLeaderboardRecordByIndexOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-leaderboard-record">
+												<code>EOS_Leaderboards_LeaderboardRecord</code>
+												data structure</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/functions/eos-leaderboards-leaderboard-record-release">
+														<code>EOS_Leaderboards_LeaderboardRecord_Release()</code>
+														function</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#retrieve-a-leaderboards-records">Retrieve A Leaderboard’s Records</a>
+								</li>
+								<li>
+									<a href="#step-1-modify-your-leaderboards-manager-class">Step 1: Modify Your Leaderboards Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-query-leaderboard-records-function">Step 2: Implement Your Query Leaderboard Records Function</a>
+								</li>
+								<li>
+									<a href="#step-3-implement-your-query-leaderboard-ranks-callback-function">Step 3: Implement Your Query Leaderboard Ranks Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-4-implement-your-copy-leaderboard-records-function">Step 4: Implement Your Copy Leaderboard Records Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

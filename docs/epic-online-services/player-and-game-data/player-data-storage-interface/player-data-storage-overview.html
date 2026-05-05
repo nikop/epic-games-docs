@@ -1,0 +1,709 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Player Data Storage Interface Overview</h1>
+			<h2>Interface to handle cloud-based data management.</h2>
+			<div>
+				<div>14 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>Integrate the Player Data Storage Interface into your game (or other software application) to use the features of the Epic Online Services (EOS) Player Data Storage service. The Player Data Storage Interface enables you to save encrypted, player-specific (user-specific), game-specific data to cloud servers. Data that you store through this interface is accessible to players (users) on any device where they can sign in to your game. The Player Data Storage Interface supports any file format; typical use cases include saved games and replay data.</p>
+			<p>To access the Player Data Storage Interface, acquire an
+				<code>EOS_HPlayerDataStorage</code>
+				handle through the
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+				function,
+				<code>EOS_Platform_GetPlayerDataStorageInterface</code>. All Player Data Storage Interface functions require this handle as their first parameter. You must ensure that the
+				<code>EOS_HPlatform</code>
+				handle is ticking for callbacks to trigger when requests are completed.</p>
+			<div>
+				<p>To use this interface, you must initialize the EOS Platform with the following extra parameters:</p>
+				<ul>
+					<li>
+						<p>
+							<code>const char* EncryptionKey</code>: This 64-character hexadecimal string builds a 256-bit key that EOS uses to encrypt user data. Epic's backend servers do not store this key. If there is no key, calls to
+							<code>EOS_Platform_GetPlayerDataStorageInterface</code>
+							return a null reference. If the key is not the correct length or format, file-management functions from the Player Data Storage Interface will result in failure and return the
+							<code>EOS_PlayerDataStorage_EncryptionKeyNotSet</code>
+							error code.</p>
+					</li>
+					<li>
+						<p>
+							<code>const char* CacheDirectory</code>: This is the full path to the local directory that the interface will use for temporary storage during data file transfers. This could be any location, with the system's temporary directory or the game's data directory being common choices. If the directory you specify does not exist, EOS will attempt to create it. You can use the same directory for multiple users and products, and EOS will ensure that they do not collide. If there are issues with the directory, calls to file-management functions will result in failure and will return
+							<code>EOS_CacheDirectoryMissing</code>
+							or
+							<code>EOS_CacheDirectoryInvalid</code>
+							error codes. Please refer to the
+							<a href="/docs/epic-online-services/platforms">EOS Platform documentation</a>
+							for platform-specific limitations on what folders can be used.</p>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h2 id="file-management">File Management</h2>
+			</div>
+			<div>
+				<h3 id="file-name-format">File Name Format</h3>
+			</div>
+			<p>File names in EOS take the following form:
+				<code>Directory0/Directory1/DirectoryN/Filename.Extension</code>
+			</p>
+			<p>The "Directory" and "Extension" portions are optional. The "/" character must appear after each directory name, but cannot appear anywhere else, including as the first or last character. File names may use the following characters:</p>
+			<ul>
+				<li>Any alphanumeric ASCII character</li>
+				<li>
+					<code>!</code>
+				</li>
+				<li>
+					<code>-</code>
+				</li>
+				<li>
+					<code>_</code>
+				</li>
+				<li>
+					<code>+</code>
+				</li>
+				<li>
+					<code>.</code>
+				</li>
+				<li>
+					<code>'</code>
+				</li>
+				<li>
+					<code>(</code>
+				</li>
+				<li>
+					<code>)</code>
+				</li>
+			</ul>
+			<p>File names may not exceed
+				<code>EOS_PLAYERDATASTORAGE_FILENAME_MAX_LENGTH_BYTES</code>
+				(64) characters.</p>
+			<div>
+				<h3 id="querying-files">Querying Files</h3>
+			</div>
+			<p>You can get information about one or all files stored on the cloud by querying EOS. Either query type will return metadata about the file or files it discovers, including the file's name, data size (in bytes, unencrypted), and MD5 hash. You can then cache a copy of this information before accessing or modifying files. Note that since files are stored in an encrypted form on the backend, some metadata (such as file size and hash) is provided for the encrypted file. The metadata won’t exactly match values that correspond to the file you pass to the API.</p>
+			<div>
+				<p>Be sure to
+					<a href="#examining-cached-file-information">copy any information you may need from the cache</a>
+					during your query's callback function. This data's lifetime is not guaranteed to last beyond the duration of the callback function. This is especially important when running multiple queries, as each successful query can alter the contents of the cache.</p>
+			</div>
+			<div>
+				<h4 id="querying-all-files">Querying All Files</h4>
+			</div>
+			<p>To retrieve information about all files, call
+				<code>EOS_PlayerDataStorage_QueryFileList</code>
+				with an
+				<code>EOS_PlayerDataStorage_QueryFileListOptions</code>
+				data structure, initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_QUERYFILELISTOPTIONS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_ProductUserId</code>
+							of the local user who is requesting file data</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Upon completion, EOS will run your callback function (of type
+				<code>EOS_PlayerDataStorage_OnQueryFileListCompleteCallback</code>) with an
+				<code>EOS_PlayerDataStorage_QueryFileListCallbackInfo</code>
+				data structure. If the call succeeded, the data structure contains the number of files found, and the information about those files is available in the EOS cache.</p>
+			<div>
+				<h4 id="querying-a-single-file">Querying a Single File</h4>
+			</div>
+			<p>If you only need information about a single file, and you know that file's name, you can call
+				<code>EOS_PlayerDataStorage_QueryFile</code>
+				function, passing in an
+				<code>EOS_PlayerDataStorage_QueryFileOptions</code>
+				structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_QUERYFILEOPTIONS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_ProductUserId</code>
+							of the local user who is requesting file data</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Filename</code>
+						</td>
+						<td>The name of the file you are querying</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation completes, EOS will run your callback (of type
+				<code>EOS_PlayerDataStorage_OnQueryFileCompleteCallback</code>) with an
+				<code>EOS_PlayerDataStorage_QueryFileCallbackInfo</code>
+				structure. If the call succeeded, EOS now has data about your file in the cache.</p>
+			<div>
+				<h4 id="examining-cached-file-information">Examining Cached File Information</h4>
+			</div>
+			<p>Once EOS has retrieved and cached information about one or more files, you can retrieve information on a specific file by calling
+				<code>EOS_PlayerDataStorage_CopyFileMetadataByFilename</code>
+				with the name of the file, or by calling
+				<code>EOS_PlayerDataStorage_CopyFileMetadataAtIndex</code>
+				with the file's zero-based index within the cache. If you need to know how many files are in the cache, you can call
+				<code>EOS_PlayerDataStorage_GetFileMetadataCount</code>. Once you no longer need your copy of this information, release the memory it was using by calling
+				<code>EOS_PlayerDataStorage_FileMetadata_Release</code>.</p>
+			<div>
+				<p>After querying EOS for information about a single file,
+					<code>EOS_PlayerDataStorage_GetFileMetadataCount</code>
+					may reveal that the cache holds multiple files. This can happen when results from previous queries remain in the cache. In these cases, the best practice is to check that the
+					<code>ResultCode</code>
+					within your
+					<code>EOS_PlayerDataStorage_QueryFileCallbackInfo</code>
+					is
+					<code>EOS_Success</code>, and to call
+					<code>EOS_PlayerDataStorage_CopyFileMetadataByFilename</code>
+					to access its information.</p>
+			</div>
+			<p>File metadata structure appears as the following:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_FILEMETADATA_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FileSizeBytes</code>
+						</td>
+						<td>The total size of the file in bytes (in encrypted form, can be slightly more than expected)</td>
+					</tr>
+					<tr>
+						<td>
+							<code>MD5Hash</code>
+						</td>
+						<td>The MD5 Hash of the entire file, in hex digits (hash of encrypted file)</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Filename</code>
+						</td>
+						<td>The file's name</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LastModifiedTime</code>
+						</td>
+						<td>Date and time when the file was saved last time. Timestamp is in the POSIX/Unix format (Epoch time).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>UnencryptedDataSizeBytes</code>
+						</td>
+						<td>The total size of the data (payload) in bytes (in its unencrypted original form).</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="accessing-and-modifying-files">Accessing and Modifying Files</h3>
+			</div>
+			<p>EOS supports reading, writing, and deleting files from the cloud asynchronously. Reading and writing are streaming operations, and EOS provides handles that the game can use to check a stream's progress, or throttle or interrupt it.</p>
+			<div>
+				<h4 id="reading-a-file">Reading a File</h4>
+			</div>
+			<p>To read a file from the cloud (or your local cache) with a known name, call
+				<code>EOS_PlayerDataStorage_ReadFile</code>. You will need to pass in an
+				<code>EOS_PlayerDataStorage_ReadFileOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_READFILEOPTIONS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The Account ID of the local user who is reading the requested file</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Filename</code>
+						</td>
+						<td>The name of the file to read</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ReadChunkLengthBytes</code>
+						</td>
+						<td>The maximum amount of data to read in a single
+							<code>EOS_PlayerDataStorage_OnReadFileDataCallback</code>
+							call</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ReadFileDataCallback</code>
+						</td>
+						<td>Callback function that handles data as it comes in, and can stop the transfer early</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FileTransferProgressCallback</code>
+						</td>
+						<td>Optional callback function to inform you of transfer progress; will be called at least once if set</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This function returns an
+				<code>EOS_HPlayerDataStorageFileTransferRequest</code>
+				handle that you can use to check the progress of the transfer, get the name of the file, or cancel the transfer. At any time during the transfer, call
+				<code>EOS_PlayerDataStorageFileTransferRequest_GetFileRequestState</code>
+				to poll its current state,
+				<code>EOS_PlayerDataStorageFileTransferRequest_GetFilename</code>
+				to check the name of the file being transferred, or
+				<code>EOS_PlayerDataStorageFileTransferRequest_CancelRequest</code>
+				to cancel it (without generating an error). If you prefer to receive updates from EOS rather than polling the transfer directly, provide a valid
+				<code>EOS_PlayerDataStorage_OnFileTransferProgressCallback</code>
+				function when initiating the transfer (as the
+				<code>FileTransferProgressCallback</code>
+				parameter), and EOS will call it (with an
+				<code>EOS_PlayerDataStorage_FileTransferProgressCallbackInfo</code>
+				parameter) periodically to inform you of the progress of the file transfer. If you choose this route, you are guaranteed to receive at least one call to your callback function. Using the callback function does not preclude using the handle, though they serve very similar purposes and most use cases will not require both.</p>
+			<p>When a chunk of the file comes through, your
+				<code>ReadFileDataCallback</code>
+				(of type
+				<code>EOS_PlayerDataStorage_OnReadFileDataCallback</code>) will run with a parameter of type
+				<code>EOS_PlayerDataStorage_ReadFileDataCallbackInfo</code>. This structure includes a chunk of the actual data from the file, as well as a variable indicating whether or not this is the last chunk. It also has an enumerated return type,
+				<code>EOS_PlayerDataStorage_EReadResult</code>, which you can use to instruct EOS to continue the transfer, end it due to an error, or cancel it without reporting an error.</p>
+			<div>
+				<p>
+					<code>ReadFileDataCallback</code>
+					will only be called from the main SDK thread (the one you are using to tick the SDK) and only once per tick. This is why it is important to set the right value for
+					<code>ReadChunkLengthBytes</code>. Setting the chunk size to a value that is too small will degrade reading performance for the user. We recommend using a multiple of 4096, as this normally corresponds to your system’s memory page size. You can estimate the maximum reading speed by multiplying
+					<code>ReadChunkLengthBytes</code>
+					by the SDK tick frequency. E.g. 4096 * 30 will give you up to 120 kilobytes per second. Using a chunk size that is too large, on the other hand, will make the SDK allocate more memory internally. In order to leave a reasonable footprint, you should pick a value that suits your needs best.</p>
+			</div>
+			<p>Once the file transfer has completed, EOS will run your
+				<code>EOS_PlayerDataStorage_OnReadFileCompleteCallback</code>
+				callback function with an
+				<code>EOS_PlayerDataStorage_ReadFileCallbackInfo</code>
+				parameter. This parameter indicates success or failure, and includes the name of the file.</p>
+			<div>
+				<p>EOS may cache files locally to speed up future read operations. These files will be encrypted with the key you provided during EOS Platform initialization. Data chunks sent to your
+					<code>ReadFileDataCallback</code>
+					function will not be encrypted.</p>
+			</div>
+			<p>The following timeline diagram shows a hypothetical read operation in action:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>When downloading multiple files in succession, you can improve performance by querying the file list first, caching the metadata, then performing downloads. This avoids having to perform multiple queries and wait for the results between file downloads.</p>
+				</div>
+			</div>
+			<div>
+				<h4 id="writing-a-file">Writing a File</h4>
+			</div>
+			<p>To write a file with a known name, call
+				<code>EOS_PlayerDataStorage_WriteFile</code>. You will need to pass in an
+				<code>EOS_PlayerDataStorage_WriteFileOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_WRITEFILEOPTIONS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The Account ID of the local user who is writing the file to the cloud</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Filename</code>
+						</td>
+						<td>The name of the file to write</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ChunkLengthBytes</code>
+						</td>
+						<td>The maximum amount of data to write to the file in a single tick</td>
+					</tr>
+					<tr>
+						<td>
+							<code>WriteFileDataCallback</code>
+						</td>
+						<td>Callback function that provides chunks of data to EOS</td>
+					</tr>
+					<tr>
+						<td>
+							<code>FileTransferProgressCallback</code>
+						</td>
+						<td>Optional callback function (type
+							<code>EOS_PlayerDataStorage_OnFileTransferProgressCallback</code>) to inform you of transfer progress; will be called at least once if set</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This function returns an
+				<code>EOS_HPlayerDataStorageFileTransferRequest</code>
+				handle that you can use to check the progress of the transfer, get the name of the file, or cancel the transfer. At any time during the transfer, call
+				<code>EOS_PlayerDataStorageFileTransferRequest_GetFileRequestState</code>
+				to poll its current state,
+				<code>EOS_PlayerDataStorageFileTransferRequest_GetFilename</code>
+				to check the name of the file being transferred, or
+				<code>EOS_PlayerDataStorageFileTransferRequest_CancelRequest</code>
+				to cancel it (without generating an error). If you prefer to receive updates from EOS rather than polling the transfer directly, provide a valid
+				<code>EOS_PlayerDataStorage_OnFileTransferProgressCallback</code>
+				function when initiating the transfer (as the
+				<code>FileTransferProgressCallback</code>
+				parameter), and EOS will call it (with an
+				<code>EOS_PlayerDataStorage_FileTransferProgressCallbackInfo</code>
+				parameter) periodically inform you of the progress of the file transfer. If you choose this route, you are guaranteed to receive at least one call to your callback function. Using the callback function does not preclude using the handle, though they serve very similar purposes and most use cases will not require both.</p>
+			<p>When EOS wants to send the next chunk of the file to the cloud, your
+				<code>WriteFileDataCallback</code>
+				(of type
+				<code>EOS_PlayerDataStorage_OnWriteFileDataCallback</code>) will run with a parameter of type
+				<code>EOS_PlayerDataStorage_WriteFileDataCallbackInfo</code>, as well as a
+				<code>void</code>
+				pointer to a buffer for the outgoing data and a
+				<code>uint32_t</code>
+				pointer to indicate the size of that data. The
+				<code>EOS_PlayerDataStorage_WriteFileDataCallbackInfo</code>
+				has a variable called
+				<code>DataBufferLengthBytes</code>
+				that indicates the maximum number of bytes that you can put into the buffer. This callback function has an enumerated return type,
+				<code>EOS_PlayerDataStorage_EWriteResult</code>, which you can use to instruct EOS to continue the transfer, end it due to successful completion, end it due to an error, or cancel it without reporting an error.</p>
+			<div>
+				<p>
+					<code>WriteFileDataCallback</code>
+					will only be called from the main SDK thread (the one you are using to tick the SDK) and only once per tick. This is why it is important to set the right value for
+					<code>ChunkLengthBytes</code>. Setting the chunk size to a value that is too small will degrade writing performance for the user. We recommend using a multiple of 4096, as this normally corresponds to your system’s memory page size. You can estimate the maximum writing speed by multiplying
+					<code>ChunkLengthBytes</code>
+					by the SDK tick frequency. E.g. 4096 * 30 will give you up to 120 kilobytes per second. Using a chunk size that is too large, on the other hand, will make the SDK allocate more memory internally. In order to leave a reasonable footprint, you should pick a value that suits your needs best.</p>
+			</div>
+			<p>Once the file transfer has completed, EOS will run your
+				<code>EOS_PlayerDataStorage_OnWriteFileCompleteCallback</code>
+				callback function with an
+				<code>EOS_PlayerDataStorage_WriteFileCallbackInfo</code>
+				parameter. This parameter indicates success or failure and includes the name of the file. To avoid data loss, ensure that this callback runs before before letting the user quit the game or shut down the console.</p>
+			<div>
+				<h4 id="copying-a-file">Copying a File</h4>
+			</div>
+			<p>If you wish to make a copy of a file, you can do so without manually reading and writing the file's full data content. Call
+				<code>EOS_PlayerDataStorage_DuplicateFile</code>
+				with an
+				<code>EOS_PlayerDataStorage_DuplicateFileOptions</code>
+				containing the following values:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_DUPLICATEFILEOPTIONS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The Account ID of the local user who authorizes the operation; must be the original file's owner</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SourceFilename</code>
+						</td>
+						<td>The name of the existing file to copy</td>
+					</tr>
+					<tr>
+						<td>
+							<code>DestinationFilename</code>
+						</td>
+						<td>The desired name of the duplicate file</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Upon completion, EOS runs your
+				<code>EOS_PlayerDataStorage_OnDuplicateFileCompleteCallback</code>
+				function with an
+				<code>EOS_PlayerDataStorage_DuplicateFileCallbackInfo</code>
+				parameter. File duplication fails in the following situtations:</p>
+			<ul>
+				<li>The original file doesn't exist.</li>
+				<li>The user does not own the original file.</li>
+				<li>The user is out of storage space.</li>
+			</ul>
+			<div>
+				<p>If
+					<code>DestinationFilename</code>
+					identifies a file that already exists, that file is replaced with the duplicate.</p>
+			</div>
+			<div>
+				<h4 id="deleting-a-file">Deleting a File</h4>
+			</div>
+			<p>You can delete a file by calling
+				<code>EOS_PlayerDataStorage_DeleteFileOptions</code>
+				with an
+				<code>EOS_PlayerDataStorage_DeleteFileOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_PLAYERDATASTORAGE_DELETEFILEOPTIONS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The Account ID of the local user who authorizes deletion of the file; must be the file's owner</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Filename</code>
+						</td>
+						<td>The name of the file to delete</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Upon completion, EOS will run your callback (of type
+				<code>EOS_PlayerDataStorage_OnDeleteFileCompleteCallback</code>) and pass a parameter of type
+				<code>EOS_PlayerDataStorage_DeleteFileCallbackInfo</code>
+				to it. File deletion operations can fail if the user does not own the file.</p>
+			<div>
+				<h3 id="data-caching-and-encryption">Data Caching and Encryption</h3>
+			</div>
+			<p>The Player Data Storage Interface caches file data and metadata in the CacheDirectory folder on the client system. Whenever possible, EOS will use this data instead of streaming from the cloud, for both read and write operations, using MD5 checksum testing to prevent data corruption and to determine when the locally cached file is identical to the version on the cloud, in which case read and write operations can complete in a single callback cycle. Any successful read or write operation updates the cache, while deletion clears the cached file and removes its metadata. EOS does not clear the cache upon shutdown, enabling reuse of cached files in future sessions.</p>
+			<p>Player Data Storage files are always stored with encryption, using the key you provide during EOS Platform initialization. The encryption key itself is not stored on the cloud, so we can't use the key to access your data.</p>
+			<div>
+				<h3 id="file-decryption-tool">File Decryption Tool</h3>
+			</div>
+			<p>You can the
+				<a href="/docs/epic-online-services/eos-fundamentals/tools/file-decryption-tool">
+					<strong>File Decryption Tool</strong>
+				</a>
+				to create new files or decrypt files loaded to
+				<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">
+					<strong>Title Storage</strong>
+				</a>
+				or
+				<strong>Player Data Storage</strong>
+				easily and conveniently.</p>
+			<div>
+				<h3 id="usage-limitations">Usage Limitations</h3>
+			</div>
+			<p>The Player Data Storage Interface enables developers using EOS to save encrypted, user-specific, game-specific data to cloud servers. Data that you store through this interface is accessible to the user on any device where they can log in. The Player Data Storage Interface supports any file format; typical use cases include saved games and replay data.</p>
+			<p>The service applies limits to both storage amounts and usage rates. Throttling enforces usage rate limitations, and the service can delete files to enforce storage space limitations. For general information about throttling, usage quotas, and best practices, see the section on service usage limitations in the
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+				page.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Usage Type</th>
+						<th>Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Read or write</td>
+						<td>1000 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Maximum individual file size (see note below)</td>
+						<td>200 MB</td>
+					</tr>
+					<tr>
+						<td>Auto-delete file size</td>
+						<td>400 MB</td>
+					</tr>
+					<tr>
+						<td>Total storage space per user</td>
+						<td>400 MB</td>
+					</tr>
+					<tr>
+						<td>Maximum files per user</td>
+						<td>1000</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<p>If a user tries to upload a file that exceeds either storage space limit, the
+					<code>EOS_PlayerDataStorage_WriteFile</code>
+					call fails, and returns
+					<code>EOS_Result_PlayerDataStorageFileSizeTooLarge</code>. When the user's storage is full, additional calls to
+					<code>EOS_PlayerDataStorage_WriteFile</code>
+					fail, and return
+					<code>EOS_Result_PlayerDataStorageUserThrottled</code>, which indicates that the user's storage is throttled. The user's storage remains in a throttled state until enough files are removed to bring the storage usage under the limit. Files that exceed the auto-delete file size are deleted following the upload.</p>
+			</div>
+			<div>
+				<h2 id="playerdatastorage-vs-egs-cloud-saves">PlayerDataStorage vs EGS Cloud Saves</h2>
+			</div>
+			<p>Epic offers two different cloud save services: Launcher Cloud Saves and EOS Player Data Storage. The former is the most broadly used, and can be set up as part of your game configuration in the Epic Games Store. There are some differences between the services however, which would influence which service to use.</p>
+			<ol>
+				<li>Launcher Cloud Saves are tied to games within the Epic Games Launcher. So if the player was able to launch the game outside the Launcher, the game would only have access to the local version of the save data.</li>
+				<li>Cloud Saves from the Launcher are handled entirely on the Epic side once configured</li>
+				<li>EOS Player Data Storage requires the player to be online, and is driven entirely game-side using EOS APIs. This allows for data to be shared across platforms, unlike Launcher Cloud Saves.</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#file-management">File Management</a>
+								</li>
+								<li>
+									<a href="#file-name-format">File Name Format</a>
+								</li>
+								<li>
+									<a href="#querying-files">Querying Files</a>
+								</li>
+								<li>
+									<a href="#querying-all-files">Querying All Files</a>
+								</li>
+								<li>
+									<a href="#querying-a-single-file">Querying a Single File</a>
+								</li>
+								<li>
+									<a href="#examining-cached-file-information">Examining Cached File Information</a>
+								</li>
+								<li>
+									<a href="#accessing-and-modifying-files">Accessing and Modifying Files</a>
+								</li>
+								<li>
+									<a href="#reading-a-file">Reading a File</a>
+								</li>
+								<li>
+									<a href="#writing-a-file">Writing a File</a>
+								</li>
+								<li>
+									<a href="#copying-a-file">Copying a File</a>
+								</li>
+								<li>
+									<a href="#deleting-a-file">Deleting a File</a>
+								</li>
+								<li>
+									<a href="#data-caching-and-encryption">Data Caching and Encryption</a>
+								</li>
+								<li>
+									<a href="#file-decryption-tool">File Decryption Tool</a>
+								</li>
+								<li>
+									<a href="#usage-limitations">Usage Limitations</a>
+								</li>
+								<li>
+									<a href="#playerdatastorage-vs-egs-cloud-saves">PlayerDataStorage vs EGS Cloud Saves</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -19,71 +19,222 @@
 						<span>Epic Games Store</span>
 					</div>
 				</div>
-				<div>19 mins to read</div>
+				<div>22 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="overview">Overview</h2>
-			</div>
-			<p>The Ecom Interface gives developers using Epic Online Services the ability to interact with the Epic Games Store. With this interface, you can manage products ranging from full games and downloadable content (DLC) to virtual goods and in-game currency. This includes making offers, completing purchase transactions, verifying ownership, and redeeming purchased items.</p>
+			<p>The Epic Online Services (EOS) Ecom Interface helps you monetize your product (game or other software application) on the Epic Games Store: it handles purchases and verification of ownership for your product and its content.</p>
+			<p>You can integrate the EOS Ecom Interface into your product to manage Epic Games Store users' access to your product and its content. You can manage access to both a full product and any downloadable content (DLC) associated with it: from virtual goods and in-game currency. This includes making offers, completing purchase transactions, verifying ownership, and redeeming purchased items.</p>
+			<p>To integrate the EOS Ecom Interface into your product, you use both EOS Game Services and EOS Epic Account Services. For an introduction to all EOS functionality, see the following documentation:
+				<a href="/docs/epic-online-services">Epic Online Services Overview</a>.</p>
 			<p>
-				<strong>Tip</strong>: To help you better understand the Ecom Interface functionality, certain terms through this page are in
-				<strong>bold</strong>. Definitions for these terms can be found in the
-				<a href="#ecom-interface-glossary">Ecom Interface Glossary</a>
+				<strong>Notes on Updates to the Ecom service</strong>
 			</p>
+			<ul>
+				<li>EOS SDK version 1.16.4 updated the EOS SDK Ecom Interface. If you use EOS SDK version 1.16.4 or higher to implement Ecom with your product, you must enable the Ecom feature on client policies for your product.</li>
+				<li>On 2024-october-08, the EOS Ecom Web API updated to add Ecom Web API version 3 (v3). From this date, you can use either v3 or earlier versions of the Ecom Web API.</li>
+				<li>On 2025-july-15, the EOS Ecom Web API updated to add Ecom Web API version 4 (v4) for the
+					<code>entitlements</code>
+					and
+					<code>entitlementToken</code>
+					endpoints only. From this date, you can use either v4 or earlier versions of the Ecom Web API for the
+					<code>entitlements</code>
+					and
+					<code>entitlementToken</code>
+					endpoints.</li>
+				<li>EOS SDK version 1.17.1.3 updated the EOS SDK Ecom Interface. If you use EOS SDK version 1.17.1.3 or higher to implement Ecom with your product, you cannot query durable content with the EOS API
+					<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">
+						<code>EOS_Ecom_QueryEntitlements</code>
+						function</a>. If you specify a durable item for the
+					<code>EntitlementNames</code>
+					property in the EOS API
+					<a href="/docs/api-ref/structs/eos-ecom-query-entitlements-options">
+						<code>EOS_Ecom_QueryEntitlementsOptions</code>
+						data structure</a>, you receive the error message "Cannot query durable items entitlement. Please use Ownership APIs."</li>
+				<li>For more information, see the
+					<a href="#how-to-enable-the-ecom-feature-for-client-policies">How to Enable the Ecom Feature for Client Policies</a>
+					section of this page.</li>
+			</ul>
 			<div>
-				<h2 id="getting-started">Getting Started</h2>
+				<h2 id="set-up-requirements-before-you-start">Set-Up Requirements Before You Start</h2>
 			</div>
-			<p>To use the Ecom Interface, your product must have an Epic Account Services (EAS) application configured and must obtain
-				<a href="/docs/epic-account-services/eos-data-privacy-visibility">user consent</a>
-				to access Basic Profile data. You can set up an EAS application on the
-				<a href="/docs/dev-portal">Developer Portal</a>
-				or review the
-				<a href="/docs/epic-account-services">Epic Account Services documentation</a>
-				to learn more. Without EAS and user consent, you will be able to initialize the EOS SDK and the Ecom Interface, but all Ecom Interface function calls to the back-end service will fail.</p>
-			<p>To access the Ecom Interface, acquire an
-				<code>EOS_HEcom</code>
-				handle through the
-				<a href="/docs/game-services/eos-platform-interface">Platform Interface</a>
-				function,
-				<code>EOS_Platform_GetEcomInterface</code>. All Ecom Interface functions require this handle as their first parameter. You must ensure that the
-				<code>EOS_HPlatform</code>
-				handle is ticking in order for callbacks to trigger when requests are completed.</p>
+			<p>The Ecom Interface is part of Epic Online Services (EOS). To use the Ecom Interface, your players must sign in to both EOS Game Services (with the Connect Interface) and EOS Epic Account Services (with the Auth interface). Your product must meet the following requirements related to EOS:</p>
+			<ul>
+				<li>
+					<p>Have an EOS Epic Account Services application configured.</p>
+					<ul>
+						<li>For guidance on setting this up, see the following section of the EOS Epic Account Services Get Started page:
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/getting-started#3-register-your-product-with-eos-epic-account-services">3. Register Your Product with EOS Epic Account Services</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Get user consent for your product to access the minimum amount of data required for it to use the EOS Ecom service.</p>
+					<ul>
+						<li>You get user consent through EOS Epic Account Services: it's part of your product's Epic Account Services application configuration.</li>
+						<li>The minimum amount of data is known as "Basic Profile".
+							<br>
+							(Documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/eos-data-privacy-visibility#data-access-levels">EOS &gt; Data Privacy and Visibility &gt; Data Access Levels</a>.)</li>
+						<li>Without EOS Epic Account Services and user consent, you can initialize the EOS SDK and the Ecom Interface, but all Ecom Interface function calls to the EOS Ecom service will fail.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Initialize EOS Ecom through the EOS Platform Interface.</p>
+					<ul>
+						<li>To do this:<br>
+							Acquire an
+							<code>EOS_HEcom</code>
+							handle through the Platform Interface's API:
+							<code>EOS_Platform_GetEcomInterface</code>
+							function.<br>
+							Documentation:
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>.</li>
+								<li>EOS SDK API:
+									<a href="/docs/api-ref/functions/eos-platform-get-ecom-interface">
+										<code>EOS_Platform_GetEcomInterface</code>
+										function</a>.</li>
+							</ul>
+						</li>
+						<li>Notes:<br>
+							All EOS Ecom Interface functions require the
+							<code>EOS_HEcom</code>
+							handle as their first parameter.<br>
+							<strong>Required:</strong>
+							You must ensure that the
+							<code>EOS_HPlatform</code>
+							handle is ticking. This is required for EOS SDK callbacks to run.<br>
+							To do this, call the
+							<a href="/docs/api-ref/functions/eos-platform-tick">
+								<code>EOS_Platform_Tick</code>
+								function</a>
+							from your game's main loop to make sure that asynchronous functions continue to update.<br>
+							<strong>Tip:</strong>
+							You don't have to make these calls every frame, but you should make them fairly often; one call every 100 milliseconds is considered reasonable, but you can adjust the exact frequency to your needs.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Implement Ecom with your product (applies to EOS SDK v 1.16.4 or higher or EOS Ecom Web API v3 or higher only).</p>
+					<ul>
+						<li>If you use one of the following versions to implement Ecom with your product, you must enable the Ecom feature on client policies for your product:
+							<ul>
+								<li>EOS SDK version 1.16.4 or higher.</li>
+								<li>EOS Ecom Web API v3.</li>
+								<li>EOS Ecom Web API v4 for the
+									<code>entitlements</code>
+									or
+									<code>entitlementToken</code>
+									endpoint.</li>
+							</ul>
+						</li>
+					</ul>
+					<p>For guidance on this, see
+						<a href="#how-to-enable-the-ecom-feature-for-client-policies">How to Enable the Ecom Feature for Client Policies</a>
+						on this page.</p>
+					<p>Documentation:</p>
+					<ul>
+						<li>For EOS SDK version information, see the
+							<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>.</li>
+						<li>Epic Online Services —
+							<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client Policy</a>
+						</li>
+						<li>EOS Web API Reference —
+							<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>Notes:</strong>
+			</p>
+			<ul>
+				<li>EOS SDK 1.16.3 or lower only.<br>
+					If you use EOS SDK version 1.16.3 or lower to implement Ecom with your product, you can query data for a specific account by default. However, to query data across all accounts, you must request access to do this from Epic Games Support.<br>
+					To do this, create a private discussion on the support website:
+					<a href="http://eoshelp.epicgames.com">eoshelp.epicgames.com</a>. In the discussion, share your client ID, and ask us to assign you the GameServer role.</li>
+			</ul>
 			<div>
-				<p>Review the
-					<a href="/docs/web-api-ref/ecom-web-apis">Ownership Verification using Web API</a>
-					documentation for using Web APIs with the Ecom Interface.</p>
+				<h3 id="how-to-enable-the-ecom-feature-for-client-policies">How to Enable the Ecom Feature for Client Policies</h3>
 			</div>
+			<p>This applies to EOS SDK 1.16.4 or higher and EOS Ecom Web API v3 or higher only.</p>
+			<p>To use one of the following versions to implement Ecom with your product, you must enable and configure the Ecom feature on your product's client policies:</p>
+			<ul>
+				<li>EOS Ecom API with EOS SDK 1.16.4 or higher.</li>
+				<li>EOS Ecom Web API v3.</li>
+				<li>EOS Ecom Web API v4 for the
+					<code>entitlements</code>
+					or
+					<code>entitlementToken</code>
+					endpoint.</li>
+			</ul>
+			<p>This gives you control over Ecom in your product so you can include only the features that you require for a client (also known as "game client"). If you don't enable the Ecom feature for a client policy, clients that use that client policy can't use the Ecom Interface.</p>
+			<p>
+				<strong>Note:</strong>
+				EOS Ecom Web API v4 is available for the
+				<code>entitlements</code>
+				and
+				<code>entitlementToken</code>
+				endpoints only.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>For general guidance on client policies and client policy management, see:
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client Policy</a>.</li>
+				<li>For Ecom Web API, see: EOS Web API Reference -
+					<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>.</li>
+			</ul>
+			<p>
+				<strong>Steps</strong>
+				<br>
+				You configure the client policy through the Developer Portal: use the Clients tab on your product's Settings page. To do this:</p>
+			<ol>
+				<li>Open the client policy.<br>
+					To do this, follow the steps in the section on:
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide#edit-clients-or-custom-client-policies">Edit Clients or Custom Client Policies</a>
+					on the
+					<em>Guide: Manage Your Clients and Client Policies</em>
+					page.</li>
+				<li>Scroll down to the
+					<strong>Features</strong>
+					section and use the
+					<strong>Ecom</strong>
+					toggle to enable the Ecom feature for the client policy.</li>
+				<li>Select the checkboxes for the ecom actions that you want to enable for the client policy.</li>
+			</ol>
 			<div>
 				<h2 id="operating-an-in-game-store">Operating an In-Game Store</h2>
 			</div>
-			<p>You can operate an in-game store by carrying out two functions: presenting
-				<strong>catalog offers</strong>
-				(sometimes called
-				<em>offers</em>) from the store, and enabling the user to purchase these catalog offers. The SDK provides functionality to retrieve lists of offers from the store's catalog to display in-game. Offer data includes one or more catalog items (sometimes called
-				<em>audience</em>) that the user will gain after purchasing the offer, as well as release details that you can use to present information about the offer to the user.</p>
+			<p>You can operate an in-game store by carrying out two functions: presenting offers from the store, and enabling the user to purchase these offers. The SDK provides functionality to retrieve lists of offers from the store's catalog to display in-game. Offer data includes one or more audience items (also known as catalog items) that the user will gain after purchasing the offer, as well as release details that you can use to present information about the offer to the user.</p>
 			<p>Once the user chooses to make a purchase, the checkout API pushes the data to the
-				<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">overlay</a>, which displays the checkout flow for the user to finalize the purchase. When the purchase is completed, a callback is triggered to inform the game of the result of the transaction, providing a transaction handle so that the game can carry out
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/sdk-integration">overlay</a>, which displays the checkout flow for the user to finalize the purchase. When the purchase is completed, a callback is triggered to inform the game of the result of the transaction, providing a transaction handle so that the game can carry out
 				<strong>fulfillment</strong>.</p>
+			<p>
+				<strong>Notes (Mobile Early Adopter program only):</strong>
+			</p>
+			<ul>
+				<li>If your
+					<code>PreferredOrientation</code>
+					and the current orientation of the mobile device differ when you start the Ecom checkout flow, then you must implement the rotation of the mobile device yourself to match your
+					<code>PreferredOrientation</code>.</li>
+			</ul>
 			<div>
 				<p>Purchase related functionality of the Ecom interface is disabled if the
-					<a href="/docs/epic-account-services/social-overlay-overview/sdk-integration">
+					<a href="/docs/epic-online-services/accounts-and-social/social-overlay/sdk-integration">
 						<code>EOS_PF_DISABLE_OVERLAY</code>
 						flag</a>
 					is set, or if the overlay is otherwise unavailable.</p>
 			</div>
 			<div>
-				<h3 id="catalog-offer-data">Catalog Offer Data</h3>
+				<h3 id="offer-data">Offer Data</h3>
 			</div>
-			<p>Catalog offers (type
-				<code>EOS_Ecom_CatalogOffer</code>) contain localized pricing information and descriptive text, based on the puser browsing the store. Price localization includes applying discounts and converting to the local currency. A localized price will include a currency code, such as USD (which represents US dollars), and is represented in the smallest possible unit of that currency. For example, an offer that costs 2.99 US dollars would correspond to the value 299.</p>
+			<p>Offers (type
+				<code>EOS_Ecom_CatalogOffer</code>), also known as "catalog offers", contain localized pricing information and descriptive text, based on the user browsing the store. Price localization includes applying discounts and converting to the local currency. A localized price will include a currency code, such as USD (which represents US dollars), and is represented in the smallest possible unit of that currency. For example, an offer that costs 2.99 US dollars would correspond to the value 299.</p>
 			<div>
 				<h3 id="presenting-the-stores-catalog">Presenting the Store's Catalog</h3>
 			</div>
-			<p>You can retrieve the list of catalog offers by calling the
+			<p>You can retrieve the list of offers by calling the
 				<code>EOS_Ecom_QueryOffers</code>
 				function. This function takes an
 				<code>EOS_Ecom_QueryOffersOptions</code>
@@ -132,7 +283,7 @@
 				to determine the number of offers stored in the cache, and
 				<code>EOS_Ecom_CopyOfferByIndex</code>
 				to get a copy of an individual offer (of type
-				<code>EOS_Ecom_CatalogOffer</code>) from it. Each catalog item within the offer contains data about images and release details associated with that Item, which you can pull out separately. When you no longer need your copy of an Offer, use
+				<code>EOS_Ecom_CatalogOffer</code>) from it. Each audience item (also known as a catalog item) in the offer contains data about images and release details associated with that Item, which you can pull out separately. When you no longer need your copy of an Offer, use
 				<code>EOS_Ecom_CatalogOffer_Release</code>
 				to release it.</p>
 			<div>
@@ -140,12 +291,12 @@
 			</div>
 			<p>After retrieving an offer from the cache, you can call
 				<code>EOS_Ecom_GetOfferItemCount</code>
-				to determine how many catalog items that offer contains, and then use
+				to determine how many audience items (also known as catalog items) that offer contains, and then use
 				<code>EOS_Ecom_CopyOfferItemByIndex</code>
 				to retrieve a copy of an individual
 				<code>EOS_Ecom_CatalogItem</code>. This structure contains additional localized text as well as the ID of the entitlement that it will provide upon purchase. To release the memory allocated to your copy of the data, call
 				<code>EOS_Ecom_CatalogItem_Release</code>.</p>
-			<p>To retrieve release details for a catalog item from the cache, first use
+			<p>To retrieve release details for an audience item (also known as a catalog item) from the cache, first use
 				<code>EOS_Ecom_GetItemReleaseCount</code>
 				to discover the number of data entries present. You can then use
 				<code>EOS_Ecom_CopyItemReleaseByIndex</code>
@@ -156,9 +307,7 @@
 			<div>
 				<h3 id="buying-from-the-store">Buying from the Store</h3>
 			</div>
-			<p>When a user buys something from the store, that user purchases a catalog offer. Once the purchase is complete, the user will own the catalog item(s) contained within the offer, each of which adds one or more
-				<strong>entitlements</strong>
-				to the buyer's user account.</p>
+			<p>When a user buys something from the store, that user purchases an offer. Once the purchase is complete, the user will own the audience items (also known as catalog items)contained in the offer, each of which adds one or more entitlements to the buyer's user account.</p>
 			<p>There are three actions involved in buying from the store: making the purchase, verifying ownership, and (optionally) redeeming entitlements.</p>
 			<p>When a user decides to make a purchase, call
 				<code>EOS_Ecom_Checkout</code>
@@ -217,6 +366,20 @@
 							<code>ApiVersion</code>
 							as this structure</td>
 					</tr>
+					<tr>
+						<td>
+							<code>PreferredOrientation</code>
+							(Mobile Early Adopter program only)</td>
+						<td>For Mobile Early Adopter Program only. A value of
+							<code>EOS_ECheckoutOrientation</code>. The screen orientation that you prefer to display the Ecom checkout flow on mobile (iOS, Android). Possible values are:
+							<code>EOS_ECO_Default</code>: the current orientation of the mobile device;
+							<code>EOS_ECO_Portrait</code>: prefer to use portrait orientation; and
+							<code>EOS_ECO_Landscape</code>: prefer to use landscape orientation. If your game's orientation doesn't match the
+							<code>PreferredOrientation</code>
+							before you start the Ecom checkout flow, we recommend that you rotate your game's orientation to match the
+							<code>PreferredOrientation</code>
+							prior to starting the checkout flow, then revert the orientation back, after completing the checkout flow.</td>
+					</tr>
 				</tbody>
 			</table>
 			<p>This information is used to generate a purchase token. The overlay is displayed, enabling the user to review the purchase, select payment options, and confirm or cancel the transaction. When the overlay closes, whether by succeeding, failing, or being canceled by the user, your callback (of type
@@ -230,6 +393,15 @@
 				are made before the first returns via the callback, an
 				<code>EOS_AlreadyPending</code>
 				error will be returned.</p>
+			<p>
+				<strong>Notes (Mobile Early Adopter program only):</strong>
+			</p>
+			<ul>
+				<li>If your
+					<code>PreferredOrientation</code>
+					and the current orientation of the mobile device differ when you start the Ecom checkout flow, then you must implement the rotation of the mobile device yourself to match your
+					<code>PreferredOrientation</code>.</li>
+			</ul>
 			<div>
 				<h3 id="accessing-completed-purchase-data">Accessing Completed Purchase Data</h3>
 			</div>
@@ -253,13 +425,13 @@
 				<h2 id="verifying-ownership">Verifying Ownership</h2>
 			</div>
 			<div>
-				<p>Verifying ownership within the game client is not recommended and may be bypassed by users using software cheats. If possible, verify ownership on a trusted server using the
+				<p>Verify ownership on a trusted server using the Ecom Web API. Users using software cheats might bypass ownership if you verify ownership in the game client. For more information, see
 					<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>.</p>
 			</div>
 			<div>
 				<h3 id="latest-recommendations-to-assist-with-preventing-piracy">Latest recommendations to assist with preventing piracy</h3>
 			</div>
-			<p>To help prevent piracy, we recommend that developers implement ownership verification checks for their game and any DLC. Online ownership verification on a trusted server/API is strongly recommended, and is generally considered the only effective way to prevent piracy. Client side verification can be used to mitigate low complexity attacks such as redistribution of the unmodified game files.</p>
+			<p>To help prevent piracy, we recommend that you implement ownership verification checks for your game and any downloadable content (DLC). We strongly recommend you use online ownership verification on any trusted server or API you use. We consider this the only effective way to prevent piracy. However, you can also use client-side verification to mitigate low complexity attacks such as redistribution of the unmodified game files.</p>
 			<p>For multiuser or online games:</p>
 			<ul>
 				<li>
@@ -307,9 +479,7 @@
 					<p>Do not store DLC as part of the main game files. Distribute DLC content via the Epic Games Store or require an additional download which is gated by a server side ownership check.</p>
 				</li>
 			</ul>
-			<p>The Ecom Interface provides two methods for ownership verification: direct verification and token-based verification. Direct verification integrates directly with the Epic Entitlement Service, while token-based verification provides a signed token that the user can verify, or can pass to a third-party service. The direct method is useful for trusted game servers or less secure checks on client systems for simple validation. The token-based method provides a token that includes information about the game client, user, and
-				<a href="#ecom-interface-glossary">Entitlement</a>
-				as well as a signature that the game client or an external service can verify. If integrating with a third-party service that performs ownership verification, the token-based method is recommended because it avoids granting the outside service access to the user's data.</p>
+			<p>The Ecom Interface provides two methods for ownership verification: direct verification and token-based verification. Direct verification integrates directly with the Epic Entitlement Service, while token-based verification provides a signed token that the user can verify, or can pass to a third-party service. The direct method is useful for trusted game servers or less secure checks on client systems for simple validation. The token-based method provides a token that includes information about the game client, user, and entitlement, as well as a signature that the game client or an external service can verify. If integrating with a third-party service that performs ownership verification, the token-based method is recommended because it avoids granting the outside service access to the user's data.</p>
 			<p>If you prefer to access ownership information for your titles and services via RESTful endpoints, see the Ecom Web APIs.</p>
 			<div>
 				<h3 id="direct-ownership-verification">Direct Ownership Verification</h3>
@@ -317,7 +487,7 @@
 			<p>The recommended approach to verify user purchases is from your own back-end service, as this is not susceptible to malicious behavior from users. Please refer to the
 				<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web API documentation</a>
 				for details.</p>
-			<p>To determine whether or not a user owns a specific catalog item, call
+			<p>To determine whether or not a user owns a specific audience item (also known as a catalog item), call
 				<code>EOS_Ecom_QueryOwnership</code>
 				and pass in an
 				<code>EOS_Ecom_QueryOwnershipOptions</code>
@@ -348,13 +518,13 @@
 						</td>
 						<td>The
 							<code>EOS_EpicAccountId</code>
-							of the local user whose ownership to query; needed for localization of Catalog Item description text and pricing information</td>
+							of the local user whose ownership to query; needed for localization of audience item (also known as catalog item) description text and pricing information</td>
 					</tr>
 					<tr>
 						<td>
 							<code>CatalogItemIds</code>
 						</td>
-						<td>List of catalog item IDs to check for ownership</td>
+						<td>List of audience item (also known as catalog item) IDs to check for ownership</td>
 					</tr>
 					<tr>
 						<td>
@@ -415,7 +585,7 @@
 						<td>
 							<code>CatalogItemIds</code>
 						</td>
-						<td>An array of up to 32 (<code>EOS_ECOM_QUERYOWNERSHIPTOKEN_MAX_CATALOGITEM_IDS</code>) catalog items to check for entitlement, of type
+						<td>An array of up to 32 (<code>EOS_ECOM_QUERYOWNERSHIPTOKEN_MAX_CATALOGITEM_IDS</code>) audience items (also known as catalog items) to check for entitlement, of type
 							<code>EOS_Ecom_CatalogItemId</code>
 						</td>
 					</tr>
@@ -423,7 +593,7 @@
 						<td>
 							<code>CatalogItemIdCount</code>
 						</td>
-						<td>The number of catalog items in
+						<td>The number of audience items (also known as catalog items) in
 							<code>CatalogItemIds</code>
 						</td>
 					</tr>
@@ -442,9 +612,7 @@
 				<code>https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</code>. A sample request follows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>GET/ecommerceintegration/api/public/publickeys/pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g HTTP/1.1Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com{	"kty": "RSA",	"e": "AQAB",	"kid": "pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g",	"n": "gcStqtD8XD9c9ifNuxXT9Xd_EEZLLCw34yxINRQPt0MxEWkoOFsuisRWGktSFtGrnUuQnp8GQY0k4Pyl_yDItWAcRtO7JUjrhQnxx3xXp_0P8xJMH1ny-RcxHF3bEJWhDzNW5PBpBjQTQZis-83499z-4OlNA7oUnDKEJkqNfzh4mMDFluPxvW_Hwpaw71nhzJI7-N-BdsPsLdqUANajLsFKq9fr06Lek_tm-6-RUxNPE3yS0x0UIsGyapA4Apcczz0xTzRDfwOkq_TyKGZiZc7vtgjkWnqdsCyXZC7dzKJvg0ggO3mKXhqZNNC_2pz24o1X_xCbG8rXtuvX8-ux-Q"}</pre>
 				</section>
 			</div>
 			<div>
@@ -497,11 +665,7 @@
 			<div>
 				<h2 id="fulfilling-purchases">Fulfilling Purchases</h2>
 			</div>
-			<p>After making a purchase, the user's
-				<span>
-					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
-				</span>
-				gains an entitlement, but the user may not see the effect of their purchase in the game yet. In some cases, fulfilling a purchase can be as simple as checking that the user owns a specific entitlement and applying some game logic to the result. In these cases, verifying ownership through the SDK is sufficient. In other cases, such as purchases involving consumable items or game currency, you may also need to fulfill the order in-game or with a third-party back-end service by redeeming the entitlement.</p>
+			<p>After making a purchase, the user's account gains an entitlement, but the user may not see the effect of their purchase in the game yet. In some cases, fulfilling a purchase can be as simple as checking that the user owns a specific entitlement and applying some game logic to the result. In these cases, verifying ownership through the SDK is sufficient. In other cases, such as purchases involving consumable items or game currency, you may also need to fulfill the order in-game or with a third-party back-end service by redeeming the entitlement.</p>
 			<div>
 				<p>Enumerating and redeeming entitlements within the game client is not recommended and may be bypassed by users using software cheats. If possible, enumerate and redeem on a trusted server using the
 					<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>.</p>
@@ -520,9 +684,20 @@
 			<p>Note that the
 				<code>EOS_Ecom_QueryEntitlements</code>
 				API should not be used to verify purchased
-				<strong>durable content</strong>, as it does not take into account the relationship between associated catalog items, such as the individual DLC contained with a Season Pass. As such,
+				<strong>durable content</strong>, as it does not take into account the relationship between associated audience items (also known as catalog items), such as the individual DLC contained with a Season Pass. As such,
 				<code>EOS_Ecom_QueryEntitlements</code>
 				is typically used for consumable offers, with durable content being managed as detailed in the Verifying Ownership section above.</p>
+			<p>
+				<strong>Note:</strong>
+				In EOS SDK 1.17.1.3 and higher, you cannot query durable content with the EOS API
+				<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">
+					<code>EOS_Ecom_QueryEntitlements</code>
+					function</a>. If you use Ecom in EOS SDK 1.17.1.3 or higher and specify a durable item for the
+				<code>EntitlementNames</code>
+				property in the EOS API
+				<a href="/docs/api-ref/structs/eos-ecom-query-entitlements-options">
+					<code>EOS_Ecom_QueryEntitlementsOptions</code>
+					data structure</a>, you receive the error message "Cannot query durable items entitlement. Please use Ownership APIs."</p>
 			<p>
 				<code>EOS_Ecom_QueryEntitlementsOptions</code>
 				is initialized as follows:</p>
@@ -554,7 +729,14 @@
 						<td>
 							<code>EntitlementNames</code>
 						</td>
-						<td>An array of entitlement names (typically equal to the catalog item ID) that you want to check</td>
+						<td>An array of entitlement names (typically equal to the catalog item ID) that you want to check.
+							<strong>Note:</strong>
+							In EOS SDK 1.17.1.3 and higher, you cannot query durable content with the EOS API
+							<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">
+								<code>EOS_Ecom_QueryEntitlements</code>
+								function</a>. If you specify a durable item for the
+							<code>EntitlementNames</code>
+							property, you receive the error message "Cannot query durable items entitlement. Please use Ownership APIs."</td>
 					</tr>
 					<tr>
 						<td>
@@ -562,13 +744,23 @@
 						</td>
 						<td>The number of entitlement names included in the
 							<code>EntitlementNames</code>
-							property. Accepts up to a maximum of EOS_ECOM_QUERYENTITLEMENTS_MAX_ENTITLEMENT_IDS. If 0 is provided, will request all entitlements associated with the user account.</td>
+							property. Accepts up to a maximum of
+							<code>EOS_ECOM_QUERYENTITLEMENTS_MAX_ENTITLEMENT_IDS</code>. If
+							<code>0</code>
+							is provided, will request all entitlements associated with the user account.</td>
 					</tr>
 					<tr>
 						<td>
 							<code>bIncludeRedeemed</code>
 						</td>
 						<td>If true, entitlements that have been redeemed will be included in the results.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>OverrideCatalogNamespace</code>
+						</td>
+						<td>Specifies the sandbox to use. If you do not provide this property, then the namespace will be the current Sandbox ID (in
+							<code>EOS_Platform_Options</code>).</td>
 					</tr>
 				</tbody>
 			</table>
@@ -641,9 +833,7 @@
 				<code>https://ecommerceintegration-public-service-ecomprod02.ol.epicgames.com/ecommerceintegration/api/public/publickeys/{kid}</code>. A sample request follows:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>GET/ecommerceintegration/api/public/publickeys/pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g HTTP/1.1Host: ecommerceintegration-public-service-ecomprod02.ol.epicgames.com{	"kty": "RSA",	"e": "AQAB",	"kid": "pbvnNIE97vErdePGIRoG41h8hnP_2wIxG8xbwZCIj3g",	"n": "gcStqtD8XD9c9ifNuxXT9Xd_EEZLLCw34yxINRQPt0MxEWkoOFsuisRWGktSFtGrnUuQnp8GQY0k4Pyl_yDItWAcRtO7JUjrhQnxx3xXp_0P8xJMH1ny-RcxHF3bEJWhDzNW5PBpBjQTQZis-83499z-4OlNA7oUnDKEJkqNfzh4mMDFluPxvW_Hwpaw71nhzJI7-N-BdsPsLdqUANajLsFKq9fr06Lek_tm-6-RUxNPE3yS0x0UIsGyapA4Apcczz0xTzRDfwOkq_TyKGZiZc7vtgjkWnqdsCyXZC7dzKJvg0ggO3mKXhqZNNC_2pz24o1X_xCbG8rXtuvX8-ux-Q"}</pre>
 				</section>
 			</div>
 			<div>
@@ -687,11 +877,10 @@
 			<div>
 				<h3 id="redeeming-an-entitlement">Redeeming an entitlement</h3>
 			</div>
-			<p>The recommended approach to verify user purchases is from your own back-end service, as this is not susceptible to malicious behavior from pusers. Please refer to the
+			<p>The recommended approach to verify user purchases is from your own back-end service, as this is not susceptible to malicious behavior from users. Please refer to the
 				<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web API documentation</a>
 				for details.</p>
-			<p>After fulfilling a
-				<strong>consumable entitlement</strong>, or managing its fulfillment through a third-party service, call the
+			<p>After fulfilling a consumable entitlement, or managing its fulfillment through a third-party service, call the
 				<code>EOS_Ecom_RedeemEntitlements</code>
 				function with an
 				<code>EOS_Ecom_RedeemEntitlementsOptions</code>
@@ -750,156 +939,73 @@
 					set to
 					<code>true</code>. Note that the Entitlement is still stored in the cache after it is redeemed. There is no way to clear the cache.</p>
 			</div>
-			<div>
-				<h2 id="ecom-interface-glossary">Ecom Interface Glossary</h2>
-			</div>
-			<p>This section contains terms and definitions commonly used within the Ecom Interface.</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Term</th>
-						<th>Definition</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<strong>Catalog Item</strong>
-						</td>
-						<td>A catalog item (also called an audience) can represent an entire game, virtual goods like in-game currency or weapon skins, or other types of downloadable content. A catalog item is used to define how entitlements are granted to accounts. You can configure catalog items to grant other catalog items. This lets you update associated offers over time. For example, you can allow season pass owners to seamlessly gain ownership rights for new DLC when it is released.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Catalog Offer</strong>
-						</td>
-						<td>A catalog offer (also called an offer) is a pairing of one or more catalog items and an associated price (which can be 0). When an offer is purchased, an entitlement is granted for each of the items contained in the offer.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Entitlement</strong>
-						</td>
-						<td>An entitlement is anything a user owns within the Epic Games Store infrastructure. An entitlement can grant access to one or more catalog items.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Consumable Entitlement</strong>
-						</td>
-						<td>Consumable entitlements have limited persistence, decreasing a use count each time the Item is used in game. This is commonly used for things like in-game currency, XP boosts, and other Items that can be used up and replenished with additional purchases. In some cases, an external service fulfills the entitlement. Once that external service has received the information about the entitlement, it is redeemed and its use count is decremented to 0, effectively removing it from the user account. The external service accepts responsibility for handling the in-game effects of the Item past that point.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Durable Entitlement</strong>
-						</td>
-						<td>Entitlements for purchases that persist, like certain forms of downloadable content, or even entire games.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Fulfillment</strong>
-						</td>
-						<td>Once a consumable entitlement is part of a user account, the entitlement still needs to be fulfilled. It can be implicit (checked by SDK APIs), or a third-party service can accept responsibility for the fulfillment through back-end service API calls.</td>
-					</tr>
-				</tbody>
-			</table>
-			<p>The following table contains the different ID types used within the Ecom Interface and information about where each comes from and what they each describe.</p>
-			<table>
-				<thead>
-					<tr>
-						<th>ID Type</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<strong>Catalog Offer ID</strong>
-						</td>
-						<td>A Catalog Offer ID is the unique identifier for an offer in the store. These IDs are unique within a Product. The checkout process requires a Catalog Offer ID.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Catalog Item ID</strong>
-						</td>
-						<td>Catalog item IDs are unique within a Product and identify a single catalog Item. You need this ID in order to check whether or not a specific user owns the corresponding catalog item.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Entitlement Name</strong>
-						</td>
-						<td>Each catalog item can have an entitlement name associated with it.  These entitlement names can be used for grouping. However, the entitlement name is usually the same value as the Catalog Item ID. The Ecom Interface allows querying for entitlements based on the entitlement name associated with the catalog item in the catalog offer that granted it.</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Entitlement ID</strong>
-						</td>
-						<td>Fulfilled catalog offers and their catalog items manifest on the user account as a particular entitlement stored with that user. Each entitlement will have its own unique identifier. This ID is used by the ECom Interface when redeeming entitlements.</td>
-					</tr>
-				</tbody>
-			</table>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#getting-started">Getting Started</a>
-					</li>
-					<li>
-						<a href="#operating-an-in-game-store">Operating an In-Game Store</a>
-					</li>
-					<li>
-						<a href="#catalog-offer-data">Catalog Offer Data</a>
-					</li>
-					<li>
-						<a href="#presenting-the-stores-catalog">Presenting the Store's Catalog</a>
-					</li>
-					<li>
-						<a href="#displaying-individual-item-data">Displaying Individual Item Data</a>
-					</li>
-					<li>
-						<a href="#buying-from-the-store">Buying from the Store</a>
-					</li>
-					<li>
-						<a href="#accessing-completed-purchase-data">Accessing Completed Purchase Data</a>
-					</li>
-					<li>
-						<a href="#verifying-ownership">Verifying Ownership</a>
-					</li>
-					<li>
-						<a href="#latest-recommendations-to-assist-with-preventing-piracy">Latest recommendations to assist with preventing piracy</a>
-					</li>
-					<li>
-						<a href="#direct-ownership-verification">Direct Ownership Verification</a>
-					</li>
-					<li>
-						<a href="#token-based-ownership-verification">Token-Based Ownership Verification</a>
-					</li>
-					<li>
-						<a href="#ownership-verification-token-details">Ownership Verification Token Details</a>
-					</li>
-					<li>
-						<a href="#fulfilling-purchases">Fulfilling Purchases</a>
-					</li>
-					<li>
-						<a href="#direct-entitlement-enumeration">Direct Entitlement Enumeration</a>
-					</li>
-					<li>
-						<a href="#token-based-entitlement-enumeration">Token-Based Entitlement Enumeration</a>
-					</li>
-					<li>
-						<a href="#entitlement-enumeration-token-details">Entitlement Enumeration Token Details</a>
-					</li>
-					<li>
-						<a href="#redeeming-an-entitlement">Redeeming an entitlement</a>
-					</li>
-					<li>
-						<a href="#ecom-interface-glossary">Ecom Interface Glossary</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#set-up-requirements-before-you-start">Set-Up Requirements Before You Start</a>
+								</li>
+								<li>
+									<a href="#how-to-enable-the-ecom-feature-for-client-policies">How to Enable the Ecom Feature for Client Policies</a>
+								</li>
+								<li>
+									<a href="#operating-an-in-game-store">Operating an In-Game Store</a>
+								</li>
+								<li>
+									<a href="#offer-data">Offer Data</a>
+								</li>
+								<li>
+									<a href="#presenting-the-stores-catalog">Presenting the Store's Catalog</a>
+								</li>
+								<li>
+									<a href="#displaying-individual-item-data">Displaying Individual Item Data</a>
+								</li>
+								<li>
+									<a href="#buying-from-the-store">Buying from the Store</a>
+								</li>
+								<li>
+									<a href="#accessing-completed-purchase-data">Accessing Completed Purchase Data</a>
+								</li>
+								<li>
+									<a href="#verifying-ownership">Verifying Ownership</a>
+								</li>
+								<li>
+									<a href="#latest-recommendations-to-assist-with-preventing-piracy">Latest recommendations to assist with preventing piracy</a>
+								</li>
+								<li>
+									<a href="#direct-ownership-verification">Direct Ownership Verification</a>
+								</li>
+								<li>
+									<a href="#token-based-ownership-verification">Token-Based Ownership Verification</a>
+								</li>
+								<li>
+									<a href="#ownership-verification-token-details">Ownership Verification Token Details</a>
+								</li>
+								<li>
+									<a href="#fulfilling-purchases">Fulfilling Purchases</a>
+								</li>
+								<li>
+									<a href="#direct-entitlement-enumeration">Direct Entitlement Enumeration</a>
+								</li>
+								<li>
+									<a href="#token-based-entitlement-enumeration">Token-Based Entitlement Enumeration</a>
+								</li>
+								<li>
+									<a href="#entitlement-enumeration-token-details">Entitlement Enumeration Token Details</a>
+								</li>
+								<li>
+									<a href="#redeeming-an-entitlement">Redeeming an entitlement</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

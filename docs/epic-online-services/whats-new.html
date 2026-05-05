@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -13,38 +13,473 @@
 		<div>
 			<h1>EOS What's New</h1>
 			<h2>The high-level features and changes for each release of Epic Online Services (EOS) SDK.</h2>
-			<div></div>
+			<div>
+				<div>31 mins to read</div>
+			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
 			<p>
 				<em>EOS What's New</em>
-				is a high-level description of what’s changed in Epic Online Services (EOS) with every EOS SDK release.
-				<br>
-				See the following documentation for additional information on EOS.</p>
+				is a high-level description of what’s changed in Epic Online Services (EOS). See the following documentation for additional information on EOS.</p>
 			<ul>
 				<li>
-					<strong>Get started</strong>:
-					<br>
-					See the EOS
+					<strong>Get started</strong>: See the EOS
 					<a href="/docs/epic-online-services/eos-get-started">Get Started Steps</a>
 					page for information on how to set up and use EOS services and the EOS SDK.</li>
 				<li>
-					<strong>Release notes</strong>:
-					<br>
-					See the
+					<strong>Release notes</strong>: See the
 					<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
 					documentation for more detailed information on what's changed with every EOS SDK release.</li>
-				<li>
-					<strong>Planned features</strong>:
-					<br>
-					Find out what’s in development on the EOS roadmap at
-					<a href="https://trello.com/b/rLvzFJfE/eos-public-roadmap">trello.com/~/eos-public-roadmap</a>.</li>
 			</ul>
+			<div>
+				<h1 id="2026">2026</h1>
+			</div>
+			<div>
+				<h2 id="eos-11907---cl52449437---2026-apr-08">EOS 1.19.0.7 - CL52449437 - 2026-Apr-08</h2>
+			</div>
+			<p>This release includes support for Sony's PlayStation 5 SDK 13.00.00.35 and support for Nintendo's Switch SDK and Switch 2 SDK 21.4.2. See the
+				<a href="/docs/epic-online-services/release-notes">Release Notes</a>
+				for this and other updates to the EOS SDK.</p>
+			<div>
+				<h2 id="eos-11903---cl49960398---2026-feb-10">EOS 1.19.0.3 - CL49960398 - 2026-feb-10</h2>
+			</div>
+			<p>This release includes several bug fixes, new features, some deprecations, and breaking changes. In addition there are changes to the Developer Portal UI and documentation organization.</p>
+			<p>
+				<strong>Updated EOS Service Groups in the Developer Portal and Documentation</strong>
+				<br>
+				We have updated how our services are categorized. Services are now in one of four groups: Accounts &amp; Social, Multiplayer, Player &amp; Game Data, and Trust &amp; Safety.</p>
+			<p>This update is reflected in the Developer Portal UI, the EOS website (<a href="http://onlineservices.epicgames.com">onlineservices.epicgames.com</a>) and the EOS documentation.</p>
+			<p>More information on the groups:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-overview">EOS Overview</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Get Started Introduction</a>
+				</li>
+			</ul>
+			<p>
+				<strong>EOS SDK for Xbox Support</strong>
+				<br>
+				We have expanded support for the Microsoft Xbox GDK, as described below:</p>
+			<ul>
+				<li>Added version support for Microsoft Xbox GDK 251000.</li>
+				<li>Retained support for Microsoft Xbox GDK 250400, 241000, 240604, 240602.</li>
+			</ul>
+			<p>
+				<strong>Deprecation Notice — 32-Bit and Android OS 6 and OS 7</strong>
+				<br>
+				EOS SDK 1.19.0.3 and all subsequent SDK versions no longer support the following operating systems:</p>
+			<ul>
+				<li>32-bit Windows</li>
+				<li>32-bit Android</li>
+				<li>32-bit and 64-bit Android OS 6 (Marshmallow)</li>
+				<li>32-bit and 64-bit Android OS 7 (Nougat)</li>
+			</ul>
+			<p>If your game runs on any of these operating systems, you can continue to use EOS SDK 1.18.1.2 (or lower). To update to EOS SDK 1.19.0.3 or higher, you must change your game to run on 64-bit Windows or 64-bit Android higher than OS 7.</p>
+			<p>
+				<strong>Breaking Changes</strong>
+			</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Windows  — the main thread priority has changed</strong>
+						<br>
+						On Windows, the priority behavior of the game code’s main thread has changed.<br>
+						Prior to this release,  any EOS SDK calls to
+						<code>EOS_Initialize</code>
+						automatically set the main thread priorities using
+						<code>THREAD_PRIORITY_ABOVE_NORMAL</code>, overriding any previous thread settings. From EOS SDK 1.19.0.3 (and higher),  a call to
+						<code>EOS_Initialize</code>
+						no longer alters the main thread priority.</p>
+					<p>If your game depends on this behavior, you must now call
+						<code>SetThreadPriority</code>
+						with an appropriate thread priority. If you do not do this, your game might become less responsive to player input and activities that use the main thread might experience performance issues.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Android — DynamicSTDC binaries are deprecated</strong>
+						<br>
+						The EOS SDK no longer provides DynamicSTDC flavor binaries. Update your game code configuration to use StaticSTDC flavor binaries instead.</p>
+				</li>
+			</ul>
+			<p>
+				<strong>More Information</strong>
+				<br>
+				See the
+				<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
+				for additional information on these and other updates to the EOS SDK in this release.</p>
+			<div>
+				<h2 id="2025">2025</h2>
+			</div>
+			<div>
+				<h2 id="eos-11812---cl47370208---2025-nov-04">EOS 1.18.1.2 - CL47370208 - 2025-Nov-04</h2>
+			</div>
+			<p>This release includes support for PS5 SDK 12.00.00.38, changes to Android compilation, and bug fixes for the Auth and Ecom interfaces.</p>
+			<p>
+				<strong>More Information</strong>
+				<br>
+				See the
+				<a href="/docs/epic-online-services/release-notes#11812---cl47370208---2025-nov-04">Release Notes</a>
+				for more information on these and other updates to the EOS SDK with this release.</p>
+			<div>
+				<h3 id="eos-overlay-update--2025-oct-06">EOS Overlay Update – 2025-oct-06</h3>
+			</div>
+			<p>From October 6th, we have updated the EOS Overlay’s Social Overlay feature.</p>
+			<p>What's changed:</p>
+			<ul>
+				<li>
+					<p>We’ve refined, polished, and modernized the Social Overlay’s design, providing players with a streamlined interface that’s easier to navigate across devices and that integrates more seamlessly into your game.</p>
+				</li>
+				<li>
+					<p>We’ve improved navigation and usability for all input methods, with particular attention to controller use and mobile optimizations. Whether players scroll through their friends list, manage parties, or send invites, the Social Overlay is now more intuitive across all devices.</p>
+				</li>
+				<li>
+					<p>This update brings significant performance improvements to the Social Overlay, especially on Nintendo Switch and mobile (iOS and Android). Players now experience smoother scrolling, more responsive navigation, and have a better overall experience when interacting with a large friends list.</p>
+				</li>
+			</ul>
+			<p>You do not need to make any changes to your game’s EOS configuration or code because of this update; the update applies automatically.</p>
+			<p>See the new-look Social Overlay in the following documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/social-overlay-tabs">Social Overlay Tabs</a>
+			</p>
+			<div>
+				<h3 id="eos-11804---cl45343210---2025-sept-16">EOS 1.18.0.4 - CL45343210 - 2025-sept-16</h3>
+			</div>
+			<p>This release includes an update to the EOS redistributable installer and support for localized player presence. It also contains bug fixes to the EOS Overlay and Social Overlay, the Anti-Cheat Interface and Voice Interface, both Nintendo Switch and Nintendo Switch 2, and upgrades to the EOS SDK for Android. There are some highlights of these updates below. Full details are in the release notes.</p>
+			<p>The EOS Friends Web API also has a release at the same time as this EOS SDK release. See the
+				<em>Friends Web API Update</em>
+				below for details.</p>
+			<p>
+				<strong>Epic Online Services Redistributable Installer</strong>
+				<br>
+				This release includes an update to the EOS redistributable installer which includes the following improvements:</p>
+			<ul>
+				<li>Silent installation</li>
+				<li>Updates without UI</li>
+				<li>Lower disk space usage</li>
+				<li>Performance improvements</li>
+			</ul>
+			<p>For more information, see the
+				<a href="/docs/epic-online-services/accounts-and-social/crossplay/redistributable-installer">Redistributable Installer</a>
+				documentation.</p>
+			<p>
+				<strong>Localized presence</strong>
+				<br>
+				You can now localize player presence data to match each player’s preferred language. You can define templates and translations in the Developer Portal to render the translated strings in the Social Overlay, or use the Presence Interface to retrieve them programmatically. You can use the EOS SDK to update presence in any supported language.<br>
+				For more information on how to configure your product to use localized presence, see the
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence">Localized Presence</a>
+				documentation.</p>
+			<p>
+				<strong>Friends Web API Update</strong>
+				<br>
+				You can use the Friends Web API to retrieve an authenticated player's friends list and block list. You can then use these lists to integrate social features into your game. For example, you can display the player’s friends list in a custom in-game UI.<br>
+				For more information, see the
+				<a href="/docs/web-api-ref/friends-web-api">Friends Web API</a>
+				documentation.</p>
+			<p>
+				<strong>Breaking Changes</strong>
+			</p>
+			<ul>
+				<li>
+					<strong>Android</strong>
+					<ul>
+						<li>The EOS SDK for Android now uses Java 11. You must update your builds to use this version. To do this, open your
+							<code>build.gradle</code>
+							file and set the
+							<code>sourceCompatibility</code>
+							and
+							<code>targetCompatibility</code>
+							properties to a version higher than or equal to
+							<code>JavaVersion.VERSION_11</code>.</li>
+						<li>The EOS SDK for Android is now built with
+							<code>NDK r27c</code>. Use the Static CRT variant of the binaries for projects using EOS SDK 1.18.0.4. We will remove the deprecated Dynamic CRT variant in a future release.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>More Information</strong>
+			</p>
+			<p>See the
+				<a href="/docs/epic-online-services/release-notes#11804-cl45343210---2025-sept-16">EOS SDK Release Notes</a>
+				for additional information on these and other updates to the EOS SDK in this release.</p>
+			<div>
+				<h3 id="eos-11713-cl44532354--2025-aug-12">EOS 1.17.1.3-CL44532354 – 2025-aug-12</h3>
+			</div>
+			<p>This release includes support for Nintendo Switch 2, Windows on Arm compatibility for anti-cheat, and updates to the Ecom API. It also contains improvements and bug fixes to the Social Overlay, Android compatibility, and several SDK interfaces including lobbies, P2P, presence, sessions, and voice.</p>
+			<p>The EOS Ecom Web API also has a release at the same time as this EOS release. The EOS Ecom Web API new release is to version 4 (v4). See the
+				<em>Ecom Update</em>
+				below for details.</p>
+			<p>
+				<strong>Nintendo Switch 2 Support</strong>
+				<br>
+				This release adds support for Nintendo Switch 2. You can extend your game’s existing EOS SDK for Switch integration to run on Nintendo’s latest hardware with minimal changes.</p>
+			<p>Note that to access the EOS SDK for Switch 2, you must have approval from Nintendo and Epic Games. For guidance on how to request access, go to the Settings tab on the Organization page of the Developer Portal.</p>
+			<p>To go to the Settings tab and see the Nintendo Switch guidance, follow the steps below:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+				<li>On the left navigation, click
+					<strong>Organization</strong>.</li>
+				<li>On the Organization page, click
+					<strong>Settings</strong>.</li>
+				<li>Scroll down to the
+					<strong>Console Developer Access</strong>
+					section.</li>
+				<li>Click
+					<strong>Configure</strong>
+					for
+					<strong>Nintendo Switch 2</strong>.</li>
+			</ol>
+			<p>
+				<strong>Anti-Cheat: Windows on Arm Support</strong>
+				<br>
+				This release adds support for Windows on Arm for x64 binaries that run using emulation to the Anti-Cheat Interface, enabling secure multiplayer experiences for devices using 64-bit binaries that run using emulation.
+				<br>
+				To make anti-cheat in your game support this, you must:</p>
+			<ol>
+				<li>Update the anti-cheat bootstrapper (<code>start_protected_game.exe</code>). To do this, update to this EOS SDK release. The anti-cheat bootstrapper is included in the EOS SDK download. (Documentation:
+					<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-interfaces#platform-components">Anti-Cheat &gt; Platform Components</a>.)</li>
+				<li>Use the Windows-on-Arm-compatible anti-cheat client module. To do this, update to the latest version of the Windows anti-cheat client module. (Documentation:
+					<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#set-up-update-and-revert-your-client-module">Anti-Cheat &gt; Set Up, Update and Revert Your Client Module</a>.)</li>
+			</ol>
+			<p>
+				<strong>Ecom Update</strong>
+			</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Ecom Web API v4</strong>
+						<br>
+						The EOS Ecom Web API also has a release at the same time as this EOS release. The Ecom Web API new release is version 4 (v4). V4 adds server-side validation of durable items in the Epic Games Store (documentation:
+						<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>).
+						<br>
+						<br>
+						If your game uses the Ecom Web API, we recommend you update to v4 as soon as you are able to. (If your game uses the EOS SDK Ecom Interface, see the bullet point below.)</p>
+				</li>
+				<li>
+					<p>
+						<strong>EOS SDK Ecom Interface</strong>
+						<br>
+						This EOS SDK release (1.17.1.3) adds server-side validation of durable items in the Epic Games Store and updates the API that validates durable items in the Epic Games Store.
+						<br>
+						<br>
+						With this release of the EOS SDK, you must use the EOS SDK API
+						<a href="/docs/api-ref/functions/eos-ecom-query-ownership">
+							<code>EOS_Ecom_QueryOwnership</code>
+							function</a>
+						to query ownership of durable items in the Epic Games Store. If you previously used the EOS SDK API
+						<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">
+							<code>EOS_Ecom_QueryEntitlements</code>
+							function</a>
+						to query ownership of durable items, note that the
+						<a href="/docs/api-ref/callbacks/eos-ecom-on-query-entitlements-callback">
+							<code>EOS_Ecom_OnQueryEntitlementsCallback</code>
+							callback</a>
+						now returns a
+						<code>EOS_InvalidRequest</code>
+						result code. Use
+						<code>QueryEntitlements</code>
+						to validate consumable purchases only.</p>
+				</li>
+			</ul>
+			<p>
+				<strong>Breaking Changes</strong>
+			</p>
+			<ul>
+				<li>
+					<p>
+						<strong>EOS SDK in C#</strong>
+						<br>
+						The directory structure and naming conventions of the EOS SDK in C# have changed. This update might require you to amend your code.
+						<br>
+						More information:
+						<a href="/docs/epic-online-services/release-notes#eos-sdk-in-c">EOS SDK Release Notes &gt; 1.17.1.3 &gt; EOS SDK in C#</a>.</p>
+				</li>
+				<li>
+					<p>
+						<strong>EOS SDK version naming convention change</strong>
+						<br>
+						The naming convention of EOS SDK versioning has changed. If you reference the version number in any of your game’s tools or processes, this update might require you to amend your code.<br>
+						More information:
+						<a href="/docs/epic-online-services/release-notes#upgrade-notes">EOS SDK Release Notes &gt; 1.17.1.3 &gt; Upgrade Notes &gt; EOS Core</a>.</p>
+				</li>
+			</ul>
+			<p>
+				<strong>More Information</strong>
+				<br>
+				See the
+				<a href="/docs/epic-online-services/release-notes">EOS SDK Release Notes</a>
+				for additional information on these and other updates to the EOS SDK in this release.</p>
+			<div>
+				<h3 id="eos-1170-cl41373641---2025-apr-22">EOS 1.17.0-CL41373641 - 2025-apr-22</h3>
+			</div>
+			<p>This EOS SDK release fixed an issue where Ecom payment options and payment routing were not correctly applied on mobile. In this release we also changed iOS version support to iOS 15 or higher.</p>
+			<p>
+				<strong>More Information</strong>
+				<br>
+				See the
+				<a href="/docs/epic-online-services/release-notes#1170-cl41373641---2025-apr-22">Release Notes</a>
+				for more information on these and other updates to the EOS SDK with this release.</p>
+			<div>
+				<h3 id="eos-1170-cl39599718---2025-feb-12">EOS 1.17.0-CL39599718 - 2025-feb-12</h3>
+			</div>
+			<p>This release includes support for Epic Games Store on mobile (iOS - iPhone, iPad - and Android), and Social Overlay on Windows support for player input through a gamepad. The release also contains a change when querying for player achievements progress, now also returning hidden achievements that are locked, and several other bug fixes.</p>
+			<p>
+				<strong>Epic Games Store on Mobile (iOS - iPhone, iPad - and Android) Support</strong>
+			</p>
+			<p>This release enables mobile games running on iPhone, iPad, and Android and distributed on the Epic Games Store to integrate with some Epic Games Store Services.</p>
+			<p>
+				<strong>Note:</strong>
+				Mobile distribution tools are currently only available to partners who are in the Epic Games Store Mobile Early Adopter program.</p>
+			<p>Documentation:
+				<a href="/docs/epic-games-store/services">Epic Games Store &gt; Epic Games Store Services</a>
+			</p>
+			<p>
+				<strong>Gamepad Support for the EOS Social Overlay on Windows</strong>
+			</p>
+			<p>The EOS Social Overlay on Windows now supports gamepad as an input mechanism. (Gamepad support for account sign-in through the EOS Overlay’s Account Portal will be available at a later date.)</p>
+			<p>
+				<strong>More Information</strong>
+				<br>
+				See the
+				<a href="/docs/epic-online-services/release-notes#1170-cl39599718---2025-feb-12">Release Notes</a>
+				for more information on these and other updates to the EOS SDK with this release.</p>
 			<div>
 				<h2 id="2024">2024</h2>
 			</div>
+			<div>
+				<h3 id="eos-1164-cl36651368---2024-oct-08">EOS 1.16.4-CL36651368 - 2024-oct-08</h3>
+			</div>
+			<p>The following are the significant updates to EOS with the 1.16.4 release. See the
+				<a href="/docs/epic-online-services/release-notes#2024">Release Notes</a>
+				for details of all the updates.</p>
+			<p>Get the EOS SDK v.1.16.4 downloads from the Developer Portal homepage (known as the “Dashboard”). To do this, sign in to
+				<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>
+				and on the Dashboard page, click
+				<strong>Downloads &amp; Release notes</strong>.</p>
+			<p>
+				<strong>LinuxARM64 Support</strong>
+			</p>
+			<p>The EOS SDK now supports LinuxARM64. Note that not all features support this operating system. See the following section of the release notes for details of the exceptions:
+				<a href="/docs/epic-online-services/release-notes#1164-cl36651368---2024-oct-08">Release Notes - 1.16.4-cl36651368 - 2024-oct-08</a>
+				-
+				<em>EOS Core</em>.</p>
+			<p>
+				<strong>Ecom Interface Updates - Breaking Change</strong>
+			</p>
+			<p>This release has added an additional requirement when you use the latest version of the Ecom interface. The Ecom Interface is available as EOS SDK API and as EOS Web API.</p>
+			<ul>
+				<li>
+					<strong>EOS SDK Ecom Interface</strong>: If you use EOS SDK v1.16.4 Ecom Interface, you must update your game’s client policies immediately so you can use the Ecom Interface with this SDK version.</li>
+				<li>
+					<strong>EOS Ecom Web API</strong>: From 2024-oct-08, the Ecom Web API version 3 (v3) is available. If you use Ecom Web API v3, you must update your game’s client policies immediately so you can use this Ecom Web API version.</li>
+				<li>
+					<strong>Recommended</strong>: If you already use the EOS SDK Ecom Interface (1.16.3 or lower) or the EOS Ecom Web API v1 or 2, you can continue to use your existing client policies, however we recommend you update your client policies to use the latest version of the Ecom Interface as soon as possible.</li>
+			</ul>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-games-store/services/ecom/ecom-overview">Ecom Interface Overview</a>
+					(includes how to update your client policies)</li>
+				<li>Developer Portal -
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client Credential and Client Policy Management</a>
+				</li>
+				<li>EOS Web API Reference:
+					<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>
+				</li>
+			</ul>
+			<p>
+				<strong>Platform Defines -  Breaking Change</strong>
+			</p>
+			<p>Three platform defines moved from
+				<code>eos_[PLATFORM]_types.h</code>
+				to
+				<code>eos_common.h</code>. This might be a breaking change if you manually include platform specific header files. If you do this, ensure you replace
+				<code>eos_PLATFORM_types</code>
+				with
+				<code>eos_common</code>.</p>
+			<p>
+				<strong>Thread Affinity - Breaking Change on Consoles</strong>
+			</p>
+			<p>This only affects consoles (Nintendo Switch, Xbox, and PlayStation).</p>
+			<p>The data structure
+				<code>EOS_Initialize_ThreadAffinity</code>
+				has two new members on consoles only. The members are:
+				<code>EmbeddedOverlayMainThread</code>
+				and
+				<code>EmbeddedOverlayWorkerThreads</code>. The new members control the thread affinities of the Social Overlay only on consoles.</p>
+			<p>You must initialize the new members if you use
+				<code>EOS_Initialize_ThreadAffinity</code>
+				. If you initialize them to null (‘0’), the EOS SDK chooses default values.</p>
+			<p>
+				<strong>Breaking change note</strong>:  If you have used
+				<code>EOS_Initialize_ThreadAffinity</code>
+				in your game, you must initialize these two new members when you upgrade to EOS SDK 1.16.4. If you have never used
+				<code>EOS_Initialize_ThreadAffinity</code>
+				in your game, you do not need to initialize the two new members.</p>
+			<div>
+				<h3 id="developer-portal---2024-oct-2">Developer Portal - 2024-oct-2</h3>
+			</div>
+			<p>There is now a
+				<strong>For Indie Games</strong>
+				section in your product’s Developer Portal page.</p>
+			<p>To let us know about your upcoming or recently released indie title:</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), on the left navigation, under
+							<strong>Your Products</strong>,  click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the For Indie Games section of your product's Developer Portal page, click
+					<strong>Tell us About Your Game</strong>
+					and fill out the form.</li>
+			</ol>
+			<p>For further information, see the Epic For Indies section of the Epic Developer Community (EDC) at:
+				<a href="https://dev.epicgames.com/community/indies">dev.epicgames.com/community/indies</a>.</p>
+			<div>
+				<h3 id="eos-sanctions-web-apis---2024-aug-23">EOS Sanctions Web APIs - 2024-aug-23</h3>
+			</div>
+			<p>We updated the Sanctions Web APIs to include a new endpoint that allows you to approve pending sanctions for your game.</p>
+			<p>Documentation: EOS Web API Reference -
+				<a href="/docs/web-api-ref/sanctions-web-apis#approving-pending-sanctions">Sanctions Web APIs - Approving Pending Sanctions</a>.</p>
+			<div>
+				<h3 id="eos-1163-cl35276460-2024-aug-08">EOS 1.16.3-CL35276460 2024-aug-08</h3>
+			</div>
+			<p>This EOS SDK release has some updates and bug fixes to anti-cheat and game clients running on Linux. In this release we also added EOS SDK support for additional platform release versions (Nintendo Switch release versions and Microsoft GDK release versions).</p>
+			<p>More information:</p>
+			<ul>
+				<li>Updates and bug fixes: See the
+					<a href="/docs/epic-online-services/release-notes#1163-cl35276460---2024-aug-08">EOS SDK Release Notes</a>
+					page.</li>
+				<li>Additional platform release versions: See the
+					<a href="/docs/epic-online-services/platforms">EOS SDK for Platforms</a>
+					documentation.</li>
+			</ul>
+			<div>
+				<h3 id="developer-portal-2024-jun-14">Developer Portal 2024-jun-14</h3>
+			</div>
+			<p>We made the following updates to the Developer Portal:</p>
+			<ul>
+				<li>You can now delete an Epic Account Services application associated with your product (game or other software application), if the application has not gone through brand review and is not published.
+					<br>
+					Documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review/brand-review-process#how-to-delete-an-epic-account-services-application">Brand Review Process &gt; How to Delete an Epic Account Services Application</a>
+				</li>
+				<li>You can now delete a website address associated with your organization (known as a "domain").
+					<br>
+					Documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review/domain-verification#step-1-add-domain-and-get-automated-verification">Domain Verification &gt; Step 1: Add Domain and Get Automated Verification</a>
+				</li>
+				<li>You can now unarchive a deployment.
+					<br>
+					Documentation:
+					<a href="/docs/dev-portal/product-management#manage-deployments">Developer Portal &gt; Product Settings, Sandbox, and Deployment &gt; Deployments &gt; Manage Deployments</a>
+				</li>
+			</ul>
 			<div>
 				<h3 id="developer-portal-2024-apr-23">Developer Portal 2024-apr-23</h3>
 			</div>
@@ -53,7 +488,7 @@
 				<li>
 					<strong>Epic Tools</strong>
 					<ul>
-						<li>Added the Epic Tools section for your organization. Use this to purchase and assign seats for Unreal Engine, Twinmotion, RealityCapture, and MetaHuman.</li>
+						<li>Added the Epic Tools section for your organization. Use this to purchase and assign seats for Unreal Engine, Twinmotion, RealityScan, and MetaHuman.</li>
 					</ul>
 				</li>
 				<li>
@@ -71,13 +506,13 @@
 				<li>
 					<strong>Roles</strong>
 					<ul>
-						<li>Added an organization member default role. An account holder with the organization member default role has no permissions on the Developer Portal. Use this when you want to assign an Epic Tool seat to your team member, but do not need to give them further permissions in your organization.</li>
+						<li>Added an organization member default role. An account holder with the organization member default role has no permissions in the Developer Portal. Use this when you want to assign an Epic Tool seat to your team member, but do not need to give them further permissions in your organization.</li>
 					</ul>
 				</li>
 				<li>
 					<strong>VAT Information</strong>
 					<ul>
-						<li>Added a Claim VAT/Sales Tax section. Use this to specify your company’s VAT details. We add your VAT number to purchases you make on the Developer Portal.</li>
+						<li>Added a Claim VAT/Sales Tax section. Use this to specify your company’s VAT details. We add your VAT number to purchases you make in the Developer Portal.</li>
 					</ul>
 				</li>
 			</ul>
@@ -87,21 +522,21 @@
 			<p>More information:</p>
 			<ul>
 				<li>Documentation:
-					<a href="https://dev.epicgames.com/docs/dev-portal">Developer Portal</a>
+					<a href="/docs/dev-portal/dev-portal-intro">Developer Portal</a>
 				</li>
 				<li>Changelog: Go to the Developer Portal at
-					<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>
-					and click
+					<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>. On the left navigtion, click
+					<strong>Dashboard</strong>, and then click
 					<strong>View changelog</strong>.</li>
 			</ul>
 			<div>
-				<h3 id="1163-cl32303053-2024-apr-09">1.16.3-CL32303053 2024-apr-09</h3>
+				<h3 id="eos-1163-cl32303053---2024-apr-09">EOS 1.16.3-CL32303053 - 2024-apr-09</h3>
 			</div>
 			<p>Added support for later versions of Sony's PlayStation 4 SDK and Sony's PlayStation 5 SDK. See the
 				<a href="/docs/epic-online-services/release-notes#1163-cl32303053---2024-apr-09">Release Notes</a>
 				documentation for details.</p>
 			<div>
-				<h3 id="1162-cl32273396-2024-mar-19">1.16.2-CL32273396 2024-mar-19</h3>
+				<h3 id="eos-1162-cl32273396---2024-mar-19">EOS 1.16.2-CL32273396 - 2024-mar-19</h3>
 			</div>
 			<p>This EOS SDK release has some notable updates and bug fixes across several major features. See the
 				<a href="/docs/epic-online-services/release-notes#1162-cl32273396---2024-mar-19">Release Notes</a>
@@ -110,11 +545,11 @@
 				<h2 id="2023">2023</h2>
 			</div>
 			<div>
-				<h3 id="1161-cl30020700---2023-nov-30">1.16.1-CL30020700 - 2023-nov-30</h3>
+				<h3 id="eos-1161-cl30020700---2023-nov-30">EOS 1.16.1-CL30020700 - 2023-nov-30</h3>
 			</div>
 			<p>Added support for later versions of Sony's PlayStation 4 SDK and Sony's PlayStation 5 SDK.</p>
 			<div>
-				<h3 id="1161---2023-aug-30">1.16.1 - 2023-aug-30</h3>
+				<h3 id="eos-1161---2023-aug-30">EOS 1.16.1 - 2023-aug-30</h3>
 			</div>
 			<p>Bug fixes for:</p>
 			<ul>
@@ -126,12 +561,12 @@
 				<li>Modifying a lobby-owner member attribute.</li>
 			</ul>
 			<div>
-				<h3 id="116---2023-aug-16">1.16 - 2023-aug-16</h3>
+				<h3 id="eos-116---2023-aug-16">EOS 1.16 - 2023-aug-16</h3>
 			</div>
 			<p>This release includes new console crossplay features, support for additional console SDK versions (Sony PlayStation, Microsoft Xbox, and Nintendo Switch), and numerous bug fixes. It also contains a few breaking changes required to enable these new features and updates.</p>
-			<div>
-				<h4 id="crossplay">Crossplay</h4>
-			</div>
+			<p>
+				<strong>Crossplay</strong>
+			</p>
 			<p>The SDK expands crossplay support from Windows PC (released in SDK 1.15) to games on Nintendo Switch, Sony PlayStation, and Microsoft Xbox consoles. By using the EOS Overlay in your game, players can quickly sign in to their Epic Games account on all platforms and easily interact with their friends and lobby members.</p>
 			<p>With this new release, you can now offer players:</p>
 			<ul>
@@ -139,7 +574,7 @@
 					<strong>Consistent overlay UX</strong>: An out-of-the-box overlay that provides a familiar player experience on PC and console platforms.</li>
 				<li>
 					<strong>One combined friend's list</strong>: Friend lists across platforms merge into one overlay, enabling players to see and invite their friends in one place. Please see Crossplay Technical Overview:
-					<a href="/docs/epic-account-services/crossplay/crossplay-technical-overview#social-overlay-and-friends">Social Overlay and Friends</a>
+					<a href="/docs/epic-online-services/accounts-and-social/crossplay/crossplay-technical-overview#social-overlay-and-friends">Social Overlay and Friends</a>
 					for more information.</li>
 				<li>
 					<strong>Frictionless cross-platform account creation</strong>: Players can start playing quickly using their existing Epic Games account or a new one created for them, linked to their active native platform account.</li>
@@ -149,10 +584,10 @@
 					<strong>Secure social experience on any platform</strong>: Implements the native platform's trust, safety, and privacy guidelines, in addition to Epic's own trust and safety controls.</li>
 			</ul>
 			<p>You can find out more in the documentation on
-				<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>.</p>
-			<div>
-				<h4 id="notable-additions">Notable Additions</h4>
-			</div>
+				<a href="/docs/epic-online-services/accounts-and-social/crossplay/crossplay-introduction">Crossplay Introduction</a>.</p>
+			<p>
+				<strong>Notable Additions</strong>
+			</p>
 			<ul>
 				<li>
 					<strong>Anti-cheat</strong>
@@ -177,23 +612,23 @@
 							<ul>
 								<li>The new features are: A Leave Party button, non-friends showing in Your Party, and a count of the members in Your Party.</li>
 								<li>See the Social Overlay:
-									<a href="/docs/epic-account-services/social-overlay-overview/your-party">Your Party</a>
+									<a href="/docs/epic-online-services/accounts-and-social/social-overlay/your-party">Your Party</a>
 									documentation for more information.</li>
 							</ul>
 						</li>
 						<li>Players can now request friends to join their lobby directly from the social overlay.
 							<ul>
 								<li>See the Social Overlay:
-									<a href="/docs/epic-account-services/social-overlay-overview/request-to-join">Request to Join</a>
+									<a href="/docs/epic-online-services/accounts-and-social/social-overlay/request-to-join">Request to Join</a>
 									documentation for more information</li>
 							</ul>
 						</li>
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h4 id="breaking-changes">Breaking Changes</h4>
-			</div>
+			<p>
+				<strong>Breaking Changes</strong>
+			</p>
 			<ul>
 				<li>
 					<p>
@@ -285,7 +720,7 @@
 					</p>
 					<ul>
 						<li>Several macros have been renamed to fit with the standard EOS SDK naming convention of
-							<code>EOS_&lt;system_type&gt;_&lt;function_name&gt;_API_LATEST</code>. We have removed the string
+							<code>EOS_\&lt;System_type&gt;_&lt;function_name&gt;_API_LATEST</code>. We have removed the string
 							<code>OPTIONS</code>
 							from macros in the
 							<code>eos_playerdatastorage_types.h</code>,
@@ -426,10 +861,9 @@
 					</ul>
 				</li>
 			</ul>
-			<div>
-				<h4 id="sdk-116-updates">SDK 1.16 Updates</h4>
-			</div>
-			<p>This SDK release has some notable updates and bug fixes across several major features. See the
+			<p>
+				<strong>SDK 1.16 Updates</strong>
+				This SDK release has some notable updates and bug fixes across several major features. See the
 				<a href="/docs/epic-online-services/release-notes">Release Notes</a>
 				for a full list.</p>
 			<ul>
@@ -454,7 +888,7 @@
 				</li>
 			</ul>
 			<div>
-				<h3 id="1155---2023-feb-16">1.15.5 - 2023-feb-16</h3>
+				<h3 id="eos-1155---2023-feb-16">EOS 1.15.5 - 2023-feb-16</h3>
 			</div>
 			<p>
 				<strong>Anti-cheat</strong>
@@ -534,23 +968,23 @@
 				<h2 id="2022">2022</h2>
 			</div>
 			<div>
-				<h3 id="1154---2022-nov-16">1.15.4 - 2022-nov-16</h3>
+				<h3 id="eos-1154---2022-nov-16">EOS 1.15.4 - 2022-nov-16</h3>
 			</div>
 			<p>This release includes improvements across multiple interfaces, as well as extra support for game consoles.</p>
 			<p>
 				<strong>Ecom</strong>
 				We have added a new EOS SDK API to the Ecom Interface:
-				<a href="https://dev.epicgames.com/docs/api-ref/functions/eos-ecom-query-entitlement-token">EOS_Ecom_QueryEntitlementToken</a>. It supports token-based verification of consumable items in your game (that is items which have limited persistence, decreasing a "use count" each time a player uses the item in your game). Use this new API to generate a JWT in your game’s client code to pass to a server-side verification service, if you use one.</p>
+				<a href="/docs/api-ref/functions/eos-ecom-query-entitlement-token">EOS_Ecom_QueryEntitlementToken</a>. It supports token-based verification of consumable items in your game (that is items which have limited persistence, decreasing a "use count" each time a player uses the item in your game). Use this new API to generate a JWT in your game’s client code to pass to a server-side verification service, if you use one.</p>
 			<p>For more information, see:</p>
 			<ul>
 				<li>Token-based verification in the
-					<a href="https://dev.epicgames.com/docs/epic-games-store/services/ecom/ecom-quick-start#token-based-verification">Ecom Quickstart Guide</a>
+					<a href="/docs/epic-games-store/services/ecom/ecom-quick-start#token-based-verification">Ecom Quickstart Guide</a>
 					in the Epic Games Store documentation.</li>
 				<li>The
-					<a href="https://dev.epicgames.com/docs/epic-games-store/services/ecom/ecom-overview">Ecom Interface</a>
+					<a href="/docs/epic-games-store/services/ecom/ecom-overview">Ecom Interface</a>
 					in the Epic Games Store documentation.</li>
 				<li>The Ecom documention's section on
-					<a href="https://dev.epicgames.com/docs/web-api-ref/ecom-web-apis#verifying-the-entitlement-verification-token">entitlement token verification</a>
+					<a href="/docs/web-api-ref/ecom-web-apis#verifying-the-entitlement-verification-token">entitlement token verification</a>
 					in the EOS Web API Reference.
 					<br>
 					This has information on how to pass this data to your chosen verification service, either your own or a third-party verification service (TPV).</li>
@@ -614,11 +1048,11 @@
 			</p>
 			<p>We have removed the string
 				<strong>OPTIONS</strong>
-				from macros across the Player Data Storage Interface and Title Storage Interface to align with the standard EOS SDK naming convention (<code>EOS_&lt;system_type&gt;_&lt;function_name&gt;_API_LATEST</code>).
+				from macros across the Player Data Storage Interface and Title Storage Interface to align with the standard EOS SDK naming convention (<code>EOS_\&lt;System_type&gt;_&lt;function_name&gt;_API_LATEST</code>).
 				<strong>Note:</strong>
 				For backward compatibility, the deprecated macros are still present but we will remove them in a future version. We recommend replacing any deprecated macros that use the old naming convention, with macros that use the new naming convention.</p>
 			<div>
-				<h3 id="1153---2022-sep-19">1.15.3 - 2022-sep-19</h3>
+				<h3 id="eos-1153---2022-sep-19">EOS 1.15.3 - 2022-sep-19</h3>
 			</div>
 			<p>There are now two types of EOS SDK for Android:</p>
 			<ul>
@@ -631,7 +1065,7 @@
 			</ul>
 			<p>You can use either the static SDK for Android or the dynamic SDK for Android.</p>
 			<div>
-				<h3 id="1152-and-11521---2022-aug">1.15.2 and 1.15.2.1 - 2022-aug</h3>
+				<h3 id="eos-1152-and-11521---2022-aug">EOS 1.15.2 and 1.15.2.1 - 2022-aug</h3>
 			</div>
 			<p>The 1.15.2 release (and 1.15.2.1 update) includes added support for Apple silicon, anti-cheat and ecom updates, as well as updates to the EOS SDKs for consoles (EOS SDK for Microsoft Xbox, EOS SDK for Nintendo Switch), and numerous bug fixes.</p>
 			<p>
@@ -768,7 +1202,7 @@
 				</li>
 			</ul>
 			<div>
-				<h3 id="1151---2022-jul-01">1.15.1 - 2022-jul-01</h3>
+				<h3 id="eos-1151---2022-jul-01">EOS 1.15.1 - 2022-jul-01</h3>
 			</div>
 			<p>We deprecated
 				<code>EOS_ECT_STEAM_APP_TICKET</code>
@@ -777,13 +1211,13 @@
 				and replaced it with
 				<code>EOS_ECT_STEAM_SESSION_TICKET</code>.</p>
 			<div>
-				<h3 id="115---2022-jun-16">1.15 - 2022-jun-16</h3>
+				<h3 id="eos-115---2022-jun-16">EOS 1.15 - 2022-jun-16</h3>
 			</div>
 			<p>This release includes new crossplay features, Anti-Cheat updates, updates to the console versions of the SDK (Sony PlayStation, Microsoft Xbox, and Nintendo Switch), new voice volume control API, and numerous bug fixes. It also contains a few breaking changes required to enable these new features and updates.</p>
 			<p>
 				<strong>Crossplay</strong>
 			</p>
-			<p>The SDK now offers seamless crossplay on PC: you can use crossplay to unify your players and your matchmaking pools across Steam and the Epic Games Store.</p>
+			<p>The SDK now offers seamless crossplay on PC: you can use crossplay to unify your players and your Lobby and Session pools across Steam and the Epic Games Store.</p>
 			<p>Its main features are:</p>
 			<ul>
 				<li>Use new Friends Interface APIs to enable players to make friend invites directly, and make connecting and playing together more streamlined.</li>
@@ -793,7 +1227,7 @@
 				<li>With the new self-updating redistributable, players experience new features and improvements to the Epic Social Overlay without you making changes to your build.</li>
 			</ul>
 			<p>Crossplay is not a new interface or new overlay; we implemented crossplay in our existing features. You can find out more in the documentation on
-				<a href="/docs/epic-account-services/crossplay/crossplay-introduction">Crossplay Introduction</a>.</p>
+				<a href="/docs/epic-online-services/accounts-and-social/crossplay/crossplay-introduction">Crossplay Introduction</a>.</p>
 			<p>
 				<strong>Anti-cheat updates</strong>
 			</p>
@@ -846,7 +1280,7 @@
 							login types now require the EOS redistributable installed and your game must launch with the EOS bootstrapper.
 							<ul>
 								<li>For more information, see the documentation on
-									<a href="/docs/epic-account-services/crossplay/redistributable-installer">Redistributable installer</a>.</li>
+									<a href="/docs/epic-online-services/accounts-and-social/crossplay/redistributable-installer">Redistributable installer</a>.</li>
 							</ul>
 						</li>
 					</ul>
@@ -926,14 +1360,14 @@
 				</li>
 			</ul>
 			<div>
-				<h3 id="1142---2022-feb-01">1.14.2 - 2022-feb-01</h3>
+				<h3 id="eos-1142---2022-feb-01">EOS 1.14.2 - 2022-feb-01</h3>
 			</div>
 			<p>
 				<strong>NEW</strong>
 			</p>
 			<p>We’ve increased Anti-Cheat’s efficiency, as well as updated the Easy Anti-Cheat Bootstrapper.</p>
 			<p>Also, Sessions that enforce sanctions can now be created. Sanctioned players may neither join nor register with a session that was created with sanctions enabled. See
-				<a href="/docs/game-services/sanctions-interface">Sanctions</a>
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface">Sanctions</a>
 				document for details.</p>
 			<p>
 				<strong>Improvements and Bug Fixes</strong>
@@ -969,7 +1403,7 @@
 				<h2 id="2021">2021</h2>
 			</div>
 			<div>
-				<h3 id="1141---2021-nov-05">1.14.1 - 2021-nov-05</h3>
+				<h3 id="eos-1141---2021-nov-05">EOS 1.14.1 - 2021-nov-05</h3>
 			</div>
 			<p>
 				<strong>Custom Invites</strong>
@@ -987,7 +1421,7 @@
 			<p>Since the recent release of our Easy Anti-Cheat, we’ve included information on bootstrappers for the Anti-Cheat Interface!</p>
 			<ul>
 				<li>Bootstrappers added,
-					<a href="/docs/game-services/anti-cheat/using-anti-cheat">Using Anti-Cheat</a>
+					<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat">Using Anti-Cheat</a>
 					<ul>
 						<li>Windows</li>
 						<li>Linux</li>
@@ -1007,7 +1441,7 @@
 			<p>
 				<strong>Publishing Tools Closed Beta</strong>
 			</p>
-			<p>There is a new suite of Epic Games Store self-publishing tools now in beta! These tools empower you to control the publishing process for your games to the Epic Games Store. Go to
+			<p>There is a new suite of Epic Games Store publishing tools now in beta! These tools empower you to control the publishing process for your games to the Epic Games Store. Go to
 				<a href="/docs/epic-games-store/publishing-tools">Publishing Tools - Closed Beta</a>
 				to learn what to expect and how these tools work.</p>
 			<p>
@@ -1016,7 +1450,7 @@
 			<p>We revamped the entire EOS documentation site map to help organize our content based on the services you are using: the Developer Portal, Epic Account Services, Epic Games Store, Game Services, and the API references. This is just another small step to cleaning up our content for your ease of you and our efforts continue to improve the documentation.</p>
 			<div>
 				<p>We missed highlighting one of our features from the
-					<a href="#111---2021-apr-07">SDK 1.11</a>
+					<a href="#eos-111---2021-apr-07">SDK 1.11</a>
 					release!</p>
 				<p>
 					<strong>Artifacts</strong>
@@ -1025,22 +1459,22 @@
 					<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>, you can add lobby and session invite functionality to the Epic Games Launcher to friends online, even if they are not signed into the game. This gives your players another way to connect with other players on their Epic Games Store friends list across platforms.</p>
 			</div>
 			<div>
-				<h3 id="113---2021-jun-21">1.13 - 2021-jun-21</h3>
+				<h3 id="eos-113---2021-jun-21">EOS 1.13 - 2021-jun-21</h3>
 			</div>
 			<p>
 				<strong>Voice</strong>
 			</p>
 			<p>For this release, the
-				<a href="/docs/game-services/real-time-communication-interface/voice">Voice interface</a>
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface">Voice interface</a>
 				is a
 				<strong>Preview</strong>
 				service. You can use the Voice interface to create and manage voice chats among your users. And with the Voice-Lobbies integration, you can have the
-				<a href="/docs/game-services/lobbies-and-sessions/lobbies">Lobbies interface</a>
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface">Lobbies interface</a>
 				handle the room management and authorization.</p>
 			<p>Be sure to check out the sample projects for
-				<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample">C</a>
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface/voice-sample">C</a>
 				and
-				<a href="/docs/game-services/real-time-communication-interface/voice/voice-sample-c-sharp">C#</a>
+				<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface/voice-sample-c-sharp">C#</a>
 				as well!</p>
 			<p>
 				<strong>Web APIs</strong>
@@ -1059,7 +1493,7 @@
 			</p>
 			<p>You can switch between dark and light theme in our documentation! Use the switch near the bottom of the panel navigation to change your view.</p>
 			<div>
-				<h3 id="112---2021-may-27">1.12 - 2021-may-27</h3>
+				<h3 id="eos-112---2021-may-27">EOS 1.12 - 2021-may-27</h3>
 			</div>
 			<p>
 				<strong>Easy Anti-Cheat</strong>
@@ -1068,7 +1502,7 @@
 				<strong>Preview</strong>
 				service.</p>
 			<p>You can use the
-				<a href="/docs/game-services/anti-cheat">Anti-Cheat interfaces</a>
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces">Anti-Cheat interfaces</a>
 				(also known as
 				<strong>Easy Anti-Cheat</strong>) to help reduce cheating in online multiplayer play.</p>
 			<p>
@@ -1077,31 +1511,31 @@
 			<p>You can use
 				<strong>itch.io</strong>
 				as an
-				<a href="/docs/dev-portal/identity-provider-management">identity provider</a>
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">identity provider</a>
 				for your products.</p>
-			<p>Available identity providers are platforms where Epic Online Services can link your users’ accounts to enable sharing their data across the different platforms and participate in cross-platform features like matchmaking. Identity providers must be configured in your Developer Portal and work with the Connect interface.</p>
+			<p>Available identity providers are platforms where Epic Online Services can link your users’ accounts to enable sharing their data across the different platforms and participate in cross-platform features like Sessions. Identity providers must be configured in your Developer Portal and work with the Connect interface.</p>
 			<div>
-				<h3 id="111---2021-apr-07">1.11 - 2021-apr-07</h3>
+				<h3 id="eos-111---2021-apr-07">EOS 1.11 - 2021-apr-07</h3>
 			</div>
 			<p>
 				<strong>Sanctions interface</strong>
 			</p>
 			<p>You can use the
-				<a href="/docs/game-services/sanctions-interface">Sanctions interface</a>
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface">Sanctions interface</a>
 				to manage the punitive actions taken against your users, such as temporary or permanent bans.</p>
 			<p>
 				<strong>Reports interface</strong>
 			</p>
 			<p>The
-				<a href="/docs/game-services/reports-interface">Reports interface</a>
+				<a href="/docs/epic-online-services/trust-and-safety/reports-interface">Reports interface</a>
 				stores in-game user behavior reports that you can query to view the details of reported user behaviors, such as cheating, verbal abuse, offensive profiles, and so on. You can then use this information with the Sanctions interface to help conduct any punitive actions.</p>
 			<p>
 				<strong>Google as an Identity Provider</strong>
 			</p>
 			<p>You can use Google as an
-				<a href="/docs/dev-portal/identity-provider-management">identity provider</a>
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">identity provider</a>
 				for your products.</p>
-			<p>Available identity providers are platforms where Epic Online Services can link your users’ accounts to enable sharing their data across the different platforms and participate in cross-platform features like matchmaking. Identity providers must be configured in your Developer Portal and work with the Connect interface.</p>
+			<p>Available identity providers are platforms where Epic Online Services can link your users’ accounts to enable sharing their data across the different platforms and participate in cross-platform features like Sessions. Identity providers must be configured in your Developer Portal and work with the Connect interface.</p>
 			<p>
 				<strong>Artifacts</strong>
 			</p>
@@ -1111,88 +1545,126 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#2024">2024</a>
-					</li>
-					<li>
-						<a href="#developer-portal-2024-apr-23">Developer Portal 2024-apr-23</a>
-					</li>
-					<li>
-						<a href="#1163-cl32303053-2024-apr-09">1.16.3-CL32303053 2024-apr-09</a>
-					</li>
-					<li>
-						<a href="#1162-cl32273396-2024-mar-19">1.16.2-CL32273396 2024-mar-19</a>
-					</li>
-					<li>
-						<a href="#2023">2023</a>
-					</li>
-					<li>
-						<a href="#1161-cl30020700---2023-nov-30">1.16.1-CL30020700 - 2023-nov-30</a>
-					</li>
-					<li>
-						<a href="#1161---2023-aug-30">1.16.1 - 2023-aug-30</a>
-					</li>
-					<li>
-						<a href="#116---2023-aug-16">1.16 - 2023-aug-16</a>
-					</li>
-					<li>
-						<a href="#crossplay">Crossplay</a>
-					</li>
-					<li>
-						<a href="#notable-additions">Notable Additions</a>
-					</li>
-					<li>
-						<a href="#breaking-changes">Breaking Changes</a>
-					</li>
-					<li>
-						<a href="#sdk-116-updates">SDK 1.16 Updates</a>
-					</li>
-					<li>
-						<a href="#1155---2023-feb-16">1.15.5 - 2023-feb-16</a>
-					</li>
-					<li>
-						<a href="#2022">2022</a>
-					</li>
-					<li>
-						<a href="#1154---2022-nov-16">1.15.4 - 2022-nov-16</a>
-					</li>
-					<li>
-						<a href="#1153---2022-sep-19">1.15.3 - 2022-sep-19</a>
-					</li>
-					<li>
-						<a href="#1152-and-11521---2022-aug">1.15.2 and 1.15.2.1 - 2022-aug</a>
-					</li>
-					<li>
-						<a href="#1151---2022-jul-01">1.15.1 - 2022-jul-01</a>
-					</li>
-					<li>
-						<a href="#115---2022-jun-16">1.15 - 2022-jun-16</a>
-					</li>
-					<li>
-						<a href="#1142---2022-feb-01">1.14.2 - 2022-feb-01</a>
-					</li>
-					<li>
-						<a href="#2021">2021</a>
-					</li>
-					<li>
-						<a href="#1141---2021-nov-05">1.14.1 - 2021-nov-05</a>
-					</li>
-					<li>
-						<a href="#2021-aug-17">2021-aug-17</a>
-					</li>
-					<li>
-						<a href="#113---2021-jun-21">1.13 - 2021-jun-21</a>
-					</li>
-					<li>
-						<a href="#112---2021-may-27">1.12 - 2021-may-27</a>
-					</li>
-					<li>
-						<a href="#111---2021-apr-07">1.11 - 2021-apr-07</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#2026">2026</a>
+								</li>
+								<li>
+									<a href="#eos-11907---cl52449437---2026-apr-08">EOS 1.19.0.7 - CL52449437 - 2026-Apr-08</a>
+								</li>
+								<li>
+									<a href="#eos-11903---cl49960398---2026-feb-10">EOS 1.19.0.3 - CL49960398 - 2026-feb-10</a>
+								</li>
+								<li>
+									<a href="#2025">2025</a>
+								</li>
+								<li>
+									<a href="#eos-11812---cl47370208---2025-nov-04">EOS 1.18.1.2 - CL47370208 - 2025-Nov-04</a>
+								</li>
+								<li>
+									<a href="#eos-overlay-update--2025-oct-06">EOS Overlay Update – 2025-oct-06</a>
+								</li>
+								<li>
+									<a href="#eos-11804---cl45343210---2025-sept-16">EOS 1.18.0.4 - CL45343210 - 2025-sept-16</a>
+								</li>
+								<li>
+									<a href="#eos-11713-cl44532354--2025-aug-12">EOS 1.17.1.3-CL44532354 – 2025-aug-12</a>
+								</li>
+								<li>
+									<a href="#eos-1170-cl41373641---2025-apr-22">EOS 1.17.0-CL41373641 - 2025-apr-22</a>
+								</li>
+								<li>
+									<a href="#eos-1170-cl39599718---2025-feb-12">EOS 1.17.0-CL39599718 - 2025-feb-12</a>
+								</li>
+								<li>
+									<a href="#2024">2024</a>
+								</li>
+								<li>
+									<a href="#eos-1164-cl36651368---2024-oct-08">EOS 1.16.4-CL36651368 - 2024-oct-08</a>
+								</li>
+								<li>
+									<a href="#developer-portal---2024-oct-2">Developer Portal - 2024-oct-2</a>
+								</li>
+								<li>
+									<a href="#eos-sanctions-web-apis---2024-aug-23">EOS Sanctions Web APIs - 2024-aug-23</a>
+								</li>
+								<li>
+									<a href="#eos-1163-cl35276460-2024-aug-08">EOS 1.16.3-CL35276460 2024-aug-08</a>
+								</li>
+								<li>
+									<a href="#developer-portal-2024-jun-14">Developer Portal 2024-jun-14</a>
+								</li>
+								<li>
+									<a href="#developer-portal-2024-apr-23">Developer Portal 2024-apr-23</a>
+								</li>
+								<li>
+									<a href="#eos-1163-cl32303053---2024-apr-09">EOS 1.16.3-CL32303053 - 2024-apr-09</a>
+								</li>
+								<li>
+									<a href="#eos-1162-cl32273396---2024-mar-19">EOS 1.16.2-CL32273396 - 2024-mar-19</a>
+								</li>
+								<li>
+									<a href="#2023">2023</a>
+								</li>
+								<li>
+									<a href="#eos-1161-cl30020700---2023-nov-30">EOS 1.16.1-CL30020700 - 2023-nov-30</a>
+								</li>
+								<li>
+									<a href="#eos-1161---2023-aug-30">EOS 1.16.1 - 2023-aug-30</a>
+								</li>
+								<li>
+									<a href="#eos-116---2023-aug-16">EOS 1.16 - 2023-aug-16</a>
+								</li>
+								<li>
+									<a href="#eos-1155---2023-feb-16">EOS 1.15.5 - 2023-feb-16</a>
+								</li>
+								<li>
+									<a href="#2022">2022</a>
+								</li>
+								<li>
+									<a href="#eos-1154---2022-nov-16">EOS 1.15.4 - 2022-nov-16</a>
+								</li>
+								<li>
+									<a href="#eos-1153---2022-sep-19">EOS 1.15.3 - 2022-sep-19</a>
+								</li>
+								<li>
+									<a href="#eos-1152-and-11521---2022-aug">EOS 1.15.2 and 1.15.2.1 - 2022-aug</a>
+								</li>
+								<li>
+									<a href="#eos-1151---2022-jul-01">EOS 1.15.1 - 2022-jul-01</a>
+								</li>
+								<li>
+									<a href="#eos-115---2022-jun-16">EOS 1.15 - 2022-jun-16</a>
+								</li>
+								<li>
+									<a href="#eos-1142---2022-feb-01">EOS 1.14.2 - 2022-feb-01</a>
+								</li>
+								<li>
+									<a href="#2021">2021</a>
+								</li>
+								<li>
+									<a href="#eos-1141---2021-nov-05">EOS 1.14.1 - 2021-nov-05</a>
+								</li>
+								<li>
+									<a href="#2021-aug-17">2021-aug-17</a>
+								</li>
+								<li>
+									<a href="#eos-113---2021-jun-21">EOS 1.13 - 2021-jun-21</a>
+								</li>
+								<li>
+									<a href="#eos-112---2021-may-27">EOS 1.12 - 2021-may-27</a>
+								</li>
+								<li>
+									<a href="#eos-111---2021-apr-07">EOS 1.11 - 2021-apr-07</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

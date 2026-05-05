@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -20,6 +20,11 @@
 	</section>
 	<section>
 		<section role="main">
+			<p>
+				<strong>Note:</strong>
+				This service is also available through the Epic Online Services (EOS) SDK APIs. See
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">EOS &gt; Connect Interface</a>
+				documentation for more information.</p>
 			<p>You can access EOS Game Services through Web APIs that require access tokens to identify the authenticated clients that make the requests. Clients can request access tokens either as an independent client (client access tokens) or on behalf of a user (user access tokens).</p>
 			<p>For example, a web application might may authenticate users to provide account-linking management functionality for players. An independent client could be a publisher-hosted backend that orchestrates voice chat rooms hosted by the EOS Voice backend service.</p>
 			<div>
@@ -36,12 +41,8 @@
 				<li>User access tokens: used by clients interacting with backend services on behalf of authenticated users.</li>
 			</ul>
 			<p>When a client requests an access token, it must provide a valid set of Client Credentials for a Product. You can create
-				<a href="/docs/dev-portal/client-credentials">clients</a>
-				for each
-				<span>
-					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
-				</span>
-				in the
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">clients</a>
+				for each product in the
 				<a href="/docs/dev-portal">Developer Portal</a>
 				in
 				<strong>Product Settings</strong>, and receive individual client policies.</p>
@@ -175,7 +176,6 @@
 							<code>steam_access_token</code>,
 							<code>steam_encrypted_appticket</code>,
 							<code>steam_session_ticket</code>,
-							<code>viveport_user_token</code>,
 							<code>xbl_xsts_token</code>
 						</td>
 					</tr>
@@ -429,7 +429,6 @@
 							<code>openid</code>,
 							<code>psn</code>,
 							<code>steam</code>,
-							<code>viveport</code>,
 							<code>xbl</code>.</td>
 					</tr>
 					<tr>
@@ -780,9 +779,6 @@
 									<code>steam</code>
 								</li>
 								<li>
-									<code>viveport</code>
-								</li>
-								<li>
 									<code>xbl</code>
 								</li>
 							</ul>
@@ -819,67 +815,72 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#request-an-eos-access-token">Request an EOS Access Token</a>
-					</li>
-					<li>
-						<a href="#token-request">Token Request</a>
-					</li>
-					<li>
-						<a href="#example-request">Example Request</a>
-					</li>
-					<li>
-						<a href="#token-response">Token Response</a>
-					</li>
-					<li>
-						<a href="#example-response">Example Response</a>
-					</li>
-					<li>
-						<a href="#query-external-accounts">Query External Accounts</a>
-					</li>
-					<li>
-						<a href="#policy">Policy</a>
-					</li>
-					<li>
-						<a href="#authorization">Authorization</a>
-					</li>
-					<li>
-						<a href="#queryexternalaccounts-request">QueryExternalAccounts Request</a>
-					</li>
-					<li>
-						<a href="#example-request-1">Example Request</a>
-					</li>
-					<li>
-						<a href="#queryexternalaccounts-response">QueryExternalAccounts Response</a>
-					</li>
-					<li>
-						<a href="#example-response-1">Example Response</a>
-					</li>
-					<li>
-						<a href="#query-product-users">Query Product Users</a>
-					</li>
-					<li>
-						<a href="#policy-1">Policy</a>
-					</li>
-					<li>
-						<a href="#authorization-1">Authorization</a>
-					</li>
-					<li>
-						<a href="#queryproductusers-request">QueryProductUsers Request</a>
-					</li>
-					<li>
-						<a href="#example-request-2">Example Request</a>
-					</li>
-					<li>
-						<a href="#queryproductusers-response">QueryProductUsers Response</a>
-					</li>
-					<li>
-						<a href="#example-response-2">Example Response</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#request-an-eos-access-token">Request an EOS Access Token</a>
+								</li>
+								<li>
+									<a href="#token-request">Token Request</a>
+								</li>
+								<li>
+									<a href="#example-request">Example Request</a>
+								</li>
+								<li>
+									<a href="#token-response">Token Response</a>
+								</li>
+								<li>
+									<a href="#example-response">Example Response</a>
+								</li>
+								<li>
+									<a href="#query-external-accounts">Query External Accounts</a>
+								</li>
+								<li>
+									<a href="#policy">Policy</a>
+								</li>
+								<li>
+									<a href="#authorization">Authorization</a>
+								</li>
+								<li>
+									<a href="#queryexternalaccounts-request">QueryExternalAccounts Request</a>
+								</li>
+								<li>
+									<a href="#example-request-1">Example Request</a>
+								</li>
+								<li>
+									<a href="#queryexternalaccounts-response">QueryExternalAccounts Response</a>
+								</li>
+								<li>
+									<a href="#example-response-1">Example Response</a>
+								</li>
+								<li>
+									<a href="#query-product-users">Query Product Users</a>
+								</li>
+								<li>
+									<a href="#policy-1">Policy</a>
+								</li>
+								<li>
+									<a href="#authorization-1">Authorization</a>
+								</li>
+								<li>
+									<a href="#queryproductusers-request">QueryProductUsers Request</a>
+								</li>
+								<li>
+									<a href="#example-request-2">Example Request</a>
+								</li>
+								<li>
+									<a href="#queryproductusers-response">QueryProductUsers Response</a>
+								</li>
+								<li>
+									<a href="#example-response-2">Example Response</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

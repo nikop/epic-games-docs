@@ -1,0 +1,519 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Sanction Players — 3. Allow Players to Appeal Sanctions</h1>
+			<h2>Step-by-step guide on how to allow your players to submit appeals against sanctions.</h2>
+			<div>
+				<div>17 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/retrieve-sanctions">2. Retrieve Sanctions</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>You can add code to your game to let a player create a sanction appeal. This guide covers how to create sanction appeals through the EOS API.</p>
+							<p>
+								<strong>Note:</strong>
+								The following limitations apply to sanction appeals created with the EOS API:</p>
+							<ul>
+								<li>Only a player can create their own sanction appeal with the EOS API.</li>
+								<li>A server cannot create a sanction appeal for a player with the EOS API.</li>
+							</ul>
+							<p>The following alternative methods are also available to appeal sanctions:</p>
+							<ul>
+								<li>Your players can create sanction appeals with the Sanctions Web API. For more information on creating sanction appeals with the Sanctions Web API, see
+									<a href="/docs/web-api-ref/sanctions-web-apis#creating-sanction-appeals">Sanctions Web APIs &gt; Creating Sanction Appeals</a>.</li>
+								<li>You can appeal a sanction for a player, in the Developer Portal. (Section of this guide:
+									<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions">4. Manage Sanctions and Sanction Appeals</a>.)</li>
+								<li>You can enable a feature to let your players appeal sanctions through a form that Epic provides (See the
+									<a href="#notes">Notes</a>
+									section below.)</li>
+							</ul>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Get Started Steps</a>.)</li>
+								<li>Set up and apply sanctions in the Developer Portal. (Section in this guide: 1.
+									<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/set-up-sanctions">Set Up and Apply Epic Online Services (EOS) Sanctions</a>.)</li>
+								<li>Retrieve the reference ID for the sanction that you want to appeal.
+									<ul>
+										<li>You can get the sanction's reference ID through either the active sanction on the Sanctions page of the Developer Portal or from the EOS API
+											<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+												<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+												function</a>. For more information, see the following documentation:
+											<ul>
+												<li>For Developer Portal instructions, see the following section of this guide:
+													<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions">4. Manage Sanctions and Sanction Appeals</a>.</li>
+												<li>For EOS API function instructions, see the following section of this guide:
+													<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/retrieve-sanctions">2. Retrieve Sanctions</a>.</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<div>
+								<h2 id="create-a-sanction-appeal-for-a-player">Create a Sanction Appeal for a Player</h2>
+							</div>
+							<p>Complete the following steps to create a sanction appeal for a player:</p>
+							<ul>
+								<li>
+									<a href="#step-a-modify-your-sanctions-manager-class">Step A: Modify Your Sanctions Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-create-sanction-appeal-function">Step B: Implement Your Create Sanction Appeal Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-create-sanction-appeal-callback-function">Step C: Implement Your Create Sanction Appeal Callback Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code example after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-modify-your-sanctions-manager-class">Step A: Modify Your Sanctions Manager Class</h3>
+							</div>
+							<p>Modify your sanctions manager class to include the necessary variables for sanctions appeals.</p>
+							<div>
+								<section>
+									<pre>// SanctionsManager.h ... class SanctionsManager{public:...     /**      * Create a sanction appeal for the local player.     *      * @param AppealReason - The reason that the local player wants to appeal the sanction.     *      * @param SanctionReferenceId - The Reference ID for the sanction that the player is appealing.     */    void CreateSanctionAppealExample(EOS_ESanctionAppealReason AppealReason, const char* SanctionReferenceId);  private:...     /**     * Callback function that executes when the sanction appeal is created.     *      * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnCreatePlayerSanctionAppealComplete(const EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo* Data); };</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In the
+																	<code>SanctionsManager.h</code>
+																	file, declare a public function to create a sanction appeal for the player. In the example, it's called
+																	<code>CreateSanctionAppealExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>void CreateSanctionAppealExample(EOS_ESanctionAppealReason AppealReason, const char* SanctionReferenceId);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-sanctions-create-player-sanction-appeal">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppeal</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-sanctions-create-player-sanction-appeal-callback">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppealCallback</code>
+																		callback</a>
+																	that receives a
+																	<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnCreatePlayerSanctionAppealComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnCreatePlayerSanctionAppealComplete(const EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-implement-your-create-sanction-appeal-function">Step B: Implement Your Create Sanction Appeal Function</h3>
+							</div>
+							<p>In your
+								<code>.cpp</code>
+								file, in your sanctions manager class, implement the function to create the sanction appeal for the player.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void SanctionsManager::CreateSanctionAppealExample(EOS_ESanctionAppealReason AppealReason, const char* SanctionReferenceId){    EOS_Sanctions_CreatePlayerSanctionAppealOptions CreateAppealOptions = {};    CreateAppealOptions.ApiVersion = EOS_SANCTIONS_CREATEPLAYERSANCTIONAPPEAL_API_LATEST;     // The Product User ID of the local player who is sending the sanction appeal.    CreateAppealOptions.LocalUserId = LocalProductUserId;     // The reason that the local player is appealing the sanction.    CreateAppealOptions.Reason = AppealReason;     // The Reference ID of the sanction to appeal.    CreateAppealOptions.ReferenceId = SanctionReferenceId;     // Call the EOS SDK to create a sanction appeal.    // The callback function will be called when the sanction appeal is sent.    EOS_Sanctions_CreatePlayerSanctionAppeal(SanctionsHandle, &amp;CreateAppealOptions, nullptr, OnCreatePlayerSanctionAppealComplete);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your sanctions manager class, implement the function to appeal a sanction for the player. In the example, it's called
+																	<code>CreateSanctionAppealExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SanctionsManager::CreateSanctionAppealExample(EOS_ESanctionAppealReason AppealReason, const char* SanctionReferenceId){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-options">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppealOptions</code>
+																		data structure</a>
+																	to hold the appeal options for one of the player's active sanctions. In the example, it's called
+																	<code>CreateAppealOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_Sanctions_CreatePlayerSanctionAppealOptions CreateAppealOptions = {}; CreateAppealOptions.ApiVersion = EOS_SANCTIONS_CREATEPLAYERSANCTIONAPPEAL_API_LATEST;CreateAppealOptions.LocalUserId = LocalProductUserId;CreateAppealOptions.Reason = AppealReason;CreateAppealOptions.ReferenceId = SanctionReferenceId;</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	To create a sanction appeal for the player's active sanction through the EOS API, you must have the reference ID for the player's sanction that you want to appeal. To get the reference ID for the player's sanction, do one of the following:</p>
+																<ul>
+																	<li>Copy the reference ID from the
+																		<a href="/docs/api-ref/structs/eos-sanctions-player-sanction">
+																			<code>EOS_Sanctions_PlayerSanction</code>
+																			data structure</a>
+																		that the
+																		<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+																			<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+																			function</a>
+																		returns.
+																		<ul>
+																			<li>For more information, see the following section of this guide:
+																				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/retrieve-sanctions">2. Retrieve Sanctions</a>.</li>
+																		</ul>
+																	</li>
+																	<li>Copy the reference ID from the Developer Portal. To get this ID, go to the Sanctions page in the Developer Portal and look in the
+																		<strong>Reference ID, status &amp; issued date</strong>
+																		column of the sanction.
+																		<ul>
+																			<li>For More information, see the following section of this guide:
+																				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions">4. Manage Sanctions and Sanction Appeals</a>.</li>
+																		</ul>
+																	</li>
+																</ul>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-sanctions-create-player-sanction-appeal">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppeal()</code>
+																		function</a>. This function creates an appeal for the active sanction with the reference ID you specify.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>Sanctions Interface handle.</li>
+																	<li>A reference to the create appeal options for the active sanction.</li>
+																	<li>(Optional)
+																		<code>ClientData</code>.<br>
+																		In the example, we pass
+																		<code>nullptr</code>
+																		because we don't need to pass any additional data to the callback.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">
+																			<code>EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</code>
+																			data structure</a>
+																		when the EOS Sanctions service completes the sanction appeal.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_Sanctions_CreatePlayerSanctionAppeal(SanctionsHandle, &amp;CreateAppealOptions, nullptr, OnCreatePlayerSanctionAppealComplete);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-create-sanction-appeal-callback-function">Step C: Implement Your Create Sanction Appeal Callback Function</h3>
+							</div>
+							<p>Implement your create sanction appeal callback function.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL SanctionsManager::OnCreatePlayerSanctionAppealComplete(const EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the sanction appeal was successfully created.        std::cout &lt;&lt; "Created sanction appeal for sanction with ID: "            &lt;&lt; Data-&gt;ReferenceId &lt;&lt; std::endl;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error creating sanction appeal! Error code: "            &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-sanctions-create-player-sanction-appeal">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppeal</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-sanctions-create-player-sanction-appeal-callback">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppealCallback</code>
+																		callback</a>
+																	that receives a
+																	<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnCreatePlayerSanctionAppealComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL SanctionsManager::OnCreatePlayerSanctionAppealComplete(const EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo* Data){</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<code>EOS_Sanctions_CreatePlayerSanctionAppeal()</code>
+																		function completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		Enum</a>
+																	to confirm that the appeal is successful. If the appeal is successful, notify the player. In the example, the console prints that the EOS SDK created a sanction appeal for the specified reference ID:</p>
+																<div>
+																	<section>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Created sanction appeal for sanction with ID: " &lt;&lt; Data-&gt;ReferenceId &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the create sanction appeal operation is not complete yet. If the create sanction appeal operation is not complete, return. The callback is called again when the operation is complete:</p>
+																<div>
+																	<section>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the create sanction appeal operation is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Error creating sanction appeal! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the
+																	<code>EOS_EResult_ToString()</code>
+																	function to convert the
+																	<code>E_EResult</code>
+																	Enum to a string, which gives the name of the error type.</p>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>You can submit the appeal for the sanction on behalf of the player.</p>
+							<p>
+								<strong>Note:</strong>
+								A successfully submitted sanction appeal does not mean the appeal is approved. You must approve or deny the sanction appeal in the Developer Portal (section of this guide:
+								<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions">4. Manage Sanctions and Sanction Appeals</a>).</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// SanctionsManager.h #pragma once#include &lt;eos_sanctions.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;vector&gt;#include &lt;string&gt; class SanctionsManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     *     * @param InLocalProductUserId - The ProductUserId of the local player obtained during Connect login.     */    SanctionsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**      * Create a sanction appeal for the local player.     *      * @param AppealReason - The reason that the local player wants to appeal the sanction.     *      * @param SanctionReferenceId - The Reference ID for the sanction that the player is appealing.     */    void CreateSanctionAppealExample(EOS_ESanctionAppealReason AppealReason, const char* SanctionReferenceId);  private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Sanctions Interface handle. */    EOS_HSanctions SanctionsHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /**     * Callback function that executes when the sanction appeal is created.     *      * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnCreatePlayerSanctionAppealComplete(const EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo* Data); };</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// SanctionsManager.cpp #include "SanctionsManager.h"#include &lt;iostream&gt; SanctionsManager::SanctionsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId){    // Get and save the handle to the Sanctions Interface.SanctionsHandle = EOS_Platform_GetSanctionsInterface(PlatformHandle);} void SanctionsManager::CreateSanctionAppealExample(EOS_ESanctionAppealReason AppealReason, const char* SanctionReferenceId){    EOS_Sanctions_CreatePlayerSanctionAppealOptions CreateAppealOptions = {};    CreateAppealOptions.ApiVersion = EOS_SANCTIONS_CREATEPLAYERSANCTIONAPPEAL_API_LATEST;     // The Product User ID of the local player who is sending the sanction appeal.    CreateAppealOptions.LocalUserId = LocalProductUserId;     // The reason that the local player is appealing the sanction.    CreateAppealOptions.Reason = AppealReason;     // The Reference ID of the sanction to appeal.    CreateAppealOptions.ReferenceId = SanctionReferenceId;     // Call the EOS SDK to create a sanction appeal.    // The callback function will be called when the sanction appeal is sent.    EOS_Sanctions_CreatePlayerSanctionAppeal(SanctionsHandle, &amp;CreateAppealOptions, nullptr, OnCreatePlayerSanctionAppealComplete);} void EOS_CALL SanctionsManager::OnCreatePlayerSanctionAppealComplete(const EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the sanction appeal was successfully created.        std::cout &lt;&lt; "Created sanction appeal for sanction with ID: "            &lt;&lt; Data-&gt;ReferenceId &lt;&lt; std::endl;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error creating sanction appeal! Error code: "            &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>You can enable a feature to let your players appeal sanctions through a form that Epic provides. To do this:</p>
+							<ul>
+								<li>a. Go to the Developer Portal at
+									<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</li>
+								<li>b. In the left navigation, under
+									<strong>Your Products</strong>, click the name of your product.</li>
+								<li>c. In the left navigation, click
+									<strong>Epic Online Services</strong>
+								</li>
+								<li>d. In the
+									<strong>Trust and Safety</strong>
+									section, click
+									<strong>Sanctions</strong>.</li>
+								<li>e. Use the
+									<strong>Allow users to appeal sanction by reference id</strong>
+									toggle to enable sanction appeals through the appeal form.
+									<ul>
+										<li>After you have enabled this feature, your players can submit sanction appeals through the form at
+											<a href="https://easy.ac/en-US/support/contact/appeal">https://easy.ac/~/appeal</a>.</li>
+										<li>
+											<strong>Note:</strong>
+											You must provide the reference ID for the sanction that the player wants to appeal. You can do this through your game code or a support request. This guide does not cover this process.</li>
+									</ul>
+								</li>
+							</ul>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-sanctions-create-player-sanction-appeal">
+										<code>EOS_Sanctions_CreatePlayerSanctionAppeal</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-options">
+												<code>EOS_Sanctions_CreatePlayerSanctionAppealOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-sanctions-create-player-sanction-appeal-callback">
+												<code>EOS_Sanctions_CreatePlayerSanctionAppealCallback</code>
+											</a>
+											<a href="/docs/api-ref/callbacks/eos-sanctions-on-query-active-player-sanctions-callback">function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-sanctions-create-player-sanction-appeal-callback-info">
+														<code>EOS_Sanctions_CreatePlayerSanctionAppealCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+										<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+										function</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions">4. Manage Sanctions and Sanction Appeals</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#create-a-sanction-appeal-for-a-player">Create a Sanction Appeal for a Player</a>
+								</li>
+								<li>
+									<a href="#step-a-modify-your-sanctions-manager-class">Step A: Modify Your Sanctions Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-create-sanction-appeal-function">Step B: Implement Your Create Sanction Appeal Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-create-sanction-appeal-callback-function">Step C: Implement Your Create Sanction Appeal Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

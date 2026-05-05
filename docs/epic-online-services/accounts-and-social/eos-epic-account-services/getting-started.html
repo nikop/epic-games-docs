@@ -1,0 +1,664 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Get Started with EOS Epic Account Services</h1>
+			<h2>How to register for and set up EOS Epic Account Services with your game.</h2>
+			<div>
+				<div>13 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>EOS Epic Account Services provide player accounts that enable your game’s players to tap into the Epic Games account ecosystem of nearly a billion players across multiple platforms and stores, and gain access to the Accounts and Social EOS services and an Epic Games Store Service.</p>
+			<p>EOS Epic Account Services player accounts are either an Epic Games account or a proxy account. For games that use crossplay, proxy accounts provide an automatic Epic Games account sign-in from any external identity provider (Steam, or Xbox Live among many others) (for a full list of providers, see documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>). Proxy accounts enable players to share their data across different platforms, and to participate in cross-platform features such as matchmaking, regardless of which supported identity provider they use.</p>
+			<div>
+				<h2 id="when-to-register-for-and-set-up-eos-epic-account-services">When to Register For and Set Up EOS Epic Account Services</h2>
+			</div>
+			<p>EOS Epic Account Services are one of two types of EOS service, the other is EOS Game Services. The type of service affects what player authentication interface you use and what player accounts can connect to the service.</p>
+			<p>You only need to register for and set up EOS Epic Account Services if your game uses any of the following services and their interfaces:</p>
+			<ul>
+				<li>EOS Group of Services
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/accounts-and-social">Accounts and Social</a>
+						</li>
+					</ul>
+				</li>
+				<li>Epic Games Store Service
+					<ul>
+						<li>Epic Games Store in-app purchases (known as “Ecom” and “Ecommerce”)<br>
+							Documentation:
+							<a href="/docs/epic-games-store/services/ecom">Epic Games Store &gt; Epic Games Store Services &gt; Ecommerce</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p>If you use any of the following groups of EOS Services, your players do not require EOS Epic Account Services, and instead they must sign in to EOS Game Services:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer">Multiplayer</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data">Player and Game Data</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety">Trust and Safety</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you can get started with EOS Epic Account Services, you must do the following actions:</p>
+			<ul>
+				<li>Sign up for or Sign in to an Epic Games Account in the Developer Portal</li>
+				<li>Integrate EOS with your game</li>
+			</ul>
+			<p>
+				<strong>Sign Up or Sign In to an Epic Games Account in the Developer Portal</strong>
+			</p>
+			<p>Before you can begin setting up EOS Epic Account Services with your game, you must sign in to your Epic Games account in the Developer Portal and set up an organization.</p>
+			<p>If you don’t have an Epic Games account already, you can sign up through the Developer Portal. You use the Epic Games account and organization to manage EOS services with your game. The account also gives you the option to manage your game on the Epic Games Store through the Developer Portal.</p>
+			<p>To sign up or sign in, see the following documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk#step-a-create-your-account-organization-and-product">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK &gt; Step A: Create Your Account, Organization, and Product</a>.</p>
+			<p>
+				<strong>Integrate EOS with Your Game</strong>
+			</p>
+			<p>Before you can integrate EOS Epic Account Services into your game, you must first integrate EOS into your game using the EOS SDK.</p>
+			<p>For guidance on accessing and working with the EOS SDK, see the following documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.</p>
+			<p>When you are familiar with the EOS SDK, you can integrate EOS Epic Account Services with your game.</p>
+			<div>
+				<h2 id="get-started-overview">Get Started Overview</h2>
+			</div>
+			<p>There are two parts to get started with EOS Epic Account Services: first you must follow an admin process, and then you can integrate EOS Epic Account Services with your game.</p>
+			<p>
+				<strong>Part 1: Register For EOS Epic Account Services: Admin Process</strong>
+				<br>
+				After you have set up an EOS Epic Games account and an organization in the Developer Portal, you can start the Epic Account Services admin process. The section below (<a href="#get-started-admin-process">Get Started: Admin Process</a>) describes how to do this step-by-step.</p>
+			<p>
+				<strong>Part 2: Set Up EOS Epic Account Services: Integrate EOS Epic Account Services with Your Game</strong>
+				<br>
+				After you have completed the admin process, you can integrate EOS Epic Account Services with your game.</p>
+			<p>The section below (<a href="#get-started-integrate-eos-epic-account-services-with-your-game">Get Started: Integrate EOS Epic Account Services with Your Game</a>) page describes how to authenticate players with Epic Games accounts (known as "Epic Games users") so they can use Epic Account Services in your game.</p>
+			<div>
+				<h2 id="get-started-admin-process">Get Started: Admin Process</h2>
+			</div>
+			<div>
+				<h4 id="1-add-your-game-to-your-organization">1. Add Your Game to Your Organization</h4>
+			</div>
+			<p>If you have not done this already, add the game you want to use EOS Epic Account Services to your organization in the Developer Portal.</p>
+			<p>
+				<strong>Note</strong>: Your game is known as your “product” in the Developer Portal.</p>
+			<p>To do this:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+				<li>Select your organization name, if prompted.</li>
+				<li>In the left navigation, under
+					<strong>Your Products</strong>, click
+					<strong>+ Create Product</strong>.</li>
+				<li>Enter the name of your product and click
+					<strong>Create</strong>.</li>
+			</ol>
+			<div>
+				<h4 id="2-accept-the-eos-epic-account-services-legal-agreement">2. Accept the EOS Epic Account Services Legal Agreement</h4>
+			</div>
+			<p>To accept your game’s (known as "product" in the Developer Portal) EOS Epic Account Services legal agreement, follow the steps below:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+				<li>In the left navigation, under
+					<strong>Your Products</strong>, click the name of your product.</li>
+				<li>In the left navigation, click
+					<strong>Epic Online Services</strong>.</li>
+				<li>Under
+					<strong>Accounts &amp; Social</strong>, click
+					<strong>Epic Account Services</strong>.</li>
+				<li>Review and accept an agreement for
+					<strong>Epic Account Services</strong>. (If you have already accepted it, it doesn't display again.)<br>
+					To accept the agreement, scroll down to the bottom of the left pane, and click
+					<strong>Accept</strong>
+					on the right pane.</li>
+			</ol>
+			<div>
+				<h5 id="agreement-types">Agreement Types</h5>
+			</div>
+			<p>There is a key difference between the
+				<em>Epic Online Services, Standard Services</em>
+				agreement and the (EOS)
+				<em>Epic Account Services</em>
+				agreement.</p>
+			<ul>
+				<li>Epic Online Services, Standard Services agreement:
+					<ul>
+						<li>You license Epic Games as a service provider to process your player data on your behalf. There is no agreement between your players and Epic Games.</li>
+					</ul>
+				</li>
+				<li>Epic Account Services agreement:
+					<ul>
+						<li>Epic Games manages player data on your players' behalf, with their consent. There is an agreement between your players and Epic Games.</li>
+						<li>You agree to use the player data for permitted uses only, as defined in the agreement.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h5 id="how-to-view-agreements">How to View Agreements</h5>
+			</div>
+			<p>You can view the agreements you have already accepted in the Developer Portal from the Organization page.
+				<br>
+				To do this:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+				<li>Select your organization name, if prompted.</li>
+				<li>In the left navigation, click
+					<strong>Organization</strong>.</li>
+				<li>Click the
+					<strong>Agreements</strong>
+					tab. This displays the
+					<strong>Agreements</strong>
+					page.</li>
+			</ol>
+			<p>You can view the Epic Games Privacy Policy for more information on how Epic Games collects, uses, and shares player (user) data at:
+				<a href="https://www.epicgames.com/site/en-US/privacypolicy">www.epicgames.com/~/privacypolicy</a>.</p>
+			<div>
+				<h5 id="accept-the-agreement-more-than-once">Accept the Agreement More Than Once</h5>
+			</div>
+			<p>Depending on your organization, you might need to accept each agreement more than once:</p>
+			<ul>
+				<li>Organizations that are company entities only need to accept each agreement once.</li>
+				<li>Organizations that are individual entities require each member of the organization with access to the Epic Account Services dashboard to accept each agreement.</li>
+			</ul>
+			<div>
+				<h4 id="3-register-your-product-with-eos-epic-account-services">3. Register Your Product with EOS Epic Account Services</h4>
+			</div>
+			<p>You register your game (known as a "product" in the Developer Portal) for EOS Epic Account Services in the
+				<strong>Epic Account Services</strong>
+				page of the Developer Portal. For more information, see the following documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">Guide: Access Epic Account Services With the Auth Interface &gt; 1. Set Up Epic Account Services</a>.</p>
+			<div>
+				<h3 id="information-on-creating-or-configuring-an-eos-epic-account-services-application">Information on creating or configuring an EOS Epic Account Services Application</h3>
+			</div>
+			<p>Your product’s configuration with EOS Epic Account Services consists of three sections, each with its own tab in the page:</p>
+			<ol>
+				<li>
+					<strong>Brand Settings:</strong>
+					Your company name, logo, privacy policy URL, and support URL.</li>
+				<li>
+					<strong>Permissions:</strong>
+					The user consent that your game requests.</li>
+				<li>
+					<strong>Linked Clients:</strong>
+					The clients that connect with your game.</li>
+			</ol>
+			<div>
+				<h5 id="brand-settings">Brand Settings</h5>
+			</div>
+			<p>See the documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review/brand-review-process#brand-settings">Brand Review Process: Brand Settings</a>
+				for detailed guidance on completing these fields and the brand review process.</p>
+			<div>
+				<h5 id="permissions">Permissions</h5>
+			</div>
+			<p>In the Permissions tab, you define the level of access your game requests from Epic Games users.</p>
+			<p>EOS Epic Account Services has three levels of permissions:</p>
+			<ul>
+				<li>
+					<strong>Basic Profile:</strong>
+					Allows read access to player display names, language preferences, and linked-account display names.</li>
+				<li>
+					<strong>Online Presence:</strong>
+					Allows your product to set the online presence of a user and to receive online presence updates from their friends.</li>
+				<li>
+					<strong>Friends:</strong>
+					Allows read access to the friends list for a player's account.</li>
+				<li>
+					<strong>Country:</strong>
+					Allows read access to the country of the current user's account.</li>
+			</ul>
+			<p>
+				<strong>Note</strong>:
+				<strong>Basic Profile</strong>
+				is always required for EOS Epic Account Services. You cannot deactivate it because your product cannot access any player data without it.</p>
+			<p>You can enable or disable
+				<strong>Online Presence</strong>
+				and
+				<strong>Friends</strong>, depending on the requirements of your product.</p>
+			<p>To set the permission level:</p>
+			<ol>
+				<li>Toggle on the permissions you want to enable for your application.</li>
+				<li>Click
+					<strong>Save changes</strong>.</li>
+			</ol>
+			<ul>
+				<li>
+					<strong>Note</strong>: Permissions update as soon as you click
+					<strong>Save changes</strong>, even if your product is already live.</li>
+			</ul>
+			<ol start="3">
+				<li>The consent dialog preview on the left side of the tab updates to reflect the permissions you add or remove.</li>
+			</ol>
+			<div>
+				<h5 id="permissions-for-live-products">Permissions for Live Products</h5>
+			</div>
+			<p>Permissions update instantly, even for products that are already live. If you do not set up your product to handle the new permissions, users might get an "Invalid Client" error when they attempt to launch your product.</p>
+			<p>If your product is live on the Epic Games Store and you want to update its permissions, make sure your build is set up to handle any changes to you make to its required permissions. To do this, you can either:</p>
+			<ul>
+				<li>Configure your build to integrate the new permissions before you set the new permissions in the Developer Portal. Documentation:
+					<a href="/docs/epic-games-store/publishing-tools/publishing-process/patch-live-builds">Patch Your Live Builds</a>.</li>
+				<li>Schedule an update to your product to occur right after you set the new permissions in the Developer Portal. Documentation:
+					<a href="/docs/epic-games-store/publishing-tools/publishing-process/scheduled-publishing">Scheduled Publishing</a>.</li>
+			</ul>
+			<div>
+				<h5 id="linked-clients">Linked Clients</h5>
+			</div>
+			<p>In the Linked Clients tab, you choose clients to link to your Epic Account Services application from a list of clients you have already associated with your product.</p>
+			<p>If you have not already associated clients with your product, you can follow a link from this tab to do this.</p>
+			<p>You must associate a client with client policies: client policies are the necessary permissions for a client.</p>
+			<p>For more information, see the following documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client and Client Policy</a>.</p>
+			<p>
+				<strong>About Linked Clients</strong>
+			</p>
+			<p>Linked clients are clients you have already associated with your game (known as “product” in the Developer Portal) that you wish to add to your EOS Epic Account Services application. You manage clients in the Clients tab of the Product Settings page. To do this:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+				<li>In the left navigation, under
+					<strong>Your Products</strong>, click the name of your product.</li>
+				<li>In the left navigation, scroll down and click
+					<strong>Product Settings</strong>.</li>
+				<li>On the
+					<strong>Product Settings</strong>
+					page, click the
+					<strong>Clients</strong>
+					tab.</li>
+			</ol>
+			<ul>
+				<li>The linked clients that you add to an application share the same user permissions (consent) when a user gives consent.</li>
+				<li>You can add as many linked clients to an application as you choose but you can only add them one at a time.</li>
+			</ul>
+			<p>
+				<strong>How to Link Clients</strong>
+				<br>
+				<strong>Note</strong>: In the Developer Portal,  "Application Clients" and "Linked Clients" mean the same thing.</p>
+			<ol>
+				<li>If you already have clients associated with your product, you can select them from the
+					<strong>Select Clients</strong>
+					dropdown.</li>
+				<li>If not, click
+					<strong>add Client</strong>
+					to open your product’s Product Settings page and configure a new client.</li>
+			</ol>
+			<p>For details on how to add new clients, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>
+				page.</p>
+			<p>After you have added a linked client to the application, click
+				<strong>Save</strong>
+				to save your changes.</p>
+			<div>
+				<h4 id="4-admin-completed">4. Admin Completed</h4>
+			</div>
+			<p>When you have completed the fields in the three admin tabs, you have completed the admin process. You are ready to integrate EOS Epic Account Services into your game.</p>
+			<p>When your brand settings have passed the brand review process, Epic Games removes audience restrictions, and you can make your game visible to Epic Games users outside of your organization.</p>
+			<div>
+				<h2 id="get-started-integrate-eos-epic-account-services-with-your-game">Get Started: Integrate EOS Epic Account Services with your Game</h2>
+			</div>
+			<p>After you finish the admin process described above, you are ready to use EOS Epic Account Services. However, with Epic Account Services, you must integrate the Auth Interface into your game so you can set up the appropriate player authentication. For a step-by-step guide to this, see:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide">Guide: Access EOS Epic Account Services With the Auth Interface</a>.</p>
+			<p>The following sections also give guidance on authentication.</p>
+			<div>
+				<h4 id="authenticate-with-the-eos-sdk">Authenticate With the EOS SDK</h4>
+			</div>
+			<p>You must do the following:</p>
+			<ul>
+				<li>Use a login type appropriate for your target platform.
+					<ul>
+						<li>Documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide">Guide: Access Epic Account Services With the Auth Interface</a>.</li>
+					</ul>
+				</li>
+				<li>Remember to include the scopes you want the Epic Games user to consent to in the login call that you denoted during your brand review (their profile, presence, and friends list).
+					<ul>
+						<li>Documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review">Brand Review</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>When you authenticate with the EOS Auth Interface, it opens a default system web browser that prompts the Epic Games account user to log in and review the game's access requests.</p>
+			<div>
+				<h4 id="authenticate-on-a-web-site">Authenticate on a Web Site</h4>
+			</div>
+			<p>To authenticate Epic Games users on websites and web applications, EOS supports the authorization code flow for OpenID Connect Core 1.0 (see
+				<a href="https://openid.net/specs/openid-connect-core-1_0.html">openid.net</a>).</p>
+			<p>
+				<strong>Note</strong>: Before you begin, you must go through brand review, set up user permissions, and set up linked clients, as described above in the
+				<a href="#get-started-admin-process">Admin Process</a>
+				section of this page.</p>
+			<div>
+				<h5 id="user-authorization">User Authorization</h5>
+			</div>
+			<p>To initiate the authentication flow, your game must redirect the Epic Games user to the authorization page where they log in to their Epic Games account.</p>
+			<p>Redirect your Epic Games users to this authorization URL:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>To request additional permissions, there are two steps:</p>
+			<ul>
+				<li>Step 1: Modify the
+					<code>scope</code>
+					parameter in the authorization request with a space-delimited list of the permissions you require.<br>
+					For example,
+					<code>scope=basic_profile friends_list</code>.</li>
+				<li>Step 2: Configure the redirect URL for the client in the Developer Portal.</li>
+			</ul>
+			<p>To configure the redirect URL, go to the Clients tab on the Product Settings page of the Developer Portal.<br>
+				To do this:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</p>
+					<ul>
+						<li>In the left navigation, under
+							<strong>Your Products</strong>, click the name of your product.</li>
+					</ul>
+				</li>
+				<li>
+					<p>On the left navigation, scroll down and click
+						<strong>Product Settings</strong>.</p>
+				</li>
+				<li>
+					<p>On the
+						<strong>Product Settings</strong>
+						page, select the
+						<strong>Clients</strong>
+						tab.</p>
+				</li>
+				<li>
+					<p>Under the list of
+						<strong>Clients</strong>, locate the client you want to update and click on the three dots (<strong>...</strong>) to open the options menu.</p>
+				</li>
+				<li>
+					<p>Follow the onscreen instructions to edit the client.</p>
+					<p>When you click
+						<strong>Save edits</strong>, in this dialog, you are done.</p>
+				</li>
+			</ol>
+			<p>When a user logs in, EOS asks them to approve the requested permissions. After they accept, EOS redirects them back to your application with a
+				<code>code</code>
+				parameter. You use this code when you request an access token.</p>
+			<p>EOS also supports an
+				<em>optional</em>
+				<code>state</code>
+				parameter that you can use to maintain state between the request and the callback. This can prevent cross-site request forgery attacks.</p>
+			<p>The following is an example redirect URL after a user is authenticated:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h5 id="request-an-access-token">Request an Access Token</h5>
+			</div>
+			<p>To request an access token, the client makes a request to the token endpoint, including the client credentials and authorization code. The Epic Games token endpoint is
+				<code>https://api.epicgames.dev/epic/oauth/v1/token</code>.</p>
+			<p>The client credentials pass in the
+				<code>Authorization</code>
+				header using basic authorization. (Documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>.)</p>
+			<p>In the request, you also need to specify the
+				<code>authorization_code</code>
+				grant type and include the code and redirect URL from the user authorization flow, described above. (See the section in this page:
+				<a href="#user-authorization">User Authorization</a>.)</p>
+			<p>The following snippet shows a sample request (using password grant type):</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>The response contains the following fields:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Response</strong>
+						</th>
+						<th>
+							<strong>Description</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>access_token</code>
+						</td>
+						<td>The access token, which may optionally have a prefix (for example:
+							<code>eg1~token</code>). Pass this value "as-is" (do not change it) in the
+							<code>Authorization</code>
+							header using the
+							<code>Bearer</code>
+							type on any requests to EOS services.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>expires_in</code>
+						</td>
+						<td>The number of seconds until the token expires.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>expires_at</code>
+						</td>
+						<td>The expiration date in ISO 8601 format.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>account_id</code>
+						</td>
+						<td>The Epic Games account ID for the user that the token was generated for.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>client_id</code>
+						</td>
+						<td>The Client ID which was used to generate this token.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>application_id</code>
+						</td>
+						<td>The Application ID which the Client is associated with.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>token_type</code>
+						</td>
+						<td>The type of token generated, value will always be bearer.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>refresh_token</code>
+						</td>
+						<td>The refresh token might be returned depending on the client configuration. You can use this refresh token to extend a session before or after the access token has expired.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>refresh_expires</code>
+						</td>
+						<td>The number of seconds until the refresh token expires.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>refresh_expires_at</code>
+						</td>
+						<td>The refresh token expiration date in ISO 8601 format.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following snippet shows a sample response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>You should always pass the access token because it is in the
+				<code>Authorization</code>
+				header to EOS services. For example:
+				<code>Authorization: Bearer eyJraWQiOiJ0RkM...</code>
+			</p>
+			<div>
+				<h5 id="endpoints">Endpoints</h5>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>URL</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>OpenID Configuration</td>
+						<td>
+							<a href="https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration">https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration</a>
+						</td>
+					</tr>
+					<tr>
+						<td>Authorization</td>
+						<td>
+							<a href="https://www.epicgames.com/id/authorize">https://www.epicgames.com/id/authorize</a>
+						</td>
+					</tr>
+					<tr>
+						<td>Token</td>
+						<td>
+							<a href="https://api.epicgames.dev/epic/oauth/v2/token">https://api.epicgames.dev/epic/oauth/v2/token</a>
+						</td>
+					</tr>
+					<tr>
+						<td>User Info</td>
+						<td>
+							<a href="https://api.epicgames.dev/epic/oauth/v2/userInfo">https://api.epicgames.dev/epic/oauth/v2/userInfo</a>
+						</td>
+					</tr>
+					<tr>
+						<td>Token Info</td>
+						<td>
+							<a href="https://api.epicgames.dev/epic/oauth/v2/tokenInfo">https://api.epicgames.dev/epic/oauth/v2/tokenInfo</a>
+						</td>
+					</tr>
+					<tr>
+						<td>JWKs</td>
+						<td>
+							<a href="https://api.epicgames.dev/epic/oauth/v2/.well-known/jwks.json">https://api.epicgames.dev/epic/oauth/v2/.well-known/jwks.json</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#when-to-register-for-and-set-up-eos-epic-account-services">When to Register For and Set Up EOS Epic Account Services</a>
+								</li>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#get-started-overview">Get Started Overview</a>
+								</li>
+								<li>
+									<a href="#get-started-admin-process">Get Started: Admin Process</a>
+								</li>
+								<li>
+									<a href="#1-add-your-game-to-your-organization">1. Add Your Game to Your Organization</a>
+								</li>
+								<li>
+									<a href="#2-accept-the-eos-epic-account-services-legal-agreement">2. Accept the EOS Epic Account Services Legal Agreement</a>
+								</li>
+								<li>
+									<a href="#agreement-types">Agreement Types</a>
+								</li>
+								<li>
+									<a href="#how-to-view-agreements">How to View Agreements</a>
+								</li>
+								<li>
+									<a href="#accept-the-agreement-more-than-once">Accept the Agreement More Than Once</a>
+								</li>
+								<li>
+									<a href="#3-register-your-product-with-eos-epic-account-services">3. Register Your Product with EOS Epic Account Services</a>
+								</li>
+								<li>
+									<a href="#information-on-creating-or-configuring-an-eos-epic-account-services-application">Information on creating or configuring an EOS Epic Account Services Application</a>
+								</li>
+								<li>
+									<a href="#brand-settings">Brand Settings</a>
+								</li>
+								<li>
+									<a href="#permissions">Permissions</a>
+								</li>
+								<li>
+									<a href="#permissions-for-live-products">Permissions for Live Products</a>
+								</li>
+								<li>
+									<a href="#linked-clients">Linked Clients</a>
+								</li>
+								<li>
+									<a href="#4-admin-completed">4. Admin Completed</a>
+								</li>
+								<li>
+									<a href="#get-started-integrate-eos-epic-account-services-with-your-game">Get Started: Integrate EOS Epic Account Services with your Game</a>
+								</li>
+								<li>
+									<a href="#authenticate-with-the-eos-sdk">Authenticate With the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#authenticate-on-a-web-site">Authenticate on a Web Site</a>
+								</li>
+								<li>
+									<a href="#user-authorization">User Authorization</a>
+								</li>
+								<li>
+									<a href="#request-an-access-token">Request an Access Token</a>
+								</li>
+								<li>
+									<a href="#endpoints">Endpoints</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

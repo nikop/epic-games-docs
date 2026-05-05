@@ -1,0 +1,288 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Bulk Import Localized Rich Presence Templates</h1>
+			<h2>How to import multiple localized rich presence templates from a CSV file.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Use localized rich presence templates to define localized text for custom status messages (rich presence) that your product displays to your users' friends. For more information, see
+						<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-intro">Localize Your Game's Rich Presence Messages—Introduction</a>.</p>
+				</div>
+			</div>
+			<p>You can bulk import multiple rich presence templates from a CSV file. To do this, you need to create and upload the following CSV files:</p>
+			<ul>
+				<li>A templates
+					<code>.CSV</code>
+					file, containing the template definitions.</li>
+				<li>A variables
+					<code>.CSV</code>
+					file, containing definitions of any variables your templates use that you haven't already defined in the Developer Portal. You only need to upload this file if
+					<strong>both</strong>
+					of the following apply:
+					<ul>
+						<li>Your templates use variables.</li>
+						<li>You haven't already defined these variables, either in the Developer Portal (documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/create-variable-definition">Create a Variable Definition</a>) or with a previous bulk import.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="workflow">Workflow</h2>
+			</div>
+			<p>To bulk import templates, you need to carry out the following steps:</p>
+			<ul>
+				<li>
+					<a href="#a-download-the-template-files">A. Download the Template Files</a>
+				</li>
+				<li>
+					<a href="#b-populate-the-template-files">B. Populate the Template Files</a>
+				</li>
+				<li>
+					<a href="#c-upload-the-template-files">C. Upload the Template Files</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="a-download-the-template-files">A. Download the Template Files</h3>
+			</div>
+			<p>To download the template files:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</p>
+				</li>
+				<li>
+					<p>Select the correct organization for your product.</p>
+					<p>(To check which organization is selected, see
+						<strong>Organization</strong>
+						at the top of the left navigation. To change organization, click
+						<strong>Organization</strong>
+						and follow the on-screen instructions.)</p>
+				</li>
+				<li>
+					<p>In the left navigation, under
+						<strong>Your products</strong>, click the name of your product.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Epic Online Services</strong>.</p>
+				</li>
+				<li>
+					<p>Under
+						<strong>Accounts &amp; Social</strong>, click
+						<strong>Localized Presence</strong>.</p>
+				</li>
+				<li>
+					<p>Above the list, click
+						<strong>Bulk import</strong>.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Download templates .csv template</strong>.</p>
+				</li>
+				<li>
+					<p>If you plan to use variables in your templates, click
+						<strong>Download variables.csv template</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="b-populate-the-template-files">B. Populate the Template Files</h3>
+			</div>
+			<div>
+				<h4 id="optional-populate-the-variable-definitions-csv-file">(Optional) Populate the Variable Definitions .CSV File</h4>
+			</div>
+			<p>If you plan to use variables in your templates, you need to populate the variable definitions
+				<code>.CSV</code>
+				with definitions of these variables.
+				<strong>Important:</strong>
+				You must do this before you upload the templates
+				<code>.CSV</code>
+				file.</p>
+			<p>For guidance on how to populate the file, see the example text in the file you downloaded.</p>
+			<p>For more information on variable definitions, see
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/variable-definitions-intro">Variable Definitions for Localized Rich Presence Templates — Introduction</a>.</p>
+			<p>
+				<strong>Note:</strong>
+				You only need to populate the variable definitions file if you haven't already defined these variables in the appropriate deployment, either in the Developer Portal (documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/create-variable-definition">Create a Variable Definition</a>) or with a previous bulk import.</p>
+			<p>To populate the variables .CSV file:</p>
+			<ol>
+				<li>Make one row for each variable definition.
+					<ul>
+						<li>If you want to define multiple locales for a variable definition, add one row for each locale.</li>
+						<li>For an example, see the contents of the downloaded file.</li>
+					</ul>
+				</li>
+				<li>Populate the columns on each row.
+					<ul>
+						<li>For information on the options for variable definitions, see documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/variable-definition-options">Variable Definition Options</a>.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>
+				<strong>Note: variable names</strong>
+				<br>
+				If you import a variable definition with the same name as an existing variable definition in your target deployment, then the existing variable definition is overwritten by the imported variable definition. If you want to avoid this, make sure that the variable definitions in your variable definitions .CSV have different names from the variable definitions in your target deployment.</p>
+			<div>
+				<h4 id="populate-the-templates-csv-file">Populate the Templates .CSV File</h4>
+			</div>
+			<p>To populate the templates .CSV file:</p>
+			<ol>
+				<li>Make one row for each template.
+					<ul>
+						<li>If you want to define multiple locales for a template, add one row for each locale.</li>
+						<li>For an example, see the contents of the downloaded file.</li>
+					</ul>
+				</li>
+				<li>On each row, populate the columns.
+					<ul>
+						<li>For information on the options for templates, see documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/templates/template-options">Template Options</a>.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>For guidance on how to populate the file, see the example text in the file you downloaded.</p>
+			<p>
+				<strong>Note: Template names</strong>
+				<br>
+				If you import a template with the same name as an existing template in your target deployment, then the existing template is overwritten by the imported template. If you want to avoid this, make sure that the templates in your templates
+				<code>.CSV</code>
+				have different names from those in your target deployment.</p>
+			<p>
+				<strong>Note: If you use variables in your templates</strong>
+				<br>
+				If you want to use variables in a template, you must populate the definitions for these variables in the variables
+				<code>.CSV</code>
+				file. See
+				<a href="#optional-populate-the-variable-definitions-csv-file">(Optional) Populate the Variable Definitions .CSV File</a>
+				above. You can use up to eight variables per template.</p>
+			<div>
+				<h3 id="c-upload-the-template-files">C. Upload the Template Files</h3>
+			</div>
+			<p>
+				<strong>Note: Duplicate names</strong>
+			</p>
+			<ul>
+				<li>If you import a template with the same name as an existing template in your target deployment, then the existing template is overwritten by the imported template. If you want to avoid this, make sure that the templates on your templates .CSV have different names from those in your target deployment.</li>
+				<li>If you import a variable definition with the same name as an existing variable definition in your target deployment, then the existing variable definition is overwritten by the imported variable definition. If you want to avoid this, make sure that the variable definitions in your variables .CSV have different names from those in your target deployment.</li>
+			</ul>
+			<p>To upload the template files:</p>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</p>
+				</li>
+				<li>
+					<p>Select the correct organization for your product.</p>
+					<p>(To check which organization is selected, see
+						<strong>Organization</strong>
+						at the top of the left navigation. To change organization, click
+						<strong>Organization</strong>
+						and follow the on-screen instructions.)</p>
+				</li>
+				<li>
+					<p>In the left navigation, under
+						<strong>Your products</strong>, click the name of your product.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Epic Online Services</strong>.</p>
+				</li>
+				<li>
+					<p>Under
+						<strong>Accounts &amp; Social</strong>, click
+						<strong>Localized Presence</strong>.</p>
+				</li>
+				<li>
+					<p>Above the list, click
+						<strong>Bulk import</strong>.</p>
+				</li>
+				<li>
+					<p>If you have a variables
+						<code>.CSV</code>
+						file, add it as follows:</p>
+					<ul>
+						<li>Either drag and drop it to the file drop area for the variables
+							<code>.CSV</code>, or click
+							<strong>browse</strong>
+							and select the
+							<code>.CSV</code>
+							file.</li>
+						<li>It is important that you do this before you move on to step 7.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Add your templates
+						<code>.CSV</code>
+						file, as follows:</p>
+					<ul>
+						<li>To do so, either drag and drop it to the file drop area for the templates
+							<code>.CSV</code>, or click
+							<strong>browse</strong>
+							and select the
+							<code>.CSV</code>
+							file.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Click
+						<strong>Next</strong>.</p>
+				</li>
+				<li>
+					<p>Check that the templates displayed on screen match what you want to import.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Import</strong>.</p>
+				</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#workflow">Workflow</a>
+								</li>
+								<li>
+									<a href="#a-download-the-template-files">A. Download the Template Files</a>
+								</li>
+								<li>
+									<a href="#b-populate-the-template-files">B. Populate the Template Files</a>
+								</li>
+								<li>
+									<a href="#optional-populate-the-variable-definitions-csv-file">(Optional) Populate the Variable Definitions .CSV File</a>
+								</li>
+								<li>
+									<a href="#populate-the-templates-csv-file">Populate the Templates .CSV File</a>
+								</li>
+								<li>
+									<a href="#c-upload-the-template-files">C. Upload the Template Files</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

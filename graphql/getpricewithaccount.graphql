@@ -1,0 +1,48 @@
+query getPriceWithAccount($country: String!, $lineOffers: [LineOfferReq]!, $identityId: String, $namespace: String, $locale: String, $calculateTax: Boolean) {
+  PriceEngine {
+    priceWithAccount(
+      country: $country
+      lineOffers: $lineOffers
+      identityId: $identityId
+      namespace: $namespace
+      calculateTax: $calculateTax
+    ) {
+      totalPrice {
+        discountPrice
+        originalPrice
+        voucherDiscount
+        discount
+        currencyCode
+        currencyInfo {
+          decimals
+        }
+        fmtPrice(locale: $locale) {
+          originalPrice
+          discountPrice
+          intermediatePrice
+        }
+        dualPrice
+        dualOriginalPrice
+      }
+      lineOffers {
+        appliedRules {
+          id
+          endDate
+          discountSetting {
+            discountType
+          }
+        }
+      }
+      priceDetails {
+        promotions {
+          type
+          promotionId
+          membershipId
+          amount
+          currency
+          initiatedBy
+        }
+      }
+    }
+  }
+}

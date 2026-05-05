@@ -1,0 +1,232 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Stats to Your Game — 1. Set Up Stats</h1>
+			<h2>Step-by-step guide on how to set up player stats for your game in the Developer Portal.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide/stats-intro">Introduction</a>
+			</p>
+			<p>To use the EOS SDK API to interact with your game's stats, you must first set up stats in the Developer Portal.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start, you must integrate the EOS SDK into your code. (Documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</p>
+			<p>
+				<strong>Note:</strong>
+				We recommend that you set up the Logging Interface to receive useful messages that can help you diagnose technical issues with the EOS SDK. (Documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</p>
+			<div>
+				<h2 id="configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</h2>
+			</div>
+			<p>Complete the following steps in the Developer Portal to set up the available stats for your game:</p>
+			<ul>
+				<li>
+					<a href="#step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</a>
+				</li>
+				<li>
+					<a href="#step-2-configure-your-games-stats">Step 2: Configure Your Game's Stats</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				This guide uses a preset client policy type, but for your game in a production environment we recommend that you create your own custom client policy to ensure your game is secure. For more information on client policies, see the following documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</p>
+			<p>You configure your game's client policy in the Developer Portal, on the Product Settings page's
+				<strong>Clients</strong>
+				tab. To do this, follow the steps below. (Note that in the Developer Portal, your game is usually known as a "product".)</p>
+			<p>
+				<strong>To go to the Clients tab:</strong>
+			</p>
+			<p>A. Go to your game's product page in the Developer Portal.</p>
+			<ul>
+				<li>To do this:<br>
+					a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).<br>
+					b. In the left navigation, under
+					<strong>Your Products</strong>,  click the name of your game (or software application).
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>B. In the left navigation, click
+				<strong>Product Settings</strong>.<br>
+				C. From the default tab (<strong>SDK Download &amp; Credentials</strong>), click
+				<strong>Clients</strong>.</p>
+			<p>Note that the
+				<strong>Clients</strong>
+				tab might show new agreements to accept.</p>
+			<p>
+				<strong>On the Clients tab:</strong>
+			</p>
+			<p>A. Scroll down to the
+				<strong>Client policies</strong>
+				section. (This is below the
+				<strong>Clients</strong>
+				section.)<br>
+				B. Either create a new client policy or enable the Stats feature for an existing client policy.</p>
+			<ul>
+				<li>
+					<p>To create a new client policy:<br>
+						a. Click
+						<strong>Add new client policy</strong>. (Do not click “Add new client”.)<br>
+						b. For
+						<strong>Client policy name</strong>, enter a name of your choice.<br>
+						c. For
+						<strong>Client policy type</strong>, select
+						<strong>GameClient w/ Unlock Achievements</strong>.</p>
+					<ul>
+						<li>You can choose
+							<strong>GameClient</strong>
+							but we recommend
+							<strong>GameClient w/ Unlock Achievements</strong>
+							so you can unlock achievements later (note this guide does not cover achievements).</li>
+						<li>
+							<strong>Note:</strong>
+							Both client policy types listed above already include the permissions you need to retrieve stats for the local player (a player's own stats on their device).</li>
+					</ul>
+					<p>d. Leave the default options and click
+						<strong>Add new client policy</strong>. The default options include the Stats feature enabled.</p>
+				</li>
+				<li>
+					<p>To enable the Stats feature for  an existing client policy:<br>
+						a. Locate the client policy and click the three dots
+						<strong>(...)</strong>
+						next to it, then select
+						<strong>Edit</strong>.<br>
+						b. In the
+						<strong>Edit client policy</strong>
+						pane, scroll down to
+						<strong>Features</strong>
+						and use the
+						<strong>Stats</strong>
+						toggle to enable the stats feature.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="step-2-configure-your-games-stats">Step 2: Configure Your Game's Stats</h3>
+			</div>
+			<p>These steps demonstrate how to configure your game's stats individually in the Developer Portal.</p>
+			<p>
+				<strong>Note:</strong>
+				You can also use the Bulk Importer and Exporter Tool to set up multiple stats in one action. For more information, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/tools/bulk-importer-exporter-tool">Tool: Bulk Import / Export</a>
+				documentation.</p>
+			<p>You configure your game's stats individually in the Developer Portal on the Stats page. To do this, follow the steps below.</p>
+			<p>
+				<strong>To go to the Stats page:</strong>
+			</p>
+			<p>A. Go to your game's product page in the Developer Portal.</p>
+			<ul>
+				<li>To do this:<br>
+					a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).<br>
+					b. In the left navigation, under
+					<strong>Your Products</strong>,  click the name of your game.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>B. In the left navigation, click
+				<strong>Epic Online Services</strong>.<br>
+				C. In the
+				<strong>Player and Game Data</strong>
+				section, click
+				<strong>Stats</strong>.</p>
+			<p>
+				<strong>On the Stats page:</strong>
+			</p>
+			<p>A. From the
+				<strong>Deployment</strong>
+				dropdown, select a deployment if it's not already selected.</p>
+			<ul>
+				<li>
+					<strong>Note:</strong>
+					Stats you create are shared for all deployments in a sandbox. However, player data for stats are not shared for all deployments in a sandbox. Be sure to remember which sandbox your deployment is attached to. The name of the sandbox is highlighted beside the name of the deployment. For example, the default deployment is
+					<strong>Release</strong>
+					and the default sandbox is
+					<strong>Live</strong>. The deployment dropdown displays each sandbox in its own section, with the available deployments for a sandbox listed directly below the sandbox name.</li>
+			</ul>
+			<p>B. Click
+				<strong>Create stat</strong>.<br>
+				C. In the
+				<strong>Name</strong>
+				field, enter a name for the new stat. This is a name of your choice that is meaningful to you. You will refer to this stat name in your game code.</p>
+			<ul>
+				<li>The name must consist only of letters, numbers, or the underscore character (<code>_</code>) with no spaces.</li>
+				<li>(The example stat names this guide uses are as follows but you can use any stat names you choose:
+					<code>AmountOfGammaCollected</code>,
+					<code>LongestJumpDistance</code>,
+					<code>NumberOfCarsSmashed</code>,
+					<code>NumberOfEnemiesDefeated</code>,
+					<code>LongestTransformation</code>.)</li>
+			</ul>
+			<p>D. Select an
+				<strong>Aggregation Type</strong>.  (Glossary: Aggregation type)</p>
+			<p>Repeat these steps to create as many stats as your game requires.</p>
+			<div>
+				<h2 id="results">Results</h2>
+			</div>
+			<p>The stats display on your game's Stats page in the Developer Portal.</p>
+			<p>Next section:
+				<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide/update-values-for-stats">2. Update Values for Stats</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</a>
+								</li>
+								<li>
+									<a href="#step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</a>
+								</li>
+								<li>
+									<a href="#step-2-configure-your-games-stats">Step 2: Configure Your Game's Stats</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

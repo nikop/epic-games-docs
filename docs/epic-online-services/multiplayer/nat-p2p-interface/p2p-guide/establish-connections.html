@@ -1,0 +1,657 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Peer-to-Peer to Your Game — 2. Establish Peer-to-Peer Connections With EOS P2P</h1>
+			<h2>Overview of how to establish peer-to-peer connections between your players with EOS P2P.</h2>
+			<div>
+				<div>30 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/notify-players">1. Notify Players About P2P Connections</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>You can add code to your game to establish peer-to-peer connections with the EOS P2P service, after you have completed the precursor steps listed in
+								<em>Before You Start</em>
+								below.</p>
+							<p>Use the EOS Peer-to-Peer service to enable your  players (sometimes referred to as "peers") to send and receive data between each other’s game clients. This is typical in  a multiplayer game.</p>
+							<p>This section of the guide covers how to establish peer-to-peer connections between players of your game with the EOS P2P Interface. The example implementation below uses the default settings for P2P. For information on how to customize P2P settings to tailor the P2P connection to the specific requirements of your game, see section
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+								of this guide.</p>
+							<p>Note that when this guide refers to "player" connections, data sharing, and notifications, it means connections, data sharing, and notifications between each player’s game client.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete the following steps:</p>
+							<ul>
+								<li>Complete the prerequisites listed in the
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/p2p-intro">Introduction</a>
+									section of this guide.</li>
+								<li>Register for P2P notifications. (Section of this guide:
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/notify-players">1. Notify Players About P2P Connections</a>.)</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+							</p>
+							<ul>
+								<li>A player does not need an Epic Games account to access the P2P Interface.</li>
+								<li>We recommend that you set up the Logging Interface to receive messages that can help you diagnose technical issues with the EOS SDK. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="establish-peer-to-peer-connections">Establish Peer-to-Peer Connections</h2>
+							</div>
+							<p>Complete the following steps to establish peer-to-peer connections with the EOS P2P service:</p>
+							<ul>
+								<li>
+									<a href="#step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-request-connection-function">Step B: Implement Your Request Connection Function</a>
+								</li>
+								<li>
+									<a href="#step-c-modify-your-on-connection-request-notification-callback-function-to-accept-an-incoming-connection-request">Step C: Modify Your On Connection Request Notification Callback Function to Accept an Incoming Connection Request</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-close-connection-function">Step D: Implement Your Close Connection Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</h3>
+							</div>
+							<p>Modify your
+								<code>P2PManager.h</code>
+								file to include the declarations for the functions and variables that you need to send connection requests and close peer-to-peer connections.</p>
+							<p>
+								<strong>Note:</strong>
+								The example code below is not the complete code. It includes only the additions that you must make to your
+								<code>P2PManager.h</code>
+								file. For the complete code, see the complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								This guide does not cover how to sign in the player. For information on this, see the following documentation:</p>
+							<ul>
+								<li>How to sign in to EOS Epic Account Services:
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+								</li>
+								<li>How to sign in to EOS Game Services:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>
+								</li>
+							</ul>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Modify your P2P manager class
+																	<code>.h</code>
+																	file to include a function declaration for a function to request a P2P connection with another player. In the example, it’s called
+																	<code>RequestConnectionExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a function to close the P2P connection with a player. In the example, it’s called
+																	<code>CloseConnectionExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-implement-your-request-connection-function">Step B: Implement Your Request Connection Function</h3>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the request connection function to send a P2P connection request from one player to another player.</p>
+							<p>Multiple EOS P2P functions require an open P2P connection. You can use any of these functions to both request and accept a P2P connection if one is not already open. The example uses the EOS API
+								<code>EOS_P2P_AcceptConnection</code>
+								function to send the request.</p>
+							<p>
+								<strong>Note:</strong>
+								If a player has multiple P2P connections open, they only have to negotiate the first connection. This greatly increases the speed at which data might be received with subsequent connection requests.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								If you have connection issues, it might be due to your NAT type, port that you are trying to connect on, or relay control settings if the NAT is too restrictive. For information on how the EOS P2P service uses NAT, see
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-reference">P2P Interface Reference &gt; Peer Connection Establishment</a>. For information on how to customize these settings and more for P2P, see section
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+								of this guide.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to allow a player to request a P2P connection with another player. In the example, it’s called
+																	<code>RequestConnectionExample()</code>.<br>
+																	The example function takes the following parameters:</p>
+																<ul>
+																	<li>The Product User ID of the remote player to request a P2P connection with.</li>
+																	<li>The Socket ID for the requested P2P connection.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your request connection function, create an instance of the
+																	<code>EOS_P2P_AcceptConnectionOptions</code>
+																	data structure to hold the request options for the P2P connection. In the example, it’s called
+																	<code>AcceptConnectionOptions</code>.</p>
+																<p>
+																	<strong>Note:</strong>
+																	In this instance, the EOS API refers to the options as "AcceptConnectionOptions" even though you will use these options to request the P2P connection.:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_AcceptConnection</code>
+																	function. This function requests a P2P connection with another player.</p>
+																<p>
+																	<strong>Note:</strong>
+																	The EOS API function is called "AcceptConnection", but you will use it to request the P2P connection. You can use any EOS P2P function that requires an open P2P connection to both request and accept a P2P connection if one is not already open. So, you can use the EOS API
+																	<code>EOS_P2P_AcceptConnection</code>
+																	function to request a P2P connection with a remote player and also pre-emptively accept the next connection request with a given socket ID.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the connection options.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<code>EOS_EResult</code>
+																	enum to confirm that the connection request is sent successfully. If the request is sent successfully, notify the player. In the example, the console prints a success statement that includes the following information:</p>
+																<ul>
+																	<li>The Product User ID of the remote player receiving the connection request (<code>PuidString</code>
+																		in the example).</li>
+																	<li>The socket ID the connection is on.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the EOS API
+																	<a href="/docs/api-ref/functions/eos-product-user-id-to-string">
+																		<code>EOS_ProductUserId_ToString()</code>
+																		function</a>
+																	to convert the EOS Product User ID to a string.</p>
+															</li>
+															<li>
+																<p>If the player’s connection request is not sent successfully, handle the errors. In the example, the console prints an error statement that includes the Product User ID of the remote player that the local player sent the connection request to and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-modify-your-on-connection-request-notification-callback-function-to-accept-an-incoming-connection-request">Step C: Modify Your On Connection Request Notification Callback Function to Accept an Incoming Connection Request</h3>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, modify your
+								<code>OnConnectionRequestNotification</code>
+								callback function that you created in section
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/notify-players">1. Get Notified About Peer-to-Peer Connections</a>
+								of this guide to accept the incoming connection request from another player.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								If you have connection issues, it might be due to your NAT type, port that you are trying to connect on, or relay control settings if the NAT is too restrictive. For information on how the EOS P2P service uses NAT, see
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-reference">P2P Interface Reference &gt; Peer Connection Establishment</a>. For information on how to customize these settings and more for P2P, see section
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+								of this guide.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Modify your
+																	<code>OnConnectionRequestNotification()</code>
+																	callback function to check if the socket ID matches what you expect for the connection.</p>
+																<p>
+																	<strong>Note:</strong>
+																	Do not accept a connection request from a socket ID that you do not recognize.</p>
+																<p>The example accepts a connection with a placeholder socket ID of
+																	<code>EXPECTED_SOCKET_ID_HERE</code>. Note that you must replace this with the actual name of the socket ID that you are accepting the peer-to-peer connection for:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the socket ID is the one you expect for the connection, retrieve the P2P manager pointer from the client data:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<code>EOS_P2P_AcceptOptions</code>
+																	data structure to hold the options for accepting the incoming peer-to-peer connection. In the example, it’s called
+																	<code>AcceptConnectionOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_AcceptConnection()</code>
+																	function to accept the incoming peer-to-peer connection request from the player.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>A reference to the options for accepting the incoming peer-to-peer connection.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the connection request was successfully accepted. If the connection is successful, notify the player that they have accepted the connection request. In the example, the console prints a success statement that includes the Product User ID of the remote player that accepted the connection request and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the EOS API
+																	<a href="/docs/api-ref/functions/eos-product-user-id-to-string">
+																		<code>EOS_ProductUserId_ToString()</code>
+																		function</a>
+																	to convert the EOS Product User ID to a string.</p>
+															</li>
+															<li>
+																<p>If the connection is not successful, handle any errors. In the example, the console prints an error statement that includes the Product User ID of the remote player that failed to accept the connection request and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-implement-your-close-connection-function">Step D: Implement Your Close Connection Function</h3>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement your function to close a P2P connection between players. In the example, the function is called
+																	<code>CloseConnectionExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<code>EOS_P2P_CloseConnectionOptions</code>
+																	data structure to hold the options to close the P2P connection. In the example, it’s called
+																	<code>CloseConnectionOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_CloseConnection()</code>
+																	function to the P2P connection between the players.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>A reference to the options for closing the P2P connection.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the connection was closed successfully. If the connection is closed, notify the player:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the connection is not successful, handle any errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>You can establish peer-to-peer connections between your players with the P2P Interface. You can call
+								<code>P2PManager::RequestConnectionExample()</code>
+								to send a P2P connection request from one player to another. When the player receives an incoming P2P connection request in the
+								<code>P2PManager::OnConnectionRequestNotification</code>
+								callback function, the callback automatically accepts the incoming connection request from the remote player if it matches the expected socket ID. You can call
+								<code>P2PManager::CloseConnectionExample()</code>
+								to close an open P2P connection between players.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-accept-connection">
+										<code>EOS_P2P_AcceptConnection</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-accept-connection-options">
+												<code>EOS_P2P_AcceptConnectionOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/callbacks/eos-p-2-p-on-incoming-connection-request-callback">
+										<code>EOS_P2P_OnIncomingConnectionRequestCallback()</code>
+										function</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-close-connection">
+										<code>EOS_P2P_CloseConnection</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-close-connection-options">
+												<code>EOS_P2P_CloseConnectionOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#establish-peer-to-peer-connections">Establish Peer-to-Peer Connections</a>
+								</li>
+								<li>
+									<a href="#step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-request-connection-function">Step B: Implement Your Request Connection Function</a>
+								</li>
+								<li>
+									<a href="#step-c-modify-your-on-connection-request-notification-callback-function-to-accept-an-incoming-connection-request">Step C: Modify Your On Connection Request Notification Callback Function to Accept an Incoming Connection Request</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-close-connection-function">Step D: Implement Your Close Connection Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

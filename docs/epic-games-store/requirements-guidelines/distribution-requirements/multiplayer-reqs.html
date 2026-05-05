@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,37 +14,69 @@
 			<h1>Cross-Platform Multiplayer Guidelines</h1>
 			<h2>Guidelines for the cross-platform multiplayer requirement.</h2>
 			<div>
-				<div>17 mins to read</div>
+				<div>18 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="overview">Overview</h2>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Mobile Early Adopter:</strong>
+						If you are in the Mobile Early Adopter program, go to the
+						<a href="/docs/epic-games-store/mobile-early-adopter/requirements-and-guidelines#cross-platform-multiplayer">Mobile Early Adopter—Requirements and Guidelines—Cross-Platform Multiplayer</a>
+						documentation for guidance.</p>
+				</div>
 			</div>
-			<p>Products with online multiplayer functionality must support crossplay across all PC storefronts in order to be distributed on the Epic Games Store. This requirement ensures users who purchase a multiplayer
-				<span>
-					<span aria-label="tooltip product" tabindex="0" role="button">product</span>
-				</span>
-				on the Epic Games Store can easily connect with friends and other players, regardless of where purchases were made.</p>
-			<p>You may use your preferred solution for crossplay, such as the free Epic Online Services (EOS) crossplay functionality, your own method, or any third-party system that works across PC storefronts. Crossplay with other non-PC platforms (i.e., consoles) is optional but encouraged.</p>
-			<p>The sections below provide guidelines, additional details, and test cases to help you meet this requirement and prepare your product for release on the Epic Games Store.</p>
-			<div>
-				<p>To allow sufficient time for testing and verification, partners must provide a crossplay enabled build at least
-					<strong>four weeks prior to any public launch</strong>.</p>
-			</div>
+			<p>The sections below provide guidelines, additional details, and test cases to help you meet multiplayer requirements and prepare your product for release on the Epic Games Store. Where supported, multiplayer functionality on the Epic Games Store must be at parity with other PC storefronts.</p>
 			<div>
 				<h2 id="crossplay-requirements">Crossplay Requirements</h2>
 			</div>
-			<p>The sections below outline the elements that comprise the cross-platform multiplayer requirement. Where supported, multiplayer functionality on Epic Games Store must be at parity with other PC storefronts.</p>
+			<div>
+				<p>Products with online multiplayer functionality must support crossplay across all PC storefronts to be distributed on the Epic Games Store. This requirement ensures users who purchase a multiplayer product on the Epic Games Store can easily connect with friends and other players, regardless of where they made the purchase. This includes products in an Early Access, Demo, or Open Beta stage.</p>
+				<br>
+				<p>Your game must meet the following requirements for crossplay:</p>
+				<ul>
+					<li>Your game must enable crossplay for matchmaking by default.
+						<ul>
+							<li>You must provide a crossplay-enabled build
+								<strong>at least four weeks prior to any public launch</strong>.
+								<ul>
+									<li>This allows sufficient time for testing and verification.</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Your game must allow players who opt out of crossplay to enable crossplay again in the in-game settings.</li>
+					<li>Your game must not permanently lock players out of crossplay functionality if they opt out of crossplay.</li>
+				</ul>
+				<br>
+				<p>
+					<strong>Crossplay exemptions:</strong>
+				</p>
+				<ul>
+					<li>
+						<strong>Mobile Early Adopter:</strong>
+						Crossplay is not required for products on mobile (iOS, Android).
+						<ul>
+							<li>Documentation:
+								<a href="/docs/epic-games-store/mobile-early-adopter/requirements-and-guidelines#cross-platform-multiplayer">Mobile Early Adopter—Requirements and Guidelines &gt; Cross-Platform Multiplayer</a>.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>macOs</strong>: macOS products are currently exempt from this requirement because this operating system is not supported by the Epic Online Services (EOS) Social Overlay.</li>
+				</ul>
+			</div>
+			<br>
 			<p>
 				<strong>Epic Online Services for Cross-Platform Multiplayer Support</strong>
 			</p>
-			<p>While you may use Epic Online Services (EOS) to support crossplay, EOS is not required. You may choose any third-party solution providers or in-house solutions to ensure your product meets the below requirements.</p>
+			<p>You can use your preferred solution for crossplay, such as the free Epic Online Services (EOS) crossplay functionality, any third-party system that works across PC storefronts, or your own method. Crossplay with other non-PC platforms (for example, game consoles) is optional but encouraged.</p>
 			<ul>
-				<li>Learn more about
-					<a href="https://dev.epicgames.com/services">Epic Online Services</a>.</li>
+				<li>For more information on Epic Online Services, see documentation:
+					<a href="/docs/epic-online-services/eos-overview">Epic Online Services (EOS) Overview</a>.</li>
 				<li>If you have any questions about the setup for your multiplayer game, contact your Business Development Manager or Technical Account Manager.</li>
 			</ul>
 			<div>
@@ -52,14 +84,32 @@
 			</div>
 			<p>For products that support matchmaking, players must be able to match-make across storefront boundaries by default. Specifically:</p>
 			<ul>
-				<li>All Steam and Epic Games Store sessions must be listed together.</li>
+				<li>You must list all Steam and Epic Games Store sessions together, so they have equal visibility.
+					<ul>
+						<li>This gives the player the option to join the session on the platform they prefer.</li>
+						<li>You can use Epic Online Services or another cross-platform session solution to do this.</li>
+					</ul>
+				</li>
 				<li>An Epic Games Store player can join a Steam or Epic Games Store session listed in the multiplayer menu.</li>
 				<li>A Steam player can join a Steam or Epic Games Store session listed in the multiplayer menu.</li>
 			</ul>
 			<div>
 				<h3 id="friends-based-multiplayer">Friends-Based Multiplayer</h3>
 			</div>
+			<p>
+				<strong>Mobile Early Adopter:</strong>
+				Friends-based multiplayer through Epic Online Services (EOS Social Overlay) is not available for products on mobile (iOS, Android). Go to the
+				<a href="/docs/epic-games-store/mobile-early-adopter/introduction#mobile-limitations">Mobile Early Adopter—Introduction—Mobile (iOS, Android) Limitations of the Mobile Adopter Program</a>
+				documentation for guidance.</p>
 			<p>For products that support friends-based multiplayer, players must be able to view and interact with friends across platform boundaries. Examples of friends-based multiplayer functionality include but are not limited to joining sessions via presence, asynchronous friends-based play, and other friends-based interactions.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						The EOS Social Overlay is not currently available on mobile (iOS, Android).</p>
+				</div>
+			</div>
 			<div>
 				<h3 id="invites">Invites</h3>
 			</div>
@@ -76,23 +126,22 @@
 			</p>
 			<p>If you choose to use Epic Games accounts as the cross-platform account system, we recommend the following flow on Steam to provide an optimal experience to users:</p>
 			<ol>
-				<li>Use a persistent setting in your product to toggle cross-platform multiplayer functionality (e.g.,
-					<em>Enable cross-platform invites to friends using an Epic Games account</em>). By default, this crossplay setting should not have a known true/false value so that users must provide their selection. Additionally, you must implement crossplay in your product using Epic Account Services.</li>
-				<li>Once implemented, users should be prompted upon first launch of your product to enable cross-platform multiplayer by linking their Epic Games account (e.g.,
-					<em>Would you like to enable cross-platform invites to friends using an Epic Games account? You can update this preference at any time in the Settings menu.</em>)
+				<li>Use a setting in your product to toggle cross-platform game invite multiplayer functionality (e.g.,
+					<em>Enable cross-platform invites to friends using an Epic Games account</em>). By default, this crossplay setting should not have a set true/false value so that users must provide their selection. Matchmaking and lobby codes must always connect players across PC storefronts by default.</li>
+				<li>Once implemented, users should be prompted upon first launch of your product to enable additional social features (e.g.,
+					<em>Would you like to enable cross-platform invites to friends using an Epic Games account? You can update this preference at any time in the Settings menu.</em>).
 					<ul>
-						<li>If a user selects
-							<strong>No</strong>, save the
-							<code>False</code>
-							value to the crossplay setting. Then, continue as if cross-platform invites have not been implemented.</li>
 						<li>If a user selects
 							<strong>Yes</strong>, save the
 							<code>True</code>
-							value to the crossplay setting. Then, proceed through the
-							<a href="/docs/epic-account-services/auth/auth-interface#external-account-authentication">Epic Games account linking flow</a>.</li>
+							value. Then, proceed through the
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference#external-account-authentication">Epic Games account linking flow</a>.</li>
+						<li>If a user selects
+							<strong>No</strong>, save the value as
+							<code>False</code>. Then, proceed with crossplay matchmaking enabled without EOS Accounts and Social features.</li>
 					</ul>
 				</li>
-				<li>On subsequent launches, detect the value of the crossplay setting (i.e.,
+				<li>On subsequent launches, detect the value of the account linking setting (i.e.,
 					<em>true</em>
 					or
 					<em>false</em>) and take the appropriate action:
@@ -100,13 +149,22 @@
 						<li>If
 							<strong>True</strong>, automatically log in the user during initial boot.</li>
 						<li>If
-							<strong>False</strong>, skip the Epic Games account authentication.</li>
+							<strong>False</strong>, skip the Epic Games account authentication.
+							<ul>
+								<li>We recommend that you don't allow players to link to an Epic Games account after the first login as it might lead to data loss.</li>
+							</ul>
+						</li>
 					</ul>
 				</li>
-				<li>In your product's UI where direct direct session invites between friends are supported, use the
-					<a href="/docs/game-services/eos-platform-interface#native-platform-integration">EOS Native Platform Integration</a>
+				<li>In your product's UI where direct session invites between friends are supported, use the
+					<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface#native-platform-integration">EOS Native Platform Integration</a>
 					to display Steam and Epic Games friends together in the social overlay.
 					<ul>
+						<li>
+							<p>
+								<strong>Note:</strong>
+								The EOS Social Overlay is not currently available on mobile (iOS, Android).</p>
+						</li>
 						<li>
 							<strong>Alternative</strong>: Provide separate options to send Steam friend invites (through the Steam API/overlay) and Epic Games friend invites (through the EOS API/overlay).</li>
 					</ul>
@@ -119,7 +177,11 @@
 			<p>Invitation systems largely depend on the player’s social graph to provide addressable users as targets for the invitation. The Epic Games Store recommends the following options for crossplay social graphs:</p>
 			<ul>
 				<li>
-					<a href="#epic-social-graph">Epic Social Graph</a>: Uses Epic Account Services-based social graph as the primary social graph across all PC storefronts.</li>
+					<a href="#epic-social-graph">Epic Social Graph</a>: An Epic account ecosystem graph. It uses EOS Epic Account Services to be the primary social graph across all PC storefronts.
+					<p>
+						<strong>Note:</strong>
+						The EOS Social Overlay is not currently available on mobile (iOS, Android).</p>
+				</li>
 				<li>
 					<a href="#publisher-social-graph">Publisher Social Graph</a>: Uses a title-, developer-, or publisher-based social graph as the primary social graph across all PC storefronts.</li>
 				<li>
@@ -134,41 +196,65 @@
 			<div>
 				<h3 id="epic-social-graph">Epic Social Graph</h3>
 			</div>
-			<p>Epic Account Services are designed to work across platforms to provide a consistent developer and user experience. Learn more about
-				<a href="https://dev.epicgames.com/services">Epic Online Services and Epic Account Services</a>.</p>
+			<p>The Epic Social Graph uses EOS Epic Account Services to access the Epic accounts ecosystem. EOS Epic Account Services and the Epic accounts ecosystem also power the EOS Accounts and Social group of services. EOS Epic Account Services works across games platforms to provide a consistent developer and user experience.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/introduction">EOS &gt; Accounts and Social Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/epic-account-services-intro">EOS &gt; EOS Epic Account Services Introduction</a>
+				</li>
+			</ul>
 			<p>
 				<strong>Pros</strong>:</p>
 			<ul>
 				<li>
-					<strong>Large social graph</strong>: The Epic Account Services have more than 350 million accounts and over 2.2 billion friend connections</li>
+					<strong>Large social graph</strong>: The graph uses EOS Epic Account Services to access the Epic accounts ecosystem, which consists of nearly a billion players across multiple platforms and stores.</li>
 				<li>
 					<strong>Single identity on all platforms</strong>: Makes development and support easier across platforms for developers. Users maintain a single online identity and friends list across titles and platforms.</li>
 				<li>
-					<strong>No blockers</strong>: Epic Account Services are supported on all major platforms, storefronts, engines, etc.</li>
+					<strong>No blockers</strong>: Epic Account Services are supported on all major platforms, storefronts, and engines.</li>
 			</ul>
 			<p>
 				<strong>Cons</strong>:</p>
 			<ul>
 				<li>
-					<strong>A change for existing users</strong>: for titles that have previously ​shipped using other social graphs as their primary, updating to Epic Account Services as the primary social graph may be disruptive. In these cases, we recommend using
-					<a href="#bifurcated-social-graph">
-						<strong>bifurcated social graphs</strong>
-					</a>.</li>
+					<strong>A change for existing users</strong>:  For products that have previously ​shipped using other social graphs as their primary social graph, updating to the Epic Social Graph as the primary social graph might be disruptive. In these cases, we recommend using bifurcated social graphs (see
+					<a href="#bifurcated-social-graph">Bifurcated Social Graph</a>
+					on this page).</li>
 			</ul>
 			<p>
 				<strong>Additional Options</strong>:</p>
 			<ul>
 				<li>
-					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publishers or platform-based social graphs where applicable, to display additional friends lists in-game</li>
+					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publishers or platform-based social graphs where applicable, to display additional friends lists in-game.</li>
 				<li>
-					<strong>Suggested friends</strong>: Optionally link to another account to suggest Epic friends to another social graph</li>
+					<strong>Suggested friends</strong>: Optionally link to another account to suggest Epic friends to another social graph.</li>
 				<li>
-					<strong>Reciprocal friends</strong>: Optionally link to another account to have Epic Account Services receive friend suggestions from another social graph</li>
+					<strong>Reciprocal friends</strong>: Optionally link to another account to have Epic Account Services receive friend suggestions from another social graph.</li>
 			</ul>
 			<div>
 				<h4 id="typical-tech-stack">Typical Tech Stack</h4>
 			</div>
-			<p>Typically, a game client leveraging Epic Account Services for the primary social graph would also use EOS services. This is not a requirement.</p>
+			<p>Typically, a game client leveraging the Epic Social Graphs for the primary social graph would also use EOS services. EOS services are are follows:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social">Accounts and Social (powered by EOS Epic Account Services)</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer">Multiplayer</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data">Player and Game Data</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety">Trust and Safety</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals">EOS Fundamentals</a>
+				</li>
+			</ul>
 			<table>
 				<thead>
 					<tr>
@@ -199,8 +285,8 @@
 						<td>
 							<strong>Social</strong>
 						</td>
-						<td align="center">Epic Account Services</td>
-						<td align="center">Epic Account Services</td>
+						<td align="center">EOS Epic Account Services</td>
+						<td align="center">EOS Epic Account Services</td>
 						<td align="center">Not applicable</td>
 					</tr>
 					<tr>
@@ -222,40 +308,36 @@
 			</p>
 			<ul>
 				<li>
-					<strong>Storefront equality</strong>: By default, when using a publisher social graph as the primary social graph, PC storefronts are treated equally</li>
+					<strong>Storefront equality</strong>: By default, when using a publisher social graph as the primary social graph, PC storefronts are treated equally.</li>
 				<li>
-					<strong>Single identity on all platforms</strong>: Makes development and support easier across platforms for developers. Users maintain a single online identity, no matter where they play</li>
+					<strong>Single identity on all platforms</strong>: Makes development and support easier across platforms for developers. Users maintain a single online identity, no matter where they play.</li>
 			</ul>
 			<p>
 				<strong>Cons</strong>
 			</p>
 			<ul>
 				<li>
-					<strong>Expensive</strong>: Not all developers/publishers have the capability to implement, maintain, and constantly draw users to their own social graphs</li>
+					<strong>Expensive</strong>: Not all developers/publishers have the capability to implement, maintain, and constantly draw users to their own social graphs.</li>
 				<li>
-					<strong>Small(er) social graphs</strong>: Publisher-focused social graphs tend to have fewer users and social connections between those users, than social graphs spanning multiple publishers</li>
+					<strong>Small(er) social graphs</strong>: Publisher-focused social graphs tend to have fewer users and social connections between those users, than social graphs spanning multiple publishers.</li>
 				<li>
-					<strong>Account linking requirements</strong>: Users may get confused if they purchase a product with one identity, but then play that product with a separate identity and have a friends list that does not match the platform/storefront’s friends list</li>
+					<strong>Account linking requirements</strong>: Users may get confused if they purchase a product with one identity, but then play that product with a separate identity and have a friends list that does not match the platform/storefront’s friends list.</li>
 			</ul>
 			<p>
 				<strong>Additional Options</strong>
 			</p>
 			<ul>
 				<li>
-					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publisher or platform social graphs where and when available, to display additional friends lists in-game</li>
+					<strong>Integrated friends</strong>: Optionally link with other social graphs, including other publisher or platform social graphs where and when available, to display additional friends lists in-game.</li>
 				<li>
-					<strong>Suggested friends</strong>: Optionally link to Epic Account Services to suggest Epic friends to the publisher social graph</li>
+					<strong>Suggested friends</strong>: Optionally link to EOS Epic Account Services to suggest Epic friends to the publisher social graph.</li>
 				<li>
-					<strong>Reciprocal friends</strong>: Optionally have Epic Account Services receive friend suggestions from the publisher social graph</li>
+					<strong>Reciprocal friends</strong>: Optionally have EOS Epic Account Services receive friend suggestions from the publisher social graph.</li>
 			</ul>
 			<div>
 				<h4 id="typical-tech-stack-1">Typical Tech Stack</h4>
 			</div>
-			<p>Typically, a game client leveraging their publisher
-				<span>
-					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
-				</span>
-				for the primary social graph across storefronts also uses their own game services. They may also have their own storefront. This is not required.</p>
+			<p>Typically, a game client leveraging their publisher account for the primary social graph across storefronts also uses their own game services. They may also have their own storefront. This is not required.</p>
 			<table>
 				<thead>
 					<tr>
@@ -350,7 +432,7 @@
 			<div>
 				<h4 id="typical-tech-stack-2">Typical Tech Stack</h4>
 			</div>
-			<p>Typically, a game client leveraging a bifurcated social graph across storefronts would use a cross-platform set of multiplayer services (either their own in-house services, EOS, or another third-party solution).An in-house solution is shared for illustrative purposes in the table below. This is not a requirement.</p>
+			<p>Typically, a game client leveraging a bifurcated social graph across storefronts would use a cross-platform set of multiplayer services (either their own in-house services, EOS, or another third-party solution). An in-house solution is shared for illustrative purposes in the table below. This is not a requirement.</p>
 			<table>
 				<thead>
 					<tr>
@@ -381,8 +463,8 @@
 						<td>
 							<strong>Social</strong>
 						</td>
-						<td align="center">Epic Account Services; Steam (optional link - not available yet)</td>
-						<td align="center">Steam; Epic Account Services (optional link)</td>
+						<td align="center">EOS Epic Account Services; Steam (optional link - not available yet)</td>
+						<td align="center">Steam; EOS Epic Account Services (optional link)</td>
 						<td align="center">Not applicable</td>
 					</tr>
 					<tr>
@@ -419,7 +501,7 @@
 			</p>
 			<ol>
 				<li>Have one or more players launch the product on the Epic Games Store.</li>
-				<li>Have one or more players launch the product on another storefront (e.g., Steam).</li>
+				<li>Have one or more players launch the product on another storefront (such as Steam).</li>
 				<li>If the product has a server browser:
 					<ul>
 						<li>Have one player on the Epic Games Store create a game.</li>
@@ -442,16 +524,18 @@
 				<li>A player on another PC platform can join a product hosted via Epic Games Store or another PC platform via server browser/matchmaking.</li>
 			</ul>
 			<p>
-				<strong>Pass Scenarios</strong>
+				<strong>Pass Scenario</strong>
 			</p>
 			<ul>
-				<li>Players across storefronts can create and join the same pool of multiplayer sessions by default.</li>
+				<li>Players across storefronts are placed in the same shared matchmaking or lobby pool by default. Players can opt out, but can always re-enable crossplay with an in-game setting.</li>
 			</ul>
 			<p>
-				<strong>Fail Scenarios</strong>
+				<strong>Fail Scenario</strong>
 			</p>
 			<ul>
-				<li>Players do not join the same pool of multiplayer sessions after completing account linking and must set additional options to enter gameplay.</li>
+				<li>Players do not join the same pool of multiplayer sessions across storefronts by default.
+					<strong>Note:</strong>
+					Crossplay must connect players automatically unless they explicitly toggle it off in-game.</li>
 			</ul>
 			<div>
 				<h3 id="game-session-invites">Game Session Invites</h3>
@@ -462,8 +546,8 @@
 			</p>
 			<ol>
 				<li>Have one or more players launch the product on the Epic Games Store.</li>
-				<li>Have one or more players launch the product on another storefront (e.g., Steam).</li>
-				<li>Create friend relationships between two or more players across storefronts through any means the product supports (ie. Epic Games accounts, Discord, custom accounts, etc.).</li>
+				<li>Have one or more players launch the product on another storefront (such as Steam).</li>
+				<li>Create friend relationships between two or more players across storefronts through any means the product supports (for example Epic Games accounts, Discord, and custom accounts).</li>
 				<li>Have one player send a session invite to a player on another storefront.</li>
 			</ol>
 			<p>
@@ -488,30 +572,27 @@
 				<li>Product supports direct invites, but friends are displayed in separate per-storefront lists.</li>
 			</ul>
 			<div>
-				<h3 id="epic-account-services">Epic Account Services</h3>
+				<h3 id="epic-online-services-eos-crossplay">Epic Online Services (EOS) Crossplay</h3>
 			</div>
-			<p>If your product uses
-				<a href="/docs/epic-account-services">Epic Account Services</a>
-				to provide crossplay functionality, use the following checklist to validate the handling of all required scenarios. Note that while this is one of the ways you can implement crossplay, it is not required and you are welcome to implement any other solution of your choice.</p>
+			<p>If your product uses Epic Online Services (EOS) to provide crossplay functionality, use the following checklist to validate the handling of all required scenarios. Note that while this is one of the ways you can implement crossplay, it is not required and you are welcome to implement any other solution of your choice.</p>
 			<div>
-				<h4 id="steam-account-linking-and-epic-account-services-consent">Steam account linking and Epic Account Services consent</h4>
+				<h4 id="steam-account-linking-and-eos-epic-account-services-consent">Steam Account Linking and EOS Epic Account Services Consent</h4>
 			</div>
-			<p>If a player who has not yet linked their Steam and Epic Games accounts chooses to authenticate to Epic Account Services using their Steam account, the product should prompt for account linking, then automatically proceed to the Epic Account Service (EAS) consent flow.</p>
+			<p>EOS crossplay is powered by EOS Epic Account Services.</p>
+			<p>If a player who has not yet linked their Steam and Epic Games accounts chooses to authenticate to EOS Epic Account Services using their Steam account, the product should prompt for account linking, then automatically proceed to the Epic Account Service (EAS) consent flow.</p>
 			<p>
 				<strong>Test Steps</strong>
 			</p>
 			<ol>
-				<li>Revoke any existing consent to the product on the Apps tab on the
-					<a href="https://www.epicgames.com/account/connections">Connections</a>
-					page.</li>
-				<li>Unlink any existing Steam account on the Accounts tab on the
-					<a href="https://www.epicgames.com/account/connections">Connections</a>
-					page.</li>
+				<li>Revoke any existing consent to the product on the Apps tab on the Epic Games account Connections page at
+					<a href="https://www.epicgames.com/account/connections">www.epicgames.com/account/connections</a>.</li>
+				<li>Unlink any existing Steam account on the Accounts tab on the Epic Games account  Connections page at
+					<a href="https://www.epicgames.com/account/connections">www.epicgames.com/account/connections</a>.</li>
 				<li>Launch the product on Steam.</li>
 				<li>Trigger the in-game Epic Games account linking flow.
 					<ul>
 						<li>
-							<strong>Note</strong>: To ensure account linking is understood to be optional, account linking and EAS consent should be driven by explicit player action (e.g., through a
+							<strong>Note</strong>: To ensure account linking is understood to be optional, account linking and EOS Epic Account Services consent must be driven by explicit player action (for example through a
 							<em>Link Epic Games account</em>
 							menu option), rather than included as part of the default launch flow.</li>
 					</ul>
@@ -523,13 +604,13 @@
 				<strong>Expected Results</strong>
 			</p>
 			<ul>
-				<li>Steam account linking is requested. Once completed, the Epic Account Services consent flow is initiated.</li>
+				<li>Steam account linking is requested. Once completed, the EOS Epic Account Services consent flow is initiated.</li>
 			</ul>
 			<p>
 				<strong>Pass Scenarios</strong>
 			</p>
 			<ul>
-				<li>Product displays account linking flow, then proceeds to Epic Account Services consent flow.</li>
+				<li>Product displays account linking flow, then proceeds to EOS Epic Account Services consent flow.</li>
 			</ul>
 			<p>
 				<strong>Fail Scenarios</strong>
@@ -540,57 +621,54 @@
 				<li>Logging in fails after the player removes account link, and product does not provide opportunity to restore account linking.</li>
 			</ul>
 			<div>
-				<h4 id="epic-account-services-consent-with-linked-steam-account">Epic Account Services consent with linked Steam account</h4>
+				<h4 id="eos-epic-account-services-consent-with-linked-steam-account">EOS Epic Account Services Consent with Linked Steam Account</h4>
 			</div>
-			<p>If a player has previously connected their Steam and Epic Games accounts, but Epic Account Services (EAS) application consent for the product has not yet been provided, the EOS SDK automatically prompts the user for consent during the Auth Interface Login API call. Through the Epic Games account management page, users can review the list of applications they have given data sharing consent to. On this page, users may also revoke access to any of the applications. If application consent is revoked, the user will be prompted for consent the next time they attempt login within your application.</p>
+			<p>If a player has previously connected their Steam and Epic Games accounts, but EOS Epic Account Services consent for the product has not yet been provided, the EOS SDK automatically prompts the user for consent during the Auth Interface Login API call. Through their Epic Games account management page, players can review the list of applications (such as games, software applications, websites, stores, or platforms) they have given data sharing consent to. On this page, users can also revoke access to any of the applications. If consent is revoked, the user will be prompted for consent the next time they attempt login within your product.</p>
 			<p>
 				<strong>Test Steps</strong>
 			</p>
 			<ol>
-				<li>Ensure a Steam account has been linked on the Accounts tab on the
-					<a href="https://www.epicgames.com/account/connections">Connections</a>
-					page.</li>
-				<li>Revoke any existing consent to the product on the Apps tab on the
-					<a href="https://www.epicgames.com/account/connections">Connections</a>
-					page.</li>
+				<li>Ensure a Steam account has been linked on the Accounts tab on the Epic Games account Connections page at
+					<a href="https://www.epicgames.com/account/connections">www.epicgames.com/account/connections</a>.</li>
+				<li>Revoke any existing consent to the product on the Apps tab on the Epic Games account Connections page at
+					<a href="https://www.epicgames.com/account/connections">www.epicgames.com/account/connections</a>.</li>
 				<li>Launch the product on Steam.</li>
 				<li>Trigger the in-game Epic Games account authentication flow.
 					<ul>
 						<li>
-							<strong>Note</strong>: In cases where the use of Epic Account Services is optional, EAS consent and logging in should be driven by explicit player action (e.g., through a
+							<strong>Note</strong>: In cases where the use of EOS Epic Account Services is optional, EOS Epic Account Services consent and logging in should be driven by explicit player action (for example, through a
 							<em>Link Epic Games account</em>
 							menu option), rather than included as part of the default launch flow.</li>
 					</ul>
 				</li>
-				<li>Complete the subsequent Epic Account Services consent flow.</li>
-				<li>Restart the product and ensure that the player is able to sign into Epic Account Services without being prompted for consent.</li>
+				<li>Complete the subsequent EOS Epic Account Services consent flow.</li>
+				<li>Restart the product and ensure that the player is able to sign into EOS Epic Account Services without being prompted for consent.</li>
 			</ol>
 			<p>
 				<strong>Expected Results</strong>
 			</p>
 			<ul>
-				<li>The Epic Account Services consent flow is initiated using the linked Epic Games account, and the player is not prompted for consent on subsequent launches.</li>
+				<li>The EOS Epic Account Services consent flow is initiated using the linked Epic Games account, and the player is not prompted for consent on subsequent launches.</li>
 			</ul>
 			<p>
 				<strong>Pass Scenarios</strong>
 			</p>
 			<ul>
-				<li>Player is prompted for Epic Account Services application consent on initial launch and is able to proceed with login.</li>
+				<li>Player is prompted for EOS Epic Account Services consent on initial launch and is able to proceed with login.</li>
 			</ul>
 			<p>
 				<strong>Fail Scenarios</strong>
 			</p>
 			<ul>
 				<li>Product skips account linking and proceeds directly to AccountPortal login flow.</li>
-				<li>Logging in fails if player has not provided Epic Account Services consent, and product does not provide opportunity to complete consent flow.</li>
-				<li>Epic Account Services consent flow displays on subsequent product launches after consent has already been provided.</li>
+				<li>Logging in fails if player has not provided EOS Epic Account Services consent, and product does not provide opportunity to complete consent flow.</li>
+				<li>EOS Epic Account Services consent flow displays on subsequent product launches after consent has already been provided.</li>
 			</ul>
 			<div>
 				<h3 id="epic-online-services-redistributable">Epic Online Services Redistributable</h3>
 			</div>
-			<p>Using Epic Online Services, you can integrate in-game user authentication through Epic Account Services and unify social experiences across any PC storefront. As an example of this implementation, users on Steam would be able to see and interact with both their Epic Games friends and Steam friends from a single list using the Social Overlay.</p>
-			<p>In order to enable the Social Overlay in your games on PC storefronts other than the Epic Games Store, the Epic Online Services redistributable must be installed by your product as part of its installation process. To learn more, review
-				<a href="/docs/epic-account-services/crossplay/redistributable-installer">Redistributable Installer</a>. Note that the redistributable installer is not needed for the Epic Games Store and should not be included with the Epic Games Store product build.</p>
+			<p>Using Epic Online Services, you can integrate in-game user authentication through EOS Epic Account Services and unify social experiences across any PC storefront. As an example of this implementation, users on Steam would be able to see and interact with both their Epic Games friends and Steam friends from a single list using the Social Overlay.</p>
+			<p>To enable the Social Overlay in your games on PC storefronts other than the Epic Games Store, your product must install the Epic Online Services redistributable as part of its installation process.</p>
 			<p>
 				<strong>Test Steps</strong>
 			</p>
@@ -598,13 +676,14 @@
 				<li>Ensure
 					<code>EpicOnlineServicesInstaller.exe</code>
 					is included in your game’s build.</li>
-				<li>Ensure your game’s installation is configured to install, and uninstall, the
+				<li>Ensure your game's installation is configured to install, and uninstall,
 					<code>EpicOnlineServicesInstaller.exe</code>
-					as part of your game’s redistributable dependencies (i.e., via
-					<a href="/docs/epic-account-services/crossplay/redistributable-installer#steam-installscript">a Steam installscript.vdf</a>
-					).</li>
-				<li>Ensure the product is launched via the
-					<a href="/docs/epic-account-services/crossplay/redistributable-installer#bootstrapper-application">EOSBootstrapper.exe process</a>.</li>
+					as part of your game's redistributable dependencies. (See an example script in the following documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/crossplay/redistributable-installer#steam-installscript">EOS &gt; Redistributable Installer &gt; Steam Installscript</a>).</li>
+				<li>Ensure the product is launched with the
+					<code>EOSBootstrapper.exe</code>
+					process (documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/crossplay/redistributable-installer#bootstrapper-application">EOS &gt; Redistributable Installer &gt; Bootstrapper Application</a>).</li>
 				<li>Launch the product for the first time after installation.</li>
 				<li>Sign into an Epic Games account in the game.</li>
 				<li>Open the Social Overlay using the
@@ -657,67 +736,69 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#crossplay-requirements">Crossplay Requirements</a>
-					</li>
-					<li>
-						<a href="#matchmaking">Matchmaking</a>
-					</li>
-					<li>
-						<a href="#friends-based-multiplayer">Friends-Based Multiplayer</a>
-					</li>
-					<li>
-						<a href="#invites">Invites</a>
-					</li>
-					<li>
-						<a href="#crossplay-social-graph-options">Crossplay Social Graph Options</a>
-					</li>
-					<li>
-						<a href="#epic-social-graph">Epic Social Graph</a>
-					</li>
-					<li>
-						<a href="#typical-tech-stack">Typical Tech Stack</a>
-					</li>
-					<li>
-						<a href="#publisher-social-graph">Publisher Social Graph</a>
-					</li>
-					<li>
-						<a href="#typical-tech-stack-1">Typical Tech Stack</a>
-					</li>
-					<li>
-						<a href="#bifurcated-social-graph">Bifurcated Social Graph</a>
-					</li>
-					<li>
-						<a href="#typical-tech-stack-2">Typical Tech Stack</a>
-					</li>
-					<li>
-						<a href="#crossplay-test-cases">Crossplay Test Cases</a>
-					</li>
-					<li>
-						<a href="#server-browser--matchmaking">Server Browser / Matchmaking</a>
-					</li>
-					<li>
-						<a href="#game-session-invites">Game Session Invites</a>
-					</li>
-					<li>
-						<a href="#epic-account-services">Epic Account Services</a>
-					</li>
-					<li>
-						<a href="#steam-account-linking-and-epic-account-services-consent">Steam account linking and Epic Account Services consent</a>
-					</li>
-					<li>
-						<a href="#epic-account-services-consent-with-linked-steam-account">Epic Account Services consent with linked Steam account</a>
-					</li>
-					<li>
-						<a href="#epic-online-services-redistributable">Epic Online Services Redistributable</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#crossplay-requirements">Crossplay Requirements</a>
+								</li>
+								<li>
+									<a href="#matchmaking">Matchmaking</a>
+								</li>
+								<li>
+									<a href="#friends-based-multiplayer">Friends-Based Multiplayer</a>
+								</li>
+								<li>
+									<a href="#invites">Invites</a>
+								</li>
+								<li>
+									<a href="#crossplay-social-graph-options">Crossplay Social Graph Options</a>
+								</li>
+								<li>
+									<a href="#epic-social-graph">Epic Social Graph</a>
+								</li>
+								<li>
+									<a href="#typical-tech-stack">Typical Tech Stack</a>
+								</li>
+								<li>
+									<a href="#publisher-social-graph">Publisher Social Graph</a>
+								</li>
+								<li>
+									<a href="#typical-tech-stack-1">Typical Tech Stack</a>
+								</li>
+								<li>
+									<a href="#bifurcated-social-graph">Bifurcated Social Graph</a>
+								</li>
+								<li>
+									<a href="#typical-tech-stack-2">Typical Tech Stack</a>
+								</li>
+								<li>
+									<a href="#crossplay-test-cases">Crossplay Test Cases</a>
+								</li>
+								<li>
+									<a href="#server-browser--matchmaking">Server Browser / Matchmaking</a>
+								</li>
+								<li>
+									<a href="#game-session-invites">Game Session Invites</a>
+								</li>
+								<li>
+									<a href="#epic-online-services-eos-crossplay">Epic Online Services (EOS) Crossplay</a>
+								</li>
+								<li>
+									<a href="#steam-account-linking-and-eos-epic-account-services-consent">Steam Account Linking and EOS Epic Account Services Consent</a>
+								</li>
+								<li>
+									<a href="#eos-epic-account-services-consent-with-linked-steam-account">EOS Epic Account Services Consent with Linked Steam Account</a>
+								</li>
+								<li>
+									<a href="#epic-online-services-redistributable">Epic Online Services Redistributable</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

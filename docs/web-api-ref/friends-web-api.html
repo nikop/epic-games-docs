@@ -1,0 +1,554 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Friends Web API</h1>
+			<h2>RESTful endpoints to retrieve a player's friends list and block list without using the SDK.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>
+				<strong>Note:</strong>
+				This service is also available through the Epic Online Services (EOS) SDK API. See the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">Friends Interface</a>
+				documentation for more information.</p>
+			<p>Use the Friends Web API to retrieve an authenticated player's friends list and block list. You can then use these lists to integrate social features into your game. For example: showing a player's friends list in an in-game UI.</p>
+			<p>The Friends Web API is part of EOS Epic Account Services. To integrate the Friends Web API with your game, you use two EOS interfaces: these are the Auth Interface for player authentication and the Friends Interface for player friends lists and block-list retrieval.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>When you use the Friends Interface, you must first authenticate players. Because the Friends Interface is part of EOS Epic Account Services, you use the Auth interface to do this. The Auth Interface enables player authentication with Epic Games accounts, providing an access token that your game uses in calls to Epic Account Services APIs, such as the Friends Interface, both the SDK Friends Interface and the Friends Web Interface.</p>
+			<p>For information about integrating EOS Auth and acquiring access tokens, see the documentation on requesting an access token:
+				<a href="/docs/web-api-ref/authentication#requesting-an-access-token">Authentication &gt; Requesting an Access Token</a>.</p>
+			<p>
+				<strong>Note</strong>: All Friends Web API endpoints require that the player has already consented to
+				<code>Basic Profile</code>
+				and
+				<code>Friends</code>
+				permissions. Players do this as part of the permission consent flow. (Documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/getting-started#permissions">Get Started &gt; Permissions</a>.)</p>
+			<p>A player's friends list and block list only appear in results if the players on the lists have also consented to the
+				<code>Basic Profile</code>
+				permission.</p>
+			<div>
+				<h2 id="account-id">Account ID</h2>
+			</div>
+			<p>The endpoint to get a player's friends list and block list is:
+				<code>https://api.epicgames.dev/epic/friends/v1/{accountId}</code>
+			</p>
+			<p>You must pass an access token in the Authorization header using Bearer authorization. (Documentation:
+				<a href="/docs/web-api-ref/authentication#requesting-an-access-token">Authentication &gt; Requesting an Access Token</a>).</p>
+			<p>This endpoint supports the following query parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Parameter</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">accountId</td>
+						<td align="left">The unique ID of the account to query.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following snippet shows a sample request to get a player's friends list and block list, where
+				<code>{accountId}</code>
+				is the player's account ID:</p>
+			<p>
+				<strong>Note:</strong>
+				The bearer authorization token
+				<code>accountId</code>
+				must match the
+				<code>accountId</code>
+				in the
+				<code>accountId</code>
+				parameter.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">200</td>
+						<td align="left">Successful request and result retrieval.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 200 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">400</td>
+						<td align="left">Request validation failure (error code: 1040)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 400 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">401</td>
+						<td align="left">Request is not authorized(error codes: 1031).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 401 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">403</td>
+						<td align="left">Operation is forbidden (error codes: 1003, 1056).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 403 responses</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">404</td>
+						<td align="left">Account id is not found (error code: 14011)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 404 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="friends-list">Friends List</h2>
+			</div>
+			<p>The endpoint to get a player's friends list is:</p>
+			<p>
+				<code>https://api.epicgames.dev/epic/friends/v1/{accountId}/friends</code>
+			</p>
+			<p>You must pass an access token in the Authorization header using Bearer authorization. (Documentation:
+				<a href="/docs/web-api-ref/authentication#requesting-an-access-token">Authentication &gt; Requesting an Access Token</a>.)</p>
+			<p>This endpoint supports the following query parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Parameter</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">accountId</td>
+						<td align="left">The unique ID of the account to query.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following snippet shows a sample request to get a player's friends list, where
+				<code>{accountId}</code>
+				is the player's account ID:</p>
+			<p>
+				<strong>Note:</strong>
+				The bearer authorization token
+				<code>accountId</code>
+				must match the
+				<code>accountId</code>
+				in the
+				<code>accountId</code>
+				parameter.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>This endpoint provides the following responses:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">200</td>
+						<td align="left">Successful request and result retrieval.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 200 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">400</td>
+						<td align="left">Request validation failure (error code: 1040).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 400 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">401</td>
+						<td align="left">Request not authorized failure (error code: 1031).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 401 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">403</td>
+						<td align="left">Operation is forbidden (error codes: 1003,1056).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 403 responses:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">404</td>
+						<td align="left">Account ID not found. (error code: 14011).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 404 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="block-list">Block List</h2>
+			</div>
+			<p>The endpoint to get a player's block list is:</p>
+			<p>
+				<code>https://api.epicgames.dev/epic/friends/v1/{accountId}/blocklist</code>
+			</p>
+			<p>You must pass an access token in the Authorization header using Bearer authorization. (Documentation:
+				<a href="/docs/web-api-ref/authentication#requesting-an-access-token">Authentication &gt; Requesting an Access Token</a>.)</p>
+			<p>This endpoint supports the following query parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Parameter</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">accountId</td>
+						<td align="left">The unique ID of the account to query.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following snippet shows a sample request to get a player's block list, where
+				<code>{accountId}</code>
+				is the player's account ID:</p>
+			<p>
+				<strong>Note:</strong>
+				The bearer authorization token
+				<code>accountId</code>
+				must match the
+				<code>accountId</code>
+				in the
+				<code>accountId</code>
+				parameter.</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>This endpoint provides the following responses:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">200</td>
+						<td align="left">Successful request and result retrieval.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 200 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">400</td>
+						<td align="left">Request validation failure (error code: 1040).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 400 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">401</td>
+						<td align="left">Request not authorized failure (error code: 1031).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 401 response:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">403</td>
+						<td align="left">Operation is forbidden (error codes: 1003,1056).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 403 responses:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Response code</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">404</td>
+						<td align="left">Account ID not found (error code: 14011).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Example 404 response :</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#account-id">Account ID</a>
+								</li>
+								<li>
+									<a href="#friends-list">Friends List</a>
+								</li>
+								<li>
+									<a href="#block-list">Block List</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

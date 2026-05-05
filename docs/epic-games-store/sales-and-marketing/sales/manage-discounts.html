@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -11,84 +11,85 @@
 	</div>
 	<section>
 		<div>
-			<h1>Manage Discounts</h1>
-			<h2>Create and manage discount campaigns for your product offers using promo campaigns.</h2>
+			<h1>Discount Management Guide</h1>
+			<h2>Create and manage discount campaigns for your offers using promo campaigns.</h2>
 			<div>
-				<div>
-					<div>
-						<span>Epic Games Store Only</span>
-					</div>
-				</div>
-				<div>20 mins to read</div>
+				<div>26 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<p>In the Developer Portal (Dev Portal), you can create and manage discounts for your offers.  (See the following documentation for guidance on managing offers:
-				<a href="/docs/epic-games-store/store-presence/manage-offers">Manage Offers</a>.)</p>
+			<p>In the Developer Portal, you can create and manage discounts for your offers. This page describes how to create and manage those discounts. For guidance on offer types and how to configure them, see:
+				<a href="/docs/epic-games-store/store-presence/manage-offers">Manage Offers</a>.</p>
 			<div>
 				<h2 id="discount-overview">Discount Overview</h2>
 			</div>
-			<p>When you apply a discount to an offer, the storefront displays strikethrough pricing. This means that the storefront displays the discounted price alongside the regular price to highlight the comparison to users.</p>
-			<p>In the Epic Games Store publishing tools, discounts are defined by two primary elements:</p>
+			<p>When you apply a discount to an offer, the Epic Games Store displays both the list price and the discount price using strikethrough text. This means that the store displays the discounted price alongside the regular price to highlight the comparison to users.</p>
+			<p>When you set up discounts, you must define them with two primary elements:</p>
 			<ul>
 				<li>
 					<strong>Duration</strong>: The length of time the discount is available on the storefront, as determined by its start and end dates/times.</li>
 				<li>
-					<strong>Discount value</strong>: The percentage decrease applied to the offer's base price, such as 25<i>%</i>
-					off.</li>
+					<strong>Discount value</strong>: The percentage decrease applied to the offer's base price, such as 25% off.</li>
 			</ul>
-			<p>In the Dev Portal, you can create two types of discount for your offers:</p>
+			<p>In the Developer Portal, you can create three types of discount for your offers:</p>
 			<ul>
 				<li>
 					<strong>Custom discount</strong>: A discount with a customized campaign name and start and end dates provided by your organization.</li>
 				<li>
 					<strong>Preset campaign</strong>: A discount that is associated with an Epic Games Store sale or an event that includes preset start and end dates (for example, the Epic Games MEGA Sale).</li>
+				<li>
+					<strong>Limited-time free promotion</strong>: A 100% discount with a customized campaign name and start and end dates provided by your organization.</li>
 			</ul>
-			<p>For both types of discount, you can specify the percentage decrease. However, some Epic-led preset campaigns require the discount value to be in a specific range.</p>
+			<p>For custom discounts and preset campaign discounts, you can specify the percentage decrease between 5 and 95. For limited-time free promotions, you cannot customize the percentage decrease. The discount for limited-time free promotion offers is always 100.</p>
 			<div>
 				<h2 id="discount-guidelines">Discount Guidelines</h2>
 			</div>
-			<p>There are guidelines for discounts on the Epic Games Store. When you create a discount, it automatically undergoes validation. This ensures that your discount follows the guidelines before it appears on the storefront.</p>
-			<p>The following discount guidelines apply on a per-product basis for both custom discounts and Epic Games preset campaigns.</p>
+			<p>When you create a discount, the Discount Management Tool automatically reviews it. This ensures that your discount follows the discount guidelines before it appears on the store.</p>
+			<p>The following discount guidelines apply on a per-product basis for custom discounts, Epic Games preset campaigns, and limited-time free promotions.</p>
 			<ul>
-				<li>You can apply only one discount to a product offer in a specific timeframe. In other words, multiple discounts cannot be active for a single offer at the same time.</li>
-				<li>You must submit the discount at least 24 hours before the discount start date and time.</li>
-				<li>The discount rate must be a value between 5<i>%</i>
-					and 95<i>%</i>.</li>
-				<li>Post-launch discounts cannot exceed 30 consecutive days.</li>
-				<li>You cannot discount a product offer for more than 45 days total during any 90-day window.</li>
-				<li>You must allow a minimum 30-day cooldown period between discounts that you apply to a specific product offer.</li>
+				<li>You can apply only one discount to an offer in a specific timeframe. In other words, multiple discounts cannot be active for a single offer at the same time.</li>
+				<li>You cannot edit the list price or the discount rate if the offer currently has a discount.
+					<ul>
+						<li>You can change the list price after the discount ends. However, if less than 30 days have elapsed since the previous discount ended, you cannot set a new list price that is lower than the previous discounted price.</li>
+					</ul>
+				</li>
+				<li>For custom discounts and preset campaigns, the discount rate must be a value between 5% and 95%.</li>
+				<li>For limited-time free promotion discounts, the discount rate is set to 100% and cannot be changed.</li>
+				<li>Post-release discounts cannot exceed 30 consecutive days.</li>
+				<li>You cannot discount an offer for more than 45 days total during any 90-day window.</li>
+				<li>You must allow a minimum 30-day cooldown period between discounts that you apply to a specific offer.</li>
 				<li>You cannot schedule discounts within the following time windows:
 					<ul>
-						<li>Within 30 days of a product’s launch date.</li>
+						<li>Within 30 days of a product's available date.</li>
 						<li>Within 30 days of the end of an introductory offer.</li>
 					</ul>
 				</li>
-				<li>Products in a pre-purchase state can have discounts, but the discounts start together with pre-purchase and end when the product launches. You can schedule a continuation of your pre-purchase discount to covert it to an introductory offer. However, the following guidelines apply:
+				<li>You can change the price after the discount ends. However, you cannot set a new price that is lower than the previous discounted price if less than 30 days have elapsed since the previous discount ended.</li>
+				<li>Products in a pre-purchase state can have discounts, but the discounts start together with pre-purchase and end when the product releases. You can schedule a continuation of your pre-purchase discount to convert it to an introductory offer. However, the following guidelines apply:
 					<ul>
 						<li>The discount must be the same discount value as the introductory offer.</li>
 						<li>You must configure the discount at the same time as you configure the pre-purchase discount. Notify the Epic Games Store team before the pre-purchase discount goes live. To do so, create a private discussion using this support website:
-							<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</li>
+							<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</li>
 					</ul>
 				</li>
 				<li>You cannot schedule a discount for a date within 30 days of a price change. This means that you must schedule discounts for a date at least 31 days after a price change.</li>
 			</ul>
-			<p>The following guidelines apply to any changes you make to region availability for product offers.</p>
+			<p>The following guidelines apply to any changes you make to region availability for offers.</p>
 			<ul>
-				<li>You cannot remove a product offer from availability in a region (block a region) while it has an active discount.</li>
-				<li>You can only remove a product offer from availability in a region (block a region) or add a product offer in a region (unblock a region) while the product offer does not have an active discount.
+				<li>You cannot remove an offer from availability in a region (block a region) while it has an active discount.</li>
+				<li>You can only remove an offer from availability in a region (block a region) or add an offer in a region (unblock a region) when the offer does not have an active discount.
 					<ul>
 						<li>
-							<strong>Exception</strong>: You can unblock a product offer during an active discount if you treat the active discount as an Introductory Offer. (See the section below on
+							<strong>Exception</strong>: You can unblock an offer during an active discount if you treat the active discount as an Introductory Offer. (See the section below on
 							<a href="#pre-purchase-introductory-and-special-offers">Pre-Purchase, Introductory, and Special Offers</a>.)</li>
 					</ul>
 				</li>
-				<li>You must wait 30 days before you can start a discount on your product offer if you change the region availability of your product offer.
+				<li>You must wait 30 days before you can start a discount on your offer if you change the region availability of that offer.
 					<ul>
 						<li>
-							<strong>Note</strong>: You must amend any existing scheduled discount to start 30 days after you change the region availability of a product offer.</li>
+							<strong>Note</strong>: You must update any existing scheduled discount to start 30 days after you change the region availability of an offer.</li>
 						<li>
 							<strong>Exception</strong>: An Introductory Offer does not have to wait 30 days to start. (See the section below on
 							<a href="#pre-purchase-introductory-and-special-offers">Pre-Purchase, Introductory, and Special Offers</a>.)</li>
@@ -98,31 +99,30 @@
 			<div>
 				<h3 id="pre-purchase-introductory-and-special-offers">Pre-Purchase, Introductory, and Special Offers</h3>
 			</div>
-			<p>The Epic Games Store supports two types of offer where you can choose to reduce the purchase price of your product. These areas follows:</p>
+			<p>You can use the following offer types to apply a temporary discount to your product:</p>
 			<ul>
 				<li>Pre-Purchase Offer</li>
 				<li>Introductory Offer</li>
-			</ul>
-			<p>You can also run a Pre-Purchase Offer into an Introductory Offer. This type of offer is as follows:</p>
-			<ul>
 				<li>Special Offer</li>
 			</ul>
-			<p>You can apply these offers to your products based on the criteria below.</p>
+			<p>
+				<strong>Note:</strong>
+				The temporary discounts include “Offer” in their name, but they are a temporary discount and not an Epic Games Store offer. An offer is an item that Epic Games Store users can buy.</p>
+			<p>You can apply these temporary discounts based on the criteria below.</p>
 			<div>
 				<h4 id="pre-purchase-offer">Pre-Purchase Offer</h4>
 			</div>
 			<p>The following criteria apply to this offer:</p>
 			<ul>
-				<li>It is only for products that are not yet launched.</li>
-				<li>It must start when a product’s pre-purchase period starts (it cannot start any earlier than the start date and time of the pre-purchase period) and it must end when the product launches.</li>
-				<li>Its reduction amount must be between 5<i>%</i>
-					and 40<i>%</i>.</li>
+				<li>It is only for products that are not yet released.</li>
+				<li>It must start when a product’s pre-purchase period starts (it cannot start any earlier than the start date and time of the pre-purchase period) and it must end when the product releases.</li>
+				<li>Its reduction amount must be between 5% and 40%.</li>
 			</ul>
 			<p>
 				<strong>Notes</strong>:</p>
 			<ul>
-				<li>Once you have set up your Pre-Purchase Offer, you must change its start and end date if you change your product’s launch date.</li>
-				<li>An offer start date is known as an offer "launch date” in the Developer Portal.</li>
+				<li>When you have set up your Pre-Purchase Offer, you must change its start and end date if you change your product’s available date.</li>
+				<li>An offer start date is known as an offer "available date on the Epic Games Store" (or "available date") in the Developer Portal.</li>
 			</ul>
 			<div>
 				<h4 id="introductory-offer">Introductory Offer</h4>
@@ -130,171 +130,132 @@
 			<p>The following criteria apply to this offer:</p>
 			<ul>
 				<li>It is only for newly released products.</li>
-				<li>It must start at the exact same date and time as the product launch date and time.</li>
-				<li>Its duration cannot exceed seven consecutive days.</li>
-				<li>Its reduction amount must be between 5<i>%</i>
-					and 40<i>%</i>.</li>
-				<li>You must submit an Introductory offer before your product’s launch date or before the start date of any Pre-Purchase Offer you have applied to your product.</li>
+				<li>It must start at the exact same date and time as the product available date and time.</li>
+				<li>Its duration cannot exceed 14 consecutive days.</li>
+				<li>Its reduction amount must be between 5% and 40%.</li>
+				<li>You must submit an Introductory offer before your product's available date or before the start date of any Pre-Purchase Offer you have applied to your product.</li>
 			</ul>
-			<p>For further information, see the following section on this page:
-				<a href="#create-introductory-offer">Create Introductory Offer</a>.</p>
+			<p>For more information, see the following section on this page:
+				<a href="#create-an-introductory-offer">Create Introductory Offer</a>.</p>
 			<p>
 				<strong>Notes</strong>:</p>
 			<ul>
-				<li>Once you have set up your Introductory Offer, you must change its start and end date if you change your product’s launch date.</li>
-				<li>An offer start date is known as an offer "launch date” in the Developer Portal.</li>
+				<li>When you have set up your Introductory Offer, you must change its start and end date if you change your product’s available date.</li>
+				<li>An offer start date is known as an offer "available date on the Epic Games Store" (or "available date") in the Developer Portal.</li>
 			</ul>
 			<div>
 				<h4 id="special-offer">Special Offer</h4>
 			</div>
-			<p>You can run a Pre-Purchase Offer into an Introductory Offer. This is a Special Offer. To do this, you must adhere to the following requirements:</p>
+			<p>You can run a Pre-Purchase Offer into an Introductory Offer. This type of temporary discount is called a Special Offer. To do this, you must follow these requirements:</p>
 			<ul>
 				<li>The Introductory Offer must have the same reduction amount as the Pre-Purchase Offer.</li>
 				<li>You must submit the Introductory Offer before the Pre-Purchase Offer starts.</li>
 			</ul>
 			<div>
-				<h2 id="configure-discounts">Configure Discounts</h2>
+				<h3 id="create-a-custom-discount-or-preset-campaign-discount">Create a Custom Discount or Preset Campaign Discount</h3>
 			</div>
-			<p>You can configure discounts for your product from these pages in the Developer Portal:</p>
-			<ul>
-				<li>The Discount Management Tool page: Create campaign discounts.</li>
-				<li>The Offers page: Apply price reductions to offers.</li>
-			</ul>
-			<div>
-				<h3 id="page-navigation">Page Navigation</h3>
-			</div>
-			<p>To go to the Discount Management Tool page or Offers page in the Developer Portal, follow the steps below:</p>
-			<ol>
-				<li>Go to your product page:
-					<ul>
-						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), from the left navigation, under
-							<strong>Your Products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
-							<strong>Back to organization</strong>
-							before you can do this.)</li>
-					</ul>
-				</li>
-				<li>Once you are in your product page, from the left navigation, click
-					<strong>Epic Games Store</strong>.</li>
-				<li>From the left navigation:
-					<ul>
-						<li>For the Offers page:<br>
-							a. Click
-							<strong>Offers</strong>.</li>
-						<li>For the Discount Management Tool page:<br>
-							a. Click
-							<strong>Promo Campaigns</strong>.<br>
-							b. On the Promo Campaigns page, locate the
-							<strong>Discount Management Tool</strong>
-							tile and click
-							<strong>View</strong>.</li>
-					</ul>
-				</li>
-			</ol>
-			<div>
-				<h3 id="create-and-submit-discounts">Create and Submit Discounts</h3>
-			</div>
-			<div>
-				<h4 id="create-custom-discount-or-preset-campaign-discount">Create Custom Discount or Preset Campaign Discount</h4>
-			</div>
-			<p>In the Developer Portal, you can create both custom discounts and preset campaign discounts for your product offers.</p>
+			<p>In the Developer Portal, you can create both custom discounts and preset campaign discounts for your offers.</p>
 			<ul>
 				<li>Custom discounts allow you to create your own discount campaigns with customized start and end dates. These dates determine when a discount is active on the storefront.</li>
 				<li>Preset campaigns are associated with an Epic Games Store sale or event (for example, the Epic Games MEGA Sale) and include preset start and end dates. These dates cannot be modified.</li>
 			</ul>
-			<p>To be eligible for a discount, a product offer must follow these guidelines:</p>
+			<p>To be eligible for a discount, an offer must follow these guidelines:</p>
 			<ul>
 				<li>It must be in the Live sandbox.</li>
 				<li>It must not be a demo offer.</li>
 				<li>It must not have a base price of $0.</li>
-				<li>It must have a specific launch date assigned. Discounts cannot be created for offers with an estimated or unknown launch date.</li>
+				<li>It must have a specific available date assigned. Discounts cannot be created for offers with an estimated or unknown available date.</li>
+				<li>It must have an artifact uploaded. You cannot create a discount for an offer without an uploaded artifact.</li>
 			</ul>
 			<p>
 				<strong>Note</strong>: Discounts that you apply to offers at the time of their release must meet specific criteria. To learn more, see the
-				<a href="#create-introductory-offer">Create Introductory Offer</a>
+				<a href="#create-an-introductory-offer">Create Introductory Offer</a>
 				section on this page.</p>
 			<p>To create a custom discount or a preset campaign discount, follow the steps below:</p>
 			<ol>
-				<li>
-					<p>In the Developer Portal, go to the Discount Management Tool page. To do this, see the
-						<a href="#page-navigation">Page Navigation</a>
-						section on this page.</p>
-				</li>
-				<li>
-					<p>In the Discount Management Tool page, click
-						<strong>Create Discount</strong>.</p>
-				</li>
-				<li>
-					<p>In the Select Discount Type menu, choose
-						<strong>Custom Discount</strong>
-						or one of the Epic-led preset campaigns.</p>
+				<li>In the Developer Portal, go to the
+					<strong>Discount Management Tool</strong>
+					page. To do this:
 					<ul>
-						<li>
-							<strong>Note</strong>: The discount options listed are for upcoming campaigns only.</li>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Promo Campaigns</strong>.</li>
+						<li>e. On the
+							<strong>Promo Campaigns</strong>
+							page, click
+							<strong>Discount Management Tool</strong>.</li>
 					</ul>
 				</li>
-				<li>
-					<p>In the Custom Discount page's Discount info section, provide the appropriate details for your discount. Ensure the information adheres to our
-						<a href="#discount-guidelines">discount guidelines</a>.</p>
+				<li>At the top right, click
+					<strong>Create discount</strong>.</li>
+				<li>Select
+					<strong>Custom campaign</strong>
+					or
+					<strong>Pre-set campaigns by EGS</strong>.</li>
+				<li>If you selected
+					<strong>Pre-set campaigns by EGS</strong>:
+					<ul>
+						<li>a. Select the campaign you want to enroll in.
+							<ul>
+								<li>Campaigns that are currently running have a green dot next to them. If you cannot enroll in a running campaign (because the campaign ends in less than seven days), the campaign is disabled in the list, and you cannot select it.</li>
+								<li>To find campaigns with specific text in the campaign name, enter that text in the
+									<strong>Search campaigns</strong>
+									box.</li>
+							</ul>
+						</li>
+						<li>b. Click
+							<strong>Next</strong>.</li>
+					</ul>
+				</li>
+				<li>In the
+					<strong>Discount info</strong>
+					section, provide the appropriate details for your discount. Ensure the information adheres to our
+					<a href="#discount-guidelines">discount guidelines</a>.
 					<ul>
 						<li>
-							<strong>Custom Discounts</strong>: Provide the discount name, start date/time, end date/time, and discount value.
+							<strong>Custom Campaigns</strong>: Provide the discount name, start date/time, end date/time, and discount value.
 							<ul>
 								<li>
 									<strong>Note</strong>: To easily identify discounts, we recommend you use a naming convention that clearly conveys the timeframe and content of the discount campaign.<br>
-									Examples: "[Publisher Sale] Epic Games - Spring ‘24" or "[Franchise Sale] Rocket League - Summer ‘24".</li>
+									Examples: "[Publisher Sale] Epic Games - Spring ‘25" or "[Franchise Sale] Rocket League - Summer ‘25".</li>
 							</ul>
 						</li>
 						<li>
-							<strong>Preset campaigns</strong>: Provide the discount value. All other details are provided by Epic Games and cannot be modified.</li>
+							<strong>Preset campaigns by EGS</strong>: Provide the discount value. All other details are provided by Epic Games and cannot be modified.</li>
 					</ul>
 				</li>
-				<li>
-					<p>In the Offers section, select each offer to include in the discount. You can then set the discount value individually per offer or apply the same discount to all selected offers.</p>
+				<li>In the
+					<strong>Offers</strong>
+					section, select every offer you want to include in the discount. You can then set the discount value individually per offer or apply the same discount to all selected offers.
 					<ul>
 						<li>
 							<strong>Individual discounts:</strong>
-							In the Discount
-							<i>%</i>
+							In the
+							<strong>Discount %</strong>
 							column, enter the desired decrease for each selected offer.</li>
 						<li>
-							<strong>Bulk discount</strong>: In the Discount Info section, enter the desired decrease in the Bulk Discount
-							<i>%</i>
-							field. This value is automatically applied to all selected offers.</li>
+							<strong>Bulk discount</strong>: You can apply a discount amount to the selected offers. At the bottom of the table, in
+							<strong>Discount %</strong>, enter the discount amount, then click
+							<strong>Apply</strong>.</li>
 						<li>
-							<strong>Note</strong>: The Offers section only contains offers in your Live sandbox. It does not include any demo-type offers or offers with a base price of $0.
-							<br>
-							The table shows the following fields:
-							<ul>
-								<li>
-									<strong>Launch date</strong>: the start date of the offer.</li>
-								<li>
-									<strong>Offer label</strong>: the current offer state. The states can be any of the following:
-									<ul>
-										<li>
-											<strong>Released</strong>: An offer (that is not a Pre-Purchase Offer) is live on the Epic Games Store.</li>
-										<li>
-											<strong>Coming soon</strong>: An offer (that is not a Pre-Purchase Offer) is set up with a specified start date.</li>
-										<li>
-											<strong>Pre-purchase</strong>: A Pre-Purchase Offer is live on the Epic Games Store. Users can pre-purchase this product before it launches.</li>
-										<li>
-											<strong>Coming soon &amp; Pre-purchase</strong>: A Pre-Purchase Offer is set up with a specified start date.</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
+							<strong>Note</strong>: The
+							<strong>Offers</strong>
+							section only contains offers in your Live sandbox. It does not include any demo-type offers or offers with a base price of $0.</li>
 					</ul>
 				</li>
-				<li>
-					<p>Review the details of your discount to ensure accuracy.</p>
-				</li>
-				<li>
-					<p>Click
-						<strong>Submit</strong>.</p>
+				<li>Review the details of your discount to ensure accuracy.</li>
+				<li>Click
+					<strong>Submit</strong>.
 					<ul>
 						<li>Your discount automatically undergoes validation to ensure that it adheres to our guidelines (see section on this page:
-							<a href="#discount-guidelines">Discount Guidelines</a>). Then, if the discount review process is applicable for your organization, it is automatically sent to the Epic Games Store team for approval. See the
-							<a href="#submit-discounts-for-validation-and-review">Submit Discounts for Validation and Review</a>
-							section on this page for more information.</li>
+							<a href="#discount-guidelines">Discount Guidelines</a>). If the discount review process is successful, it is approved and scheduled by the Discount Management Tool. For more information, see
+							<a href="#discount-validation">Submit Discounts for Validation</a>
+							on this page.</li>
 						<li>If the discount does not adhere to our discount guidelines, a validation error displays at the top of the screen. The Offers section shows error details for each affected offer. Update your discount as needed to resolve the issues, then click
 							<strong>Submit</strong>
 							again.</li>
@@ -303,29 +264,28 @@
 			</ol>
 			<p>When the discount is created, it displays in the table on the Discounts page. Its status is as follows:</p>
 			<ul>
-				<li>If the discount review process is not applicable for your organization, its status is
+				<li>If the discount review process is successful, its status is
 					<em>Published</em>.</li>
-				<li>If the discount review process is applicable for your organization, its status is
-					<em>Queued for review</em>.</li>
+				<li>If the discount review process is unsuccessful, its status is
+					<em>Issues Found</em>.</li>
 			</ul>
 			<p>On the discount start date, the discount goes live on the storefront, and its status is updated to
 				<em>Active</em>.</p>
 			<p>You can edit or delete a discount as needed before the discount's start date.</p>
-			<p>For more information, see
+			<p>For more information, see the
 				<a href="#manage-discounts">Manage Discounts</a>
-				on this page.</p>
+				section on this page.</p>
 			<div>
-				<h4 id="create-introductory-offer">Create Introductory Offer</h4>
+				<h3 id="create-an-introductory-offer">Create an Introductory Offer</h3>
 			</div>
-			<p>An introductory offer is a discount applied to a product offer at the time of the product's release, such as a launch day sale. The product offer must revert to full price no later than seven days after release.</p>
+			<p>An introductory offer is a discount applied to an offer at the time of the product's release, such as a release day sale. The offer must revert to full price no later than 14 days after release.</p>
 			<p>The discount created for an introductory offer must meet the following criteria:</p>
 			<ul>
-				<li>The start date and time of the discount must exactly match the product offer’s launch date and time.</li>
-				<li>The discount rate must be between 5<i>%</i>
-					and 40<i>%</i>.</li>
-				<li>The duration cannot be more than seven days.</li>
+				<li>The start date and time of the discount must exactly match the offer's available date and time.</li>
+				<li>The discount rate must be between 5% and 40%.</li>
+				<li>The duration cannot be more than 14 days.</li>
 			</ul>
-			<p>The product offer receiving the discount must have a specific release date assigned that matches its effective date (for example, the date the product offer becomes purchasable on the storefront). Make a note of this date and time as you need this information to create your introductory offer.</p>
+			<p>The offer receiving the discount must have a specific available date assigned that matches its effective date (for example, the date the offer becomes purchasable on the storefront). Make a note of this date and time because you need this information to create your introductory offer.</p>
 			<p>To create an introductory offer, you need to access three different pages in the Developer Portal:</p>
 			<ul>
 				<li>The Offers page</li>
@@ -337,27 +297,46 @@
 				<strong>Step 1: The Offers Page</strong>
 			</p>
 			<ol>
-				<li>In the Developer Portal, go to the Offers page. To do this, see the
-					<a href="#page-navigation">Page Navigation</a>
-					section on this page.</li>
-				<li>Select the appropriate
-					<span>
-						<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
-					</span>.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Discount Management Tool</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Offers</strong>.</li>
+					</ul>
+				</li>
+				<li>Select the appropriate sandbox.</li>
 				<li>Create a new offer or update an existing offer.</li>
-				<li>Set the offer's Launch Date to the date and time of your product launch. Take note of this date and time because you need this information to create your discount.</li>
+				<li>Set the offer's available date to the date and time of your product release. Take note of this date and time because you need this information to create your discount.</li>
 			</ol>
 			<p>
 				<strong>Step 2: The Release Management Page</strong>
 			</p>
 			<ol>
-				<li>Go to the Release Management page.<br>
-					To do this, from the left navigation in the Developer Portal, select
-					<strong>Release Management</strong>.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Release Management</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>b. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Release Management</strong>.</li>
+					</ul>
+				</li>
 				<li>Promote your offer to the Live sandbox. You must complete this step before you create your discount.
 					<ul>
 						<li>
-							<strong>Note</strong>: The offer will not be visible to users on the storefront until its Early Store Discovery or Launch Date occurs.</li>
+							<strong>Note</strong>: The offer will not be visible to users on the storefront until its viewable date or available date occurs.</li>
 					</ul>
 				</li>
 			</ol>
@@ -365,112 +344,323 @@
 				<strong>Step 3: The Discount Management Tool Page</strong>
 			</p>
 			<ol>
-				<li>
-					<p>Go to the Discount Management Tool page. To do this, see the
-						<a href="#page-navigation">Page Navigation</a>
-						section on this page.</p>
-				</li>
-				<li>
-					<p>Create a new custom discount as follows:</p>
+				<li>In the Developer Portal, go to the
+					<strong>Discount Management Tool</strong>
+					page. To do this:
 					<ul>
-						<li>Set the Start Date and Time to the launch date and time of your offer.</li>
-						<li>Set the End Date and Time to no later than seven days after the start date and time.</li>
-						<li>Set the Discount Rate to a value between 5<i>%</i>
-							and 40<i>%</i>.</li>
-						<li>In the Offers section, select the offer from the steps above under,
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Promo Campaigns</strong>.</li>
+						<li>e. On the
+							<strong>Promo Campaigns</strong>
+							page, click
+							<strong>Discount Management Tool</strong>.</li>
+					</ul>
+				</li>
+				<li>Create a new custom discount as follows:
+					<ul>
+						<li>Set the
+							<strong>Start Date and Time</strong>
+							to the available date and time of your offer.</li>
+						<li>Set the
+							<strong>End Date and Time</strong>
+							to no later than 14 days after the start date and time.</li>
+						<li>Set the
+							<strong>Discount Rate</strong>
+							to a value between 5% and 40%.</li>
+						<li>In the
+							<strong>Offers</strong>
+							section, select the offer from the steps above in
 							<strong>Step 1: The Offers Page</strong>.</li>
 					</ul>
 				</li>
-				<li>
-					<p>Carefully review the details of your discount.</p>
-				</li>
-				<li>
-					<p>Click
-						<strong>Submit</strong>.</p>
+				<li>Carefully review the details of your discount.</li>
+				<li>Click
+					<strong>Submit</strong>.
 					<ul>
-						<li>If any validation errors occur, you must resolve those issues before you can submit the discount again. To learn more, see
-							<a href="#discount-guidelines">discount guidelines</a>
-							on this page.</li>
-						<li>If the discount review process applies for your organization, then the introductory offer goes through the standard validation process. The offer is then automatically sent to the Epic Games Store team for review. To learn more, see
-							<a href="#submit-discounts-for-validation-and-review">Submit Discounts for Validation and Review</a>
-							below.</li>
+						<li>If any validation errors occur, you must resolve those issues before you can submit the discount again. To learn more, see the
+							<a href="#discount-guidelines">Discount Guidelines</a>
+							section on this page.</li>
 					</ul>
 				</li>
 			</ol>
 			<div>
-				<h3 id="submit-discounts-for-validation-and-review">Submit Discounts for Validation and Review</h3>
+				<h3 id="create-a-limited-time-free-promotion">Create a Limited-Time Free Promotion</h3>
 			</div>
-			<p>When you submit your discount, it automatically goes through two processes, in the following order:</p>
+			<p>A limited-time free promotion is a 100% discount applied to an offer for a set time period. Limited-time free promotional offers follow the same requirements as custom discounts or preset campaign discounts. However, you cannot adjust the discount rate for a limited-time free promotion.</p>
+			<p>For more information on discount requirements, schedule limitations, and guidelines, see the
+				<a href="#discount-guidelines">Discount Guidelines</a>
+				section on this page.</p>
+			<p>To be eligible for a limited-time free promotion, an offer must follow these guidelines:</p>
 			<ul>
-				<li>It goes through validation to ensure that it adheres to the Epic Games Store
-					<a href="#discount-guidelines">guidelines</a>.</li>
-				<li>If the discount review process applies to your organization, it goes to the Epic Games Store team for review. The review process typically takes 24 hours (excluding weekends).</li>
+				<li>It must be in the Live sandbox.</li>
+				<li>It must not be a demo offer.</li>
+				<li>It must not have a base price of $0.</li>
+				<li>It must have a specific available date assigned. Discounts cannot be created for offers with an estimated or unknown available date.</li>
+				<li>It must have an artifact uploaded. You cannot create a discount for an offer without an uploaded artifact.</li>
 			</ul>
-			<p>Discounts must pass validation and review before they can become active on the storefront.</p>
-			<p>You can monitor the progress of validation and approval on the Discount Management Tool page of the Dev Portal. The Status column indicates its current position in the workflow, as follows:</p>
-			<ul>
-				<li>
-					<code>Queued for review</code>: Your discount passed validation and is with the Epic Games Store team for review.
+			<p>To create a limited-time free promotion, follow the steps below:</p>
+			<ol>
+				<li>In the Developer Portal, go to the
+					<strong>Discount Management Tool</strong>
+					page. To do this:
 					<ul>
-						<li>This only happens if the discount review process applies to the organization.</li>
-						<li>If the discount review process is not applicable for your organization, then status is updated to Published when your discount passes validation.</li>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Promo Campaigns</strong>.</li>
+						<li>e. On the
+							<strong>Promo Campaigns</strong>
+							page, click
+							<strong>Discount Management Tool</strong>.</li>
 					</ul>
 				</li>
+				<li>At the top right, click
+					<strong>Create discount</strong>.</li>
+				<li>In the
+					<strong>Select Discount Type</strong>
+					menu, choose
+					<strong>Limited-time free promotion</strong>.</li>
+				<li>In the
+					<strong>Limited-time free promotion</strong>
+					menu, provide the appropriate details in the
+					<strong>Discount info</strong>
+					section. You must provide the following details:
+					<ul>
+						<li>Discount name.</li>
+						<li>Start date and time.</li>
+						<li>End date and time.</li>
+					</ul>
+				</li>
+				<li>In the
+					<strong>Offers</strong>
+					section, select each offer to include in the discount.
+					<strong>Note:</strong>
+					You cannot set the discount rate for limited-time free promotions.
+					<strong>Note:</strong>
+					The Offers section only contains offers in your Live sandbox. It does not include any demo-type offers or offers with a base price of $0.</li>
+				<li>The table shows the following fields:
+					<ul>
+						<li>
+							<strong>Available date</strong>: the start date of the offer.</li>
+						<li>
+							<strong>Offer label</strong>: the current offer state. The states can be any of the following:</li>
+						<li>
+							<strong>Released</strong>: An offer (that is not a Pre-Purchase Offer) is live on the Epic Games Store.</li>
+						<li>
+							<strong>Coming soon</strong>: An offer (that is not a Pre-Purchase Offer) is set up with a specified start date.</li>
+						<li>
+							<strong>Pre-purchase</strong>: A Pre-Purchase Offer is live on the Epic Games Store. Users can pre-purchase this product before it releases.</li>
+						<li>
+							<strong>Coming soon &amp; Pre-purchase</strong>: A Pre-Purchase Offer is set up with a specified start date.</li>
+					</ul>
+				</li>
+				<li>Review the details of your discount to ensure accuracy.</li>
+				<li>Click
+					<strong>Submit</strong>. Your discount automatically undergoes validation to ensure that it adheres to our guidelines (see the
+					<a href="#discount-guidelines">Discount Guidelines</a>
+					section on this page.).
+					<ul>
+						<li>If the discount review process is successful, it is approved and scheduled by the Discount Management Tool. For more information, see the
+							<a href="#discount-validation">Submit Discounts for Validation</a>
+							section on this page.</li>
+						<li>If the discount does not adhere to our discount guidelines, a validation error displays at the top of the screen. The
+							<strong>Offers</strong>
+							section shows error details for each affected offer. Update your discount as needed to resolve the issues, then click
+							<strong>Submit</strong>
+							again.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>When the discount is created, it displays in the table on the Discounts page. Its status is as follows:</p>
+			<ul>
+				<li>If the discount review process is successful, its status is
+					<code>Published</code>.</li>
+				<li>If the discount review process is unsuccessful, its status is
+					<code>Issues Found</code>.</li>
+			</ul>
+			<p>On the discount start date, the discount goes live on the storefront, and its status is updated to
+				<code>Active</code>.</p>
+			<p>You can edit or delete a discount as needed before the discount's start date.</p>
+			<p>For more information, see the
+				<a href="#manage-discounts">Manage Discounts</a>
+				section on this page.</p>
+			<div>
+				<h2 id="discount-validation">Discount Validation</h2>
+			</div>
+			<p>When you submit a discount, it automatically goes through validation to ensure that it adheres to the Epic Games Store discount guidelines. For more information, see the
+				<a href="#discount-guidelines">Discount Guidelines</a>
+				section on this page.</p>
+			<p>Discounts must pass validation and review before they can become active on the storefront.</p>
+			<p>You can monitor the progress of validation and approval on the Discount Management Tool page of the Developer Portal. The Status column indicates its current position in the workflow, as follows:</p>
+			<ul>
 				<li>
-					<code>Validation failed</code>
-					The discount did not pass validation. You must take additional action before the discount is sent for review. For more information, see
-					<em>Validation Failed</em>
-					below.</li>
+					<code>Published</code>: The discount passed validation.</li>
+				<li>
+					<code>Validation failed</code>: The discount did
+					<strong>not</strong>
+					pass validation. You must take additional action before the discount is sent for review. For more information, see the
+					<a href="#validation-failed">Validation Failed</a>
+					section on this page.</li>
 			</ul>
 			<p>For more information on statuses, see the
 				<a href="#discount-statuses">Discount Statuses</a>
 				section on this page.</p>
 			<div>
-				<h4 id="validation-failed">Validation Failed</h4>
+				<h3 id="validation-failed">Validation Failed</h3>
 			</div>
 			<p>If your discount has the
 				<code>Validation failed</code>
 				status, follow the steps below to review the validation feedback:</p>
 			<ol>
-				<li>In the Developer Portal, go to the Discount Management Tool page.  To do this, see the
-					<a href="#page-navigation">Page Navigation</a>
-					section on this page.</li>
-				<li>Locate the discount with the
-					<code>Validation failed</code>
-					status.</li>
-				<li>In the discount’s options (<strong>...</strong>) menu, select
-					<strong>View</strong>.</li>
-				<li>Review the provided feedback, then take one of the following actions:
+				<li>In the Developer Portal, go to the
+					<strong>Discount Management Tool</strong>
+					page. To do this:
 					<ul>
-						<li>Click
-							<strong>Edit Discount</strong>
-							and update your discount in accordance with the feedback. Then, resubmit the discount for validation again. and review.</li>
-						<li>If you cannot update your discount to adhere to our guidelines, select
-							<strong>Submit with Issues Found</strong>
-							to escalate your discount to the Epic Games Store team.<br>
-							This option is available only if the discount review process applies to your organization. You should only use this option after you have made reasonable efforts to resolve any issues.</li>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Promo Campaigns</strong>.</li>
+						<li>e. On the
+							<strong>Promo Campaigns</strong>
+							page, click
+							<strong>Discount Management Tool</strong>.</li>
 					</ul>
 				</li>
+				<li>Click the discount with the
+					<code>Validation failed</code>
+					status.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You can filter the list of offers to make it easier to find offers that have failed validation. To do this, at the top left click
+							<strong>Show: All</strong>, then select
+							<strong>Offers with issues</strong>.</li>
+					</ul>
+				</li>
+				<li>View the details of the validation failures and update your discount in accordance with the feedback provided.</li>
+				<li>For preset campaigns, check your offers' date eligibility as follows:
+					<ul>
+						<li>For each offer in the list, the
+							<strong>Date eligibility</strong>
+							column shows whether the offer is allowed to enter the campaign based on the preset campaign's dates, as follows:
+							<ul>
+								<li>If an offer is eligible to enter the preset campaign, the date it will enter the campaign is shown next to a green check. (For more information, see
+									<a href="#date-eligibility-statuses">Date Eligibility Statuses</a>
+									on this page.) You do not need to adjust this offer to enroll it in the campaign.</li>
+								<li>If an offer is eligible to enter the campaign, but it cannot join the campaign at the start, then you need to adjust the date. The earliest possible date it can enter the campaign is shown in yellow. (For more information, see
+									<a href="#date-eligibility-statuses">Date Eligibility Statuses</a>
+									on this page.)
+									<ul>
+										<li>This situation happens if date restrictions prevent the offer joining the campaign at the start. For example, the offer might have been discounted within 30 days of the start of the campaign.</li>
+										<li>In this situation, you can enter the offer into the campaign on the date shown in yellow. To do this:
+											<ul>
+												<li>a. To set the offer's enrollment date to the date shown in yellow, in the
+													<strong>Apply date</strong>
+													dropdown, select
+													<strong>Apply date to this offer</strong>
+													.
+													<ul>
+														<li>You can also apply the date to all offers in the list. This is useful if you want all your offers to enter the campaign at the same time as each other. To do this, in the
+															<strong>Apply Date dropdown</strong>, select
+															<strong>Apply date to all offers</strong>.</li>
+													</ul>
+												</li>
+												<li>b. To change a date back to its initial value when you opened this page, select
+													<strong>Apply Date</strong>
+													&gt;
+													<strong>Revert to default date</strong>.
+													<ul>
+														<li>You can also change all of the dates in the list back to their initial values when you opened the page. To do this, select
+															<strong>Apply Date</strong>
+															&gt;
+															<strong>Revert all dates</strong>.</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>If you cannot enter an offer into the campaign because of date restrictions, the
+									<strong>Date eligibility</strong>
+									column shows
+									<strong>Not eligible</strong>. (For more information, see
+									<a href="#date-eligibility-statuses">Date Eligibility Statuses</a>
+									on this page.)
+									<ul>
+										<li>This situation happens if date restrictions prevent entry into the campaign. For example, a 30-day timeout between discounts might apply.</li>
+										<li>To view details, hold your mouse pointer over the
+											<strong>?</strong>
+											icon.</li>
+										<li>If you want to enter the campaign without this ineligible offer, then you can de-select this ineligible offer and select the other offers.</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>When you have resolved all validation failures, you can resubmit the discount. To do this, at the bottom right, click
+					<strong>Resubmit</strong>.</li>
 			</ol>
-			<p>After you submit the discount, its status updates as follows:</p>
-			<ul>
-				<li>If the discount review process applies to  your organization, it updates to Queued for review, and the discount is routed for review.</li>
-				<li>If the discount review process does not apply to your organization, it updates to Published, and the discount is published to use on the storefront.</li>
-			</ul>
+			<p>After you click
+				<strong>Resubmit</strong>, the discount is validated again. If successful, the discount is published to use on the storefront.</p>
 			<div>
-				<h4 id="after-review">After Review</h4>
+				<h4 id="date-eligibility-statuses">Date Eligibility Statuses</h4>
 			</div>
-			<p>After the Epic Games Store team reviews the discount, its status updates to one of the following:</p>
-			<ul>
-				<li>
-					<code>Published</code>
-					The discount is published and ready to become active on the storefront during its specified time frame.</li>
-				<li>
-					<code>Changes Needed</code>
-					The review identified one or more issues with the discount. You must resolve these issues before you can publish the discount.  Review the feedback comments provided by the Epic Games Store team and update the discount accordingly. Then, resubmit the discount for review again.</li>
-			</ul>
+			<p>The
+				<strong>Date eligibility</strong>
+				column shows the status for each offer, as follows:</p>
+			<p>If an offer is eligible to enter the campaign, the date it will enter the campaign is shown next to a green check:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>Offer eligible: shown with a green check.
+				</figcaption>
+			</div>
+			<p>If an offer is eligible to enter the campaign, but it cannot join the campaign at the start, then the earliest possible date it can enter the campaign is shown in yellow:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>If you cannot enter an offer into the campaign because of date restrictions, the
+				<strong>Date eligibility</strong>
+				column shows
+				<strong>Not eligible</strong>. To view details, hold your mouse pointer over the
+				<strong>?</strong>
+				icon:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
 			<div>
-				<h3 id="upload-bulk-discounts">Upload Bulk Discounts</h3>
+				<h2 id="upload-bulk-discounts">Upload Bulk Discounts</h2>
 			</div>
 			<p>You can create discounts in bulk by filling out and uploading a .csv template provided by Epic Games. With this template, you can create multiple discounts across multiple products with a single file upload.</p>
 			<p>
@@ -483,13 +673,28 @@
 				<li>Step 3. Upload your completed template.</li>
 			</ul>
 			<div>
-				<h4 id="step-1-download-the-template">Step 1. Download the Template</h4>
+				<h3 id="step-1-download-the-template">Step 1. Download the Template</h3>
 			</div>
 			<p>To complete the bulk discount template, follow the steps below:</p>
 			<ol>
-				<li>In the Developer Portal, go to the Discount Management Tool page. To do this, see the
-					<a href="#page-navigation">Page Navigation</a>
-					section on this page.</li>
+				<li>In the Developer Portal, go to the
+					<strong>Discount Management Tool</strong>
+					page. To do this:
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Promo Campaigns</strong>.</li>
+						<li>e. On the
+							<strong>Promo Campaigns</strong>
+							page, click
+							<strong>Discount Management Tool</strong>.</li>
+					</ul>
+				</li>
 				<li>Click
 					<strong>Upload Bulk Discount</strong>.</li>
 				<li>On the Upload Bulk Discount page, select the type of discounts you want to create (for example, custom discounts or an available preset campaign).</li>
@@ -503,7 +708,7 @@
 				</li>
 			</ol>
 			<div>
-				<h4 id="step-2-complete-the-template">Step 2. Complete the Template</h4>
+				<h3 id="step-2-complete-the-template">Step 2. Complete the Template</h3>
 			</div>
 			<p>Open the template. Some of the columns are pre-filled with your data as follows:</p>
 			<ul>
@@ -545,19 +750,33 @@
 							Enter a time in the format HH:MM. Use a 24h format, UTC time zone.</li>
 						<li>
 							<strong>Discount Name:</strong>
-							You can enter any text, except commas. The Discount Name must be unique in the product.</li>
+							You can enter any text, except commas.</li>
 					</ul>
 				</li>
 			</ul>
 			<div>
-				<h4 id="step-3-upload-your-completed-template">Step 3. Upload Your Completed Template</h4>
+				<h3 id="step-3-upload-your-completed-template">Step 3. Upload Your Completed Template</h3>
 			</div>
-			<p>When  you have completed the bulk discount template, upload the file in the Dev Portal. After confirming the information is correct, submit your discounts to the Epic Games Store.</p>
+			<p>When  you have completed the bulk discount template, upload the file in the Developer Portal. After confirming the information is correct, submit your discounts to the Epic Games Store.</p>
 			<ol>
 				<li>
-					<p>In the Developer Portal, go to the Discount Management Tool page. To do this, see the
-						<a href="#page-navigation">Page Navigation</a>
-						section on this page.</p>
+					<p>In the Developer Portal, go to the
+						<strong>Discount Management Tool</strong>
+						page. To do this:</p>
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+						<li>b. Select the correct organization for your product.</li>
+						<li>c. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>d. In the left navigation, click
+							<strong>Epic Games Store</strong>
+							&gt;
+							<strong>Promo Campaigns</strong>.</li>
+						<li>e. On the
+							<strong>Promo Campaigns</strong>
+							page, click
+							<strong>Discount Management Tool</strong>.</li>
+					</ul>
 				</li>
 				<li>
 					<p>Click
@@ -603,23 +822,13 @@
 			<ul>
 				<li>
 					<p>
-						<code>Queued for review</code>
-						Your discount was successfully sent for review. You do not need to take action at this time.</p>
-					<ul>
-						<li>This status only applies if the discount review process applies for your organization.</li>
-					</ul>
+						<code>Published</code>: Your discount was successfully published on the storefront with the discount start date. You do not need to take action at this time.</p>
 				</li>
 				<li>
 					<p>
-						<code>Published</code>
-						Your discount was successfully published on the storefront with the discount start date. You do not need to take action at this time.</p>
-				</li>
-				<li>
-					<p>
-						<code>Validation failed</code>
-						The validation process found one or more issues with the discount. You must resolve these issues and resubmit the discount. See section
-						<a href="#submit-discounts-for-validation-and-review">Submit Discounts for Validation and Review</a>
-						on this page for more information.</p>
+						<code>Validation failed</code>: The validation process found one or more issues with the discount. You must resolve these issues and resubmit the discount. For more information, see the
+						<a href="#discount-validation">Submit Discounts for Validation and Review</a>
+						section on this page.</p>
 					<ul>
 						<li>
 							<strong>Note:</strong>
@@ -628,87 +837,141 @@
 				</li>
 				<li>
 					<p>
-						<code>Error</code>
-						An error occurred during the submission process. Access the View Discount page to review the error details.</p>
+						<code>Error</code>: An error occurred during the submission process. Access the View Discount page to review the error details.</p>
 				</li>
 			</ul>
 			<div>
-				<h3 id="manage-discounts">Manage Discounts</h3>
+				<h3 id="troubleshoot-bulk-discounts">Troubleshoot Bulk Discounts</h3>
 			</div>
-			<p>See the Discount Management Tool page to review your upcoming discounts, monitor their statuses, and edit and delete discounts. To do this, see the
-				<a href="#page-navigation">Page Navigation</a>
-				section on this page.</p>
+			<p>If your Bulk Upload
+				<code>.CSV</code>
+				export does not look as expected, or you get errors when you try to import the
+				<code>.CSV</code>
+				file into the Discount Management Tool, you might have a problem with regional comma-separator characters.</p>
+			<p>To fix this issue:</p>
+			<ol>
+				<li>Change your device’s regional setting from using semicolon (<code>;</code>) to using comma (<code>,</code>).
+					<ul>
+						<li>For information, see the documentation for your device's operating system.</li>
+					</ul>
+				</li>
+				<li>Download the
+					<code>.CSV</code>
+					again.</li>
+				<li>Open the
+					<code>.CSV</code>
+					file. It should look like an organized table. If you open it in a spreadsheet application, such as Microsoft Excel, then you should see the content laid out in separate columns.</li>
+				<li>Update the
+					<code>.CSV</code>
+					file according to your discounting plan.
+					<ul>
+						<li>For guidance, see documentation Manage Discounts–<a href="#upload-bulk-discounts">Upload Bulk Discounts</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>Save the
+					<code>.CSV</code>
+					file.</li>
+				<li>Upload the
+					<code>.CSV</code>
+					into the Discount Management Tool.</li>
+				<li>Follow the on-screen instructions to complete your submission.</li>
+			</ol>
+			<p>
+				<strong>Note:</strong>
+				For guidelines on how to format your
+				<code>.CSV</code>
+				file, see
+				<a href="#csv-file-recommendations">.CSV file recommendations</a>
+				on this page.</p>
 			<div>
-				<h4 id="discount-statuses">Discount Statuses</h4>
+				<h3 id="csv-file-recommendations">.CSV file recommendations</h3>
+			</div>
+			<ul>
+				<li>We recommend that you use Excel to edit bulk discount
+					<code>.CSV</code>
+					files.</li>
+				<li>In the
+					<code>.CSV</code>, use the following date and time formats:
+					<ul>
+						<li>For start and end times, use the 24-hour clock format (<code>00:00 - 24:00</code>).</li>
+						<li>For dates, use the structure
+							<code>YYYY-MM-DD</code>.
+							<ul>
+								<li>If you don't see this format when you open the .CSV, change the format of the date columns to
+									<code>YYYY-MM-DD</code>.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="manage-discounts">Manage Discounts</h2>
+			</div>
+			<p>Use the
+				<strong>Discount Management Tool</strong>
+				page in the Developer Portal to review your upcoming discounts, monitor their statuses, and edit and delete discounts.</p>
+			<p>To go to the
+				<strong>Discount Management Tool</strong>
+				page:</p>
+			<ol>
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+				<li>Select the correct organization for your product.</li>
+				<li>In the left navigation, under
+					<strong>Your products</strong>, click the name of your product.</li>
+				<li>In the left navigation, click
+					<strong>Epic Games Store</strong>
+					&gt;
+					<strong>Promo Campaigns</strong>.</li>
+				<li>Select
+					<strong>Discount Management Tool</strong>.</li>
+			</ol>
+			<div>
+				<h3 id="discount-statuses">Discount Statuses</h3>
 			</div>
 			<p>The statuses given to discounts show their current position in the process. Possible statuses are as follows:</p>
 			<ul>
 				<li>
 					<p>
-						<code>Draft</code>
-						The discount has been created but not yet submitted. For example, you selected
+						<code>Draft</code>: The discount has been created but not yet submitted. For example, you selected
 						<em>Save as Draft</em>
 						when you created the discount.</p>
 				</li>
 				<li>
 					<p>
-						<code>Validation failed</code>
-						When you submitted the discount, the validation process found one or more issues. You can review specific issues on the View Discount page.</p>
+						<code>Validation failed</code>: When you submitted the discount, the validation process found one or more issues. You can review specific issues on the View Discount page.</p>
 					<ul>
-						<li>
-							<strong>Note:</strong>
-							See
+						<li>For more information, see the
 							<a href="#discount-guidelines">Discount Guidelines</a>
-							on this page for more information.</li>
+							section on this page.</li>
 					</ul>
 				</li>
 				<li>
 					<p>
-						<code>Queued for review</code>
-						The discount is ready for review by the Epic Games Store team (if it applies for your organization). Submissions are typically reviewed within 24 hours (excluding weekends).</p>
+						<code>Published</code>: The discount is ready to use on the storefront as scheduled. When the discount is live, its status is Active.</p>
 				</li>
 				<li>
 					<p>
-						<code>In review</code>
-						The discount is under review by the Epic Games Store team (if it’s applicable for your organization).</p>
+						<code>Active</code>: The discount is currently live on the storefront.</p>
 				</li>
 				<li>
 					<p>
-						<code>Changes Needed</code>
-						The Epic Games Store team identified one or more issues in the discount that must be resolved before it can be published. (if the discount review process is applicable for your organization). You can review specific issues on the View Discount page.</p>
+						<code>Canceled</code>: The discount was published but canceled before its start date. Canceled discounts do not become active on the storefront.</p>
 				</li>
 				<li>
 					<p>
-						<code>Published</code>
-						The Epic Games Store team has published the discount for use on the storefront as scheduled. When the discount is live, its status is Active.</p>
+						<code>Expired</code>: The end date of the discount has passed, and it is no longer active on the storefront.</p>
 				</li>
 				<li>
 					<p>
-						<code>Active</code>
-						The discount is currently live on the storefront.</p>
+						<code>Error</code>: A failure occurred during the discount submission or cancellation process. You can review specific issues on the View Discount page.</p>
 				</li>
 				<li>
 					<p>
-						<code>Canceled</code>
-						The discount was published but canceled before its start date. Canceled discounts do not become active on the storefront.</p>
-				</li>
-				<li>
-					<p>
-						<code>Expired</code>
-						The end date of the discount has passed, and it is no longer active on the storefront.</p>
-				</li>
-				<li>
-					<p>
-						<code>Error</code>
-						A failure occurred during the discount submission or cancellation process. You can review specific issues on the View Discount page.</p>
-				</li>
-				<li>
-					<p>
-						<code>Created by Epic</code>
-						This discount was created by the Epic Games Store team. You cannot perform any actions on this  discount.</p>
+						<code>Created by Epic</code>: This discount was created by the Epic Games Store team. You cannot perform any actions on this  discount.</p>
 					<ul>
 						<li>If you want to make any changes, contact the Epic Games Store team. To do so, create a private discussion using this support website:
-							<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</li>
+							<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</li>
 					</ul>
 				</li>
 				<li>
@@ -718,43 +981,28 @@
 				</li>
 			</ul>
 			<div>
-				<h2 id="management-options">Management Options</h2>
+				<h3 id="discount-management-options">Discount Management Options</h3>
 			</div>
-			<p>Several actions are available to help you manage your discounts. To take action on a discount, click the options (<strong>...</strong>) menu to the right of its row in the table. Then, select one of the options below:</p>
+			<p>Several actions are available to help you manage your discounts.</p>
+			<p>You can click a discount to open the
+				<strong>Edit Discount</strong>
+				page, where you can view and edit the discount. This page displays the following:</p>
 			<ul>
+				<li>Specific details about the discount (such as its included offers).</li>
+				<li>Any validation issues or feedback from the Epic Games Store team (if the discount review process applies to your organization).</li>
 				<li>
-					<strong>View:</strong>
-					Opens the View Discount page, which displays the following:
-					<ul>
-						<li>Specific details about the discount (such as its included offers).</li>
-						<li>Any validation issues or feedback from the Epic Games Store team (if the discount review process applies to  your organization).</li>
-						<li>
-							<strong>Note:</strong>
-							On the View Discount page, to quickly switch to edit mode, click Edit Discount at the top of the page. You cannot edit discounts with the statuses
-							<em>In review</em>,
-							<em>Active</em>,
-							<code>Canceled</code>,
-							<code>Expired</code>,
-							<code>Error</code>,
-							<code>Created by Epic</code>, or
-							<code>Created in SPT</code>.</li>
-					</ul>
-				</li>
-				<li>
-					<strong>Edit:</strong>
-					Launches the discount in edit mode, where you can update its details. Discounts in some statuses cannot be edited.
-					<ul>
-						<li>You cannot edit discounts with the statuses
-							<code>In review</code>,
-							<code>Active</code>,
-							<code>Canceled</code>,
-							<code>Expired</code>,
-							<code>Error</code>,
-							<code>Created by Epic</code>, or
-							<code>Created in SPT</code>.</li>
-						<li>If you update a discount, you submit it  again.</li>
-					</ul>
-				</li>
+					<strong>Note:</strong>
+					You cannot edit discounts with the statuses
+					<code>In review</code>,
+					<code>Active</code>,
+					<code>Canceled</code>,
+					<code>Expired</code>,
+					<code>Error</code>,
+					<code>Created by Epic</code>, or
+					<code>Created in SPT</code>.</li>
+			</ul>
+			<p>You can also click the three dots (<strong>...</strong>) for a discount, then, select one of the options below:</p>
+			<ul>
 				<li>
 					<strong>Delete:</strong>
 					Removes the discount from your product. You cannot delete a discount with the status published, canceled, or active.</li>
@@ -763,7 +1011,7 @@
 					Prevents the discount from becoming active on the storefront on its start date.You can select this action only on discounts with the published status.</li>
 				<li>
 					<strong>Clone:</strong>
-					Use this action when you want to create a new discount based on this one. The Dev Portal copies the  details from the discount into a new discount creation form. You can then provide additional information and submit the new discount.
+					Use this action when you want to create a new discount based on this one. The Developer Portal copies the details from the discount into a new discount creation form. You can then provide additional information and submit the new discount.
 					<ul>
 						<li>
 							<strong>Note:</strong>
@@ -772,29 +1020,25 @@
 				</li>
 			</ul>
 			<div>
-				<h2 id="dashboard-calendar">Dashboard Calendar</h2>
+				<h2 id="review-your-products-discount-schedule">Review Your Product's Discount Schedule</h2>
 			</div>
 			<p>There is a discount calendar in your product's Epic Games Store page in the Developer Portal. The calendar is near the bottom of the page in the
 				<em>Promo Campaigns</em>
 				section. The calendar provides an overview of your upcoming discounts so you can quickly review your product’s discount schedule.</p>
-			<p>To access your product's Epic Games Store page:</p>
+			<p>To access your product's discount calendar:</p>
 			<ol>
-				<li>Go to your product page:
-					<ul>
-						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), from the left navigation, under
-							<strong>Your Products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
-							<strong>Back to organization</strong>
-							before you can do this.)</li>
-					</ul>
-				</li>
-				<li>Once you are in your product page, from the left navigation, click
+				<li>Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>).</li>
+				<li>Select the correct organization for your product.</li>
+				<li>In the left navigation, under
+					<strong>Your products</strong>, click the name of your product.</li>
+				<li>In the left navigation, click
 					<strong>Epic Games Store</strong>.</li>
-				<li>Scroll down the page to see the
+				<li>Scroll down the page to the
 					<strong>Promo Campaigns</strong>
 					section.</li>
 			</ol>
 			<div>
-				<h2 id="image-templates-for-current-sales-psd-templates">Image Templates for Current Sales (PSD Templates)</h2>
+				<h2 id="download-image-templates-for-current-sales-psd-templates">Download Image Templates for Current Sales (PSD Templates)</h2>
 			</div>
 			<p>Epic Games provides image templates you can use for current Epic Games Store sales. The templates are in .psd file format.</p>
 			<p>See the
@@ -804,79 +1048,84 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#discount-overview">Discount Overview</a>
-					</li>
-					<li>
-						<a href="#discount-guidelines">Discount Guidelines</a>
-					</li>
-					<li>
-						<a href="#pre-purchase-introductory-and-special-offers">Pre-Purchase, Introductory, and Special Offers</a>
-					</li>
-					<li>
-						<a href="#pre-purchase-offer">Pre-Purchase Offer</a>
-					</li>
-					<li>
-						<a href="#introductory-offer">Introductory Offer</a>
-					</li>
-					<li>
-						<a href="#special-offer">Special Offer</a>
-					</li>
-					<li>
-						<a href="#configure-discounts">Configure Discounts</a>
-					</li>
-					<li>
-						<a href="#page-navigation">Page Navigation</a>
-					</li>
-					<li>
-						<a href="#create-and-submit-discounts">Create and Submit Discounts</a>
-					</li>
-					<li>
-						<a href="#create-custom-discount-or-preset-campaign-discount">Create Custom Discount or Preset Campaign Discount</a>
-					</li>
-					<li>
-						<a href="#create-introductory-offer">Create Introductory Offer</a>
-					</li>
-					<li>
-						<a href="#submit-discounts-for-validation-and-review">Submit Discounts for Validation and Review</a>
-					</li>
-					<li>
-						<a href="#validation-failed">Validation Failed</a>
-					</li>
-					<li>
-						<a href="#after-review">After Review</a>
-					</li>
-					<li>
-						<a href="#upload-bulk-discounts">Upload Bulk Discounts</a>
-					</li>
-					<li>
-						<a href="#step-1-download-the-template">Step 1. Download the Template</a>
-					</li>
-					<li>
-						<a href="#step-2-complete-the-template">Step 2. Complete the Template</a>
-					</li>
-					<li>
-						<a href="#step-3-upload-your-completed-template">Step 3. Upload Your Completed Template</a>
-					</li>
-					<li>
-						<a href="#manage-discounts">Manage Discounts</a>
-					</li>
-					<li>
-						<a href="#discount-statuses">Discount Statuses</a>
-					</li>
-					<li>
-						<a href="#management-options">Management Options</a>
-					</li>
-					<li>
-						<a href="#dashboard-calendar">Dashboard Calendar</a>
-					</li>
-					<li>
-						<a href="#image-templates-for-current-sales-psd-templates">Image Templates for Current Sales (PSD Templates)</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#discount-overview">Discount Overview</a>
+								</li>
+								<li>
+									<a href="#discount-guidelines">Discount Guidelines</a>
+								</li>
+								<li>
+									<a href="#pre-purchase-introductory-and-special-offers">Pre-Purchase, Introductory, and Special Offers</a>
+								</li>
+								<li>
+									<a href="#pre-purchase-offer">Pre-Purchase Offer</a>
+								</li>
+								<li>
+									<a href="#introductory-offer">Introductory Offer</a>
+								</li>
+								<li>
+									<a href="#special-offer">Special Offer</a>
+								</li>
+								<li>
+									<a href="#create-a-custom-discount-or-preset-campaign-discount">Create a Custom Discount or Preset Campaign Discount</a>
+								</li>
+								<li>
+									<a href="#create-an-introductory-offer">Create an Introductory Offer</a>
+								</li>
+								<li>
+									<a href="#create-a-limited-time-free-promotion">Create a Limited-Time Free Promotion</a>
+								</li>
+								<li>
+									<a href="#discount-validation">Discount Validation</a>
+								</li>
+								<li>
+									<a href="#validation-failed">Validation Failed</a>
+								</li>
+								<li>
+									<a href="#date-eligibility-statuses">Date Eligibility Statuses</a>
+								</li>
+								<li>
+									<a href="#upload-bulk-discounts">Upload Bulk Discounts</a>
+								</li>
+								<li>
+									<a href="#step-1-download-the-template">Step 1. Download the Template</a>
+								</li>
+								<li>
+									<a href="#step-2-complete-the-template">Step 2. Complete the Template</a>
+								</li>
+								<li>
+									<a href="#step-3-upload-your-completed-template">Step 3. Upload Your Completed Template</a>
+								</li>
+								<li>
+									<a href="#troubleshoot-bulk-discounts">Troubleshoot Bulk Discounts</a>
+								</li>
+								<li>
+									<a href="#csv-file-recommendations">.CSV file recommendations</a>
+								</li>
+								<li>
+									<a href="#manage-discounts">Manage Discounts</a>
+								</li>
+								<li>
+									<a href="#discount-statuses">Discount Statuses</a>
+								</li>
+								<li>
+									<a href="#discount-management-options">Discount Management Options</a>
+								</li>
+								<li>
+									<a href="#review-your-products-discount-schedule">Review Your Product's Discount Schedule</a>
+								</li>
+								<li>
+									<a href="#download-image-templates-for-current-sales-psd-templates">Download Image Templates for Current Sales (PSD Templates)</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

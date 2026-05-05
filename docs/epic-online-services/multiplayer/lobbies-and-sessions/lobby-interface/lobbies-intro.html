@@ -1,0 +1,645 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Lobbies Introduction</h1>
+			<h2>Use this to add lobbies to your game so players can create, join, leave, and manage lobbies.</h2>
+			<div>
+				<div>9 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>Lobbies provide a persistent connection between players (also called "users") for the purpose of sharing game (or other software application) and player state with real-time updates. Typically, players can create or join lobbies to form teams, select pre-game options, and wait for additional players to join in before playing together. Using the Lobby Interface, your players can create, join, leave, and manage lobbies.</p>
+			<p>Integrate the Lobby Interface into your game (or other software application) to use the features of the Epic Online Services (EOS) Lobby service. To access the Lobby Interface, acquire an
+				<code>EOS_HLobby</code>
+				handle through the Platform Interface (documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>) function,
+				<code>EOS_Platform_GetLobbyInterface</code>. All Lobby Interface functions require this handle as their first parameter. You must ensure that the
+				<code>EOS_HPlatform</code>
+				handle is ticking for appropriate callbacks to trigger when operations complete.</p>
+			<div>
+				<h2 id="lobby-lifecycle">Lobby Lifecycle</h2>
+			</div>
+			<p>The lifecycle of a lobby generally follows this sequence:</p>
+			<ul>
+				<li>
+					<p>A user creates the lobby. This user automatically joins the lobby and becomes both the first member and the owner.</p>
+					<p>
+						<strong>Note:</strong>
+						The EOS Lobbies service can take up to three seconds to index newly created lobbies. When you search lobbies, you will not see the new lobby in the search results until the EOS Lobbies service finishes indexing.</p>
+				</li>
+				<li>
+					<p>The owner sets up the lobby's initial state, and may invite users to join.</p>
+				</li>
+				<li>
+					<p>Other users join and leave the lobby. While connected, members update state information about themselves and can invite other users.</p>
+				</li>
+				<li>
+					<p>The lobby owner can update data specific to the state of the game.</p>
+				</li>
+				<li>
+					<p>The owner can remove members from the lobby or transfer ownership status to another member.</p>
+				</li>
+				<li>
+					<p>Users can play multiple rounds of the game without leaving or destroying the lobby. Your game's logic determines the lifetime of a lobby.</p>
+				</li>
+				<li>
+					<p>Finally, the owner destroys the lobby.</p>
+				</li>
+			</ul>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						In Developer Portal, when you remove the
+						<code>lobbies:connect</code>
+						permission from a client policy, the lobby service closes the lobby a few minutes later. This removes all members from the lobby.</p>
+					<p>For more information on how to configure a client policy in Developer Portal, see
+						<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client Policy</a>.</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="create-a-lobby">Create a Lobby</h2>
+			</div>
+			<p>The
+				<code>EOS_Lobby_CreateLobby</code>
+				function creates a lobby. For more properties and full details see
+				<a href="/docs/api-ref/structs/eos-lobby-create-lobby-options">EOS_Lobby_CreateLobbyOptions</a>. Initialize
+				<code>EOS_Lobby_CreateLobbyOptions</code>
+				as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_CREATELOBBY_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The user creating the lobby. This user automatically joins the lobby as its owner.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>MaxLobbyMembers</code>
+						</td>
+						<td>The maximum number of users who can be in the lobby at any time</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PermissionLevel</code>
+						</td>
+						<td>Whether or not the lobby is visible to the public (see the section on:
+							<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/modify-a-lobby#permission-levels">Permission Levels</a>
+							in the
+							<em>Modify a Lobby</em>
+							page for more information).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>BucketId</code>
+						</td>
+						<td>Bucket ID associated with the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bPresenceEnabled</code>
+						</td>
+						<td>If true, this lobby will be associated with presence information. A user's presence can only be associated with one lobby at a time.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bAllowInvites</code>
+						</td>
+						<td>Whether members of the lobby are allowed to invite others.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bDisableHostMigration</code>
+						</td>
+						<td>Whether host migration is allowed / will the lobby stay open if the original host leaves.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bEnableRTCRoom</code>
+						</td>
+						<td>Creates a real-time communication (RTC) room for all members of this lobby. All members of the lobby will automatically join the RTC room when they connect to the lobby and they will automatically leave the RTC room when they leave or are removed from the lobby. While the joining and leaving of the RTC room is automatic, applications will still need to use the EOS RTC interfaces to handle all other functionality for the room.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AllowedPlatformIdsCount</code>
+						</td>
+						<td>The number of platform IDs in the
+							<code>AllowedPlatformIds</code>
+							array.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AllowedPlatformIds</code>
+						</td>
+						<td>An array of platform IDs that specify the player platforms that are allowed to register with the session. Platform IDs are found in the EOS header file, e.g.
+							<code>EOS_OPT_Epic</code>. For some platforms, the value is in the EOS Platform specific header file. If null, the lobby is unrestricted.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bCrossplayOptOut</code>
+						</td>
+						<td>Whether the lobby owner does not allow crossplay interactions. If
+							<code>false</code>, crossplay interactions are allowed. If
+							<code>true</code>,
+							<code>AllowedPlatformIds</code>
+							must have a single entry that matches the platform of the lobby owner.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation finishes, your
+				<code>EOS_Lobby_OnCreateLobbyCallback</code>
+				run with an
+				<code>EOS_Lobby_CreateLobbyCallbackInfo</code>
+				data structure. If the data structure's
+				<code>ResultCode</code>
+				field indicates success, its
+				<code>LobbyId</code>
+				field contains the new lobby's ID value. You need this ID value to interact with the lobby further.</p>
+			<div>
+				<h2 id="invite-users-to-a-lobby">Invite Users to a Lobby</h2>
+			</div>
+			<p>Users who are in a lobby can invite others to join them with the
+				<code>EOS_Lobby_SendInvite</code>
+				function. The
+				<code>EOS_Lobby_OnSendInviteCallback</code>
+				triggers locally once the invitation is successfully sent. The target user receives a
+				<a href="#notifications">notification</a>
+				when the invitation arrives. The game then uses
+				<code>EOS_Lobby_AddNotifyLobbyInviteAccepted</code>
+				to know when the player clicks
+				<strong>Accept</strong>
+				in the overlay. For more information about the interaction between the
+				<strong>Invite to game</strong>
+				button, the social overlay, and lobbies, see
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/sdk-integration">Social Overlay Integration: Using Lobbies</a>. For invite functionality with the Epic Games Launcher, be sure to map your deployments to your
+				<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>
+				as well.</p>
+			<div>
+				<h3 id="reject-an-invitation">Reject an Invitation</h3>
+			</div>
+			<p>To reject the invitation, call
+				<code>EOS_Lobby_RejectInvite</code>
+				with an
+				<code>EOS_Lobby_RejectInviteOptions</code>
+				structure containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_REJECTINVITE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LobbyId</code>
+						</td>
+						<td>The ID of the lobby associated with the invitation</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The ID of the user who is rejecting the invitation</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Once complete, your
+				<code>EOS_Lobby_OnRejectInviteCallback</code>
+				function triggers locally with an
+				<code>EOS_Lobby_RejectInviteCallbackInfo</code>
+				data structure. If successful, the invitation is permanently deleted from the system.</p>
+			<div>
+				<h3 id="update-all-invitations">Update All Invitations</h3>
+			</div>
+			<p>To ensure that your local cache contains all pending invitations, call
+				<code>EOS_Lobby_QueryInvites</code>
+				with an
+				<code>EOS_Lobby_QueryInvitesOptions</code>
+				structure containing the following data:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_QUERYINVITES_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The ID of the user whose invitations you want to retrieve</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation finishes, your
+				<code>EOS_Lobby_OnQueryInvitesCallback</code>
+				runs with an
+				<code>EOS_Lobby_QueryInvitesCallbackInfo</code>
+				data structure. On success, the local cache contains all pending invitations for the specified user that you can search. This is useful at startup to discover any invitations that were sent while the user was offline. During play, users with a registered notification should rarely need to call this function.</p>
+			<div>
+				<h3 id="retrieve-an-invitation-from-the-cache">Retrieve an Invitation from the Cache</h3>
+			</div>
+			<p>To examine a cached invitation, first call
+				<code>EOS_Lobby_GetInviteCount</code>
+				with an
+				<code>EOS_Lobby_GetInviteCountOptions</code>
+				structure, initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_GETINVITECOUNT_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user whose invitations you want to count</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This function runs against your local cache, and will immediately return a
+				<code>uint32_t</code>
+				indicating the number of pending invitations in the cache. You can then call
+				<code>EOS_Lobby_GetInviteIdByIndex</code>
+				with an
+				<code>EOS_Lobby_GetInviteIdByIndexOptions</code>
+				structure containing the following data:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_GETINVITEIDBYINDEX_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user who owns the invitation</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Index</code>
+						</td>
+						<td>The index of the invitation you want to retrieve</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<code>EOS_Lobby_GetInviteIdByIndex</code>
+				also runs against the local cache and will immediately return
+				<code>EOS_Success</code>
+				if the call succeeds. On success, the output parameters that you provided will contain a copy of the invitation data and its size. You are responsible for freeing the buffer when you no longer need it.</p>
+			<div>
+				<h3 id="notifications">Notifications</h3>
+			</div>
+			<p>Users receive invitations in real time as long as they have registered a callback through
+				<code>EOS_Lobby_AddNotifyLobbyInviteReceived</code>. The callback data includes all of the relevant information about the invitation. At this point, users can use
+				<code>EOS_Lobby_CopyLobbyDetailsHandleByInviteId</code>
+				to retrieve the invitation in the form of an
+				<code>EOS_HLobbyDetails</code>, which the user must have to join the lobby. When shutting down the application or going offline, use
+				<code>EOS_Lobby_RemoveNotifyLobbyInviteReceived</code>
+				to remove your callback from the notification list.</p>
+			<div>
+				<h2 id="join-or-leave-a-lobby">Join or Leave a Lobby</h2>
+			</div>
+			<p>Calling
+				<code>EOS_Lobby_JoinLobby</code>
+				with a valid
+				<code>EOS_HLobbyDetails</code>
+				handle causes the user to attempt to join the lobby that the handle references. A user can be in multiple lobbies at the same time; joining one lobby does not require the user to leave another. Joining a new lobby does not leave any existing lobbies. Leaving or destroying a lobby must be explicit.</p>
+			<p>To leave a lobby, call
+				<code>EOS_Lobby_LeaveLobby</code>. If the departing user is the current lobby owner, EOS will select a new owner from the remaining users. All members will receive notification when any user leaves, as well as when ownership changes.</p>
+			<div>
+				<h2 id="remove-a-member-from-a-lobby">Remove a Member from a Lobby</h2>
+			</div>
+			<p>The lobby owner may remove a lobby member at any time. To do this, call
+				<code>EOS_Lobby_KickMember</code>
+				with an
+				<code>EOS_Lobby_KickMemberOptions</code>
+				data structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_KICKMEMBER_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LobbyId</code>
+						</td>
+						<td>The ID of the lobby from which the member should be removed.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The ID of the lobby member requesting the removal. This must be the lobby owner.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_ProductUserId TargetUserId</code>
+						</td>
+						<td>The ID of the lobby member to be removed.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation finishes, you will receive a call to your
+				<code>EOS_Lobby_OnKickMemberCallback</code>
+				function, with an
+				<code>EOS_Lobby_KickMemberCallbackInfo</code>
+				data structure. In addition, all remaining lobby members will receive notification of the
+				<code>EOS_LMSC_KICKED</code>
+				event.</p>
+			<div>
+				<h2 id="destroy-a-lobby">Destroy a Lobby</h2>
+			</div>
+			<p>To destroy the lobby, the lobby's owner must call
+				<code>EOS_Lobby_DestroyLobby</code>
+				with an
+				<code>EOS_Lobby_DestroyLobbyOptions</code>
+				structure initialized with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_LOBBY_DESTROYLOBBY_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The user requesting destruction of the lobby; this user must currently own the lobby.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LobbyId</code>
+						</td>
+						<td>The ID of the lobby to destroy.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Once complete, your
+				<code>EOS_Lobby_OnDestroyLobbyCallback</code>
+				callback function runs with an
+				<code>EOS_Lobby_DestroyLobbyCallbackInfo</code>
+				data structure indicating if the destruction was successful the ID of the lobby. When the lobby closes, it automatically removes all remaining members and triggers a member status update with state
+				<code>EOS_LMS_CLOSED</code>.</p>
+			<div>
+				<h2 id="usage-limitations">Usage Limitations</h2>
+			</div>
+			<p>Lobbies provide a persistent connection between your users, for the purpose of sharing game and user state with real-time updates. Typically, users can create or join lobbies to chat with other users, form teams, select pre-game options, and wait for additional users to join in before playing together. For general information about throttling, usage quotas, and best practices, see the service usage limitation section of the
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+				page.</p>
+			<p>The following are general limitations for the lobby service:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Service Limit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Max players in a lobby</td>
+						<td>64</td>
+					</tr>
+					<tr>
+						<td>Max session attributes</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td>Max member attributes</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td>String attribute length</td>
+						<td>1000 characters</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Additionally, there are per-user rate limitations. Consider the following limitations to avoid throttling:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>User Limit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Connect</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Create a lobby</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Delete a lobby</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Join a lobby</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Amount of lobbies a single user can join at once</td>
+						<td>16</td>
+					</tr>
+					<tr>
+						<td>Read lobby data</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Update lobby attributes</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Update member attributes</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Change lobby settings</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Invite a user</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Delete an invitation</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Kick a player out</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Promote a member to lobby owner</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Find lobbies</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Get a lobby by ID</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Find lobbies by user</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Find invitations by user</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Find lobby by invitation</td>
+						<td>30 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Max number of search results for a query</td>
+						<td>256</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#lobby-lifecycle">Lobby Lifecycle</a>
+								</li>
+								<li>
+									<a href="#create-a-lobby">Create a Lobby</a>
+								</li>
+								<li>
+									<a href="#invite-users-to-a-lobby">Invite Users to a Lobby</a>
+								</li>
+								<li>
+									<a href="#reject-an-invitation">Reject an Invitation</a>
+								</li>
+								<li>
+									<a href="#update-all-invitations">Update All Invitations</a>
+								</li>
+								<li>
+									<a href="#retrieve-an-invitation-from-the-cache">Retrieve an Invitation from the Cache</a>
+								</li>
+								<li>
+									<a href="#notifications">Notifications</a>
+								</li>
+								<li>
+									<a href="#join-or-leave-a-lobby">Join or Leave a Lobby</a>
+								</li>
+								<li>
+									<a href="#remove-a-member-from-a-lobby">Remove a Member from a Lobby</a>
+								</li>
+								<li>
+									<a href="#destroy-a-lobby">Destroy a Lobby</a>
+								</li>
+								<li>
+									<a href="#usage-limitations">Usage Limitations</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

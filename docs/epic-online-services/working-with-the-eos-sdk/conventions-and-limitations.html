@@ -1,0 +1,341 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK Conventions and Limitations</h1>
+			<h2>Fundamentals when working with the SDK.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>This page details the conventions used by the EOS SDK and its limitations. For an introduction to Epic Online Services and how to set up the EOS SDK, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="naming-conventions">Naming Conventions</h2>
+			</div>
+			<p>To help convey usage and intent, EOS SDK interfaces use consistent naming conventions and prefixes:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Convention</th>
+						<th>Use</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<strong>Create</strong>
+						</td>
+						<td>The function allocates memory and expects to be paired with a
+							<code>Release</code>
+							function.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Copy</strong>
+						</td>
+						<td>Retrieves cached data from a previous call to a
+							<code>Query</code>
+							function and expects to be paired with a
+							<code>Release</code>
+							function.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Release</strong>
+						</td>
+						<td>The function frees memory. These have a corresponding
+							<code>Create</code>
+							or
+							<code>Copy</code>
+							function.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Query</strong>
+						</td>
+						<td>Interacts with backend services asynchronously, over an unspecified period of time. These calls may be throttled or retried depending on connectivity.</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Get</strong>
+						</td>
+						<td>Used when the cache value does not require a structure and is just a value. Includes
+							<code>Get</code>
+							for strings that require a buffer.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="function-signatures">Function signatures</h2>
+			</div>
+			<p>Every function in the EOS SDK has a similar, predictable signature:</p>
+			<ul>
+				<li>The handle is always the first parameter for an interface.
+					<ul>
+						<li>For C#, you do not need to pass a handle parameter.</li>
+					</ul>
+				</li>
+				<li>An "options" data structure encapsulates all of the function's parameters and contains API versioning information.</li>
+				<li>Finally, asynchronous functions feature an application-specific callback function, and can accept user-defined context information for the callback function to process. This callback function runs when the asynchronous operation ultimately succeeds or fails, and may also run in response to delays caused by connectivity issues.</li>
+			</ul>
+			<div>
+				<h2 id="error-handling">Error handling</h2>
+			</div>
+			<p>Error codes from the EOS C SDK functions use the type
+				<code>EOS_EResult</code>
+				to include common error values and errors specific to a single interface. For example, the enum type
+				<code>EOS_EResult</code>
+				with a
+				<code>EOS_Success</code>
+				value appears as
+				<code>EOS_EResult::EOS_Success</code>.</p>
+			<p>For C#, the error codes are slightly different by using the type Result to include the common error values and interface-specific errors. To compare with the C SDK example, the enum type
+				<code>Result</code>
+				with a
+				<code>Success</code>
+				value appears as
+				<code>Result.Success</code>.</p>
+			<p>Common errors take the form
+				<code>EOS_&lt;ErrorCode&gt;</code>, while interface-specific error codes appear as
+				<code>EOS_&lt;Interface&gt;_&lt;ErrorCode&gt;</code>. Some examples follow:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Error Code</th>
+						<th>Meaning</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_InvalidParameters</code>
+						</td>
+						<td>There was at least one unset or invalid input parameter passed to the function.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_InvalidUser</code>
+						</td>
+						<td>The operation requires a user, but the provided user was invalid or unspecified.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_MissingPermissions</code>
+						</td>
+						<td>The backend system rejected the request due to access restrictions.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_UnrecognizedResponse</code>
+						</td>
+						<td>The SDK was unable to parse the backend's response.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_OperationWillRetry</code>
+						</td>
+						<td>Backend connectivity is impaired and the SDK will try again.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_IncompatibleVersion</code>
+						</td>
+						<td>The API version parameter that the calling code sent does not match the function's version number in the SDK.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_Auth_TokenInvalid</code>
+						</td>
+						<td>Specific to the
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>, the local authentication session has expired or become invalid, and the user needs to log in again.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>For more information on error codes, see:
+				<a href="/docs/epic-online-services/sdk-error-codes">EOS SDK Error Codes</a>.</p>
+			<p>
+				<strong>Tip</strong>: Use the
+				<code>EOS_LOG_VeryVerbose</code>
+				log level of the EOS SDK during early integration to receive detailed logs. These details can help you troubleshoot any errors you might encounter. Include a full log file if you report issues to support. (Documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>).</p>
+			<div>
+				<h2 id="strings">Strings</h2>
+			</div>
+			<p>Strings, both as input and as output, must be in UTF-8 form.</p>
+			<div>
+				<h2 id="memory-allocation">Memory Allocation</h2>
+			</div>
+			<p>When an SDK function needs to provide a data structure to a callback, the SDK allocates the memory for the data, and frees the memory as soon as the callback function completes. If you need to cache a copy of that data, you must make your copy during the lifetime of the callback function. In addition, if your system requires custom memory allocators, you must specify them at SDK creation time.</p>
+			<p>SDK Functions with the verb
+				<code>Get</code>
+				in their names also own the memory they use. Like callbacks, you must make a copy of the data if you want to have access to it later.</p>
+			<p>SDK Functions with the verb
+				<code>Copy</code>
+				in their names are the exception. These functions return copies of cached data, and expect that the caller takes ownership of the copy. The C SDK will never free the copy, so the user must call the corresponding
+				<code>Release</code>
+				function before shutting the SDK down. The C# SDK does not need to manually release copied structs because the wrapper does this automatically for you.</p>
+			<div>
+				<h2 id="function-argument-lifespan">Function Argument Lifespan</h2>
+			</div>
+			<p>The EOS SDK only references arguments within the scope of the function. Note that the EOS SDK makes internal copies of any data that's needed longer.</p>
+			<p>In most cases, the EOS SDK only retains the data until the async operation completes. If the act of that async operation is to acquire more data, then the EOS SDK retains the data based on the use case's retention policy.</p>
+			<div>
+				<h2 id="initialize-c-structures">Initialize C Structures</h2>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				You must always initialize memory in C.</p>
+			<p>Some C structures for the EOS SDK have optional fields. If you want to use one of the optional fields, you must initialize all the optional fields, even if you don't plan to assign a value to them. We recommend that you initialize the entire options structure before you use it. See the example code snippet below:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>After you initialize the entire options structure, you can assign a value to the individual fields that you want to use.</p>
+			<p>This method also helps when you update the EOS SDK API to a newer version. Instead of reviewing every EOS SDK function call for changes, you can initialize them all and then only review the function calls that you know you need to update.</p>
+			<div>
+				<h2 id="service-usage-limitations">Service Usage Limitations</h2>
+			</div>
+			<p>For a stable and reliable ecosystem for all users, Epic Online Services (EOS) implements client request rate limiting and service usage quotas. When the SDK APIs are integrated correctly with your code, the request limits and usage quotas should never be reached.</p>
+			<p>However, be mindful of the limits and pay attention to the SDK’s log output. During internal play testing, any erroneous log output should be checked to verify that EOS functions are not returning the
+				<code>EOS_TooManyRequests</code>
+				result or warning about incorrect use patterns.</p>
+			<p>Client request throttling and service usage quotas work in parallel to limit the impact an individual product can have on the overall EOS ecosystem.</p>
+			<div>
+				<h3 id="request-throttling">Request Throttling</h3>
+			</div>
+			<p>When the EOS SDK detects that calls to the backend service are coming in too rapidly, the local client self-throttles by rejecting API calls with the
+				<code>EOS_TooManyRequests</code>
+				error code.</p>
+			<p>The backend service has a similar feature to reject requests from individual clients or hosted servers that have exceeded the maximum usage guidelines. The EOS SDK reports this as
+				<code>EOS_TooManyRequests</code>
+				and internally handles the retry logic with the time specified in the HTTP data.</p>
+			<div>
+				<h3 id="service-usage-quotas">Service Usage Quotas</h3>
+			</div>
+			<p>Each service applies usage quotas on a per-<em>deployment</em>
+				basis to ensure that the backend services always have the necessary capacity readily available for products.</p>
+			<p>Depending on the service type, quotas are either fixed or adjusted based on the number of concurrent users online for each deployment. All quotas apply equally to every product in the EOS ecosystem.</p>
+			<p>If an application reaches a usage quota limit for a backend service, any following requests for new resource allocations fail until the usage rate of the service lowers to acceptable levels.</p>
+			<div>
+				<h2 id="thread-safety">Thread Safety</h2>
+			</div>
+			<p>The EOS SDK is not thread safe. Some functions might assert and crash if you call them from different threads. We recommend the following approach:</p>
+			<ul>
+				<li>All calls to the SDK come from your game's main thread.</li>
+				<li>Do not use
+					<code>async</code>,
+					<code>await</code>,
+					<code>Thread</code>,
+					<code>Task</code>, or similar patterns.</li>
+			</ul>
+			<div>
+				<h2 id="thread-affinity">Thread Affinity</h2>
+			</div>
+			<p>The EOS SDK binds threads to a specific set of CPU cores. This is called "thread affinity." Each platform has its own default thread affinity, which helps prevent deadlocks. However, if you'd rather use a different thread affinity, you can override the default thread affinity when you initialize the EOS SDK. To do this, assign an affinity mask to each category of threads defined in the struct
+				<a href="/docs/api-ref/structs/eos-initialize-thread-affinity">
+					<code>EOS_Initialize_ThreadAffinity</code>
+				</a>. Here is an example configuration:</p>
+			<div>
+				<section>
+					<pre>
+
+					</pre>
+				</section>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				The default values are used if you set
+				<code>OverrideThreadAffinity</code>
+				to
+				<code>nullptr</code>.</p>
+			<p>Documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">Guide: Get Started With EOS &gt; 3. Set Up the EOS SDK</a>.</p>
+			<div>
+				<h2 id="eos-sdk-api-reference">EOS SDK API Reference</h2>
+			</div>
+			<p>See the
+				<a href="/docs/api-ref">EOS API Reference</a>
+				documentation.</p>
+			<p>
+				<strong>Note:</strong>
+				To use Epic Online Services (EOS) SDK, your local network, router, and firewall must allow access to specific host addresses. For a complete list of these host addresses, see the
+				<a href="/docs/epic-online-services/firewall-considerations">Firewall Considerations</a>
+				documentation.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#naming-conventions">Naming Conventions</a>
+								</li>
+								<li>
+									<a href="#function-signatures">Function signatures</a>
+								</li>
+								<li>
+									<a href="#error-handling">Error handling</a>
+								</li>
+								<li>
+									<a href="#strings">Strings</a>
+								</li>
+								<li>
+									<a href="#memory-allocation">Memory Allocation</a>
+								</li>
+								<li>
+									<a href="#function-argument-lifespan">Function Argument Lifespan</a>
+								</li>
+								<li>
+									<a href="#initialize-c-structures">Initialize C Structures</a>
+								</li>
+								<li>
+									<a href="#service-usage-limitations">Service Usage Limitations</a>
+								</li>
+								<li>
+									<a href="#request-throttling">Request Throttling</a>
+								</li>
+								<li>
+									<a href="#service-usage-quotas">Service Usage Quotas</a>
+								</li>
+								<li>
+									<a href="#thread-safety">Thread Safety</a>
+								</li>
+								<li>
+									<a href="#thread-affinity">Thread Affinity</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-api-reference">EOS SDK API Reference</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

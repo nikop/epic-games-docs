@@ -1,0 +1,142 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Display Localized Rich Presence in Your Game</h1>
+			<h2>Localize the dynamic messages you display to players.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>To display localized rich presence in your game, carry out the following steps. You need to do this for each rich presence message that you want to localize.</p>
+			<p>For an introduction to localized rich presence, see
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-intro">Localize Your Game's Rich Presence Messages — Introduction</a>.</p>
+			<div>
+				<h2 id="step-1-define-localized-rich-presence-variables-optional">Step 1. Define Localized Rich Presence Variables (Optional)</h2>
+			</div>
+			<p>Optional: You only need to do this step if you want to include dynamic content in your message.</p>
+			<p>In the Developer Portal, create a variable definition for each piece of dynamic content you want to include in your message. For example, if you want to display the product user's rank in a game, you might create a variable definition called
+				<code>player_rank</code>. If you want to display the number of players, you might create a variable definition called
+				<code>player_count</code>.</p>
+			<p>More information:
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/variable-definitions/variable-definitions-intro">Variable Definitions for Localized Rich Presence Templates—Introduction</a>.</p>
+			<div>
+				<h2 id="step-2-set-up-a-localized-rich-presence-template">Step 2. Set Up a Localized Rich Presence Template</h2>
+			</div>
+			<p>In the Developer Portal, set up a localized rich presence template that contains your localized text.</p>
+			<p>If you want to include dynamic content in your message, add the variables you defined in step 1 to your template.</p>
+			<p>More information:
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/templates/create-template">Create a  Localized Rich Presence Template</a>.</p>
+			<div>
+				<h2 id="step-3-use-the-eos-presence-interface-in-your-code">Step 3. Use the EOS Presence Interface in Your Code</h2>
+			</div>
+			<p>In your code, use the EOS Presence Interface to send status information to the social overlay.</p>
+			<p>The process is as follows:</p>
+			<ol>
+				<li>Create a presence modification with
+					<code>EOS_Presence_CreatePresenceModification</code>.</li>
+				<li>Update the modification state.</li>
+				<li>Call
+					<code>EOS_Presence_SetPresence</code>.</li>
+			</ol>
+			<p>For general information on how to modify presence in your code, see
+				<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface#modify-local-presence">Presence Interface &gt; Modify Local Presence</a>. For specific information on how to handle localized rich presence, see
+				<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface#localize-rich-presence-text">Presence Interface &gt; Localized Rich Presence Text</a>.</p>
+			<div>
+				<h2 id="example">Example</h2>
+			</div>
+			<p>In this example, you want to display a message with the following text:</p>
+			<ul>
+				<li>The map the player is currently playing in</li>
+				<li>The map the player previously played in</li>
+			</ul>
+			<p>In the Developer Portal, you set this up as follows:</p>
+			<ol>
+				<li>You create a variable definition called map with a list of the accepted values. In this case, each value is the name of a map in your game.
+					<ul>
+						<li>In step 3 below, you will set up instances of this variable called
+							<code>previous_map</code>
+							and
+							<code>current_map</code>.</li>
+						<li>For each accepted value, add localizations for each locale you want to support.</li>
+					</ul>
+				</li>
+				<li>Create a template called
+					<code>player_map</code>.
+					<ul>
+						<li>In your code, you specify this template with
+							<code>EOS_PresenceModification_SetTemplateID</code>. For information, see
+							<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface#localize-rich-presence-text">Presence Interface &gt; Localized Rich Presence Text</a>.</li>
+					</ul>
+				</li>
+				<li>Set up your template as follows:
+					<ul>
+						<li>a. Add a variable instance called
+							<code>previous_map</code>. Use the variable definition
+							<code>map</code>.</li>
+						<li>b. Add a variable instance called
+							<code>current_map</code>. Use the variable definition
+							<code>map</code>.</li>
+						<li>c. Add the following text to the template for the default locale (in this example, English), with variable names matching those that you pass in your code: Player left
+							<code>{previous_map}</code>
+							and started
+							<code>{current_map}</code>.</li>
+						<li>Add localized text for each additional locale you want to support.</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h3 id="result">Result</h3>
+			</div>
+			<p>The Social Overlay displays the player's previous and current map names to their friends.</p>
+			<p>For example, English-speaking recipients receive the following message:</p>
+			<ul>
+				<li>Player left Industrial Zone and started Chemical Zone.</li>
+			</ul>
+			<p>French-speaking recipients receive the following message:</p>
+			<ul>
+				<li>Le joueur a quitté La Zone Verte et a commencé La Zone Chimique.</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#step-1-define-localized-rich-presence-variables-optional">Step 1. Define Localized Rich Presence Variables (Optional)</a>
+								</li>
+								<li>
+									<a href="#step-2-set-up-a-localized-rich-presence-template">Step 2. Set Up a Localized Rich Presence Template</a>
+								</li>
+								<li>
+									<a href="#step-3-use-the-eos-presence-interface-in-your-code">Step 3. Use the EOS Presence Interface in Your Code</a>
+								</li>
+								<li>
+									<a href="#example">Example</a>
+								</li>
+								<li>
+									<a href="#result">Result</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

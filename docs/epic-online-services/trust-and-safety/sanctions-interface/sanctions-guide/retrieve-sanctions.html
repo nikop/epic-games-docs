@@ -1,0 +1,781 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Sanction Players — 2. Retrieve Sanctions</h1>
+			<h2>Step-by-step guide on how to retrieve active sanctions against a player, in your game code.</h2>
+			<div>
+				<div>28 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/set-up-sanctions">1. Set Up and Apply Sanctions</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>This section of the guide explains how your game can retrieve the details of any active sanctions for a specific player. To do this, your game code must query the active sanctions to save them to the local cache, copy the cached sanctions, then access the data for each sanction.</p>
+							<p>You can use this sanction data however you choose to in your game, but common scenarios include the following:</p>
+							<ul>
+								<li>Copy the reference ID of an active sanction against the player and use it in a sanction appeal (section of this guide:
+									<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/appeal-sanctions">3. Allow Players to Appeal Sanctions</a>).</li>
+								<li>Enforce gameplay restrictions on the player based on the action of the sanction against them.</li>
+							</ul>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Get Started Steps</a>.)</li>
+								<li>Set up and apply sanctions in the Developer Portal. (Section in this guide:
+									<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/set-up-sanctions">1. Set Up and Apply Epic Online Services (EOS) Sanctions</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="retrieve-your-games-sanctions">Retrieve Your Game's Sanctions</h2>
+							</div>
+							<p>Complete the following steps to retrieve your game's sanctions:</p>
+							<ul>
+								<li>
+									<a href="#step-a-create-a-class-to-manage-eos-sanctions">Step A: Create a Class to Manage EOS Sanctions</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-retrieve-sanctions-function">Step B: Implement Your Retrieve Sanctions Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-query-sanctions-callback-function">Step C: Implement Your Query Sanctions Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-copy-sanctions-function">Step D: Implement Your Copy Sanctions Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code example after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-create-a-class-to-manage-eos-sanctions">Step A: Create a Class to Manage EOS Sanctions</h3>
+							</div>
+							<p>Create a class to manage EOS Sanctions in your game. Include a vector to hold the copied sanction data for lookup.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								Player sign-in is outside the scope of this guide. For more information, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+								</li>
+								<li>
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>
+								</li>
+							</ul>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Create a data structure to hold the sanction data that you want to copy for your game. In the example, the data structure is called
+																	<code>PlayerSanctionCopy</code>. This data structure can contain whichever data you need to copy for your game.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create a class to manage EOS Sanctions for your players. In your sanctions manager class, declare a public function to get read-only access to the sanctions vector. (The vector itself is declared as a private variable and described in more detail below). In the example, it's called
+																	<code>GetRetrievedDefinitions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to retrieve the sanctions for your game. In the example, it's called
+																	<code>RetrieveActiveSanctionsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare the following variables:</p>
+																<ul>
+																	<li>A handle for the Platform Interface.</li>
+																	<li>A handle for the Sanctions Interface.</li>
+																	<li>A variable for the Product User ID of the signed-in local player. The EOS SDK returns the Product User ID after the player signs in. You use the Product User ID to make API calls.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-sanctions-query-active-player-sanctions">
+																		<code>EOS_Sanctions_QueryActivePlayerSanctions</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-sanctions-on-query-active-player-sanctions-callback">
+																		<code>EOS_Sanctions_OnQueryActivePlayerSanctionsCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-sanctions-query-active-player-sanctions-callback-info">
+																		<code>EOS_Sanctions_QueryActivePlayerSanctionsCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryActivePlayerSanctionsComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private function to copy the queried sanction definitions from the local cache. In the example, it's called
+																	<code>CopyActiveSanctionsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private vector to hold data for the sanctions that you copy. In the example, it's called
+																	<code>RetrievedSanctions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note</strong>:</p>
+																<ul>
+																	<li>When you query definitions, the EOS SDK saves those definitions to the local cache.</li>
+																	<li>Storing the sanction copies in a vector makes it much easier to look up a sanction and retrieve its value when you need it.</li>
+																</ul>
+															</li>
+															<li>
+																<p>Define the constructor for the sanctions manager class. In the constructor, do the following:</p>
+																<ul>
+																	<li>Pass the Platform Interface handle.</li>
+																	<li>Pass the Product User ID of the local signed-in player.</li>
+																	<li>Assign the Sanctions Interface handle. You need this handle to make EOS Sanctions Interface API calls.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-implement-your-retrieve-sanctions-function">Step B: Implement Your Retrieve Sanctions Function</h3>
+							</div>
+							<p>In your sanctions manager class, implement the function to retrieve the sanctions for a player of your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your sanctions manager class, implement the function to query the sanctions for the local player. In the example, it's called
+																	<code>RetrieveActiveSanctionsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-sanctions-query-active-player-sanctions-options">
+																		<code>EOS_Sanctions_QueryActivePlayerSanctionsOptions</code>
+																		data structure</a>
+																	to hold the query options for the active sanctions. In the example, it's called
+																	<code>QuerySanctionsOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-sanctions-query-active-player-sanctions">
+																		<code>EOS_Sanctions_QueryActivePlayerSanctions()</code>
+																		function</a>. This function saves the sanctions for the player to the local cache.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>Sanctions Interface handle.</li>
+																	<li>A reference to the query options for the active sanctions.</li>
+																	<li>(Optional)
+																		<code>ClientData</code>.<br>
+																		In the example, we pass the sanctions manager (<code>this</code>
+																		in the example) for the
+																		<code>ClientData</code>
+																		field, so we can access it in the callback.<br>
+																		If you don't need to pass any additional data to the callback, pass a
+																		<code>nullptr</code>
+																		instead.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-sanctions-query-active-player-sanctions-callback-info">
+																			<code>EOS_Sanctions_OnQueryActivePlayerSanctionsCallbackInfo</code>
+																			data structure</a>
+																		when the EOS Sanctions service completes the active sanctions query.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-query-sanctions-callback-function">Step C: Implement Your Query Sanctions Callback Function</h3>
+							</div>
+							<p>Implement your query sanctions callback function.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-sanctions-query-active-player-sanctions">
+																		<code>EOS_Sanctions_QueryActivePlayerSanctions()</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-sanctions-on-query-active-player-sanctions-callback">
+																		<code>EOS_Sanctions_OnQueryActivePlayerSanctionsCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-sanctions-query-active-player-sanctions-callback-info">
+																		<code>EOS_Sanctions_OnQueryActivePlayerSanctionsCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryActivePlayerSanctionsComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-sanctions-query-active-player-sanctions">
+																			<code>EOS_Sanctions_QueryActivePlayerSanctions()</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the query is successful. If the query is successful, retrieve the sanctions manager pointer from the client data and call your function to copy the sanctions:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the query is not complete yet. If the query is not complete, return. The callback is called again when the query is complete:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the query is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-to-string">
+																		<code>EOS_EResult_ToString()</code>
+																		function</a>
+																	to convert the
+																	<code>E_EResult</code>
+																	enum to a string. This gives the name of the error type.</p>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-implement-your-copy-sanctions-function">Step D: Implement Your Copy Sanctions Function</h3>
+							</div>
+							<p>Implement your function to copy the active sanctions for the player and save those sanctions to a vector for retrieval later on.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the function to copy the active sanctions for the player and save those sanctions to a vector for later retrieval. In the example, it's called
+																	<code>CopyActiveSanctionsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your copy function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-sanctions-get-player-sanction-count-options">
+																		<code>EOS_Sanctions_GetPlayerSanctionCountOptions</code>
+																		data structure</a>
+																	to hold the count options for the player's active sanctions. You will use these options to get the total number of active sanctions that are cached locally for the player. In the example, it's called
+																	<code>GetSanctionCountOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-sanctions-get-player-sanction-count">
+																		<code>EOS_Sanctions_GetPlayerSanctionCount()</code>
+																		function</a>
+																	to get the number of sanctions stored in the local cache, and assign the value to a variable to hold the returned count.<br>
+																	The function call must include the following arguments:</p>
+																<ul>
+																	<li>Sanctions Interface handle.</li>
+																	<li>A reference to the count options for the sanctions.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the definition count to iterate through the list of queried sanctions that you want to copy:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In the for loop, create an instance of the
+																	<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+																		<code>EOS_Sanctions_CopyPlayerSanctionByIndexOptions</code>
+																		data structure</a>
+																	to hold the copy options for the active sanctions for the player. In the example, it's called
+																	<code>CopyPlayerSanctionByIndexOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Define a pointer to temporarily store the copied sanction data. In the example, it's called
+																	<code>Sanction</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+																		<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+																		function</a>
+																	to copy the sanctions from the local cache.<br>
+																	The function call must include the following arguments:</p>
+																<ul>
+																	<li>Sanctions Interface handle.</li>
+																	<li>A reference to the copy options for the sanctions.</li>
+																	<li>A reference to the definition pointer to hold the returned sanction data.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+																		<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+																		function</a>
+																	call is successful, retrieve data for the sanction from the
+																	<code>Sanction</code>
+																	pointer variable that you passed, and then copy it to the sanction data structure in the vector. Call the
+																	<a href="/docs/api-ref/functions/eos-sanctions-player-sanction-release">
+																		<code>EOS_Sanctions_PlayerSanction_Release</code>
+																		function</a>
+																	on the sanction pointer to free its memory:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+																		<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+																		function</a>
+																	call is not successful, handle any errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>After you call the
+								<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+									<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+									function</a>, on success, you can access the
+								<a href="/docs/api-ref/structs/eos-sanctions-player-sanction">
+									<code>EOS_Sanctions_PlayerSanction</code>
+									data structure</a>
+								through the sanction pointer that you passed in the
+								<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+									<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+									function</a>
+								call.</p>
+							<p>You can also call the
+								<code>SanctionsManager::GetRetrievedSanctions()</code>
+								function to access the sanctions that you copied to the sanctions vector. Make sure there are no sanction queries in progress before you call
+								<code>GetRetrievedDefinitions</code>. If there are queries in progress, the sanctions you retrieve might not include the latest updates from the active query and will therefore be outdated.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-sanctions-query-active-player-sanctions">
+										<code>EOS_Sanctions_QueryActivePlayerSanctions()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-sanctions-query-active-player-sanctions-options">
+												<code>EOS_Sanctions_QueryActivePlayerSanctionsOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-sanctions-on-query-active-player-sanctions-callback">
+												<code>EOS_Sanctions_OnQueryActivePlayerSanctionsCallback</code>
+												function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-sanctions-query-active-player-sanctions-callback-info">
+														<code>EOS_Sanctions_OnQueryActivePlayerSanctionsCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-sanctions-get-player-sanction-count">
+										<code>EOS_Sanctions_GetPlayerSanctionCount()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-sanctions-get-player-sanction-count-options">
+												<code>EOS_Sanctions_GetPlayerSanctionCountOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+										<code>EOS_Sanctions_CopyPlayerSanctionByIndex()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/functions/eos-sanctions-copy-player-sanction-by-index">
+												<code>EOS_Sanctions_CopyPlayerSanctionByIndexOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-sanctions-player-sanction">
+												<code>EOS_Sanctions_PlayerSanction</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-sanctions-player-sanction-release">
+										<code>EOS_Sanctions_PlayerSanction_Release()</code>
+										function</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/appeal-sanctions">3. Allow Players to Appeal Sanctions</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#retrieve-your-games-sanctions">Retrieve Your Game's Sanctions</a>
+								</li>
+								<li>
+									<a href="#step-a-create-a-class-to-manage-eos-sanctions">Step A: Create a Class to Manage EOS Sanctions</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-retrieve-sanctions-function">Step B: Implement Your Retrieve Sanctions Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-query-sanctions-callback-function">Step C: Implement Your Query Sanctions Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-copy-sanctions-function">Step D: Implement Your Copy Sanctions Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,7 +14,7 @@
 			<h1>BuildPatch Tool Instructions (1.6.0)</h1>
 			<h2>Setup and processing instructions for BPT 1.6.0.</h2>
 			<div>
-				<div>22 mins to read</div>
+				<div>24 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -23,14 +23,14 @@
 			<div>
 				<h2 id="overview">Overview</h2>
 			</div>
-			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely upload binary files for your product to the Dev
-				<span>
-					<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
-				</span>
-				for your product. You can then use the Artifacts and Binaries section of the Dev Portal to attach binaries to the correct artifact for your product offer and conduct testing. (For some organizations, this section may be labeled as
+			<p>The BuildPatch tool (BPT) is a command line tool that allows you to securely upload binary files for your product to the Dev sandbox for your product. You can then use the Artifacts and Binaries section of the Dev Portal to attach binaries to the correct artifact for your offer and conduct testing. (For some organizations, this section might be labeled as
 				<em>Builds</em>.) Using the
 				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">Release Management</a>
 				process, you can promote binaries uploaded via the BuildPatch tool between sandboxes.</p>
+			<div>
+				<strong>Important Note</strong>: For best results, we recommend using the most recent version of the BuildPatch Tool. To learn more, review
+				<a href="/docs/buildpatch-tool-latest">BuildPatch Tool Instructions (1.8.1)</a>.
+			</div>
 			<div>
 				<h2 id="before-you-start">Before You Start</h2>
 			</div>
@@ -38,10 +38,21 @@
 			<div>
 				<h3 id="download-the-buildpatch-tool">Download the BuildPatch Tool</h3>
 			</div>
-			<p>You can download the BuildPatch tool (BPT) from the Artifacts and Binaries page of the Dev Portal.</p>
+			<p>You can download the BuildPatch tool (BPT) from the Artifacts and Binaries page of the Dev Portal. To do this, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are on your product's Developer Portal page, in the left navigation, click
+					<strong>Epic Games Store</strong>.</li>
+				<li>In the left navigation, click
+					<strong>Artifacts and Binaries</strong>.</li>
 				<li>To the top right, click
 					<strong>Download Tool</strong>.</li>
 				<li>After the download finishes, install the tool on your local machine.</li>
@@ -55,8 +66,17 @@
 			</p>
 			<p>Any user in your organization with Owner, Admin, or Store roles can retrieve the following credentials:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Product Settings</strong>.</li>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Product Settings</strong>.</li>
 				<li>Select the
 					<strong>General</strong>
 					tab.</li>
@@ -66,25 +86,50 @@
 				<strong>Artifact Name and ID for the Offer</strong>
 			</p>
 			<ol>
-				<li>Navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
-				<li>From the list, click the name of the offer for which you wish to retrieve credentials.</li>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Product Settings</strong>.</li>
+				<li>In the left navigation, click
+					<strong>Artifacts and Binaries</strong>.</li>
+				<li>From the list, click the name of the offer for which you want to retrieve credentials.</li>
 				<li>On the Manage Artifact screen, click the
 					<strong>arrow icon</strong>
 					to the right of Edit Details.</li>
 				<li>Save the artifact name and ID.</li>
-				<li>Repeat as needed for additional offers.</li>
 			</ol>
+			<p>Repeat the above procedure as needed for additional offers.</p>
 			<p>
 				<strong>Offer IDs for the Offer</strong>
 			</p>
 			<ol>
-				<li>Navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Offers</strong>.</li>
-				<li>From the list, click the name of the offer for which you wish to retrieve credentials.</li>
-				<li>On the Offer Details screen, locate the IDs section and save the offer ID.</li>
-				<li>Repeat as needed for additional offers.</li>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Epic Games Store</strong>
+					&gt;
+					<strong>Offers</strong>.</li>
+				<li>Click the name of the offer for which you want to retrieve credentials.</li>
+				<li>In the panel on the right, scroll down to the
+					<strong>IDs</strong>
+					section and save the
+					<strong>Offer ID</strong>.</li>
 			</ol>
+			<p>Repeat the above procedure for additional offers.</p>
 			<div>
 				<h3 id="review-paths-on-the-command-line">Review Paths on the Command Line</h3>
 			</div>
@@ -143,14 +188,10 @@
 			</div>
 			<p>Extract the contents of the
 				<a href="https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/BuildPatchTool.zip">BuildPatchTool ZIP</a>
-				file to a machine that has access to the
-				<span>
-					<span aria-label="tooltip binary" tabindex="0" role="button">binary</span>
-				</span>
-				you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
+				file to a machine that has access to the binary you want to upload.  The machine will also need Internet access to communicate with the Epic backend.</p>
 			<div>
 				<p>The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file, create a private discussion using this support website:
-					<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</p>
+					<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</p>
 			</div>
 			<div>
 				<p>Examples in this document are provided for the Windows platform but will be similar on macOS and Linux.</p>
@@ -314,6 +355,37 @@
 					</tr>
 					<tr>
 						<td>
+							<code>PrereqIds</code>
+							(Optional)</td>
+						<td>A comma-separated list of identifiers, wrapped in double quotes, that the prerequisites satisfy. At install time, a machine that has all the prerequisites with these ids installed skips prerequisite installation. Documentation: Game Prerequisites Installers–<a href="/docs/epic-games-store/services/game-prereqs-installer#epic-games-launcher-via-the-buildpatchtool-command-line">Epic Games Launcher via the BuildPatchTool Command Line</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PrereqPath</code>
+							(Optional)</td>
+						<td>The prerequisite installer that you want to launch on a successful product install. Specify a path, in double quotes, relative to the build root.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PrereqArgs</code>
+							(Optional)</td>
+						<td>The command line, wrapped in double quotes, that you want to send on launch to the prerequisite installer specified in
+							<code>PrereqPath</code>. This parameter supports string replacements for
+							<code>"$[RootDirectory]"</code>
+							and
+							<code>"$[LogDirectory]"</code>. The replacements include trailing
+							<code>/</code>
+							symbols.
+							<code>RootDirectory</code>
+							is replaced with the root path of the installed product before the product executes.
+							<code>LogDirectory</code>
+							is the path to the program's log output directory. For example, you might specify this so that your prerequisite installer can create logs in that directory. You can use
+							<code>"$[Quote]"</code>
+							to get a quote character. This is important because the BPT command line already uses quotes for token parsing.</td>
+					</tr>
+					<tr>
+						<td>
 							<code>UninstallActionPath</code>
 							(Optional)</td>
 						<td>A path to the custom uninstall action executable to launch right before product uninstall, relative to the build root.</td>
@@ -375,7 +447,7 @@
 				Epic Games Store publishing tools, labeling your binary via the BuildPatch Tool is not currently supported. Instead, you can add the appropriate platforms to your artifacts through the Dev Portal. When a platform is assigned to an artifact, the artifact automatically receives the
 				<em>Live</em>
 				label. For more information, review
-				<a href="/docs/epic-games-store/store-presence/manage-artifacts#upload-the-binary">Manage Artifacts</a>
+				<a href="/docs/epic-games-store/store-presence/manage-artifacts#how-to-upload-binaries-and-configure-artifacts-and-binaries">Manage Artifacts</a>
 			</div>
 			<p>After the chunking and upload process has completed, you must apply a label to your binary to make it accessible from the Epic Games Launcher. Applying a label to a binary associates a label name (e.g. "Live") and a platform (e.g. "Win32") with a single binary version. Multiple labels can be assigned to the same binary.</p>
 			<p>The EpicGamesLauncher client will only ever query for binaries associated with the platform on which it is currently running. For example, the Win32 Launcher client will only ever query with a platform of Win32, so it will never receive binaries labeled with Windows or Mac. A Windows x64 client will only query for binaries using the Windows platform, and so on. If you do actually have a single binary that is compatible with multiple platforms (for example, one compatible with both Windows and Win32), then you can apply two labels (one for each platform) to the same binary to make it available for both platforms without having to re-upload it.</p>
@@ -705,11 +777,7 @@
 			</div>
 			<p>The
 				<em>CopyBinary</em>
-				mode allows you to copy binaries from one
-				<span>
-					<span aria-label="tooltip artifact" tabindex="0" role="button">artifact</span>
-				</span>
-				to another without having to re-upload the binary. This is useful when you want to move a final binary from a Staging artifact to a Live artifact.</p>
+				mode allows you to copy binaries from one artifact to another without having to re-upload the binary. This is useful when you want to move a final binary from a Staging artifact to a Live artifact.</p>
 			<div>
 				<section>
 					<pre>
@@ -1103,15 +1171,13 @@
 			<div>
 				<h2 id="downloadable-content-dlc">Downloadable Content (DLC)</h2>
 			</div>
-			<p>The Epic Games store provides full support for Downloadable Content (DLC).
-				<strong>Please contact your Epic Service Delivery Team representatives to get artifacts for your DLC items provisioned, as they require additional up-front configuration that differs from non-DLC items.</strong>
-			</p>
+			<p>The Epic Games store provides full support for Downloadable Content (DLC).</p>
 			<p>Once your DLC artifacts have been pre-provisioned in the Epic backend, the operation of BuildPatchTool is exactly the same for DLC as it is for full games, with the following additional notes:</p>
 			<p>Each item of DLC will be given its own, unique Artifact ID. Accordingly, each item of DLC will need its own patch generation process to be executed with the appropriate Artifact ID specified. Because each is generated separately, then it is important when performing patch generation for a DLC item that the base game, and all other DLC items are not present at the same time in the folder specified in the BuildRoot parameter during the patch generation process. Alternatively, if the BuildRoot folder does contain the main game or other DLC items, then a -FileIgnoreList parameter can be specified on the BuildPatchTool command line to exclude them from being included in the generated binary (see the
 				<a href="#how-to-upload-a-binary">How to Upload a Binary</a>
 				for more details).</p>
 			<p>When installed on end users’ machines, the main game and all items of related DLC will be installed into the same directory. This leads to the restriction that there must be no files within the main game or any item of DLC which share a common file path. The BuildPatchTool will perform checks on this and prevent the patch generation process from occurring if there are any files which violate this rule. This means that the base game must be able to locate installed DLC by relative path from its install location.</p>
-			<p>In the short-term, Artifact IDs for DLC items will be allocated to you by Epic, and the association between the main game and the DLC item will be provisioned as part of that process. Longer term, we will look to incorporate this provisioning into a self-service operation on the Developer Portal.</p>
+			<p>In the short-term, Artifact IDs for DLC items will be allocated to you by Epic, and the association between the main game and the DLC item will be provisioned as part of that process. Longer term, we will look to incorporate this provisioning into a self-service operation in the Developer Portal.</p>
 			<div>
 				<h2 id="troubleshooting-common-errors">Troubleshooting Common Errors</h2>
 			</div>
@@ -1227,133 +1293,138 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#before-you-start">Before You Start</a>
-					</li>
-					<li>
-						<a href="#download-the-buildpatch-tool">Download the BuildPatch Tool</a>
-					</li>
-					<li>
-						<a href="#retrieve-credential-ids">Retrieve Credential IDs</a>
-					</li>
-					<li>
-						<a href="#review-paths-on-the-command-line">Review Paths on the Command Line</a>
-					</li>
-					<li>
-						<a href="#using-the-buildpatch-tool">Using the BuildPatch Tool</a>
-					</li>
-					<li>
-						<a href="#initial-setup">Initial Setup</a>
-					</li>
-					<li>
-						<a href="#authentication">Authentication</a>
-					</li>
-					<li>
-						<a href="#how-to-upload-a-binary">How to Upload a Binary</a>
-					</li>
-					<li>
-						<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
-					</li>
-					<li>
-						<a href="#example-entries">Example entries</a>
-					</li>
-					<li>
-						<a href="#setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</a>
-					</li>
-					<li>
-						<a href="#how-to-label-a-binary">How to Label a Binary</a>
-					</li>
-					<li>
-						<a href="#labelbinary-mode">LabelBinary mode:</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#how-to-unlabel-a-binary">How to Unlabel a Binary</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-1">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#how-to-list-existing-binaries">How to List Existing Binaries</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-2">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#how-to-delete-a-binary">How to Delete a Binary</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-3">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#how-to-copy-a-binary">How to Copy a Binary</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-4">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#how-to-diff-binaries">How to Diff Binaries</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-5">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#how-to-get-binary-metadata">How to Get Binary Metadata</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-6">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#reducing-update-size">Reducing Update Size</a>
-					</li>
-					<li>
-						<a href="#description-of-parameters-7">Description of parameters:</a>
-					</li>
-					<li>
-						<a href="#example-output">Example output:</a>
-					</li>
-					<li>
-						<a href="#downloadable-content-dlc">Downloadable Content (DLC)</a>
-					</li>
-					<li>
-						<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
-					</li>
-					<li>
-						<a href="#logs">Logs</a>
-					</li>
-					<li>
-						<a href="#getting-started">Getting Started</a>
-					</li>
-					<li>
-						<a href="#common-errors">Common errors</a>
-					</li>
-					<li>
-						<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</a>
-					</li>
-					<li>
-						<a href="#error---missing-parameters">Error - Missing parameters</a>
-					</li>
-					<li>
-						<a href="#error---missing-credentials">Error - Missing credentials</a>
-					</li>
-					<li>
-						<a href="#error---authentication-error">Error - Authentication error</a>
-					</li>
-					<li>
-						<a href="#error---unexpected-error">Error - Unexpected error</a>
-					</li>
-					<li>
-						<a href="#additional-considerations">Additional Considerations</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#overview">Overview</a>
+								</li>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#download-the-buildpatch-tool">Download the BuildPatch Tool</a>
+								</li>
+								<li>
+									<a href="#retrieve-credential-ids">Retrieve Credential IDs</a>
+								</li>
+								<li>
+									<a href="#review-paths-on-the-command-line">Review Paths on the Command Line</a>
+								</li>
+								<li>
+									<a href="#using-the-buildpatch-tool">Using the BuildPatch Tool</a>
+								</li>
+								<li>
+									<a href="#initial-setup">Initial Setup</a>
+								</li>
+								<li>
+									<a href="#authentication">Authentication</a>
+								</li>
+								<li>
+									<a href="#how-to-upload-a-binary">How to Upload a Binary</a>
+								</li>
+								<li>
+									<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
+								</li>
+								<li>
+									<a href="#example-entries">Example entries</a>
+								</li>
+								<li>
+									<a href="#setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</a>
+								</li>
+								<li>
+									<a href="#how-to-label-a-binary">How to Label a Binary</a>
+								</li>
+								<li>
+									<a href="#labelbinary-mode">LabelBinary mode:</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#how-to-unlabel-a-binary">How to Unlabel a Binary</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-1">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#how-to-list-existing-binaries">How to List Existing Binaries</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-2">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#how-to-delete-a-binary">How to Delete a Binary</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-3">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#how-to-copy-a-binary">How to Copy a Binary</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-4">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#how-to-diff-binaries">How to Diff Binaries</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-5">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#how-to-get-binary-metadata">How to Get Binary Metadata</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-6">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#reducing-update-size">Reducing Update Size</a>
+								</li>
+								<li>
+									<a href="#description-of-parameters-7">Description of parameters:</a>
+								</li>
+								<li>
+									<a href="#example-output">Example output:</a>
+								</li>
+								<li>
+									<a href="#downloadable-content-dlc">Downloadable Content (DLC)</a>
+								</li>
+								<li>
+									<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
+								</li>
+								<li>
+									<a href="#logs">Logs</a>
+								</li>
+								<li>
+									<a href="#getting-started">Getting Started</a>
+								</li>
+								<li>
+									<a href="#common-errors">Common errors</a>
+								</li>
+								<li>
+									<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</a>
+								</li>
+								<li>
+									<a href="#error---missing-parameters">Error - Missing parameters</a>
+								</li>
+								<li>
+									<a href="#error---missing-credentials">Error - Missing credentials</a>
+								</li>
+								<li>
+									<a href="#error---authentication-error">Error - Authentication error</a>
+								</li>
+								<li>
+									<a href="#error---unexpected-error">Error - Unexpected error</a>
+								</li>
+								<li>
+									<a href="#additional-considerations">Additional Considerations</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

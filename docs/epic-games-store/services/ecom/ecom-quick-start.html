@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -12,7 +12,7 @@
 	<section>
 		<div>
 			<h1>Ecommerce Get Started</h1>
-			<h2>Supporting guide covering ecommerce capabilities, essential terminology, and common use cases for the Ecommerce API.</h2>
+			<h2>Information about ecommerce capabilities, essential terminology, and common use cases for the Ecommerce API.</h2>
 			<div>
 				<div>12 mins to read</div>
 			</div>
@@ -20,17 +20,15 @@
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="ecommerce-overview">Ecommerce overview</h2>
-			</div>
 			<p>The Epic Games Store offers an extensive set of ecommerce capabilities that enable you to manage purchasable or redeemable items related to your game, such as downloadable content (DLC) or virtual currency. The system is set up as a hierarchy, so you can optimize bundles within your product offerings. The information below expands upon this system, outlining essential terminology and providing common use cases of how you can use the Ecommerce API to support in-game and back-end functionality.</p>
-			<p>See the
-				<a href="/docs/api-ref/interfaces/ecom">API reference</a>
-				for further guidance to the Ecommerce API.</p>
+			<p>For more information on how to use the Ecom Interface, see the following section of the Ecommerce -
+				<em>Ecom Interface Overview</em>
+				page:
+				<a href="/docs/epic-games-store/services/ecom/ecom-overview#set-up-requirements-before-you-start">Set-Up Requirements Before You Start</a>.</p>
 			<div>
-				<h3 id="example-ecommerce-configuration-and-terminology">Example ecommerce configuration and terminology</h3>
+				<h3 id="example-ecommerce-configuration-and-terminology">Example Ecommerce Configuration and Terminology</h3>
 			</div>
-			<p>To help illustrate the Epic Games Store ecommerce capabilities, consider the example configuration below:</p>
+			<p>To help illustrate the Epic Games Store ecommerce capabilities, consider the following example configuration:</p>
 			<div tabindex="0" aria-label=" image, press Enter to open full size">
 				<div>
 					<span>
@@ -50,84 +48,73 @@
 			<ul>
 				<li>
 					<p>
-						<strong>Catalog offers</strong>: A catalog offer (also referred to as offer) is a pairing of a catalog item and an associated price (which can be 0). Users can purchase offers in the Epic Games Store. When a user buys an offer, the back-end service grants an
-						<span>
-							<span aria-label="tooltip entitlement" tabindex="0" role="button">entitlement</span>
-						</span>
-						to the user for each of the items contained within the offer.</p>
+						<strong>Offers</strong>: An offer (also known as a "catalog offer") is a pairing of an audience item (also known as a catalog item) and an associated price (which can be 0). Users can purchase offers in the Epic Games Store. When a user buys an offer, the back-end service grants an entitlement to the user for each of the items contained within the offer.</p>
 					<ul>
 						<li>
 							<strong>Note:</strong>
-							An entitlement is anything a user owns within the Epic Games Store infrastructure. An entitlement can grant access to one or more catalog items.</li>
+							An entitlement is anything a user owns within the Epic Games Store infrastructure. An entitlement can grant access to one or more audience items.</li>
 					</ul>
 				</li>
 				<li>
 					<p>
-						<strong>Catalog items</strong>: A catalog item (also referred to as
-						<span>
-							<span aria-label="tooltip audience" tabindex="0" role="button">audience</span>
-						</span>) can represent an entire game, virtual goods like in-game currency or weapon skins, or other types of downloadable content. The service uses catalog items to define how to grant entitlements to users. An entitlement is tied directly to a single  catalog item, which in turn may grant ownership rights to additional catalog items.</p>
+						<strong>Audience items</strong>: An audience item (also known as a catalog item) can represent an entire game, virtual goods like in-game currency or weapon skins, or other types of downloadable content. The service uses audience items to define how to grant entitlements to users. An entitlement is tied directly to a single audience item, which in turn might grant ownership rights to additional audience items.</p>
 					<ul>
 						<li>
 							<strong>Tip:</strong>
-							You can configure catalog items to grant other catalog items. This lets you update associated offers over time. For example, you can allow season pass owners to seamlessly gain ownership rights for new DLC when it is released.</li>
+							You can configure audience items to grant other audience items. This lets you update associated offers over time. For example, you can allow season pass owners to seamlessly gain ownership rights for new DLC when it is released.</li>
 					</ul>
 				</li>
 				<li>
 					<p>
-						<strong>Library items</strong>: A library item (also referred to as game item) is a type of catalog item that the Epic Games Store infrastructure uses to configure additional properties of that catalog item, such as an
-						<span>
-							<span aria-label="tooltip artifact" tabindex="0" role="button">artifact</span>
-						</span>
-						ID or cloud save configuration. A Library item is always linked to a catalog item.</p>
+						<strong>Library items</strong>: A library item (also referred to as game item) is a type of audience item (also known as a catalog item) that the Epic Games Store infrastructure uses to configure additional properties of that audience item, such as an artifact ID or cloud save configuration. A Library item is always linked to an audience item.</p>
 					<ul>
 						<li>
 							<strong>Note</strong>
 							Artifacts represent your game's downloadable or playable content such as game clients and DLC. Artifacts are linked to library items. You can configure which binaries are linked to an artifact, determining the content that the Epic Games Launcher downloads and installs. Binaries are uploaded with the
-							<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160">BuildPatch Tool</a>.</li>
+							<a href="/docs/buildpatch-tool-latest">BuildPatch Tool</a>.</li>
 					</ul>
 				</li>
 			</ul>
-			<p>Catalog offers and catalog items are exposed via the Epic Online Services SDK Ecom Interface (or
-				<a href="/docs/web-api-ref/ecom-web-apis">Web API</a>), which enables you to query all catalog offers and items configured for your product, show in-game checkout flows for catalog offers, as well as query ownership information for catalog items and entitlements.</p>
+			<p>Offers and audience items (also known as catalog items) are exposed via the Epic Online Services SDK Ecom Interface (or
+				<a href="/docs/web-api-ref/ecom-web-apis">Web API</a>), which enables you to query all offers and items configured for your product, show in-game checkout flows for offers, as well as query ownership information for audience items and entitlements.</p>
 			<p>In our example configuration, we are set up with four offers for our product in the Live sandbox:</p>
 			<ul>
 				<li>
 					<p>
-						<strong>Base game offer</strong>: The catalog offer for the base edition of our game. The base game offer is a durable purchase, meaning the player permanently owns it after purchase.This offer consists of a single catalog item, which in turn has a child library item:</p>
+						<strong>Base game offer</strong>: The offer for the base edition of our game. The base game offer is a durable purchase, meaning the player permanently owns it after purchase. This offer consists of a single audience item (also known as a catalog item), which in turn has a child library item:</p>
 					<ul>
 						<li>
-							<strong>Base game item</strong>: The catalog item for the base edition of our game. This catalog item is used to verify ownership of the base game as described in the use-cases
+							<strong>Base game item</strong>: The audience item for the base edition of our game. This audience item is used to verify ownership of the base game as described in the use-cases
 							<a href="#ecommerce-api-use-cases">below</a>.</li>
 						<li>
-							<strong>Base game library item</strong>: The catalog item used to configure the base game artifact, cloud save game configuration, or other game properties.</li>
+							<strong>Base game library item</strong>: The audience item used to configure the base game artifact, cloud save game configuration, or other game properties.</li>
 					</ul>
 				</li>
 				<li>
 					<p>
-						<strong>Deluxe game offer</strong>: The catalog offer for the deluxe edition of our game. This offer is a durable purchase and consists of the following catalog item:</p>
+						<strong>Deluxe game offer</strong>: The offer for the deluxe edition of our game. This offer is a durable purchase and consists of the following audience item:</p>
 					<ul>
 						<li>
-							<strong>Deluxe game item</strong>: The catalog item for the deluxe edition of our game that  can be used to verify ownership of this edition. The deluxe game item is not linked to a library item of its own and is instead linked to the Base game item (described above) and the DLC item (described below).</li>
+							<strong>Deluxe game item</strong>: The audience item for the deluxe edition of our game that  can be used to verify ownership of this edition. The deluxe game item is not linked to a library item of its own and is instead linked to the Base game item (described above) and the DLC item (described below).</li>
 					</ul>
 				</li>
 				<li>
 					<p>
-						<strong>DLC offer</strong>: The catalog offer for the DLC of our game; this offer is a durable purchase.</p>
+						<strong>DLC offer</strong>: The offer for the DLC of our game; this offer is a durable purchase.</p>
 					<ul>
 						<li>
-							<strong>DLC item</strong>: The catalog item for the DLC of our game. This catalog item is used to verify ownership of the DLC.</li>
+							<strong>DLC item</strong>: The audience item for the DLC of our game. This audience item is used to verify ownership of the DLC.</li>
 						<li>
-							<strong>DLC library item</strong>: The catalog item used to configure the DLC artifact or other properties.</li>
+							<strong>DLC library item</strong>: The audience item used to configure the DLC artifact or other properties.</li>
 					</ul>
 				</li>
 				<li>
 					<p>
 						<strong>100 coins</strong>
-						offer: The catalog offer for 100 coins of in-game currency. This offer is a consumable purchase, meaning the player can purchase it multiple times and it can be fulfilled in game for a consumable item.</p>
+						offer: The offer for 100 coins of in-game currency. This offer is a consumable purchase, meaning the player can purchase it multiple times and it can be fulfilled in game for a consumable item.</p>
 					<ul>
 						<li>
-							<strong>100 coins item</strong>: The catalog item for our 100 coins offer. This catalog item is used to retrieve additional information about our offer. However, it is not used to verify ownership, as the offer is a consumable purchase.</li>
+							<strong>100 coins item</strong>: The audience item for our 100 coins offer. This audience item is used to retrieve additional information about our offer. However, it is not used to verify ownership, as the offer is a consumable purchase.</li>
 					</ul>
 				</li>
 			</ul>
@@ -135,24 +122,24 @@
 				<strong>Note:</strong>
 				Consumable items cannot be granted through purchase of another offer. In other words, if you want the Deluxe game offer to grant players 100 coins as part of the purchase, you will need to incorporate in-game logic that provides the coins to players, as the 100 coins offer will not be displayed in the "Included offers" section of the Deluxe game.</p>
 			<div>
-				<h2 id="ecommerce-api-use-cases">Ecommerce API use-cases</h2>
+				<h2 id="ecommerce-api-use-cases">Ecommerce API Use-Cases</h2>
 			</div>
 			<p>The sections below outline common use cases for how the Ecommerce API can be used to support in-game or back-end functionality.</p>
 			<div>
-				<h3 id="display-catalog-offers-in-game-to-enable-purchasing">Display catalog offers in game to enable purchasing</h3>
+				<h3 id="display-offers-in-game-to-enable-purchasing">Display Offers In-Game to Enable Purchasing</h3>
 			</div>
-			<p>To display catalog offers in-game for users to purchase, the following flow is used in combination with the Epic Online Services SDK.</p>
+			<p>To display offers in-game for users to purchase, the following flow is used in combination with the Epic Online Services SDK.</p>
 			<ol>
 				<li>Authenticate the user using
 					<a href="/docs/api-ref/functions/eos-auth-login">EOS_Auth_Login</a>, as described in the
-					<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
 					documentation. Typically this is done using the ExchangeCode provided by the Epic Games Launcher, as described
-					<a href="/docs/epic-account-services/auth/auth-interface#epic-games-launcher">here</a>.</li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference#epic-games-launcher">here</a>.</li>
 				<li>Use the
 					<a href="/docs/api-ref/functions/eos-ecom-query-offers">EOS_Ecom_QueryOffers</a>
 					API, as described in the
 					<a href="/docs/epic-games-store/services/ecom/ecom-overview#presenting-the-stores-catalog">Ecom Interface</a>
-					documentation, to retrieve a list of available catalog offers. Follow the described pattern to determine the offer count and copy the offers from the SDK cache into your own collection.
+					documentation, to retrieve a list of available offers. Follow the described pattern to determine the offer count and copy the offers from the SDK cache into your own collection.
 					<ul>
 						<li>In our example configuration above, we would retrieve a list of the following offers:
 							<ul>
@@ -172,13 +159,13 @@
 				<code>bIsAvailableForPurchases</code>
 				property of
 				<code>EOS_Ecom_CatalogOffer</code>). To use this flow, your game must be configured to use the
-				<a href="/docs/epic-account-services/social-overlay-overview">Epic Online Services Social Overlay</a>.</p>
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay">Epic Online Services &gt; Accounts And Social &gt; Social Overlay</a>.</p>
 			<ol>
 				<li>Use the
 					<a href="/docs/api-ref/functions/eos-ecom-checkout">EOS_Ecom_Checkout</a>
 					API, as described in the
 					<a href="/docs/epic-games-store/services/ecom/ecom-overview#buying-from-the-store">Ecom Interface</a>
-					documentation, and pass in the catalog offer IDs for each offer the user wishes to purchase.</li>
+					documentation, and pass in the offer IDs for each offer the user wishes to purchase.</li>
 				<li>Use the
 					<code>TransactionId</code>
 					returned in the
@@ -190,7 +177,7 @@
 				<code>EOS_Ecom_Checkout</code>
 				API can be for either durable or consumable purchases. To learn more, reference the following scenarios to verify the purchases as necessary.</p>
 			<div>
-				<h3 id="verify-purchases-securely-using-your-own-back-end-service">Verify purchases securely using your own back-end service</h3>
+				<h3 id="verify-purchases-securely-using-your-own-back-end-service">Verify Purchases Securely Using Your Own Back-End Service</h3>
 			</div>
 			<p>The recommended approach to verify player purchases is from your own back-end service, as this is not susceptible to malicious behavior from users. If you do not have a custom back-end service to implement this verification, refer to the
 				<a href="#verify-purchased-durable-content-eg-dlc">Verify purchased durable content</a>
@@ -200,7 +187,7 @@
 			<p>To perform verification through your back-end service, use one of the following methods that leverage the
 				<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web APIs</a>:</p>
 			<div>
-				<h4 id="direct-verification">Direct verification</h4>
+				<h4 id="direct-verification">Direct Verification</h4>
 			</div>
 			<p>Direct verification refers to directly using an access token to make calls to the Ecom Web APIs from your back-end service.</p>
 			<ol>
@@ -216,7 +203,7 @@
 					APIs.</li>
 			</ol>
 			<div>
-				<h4 id="token-based-verification">Token-based verification</h4>
+				<h4 id="token-based-verification">Token-Based Verification</h4>
 			</div>
 			<p>Token-based verification refers to verifying the authenticity of a JSON Web Token (JWT) generated by the game client, which is then passed to your back-end service. With this method, your back-end service only needs to retrieve a public key once (or until the key is invalidated) to verify multiple tokens generated by the game client.</p>
 			<ul>
@@ -225,7 +212,7 @@
 					<a href="/docs/epic-games-store/services/ecom/ecom-overview#token-based-ownership-verification">Ecom Interface</a>
 					documentation to generate a JWT in the game client code, using the
 					<a href="/docs/api-ref/functions/eos-ecom-query-ownership-token">EOS_Ecom_QueryOwnershipToken</a>
-					API. This JWT can contain ownership information for multiple catalog items.</li>
+					API. This JWT can contain ownership information for multiple audience items (also known as "catalog items").</li>
 				<li>
 					<strong>For consumable content (e.g. in-game currency)</strong>: Follow the instructions in the
 					<a href="/docs/epic-games-store/services/ecom/ecom-overview#token-based-entitlement-enumeration">Ecom Interface</a>
@@ -237,15 +224,22 @@
 				<a href="/docs/web-api-ref/ecom-web-apis">Ecom Web API</a>
 				documentation to verify that the token is genuine.</p>
 			<div>
-				<h3 id="verify-purchased-durable-content-eg-dlc">Verify purchased durable content (e.g. DLC)</h3>
+				<h3 id="verify-purchased-durable-content-eg-dlc">Verify Purchased Durable Content (e.g. DLC)</h3>
 			</div>
 			<p>The recommended approach to verify player purchases is from your own back-end service, as this is not susceptible to malicious behavior from users. Please refer to the
 				<a href="#verify-purchases-securely-using-your-own-back-end-service">Verify purchases securely using your own back-end service</a>
 				use-case for details.</p>
 			<p>To verify durable content within your game client, use the
 				<a href="/docs/api-ref/functions/eos-ecom-query-ownership">EOS_Ecom_QueryOwnership</a>
-				API. This API verifies ownership by passing in a collection of catalog item IDs. This ownership validation automatically takes relationships between catalog items into account.</p>
-			<p>In our example configuration, a user can purchase the Deluxe game offer or the Base game offer, and both result in a successful validation of the Base game item, as each offer is associated with the Base game item. Similarly, a purchase of the Deluxe game offer results in successful validation of the DLC item, as that catalog item also has a relationship to the Deluxe game offer.</p>
+				API. This API verifies ownership by passing in a collection of catalog item IDs (catalog items are also known as audience items). This ownership validation automatically takes relationships between audience items into account.</p>
+			<p>
+				<strong>Note:</strong>
+				To verify consumable content within your game client, use the
+				<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">EOS_Ecom_QueryEntitlements</a>
+				API. For more information, see the section on
+				<a href="#verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify and fulfill consumable purchases</a>
+				further down on the page.</p>
+			<p>In our example configuration, a user can purchase the Deluxe game offer or the Base game offer, and both result in a successful validation of the Base game item, as each offer is associated with the Base game item. Similarly, a purchase of the Deluxe game offer results in successful validation of the DLC item, as that audience item also has a relationship to the Deluxe game offer.</p>
 			<p>The following flow is used to verify durable content via the
 				<a href="/docs/api-ref/functions/eos-ecom-query-ownership">EOS_Ecom_QueryOwnership</a>
 				API:</p>
@@ -253,23 +247,23 @@
 				<li>
 					<p>Authenticate the user using
 						<a href="/docs/api-ref/functions/eos-auth-login">EOS_Auth_Login</a>, as described in the
-						<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+						<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
 						documentation. Typically this is done using the ExchangeCode provided by the Epic Games Launcher, as described
-						<a href="/docs/epic-account-services/auth/auth-interface#epic-games-launcher">here</a>.</p>
+						<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference#epic-games-launcher">here</a>.</p>
 				</li>
 				<li>
 					<p>Use the
 						<a href="/docs/api-ref/functions/eos-ecom-query-offers">EOS_Ecom_QueryOffers</a>
 						API, as described in the
 						<a href="/docs/epic-games-store/services/ecom/ecom-overview#presenting-the-stores-catalog">Ecom Interface</a>
-						documentation, to retrieve a list of available catalog offers. Follow the described pattern to determine the offer count and copy the offers from the SDK cache into your own collection.</p>
+						documentation, to retrieve a list of available offers. Follow the described pattern to determine the offer count and copy the offers from the SDK cache into your own collection.</p>
 				</li>
 				<li>
 					<p>Follow the instructions in the
 						<a href="/docs/epic-games-store/services/ecom/ecom-overview#presenting-the-stores-catalog">Ecom Interface</a>
-						documentation to iterate through the collection of offers to find their associated catalog items (<a href="/docs/api-ref/structs/eos-ecom-catalog-item">EOS_Ecom_CatalogItem</a>).</p>
+						documentation to iterate through the collection of offers to find their associated audience items (also known as catalog items) (<a href="/docs/api-ref/structs/eos-ecom-catalog-item">EOS_Ecom_CatalogItem</a>).</p>
 					<ul>
-						<li>In our example configuration, we would get the catalog item contained in each catalog offer:
+						<li>In our example configuration, we would get the audience item contained in each offer:
 							<ul>
 								<li>
 									<em>Base game offer → Base game item</em>
@@ -295,7 +289,7 @@
 				<li>
 					<p>Use the
 						<a href="/docs/api-ref/functions/eos-ecom-query-ownership">EOS_Ecom_QueryOwnership</a>
-						API to query for ownership information of a user, using the catalog item IDs. The callback will contain an array of
+						API to query for ownership information of a user, using the catalog item IDs (catalog items are also known as audience items). The callback will contain an array of
 						<a href="/docs/api-ref/structs/eos-ecom-item-ownership">EOS_Ecom_ItemOwnership</a>
 						members for each catalog item ID passed in, with corresponding
 						<a href="/docs/api-ref/enums/eos-e-ownership-status">EOS_Ecom_Owned</a>
@@ -309,7 +303,7 @@
 				</li>
 			</ol>
 			<div>
-				<h3 id="verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify and fulfill consumable purchases (e.g. in-game currency)</h3>
+				<h3 id="verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify and Fulfill Consumable Purchases (e.g. In-Game Currency)</h3>
 			</div>
 			<p>Consumable purchases can be verified and consumed using the
 				<a href="/docs/api-ref/functions/eos-ecom-query-entitlements">EOS_Ecom_QueryEntitlements</a>
@@ -321,25 +315,32 @@
 				<code>EntitlementNames</code>, which are equal to
 				<code>CatalogItem</code>
 				IDs.</p>
+			<p>
+				<strong>Note:</strong>
+				To verify durable content in your game client, use the
+				<a href="/docs/api-ref/functions/eos-ecom-query-ownership">EOS_Ecom_QueryOwnership</a>
+				API. For more information, see the section on
+				<a href="#verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify purchased durable content</a>
+				on this page.</p>
 			<p>In our example configuration, a user can purchase the 100 coins offer one or more times, which results in entitlements that can be redeemed to fulfill these coin offers and add the coins to the player's account.</p>
 			<p>The
 				<code>EOS_Ecom_QueryEntitlements</code>
 				API should
 				<em>not</em>
-				be used to verify purchased durable content, as it does not take into account the relationship between associated catalog items. As in our example configuration, a user can purchase the Deluxe game offer which consists of both the Base game item and DLC item. In this scenario, the
+				be used to verify purchased durable content, as it does not take into account the relationship between associated audience items (also known as catalog items). As in our example configuration, a user can purchase the Deluxe game offer which consists of both the Base game item and DLC item. In this scenario, the
 				<code>EOS_Ecom_QueryEntitlements</code>
 				API would only return an entitlement for Deluxe game item, ignoring the relationship with the Base game item or DLC item.</p>
 			<ol>
 				<li>Authenticate the user using
 					<a href="/docs/api-ref/functions/eos-auth-login">EOS_Auth_Login</a>, as described in the
-					<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
 					documentation. Typically this is done using the
 					<code>ExchangeCode</code>
 					provided by the Epic Games Launcher, as described
-					<a href="/docs/epic-account-services/auth/auth-interface#epic-games-launcher">here</a>.</li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference#epic-games-launcher">here</a>.</li>
 				<li>If you know the entitlement names you want to query for, proceed to step 3. Otherwise follow steps one and two of the
 					<a href="#verify-purchased-durable-content-eg-dlc">Verify purchased durable content</a>
-					(e.g. DLC) use-case above to retrieve the IDs for each applicable catalog item. The catalog item IDs retrieved equal the entitlement names required for this process.</li>
+					(e.g. DLC) use-case above to retrieve the IDs for each applicable catalog item. The catalog item IDs retrieved equal the entitlement names required for this process. Catalog items are also known as audience items.</li>
 				<li>Follow the instructions in the
 					<a href="/docs/epic-games-store/services/ecom/ecom-overview#fulfilling-purchases">Ecom Interface</a>
 					documentation to call
@@ -383,8 +384,8 @@
 							in the left-side menu. Confirm that the Epic Games account that you want to use is listed in the table for the organization.</li>
 					</ul>
 				</li>
-				<li>If you use Epic Games Store's Self Publishing Tools, you must test in-game purchases in your dev or stage sandbox. You can't test in-game purchases in your live sandbox.</li>
-				<li>If you don't use Self Publishing Tools, the in-game item must have an effective date that is set for the future.</li>
+				<li>If you use Epic Games Store's publishing tools, you must test in-game purchases in your dev or stage sandbox. You can't test in-game purchases in your live sandbox.</li>
+				<li>If you don't use Epic Games Store's publishing tools, the in-game item must have an effective date that is set for the future.</li>
 			</ul>
 			<div role="alert">
 				<div></div>
@@ -423,43 +424,45 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#ecommerce-overview">Ecommerce overview</a>
-					</li>
-					<li>
-						<a href="#example-ecommerce-configuration-and-terminology">Example ecommerce configuration and terminology</a>
-					</li>
-					<li>
-						<a href="#ecommerce-api-use-cases">Ecommerce API use-cases</a>
-					</li>
-					<li>
-						<a href="#display-catalog-offers-in-game-to-enable-purchasing">Display catalog offers in game to enable purchasing</a>
-					</li>
-					<li>
-						<a href="#verify-purchases-securely-using-your-own-back-end-service">Verify purchases securely using your own back-end service</a>
-					</li>
-					<li>
-						<a href="#direct-verification">Direct verification</a>
-					</li>
-					<li>
-						<a href="#token-based-verification">Token-based verification</a>
-					</li>
-					<li>
-						<a href="#verify-purchased-durable-content-eg-dlc">Verify purchased durable content (e.g. DLC)</a>
-					</li>
-					<li>
-						<a href="#verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify and fulfill consumable purchases (e.g. in-game currency)</a>
-					</li>
-					<li>
-						<a href="#test-the-in-game-purchase-flow">Test the In-Game Purchase Flow</a>
-					</li>
-					<li>
-						<a href="#troubleshooting-errors">Troubleshooting Errors</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#example-ecommerce-configuration-and-terminology">Example Ecommerce Configuration and Terminology</a>
+								</li>
+								<li>
+									<a href="#ecommerce-api-use-cases">Ecommerce API Use-Cases</a>
+								</li>
+								<li>
+									<a href="#display-offers-in-game-to-enable-purchasing">Display Offers In-Game to Enable Purchasing</a>
+								</li>
+								<li>
+									<a href="#verify-purchases-securely-using-your-own-back-end-service">Verify Purchases Securely Using Your Own Back-End Service</a>
+								</li>
+								<li>
+									<a href="#direct-verification">Direct Verification</a>
+								</li>
+								<li>
+									<a href="#token-based-verification">Token-Based Verification</a>
+								</li>
+								<li>
+									<a href="#verify-purchased-durable-content-eg-dlc">Verify Purchased Durable Content (e.g. DLC)</a>
+								</li>
+								<li>
+									<a href="#verify-and-fulfill-consumable-purchases-eg-in-game-currency">Verify and Fulfill Consumable Purchases (e.g. In-Game Currency)</a>
+								</li>
+								<li>
+									<a href="#test-the-in-game-purchase-flow">Test the In-Game Purchase Flow</a>
+								</li>
+								<li>
+									<a href="#troubleshooting-errors">Troubleshooting Errors</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

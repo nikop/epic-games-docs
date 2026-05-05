@@ -1,0 +1,195 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>P2P Sample</h1>
+			<h2>Guide to the P2P sample, also known as the "P2P NAT" sample.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>The P2P NAT sample demonstrates peer-to-peer communication between players with NAT traversal in the P2P Interface. To help determine if a player can easily connect to peers, the P2P Interface can query the local player's NAT Type in relation to the internet. The sample shows this status for the signed-in player. For information on how to implement and use the Peer-to-Peer (P2P) Interface, see
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface">Multiplayer &gt; Peer-to-Peer (P2P) Interface</a>.</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="https://static-assets-prod.epicgames.com/eos-docs/game-services/p-2-p/sample/p-2-p-sample_-01.png" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>Example of the P2P NAT sample using P2P NAT for text chat.</p>
+				</figcaption>
+			</div>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>The sample program uses the Auth Interface to authenticate the local player for demonstration purposes. To use the Auth Interface, you must set up your game (or program in this case) as an EOS Epic Account Services application and assign client credentials to the application. You can use the SDK functionality that the sample program demonstrates with any of the supported identity providers for player authentication. You can use the SDK functionality that the sample program demonstrates with any of the supported identity providers for player authentication.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Clients and Client Policy</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="sign-in">Sign In</h2>
+			</div>
+			<p>From the right-side panel, click one of these options to sign in:</p>
+			<ul>
+				<li>
+					<strong>Dev Auth</strong>: Enter the host port and credentials that you configured for the Developer Authentication Tool (for example,
+					<code>127.0.0.1:8080</code>
+					if you set
+					<code>8080</code>
+					for the host port) and click
+					<strong>LOG IN</strong>. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					documentation for more information on the Developer Authentication Tool.</li>
+				<li>
+					<strong>Account Portal</strong>: Click
+					<strong>LOG IN</strong>
+					to sign in through the Account Portal with your Epic Games account credentials or a supported identity provider. See the
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					documentation for more information on identity providers.</li>
+			</ul>
+			<div>
+				<h2 id="nat-status">NAT Status</h2>
+			</div>
+			<p>After you sign in, you see one of the following NAT Statuses:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>NAT Status</th>
+						<th>Image</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Unknown</td>
+						<td>
+							<img src="https://static-assets-prod.epicgames.com/eos-docs/game-services/p-2-p/sample/p-2-pnat-status-unknown.png" alt="Unknown">
+						</td>
+						<td>NAT type either unknown (remote) or we are unable to determine it (local).</td>
+					</tr>
+					<tr>
+						<td>Open</td>
+						<td>
+							<img src="https://static-assets-prod.epicgames.com/eos-docs/game-services/p-2-p/sample/p-2-pnat-status-open.png" alt="Open">
+						</td>
+						<td>All peers can directly-connect to you.</td>
+					</tr>
+					<tr>
+						<td>Moderate</td>
+						<td>
+							<img src="https://static-assets-prod.epicgames.com/eos-docs/game-services/p-2-p/sample/p-2-pnat-status-moderate.png" alt="Moderate">
+						</td>
+						<td>You can directly-connect to other Moderate and Open peers.</td>
+					</tr>
+					<tr>
+						<td>Strict</td>
+						<td>
+							<img src="https://static-assets-prod.epicgames.com/eos-docs/game-services/p-2-p/sample/p-2-pnat-status-strict.png" alt="Strict">
+						</td>
+						<td>You can only directly-connect to Open peers.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="chat">Chat</h2>
+			</div>
+			<p>To illustrate communication between users there is a basic chat system included with this sample to allow you to attempt to send and receive messages between users. To attempt to initiate a chat with a friend, click on the "CHAT" button next to their name in the friends section as shown below:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>To chat click on the chat box (above the console) and type a message then hit ENTER to send the chat message as shown below:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>The messages sent by you and received from friends will appear in the box in the top-left as shown below:</p>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>To close the current chat session, click on the "CLOSE CHAT" button.</p>
+			<div>
+				<h2 id="console-panel">Console Panel</h2>
+			</div>
+			<p>To view log output from the program's operation, including the results of console commands, use the console panel included with this sample on the lower-left side of the user interface. You can enter console commands at the bottom of the console panel.</p>
+			<div tabindex="0" aria-label="The console panel for the P2P NAT sample. Click image to enlarge. image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="The console panel for the P2P NAT sample. Click image to enlarge." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<p>Enter the
+					<code>HELP</code>
+					command into the console to print the list of available commands.</p>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#sign-in">Sign In</a>
+								</li>
+								<li>
+									<a href="#nat-status">NAT Status</a>
+								</li>
+								<li>
+									<a href="#chat">Chat</a>
+								</li>
+								<li>
+									<a href="#console-panel">Console Panel</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,67 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Localized Rich Presence — Introduction</h1>
+			<h2>Introduction to rich presence messages, dynamic message content, and localization of these messages in your product.</h2>
+			<div>
+				<div>1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Presence messages display the online status of a player to their friends. Your product (game or other software application) can also display additional information to a player's friends. This is called rich presence. For general information on presence, see documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface">Presence Interface</a>.</p>
+			<p>In the Developer Portal, you can localize the text of rich presence messages so that each message appears in the language of the player receiving it. For each message that you want to localize, you must create a localized rich presence template. This template defines the text of the message in the languages of one or more locales.</p>
+			<p>
+				<strong>Note:</strong>
+				If you don't provide a localization for a particular locale, players in that locale see the rich presence message in the template's default locale. For example, if your localized rich presence template's default locale is English and you do not translate a rich presence message into Spanish, then Spanish-speaking users see the message in English.  You choose the default locale when you create or edit the template.</p>
+			<div>
+				<h2 id="dynamic-message-content">Dynamic Message Content</h2>
+			</div>
+			<p>Rich presence messages can optionally have dynamic content that changes depending on the player's status or activity. For example, a message might display the game level that a player is currently playing.</p>
+			<p>To include this dynamic content in your localized rich presence template, you must set up a localized presence variable for that dynamic content. For example, if you have a status message as follows:</p>
+			<p>
+				<em>Currently playing {level_id}</em>
+			</p>
+			<p>In this example,
+				<code>level_id</code>
+				is a localized presence variable. It provides the name of the game level that the player is currently playing.</p>
+			<p>In your game code, you can use the Epic EOS Account Services Presence Interface to set the dynamic content, as described below.</p>
+			<div>
+				<h2 id="how-to-set-up-rich-presence">How to Set Up Rich Presence</h2>
+			</div>
+			<p>For a guide on how to set up localized rich presence in your game, see
+				<a href="/docs/epic-online-services/accounts-and-social/localized-rich-presence/localized-rich-presence-how-to">Display Localized Rich Presence in Your Game</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#dynamic-message-content">Dynamic Message Content</a>
+								</li>
+								<li>
+									<a href="#how-to-set-up-rich-presence">How to Set Up Rich Presence</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,130 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Tool: File Decryption</h1>
+			<h2>Manage files loaded to the Title Storage and Player Data Storage associated with your game.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the File Decryption tool to encrypt or decrypt files loaded to Title Storage (documentation:
+				<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">Title Storage Interface</a>) and Player Data Storage (documentation:
+				<a href="/docs/epic-online-services/player-and-game-data/player-data-storage-interface">Player Data Storage Interface</a>).</p>
+			<p>For information on other tools that help you access, link, and delete the data stored on behalf of your players by Epic Online Services, see documentation:
+				<a href="/docs/epic-online-services/player-and-game-data/player-search">EOS Player Search</a>.</p>
+			<p>The File Decryption tool is a command-line tool that is part of the EOS SDK distribution. To encrypt a file, you must specify an encryption key. To decrypt a file, you must provide the key that you used to encrypt the file.</p>
+			<p>You can encrypt or decrypt a single file or multiple files with one command, as follows:</p>
+			<ul>
+				<li>If you specify a single file as the input, the tool encrypts or decrypts the file and outputs the result to another file.</li>
+				<li>If you specify a directory, the tool goes through all files in the directory, and its subdirectories, and places the output files in a duplicate directory structure.</li>
+			</ul>
+			<p>The Title Storage Interface maintains a local cache, so you can copy encrypted files from that cache and decrypt them.</p>
+			<p>You must set the tool into the appropriate mode for the type of files that you want to encrypt or decrypt: Title Storage or Player Data Storage.</p>
+			<ul>
+				<li>To encrypt or decrypt Title Storage files, use the
+					<code>-mode title</code>
+					parameter to enable Title Storage mode.</li>
+				<li>To encrypt or decrypt Player Data Storage files, you do not need to set the mode because the tool supports Player Data Storage files by default.</li>
+				<li>If the tool encounters a Player Data Storage file while in Title Storage mode, or a Title Storage file while in Player Data Storage mode, it skips over the file and reports an error.</li>
+			</ul>
+			<div>
+				<h2 id="parameter-listing">Parameter Listing</h2>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Effect</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>-input</code>
+							(Location)</td>
+						<td>Sets the path to the file (or directory) containing encrypted data to read</td>
+					</tr>
+					<tr>
+						<td>
+							<code>-output</code>
+							(Location)</td>
+						<td>Sets the path to the file (or directory) where the decrypted data will be written</td>
+					</tr>
+					<tr>
+						<td>
+							<code>-key</code>
+							(EncryptionKey)</td>
+						<td>Sets the encryption key to use for encrypting and decrypting operations. The key must be in hexadecimal and no more than 64 characters long</td>
+					</tr>
+					<tr>
+						<td>
+							<code>-mode</code>
+							(<code>title</code>
+							for Title Storage mode or
+							<code>user</code>
+							for Player Data Storage mode)</td>
+						<td>Enables Title Storage or Player Data Storage mode (Player Data Storage mode is the default)</td>
+					</tr>
+					<tr>
+						<td>
+							<code>-encrypt</code>
+						</td>
+						<td>Enables encryption mode, meaning the output files will be encrypted copies of the input files; if not set, the output files will be decrypted copies of the input files</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note:</strong>
+				The data format of the input files is unknown to the tool, so providing an incorrect encryption key does not cause an error. However, the output files will be unusable by the application due to the mismatch between keys.</p>
+			<div>
+				<h2 id="sample-command-lines">Sample Command Lines</h2>
+			</div>
+			<ul>
+				<li>
+					<code>FileDecryptionTool -input encrypted_ts_data -output unencrypted_ts_data -key 123abcdef -mode title</code>
+				</li>
+				<li>
+					<code>FileDecryptionTool -input raw_ts_data_file -output encrypted_ts_data_file -key 123abcdef -encrypt -mode title</code>
+				</li>
+				<li>
+					<code>FileDecryptionTool -input encrypted_pds_file -output decrypted_pds_file -key 123abcdef -user 123abcdef</code>
+				</li>
+				<li>
+					<code>FileDecryptionTool -input directory_with_encrypted_pds_files -output directory_with_decrypted_pds_files -key 123abcdef -user 123abcdef</code>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#parameter-listing">Parameter Listing</a>
+								</li>
+								<li>
+									<a href="#sample-command-lines">Sample Command Lines</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

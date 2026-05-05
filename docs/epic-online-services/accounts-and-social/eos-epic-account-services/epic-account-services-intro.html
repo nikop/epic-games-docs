@@ -1,0 +1,161 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS Epic Account Services Introduction</h1>
+			<h2>EOS Epic Account Services provide player accounts that grant access to the cross-platform Epic Games account ecosystem and the Accounts and Social EOS services.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>EOS Epic Account Services provide player accounts that enable your game's players to tap into the Epic Games account ecosystem of nearly a billion players across multiple platforms and stores and gain access to the Accounts and Social EOS services and the Epic Games Store Ecommerce (Ecom) service.</p>
+			<p>EOS Epic Account Services player accounts are either an Epic Games account or a proxy account. For games that use crossplay, proxy accounts provide an automatic Epic Games account sign-in from any external identity provider (Steam, or Xbox Live among many others) (for a full list of providers, see documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>). Proxy accounts enable players to share their data across different platforms, and to participate in cross-platform features such as matchmaking, regardless of which supported identity provider they use.</p>
+			<p>After your players sign in to Epic Account Services with a player account, they can tap into the Epic Games account ecosystem of nearly a billion players across multiple platforms and stores and gain access to the Accounts and Social EOS services and an Epic Games Store service.</p>
+			<p>
+				<strong>Type of Service</strong>
+			</p>
+			<p>EOS Epic Account Services are one of two types of EOS service, the other is EOS Game Services.</p>
+			<p>The type of service affects what player authentication interface you use and what player accounts can connect to the service.</p>
+			<p>EOS Epic Account Services use the Auth Interface to authenticate players. To use Epic Account Services, players of your game must have an Epic Games account (or a proxy account).</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-overview#type-of-service">EOS Overview &gt; Type of Service</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+				</li>
+			</ul>
+			<p>
+				<strong>Accounts and Social EOS Services</strong>
+			</p>
+			<p>The Accounts and Social group of EOS services are EOS Epic Account Services. Use the Accounts and Social EOS services to integrate the following features into your game: friend management, rich presence information, streamlined crossplay, and a unified UI and UX with the Social Overlay. Deliver a consistent, connected experience across every platform and storefront on the engine of your choice.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/introduction">Accounts and Social Introduction</a>
+				</li>
+			</ul>
+			<p>
+				<strong>Epic Games Store Service</strong>
+			</p>
+			<p>The Epic Games Store in-app purchases service (known as "Ecom" and "Ecommerce") is an EOS Epic Accounts Service.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-games-store/services/ecom">Epic Games Store &gt; Epic Games Store Services &gt; Ecommerce</a>
+					(for Epic Games Store in-app purchases)</li>
+			</ul>
+			<div>
+				<h2 id="interfaces-and-features">Interfaces and Features</h2>
+			</div>
+			<p>When you integrate a service from the Accounts and Social group of EOS services into your game, you use the following interface and tool, and complete the following process:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+					(required): Authenticate players, get authorization credentials (access tokens), and handle other Epic Games account-related interactions with Epic Online Services (EOS).</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					(optional): A developer tool to reduce iteration time. Sign in once and remain signed in, even after closing and relaunching your game and store credentials for multiple players, so you can run multiple instances of your game to test multiplayer scenarios.</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review">Brand Review</a>
+					process (required): Verify your brand with Epic Games to protect your organization, game, and players, as well as Epic Games, from malicious activities, such as brand spoofing, phishing, malware, stolen identity, and copyright infringement.</li>
+			</ul>
+			<p>You can also use the following approaches and guidelines:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/consent-management">Authorization and Consent Management</a>
+					(required): Requirements and recommendations for players' consent and how players manage permissions.</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/eos-data-privacy-visibility">Data Privacy and Visibility</a>
+					(for information): Details of Epic Games' data privacy and the different levels of player data access that your game can request.</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/epic-account-services-design-guidelines">Design Guidelines</a>
+					(required): Epic Games brand guidelines that you must follow when you integrate EOS Epic Account Services into your game.</li>
+			</ul>
+			<div>
+				<h2 id="key-information">Key Information</h2>
+			</div>
+			<ul>
+				<li>
+					<strong>EOS Game Services</strong>
+					<br>
+					Only Accounts and Social EOS Services and Epic Games Store Ecommerce (Ecom) require your game to use EOS Epic Account Services' Auth Interface for player authentication and for your game and organization to go through EOS Epic Account Services brand review. If you use any of the following groups of EOS Services, your players do not require EOS Epic Account Services, and instead they must sign in to EOS Game Services:
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/multiplayer">Multiplayer</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data">Player and Game Data</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/trust-and-safety">Trust and Safety</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Acceptable use</strong>
+					Acceptable use of EOS Epic Account Services is defined in the Service Addendum for Epic Account Services. For information on how to set up your application for Epic Account Services, see the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/getting-started">Get Started</a>
+					documentation on Epic Account Services.</li>
+				<li>
+					<strong>OpenID specification compatibility</strong>
+					The EOS Epic Account Services authentication and authorization flow is compatible with OpenID Connect Core 1.0 and Discovery 1.0 specifications with minor extensions. EOS Epic Account Services OpenID provider configuration is available at
+					<code>https://api.epicgames.dev/epic/oauth/v1/.well-known/openid-configuration</code>.</li>
+				<li>
+					<strong>Epic Games accounts vs. EOS Organization User IDs / EOS Product User IDs</strong>
+					EOS  Epic Account Services use the Epic Games account system for player identification. EOS Game Services use the EOS Organization User ID / Product User ID system for player identification. There are several commonalities and differences between the Epic Games account system and the EOS Organization User ID / Product User ID system.
+					<ul>
+						<li>Both (a) the Epic Games account system and (b) the EOS Organization User ID / EOS Product User ID system are fully cross-platform, and both support a wide variety of external authentication methods.</li>
+						<li>However, in contrast to an ecosystem-wide Epic Games account:
+							<ul>
+								<li>An EOS Organization User ID is always specific to a developer's
+									<strong>organization</strong>.</li>
+								<li>An EOS Product User ID is always specific to a
+									<strong>product</strong>.</li>
+							</ul>
+						</li>
+						<li>As a result:
+							<ul>
+								<li>The same external identity, such as a console account is always linked at most to one (a) Epic Games account at a time, but can be linked to multiple (b) EOS Organization User IDs simultaneously, though no more than once per Organization.</li>
+								<li>The same EOS Organization User ID can point at most to one EOS Product User ID per each product.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#interfaces-and-features">Interfaces and Features</a>
+								</li>
+								<li>
+									<a href="#key-information">Key Information</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

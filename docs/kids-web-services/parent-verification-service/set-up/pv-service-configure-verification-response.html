@@ -1,0 +1,284 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Configure the Parent Verification Service Verification Response</h1>
+			<h2>How to configure the Parent Verification (PV) Service Verification Response to receive verification events.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>When a parent or guardian verifies they are an adult using the Parent Verification Service, KWS notifies you by sending an event that contains the parent or guardian's verification status and a signature that you use to confirm the authenticity of the payload.</p>
+			<p>KWS offers two methods to confirm the validity of verified users:</p>
+			<ul>
+				<li>Webhook</li>
+				<li>Verification Response</li>
+			</ul>
+			<p>You can use one or both methods to configure the Parent Verification Service.</p>
+			<p>We recommend using both the Webhook Method and the Verification Response to provide redundancy in case one response fails to reach your product for any reason.</p>
+			<div>
+				<h2 id="verification-response">Verification Response</h2>
+			</div>
+			<p>When a parent or guardian successfully verifies they are an adult using the Parent Verification Service, KWS can notify you with a Verification Response. KWS can also send the user to a URL if you provide one (known as the "Redirect URL").</p>
+			<p>To receive Verification Responses, you must set up the PV Service settings as follows:</p>
+			<ul>
+				<li>Provide an optional URL (known as the "Redirect URL") where the PV Service will send callbacks.</li>
+				<li>Generate a signature using the
+					<strong>Verification secret</strong>. Use this signature to confirm that the external payload comes from a genuine call from KWS.</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				Your test and production environments use different
+				<strong>Verification secrets</strong>.</p>
+			<p>You can configure the Webhook in two ways. Either:</p>
+			<ul>
+				<li>Option A — For all the products in your organization.</li>
+				<li>Option B — For an individual product.</li>
+			</ul>
+			<p>For more information about these options, see the documentation:
+				<a href="/docs/kids-web-services/kws-get-started#step-3--choose-to-set-up-kws-for-your-organization-or-product">Choose to Set Up KWS for Your Organization or Product</a>.</p>
+			<p>For both options, you configure the Verification Response in the Developer Portal, on the
+				<strong>Parent Verification</strong>
+				page’s
+				<strong>Configuration</strong>
+				tab. However, the way you access the tab depends on which option you use.</p>
+			<p>To configure the Webhook, follow the steps below:</p>
+			<div>
+				<h3 id="step-1--go-to-the-parent-verification-page">Step 1 — Go to the Parent Verification Page</h3>
+			</div>
+			<div>
+				<h4 id="option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Parent Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h4 id="option-b-for-an-individual-product">Option B: For an individual product</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation under
+						<strong>Your Products</strong>, select the name of the product you want to configure.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							If you can’t see the product you want, make sure you are working in the correct organization.</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Parent Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-2--configure-the-verification-response">Step 2 — Configure the Verification Response</h3>
+			</div>
+			<ol>
+				<li>
+					<p>On the
+						<strong>Parent Verification</strong>
+						page, click the
+						<strong>Configuration</strong>
+						tab.</p>
+				</li>
+				<li>
+					<p>Under
+						<strong>Configure Verification Service</strong>, click
+						<strong>Verification Response</strong>
+						and follow the onscreen instructions.</p>
+				</li>
+			</ol>
+			<div>
+				<h4 id="information-and-tips">Information and Tips</h4>
+			</div>
+			<ul>
+				<li>Do not include information in the Redirect URL that might be sensitive to manipulation by an attacker (for example: numeric IDs that attackers can iterate over to find the correct numbers).</li>
+				<li>Do not include special characters in your Redirect URL.</li>
+				<li>KWS automatically generates the Verification secret after you have clicked
+					<strong>Publish to Test</strong>.</li>
+				<li>The redirect URL must be in this format:
+					<code>https://your.domain.com/your/path</code>.</li>
+				<li>A valid web resource must exist at the provided URL.</li>
+				<li>Do not use your Redirect URL to determine the verification result, as the information in the Redirect URL is not signed.</li>
+				<li>If you provide a Redirect URL, KWS sends parents or guardians to this URL after they successfully verify as an adult. If you do not specify a URL, KWS displays a verification success message:</li>
+			</ul>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h5 id="successful-verification-message-web-ui-screen">Successful Verification Message Web UI Screen</h5>
+							<span>Click here to view an example.</span>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<div tabindex="0" aria-label="Successful Verification Message Web UI Screen image, press Enter to open full size">
+											<div>
+												<span>
+													<img alt="Successful Verification Message Web UI Screen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+													<noscript></noscript>
+												</span>
+											</div>
+											<figcaption>The message displayed to a parent or guardian who successfully verifies as an adult if you do not specify a Redirect URL. Click image for full size.</figcaption>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h3 id="generate-your-signature">Generate Your Signature</h3>
+			</div>
+			<p>After you click
+				<strong>Publish to Test</strong>, the
+				<strong>Verification secret</strong>
+				is displayed:</p>
+			<center>
+				<div tabindex="0" aria-label="Verification Secret image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="Verification Secret" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>The Verification secret in the PV Service configuration settings. Click image for full size.</figcaption>
+				</div>
+			</center>
+			<p>When KWS redirects a user to the
+				<strong>Redirect URL</strong>
+				you provide, it attaches a query with a standardized wrapper containing an event-specific external payload:</p>
+			<div>
+				<section>
+					<pre>GET https://www.yourdomain.com/your-redirect-url?status=%7B%22verified%22%3Atrue%2C%22transactionId%22%3A%22&lt;transactionId&gt;%22%2C%22errorCode%22%3Anull%7D&amp;externalPayload=&lt;externalPayload&gt;&amp;signature=&lt;signature&gt;</pre>
+				</section>
+			</div>
+			<p>The
+				<code>&lt;signature&gt;</code>
+				is generated in
+				<code>HMAC_SHA256</code>
+				format using the following code:</p>
+			<div>
+				<section>
+					<pre>const status = /* status from the query as UTF-8 string */;const payload = /* external payload from the query as UTF-8 string */;const verificationResponseSecret = /* verification response secret code, as provided in the Developer Portal */;const signature = crypto   .createHmac('sha256', verificationResponseSecretCode)   .update('${status}:${payload}')   .digest('hex');</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Value</strong>
+						</th>
+						<th>
+							<strong>Definition</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>status</code>
+						</td>
+						<td>A JSON object containing the following properties:<ul>
+								<li>
+									<code>verified</code>
+									(boolean): true if the verification was successful</li>
+								<li>
+									<code>transactionID</code>
+									(string): a unique reference ID for the verification transaction</li>
+								<li>
+									<code>errorCode</code>
+									(string): null if the verification was successful, but will otherwise contain a code indicating the reason for failure.</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>externalPayload</code>
+						</td>
+						<td>A value you pass when initiating a verification.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>signature</code>
+						</td>
+						<td>The signature KWS passes to authenticate the call.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#verification-response">Verification Response</a>
+								</li>
+								<li>
+									<a href="#step-1--go-to-the-parent-verification-page">Step 1 — Go to the Parent Verification Page</a>
+								</li>
+								<li>
+									<a href="#option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</a>
+								</li>
+								<li>
+									<a href="#option-b-for-an-individual-product">Option B: For an individual product</a>
+								</li>
+								<li>
+									<a href="#step-2--configure-the-verification-response">Step 2 — Configure the Verification Response</a>
+								</li>
+								<li>
+									<a href="#information-and-tips">Information and Tips</a>
+								</li>
+								<li>
+									<a href="#successful-verification-message-web-ui-screen">Successful Verification Message Web UI Screen</a>
+								</li>
+								<li>
+									<a href="#generate-your-signature">Generate Your Signature</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

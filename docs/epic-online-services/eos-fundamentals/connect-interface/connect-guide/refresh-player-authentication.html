@@ -1,0 +1,351 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Access EOS Game Services With the Connect Interface — 2. Refresh Player Authentication</h1>
+			<h2>Overview of how to refresh the player's authentication with the Connect Interface in your game.</h2>
+			<div>
+				<div>8 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/log-in-with-an-epic-games-account">1. Log In With an Epic Games Account</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>When you log players in using the Connect Interface, you use an ID Token to authenticate the player. This authentication remains valid and keeps the player logged in for one hour before you must refresh it. You can subscribe to notifications from the EOS SDK to remind you to refresh the player’s authentication before it expires.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you add functionality to refresh the player’s authentication using the Connect Interface, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>Integrate the Connect Interface. (Section in this guide:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/log-in-with-an-epic-games-account">1. Log In With an Epic Games Account</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="refresh-the-players-authentication">Refresh the Player’s Authentication</h2>
+							</div>
+							<p>Complete these steps to refresh the player’s authentication:</p>
+							<ul>
+								<li>
+									<a href="#step-a-modify-your-connect-manager-class">Step A: Modify Your Connect Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-subscribe-to-the-authentication-expiration-notification">Step B: Subscribe to the Authentication Expiration Notification</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-authentication-expiration-notification-callback-function">Step C: Implement Your Authentication Expiration Notification Callback Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-modify-your-connect-manager-class">Step A: Modify Your Connect Manager Class</h3>
+							</div>
+							<p>In your connect manager class, add a callback function to call when the player’s current authentication is about to expire.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// ConnectManager.h class ConnectManager{private:    ...     /**     * Callback function that executes when the current authentication is about to expire.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthExpirationNotification(const EOS_Connect_AuthExpirationCallbackInfo* Data);     ...}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>Declare a private static callback function to execute when the player’s current authentication is about to expire. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-connect-on-auth-expiration-callback">
+																		<code>EOS_Connect_OnAuthExpirationCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-connect-auth-expiration-callback-info">
+																		<code>EOS_Connect_AuthExpirationCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnAuthExpirationNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnAuthExpirationNotification(const EOS_Connect_AuthExpirationCallbackInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-subscribe-to-the-authentication-expiration-notification">Step B: Subscribe to the Authentication Expiration Notification</h3>
+							</div>
+							<p>In the constructor of your connect manager class, subscribe to your authentication expiration callback function.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// ConnectManager.cpp ConnectManager::ConnectManager(EOS_HPlatform InPlatformHandle, AuthManager* InAuthManagerPtr)    : PlatformHandle(InPlatformHandle)    , AuthManagerPtr(InAuthManagerPtr){    ConnectHandle = EOS_Platform_GetConnectInterface(PlatformHandle);     EOS_Connect_AddNotifyAuthExpirationOptions NotifyAuthExpirationOptions = {};    NotifyAuthExpirationOptions.ApiVersion = EOS_CONNECT_ADDNOTIFYAUTHEXPIRATION_API_LATEST;     // Assign a callback function that will be called when the current authentication is about to expire.    EOS_Connect_AddNotifyAuthExpiration(ConnectHandle, &amp;NotifyAuthExpirationOptions, this, OnAuthExpirationNotification);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>In the constructor of your connect manager class, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-connect-add-notify-auth-expiration-options">
+																		<code>EOS_Connect_AddNotifyAuthExpirationOptions</code>
+																		data structure</a>
+																	to hold the notification options for the authentication expiration notifications. In this example, it’s called
+																	<code>NotifyAuthExpirationOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_Connect_AddNotifyAuthExpirationOptions NotifyAuthExpirationOptions = {};NotifyAuthExpirationOptions.ApiVersion = EOS_CONNECT_ADDNOTIFYAUTHEXPIRATION_API_LATEST;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-connect-add-notify-auth-expiration">
+																		<code>EOS_Connect_AddNotifyAuthExpiration</code>
+																		function</a>
+																	to subscribe to authentication expiration notifications. This function takes the following arguments:</p>
+																<ul>
+																	<li>The Connect Interface handle.</li>
+																	<li>A reference to the notification options for authentication expiration notifications.</li>
+																	<li>(Optional) ClientData.<br>
+																		In the example, we pass the connect manager (<code>this</code>
+																		in the example) for the ClientData field, so we can access it in the callback. If you don’t need to pass any additional data to the callback, pass a
+																		<code>nullptr</code>
+																		instead.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-connect-auth-expiration-callback-info">
+																			<code>EOS_Connect_AuthExpirationCallbackInfo</code>
+																			data structure</a>
+																		when the current authentication is about to expire.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_Connect_AddNotifyAuthExpiration(ConnectHandle, &amp;NotifyAuthExpirationOptions, this, OnAuthExpirationNotification);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-authentication-expiration-notification-callback-function">Step C: Implement Your Authentication Expiration Notification Callback Function</h3>
+							</div>
+							<p>Implement the callback function that executes when the player’s current authentication is about to expire.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// ConnectManager.cpp void EOS_CALL ConnectManager::OnAuthExpirationNotification(const EOS_Connect_AuthExpirationCallbackInfo* Data){    std::cout &lt;&lt; "Player authentication is about to expire! Refreshing authentication..." &lt;&lt; std::endl;     // Retrieve the ConnectManager pointer from the client data passed to the callback function.    ConnectManager* Self = static_cast&lt;ConnectManager*&gt;(Data-&gt;ClientData);     // Log in using a new ID Token.    Self-&gt;LogInWithIdTokenExample();}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the current authentication is about to expire. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-connect-on-auth-expiration-callback">
+																		<code>EOS_Connect_OnAuthExpirationCallback</code>
+																		callback function</a>
+																	which receives an
+																	<a href="/docs/api-ref/structs/eos-connect-auth-expiration-callback-info">
+																		<code>EOS_Connect_AuthExpirationCallbackInfo</code>
+																		data structure</a>. In the example, it’s called
+																	<code>OnAuthExpirationNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL ConnectManager::OnAuthExpirationNotification(const EOS_Connect_AuthExpirationCallbackInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the player’s current authentication is about to expire.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, call your function to log in using an ID Token, which retrieves a new ID Token and logs in using the Connect Interface again.</p>
+																<div>
+																	<section>
+																		<pre>std::cout &lt;&lt; "ID Token is about to expire! Refreshing authentication..." &lt;&lt; std::endl; ConnectManager* Self = static_cast&lt;ConnectManager*&gt;(Data-&gt;ClientData); Self-&gt;LogInWithIdTokenExample();</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>When the player’s current authentication is about to expire, your game calls your login function to refresh the player’s authentication and keep the player logged in. This process can be repeated for as long as the player needs to stay logged in.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// ConnectManager.h #pragma once #include &lt;eos_connect.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_common.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;string&gt; class ConnectManager{public:    /**      * Constructor     *     * @param InPlatformHandle - The handle for the Platform Interface received during platform setup.     */    ConnectManager(EOS_HPlatform InPlatformHandle, AuthManager* InAuthManagerPtr); private:     /**     * Callback function that executes when the current authentication is about to expire.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthExpirationNotification(const EOS_Connect_AuthExpirationCallbackInfo* Data);}</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// ConnectManager.cpp ConnectManager::ConnectManager(EOS_HPlatform InPlatformHandle, AuthManager* InAuthManagerPtr)    : PlatformHandle(InPlatformHandle)    , AuthManagerPtr(InAuthManagerPtr){    ConnectHandle = EOS_Platform_GetConnectInterface(PlatformHandle);     EOS_Connect_AddNotifyAuthExpirationOptions NotifyAuthExpirationOptions = {};    NotifyAuthExpirationOptions.ApiVersion = EOS_CONNECT_ADDNOTIFYAUTHEXPIRATION_API_LATEST;     // Assign a callback function that will be called when the current authentication is about to expire.    EOS_Connect_AddNotifyAuthExpiration(ConnectHandle, &amp;NotifyAuthExpirationOptions, this, OnAuthExpirationNotification);} void EOS_CALL ConnectManager::OnAuthExpirationNotification(const EOS_Connect_AuthExpirationCallbackInfo* Data){    std::cout &lt;&lt; "Player authentication is about to expire! Refreshing authentication..." &lt;&lt; std::endl;     // Retrieve the ConnectManager pointer from the client data passed to the callback function.    ConnectManager* Self = static_cast&lt;ConnectManager*&gt;(Data-&gt;ClientData);     // Log in using a new ID Token.    Self-&gt;LogInWithIdToken();}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-connect-add-notify-auth-expiration">
+										<code>EOS_Connect_AddNotifyAuthExpiration</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-connect-add-notify-auth-expiration-options">
+												<code>EOS_Connect_AddNotifyAuthExpirationOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-connect-on-auth-expiration-callback">
+												<code>EOS_Connect_OnAuthExpirationCallback</code>
+												callback function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-connect-auth-expiration-callback-info">
+														<code>EOS_Connect_AuthExpirationCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#refresh-the-players-authentication">Refresh the Player’s Authentication</a>
+								</li>
+								<li>
+									<a href="#step-a-modify-your-connect-manager-class">Step A: Modify Your Connect Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-subscribe-to-the-authentication-expiration-notification">Step B: Subscribe to the Authentication Expiration Notification</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-authentication-expiration-notification-callback-function">Step C: Implement Your Authentication Expiration Notification Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

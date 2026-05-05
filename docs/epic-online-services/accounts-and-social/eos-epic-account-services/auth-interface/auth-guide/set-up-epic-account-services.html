@@ -1,0 +1,169 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Access EOS Epic Account Services With the Auth Interface — 1. Set Up Epic Account Services</h1>
+			<h2>Overview of how to set up Epic Account Services to use it in your game.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/auth-intro">Introduction</a>
+			</p>
+			<p>To access EOS Epic Account Services in your game, you must first create an Epic Account Services application for your product in the Developer Portal. You can then specify which Epic Account Services features you want your players to have access to in your game.</p>
+			<p>
+				<strong>Note</strong>:</p>
+			<ul>
+				<li>Your game is usually known as a "product" in the Developer Portal.</li>
+				<li>Your product's settings for EOS Epic Account Services are collectively referred to as your "Epic Account Services application".</li>
+			</ul>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start, you must complete these steps:</p>
+			<ul>
+				<li>Integrate the EOS SDK into your code. (Documentation:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+				<li>Create a client for your product in the Developer Portal. (Documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.)</li>
+			</ul>
+			<div>
+				<h2 id="configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</h2>
+			</div>
+			<p>You create an application for your product on the
+				<strong>Epic Account Services</strong>
+				page in the Developer Portal. (Note that in the Developer Portal, your game is usually known as a "product".)</p>
+			<p>To go to the Epic Account Services page of the Developer Portal:</p>
+			<ol>
+				<li>Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+				<li>Select the correct organization for your product.</li>
+				<li>In the left navigation, under
+					<strong>Your Products</strong>, click the name of your game (or software application).</li>
+				<li>In the left navigation, click
+					<strong>Epic Online Services</strong>.</li>
+				<li>Under
+					<strong>Accounts &amp; Social</strong>, click
+					<strong>Epic Account Services</strong>.</li>
+			</ol>
+			<div>
+				<h3 id="create-and-configure-your-application">Create and Configure your Application</h3>
+			</div>
+			<p>On the Epic Account Services page:</p>
+			<ol>
+				<li>
+					<p>Click
+						<strong>Create Application</strong>.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							Each tab of the Epic Account Services application includes the text “Not configured” until you complete the configuration for a tab, and then the text changes to “Configured”.</li>
+					</ul>
+				</li>
+				<li>
+					<p>(Optional) Follow the onscreen instructions to configure the brand settings for your application. Click
+						<strong>Save Draft</strong>
+						to save a draft of your brand settings, or
+						<strong>Submit for Review</strong>
+						to begin the brand review process. (Documentation:
+						<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review">Brand Review</a>.)</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Permissions</strong>.</p>
+				</li>
+				<li>
+					<p>Click the toggle for each permission that you want to enable for your application, and save the changes.<br>
+						This specifies which Epic Account Services features your players can access in your game.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							The permissions you toggle here must match the scopes you request in the code when you sign in. (Documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/log-in-with-the-dev-auth-tool">2. Sign In With the Developer Authentication Tool</a>.)</li>
+					</ul>
+				</li>
+				<li>
+					<p>Click
+						<strong>Linked Clients</strong>.</p>
+				</li>
+				<li>
+					<p>From the
+						<strong>Select Clients</strong>
+						dropdown, select the client(s) that you want to link to the Epic Account Services application. Save the changes.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							<ul>
+								<li>Each client you select must match the client you use to create the EOS platform for that client when you integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>A client can only be linked to one Epic Account Services application at a time. However, you can link multiple clients to the same Epic Account Services application.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ol>
+			<div>
+				<h3 id="results">Results</h3>
+			</div>
+			<p>Your Epic Account Services application is listed on the Epic Account Services page. There is a green checkmark with the word “Configured” next to the
+				<strong>Permissions</strong>
+				and
+				<strong>Linked Clients</strong>
+				tabs (as well as the
+				<strong>Brand Settings</strong>
+				tab if you configured your brand settings).</p>
+			<div>
+				<h2 id="notes">Notes</h2>
+			</div>
+			<ul>
+				<li>You do not have to configure your Epic Account Services application’s brand settings (the
+					<strong>Brand Settings</strong>
+					tab) to sign in to your Epic Games account to test Epic Account Services while you develop your game. However, you must configure brand settings before you release your game to the public. Without brand review, players receive an error if they try to sign in to your game with an external account or an account that is not a member of your organization. (Documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review">Brand Review</a>.)</li>
+			</ul>
+			<p>Next section:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/log-in-with-the-dev-auth-tool">2. Log In With the Developer Authentication Tool</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</a>
+								</li>
+								<li>
+									<a href="#create-and-configure-your-application">Create and Configure your Application</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

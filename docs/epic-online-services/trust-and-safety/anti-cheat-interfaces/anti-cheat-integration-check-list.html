@@ -1,0 +1,340 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Anti-Cheat Integration Checklist</h1>
+			<h2>Before going live, ensure your product is running the  Anti-Cheat interfaces correctly with this checklist.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						Anti-Cheat does not support the following platforms: Linux ARM64 (Anti-Cheat Client Interface), Android, iOS, and console platforms.<br>
+						Anti-Cheat requires EOS SDK 1.15 or higher, the
+						<code>start_protected_game.exe</code>
+						from EOS SDK 1.16 or higher, and a 64-bit operating system.</p>
+				</div>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>Note that to generate sanctions with the Anti-Cheat service, you must first implement the
+						<a href="/docs/epic-online-services/trust-and-safety/reports-interface">Reports Interface</a>.</p>
+				</div>
+			</div>
+			<p>You should use these checklists to verify the integration of the Anti-Cheat interfaces and your game works properly before release.</p>
+			<div>
+				<h2 id="service-installer-windows">Service Installer (Windows)</h2>
+			</div>
+			<p>1. Fully remove any existing Easy Anti-Cheat installation by running
+				<code>EasyAntiCheat_EOS_Setup.exe qa-factory-reset</code>
+				from a command prompt.</p>
+			<p>This ensures that your test system is in the same state as the system of a player who has never played any Easy Anti-Cheat protected game before. If you have other Easy Anti-Cheat protected games installed then they will need to be repaired or reinstalled after this operation.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>The command
+					<code>sc query EasyAntiCheat_EOS</code>
+					reports that the specified service does not exist as an installed service.</li>
+				<li>Registry keys do not exist at the following location:
+					<code>HKLM\Software\Wow6432Node\EasyAntiCheat_EOS\</code>.</li>
+			</ul>
+			<p>2. Install the game as a player would, using e.g. the Epic Games Store, Steam, etc.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>
+					<code>EasyAntiCheat_EOS_Setup</code>
+					executes with Administrator rights, and it closes with exit status
+					<code>0</code>.</li>
+				<li>The command
+					<code>sc query EasyAntiCheat_EOS</code>
+					reports that the service exists and is in a
+					<code>STOPPED</code>
+					state when the game is not running.</li>
+			</ul>
+			<p>3. Uninstall the game</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>
+					<code>EasyAntiCheat_EOS_Setup</code>
+					executes to uninstall the Easy Anti-Cheat Service.</li>
+				<li>The command
+					<code>sc query EasyAntiCheat_EOS</code>
+					reports that the specified service does not exist as an installed service.</li>
+			</ul>
+			<div>
+				<h2 id="game-client-and-anti-cheat-bootstrapper">Game Client and Anti-Cheat Bootstrapper</h2>
+			</div>
+			<p>1. Go to your
+				<strong>Developer Portal &gt; Your Product &gt; Game Services &gt; Anti-Cheat &gt; Configure</strong>. Select
+				<strong>Enable All</strong>
+				and click
+				<strong>Save Changes</strong>.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>
+					<strong>Client Protection</strong>
+					and
+					<strong>Server Kicks</strong>
+					remain enabled after refreshing the Anti-Cheat page.</li>
+			</ul>
+			<p>2. Start the game without the anti-cheat bootstrapper.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>Your game may function normally, or may display a warning/error message if you prefer.
+					<div>
+						<p>
+							<code>EOS_Platform_GetAntiCheatClientInterface</code>
+							returns a nullptr if someone starts the game without the anti-cheat bootstrapper. You can use this to determine when to display a warning/error message.</p>
+					</div>
+				</li>
+				<li>However, the player should not be able to join protected multiplayer game sessions with other players. Anti-cheat authentication should fail and an appropriate message should display.</li>
+			</ul>
+			<p>3. Start the game with the anti-cheat bootstrapper.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>Your game should function normally.</li>
+				<li>The player should be able to join protected multiplayer game sessions with other players successfully and remain connected for more than 10 minutes.</li>
+				<li>The player should be able to disconnect from one protected multiplayer game session and join a different one successfully.</li>
+			</ul>
+			<p>If you run into any errors, see the
+				<em>Common Errors</em>
+				section of the
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#common-errors">Anti-Cheat</a>
+				documentation for troubleshooting steps.</p>
+			<p>4. Go to your
+				<strong>Developer Portal &gt; Your Product &gt; Game Services &gt; Anti-Cheat &gt; Configure</strong>. Select
+				<strong>Enable Client Protection Only</strong>
+				and click
+				<strong>Save Changes</strong>.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>
+					<strong>Client Protection</strong>
+					remains enabled after refreshing the Anti-Cheat page.</li>
+			</ul>
+			<p>5. Set the system environment variable
+				<code>EOS_USE_ANTICHEATCLIENTNULL</code>
+				to a value of
+				<code>1</code>, and start the game executable directly instead of using the anti-cheat bootstrapper executable. This starts the game without anti-cheat protection active. Remove the system environment variable after this test step is complete.</p>
+			<p>To set the system environment variable:</p>
+			<ul>
+				<li>On Windows:
+					<ol>
+						<li>Click Start to open the Start menu and enter "environment variable" into the search.</li>
+						<li>Click
+							<strong>Edit the system environment variables</strong>.</li>
+						<li>In the System Properties dialog, click
+							<strong>Environment Variables...</strong>.</li>
+						<li>In the System Variables section, click
+							<strong>New...</strong>.</li>
+						<li>In the variable name, enter
+							<code>EOS_USE_ANTICHEATCLIENTNULL</code>. In the variable value, enter
+							<code>1</code>.</li>
+						<li>Click
+							<strong>OK</strong>
+							to save the changes.</li>
+					</ol>
+				</li>
+				<li>On macOS:
+					<ul>
+						<li>If your default shell is Zsh:
+							<ol>
+								<li>Create a
+									<code>.zshrc</code>
+									file in your home directory if it doesn't already exists. If you already have a
+									<code>.zshrc</code>
+									file, you can locate it with a command. To do this, open a terminal window and enter the command
+									<code>ls -A ~/.zshrc</code>.</li>
+								<li>Open the
+									<code>.zshrc</code>
+									file and add
+									<code>EOS_USE_ANTICHEATCLIENTNULL=1</code>
+									to the bottom of the file.</li>
+								<li>Save the file.</li>
+							</ol>
+						</li>
+						<li>If your default shell is Bash:
+							<ol>
+								<li>Create a
+									<code>.bashrc</code>
+									file in your home directory if it doesn't already exists. If you already have a
+									<code>.bashrc</code>
+									file, you can locate it with a command. To do this, open a terminal window and enter the command
+									<code>ls -A ~/.bashrc</code>.</li>
+								<li>Open the
+									<code>.bashrc</code>
+									file and add
+									<code>EOS_USE_ANTICHEATCLIENTNULL=1</code>
+									to the bottom of the file.</li>
+								<li>Save the file.</li>
+							</ol>
+						</li>
+					</ul>
+				</li>
+				<li>On Linux:
+					<ol>
+						<li>Create a
+							<code>.bashrc</code>
+							file in your home directory if it doesn't already exists. If you already have a
+							<code>.bashrc</code>
+							file, you can locate it with a command. To do this, open a terminal window and enter the command
+							<code>ls -A ~/.bashrc</code>.</li>
+						<li>Open the
+							<code>.bashrc</code>
+							file and add
+							<code>EOS_USE_ANTICHEATCLIENTNULL=1</code>
+							to the bottom of the file.</li>
+						<li>Save the file.</li>
+					</ol>
+				</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				You might have to restart your computer to save the changes.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>Your game should function normally.</li>
+				<li>The player should be able to join protected multiplayer game sessions with other players successfully and remain connected for more than 10 minutes.</li>
+				<li>The player should be able to disconnect from one protected multiplayer game session and join a different one successfully.</li>
+			</ul>
+			<p>To remove the system environment variable:</p>
+			<ul>
+				<li>On Windows:
+					<ol>
+						<li>Click Start to open the Start menu and enter "environment variable" into the search.</li>
+						<li>Click
+							<strong>Edit the system environment variables</strong>.</li>
+						<li>In the System Properties dialog, click
+							<strong>Environment Variables...</strong>.</li>
+						<li>Select the variable
+							<code>EOS_USE_ANTICHEATCLIENTNULL</code>
+							and click
+							<strong>Delete</strong>.</li>
+						<li>Click
+							<strong>OK</strong>
+							to save the changes.</li>
+					</ol>
+				</li>
+				<li>On macOS:
+					<ol>
+						<li>Open the
+							<code>.zshrc</code>
+							file, or the
+							<code>.bashrc</code>
+							file if Bash is your default shell on macOS.</li>
+						<li>Remove the line
+							<code>EOS_USE_ANTICHEATCLIENTNULL=1</code>.</li>
+						<li>Save the file.</li>
+					</ol>
+				</li>
+				<li>On Linux:
+					<ol>
+						<li>Open the
+							<code>.bashrc</code>
+							file.</li>
+						<li>Remove the line
+							<code>EOS_USE_ANTICHEATCLIENTNULL=1</code>.</li>
+						<li>Save the file.</li>
+					</ol>
+				</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				You might have to restart your computer to save the changes.</p>
+			<p>6. Start the game with the anti-cheat bootstrapper executable.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>Your game should function normally.</li>
+				<li>The player should be able to join protected multiplayer game sessions with other players successfully and remain connected for more than 10 minutes.</li>
+				<li>The player should be able to disconnect from one protected multiplayer game session and join a different one successfully.</li>
+			</ul>
+			<p>7. Go to your
+				<strong>Developer Portal &gt; Your Product &gt; Game Services &gt; Anti-Cheat &gt; Configure</strong>. Select
+				<strong>Disable All</strong>
+				and click
+				<strong>Save Changes</strong>.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>
+					<strong>Client Protection</strong>
+					and
+					<strong>Server Kicks</strong>
+					remain disabled after refreshing the Anti-Cheat page.</li>
+			</ul>
+			<p>8. Start the game with the anti-cheat bootstrapper executable.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>Your game should function normally.</li>
+				<li>(<em>For Windows</em>) The command sc query EasyAntiCheat_EOS reports that the service is in state STOPPED while the game is running.</li>
+				<li>The player should be able to join protected multiplayer game sessions with other players successfully and remain connected for more than 10 minutes.</li>
+				<li>The EOS SDK should trigger the proper callback functions:
+					<ul>
+						<li>In a client-server game, the EOS SDK triggers the
+							<a href="/docs/api-ref/functions/eos-anti-cheat-client-add-notify-message-to-server">
+								<code>EOS_AntiCheatClient_AddNotifyMessageToServer</code>
+							</a>
+							callback on the client and the EOS SDK triggers the
+							<a href="/docs/api-ref/functions/eos-anti-cheat-server-add-notify-message-to-client">
+								<code>EOS_AntiCheatServer_AddNotifyMessageToClient</code>
+							</a>
+							callback on the server. The game's networking layer doesn't modify messages in transit sent between client and server.</li>
+						<li>In a peer-to-peer game, the EOS SDK triggers the
+							<a href="/docs/api-ref/functions/eos-anti-cheat-client-add-notify-message-to-peer">
+								<code>EOS_AntiCheatClient_AddNotifyMessageToPeer</code>
+							</a>
+							callback on all peers. The game's networking layer doesn't modify messages in transit sent between peers.</li>
+					</ul>
+				</li>
+				<li>The player should be able to disconnect from one protected multiplayer game session and join a different one successfully.</li>
+			</ul>
+			<p>9. Go to your
+				<strong>Developer Portal &gt; Your Product &gt; Game Services &gt; Anti-Cheat &gt; Configure</strong>. Select
+				<strong>Enable All</strong>, enable
+				<strong>Force Enable Server Kicks</strong>, and click
+				<strong>Save Changes</strong>.</p>
+			<p>Success criteria:</p>
+			<ul>
+				<li>
+					<strong>Client Protection</strong>
+					and
+					<strong>Server Kicks</strong>
+					remain enabled after refreshing the Anti-Cheat page.</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#service-installer-windows">Service Installer (Windows)</a>
+								</li>
+								<li>
+									<a href="#game-client-and-anti-cheat-bootstrapper">Game Client and Anti-Cheat Bootstrapper</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

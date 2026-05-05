@@ -1,0 +1,367 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>User Info Interface</h1>
+			<h2>Obtain information about a player, such as their display name or country.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Epic Account Service — authenticate players with the Auth Interface.</p>
+			</div>
+			<p>Each
+				<strong>Epic Online Services</strong>
+				(EOS) user account has a unique identifier that the service uses internally to refer to the account. The
+				<strong>User Info Interface</strong>
+				bridges the gap between the user's account identifier and information about the user, such as display name, country and preferred language, and so on. You can retrieve this information for both remote users and logged-in, local users.</p>
+			<p>To use the User Info Interface in your game, you must first create an Epic Account Services application for your product in the Developer Portal (documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services">EOS Epic Account Services</a>). You must also obtain player consent to access the player's basic profile data (documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/eos-data-privacy-visibility">Data Privacy and Visibility</a>). If you have not created an Epic Account Services application for your product, you can initialize the User Info Interface, but all User Info Interface function calls to the User Info service will fail.</p>
+			<p>
+				<strong>Note:</strong>
+				To protect user privacy, the User Info Interface will only provide the display name and unique account identifier for remote users.</p>
+			<div>
+				<h2 id="retrieving-and-caching-user-info">Retrieving and Caching User Info</h2>
+			</div>
+			<p>To access the User Info Interface, you need an
+				<code>EOS_HUserInfo</code>
+				handle, which you can acquire from the
+				<strong>
+					<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+				</strong>
+				through the
+				<code>EOS_Platform_GetUserInfoInterface</code>
+				function. User Info Interface functions require this handle to access user information. The online service's servers store user information, and this information can change without notification as people make updates to their accounts. The User Info Interface automatically creates a local cache that you can update by querying the server when you need the latest information.</p>
+			<div>
+				<h3 id="retrieving-user-info-by-account-identifier">Retrieving User Info by Account Identifier</h3>
+			</div>
+			<p>The first step in dealing with user info is to call
+				<code>EOS_UserInfo_QueryUserInfo</code>
+				with an
+				<code>EOS_UserInfo_QueryUserInfoOptions</code>
+				data structure. This will download the most up-to-date version of a user's information into the local cache. To perform the
+				<code>EOS_UserInfo_QueryUserInfo</code>
+				call, create and initialize an
+				<code>EOS_UserInfo_QueryUserInfoOptions</code>
+				with the following field values:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_USERINFO_QUERYUSERINFO_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the user whose information you want to retrieve</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Pass the User Info Interface handle, the
+				<code>EOS_UserInfo_QueryUserInfoOptions</code>
+				structure, and your callback information to the function. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided to
+				<code>EOS_UserInfo_QueryUserInfo</code>
+				will run when the operation finishes. When your callback executes, you can check the
+				<code>ResultCode</code>
+				field of the
+				<code>EOS_UserInfo_QueryUserInfoCallbackInfo</code>
+				structure to determine whether the operation succeeded or failed. A success code indicates that the SDK has cached the latest data from the server, which you can examine at any time.</p>
+			<div>
+				<h3 id="retrieving-user-info-by-display-name">Retrieving User Info by Display Name</h3>
+			</div>
+			<p>Almost every function in the EOS SDK deals with users based on their unique account identifiers, but players should only ever know their friends' account names.
+				<code>EOS_UserInfo_QueryUserInfoByDisplayName</code>
+				provides a way to map a display name to its account identifier. Call
+				<code>EOS_UserInfo_QueryUserInfoByDisplayName</code>
+				with an
+				<code>EOS_UserInfo_QueryUserInfoByDisplayNameOptions</code>
+				data structure to retrieve and cache the most up-to-date version of a user's information. When calling this function, initialize your
+				<code>EOS_UserInfo_QueryUserInfoByDisplayNameOptions</code>
+				structure as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_USERINFO_QUERYUSERINFOBYDISPLAYNAME_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user</td>
+					</tr>
+					<tr>
+						<td>
+							<code>DisplayName</code>
+						</td>
+						<td>The display name of the user whose information you want to retrieve</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Pass the User Info Interface handle, the
+				<code>EOS_UserInfo_QueryUserInfoByDisplayNameOptions</code>
+				structure, and your callback information to the function. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided will run when the operation finishes. In your callback function, you can check the
+				<code>ResultCode</code>
+				field of the
+				<code>EOS_UserInfo_QueryUserInfoByDisplayNameCallbackInfo</code>
+				structure to determine whether the operation succeeded or failed. On success, the SDK has cached the latest data from the server, which you can examine at any time.</p>
+			<div>
+				<h3 id="retrieving-user-info-by-external-account">Retrieving User Info by External Account</h3>
+			</div>
+			<p>
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccount</code>
+				provides a way to query for user info using information about a linked external account. Call
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccount</code>
+				with an
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccountOptions</code>
+				data structure to retrieve and cache the most up-to-date version of a user's information. When calling this function, initialize your
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccountOptions</code>
+				structure as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_USERINFO_QUERYUSERINFOBYEXTERNALACCOUNT_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ExternalAccountId</code>
+						</td>
+						<td>The external account ID of the user whose information you want to retrieve</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AccountType</code>
+						</td>
+						<td>The account type of the external user info to query. See
+							<a href="/docs/api-ref/enums/eos-e-external-credential-type">
+								<code>EOS_EExternalCredentialType</code>
+							</a>
+							for a list of all available methods.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Pass the User Info Interface handle, the
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccountOptions</code>
+				structure, and your callback information to the function. Provided that the
+				<code>EOS_HPlatform</code>
+				handle is ticking, the callback you provided will run when the operation finishes. In your callback function, you can check the
+				<code>ResultCode</code>
+				field of the
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccountCallbackInfo</code>
+				structure to determine whether the operation succeeded or failed, along with a
+				<code>TargetUserId</code>
+				(the
+				<code>EOS_EpicAccountId</code>
+				of the player whose information has been retrieved). On success, the SDK has cached the latest data from the server, which you can examine at any time. Multiple external account IDs may be queried in a frame. These queries will be batched, and individual calls to each
+				<code>EOS_UserInfo_QueryUserInfoByExternalAccountCallback</code>
+				function will be made when the entire batch has been completed.</p>
+			<div>
+				<h2 id="examining-user-information">Examining User Information</h2>
+			</div>
+			<p>Once you have retrieved information about a specific user from the online service, you can request a copy of that data with the
+				<code>EOS_UserInfo_CopyUserInfo</code>
+				function. This function requires an
+				<code>EOS_UserInfo_CopyUserInfoOptions</code>
+				structure with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_USERINFO_COPYUSERINFO_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the logged-in user.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the user whose information you want. This can be the same as
+							<code>LocalUserId</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Pass the User Info Interface handle, the
+				<code>EOS_UserInfo_CopyUserInfoOptions</code>
+				structure, and the address of a pointer to an
+				<code>EOS_UserInfo</code>
+				data structure. If the cache contains information about the target user, the
+				<code>EOS_UserInfo</code>
+				data structure will be filled in, and the function will return
+				<code>EOS_Success</code>.</p>
+			<p>This function makes a copy of the data to prevent user information that your game code is accessing from being deleted by the User Info Interface. This means that your code owns the memory, and is responsible for freeing it. Failure to do so will cause a memory leak. You can free
+				<code>EOS_UserInfo</code>
+				objects by passing them to the
+				<code>EOS_UserInfo_Release</code>
+				function.</p>
+			<div>
+				<p>Most of the information in the
+					<code>EOS_UserInfo</code>
+					structure will be empty for non-local users. This is to ensure that EOS does not provide personally identifiable information (PII) to other users. The
+					<code>DisplayName</code>
+					and
+					<code>UserId</code>
+					fields are the only ones the EOS SDK guarantees to populate.</p>
+			</div>
+			<div>
+				<h2 id="display-names-and-nicknames">Display Names and Nicknames</h2>
+			</div>
+			<p>Users can set nicknames for other users. If a user assigns a nickname to another user it will be contained in the
+				<code>Nickname</code>
+				field, and it will only be available to the user who created it. If a nickname is not assigned then the
+				<code>Nickname</code>
+				field will be null.</p>
+			<div>
+				<p>We recommend that you be considerate of users and avoid replicating nicknames, as the local user may consider their assigned nicknames to be private information.</p>
+			</div>
+			<div>
+				<h2 id="external-user-info">External User Info</h2>
+			</div>
+			<p>As of 1.6, it's possible to retrieve data about a user's linked accounts, known in the SDK as their external user info. The interface exposes several API functions to assist with the retrieval of this data. Note that like a user's
+				<code>EOS_UserInfo</code>, a user's
+				<code>EOS_UserInfo_ExternalUserInfo</code>
+				will not be cached and available for retrieval unless you have previously made a call to
+				<code>EOS_UserInfo_QueryUserInfo</code>.</p>
+			<p>
+				<code>EOS_UserInfo_GetExternalUserInfoCount</code>
+				returns the number of external user info entries available to be retrieved for a target user.</p>
+			<p>
+				<code>EOS_UserInfo_CopyExternalUserInfoByIndex</code>
+				outputs the external user info of a target user given an index.</p>
+			<p>
+				<code>EOS_UserInfo_CopyExternalUserInfoByAccountType</code>
+				outputs the external user info of a target user given the specific type of the external account you want to retrieve info for. In 1.6, the supported account types for external user info are
+				<code>EOS_EAT_PSN</code>,
+				<code>EOS_EAT_XBL</code>,
+				<code>EOS_EAT_NINTENDO</code>, and
+				<code>EOS_EAT_STEAM</code>.</p>
+			<p>
+				<code>EOS_UserInfo_CopyExternalUserInfoByAccountId</code>
+				outputs the external user info of a target user given the account id of their external account.</p>
+			<p>Remember to call
+				<code>EOS_UserInfo_ExternalUserInfo_Release</code>
+				when you are finished using an external user info entry to prevent leaks.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#retrieving-and-caching-user-info">Retrieving and Caching User Info</a>
+								</li>
+								<li>
+									<a href="#retrieving-user-info-by-account-identifier">Retrieving User Info by Account Identifier</a>
+								</li>
+								<li>
+									<a href="#retrieving-user-info-by-display-name">Retrieving User Info by Display Name</a>
+								</li>
+								<li>
+									<a href="#retrieving-user-info-by-external-account">Retrieving User Info by External Account</a>
+								</li>
+								<li>
+									<a href="#examining-user-information">Examining User Information</a>
+								</li>
+								<li>
+									<a href="#display-names-and-nicknames">Display Names and Nicknames</a>
+								</li>
+								<li>
+									<a href="#external-user-info">External User Info</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,238 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Your Party</h1>
+			<h2>How to allow players to join or leave a party on the Social Overlay.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						The Social Overlay does not support the following platforms: macOS, Linux, Linux ARM64, Android, and iOS.<br>
+						Players must sign in with their Epic Games account or a proxy account to use the Social Overlay.</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="introduction">Introduction</h2>
+			</div>
+			<p>Players who are in the same presence lobby or presence session are automatically grouped together into a party. Players in your party are listed under a section called
+				<strong>Your party</strong>
+				in the Social Overlay. On the Social Overlay, a player with an Epic Games account can invite another player with an Epic Games account, who is playing the same game, to join a party. Players may want to join a party so that they can discuss a game before they start playing. For example, they might agree on which in-game customization each player is going to use. The players in a party can do the same activities that they can do in an EOS SDK lobby or session.</p>
+			<p>For more information on:</p>
+			<ul>
+				<li>How to create a lobby, see the
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface">Lobby Interface</a>
+					documentation.</li>
+				<li>How to create a session, see the
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface">Session Interface</a>
+					documentation.</li>
+			</ul>
+			<p>The
+				<strong>Your party</strong>
+				section in the Social Overlay displays:</p>
+			<ul>
+				<li>The current members in the lobby or session.</li>
+				<li>The current member count in the lobby or session.</li>
+				<li>The maximum member count allowed in the lobby or session.</li>
+				<li>A
+					<strong>Leave Party</strong>
+					button that the game can register to.</li>
+			</ul>
+			<center>
+				<div tabindex="0" aria-label="In the Social Overlay, the Social tab displays the Your party section. image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="In the Social Overlay, the Social tab displays the Your party section." src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>In the Social Overlay, the Social tab displays the
+					<strong>Your party</strong>
+					section.</em>
+			</center>
+			<div>
+				<h2 id="register-callback">Register Callback</h2>
+			</div>
+			<p>When you initialize the EOS SDK, to get notified when a player clicks on the
+				<strong>Leave Party</strong>
+				button, you must register to the following callbacks after you successfully call
+				<code>EOS_Platform_Create</code>:</p>
+			<ul>
+				<li>For a lobby:
+					<a href="/docs/api-ref/functions/eos-lobby-add-notify-leave-lobby-requested">
+						<code>EOS_Lobby_AddNotifyLeaveLobbyRequested</code>
+						function</a>
+				</li>
+				<li>For a Session:
+					<a href="/docs/api-ref/functions/eos-sessions-add-notify-leave-session-requested">
+						<code>EOS_Sessions_AddNotifyLeaveSessionRequested</code>
+						function</a>
+				</li>
+			</ul>
+			<p>For more information on how to:</p>
+			<ul>
+				<li>Initialize the EOS SDK, see the
+					<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+					documentation.</li>
+				<li>Handle leave party notifications, see the
+					<a href="#allow-players-to-leave-a-party">Allow Players to Leave a Party</a>
+					section below.</li>
+			</ul>
+			<div>
+				<h2 id="allow-players-to-join-a-party">Allow Players to Join a Party</h2>
+			</div>
+			<div>
+				<h3 id="lobbies">Lobbies</h3>
+			</div>
+			<p>All players in a presence lobby are automatically added to the
+				<strong>Your party</strong>
+				section of the Social Overlay. Players can join a lobby that their friend invites them to, or they can search for and join a public lobby.</p>
+			<div>
+				<h3 id="sessions">Sessions</h3>
+			</div>
+			<p>Unlike lobbies, all players in a presence session are not added to the
+				<strong>Your party</strong>
+				section by default. Sessions do not maintain a persistent connection between all members, so you must manage them to keep the local session view on all remote clients in sync. For a player in a session to show up in the
+				<strong>Your party</strong>
+				section of the Social Overlay, remote clients must call the
+				<a href="/docs/api-ref/functions/eos-sessions-register-players">
+					<code>EOS_Sessions_RegisterPlayers</code>
+				</a>
+				function when a player joins a session. Similarly, when a player leaves the session, the client must call the
+				<a href="/docs/api-ref/functions/eos-sessions-unregister-players">
+					<code>EOS_Sessions_UnregisterPlayers</code>
+				</a>
+				function to remove the player from the Your Party section. For more information, see the section on:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/sessions-intro#mirror-session-management-on-remote-clients">Mirror session management on remote clients</a>
+				in the
+				<em>Sessions Introduction</em>
+				page.</p>
+			<p>Similar to lobbies, players can join a session that their friend invites them to, or they can search for and join a public session.</p>
+			<div>
+				<h2 id="allow-players-to-leave-a-party">Allow Players to Leave a Party</h2>
+			</div>
+			<p>When a player clicks the
+				<strong>Leave Party</strong>
+				button in the Social Overlay, it triggers a notification to leave the party. The Social Overlay calls
+				<code>EOS_Lobby_AddNotifyLeaveLobbyRequested</code>
+				if you use a lobby, or
+				<code>EOS_Sessions_AddNotifyLeaveSessionRequested</code>
+				for a session, and sends a notification to you.</p>
+			<p>For lobbies, the notification contains the lobby ID of the lobby the player intends to leave. For sessions, the notification contains the name of the session that the player intends to leave.</p>
+			<p>You need to do any necessary cleanup and then call
+				<a href="/docs/api-ref/functions/eos-lobby-leave-lobby">
+					<code>EOS_Lobby_LeaveLobby</code>
+				</a>
+				with the handle of the lobby to leave the lobby or
+				<a href="/docs/api-ref/functions/eos-sessions-destroy-session">
+					<code>EOS_Sessions_DestroySession</code>
+				</a>
+				with the name of the session to leave the session.</p>
+			<div>
+				<h2 id="show-players-across-multiple-platforms-in-a-party">Show Players Across Multiple Platforms in a Party</h2>
+			</div>
+			<p>On the Social Overlay, a player sees the list of other players in their party under the heading
+				<strong>Your party</strong>. They see the following:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Platform friends</strong>
+					</p>
+					<p>These are Epic friends who are playing your game on the same platform.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Friends not on the same platform</strong>
+					</p>
+					<p>These are Epic friends that are playing your game but are not on the same platform.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Players that are not friends</strong>
+					</p>
+					<p>These are players that are playing your game but are not Epic friends. These players are not listed separately, the player only sees a number that represents how many players are not friends. For example, +2.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Friends that they blocked</strong>
+					</p>
+					<p>These are friends that they block using the Social Overlay. The player sees the blocked player and the label "Blocked".</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="remove-callback">Remove Callback</h2>
+			</div>
+			<p>When you shut down your game, you must remove the callbacks you registered earlier that handle notifications for players with Epic Games accounts who leave a party. To do this, call the following APIs:</p>
+			<ul>
+				<li>For a lobby:
+					<a href="/docs/api-ref/functions/eos-lobby-remove-notify-leave-lobby-requested">
+						<code>EOS_Lobby_RemoveNotifyLeaveLobbyRequested</code>
+						function</a>
+				</li>
+				<li>For a session:
+					<a href="/docs/api-ref/functions/eos-sessions-remove-notify-leave-session-requested">
+						<code>EOS_Sessions_RemoveNotifyLeaveSessionRequested</code>
+						function</a>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#introduction">Introduction</a>
+								</li>
+								<li>
+									<a href="#register-callback">Register Callback</a>
+								</li>
+								<li>
+									<a href="#allow-players-to-join-a-party">Allow Players to Join a Party</a>
+								</li>
+								<li>
+									<a href="#lobbies">Lobbies</a>
+								</li>
+								<li>
+									<a href="#sessions">Sessions</a>
+								</li>
+								<li>
+									<a href="#allow-players-to-leave-a-party">Allow Players to Leave a Party</a>
+								</li>
+								<li>
+									<a href="#show-players-across-multiple-platforms-in-a-party">Show Players Across Multiple Platforms in a Party</a>
+								</li>
+								<li>
+									<a href="#remove-callback">Remove Callback</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

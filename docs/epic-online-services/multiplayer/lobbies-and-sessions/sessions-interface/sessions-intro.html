@@ -1,0 +1,1022 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Sessions Introduction</h1>
+			<h2>Interface to handle session-based multiplayer.</h2>
+			<div>
+				<div>16 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>
+				<strong>Epic Online Services</strong>
+				(EOS) gives players the ability to host, find, and interact with online gaming sessions through the
+				<strong>Sessions Interface</strong>. A session can be short, like filling a certain number of player slots before starting a game, then disbanding after the game ends, or it could be longer, like keeping track of a game that cycles through matches on multiple maps or levels. The Sessions Interface also manages game-specific data that supports the back-end service searching and functionality. For more information on the considerations you should take for matchmaking, see the documentation:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/security-considerations">Security Considerations</a>
+				section below. This document covers some of the definitions and headers for the Sessions Interface. See the
+				<a href="/docs/api-ref/interfaces/sessions">Sessions Interface API Reference</a>
+				documentation for a complete list.</p>
+			<p>Integrate the Sessions Interface into your game (or other software application) to use the features of the EOS Sessions service. To use the Sessions Interface, acquire an
+				<code>EOS_HSessions</code>
+				handle through the Platform Interface (documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>) function,
+				<code>EOS_Platform_GetSessionsInterface</code>. All Sessions Interface functions require this handle as their first parameter. You must ensure that the
+				<code>EOS_HPlatform</code>
+				handle is ticking for callbacks to trigger when requests are completed. See the
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps#set-up-ticking">Guide: Get Started With EOS &gt; 4. Next Steps &gt; Set Up Ticking</a>
+				documentation for more information on ticking.</p>
+			<div>
+				<h2 id="session-lifecycle">Session Lifecycle</h2>
+			</div>
+			<p>A session's life cycle is not rigid; for example, sessions can modify their data at any time, and can start and end multiple matches. A session generally includes these events:</p>
+			<ul>
+				<li>
+					<p>A user or a dedicated server creates the session and sets up the session's initial state.</p>
+					<p>
+						<strong>Note:</strong>
+						The EOS Sessions service can take up to three seconds to index newly created sessions. When you search sessions, you will not see the new sessions in the search results until the EOS Sessions service finishes indexing.</p>
+				</li>
+				<li>
+					<p>The owner might invite users to join.</p>
+				</li>
+				<li>
+					<p>Other users join and leave the session.</p>
+					<ul>
+						<li>The owner registers users when they join the session and unregisters users when they leave the session.</li>
+					</ul>
+				</li>
+				<li>
+					<p>The session owner can update data specific to the state of the game.</p>
+					<ul>
+						<li>Users can play multiple matches without leaving or destroying the session. Your game's logic determines the lifetime of a session.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Finally, the owner destroys the session.</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="active-sessions">Active Sessions</h2>
+			</div>
+			<p>Active sessions are at the core of everything the Sessions Interface does. An application can have multiple active sessions at the same time, each identified by a unique, local name. For example, there might be a session called "Party" with the local player's friends, keeping them together as they play matches against other teams, and another called "Game" that includes some or all of those friends as well as other players in the match currently in progress. Each session has its own
+				<code>EOS_HActiveSession</code>
+				handle on each participating player's system. An active session forms on a player's machine whenever that player creates a session, or joins a session found in an online search or through an invitation. Since active sessions exist locally, the local application must destroy them when they are no longer needed. If a host fails to do this, the back-end service server will delay destruction of the session, which can lead to other players falsely discovering sessions in their online searches.</p>
+			<p>To get a copy of the high-level information (type
+				<code>EOS_ActiveSession_Info</code>), for an active session, including its name, the ID of the local user who created or joined it, its
+				<a href="/docs/api-ref/enums/eos-e-online-session-state">current state</a>, a reference to the session details (a const pointer to
+				<code>EOS_SessionDetails_Info</code>), and any user-defined data attributes, you must first get its active session handle (type
+				<code>EOS_HActiveSession</code>) by calling the local function
+				<code>EOS_Sessions_CopyActiveSessionHandle</code>
+				with an
+				<code>EOS_Sessions_CopyActiveSessionHandleOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_COPYACTIVESESSIONHANDLE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>Name of the session for which to retrieve a session handle</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>With this handle, you can call
+				<code>EOS_ActiveSession_CopyInfo</code>. You will also need to initialize and pass in an
+				<code>EOS_ActiveSession_CopyInfoOptions</code>
+				as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_ACTIVESESSION_COPYINFO_API_LATEST</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This function also runs locally and, on success, makes a copy of the session's
+				<code>EOS_ActiveSession_Info</code>
+				data. You are responsible for releasing the copy with
+				<code>EOS_ActiveSession_Info_Release</code>
+				when you no longer need it.</p>
+			<div>
+				<h2 id="create-a-session">Create a Session</h2>
+			</div>
+			<p>Creating a session is a three-step process:.</p>
+			<ul>
+				<li>Set the initial state and settings for the session locally.</li>
+				<li>Make any additional modifications to the session that you require.</li>
+				<li>Complete the Setup.</li>
+			</ul>
+			<div>
+				<h3 id="set-the-initial-state-and-settings">Set the Initial State and Settings</h3>
+			</div>
+			<p>First, call the
+				<code>EOS_Sessions_CreateSessionModification</code>
+				function to set the initial state and settings for the session locally. You must pass in an
+				<code>EOS_Sessions_CreateSessionModificationOptions</code>
+				structure. See the
+				<a href="/docs/api-ref/structs/eos-sessions-create-session-modification-options">
+					<code>EOS_Sessions_CreateSessionsModificationOptions</code>
+				</a>
+				API reference documentation for details.</p>
+			<p>If the
+				<code>EOS_Sessions_CreateSessionModification</code>
+				call succeeds, it will return
+				<code>EOS_Success</code>
+				and the default
+				<code>EOS_HSessionModification</code>
+				you provided will contain a valid handle.</p>
+			<div>
+				<h3 id="make-additional-modifications">Make Additional Modifications</h3>
+			</div>
+			<p>Second, continue to modify the session's initial setup (see the documentation:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session">Modify a Session</a>) until you have made all the modifications you need.</p>
+			<div>
+				<h3 id="complete-the-setup">Complete the Setup</h3>
+			</div>
+			<p>After you have finished setting up the session, you can complete the creation process by calling
+				<a href="/docs/api-ref/functions/eos-sessions-update-session">
+					<code>EOS_Sessions_UpdateSession</code>
+				</a>
+				with an
+				<a href="/docs/api-ref/structs/eos-sessions-update-session-options">
+					<code>EOS_Sessions_UpdateSessionOptions</code>
+				</a>
+				structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_UPDATESESSION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionModificationHandle</code>
+						</td>
+						<td>The handle (<code>EOS_HSessionModification</code>) for the session you want to create or update</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<code>EOS_Sessions_UpdateSession</code>
+				is asynchronous, and will call your delegate (of type
+				<code>EOS_Sessions_OnUpdateSessionCallback</code>) upon completion with an
+				<code>EOS_Sessions_UpdateSessionCallbackInfo</code>
+				data structure. On success, the local name that you provided will be paired with a searchable, unique ID string from the server.</p>
+			<div>
+				<h2 id="invite-users-to-a-session">Invite Users to a Session</h2>
+			</div>
+			<p>To invite another user to join an active session, a
+				<a href="#register-a-player">registered</a>
+				member of the session can call
+				<code>EOS_Sessions_SendInvite</code>
+				with an
+				<code>EOS_Sessions_SendInviteOptions</code>
+				structure containing the following data:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_SENDINVITE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The name of the session to which the player is invited</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user sending the invitation</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The remote user being invited</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Once the server has processed the invitation request, your callback, of type
+				<code>EOS_Sessions_OnSendInviteCallback</code>, will run with an
+				<code>EOS_Sessions_SendInviteCallbackInfo</code>
+				structure containing a result code. This result indicates success if there was no error in the process of sending the invitation; success does not mean that the remote user has accepted, or even seen, the invitation.</p>
+			<div>
+				<p>For invite functionality with the Epic Games Launcher, be sure to map your deployments to your
+					<a href="/docs/epic-games-store/services/launcher-invites">artifacts</a>
+					as well.</p>
+			</div>
+			<p>The remote user will receive notification of the invitation when it arrives, and the payload will provide the user ID that has been invited as well as the ID of the invitation itself. Upon receipt, use
+				<code>EOS_Sessions_CopySessionHandleByInviteId</code>
+				to retrieve the
+				<code>EOS_HSessionDetails</code>
+				handle from the invitation. You can use this handle to gain access to the
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/get-information-about-a-session#session-details">session details</a>
+				data for the associated session, or to accept or reject the invitation. Once you are finished with the handle, call
+				<code>EOS_SessionDetails_Release</code>
+				to release it.</p>
+			<p>In order to receive this notification, you must register a callback with
+				<code>EOS_Sessions_AddNotifySessionInviteReceived</code>. You only need to do this once, typically at startup, after which your callback will run as each invitation is received. When you no longer need notification, call
+				<code>EOS_Sessions_RemoveNotifySessionInviteReceived</code>
+				to remove your callback.</p>
+			<div>
+				<h3 id="accept-an-invitation">Accept an Invitation</h3>
+			</div>
+			<p>The Sessions Interface does not feature a dedicated function for accepting an invitation. You can
+				<a href="#join-a-session">join</a>
+				the session using the standard method with the
+				<code>EOS_HSessionDetails</code>
+				handle that you retrieved from the invitation. To request a list of all pending invitations, call
+				<code>EOS_Sessions_QueryInvites</code>
+				with an
+				<code>EOS_Sessions_QueryInvitesOptions</code>
+				data structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_QUERYINVITES_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user whose invitations are being requested</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This operation is asynchronous. When it finishes, it will call your callback function, of type
+				<code>EOS_Sessions_OnQueryInvitesCallback</code>, with an
+				<code>EOS_Sessions_QueryInvitesCallbackInfo</code>
+				data structure. On success, EOS will have all of the user's pending invitations cached locally. You can use
+				<code>EOS_Sessions_GetInviteCount</code>
+				to determine the number of invitations in the cache. Pass in an
+				<code>EOS_Sessions_GetInviteCountOptions</code>
+				structure with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_GETINVITECOUNT_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user who has cached invitations</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This function runs locally and will return a
+				<code>uint32_t</code>
+				that represents the number of invitations currently in the cache. To get the ID of any cached invitation, call
+				<code>EOS_Sessions_GetInviteIdByIndex</code>
+				with an
+				<code>EOS_Sessions_GetInviteIdByIndexOptions</code>
+				containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_GETINVITEIDBYINDEX_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user who has cached invitations</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Index</code>
+						</td>
+						<td>The cache index of the invitation whose ID we want to retrieve</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If
+				<code>EOS_Sessions_GetInviteIdByIndex</code>
+				returns
+				<code>EOS_Success</code>, the output parameters you passed to it contain the invitation's ID as a null-terminated character string and the length of that string.</p>
+			<div>
+				<p>The max length of an invitation's ID string is
+					<code>EOS_SESSIONS_INVITEID_MAX_LENGTH</code>
+					(currently 64).</p>
+			</div>
+			<p>As described
+				<a href="#invite-users-to-a-session">above</a>, the
+				<code>EOS_Sessions_CopySessionHandleByInviteId</code>
+				function will provide an
+				<code>EOS_HSession</code>
+				handle which gives you access to the
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/get-information-about-a-session#session-details">session details</a>
+				data for the associated session. You can then choose to accept the invitation by
+				<a href="#join-a-session">joining</a>
+				the session, ignore the invitation, or
+				<a href="#reject-an-invitation">reject</a>
+				it. Once you are finished with the
+				<code>EOS_HSession</code>
+				handle, call
+				<code>EOS_SessionDetails_Release</code>
+				to release it.</p>
+			<div>
+				<h3 id="reject-an-invitation">Reject an Invitation</h3>
+			</div>
+			<p>To reject an invitation, call
+				<code>EOS_Sessions_RejectInvite</code>
+				with an
+				<code>EOS_Sessions_RejectInviteOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_REJECTINVITE</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user rejecting the invitation</td>
+					</tr>
+					<tr>
+						<td>
+							<code>InviteId</code>
+						</td>
+						<td>The ID of the invitation</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Upon completion, you will receive a call to your
+				<code>EOS_Sessions_OnRejectInviteCallback</code>
+				callback function with an
+				<code>EOS_Sessions_RejectInviteCallbackInfo</code>
+				data structure indicating success or failure. Successfully rejecting an invitation permanently deletes it from the system.</p>
+			<div>
+				<h2 id="join-a-session">Join a Session</h2>
+			</div>
+			<p>You can join an existing session if you have a valid
+				<code>EOS_HSessionDetails</code>
+				handle to it by calling
+				<code>EOS_Sessions_JoinSession</code>
+				and providing an
+				<a href="/docs/api-ref/structs/eos-sessions-join-session-options">
+					<code>EOS_Sessions_JoinSessionOptions</code>
+				</a>
+				structure with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_JOINSESSION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The unique name that the local system will use to refer to the session</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionHandle</code>
+						</td>
+						<td>The
+							<code>EOS_HSessionDetails</code>
+							handle for the session you want to join</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The local user joining the session</td>
+					</tr>
+					<tr>
+						<td>
+							<code>bPresenceEnabled</code>
+						</td>
+						<td>Whether or not this session should be the one associated with the local user's presence information (see the
+							<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface">Presence Interface</a>
+							for more details)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation finishes, your callback function, of type
+				<code>EOS_Sessions_OnJoinSessionCallback</code>, will receive an
+				<code>EOS_Sessions_JoinSessionCallbackInfo</code>
+				indicating success or failure. If the operation succeeds, EOS will create an active session on the joining client's system. As this new session is locally-owned, the joining user is responsible for
+				<a href="#destroy-a-session">destroying</a>
+				it once it is no longer needed.</p>
+			<div>
+				<h3 id="register-a-player">Register a Player</h3>
+			</div>
+			<p>When a player joins the session, the session owner is responsible for registering the player with the session. This keeps the back-end service aware of the number of players so that it may stop advertising the session publicly when it is full. EOS accepts registration of multiple players at once through the
+				<code>EOS_Sessions_RegisterPlayers</code>
+				function. Call this function from the owning client with an
+				<code>EOS_Sessions_RegisterPlayersOptions</code>
+				structure containing the following data:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_REGISTERPLAYERS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The local name of the session</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PlayersToRegister</code>
+						</td>
+						<td>An array of IDs for the joining players</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PlayersToRegisterCount</code>
+						</td>
+						<td>The number of elements in
+							<code>PlayersToRegister</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>On completion, your callback of type
+				<code>EOS_Sessions_OnRegisterPlayersCallback</code>
+				will run with an
+				<code>EOS_Sessions_RegisterPlayersCallbackInfo</code>
+				parameter that contains the following data:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ResultCode</code>
+						</td>
+						<td>Result code indicating success or failure</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Registered Players</code>
+						</td>
+						<td>A list of players successfully registered</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Registered Players Count</code>
+						</td>
+						<td>The number of registered players</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Sanctioned Players</code>
+						</td>
+						<td>A list of players that were not registered due to sanctions</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Sanctioned Players Count</code>
+						</td>
+						<td>The number of players not registered due to sanctions</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If the call succeeds, the newly-registered players will receive access to some session management functionality, such as the ability to invite other players to the session. Note that no errors are returned when one or more sanctioned players are denied registration;
+				<em>the
+					<code>SanctionedPlayers</code>
+					list must be checked manually</em>. See
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/enforce-sanctions">Enforcing Sanctions</a>
+				for more details. EOS does not provide notification when a player joins a session, so you must notify the owner when you join, or provide the owner with a way to detect when a player has successfully joined the session.</p>
+			<p>After a user registers with a session configured with the
+				<code>EOS_OSPF_PublicAdvertised</code>
+				permission level, other users can find the session with
+				<code>EOS_SessionSearch_SetTargetUserId</code>. For more information on the permission levels that you can set for a session, see the section on:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session#permission-levels">Permission Levels</a>
+				in the page
+				<em>Modify a Session</em>.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>This information is publicly visible, including to applications outside of the EOS ecosystem. These applications could use session data to discover the IP address of the server or P2P host, and potentially attempt to cause disruption.</p>
+				</div>
+			</div>
+			<div>
+				<h2 id="leave-a-session">Leave a Session</h2>
+			</div>
+			<p>The Sessions Interface does not feature a dedicated function for leaving a session. To leave a session,
+				<a href="#destroy-a-session">destroy</a>
+				your local session through the standard method, using its local name.</p>
+			<div>
+				<h3 id="unregister-a-player">Unregister a Player</h3>
+			</div>
+			<p>When a player leaves the session, the session's owner is responsible for unregistering the player. This enables the server to free up player slots so that future players can join. EOS accepts unregistration of multiple players at once through the
+				<code>EOS_Sessions_UnregisterPlayers</code>
+				function. Call this function from the owning client with an
+				<code>EOS_Sessions_UnregisterPlayersOptions</code>
+				structure containing the following data:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_UNREGISTERPLAYERS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The local name of the session</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PlayersToUnregister</code>
+						</td>
+						<td>An array of IDs for the departing players</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PlayersToUnregisterCount</code>
+						</td>
+						<td>The number of elements in
+							<code>PlayersToUnregister</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>On completion, your callback of type
+				<code>EOS_Sessions_OnUnregisterPlayersCallback</code>
+				will run with an
+				<code>EOS_Sessions_UnregisterPlayersCallbackInfo</code>
+				parameter that indicates success or failure. If the call succeeds, the back-end service will revoke the session management access that those players received when they were originally registered. For example, players who are not registered with the session cannot invite others to join it. EOS does not provide notification of a player leaving a session, so you must notify the owner when you leave a session, or provide the owner with a way to detect that a player has left the game or disconnected.</p>
+			<div>
+				<p>Host migration is not supported for sessions. If the owner of the session leaves or they lose their connection to the network, the session is orphaned, and no one else can manage the session on the back-end.</p>
+			</div>
+			<div>
+				<h2 id="start-and-end-play">Start and End Play</h2>
+			</div>
+			<p>A player can declare that a match has started or ended for a local active session. If that session maps to a session on the back-end service that the local player owns, the back-end version will also start or end play. While playing, the back-end service will automatically reject attempts to join a session if that session has
+				<strong>Join in Progress</strong>
+				disabled (see the documentation:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session">Modify a Session</a>). Although starting a session typically implies that a match has begun, the specific usage of this functionality is up to the game's developers.</p>
+			<p>To start play, call
+				<code>EOS_Sessions_StartSession</code>
+				with an
+				<code>EOS_Sessions_StartSessionOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_STARTSESSION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The local name of the session</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the operation completes, your callback, of type
+				<code>EOS_Sessions_OnStartSessionCallback</code>, will run with an
+				<code>EOS_Sessions_StartSessionCallbackInfo</code>
+				data structure indicating success or failure. If the operation succeeds, the session is considered "in progress" until you end play by calling
+				<code>EOS_Sessions_EndSession</code>
+				with an
+				<code>EOS_Sessions_EndSessionOptions</code>
+				containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_ENDSESSION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The local name of the session</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Upon completion, your
+				<code>EOS_Sessions_OnEndSessionCallback</code>
+				function will receive a call with an
+				<code>EOS_Sessions_EndSessionCallbackInfo</code>
+				data structure indicating success or failure. On success, the session is no longer considered "in progress" and will once again permit players to join. Ending a session does not remove players or destroy the session; it effectively returns to its pre-start state and remains usable, including the ability to start play again. If you intend to destroy the session, you do not need to call
+				<code>EOS_Sessions_EndSession</code>
+				first.</p>
+			<div>
+				<h2 id="destroy-a-session">Destroy a Session</h2>
+			</div>
+			<p>When you no longer need a session, you must destroy it using
+				<code>EOS_Sessions_DestroySession</code>. Call this function with an
+				<code>EOS_Sessions_DestroySessionOptions</code>
+				data structure containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_DESTROYSESSION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The name of the session to destroy</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When the destruction operation completes, you will receive a callback of type
+				<code>EOS_Sessions_OnDestroySessionCallback</code>
+				with an
+				<code>EOS_Sessions_DestroySessionCallbackInfo</code>
+				data structure. Upon success, the session will cease to exist and its name will be available for reuse. However, due to the asynchronous nature of this system, it is possible for a player to make a request after you have called
+				<code>EOS_Sessions_DestroySession</code>
+				but before the back-end service has destroyed the session. In this case, you may receive requests to join the session after having started the destruction operation. It is important to reject these players, or shut down the network to prevent them from joining the defunct session.</p>
+			<div>
+				<h2 id="mirror-session-management-on-remote-clients">Mirror Session Management on Remote Clients</h2>
+			</div>
+			<p>Through the Sessions Interface, the session owner (the user who created the session) can manage the session's state as it exists on the back-end service.</p>
+			<p>In general, only the owner of the session can make modifications to session data on the back-end service. However, remote clients who
+				<a href="#join-a-session">join</a>
+				a session will have their own local view of the session, and this view does not automatically receive data updates about the back-end version. It is not required, but can be beneficial for remote clients to keep their local view in sync with the back-end session by mirroring the following function calls:</p>
+			<ul>
+				<li>
+					<p>
+						<code>EOS_Sessions_StartSession</code>
+					</p>
+				</li>
+				<li>
+					<p>
+						<code>EOS_Sessions_EndSession</code>
+					</p>
+				</li>
+				<li>
+					<p>
+						<code>EOS_Sessions_RegisterPlayers</code>
+					</p>
+				</li>
+				<li>
+					<p>
+						<code>EOS_Sessions_UnregisterPlayers</code>
+					</p>
+				</li>
+			</ul>
+			<p>These functions will modify the local state of the session on remote (non-owner) clients without affecting the back-end service's version.</p>
+			<div>
+				<h2 id="usage-limitations">Usage Limitations</h2>
+			</div>
+			<p>Users can host, find, and interact with online gaming sessions through the Sessions Interface. A session can be short, like filling a certain number of player slots before starting a game, then disbanding after the game ends. Or it can be longer, like keeping track of a game that cycles through matches on multiple maps or levels. The Sessions Interface also manages game-specific data that supports the back-end service searching and matchmaking functionality.</p>
+			<p>For general information about throttling, usage quotas, and best practices, s ee the section on service usage limitations in the
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK - Conventions and Limitations</a>
+				page.</p>
+			<p>The following general limitations apply to sessions:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Concurrent players</td>
+						<td>1000 per session</td>
+					</tr>
+					<tr>
+						<td>Session attributes</td>
+						<td>100 per session</td>
+					</tr>
+					<tr>
+						<td>Attribute name length</td>
+						<td>1000 characters</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>User interaction with the Sessions Interface must respect the following limitations:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Limitation</th>
+						<th>Per-Deployment Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Create a session</td>
+						<td>30 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+					<tr>
+						<td>Delete a session</td>
+						<td>30 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+					<tr>
+						<td>Update a session</td>
+						<td>30 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+					<tr>
+						<td>Add or remove players</td>
+						<td>100 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+					<tr>
+						<td>Start or stop a session</td>
+						<td>30 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+					<tr>
+						<td>Invite a user</td>
+						<td>100 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+					<tr>
+						<td>Filter sessions</td>
+						<td>30 requests per minute</td>
+						<td>30 request per 1 CCU per minute</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Additionally, there are per-user rate limitations. Consider the following limitations to avoid throttling:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>User Limit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Amount of sessions a single user can join at once</td>
+						<td>16</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="faq">FAQ</h2>
+			</div>
+			<p>
+				<strong>Q: Why can't I find the server that I just created?</strong>
+				<br>
+				A: The EOS Sessions service can take up to three seconds to index newly created sessions. When you search sessions, you will not see your new session in the search results until the EOS Sessions service finishes indexing.</p>
+			<p>
+				<strong>Q: Why can't I see the same list of servers as my co-worker or friend?</strong>
+				<br>
+				A: The EOS Sessions service uses deliberate jittering (the service applies a random amount of time before making or retrying a request call) to avoid race conditions that can affect the efficiency of the servers. This ensures that no two people get the same list of servers at the same time.</p>
+			<p>
+				<strong>Q: I want to see the sessions that are set up in my game. How can I see all the sessions in my game?</strong>
+				<br>
+				A: You can find the list of sessions in your game in the Developer Portal. To do this:</p>
+			<ol>
+				<li>Go to your game’s Developer Portal product page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal/">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Epic Online Services</strong>.</li>
+				<li>In the
+					<strong>Multiplayer</strong>
+					section, click
+					<strong>Sessions</strong>.</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#session-lifecycle">Session Lifecycle</a>
+								</li>
+								<li>
+									<a href="#active-sessions">Active Sessions</a>
+								</li>
+								<li>
+									<a href="#create-a-session">Create a Session</a>
+								</li>
+								<li>
+									<a href="#set-the-initial-state-and-settings">Set the Initial State and Settings</a>
+								</li>
+								<li>
+									<a href="#make-additional-modifications">Make Additional Modifications</a>
+								</li>
+								<li>
+									<a href="#complete-the-setup">Complete the Setup</a>
+								</li>
+								<li>
+									<a href="#invite-users-to-a-session">Invite Users to a Session</a>
+								</li>
+								<li>
+									<a href="#accept-an-invitation">Accept an Invitation</a>
+								</li>
+								<li>
+									<a href="#reject-an-invitation">Reject an Invitation</a>
+								</li>
+								<li>
+									<a href="#join-a-session">Join a Session</a>
+								</li>
+								<li>
+									<a href="#register-a-player">Register a Player</a>
+								</li>
+								<li>
+									<a href="#leave-a-session">Leave a Session</a>
+								</li>
+								<li>
+									<a href="#unregister-a-player">Unregister a Player</a>
+								</li>
+								<li>
+									<a href="#start-and-end-play">Start and End Play</a>
+								</li>
+								<li>
+									<a href="#destroy-a-session">Destroy a Session</a>
+								</li>
+								<li>
+									<a href="#mirror-session-management-on-remote-clients">Mirror Session Management on Remote Clients</a>
+								</li>
+								<li>
+									<a href="#usage-limitations">Usage Limitations</a>
+								</li>
+								<li>
+									<a href="#faq">FAQ</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

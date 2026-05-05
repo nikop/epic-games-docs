@@ -1,0 +1,66 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Enforce Sanctions</h1>
+			<h2>Overview of the Session Matchmaking Sample.</h2>
+			<div>
+				<div>1 min to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>If you are using EOS Sanctions, then you can enforce sanctions when players attempt to join or register with the session. See the
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface">Sanctions Interface</a>
+				documentation for more information on sanctions.</p>
+			<div>
+				<p>Sanctioned players may neither join nor register with a session that has sanctions enabled. This includes sanctioned sessions that the player creates themselves; they are still not able to join those sessions if they are a sanctioned player.</p>
+			</div>
+			<p>Sanctions are enforced through the Sessions Interface. Sanctions enforcement is enabled at session creation based on the value of the
+				<code>bSanctionsEnabled</code>
+				member in the
+				<code>EOS_Sessions_CreateSessionModificationOptions</code>
+				structure. If
+				<code>bSanctionsEnabled</code>
+				is true, then the created session enforces sanctions. For more information, see the section on:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/sessions-intro#create-a-session">Create a Session</a>
+				in the
+				<em>Sessions Introduction</em>
+				page.</p>
+			<p>If a player has a
+				<code>RESTRICT_GAME_ACCESS</code>
+				sanction, they are automatically kicked from multiplayer sessions in games protected by Anti-Cheat. See the documentation on
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces">Anti-cheat</a>
+				for more information.</p>
+			<p>The
+				<a href="/docs/api-ref/functions/eos-sessions-join-session">
+					<code>EOS_Sessions_JoinSession</code>
+				</a>
+				function does not join a player with a
+				<code>RESTRICT_MATCHMAKING</code>
+				sanction, and it returns the error
+				<code>EOS_Sessions_PlayerSanctioned</code>
+				on any attempt to do so. However, the function
+				<code>EOS_Sessions_RegisterPlayers</code>
+				supports multiple players, and, unlike
+				<code>EOS_Sessions_JoinSession</code>, it does not return an error when one or more sanctioned players attempts to register with a session that has sanctions enabled. Instead, you must check the response object to ensure that all players are registered. If the session has sanctions enabled, any sanctioned players who failed to register are listed in the
+				<code>SanctionedPlayers</code>
+				member of the callback result struct
+				<code>EOS_Sessions_RegisterPlayersCallbackInfo</code>. For more information, see the section on:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/sessions-intro#register-a-player">Register a Player</a>
+				in the
+				<em>Sessions Introduction</em>
+				page.</p>
+		</section>
+	</section>
+</section>

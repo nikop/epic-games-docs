@@ -1,0 +1,448 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Friends Interface</h1>
+			<h2>Enable players to invite friends to join a game-play session. Retrieve and display friend information to players.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Epic Account Service — authenticate players with the Auth Interface.</p>
+			</div>
+			<p>Use the Epic Online Services (EOS) Friends Interface to retrieve, manage, and subscribe to events for the friends list of a signed-in player of your game (or user of a software application).</p>
+			<p>
+				<strong>Notes:</strong>
+			</p>
+			<ul>
+				<li>To use the Friends Interface in your game, you must first create an Epic Account Services application for your product in the Developer Portal. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services">EOS Epic Account Services</a>
+					documentation for more information.</li>
+				<li>You must obtain user consent (see documentation:
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/eos-data-privacy-visibility">Data Privacy and Visibility</a>) from your players to access their friends list data.</li>
+				<li>Before you can use all the features of the Friends Interface, you must first retrieve the friends list of the player and cache it. See the
+					<em>Retrieve and Cache the Friends List</em>
+					section for details.</li>
+			</ul>
+			<div>
+				<h2 id="retrieve-and-cache-the-friends-list">Retrieve and Cache the Friends List</h2>
+			</div>
+			<p>To retrieve and cache the player's friends list, you must complete a two-step process:</p>
+			<ol>
+				<li>Acquire a Friends Interface handle.</li>
+				<li>Query the friends list.</li>
+			</ol>
+			<div>
+				<h3 id="step-1-acquire-a-friends-interface-handle">Step 1: Acquire a Friends Interface Handle</h3>
+			</div>
+			<p>To retrieve a player's friends list, you must obtain an
+				<code>EOS_HFriends</code>
+				handle. Friends Interface functions require this handle to access the player's friends list. Call the Platform Interface function
+				<a href="/docs/api-ref/functions/eos-platform-get-friends-interface">
+					<code>EOS_Platform_GetFriendsInterface</code>
+				</a>
+				to get the handle.</p>
+			<div>
+				<h3 id="step-2-query-the-friends-list">Step 2: Query the Friends List</h3>
+			</div>
+			<p>After you obtain the
+				<code>EOS_HFriends</code>
+				handle, you can retrieve the player's friends list. To do this, call
+				<a href="/docs/api-ref/functions/eos-friends-query-friends">
+					<code>EOS_Friends_QueryFriends</code>
+				</a>
+				and pass the following information in it:</p>
+			<ul>
+				<li>The Friends Interface handle.</li>
+				<li>An
+					<a href="/docs/api-ref/structs/eos-friends-query-friends-options">
+						<code>EOS_Friends_QueryFriendsOptions</code>
+					</a>
+					structure.</li>
+				<li>Your callback information.</li>
+			</ul>
+			<p>The
+				<code>EOS_Friends_QueryFriendsOptions</code>
+				data structure must have the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_FRIENDS_QUERYFRIENDS_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the player whose friends list you want to retrieve.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>When you call
+				<code>EOS_Friends_QueryFriends</code>, it downloads the most up-to-date version of the player's friends list, including blocked players, into the local cache. The cached friend’s list does not separate blocked players from non-blocked players. If you want to get only the blocked players from the player’s friend’s list, you must query for the blocked players. For more information, see the section on:
+				<a href="#query-for-blocked-friends">Query for Blocked Friends</a>.</p>
+			<p>The callback you provided runs when
+				<code>EOS_Friends_QueryFriends</code>
+				finishes.</p>
+			<p>
+				<strong>Note:</strong>
+				For callbacks to trigger when requests complete, you must ensure that the
+				<code>EOS_HPlatform</code>
+				handle is ticking. (Documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>).</p>
+			<p>Check if the
+				<code>EOS_Friends_QueryFriends</code>
+				call succeeded. To do this, when your callback executes, check the
+				<code>ResultCode</code>
+				field of the
+				<a href="/docs/api-ref/structs/eos-friends-query-friends-callback-info">
+					<code>EOS_Friends_QueryFriendsCallbackInfo</code>
+				</a>
+				structure. If your callback returns a success code this means the SDK now has a cache of the latest data from the server. You can get information about the cached friends list data at any time. For more information, see the section on:
+				<a href="#get-information-about-the-friends-list">Get Information About the Friends List</a>.</p>
+			<p>
+				<strong>Notes:</strong>
+			</p>
+			<ul>
+				<li>
+					<code>EOS_Friends_QueryFriends</code>
+					only returns friends who have played the game at least once and have given their consent to allow your game to use their Friends List data.
+					<ul>
+						<li>A friend gives their consent when either they purchase the game or when they use Epic Account Services to sign in to an application and allow Epic Account Services to access their Epic Games account data.</li>
+					</ul>
+				</li>
+				<li>Your game does not need and should not call
+					<code>EOS_Friends_QueryFriends</code>
+					more than once per sign in of a player. However, after a player signs out, you must query their friends list again when they sign in, to get the latest friends list.</li>
+				<li>Friends lists can change at any time. For example, a player might add a new friend after they meet a new player in-game. Or they might add a new friend when they modify the account from a separate system. To keep a game's local copy of the friends list up to date, subscribe to friend status update notifications. For more information, see the section on:
+					<a href="#subscribe-and-unsubscribe-to-friend-status-updates">Subscribe and Unsubscribe to Friend Status Updates</a>.</li>
+			</ul>
+			<div>
+				<h2 id="perform-functions-on-the-cached-friends-list">Perform Functions on the Cached Friends List</h2>
+			</div>
+			<p>After you retrieve and cache the friends list (see the section on:
+				<em>Retrieve and Cache the Friends List</em>), you can perform these functions on the cached friends list:</p>
+			<ul>
+				<li>
+					<a href="#get-information-about-the-friends-list">Get Information About the Friends List</a>
+				</li>
+				<li>
+					<a href="#subscribe-and-unsubscribe-to-friend-status-updates">Subscribe and Unsubscribe to Friend Status Updates</a>
+				</li>
+				<li>
+					<a href="#manage-the-friends-list">Manage the Friends List</a>
+				</li>
+				<li>
+					<a href="#query-for-blocked-friends">Query for Blocked Friends</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="get-information-about-the-friends-list">Get Information About the Friends List</h3>
+			</div>
+			<p>To get information about the player's friends list, use the functions below:</p>
+			<ul>
+				<li>
+					<a href="/docs/api-ref/functions/eos-friends-get-friends-count">
+						<code>EOS_Friends_GetFriendsCount</code>
+					</a>: Get the number of friends.</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-friends-get-friend-at-index">
+						<code>EOS_Friends_GetFriendAtIndex</code>
+					</a>: Get the
+					<code>EOS_EpicAccountId</code>
+					of each friend.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You can get additional information about the friend with the
+							<code>EOS_EpicAccountId</code>
+							that the function
+							<code>EOS_Friends_GetFriendAtIndex</code>
+							returns. To do this, pass the
+							<code>EOS_EpicAccountId</code>
+							to the User Info Interface. See the
+							<a href="/docs/epic-online-services/accounts-and-social/eos-user-info-interface">User Info Interface</a>
+							documentation for more information.</li>
+					</ul>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-friends-get-status">
+						<code>EOS_Friends_GetStatus</code>
+					</a>: Get the current status of the social relationship between the player and one of their friends.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							By default, the function GetStatus returns whether a player is a friend (<code>EOS_FS_Friends</code>) or whether a player is not a friend (<code>EOS_FS_NotFriends</code>). The Social Overlay handles pending invites for you, which includes additional statuses for when an invite is sent (<code>EOS_FS_InviteSent</code>) or when an invite is received (<code>EOS_FS_InviteReceived</code>).</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="subscribe-and-unsubscribe-to-friend-status-updates">Subscribe and Unsubscribe to Friend Status Updates</h3>
+			</div>
+			<div>
+				<h4 id="subscribe-to-friend-status-updates">Subscribe to Friend Status Updates</h4>
+			</div>
+			<p>You can subscribe to friend status updates to receive a notification when the status changes of any of the friends on the player's friends list. To do this, call
+				<a href="/docs/api-ref/functions/eos-friends-add-notify-friends-update">
+					<code>EOS_Friends_AddNotifyFriendsUpdate</code>
+				</a>
+				with the following parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>Options</code>
+						</td>
+						<td>An
+							<a href="/docs/api-ref/structs/eos-friends-add-notify-friends-update-options">
+								<code>EOS_Friends_AddNotifyFriendsUpdateOptions</code>
+							</a>
+							structure, with
+							<code>ApiVersion</code>
+							as its only parameter.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Callback</code>
+						</td>
+						<td>The callback function
+							<a href="/docs/api-ref/callbacks/eos-friends-on-friends-update-callback">
+								<code>EOS_Friends_OnFriendsUpdateCallback</code>
+							</a>
+							that the EOS SDK calls when a friend's status changes.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The EOS SDK calls the callback function when a friend's status changes. The callback receives an
+				<a href="/docs/api-ref/structs/eos-friends-on-friends-update-info">
+					<code>EOS_Friends_OnFriendsUpdateInfo</code>
+				</a>
+				structure with the following parameters:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>LocalUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the player who receives the update about their friends.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TargetUserId</code>
+						</td>
+						<td>The
+							<code>EOS_EpicAccountId</code>
+							of the player's friend whose status changed.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>PreviousStatus</code>
+						</td>
+						<td>The previous value of the friend's status.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>CurrentStatus</code>
+						</td>
+						<td>The new value of the friend's status.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="unsubscribe-to-friend-status-updates">Unsubscribe to Friend Status Updates</h4>
+			</div>
+			<p>
+				<code>EOS_Friends_AddNotifyFriendsUpdate</code>
+				returns an
+				<code>EOS_NotificationId</code>
+				handle. You must use the handle to unsubscribe from notifications when you no longer need them. To unsubscribe from friend status updates, call the function
+				<a href="/docs/api-ref/functions/eos-friends-remove-notify-friends-update">
+					<code>EOS_Friends_RemoveNotifyFriendsUpdate</code>
+				</a>
+				and pass the
+				<code>EOS_NotificationId</code>
+				handle. If the call to
+				<code>EOS_Friends_AddNotifyFriendsUpdate</code>
+				fails, it returns a result code of
+				<code>EOS_INVALID_NOTIFICATIONID</code>.</p>
+			<div>
+				<h3 id="manage-the-friends-list">Manage the Friends List</h3>
+			</div>
+			<p>This section describes the available APIs that you can use to manage the friends list in your game. For information on how to manage the friends list through the Social Overlay, see the documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/social-overlay-tabs/social">Social Overlay Tabs: Friends</a>.</p>
+			<p>
+				<strong>Note:</strong>
+				The friends list management APIs described in this section are only available for games on Windows PC and Nintendo Switch, PlayStation, and Xbox console platforms. Support for macOS, Linux, Android and iOS is planned.</p>
+			<p>You can manage invites in your game with the following functions:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-send-invite">
+								<code>EOS_Friends_SendInvite</code>
+							</a>
+						</td>
+						<td>Send a friend request from one player to another player. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-accept-invite">
+								<code>EOS_Friends_AcceptInvite</code>
+							</a>
+						</td>
+						<td>Accept a friend request from one player to another player. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-reject-invite">
+								<code>EOS_Friends_RejectInvite</code>
+							</a>
+						</td>
+						<td>Reject a friend request from one player to another player. For more information, click the function to see the API documentation.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note:</strong>
+				These functions return
+				<code>EOS_NotImplemented</code>
+				for platforms on which the functionality is not yet available.</p>
+			<div>
+				<h3 id="query-for-blocked-friends">Query for Blocked Friends</h3>
+			</div>
+			<p>You can query for blocked friends of one of your players with the following functions:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-get-blocked-users-count">
+								<code>EOS_Friends_GetBlockedUsersCount</code>
+							</a>
+						</td>
+						<td>Retrieve the number of blocked players on the blocklist. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-get-blocked-user-at-index">
+								<code>EOS_Friends_GetBlockedUserAtIndex</code>
+							</a>
+						</td>
+						<td>Retrieve the Epic Account ID of an entry from the blocklist. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-add-notify-blocked-users-update">
+								<code>EOS_Friends_AddNotifyBlockedUsersUpdate</code>
+							</a>
+						</td>
+						<td>Listen for changes to the blocklist for a particular account. For more information, click the function to see the API documentation.</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/docs/api-ref/functions/eos-friends-remove-notify-blocked-users-update">
+								<code>EOS_Friends_RemoveNotifyBlockedUsersUpdate</code>
+							</a>
+						</td>
+						<td>Stop listening for blocklist changes on a previously bound handler. For more information, click the function to see the API documentation.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>For more information on how a player can block another player on their friends list, see the documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/social-overlay-tabs/profile">Social Overlay Tabs: Profile</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#retrieve-and-cache-the-friends-list">Retrieve and Cache the Friends List</a>
+								</li>
+								<li>
+									<a href="#step-1-acquire-a-friends-interface-handle">Step 1: Acquire a Friends Interface Handle</a>
+								</li>
+								<li>
+									<a href="#step-2-query-the-friends-list">Step 2: Query the Friends List</a>
+								</li>
+								<li>
+									<a href="#perform-functions-on-the-cached-friends-list">Perform Functions on the Cached Friends List</a>
+								</li>
+								<li>
+									<a href="#get-information-about-the-friends-list">Get Information About the Friends List</a>
+								</li>
+								<li>
+									<a href="#subscribe-and-unsubscribe-to-friend-status-updates">Subscribe and Unsubscribe to Friend Status Updates</a>
+								</li>
+								<li>
+									<a href="#subscribe-to-friend-status-updates">Subscribe to Friend Status Updates</a>
+								</li>
+								<li>
+									<a href="#unsubscribe-to-friend-status-updates">Unsubscribe to Friend Status Updates</a>
+								</li>
+								<li>
+									<a href="#manage-the-friends-list">Manage the Friends List</a>
+								</li>
+								<li>
+									<a href="#query-for-blocked-friends">Query for Blocked Friends</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

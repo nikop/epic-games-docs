@@ -1,0 +1,368 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Manage Your Clients and Client Policies</h1>
+			<h2>A guide on how to manage EOS clients and client policies.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>A client is software that accesses any Epic Online Services (EOS) service. Players download and run a client to play a game that uses EOS services. (Note that throughout this guide "game" also means "non-game software application" and "player" also means "user"). In addition, a trusted server can be a client.
+				<br>
+				For more information on types of clients, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference">Client Types</a>
+				section of the Client and Client Policy Reference documentation.</p>
+			<p>Before you set up clients, you must first set up a client policy. A client policy defines what EOS services and other EOS features a client can access, such as Achievements, Stats, Leaderboards, and more. You set up both clients and client policies in the Developer Portal. You also assign a client policy to a client in the Developer Portal.</p>
+			<p>This guide describes how to:</p>
+			<ul>
+				<li>Set up a client policy and avoid common pitfalls.</li>
+				<li>Set up a client (you can only do this after you have set up a client policy).</li>
+				<li>Edit clients and custom client policies.</li>
+			</ul>
+			<p>Use this guide if you are integrating Epic Online Services (EOS) into your game and need to give your game's clients access to EOS services and other EOS features. For a detailed list of the EOS services and EOS features available for client policies, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference">Client and Client Policy Reference</a>
+				documentation.</p>
+			<p>For a full list of the available guides, see the
+				<a href="/docs/epic-online-services/how-to-guides">How-to Guides</a>
+				page.</p>
+			<div>
+				<h2 id="set-up-a-client-policy">Set Up a Client Policy</h2>
+			</div>
+			<div>
+				<h3 id="client-policy-types">Client Policy Types</h3>
+			</div>
+			<p>There are two client policy types. These are as follows:</p>
+			<ul>
+				<li>
+					<strong>Predefined Client Policy</strong>
+					<br>
+					Gives your game's clients access to a ready-selected collection of EOS services and other features.<br>
+					<strong>Note:</strong>
+					You cannot modify a predefined client policy.</li>
+				<li>
+					<strong>Custom Client Policy</strong>
+					<br>
+					You define the policy. Select which EOS services and other features your game's clients can access. We recommend this policy type for production (live) environments so you have fine-grained control over your game's client access to EOS services and other features.</li>
+			</ul>
+			<p>This guide covers both of these client policy types.</p>
+			<div>
+				<h3 id="before-you-start">Before You Start</h3>
+			</div>
+			<p>Before you can set up a client policy, you must complete these steps:</p>
+			<ul>
+				<li>Set up an Epic Games account, organization, and product in the Developer Portal.<br>
+					(Documentation:
+					<a href="/docs/dev-portal/dev-portal-intro#sign-in">Developer Portal &gt; Introduction &gt; Sign In</a>)</li>
+				<li>Have a role in your organization that can edit client policies.<br>
+					(Documentation:
+					<a href="/docs/dev-portal/organization-management#roles">Developer Portal &gt; Organizations &gt; Roles</a>)</li>
+				<li>Sign any required agreements for EOS services that you use in your game. (For example, Anti-Cheat or Ecom.)
+					<ul>
+						<li>You can check your agreements in the Developer Portal on the Agreements tab of the Organization page.<br>
+							To do this:
+							<ol>
+								<li>Sign in to the Developer Portal at
+									<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</li>
+								<li>In the left navigation, click
+									<strong>Organization</strong>.</li>
+								<li>The default tab is Members. Click the
+									<strong>Agreements</strong>
+									tab.</li>
+							</ol>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h3 id="select-a-predefined-client-policy">Select a Predefined Client Policy</h3>
+			</div>
+			<p>Note that if you use a predefined client policy, you cannot make changes to it at any time. To create your own client policy that you can make changes to, see the
+				<a href="#create-a-custom-client-policy">Create a Custom Client Policy</a>
+				section on this page.</p>
+			<p>You select a predefined client policy in the Developer Portal on the Product Settings page. To select a predefined client policy, follow the steps below.</p>
+			<p>
+				<strong>To go to the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>, click the name of your product.<br>
+							(<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are in your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+			</ol>
+			<p>
+				<strong>On the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>
+					<p>The default tab is SDK Download &amp; Credentials. Click
+						<strong>Clients</strong>.</p>
+				</li>
+				<li>
+					<p>Scroll down to
+						<strong>Client policies</strong>, and click
+						<strong>Add new client policy</strong>.<br>
+						(Note that the Clients tab might show new agreements to accept. To see the
+						<strong>Client policies</strong>
+						section, scroll down.)</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Client policy name</strong>
+						field, enter a name for the client policy. You can use any combination of alphanumeric characters, spaces, and special characters.</p>
+				</li>
+				<li>
+					<p>From the
+						<strong>Client policy type</strong>
+						dropdown, select one of the predefined client policy types.<br>
+						For details about the available policies, see the documentation:
+						<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference#predefined-client-policy-types">Client and Client Policy Reference &gt; Predefined Client Policy Types</a>.</p>
+				</li>
+				<li>
+					<p>Select the
+						<strong>User required</strong>
+						checkbox, unless the client is a trusted server.</p>
+					<p>
+						<strong>Warning:</strong>
+						Never use a client ID and client secret tied to a trusted server policy with a public game build.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Add new client policy</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="create-a-custom-client-policy">Create a Custom Client Policy</h3>
+			</div>
+			<p>Use a custom client policy to restrict client access to only the EOS services or other features that your game uses.</p>
+			<p>You create a custom client policy in the Developer Portal on the Product Settings page. To create a custom client policy, follow the steps below.</p>
+			<p>
+				<strong>To go to the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>, click the name of your product.<br>
+							(<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are in your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+			</ol>
+			<p>
+				<strong>On the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>
+					<p>The default tab is SDK Download &amp; Credentials. Click
+						<strong>Clients</strong>.</p>
+				</li>
+				<li>
+					<p>Scroll down to
+						<strong>Client policies</strong>, and click
+						<strong>Add new client policy</strong>.
+						<br>
+						Note that the Clients tab might show new agreements to accept. To see the
+						<strong>Client policies</strong>
+						section, scroll down.)</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Client policy name</strong>
+						field, enter a name for the client policy.<br>
+						You can use any combination of alphanumeric characters, spaces, and special characters.</p>
+				</li>
+				<li>
+					<p>From the
+						<strong>Client policy type</strong>
+						dropdown, select
+						<strong>Create custom policy</strong>.</p>
+				</li>
+				<li>
+					<p>Select the
+						<strong>User required</strong>
+						checkbox, unless the client is a trusted server.</p>
+					<p>
+						<strong>Warning:</strong>
+						Never use a client ID and client secret tied to a trusted server policy with a public game build.</p>
+				</li>
+				<li>
+					<p>Under Features, select the features you want to enable in your custom client policy.<br>
+						For details of the available features, see the documentation:
+						<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference#client-policy-features">Client and Client Policy Reference &gt; Client Policy Features</a>.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Add new client policy</strong>.</p>
+				</li>
+			</ol>
+			<p>
+				<strong>Note:</strong>
+				The EOS Authentication service works with a client policy that has no features enabled. Other services (such as EOS Achievements and EOS Stats) require a client policy with specific features enabled.</p>
+			<div>
+				<h2 id="set-up-a-client">Set Up a Client</h2>
+			</div>
+			<p>You must set up a client policy before you can set up a client.</p>
+			<p>For a game in a production (live) environment, we recommend that you create a custom client policy to grant your game's clients access to only the EOS services and other features that you intend to use in your game. For guidance, see the
+				<a href="#create-a-custom-client-policy">Create a Custom Client Policy</a>
+				section on this page.</p>
+			<p>You set up a client in the Developer Portal on the Product Settings page. To set up a client, follow the steps below.</p>
+			<p>
+				<strong>To go to the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>, click the name of your product.<br>
+							(<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are in your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+			</ol>
+			<p>
+				<strong>On the Product Settings page:</strong>
+			</p>
+			<ol>
+				<li>The default tab is SDK Download &amp; Credentials. Click
+					<strong>Clients</strong>.
+					<br>
+					Note that the Clients tab might show new agreements to accept. If applicable, accept these agreements before continuing.)</li>
+				<li>Scroll down to
+					<strong>Clients</strong>, and click
+					<strong>Add new client</strong>.</li>
+				<li>In the
+					<strong>Client Name</strong>
+					field, enter a name for the client. You can use any combination of alphanumeric characters, spaces, and special characters.<br>
+					<strong>Tip:</strong>
+					Choose a name that makes it clear that this is either a user client or a trusted server.<br>
+					(For more information on the types of clients, see the
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference">Client Types</a>
+					section of the Client and Client Policy Reference documentation).</li>
+				<li>From the
+					<strong>Client policy</strong>
+					dropdown, select one of your existing client policies.
+					<ul>
+						<li>If you have not set up a client policy, there is no dropdown. Click
+							<strong>Add new client policy</strong>
+							and follow the on-screen instructions.</li>
+						<li>If you have already set up a client policy but want to set up a new one, click
+							<strong>Create new client policy</strong>
+							and follow the on-screen instructions.</li>
+						<li>If you're setting up a new client policy, you can either:
+							<ul>
+								<li>Create a custom client policy. (See the section on this page:
+									<a href="#create-a-custom-client-policy">Create a Custom Client Policy</a>.)</li>
+								<li>Choose a predefined client policy. (See the section on this page:
+									<a href="#select-a-predefined-client-policy">Select a Predefined Client Policy</a>.)</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>With your client policy selected, update the settings in the rest of the form if needed.
+					<br>
+					The settings are:
+					<ul>
+						<li>Add the IP allow list for the trusted server.</li>
+						<li>Add the Epic Account Service Redirect URL.<br>
+							<br>
+							For details on these settings, see the
+							<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference">Add New Client Settings</a>
+							section of the Client and Client Policy Reference documentation.</li>
+					</ul>
+				</li>
+				<li>Click
+					<strong>Add new client</strong>.</li>
+			</ol>
+			<div>
+				<h2 id="edit-clients-or-custom-client-policies">Edit Clients or Custom Client Policies</h2>
+			</div>
+			<p>
+				<strong>Predefined Client Policies</strong>
+			</p>
+			<p>You cannot edit predefined client policies. If you want to change a predefined client policy, you must create a new custom policy and assign the clients to it. For guidance on this, follow the steps in the
+				<a href="#create-a-custom-client-policy">Create a Custom Client Policy</a>
+				section on this page.</p>
+			<p>
+				<strong>Clients and Custom Client Policies</strong>
+			</p>
+			<p>To edit existing clients or custom client policies:</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Product Settings</strong>.</li>
+				<li>The default tab is
+					<strong>SDK Download &amp; Credentials</strong>. Click
+					<strong>Clients</strong>.</li>
+				<li>Next to your client or client policy, click the ellipsis (<strong>...</strong>) icon &gt;
+					<strong>Edit</strong>.</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#set-up-a-client-policy">Set Up a Client Policy</a>
+								</li>
+								<li>
+									<a href="#client-policy-types">Client Policy Types</a>
+								</li>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#select-a-predefined-client-policy">Select a Predefined Client Policy</a>
+								</li>
+								<li>
+									<a href="#create-a-custom-client-policy">Create a Custom Client Policy</a>
+								</li>
+								<li>
+									<a href="#set-up-a-client">Set Up a Client</a>
+								</li>
+								<li>
+									<a href="#edit-clients-or-custom-client-policies">Edit Clients or Custom Client Policies</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,563 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>EOS SDK and Your Unity Project on Android</h1>
+			<h2>How to integrate the EOS SDK into your Unity project on Android.</h2>
+			<div>
+				<div>10 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>To integrate the EOS SDK into your Unity project, we recommend that you use the EOS Plugin for Unity. For information, see documentation:
+						<a href="/docs/epic-online-services/game-engines/game-engines-introduction#unity">Introduction (EOS SDK &amp; Game Engines) &gt; Unity</a>.</p>
+					<p>Use this how-to guide only if you cannot use the EOS Plugin for Unity.</p>
+				</div>
+			</div>
+			<p>This guide shows you how to manually integrate the EOS SDK into your Unity project on Android. The sample code in this guide is written in C#.</p>
+			<p>After you complete these steps, you will know how to:</p>
+			<ul>
+				<li>Download and install the EOS SDK into your Unity project</li>
+				<li>Initialize the EOS SDK</li>
+				<li>Create the Platform Interface</li>
+				<li>Shut down the EOS SDK</li>
+				<li>Configure Android dependencies</li>
+			</ul>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>Read the
+				<a href="/docs/epic-online-services/game-engines/eos-unity-integration/eos-unity-integration-introduction">How to Integrate the EOS SDK Into Your Unity Project &gt; Introduction</a>
+				page before you begin. It includes information on limitations that the EOS SDK has in the Unity Editor that you should be aware of.</p>
+			<p>To integrate the EOS SDK into your Unity project, you must first set up your Epic Games account and organization in the Developer Portal.<br>
+				If you have not already done this, follow the guidance in
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK</a>
+				to set these up.</p>
+			<div>
+				<h2 id="integrate-the-eos-sdk-into-your-project">Integrate the EOS SDK into Your Project</h2>
+			</div>
+			<p>To integrate the EOS SDK into your Unity project on Android you must complete these steps:</p>
+			<ol>
+				<li>Download and install the EOS SDK into your Unity project.</li>
+				<li>Configure Android dependencies.</li>
+				<li>In your game's code, initialize the EOS SDK when your game starts.</li>
+				<li>Create the EOS Platform Interface.</li>
+				<li>In your game's code, shut down the EOS SDK when your game closes.</li>
+			</ol>
+			<div>
+				<h3 id="step-1-download-and-install-the-eos-sdk-into-your-unity-project">Step 1: Download and Install the EOS SDK into Your Unity Project</h3>
+			</div>
+			<p>To download the EOS SDK for Android and install it into your Unity Project, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Download the EOS SDK from the Developer Portal.</p>
+					<ul>
+						<li>a. Sign in to the Developer Portal at (<a href="http://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, click
+							<strong>Dashboard</strong>
+							if it isn't already selected.</li>
+						<li>c. On the Dashboard page, under the
+							<strong>Your products</strong>
+							heading, click
+							<strong>Downloads &amp; Release notes</strong>.</li>
+						<li>d. Select the
+							<strong>EOS SDK</strong>
+							tab.</li>
+						<li>e. In
+							<strong>SDK Type</strong>, select
+							<strong>SDK for Android</strong>.</li>
+						<li>f. In
+							<strong>SDK Version</strong>, select the most recent version.</li>
+						<li>g. Click
+							<strong>Download</strong>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Unzip the EOS SDK download.</p>
+				</li>
+				<li>
+					<p>Organize the EOS SDK files in your Unity project as follows:</p>
+					<ul>
+						<li>
+							<p>a. Move all the files from
+								<code>/SDK/</code>
+								into the
+								<code>Assets/</code>
+								directory.</p>
+							<p>
+								<strong>Tip:</strong>
+								Organize the
+								<code>SDK/</code>
+								files into a subdirectory to make them easier to manage.</p>
+						</li>
+						<li>
+							<p>b. Move the static
+								<code>.aar</code>
+								file from the
+								<code>SDK/Bin/Android</code>
+								directory into the
+								<code>Assets/Plugins/Android</code>
+								directory in your Unity project.</p>
+							<p>
+								<strong>Note:</strong>
+								There is a static .aar file and a dynamic
+								<code>.aar</code>
+								file provided in
+								<code>SDK/Bin/Android</code>. Use only the static .aar file because it links the C Runtime statically. Do not use the dynamic .aar file. It is incompatible with most toolchains and can result in random crashes.</p>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Verify that the binaries are configured to load for the correct platform.<br>
+						To do this, click the binary file and verify that the settings are for the correct Android platform.</p>
+					<p>
+						<strong>Note:</strong>
+						It is safe to import binaries for different platforms into the same project, but you must make sure that they are configured to load on the proper platform. For more information, see Unity's documentation at
+						<a href="https://docs.unity3d.com/6000.0/Documentation/Manual/plug-in-inspector.html">docs.unity3d.com/~/plug-in-inspector</a>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-2-configure-android-dependencies">Step 2: Configure Android Dependencies</h3>
+			</div>
+			<p>To use the EOS SDK for Android, you must configure the required dependencies.</p>
+			<p>To configure Android dependencies in your Unity project, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Create a new directory in your Unity project's
+						<code>Assets/</code>
+						directory called
+						<code>eos-dependencies.androidlib</code>. The directory's name is arbitrary, but it must have a
+						<code>.androidlib</code>
+						extension.</p>
+					<p>
+						<strong>Note:</strong>
+						Unity automatically includes
+						<code>.androidlib</code>
+						directories as an Android library project in the final build.</p>
+				</li>
+				<li>
+					<p>Create a
+						<code>build.gradle</code>
+						file and add it to the
+						<code>Assets/eos-dependencies.androidlib</code>
+						directory. See
+						<a href="https://developer.android.com/build">developer.android.com/build</a>
+						for more details about the
+						<code>.gradle</code>
+						file structure.</p>
+				</li>
+				<li>
+					<p>Configure Android library dependencies (for EOS 1.16.2). Include the following dependencies in your
+						<code>build.gradle</code>
+						file:</p>
+					<div>
+						<section>
+							<pre>dependencies {    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'    implementation 'androidx.appcompat:appcompat:1.5.1'    implementation 'com.google.android.material:material:1.2.1'    implementation 'androidx.security:security-crypto:1.0.0'    implementation 'androidx.browser:browser:1.4.0'    implementation "androidx.webkit:webkit:1.7.0"}</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Configure resource dependencies. Create an
+						<code>eos_login_protocol.xml</code>
+						file and add the following content to it:</p>
+					<div>
+						<section>
+							<pre>&lt;resources&gt;  &lt;string name="eos_login_protocol_scheme"&gt;    eos.[replace with client ID in lower case]  &lt;/string&gt;&lt;/resources&gt;;
+							</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						This is a deep link registration for the application. When authentication is completed, the browser opens a special link that only this application should be registered for. This needs to be present in the application manifest because Android OS needs to know the value even when the application isn't running. For more information about source sets, see
+						<a href="https://developer.android.com/build#sourcesets">developer.android.com/build#sourcesets</a>
+					</p>
+				</li>
+				<li>
+					<p>Include the
+						<code>eos_login_protocol.xml</code>
+						file in the sourceset list in your
+						<code>build.gradle</code>
+						file.</p>
+				</li>
+				<li>
+					<p>Configure
+						<code>AndroidManifest.xml</code>
+						permissions. Set the following permissions in your
+						<code>AndroidManifest.xml</code>
+						file:</p>
+					<div>
+						<section>
+							<pre>&lt;manifest  xmlns:android="http://schemas.android.com/apk/res/android"  package="com.pew.eos_dependencies"&gt;  &lt;application android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"&gt;    {' '}  &lt;/application&gt;  &lt;uses-permission android:name="android.permission.INTERNET" /&gt;  &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;  &lt;uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" /&gt;  &lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;  &lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /&gt;&lt;/manifest&gt;;
+							</pre>
+						</section>
+					</div>
+					<p>For more information on the available permissions, see Android's documentation at
+						<a href="https://developer.android.com/reference/android/Manifest.permission">developer.android.com/~/Manifest.permission</a>.</p>
+				</li>
+				<li>
+					<p>Include
+						<code>AndroidManifest.xml</code>
+						in the SourceSet list in your
+						<code>build.gradle</code>
+						file.</p>
+				</li>
+				<li>
+					<p>Configure your project so Unity recognizes it as an Android library. The configuration you must use depends on your Unity version.</p>
+					<p>For Unity 2021.3 and higher: Add the following line to your
+						<code>build.gradle</code>
+						file:</p>
+					<div>
+						<section>
+							<pre>apply plugin: 'com.android.library'</pre>
+						</section>
+					</div>
+					<p>For Unity 2021.2 and earlier: Create a file named
+						<code>project.properties</code>
+						that contains the following line:</p>
+					<div>
+						<section>
+							<pre>android.library = true;
+							</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Configure Gradle properties in Unity player settings. To do this, create a
+						<code>styles.xml</code>
+						file and add the following content to it:</p>
+					<div>
+						<section>
+							<pre>&lt;resources&gt;  &lt;style    name="Theme.AppCompat.Light.NoActionBar.FullScreen"    parent="@style/Theme.AppCompat.Light.NoActionBar"  &gt;    &lt;item name="android:windowNoTitle"&gt;true&lt;/item&gt;    &lt;item name="android:windowActionBar"&gt;false&lt;/item&gt;    &lt;item name="android:windowFullscreen"&gt;true&lt;/item&gt;    &lt;item name="android:windowContentOverlay"&gt;@null&lt;/item&gt;  &lt;/style&gt;&lt;/resources&gt;;
+							</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+			<div>
+				<h4 id="example-project-structure">Example Project Structure</h4>
+			</div>
+			<p>
+				<strong>directory structure</strong>:</p>
+			<div>
+				<section>
+					<pre>eos-dependencies.androidlib├── res│   └── values│       ├── eos_login_protocol.xml│       └── styles.xml├── AndroidManifest.xml└── build.gradle</pre>
+				</section>
+			</div>
+			<p>
+				<strong>
+					<code>build.gradle</code>
+					file</strong>:</p>
+			<div>
+				<section>
+					<pre>buildscript {    repositories {        google()        jcenter()        flatDir(dirs: 'libs')    }        dependencies {        classpath "com.android.tools.build:gradle:3.6.0"    }} apply plugin: 'com.android.library' android {    sourceSets {        main {            manifest.srcFile 'AndroidManifest.xml'            res.srcDirs = ['res']        }    }     compileSdkVersion **APIVERSION**    buildToolsVersion '**BUILDTOOLS**'    defaultConfig {        targetSdkVersion **TARGETSDKVERSION**    }}dependencies {        implementation 'androidx.appcompat:appcompat:1.6.1'        implementation 'androidx.constraintlayout:constraintlayout:2.1.4'        implementation 'androidx.security:security-crypto:1.0.0'        implementation 'androidx.browser:browser:1.8.0'implementation 'androidx.webkit:webkit:1.10.0}</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="step-3-initialize-the-eos-sdk">Step 3: Initialize the EOS SDK</h3>
+			</div>
+			<p>To use the EOS SDK in your game's code, you must initialize the EOS SDK. During initialization, do the following:</p>
+			<ul>
+				<li>Identify your product details (for example, your product's name).</li>
+				<li>Configure platform-specific initialization options.</li>
+			</ul>
+			<p>To initialize the EOS SDK, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Create a
+						<code>EOSSDKManager</code>
+						class in your project to manage the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>using Epic.OnlineServices;using Epic.OnlineServices.Platform; class EOSSDKManager{    }</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Set up the class to track and retrieve the EOS Platform Interface instance only when the code is run in the Unity Editor (note the
+						<code>UNITY_EDITOR</code>
+						scripting symbol).<br>
+						You use the Platform Interface in the next section (<a href="#step-4-create-the-eos-platform-interface">Step 4: Create the EOS Platform Interface</a>).</p>
+					<div>
+						<section>
+							<pre>using System; class EOSSDKManager{    static private PlatformInterface s_eosPlatformInterface;     public PlatformInterface GetEOSPlatformInterface()    {#if UNITY_EDITOR        return s_eosPlatformInterface;#else        if (s_eosPlatformInterface == null)        {            if (EOS_GetPlatformInterface() == IntPtr.Zero)            {                    throw new Exception("The native code returned a NULL EOS Platform. The issue is likely in the GFX plugin.");            }            SetEOSPlatformInterface(new Epic.OnlineServices.Platform.PlatformInterface(EOS_GetPlatformInterface()));        }#endif     }}</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>In the
+						<code>EOSSDKManager</code>
+						class, add a method to pass a pointer to the Android connect activity and initialize the EOS SDK from the Android EOS SDK Java plugin:</p>
+					<div>
+						<section>
+							<pre>private static void ConfigureAndroidActivity()    {        using AndroidJavaClass unityPlayer = new("com.unity3d.player.UnityPlayer");        using AndroidJavaObject activity = unityPlayer.GetStatic&lt;AndroidJavaObject&gt;("currentActivity");         if(activity != null)        {            UnityEngine.Debug.Log("EOSAndroid: activity context found!");            using AndroidJavaClass pluginClass = new("com.epicgames.mobile.eossdk.EOSSDK");             UnityEngine.Debug.Log("EOSAndroid: call EOS SDK init.");            pluginClass.CallStatic("init", activity);        }        else        {            UnityEngine.Debug.LogError("EOSAndroid: activity context is null!");        }    }</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Notes:</strong>
+					</p>
+					<ul>
+						<li>Android activity cannot be detected in the Unity Editor. To test Android activity, you must test and run your application on an actual Android device. To test, you can deploy your project in Unity directly to a connected Android device through USB.</li>
+						<li>The
+							<code>com.epicgames.mobile.eossdk.EOSSDK</code>
+							class is a Java EOS SDK class included in the EOS SDK for Android download's AAR file.</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the
+						<code>EOSSDKManager</code>
+						class, add a method to initialize the EOS SDK and configure the initialization options for your platform:</p>
+					<div>
+						<section>
+							<pre>private Epic.OnlineServices.Result InitializePlatformInterface(){    InitializeOptions initOptions = new InitializeOptions();     initOptions.ProductName = /*YOUR_PRODUCT_NAME*/;    initOptions.ProductVersion = /*YOUR_PRODUCT_VERSION*/;    initOptions.AllocateMemoryFunction = IntPtr.Zero;    initOptions.ReallocateMemoryFunction = IntPtr.Zero;    initOptions.ReleaseMemoryFunction = IntPtr.Zero;     var overrideThreadAffinity = new InitializeThreadAffinity();     // You might need to configure these thread affinity values, depending on your application's needs.    // Setting the values to Zero, which is the default in C#, lets you configure the priority through the EOS SDK.    overrideThreadAffinity.NetworkWork   = 0;    overrideThreadAffinity.StorageIo 	= 0;    overrideThreadAffinity.WebSocketIo   = 0;    overrideThreadAffinity.P2PIo     	= 0;    overrideThreadAffinity.HttpRequestIo = 0;    overrideThreadAffinity.RTCIo     	= 0;     initOptions.OverrideThreadAffinity = overrideThreadAffinity;     // Android System-specific configration options        SystemInitializeOptions sysInitOptions = new SystemInitializeOptions();        sysInitOptions.Reserved = IntPtr.Zero;                // Customize paths if desired        sysInitOptions.OptionalInternalDirectory = null;        sysInitOptions.OptionalExternalDirectory = null;         initOptions.SystemInitializeOptions = sysInitOptions;      return PlatformInterface.Initialize(initOptions);}</pre>
+						</section>
+					</div>
+					<p>For more information, see the following documentation:</p>
+					<ul>
+						<li>On the available initialization options, see
+							<a href="/docs/api-ref/structs/eos-initialize-options">
+								<code>EOS_InitializeOptions</code>
+								data structure</a>
+							API reference.</li>
+						<li>On thread affinity, see
+							<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-affinity">Conventions and Limitations &gt; Thread Affinity</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Awake()</code>
+						method to include calls to configure the Android activity and to initialize the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>public void Awake()    {EOSSDKManager.ConfigureAndroidActivity();EOSSDKManager.InitializePlatformInterface();    }</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-4-create-the-eos-platform-interface">Step 4: Create the EOS Platform Interface</h3>
+			</div>
+			<p>After you initialize the EOS SDK, you must create the Platform Interface.<br>
+				This lets you do several things, including:</p>
+			<ul>
+				<li>Retrieve handles to access the other EOS Interfaces.</li>
+				<li>Control the EOS SDK lifecycle (for example, shutdown the EOS SDK).</li>
+				<li>Keep the per-frame update code running (known as ticking).</li>
+			</ul>
+			<p>For more information on the EOS Platform Interface and its functionality, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+				documentation.</p>
+			<p>To create the Platform Interface, follow these steps:</p>
+			<ol>
+				<li>
+					<p>In the
+						<code>EOSSDKManager</code>
+						class, add a method to create the Platform Interface:</p>
+					<div>
+						<section>
+							<pre>private PlatformInterface CreatePlatformInterface(){    }</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Modify the
+						<code>CreatePlatformInterface()</code>
+						method to include the platform options for your platform:</p>
+					<div>
+						<section>
+							<pre>var platformOptions = new Epic.OnlineServices.Platform.Options();    platformOptions.CacheDirectory = Application.temporaryCachePath;    platformOptions.IsServer = /*YOUR_IS_SERVER_VALUE*/; //For Title Storage and Player Data Storage    platformOptions.EncryptionKey = /*YOUR_ENCRYPTION_KEY*/;    platformOptions.OverrideCountryCode = null;    platformOptions.OverrideLocaleCode = null;    platformOptions.ProductId = /*YOUR_PRODUCT_ID*/;    platformOptions.SandboxId = /*YOUR_SANDBOX_ID*/;    platformOptions.DeploymentId = /*YOUR_DEPLOYMENT_ID*/;     platformOptions.TickBudgetInMilliseconds =/*YOUR_TICK_BUDGET*/; var clientCredentials = new Epic.OnlineServices.Platform.ClientCredentials    {            ClientId = /*YOUR_CLIENT_ID*/,            ClientSecret = /*YOUR_CLIENT_SECRET*/    };    platformOptions.ClientCredentials = clientCredentials;</pre>
+						</section>
+					</div>
+					<p>For more information on the available platform options, see the
+						<a href="/docs/api-ref/structs/eos-platform-options">EOS_Platform_Options data structure</a>
+						API reference documentation.</p>
+					<p>
+						<strong>Note:</strong>
+						You can find your product's credentials (<code>ProductId</code>,
+						<code>SandboxId</code>,
+						<code>DeploymentId</code>,
+						<code>ClientId</code>, and
+						<code>ClientSecret</code>
+						in the code snippet) under the
+						<strong>Product Settings</strong>
+						page for your product in the Developer Portal.<br>
+						To do this:</p>
+					<ul>
+						<li>a. In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>b. In the left navigation, click
+							<strong>Product Settings</strong>.</li>
+					</ul>
+				</li>
+				<li>
+					<p>Modify the
+						<code>CreatePlatformInterface()</code>
+						method to disable the EOS Overlay when you run the game in the Unity Editor.<br>
+						To do this, set the
+						<code>Flags</code>
+						platform option to
+						<code>Platformflags.LoadingInEditor</code>:</p>
+					<div>
+						<section>
+							<pre>platformOptions.Flags =#if UNITY_EDITOR        PlatformFlags.LoadingInEditor;#else        PlatformFlags.None;#endif return Epic.OnlineServices.Platform.PlatformInterface.Create(platformOptions);</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						If you use the Player Data Storage Interface or the Title Data Storage Interface in your game, you must set the
+						<code>EncryptionKey</code>
+						platform option in the
+						<code>CreatePlatformInterface()</code>
+						method as well.<br>
+						For more information on the Player Data Storage Interface or the Title Data Storage Interface, see the following documentation:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/player-data-storage-interface">Player Data Storage Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">Title Storage Interface</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Awake()</code>
+						method to include the calls to create the Platform:</p>
+					<div>
+						<section>
+							<pre>public void Awake()    {        EOSSDKManager.ConfigureAndroidActivity();         EOSSDKManager.InitializePlatformInterface();         EOSSDKManager.CreatePlatformInterface();    }</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						You must call the methods in the order shown above.</p>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Update()</code>
+						method to include the call to tick the platform, so the per-frame code for the EOS SDK runs correctly:</p>
+					<div>
+						<section>
+							<pre>public void Update()    {if (EOSSDKManager.GetEOSPlatformInterface() != null){    EOSSDKManager.GetEOSPlatformInterface().Tick();}    }</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						For more information on ticking, see the following documentation:
+						<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps#set-up-ticking">Guide: Get Started With EOS &gt; 4. Next Steps &gt; Set Up Ticking</a>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-5-shut-down-the-eos-sdk">Step 5: Shut Down the EOS SDK</h3>
+			</div>
+			<p>When you are ready to close your game, you must also shut down the EOS SDK. During shutdown, do the following:</p>
+			<ul>
+				<li>Release the memory held by the Platform Interface</li>
+				<li>Release the global state held by the EOS SDK</li>
+			</ul>
+			<p>To shut down the EOS SDK, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Add a method to shut down the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>private ShutDownEOSSDK(){ }</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Include a call to the
+						<a href="/docs/api-ref/functions/eos-platform-release">
+							<code>Epic.OnlineServices.Platform.PlatformInterface.Release()</code>
+							method</a>
+						to release the EOS Platform Interface instance:</p>
+					<div>
+						<section>
+							<pre>private ShutDownEOSSDK(){GetEOSPlatformInterface().Release();}</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Include a call to the
+						<a href="/docs/api-ref/functions/eos-shutdown">
+							<code>Epic.OnlineServices.Platform.PlatformInterface.Shutdown()</code>
+							method</a>
+						to complete the process and shut down the EOS SDK:</p>
+					<div>
+						<section>
+							<pre>private ShutDownEOSSDK(){GetEOSPlatformInterface().Release();GetEOSPlatformInterface().Shutdown();}</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						After you shut down the EOS SDK, you can't reinitialize the EOS SDK, and any further calls to it fail.</p>
+				</li>
+				<li>
+					<p>Modify Unity's
+						<code>Update()</code>
+						method to call your
+						<code>ShutDownEOSSDK()</code>
+						method when you're ready to shut down your game. The example configuration below runs the shutdown code when
+						<code>timeToShutDownMyGame</code>
+						(not defined in this guide) is
+						<code>true</code>:</p>
+					<div>
+						<section>
+							<pre>public void Update()    {if (EOSSDKManager.GetEOSPlatformInterface() != null){    EOSSDKManager.GetEOSPlatformInterface().Tick();} if (timeToShutDownMyGame){    EOSSDKManager.ShutDownEOSSDK();}    }</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#integrate-the-eos-sdk-into-your-project">Integrate the EOS SDK into Your Project</a>
+								</li>
+								<li>
+									<a href="#step-1-download-and-install-the-eos-sdk-into-your-unity-project">Step 1: Download and Install the EOS SDK into Your Unity Project</a>
+								</li>
+								<li>
+									<a href="#step-2-configure-android-dependencies">Step 2: Configure Android Dependencies</a>
+								</li>
+								<li>
+									<a href="#example-project-structure">Example Project Structure</a>
+								</li>
+								<li>
+									<a href="#step-3-initialize-the-eos-sdk">Step 3: Initialize the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#step-4-create-the-eos-platform-interface">Step 4: Create the EOS Platform Interface</a>
+								</li>
+								<li>
+									<a href="#step-5-shut-down-the-eos-sdk">Step 5: Shut Down the EOS SDK</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

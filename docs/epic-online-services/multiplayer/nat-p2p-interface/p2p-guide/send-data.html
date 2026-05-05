@@ -1,0 +1,549 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Peer-to-Peer to Your Game — 4. Send and Receive Data With EOS P2P</h1>
+			<h2>Overview of how to send and receive data between your players through a peer-to-peer connection with EOS P2P.</h2>
+			<div>
+				<div>32 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>Use the EOS P2P service to allow your players (sometimes referred to as "peers") to send and receive data between each other's game clients. This is typical in a multiplayer game.</p>
+							<p>After a P2P connection is established between players, the players game clients can send and receive data between each other. For example, you might set up your game to send players' gameplay data to each other so each player's game client stays in sync with each other. You might send data such as player movement, player or object animation, or game-state data about when a match has started or ended.</p>
+							<p>Note that when this guide refers to "player" connections, data sharing, and notifications, it means connections, data sharing, and notifications between each player’s game client.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete the following steps:</p>
+							<ul>
+								<li>Complete the prerequisites listed in the
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/p2p-intro">Introduction</a>
+									section of this guide.</li>
+								<li>Register for P2P notifications. (Section of this guide:<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/notify-players">1. Notify Players About P2P Connections</a>.)</li>
+								<li>Establish a connection between players. (Section of this guide:
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/establish-connections">2. Establish Peer-to-Peer Connections With EOS P2P</a>.)</li>
+								<li>Customize your peer-to-peer settings. (Section of this guide:
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>.)</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								If a connection is not already established between players, when a player attempts to send data to another player, the EOS SDK automatically sends a connection request to the receiving player. This guide assumes that you have followed section
+								<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/establish-connections">2. Establish P2P Connections</a>
+								and already have established a P2P connection between players.</p>
+							<div>
+								<h2 id="manage-p2p-data">Manage P2P Data</h2>
+							</div>
+							<p>Complete the following steps to customize the EOS P2P settings:</p>
+							<ul>
+								<li>
+									<a href="#step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-send-data-function">Step B: Implement Your Send Data Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-receive-data-function">Step C: Implement Your Receive Data Function</a>
+								</li>
+							</ul>
+							<div>
+								<h3 id="step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</h3>
+							</div>
+							<p>Modify your
+								<code>P2PManager.h</code>
+								file to include the declarations for the functions that you need to send and receive data between players.</p>
+							<p>
+								<strong>Note:</strong>
+								The example code below is not the complete code. It includes only the additions that you must make to your
+								<code>P2PManager.h</code>
+								file. For the complete code, see the complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// P2PManager.h...class P2PManager{public:...    /**     * Send a message to the other player you are connected with.     *      * @param Message - The message to send to the remote player.     *      * @param Channel - A flag for the recipient to use to filter messages.      *      * @param Reliability - An enum to indicate the reliability and order of sent packets.      */    void SendMessageExample(const std::string&amp; Message, uint8_t Channel, EOS_EPacketReliability Reliability = EOS_EPacketReliability::EOS_PR_ReliableOrdered);      /**     * Receive any messages that have been sent from the other player. Call this function with every platform tick.      *      * @param Channel - An optional flag to filter packets by channel. If set to nullptr, no packets are filtered.      */    void ReceiveMessageExample(uint8_t* Channel = nullptr);  private:... };</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								We recommend that you call your
+								<code>ReceiveMessageExample</code>
+								function with every platform tick to ensure that you do not miss any incoming messages. (Documentation:
+								<a href="/docs/epic-online-services/eos-get-started/get-started-guide/next-steps#set-up-ticking">Guide: Get Started With EOS — 4. Next Steps &gt; Set Up Ticking</a>).</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.h</code>
+																	file, declare a public function to send data packets between players. In the example, it's called
+																	<code>SendMessageExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SendMessageExample(const std::string&amp; Message, uint8_t Channel, EOS_EPacketReliability Reliability = EOS_EPacketReliability::EOS_PR_ReliableOrdered);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to receive data packets between players. In the example, it's called
+																	<code>ReceiveMessageExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void ReceiveMessageExample(uint8_t* Channel = nullptr);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-implement-your-send-data-function">Step B: Implement Your Send Data Function</h3>
+							</div>
+							<p>In your P2P manager class, implement the function to send data packets from one player to another.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SendMessageExample(const std::string&amp; Message, EOS_EPacketReliability Reliability, uint8_t Channel){    // Set the options for sending the message.    EOS_P2P_SendPacketOptions SendPacketOptions = {};    SendPacketOptions.ApiVersion = EOS_P2P_SENDPACKET_API_LATEST;     // Set the Product User ID of the local player sending a message.    SendPacketOptions.LocalUserId = LocalProductUserId;     // Set the Product User ID of the remote player to send a message to.    SendPacketOptions.RemoteUserId = RemoteProductUserId;     // Set the socket ID for the P2P connection.    SendPacketOptions.SocketId = SocketId;     // Set a boolean to specify whether to delay sending the message if the remote player is not currently connected.    // If you set this to false and a connection is not established with the peer, this data will be dropped.    SendPacketOptions.bAllowDelayedDelivery = EOS_TRUE;     // Set a channel to send messages on.    SendPacketOptions.Channel = Channel;     // Set an enum to indicate the reliability and order of sent packets.     SendPacketOptions.Reliability = Reliability;     // Set a boolean to specify whether to disable automatically establishing a connection with the remote player.    // If you set this to true, you must establish the connection manually with a call to P2P_AcceptConnection.    // If you set this to false, this function will automatically establish a connection with the remote player if one is not already established.    SendPacketOptions.bDisableAutoAcceptConnection = EOS_FALSE;     // Set the length in bytes of the message to send to the remote player.    SendPacketOptions.DataLengthBytes = static_cast&lt;uint32_t&gt;(Message.length());     // Set the message to send to the remote player.    SendPacketOptions.Data = Message.data();     // Call the EOS SDK to send the message to the remote player.     EOS_EResult SendPacketResult = EOS_P2P_SendPacket(P2PHandle, &amp;SendPacketOptions);     if (SendPacketResult == EOS_EResult::EOS_Success)    {        // If the code gets here, the message was successfully sent.         char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);         std::cout &lt;&lt; "Message sent to Product User ID : " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; ": " &lt;&lt; Message &lt;&lt; std::endl;    }    else if (SendPacketResult == EOS_EResult::EOS_LimitExceeded)    {        // If the code gets here, the message is too large,         // or the outgoing packet queue is full.        std::cerr &lt;&lt; "Error: not enough room in queue for packet! Error code: " &lt;&lt; static_cast&lt;int&gt;(SendPacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SendPacketResult) &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error sending packet to Product User ID " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(SendPacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SendPacketResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+							</p>
+							<ul>
+								<li>Your packet queue can affect your network performance. Packets might be delayed or dropped if your queue is too full.</li>
+								<li>If the P2P Interface cannot establish a connection with the standard NAT traversal, it defaults to using secure relays to establish the peer-to-peer connection.</li>
+								<li>For information on how to customize packet queue size, control relay settings, and get NAT information for P2P, see section
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+									of this guide.</li>
+							</ul>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to send data packets from one player to another player. In the example, it's called
+																	<code>SendMessageExample()</code>.</p>
+																<p>The example function takes the following parameters:</p>
+																<ul>
+																	<li>A reference to the data to send (called
+																		<code>Message</code>
+																		in the example).</li>
+																	<li>An EOS API
+																		<a href="/docs/api-ref/enums/eos-e-packet-reliability">
+																			<code>EOS_EPacketReliability</code>
+																			enum</a>
+																		that indicates the reliability and order of the data packets to send.</li>
+																	<li>(optional) The channel to send the data packet on. The remote player can filter messages for this channel to just receive data packets that are sent on it.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SendMessageExample(const std::string&amp; Message, EOS_EPacketReliability Reliability, uint8_t Channel){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your request connection function, create an instance of the
+																	<code>EOS_P2P_SendPacketOptions</code>
+																	data structure to hold the options for sending the data packet. In the example, it's called
+																	<code>SendPacketOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_SendPacketOptions SendPacketOptions = {};SendPacketOptions.ApiVersion = EOS_P2P_SENDPACKET_API_LATEST;SendPacketOptions.LocalUserId = LocalProductUserId;SendPacketOptions.RemoteUserId = RemoteProductUserId;SendPacketOptions.SocketId = SocketId;SendPacketOptions.bAllowDelayedDelivery = EOS_TRUE;SendPacketOptions.Channel = Channel;SendPacketOptions.Reliability = Reliability;SendPacketOptions.bDisableAutoAcceptConnection = EOS_FALSE;SendPacketOptions.DataLengthBytes = static_cast&lt;uint32_t&gt;(Message.length());SendPacketOptions.Data = Message.data();</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	The options above control the way your game handles data packets, such as a channel to send data packets on. The remote player receiving the data packet can filter incoming messages so they receive data packets that are only sent on that channel. For more information on the channel option and other options that you can use to customize how the EOS P2P service handles data packets for your game, see the following section of this guide:
+																	<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings</a>.</p>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_SendPacket</code>
+																	function. This function sends a data packet from the local player to the specified remote player.</p>
+																<p>
+																	<strong>Note:</strong>
+																	If a connection is not already established between players, when a player attempts to send data to another player, the EOS SDK automatically sends a connection request to the receiving player. This guide assumes that you have followed section
+																	<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/establish-connections">2. Establish P2P Connections</a>
+																	and already have established a P2P connection between players.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the send packet options.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult SendPacketResult = EOS_P2P_SendPacket(P2PHandle, &amp;SendPacketOptions);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<code>EOS_EResult</code>
+																	enum to confirm that the data packet is sent successfully. If the data packet is sent successfully, notify the player. In the example, the console prints a success statement that includes the Product User ID of the remote player receiving the data and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>if (SendPacketResult == EOS_EResult::EOS_Success){    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);     std::cout &lt;&lt; "Message sent to Product User ID : " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; ": " &lt;&lt; Message &lt;&lt; std::endl;    }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the EOS API
+																	<a href="/docs/api-ref/functions/eos-product-user-id-to-string">
+																		<code>EOS_ProductUserId_ToString()</code>
+																		function</a>
+																	to convert the EOS Product User ID to a string.</p>
+															</li>
+															<li>
+																<p>Use the returned
+																	<code>EOS_EResult</code>
+																	enum to check if there is enough room in the outgoing packet queue for the message. If there is not enough room in the outgoing packet queue for the message (<code>EOS_EResult::EOS_LimitExceeded</code>), handle the error:</p>
+																<div>
+																	<section>
+																		<pre>else if (SendPacketResult == EOS_EResult::EOS_LimitExceeded){    std::cerr &lt;&lt; "Error: not enough room in queue for packet! Error code: " &lt;&lt; static_cast&lt;int&gt;(SendPacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SendPacketResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the
+																	<code>EOS_EResult_ToString()</code>
+																	function to convert the
+																	<code>E_EResult</code>
+																	enum to a string. This gives the name of the error type.</p>
+															</li>
+															<li>
+																<p>If the player's data packet is not sent successfully, handle the errors. In the example, the console prints an error statement that includes the Product User ID of the remote player that the local player attempted to send the data packet to and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>else{    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);     std::cerr &lt;&lt; "Error sending packet to Product User ID " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(SendPacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SendPacketResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-receive-data-function">Step C: Implement Your Receive Data Function</h3>
+							</div>
+							<p>In your P2P manager class, implement the function for the local player to receive data packets from another player.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::ReceiveMessageExample(uint8_t* Channel){    // Set the options for receiving messages.     EOS_P2P_ReceivePacketOptions ReceivePacketOptions = {};    ReceivePacketOptions.ApiVersion = EOS_P2P_RECEIVEPACKET_API_LATEST;     // Set the Product User ID of the local player receiving a message.     ReceivePacketOptions.LocalUserId = LocalProductUserId;     // Set the maximum size in bytes of messages that the local player can receive.     ReceivePacketOptions.MaxDataSizeBytes = 4096;     // Set an optional channel to filter received messages.    // If you specify a requested channel, the local player receives messages on that channel only.    // If set to nullptr, the local player receives messages on any channel.    ReceivePacketOptions.RequestedChannel = Channel;     // Initialize out variables for the receive packet function.     EOS_ProductUserId OutRemoteId = nullptr;    EOS_P2P_SocketId OutSocketId = EOS_P2P_SocketId();    uint8_t OutChannel = 0;     // Initialize the memory for the received message.     uint32_t BytesWritten = 0;    std::vector&lt;char&gt; OutMessage;    OutMessage.resize(ReceivePacketOptions.MaxDataSizeBytes);     // Call the EOS SDK to receive a message from the queue of messages sent by the remote player, if there are any.     EOS_EResult ReceivePacketResult = EOS_P2P_ReceivePacket(P2PHandle, &amp;ReceivePacketOptions,         &amp;OutRemoteId, &amp;OutSocketId, &amp;OutChannel, OutMessage.data(), &amp;BytesWritten);     if (ReceivePacketResult == EOS_EResult::EOS_Success)    {        // Verify that the received socket ID matches what is expected.        if (strcmp(OutSocketId.SocketName, SocketId-&gt;SocketName) != 0)        {            std::cerr &lt;&lt; "Socket IDs don't match! Out ID: "                 &lt;&lt; OutSocketId.SocketName &lt;&lt; " - Saved ID: " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; std::endl;        }         // If the code gets here, a packet was successfully received.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);         std::string MessageString(OutMessage.data(), BytesWritten);        std::cout &lt;&lt; "Message received from Product User ID: " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; OutSocketId-&gt;SocketName &lt;&lt; ": " &lt;&lt; MessageString &lt;&lt; std::endl;    }    else if (ReceivePacketResult == EOS_EResult::EOS_NotFound)    {        // If the code gets here, there are no packets to receive.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error receiving packet from Product User ID " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; OutSocketId-&gt;SocketName &lt;&lt; "! Error code: "&lt;&lt; static_cast&lt;int&gt;(ReceivePacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(ReceivePacketResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								We recommend the following workflow when you receive data packets:</p>
+							<ul>
+								<li>Call the EOS API
+									<a href="/docs/api-ref/functions/eos-p-2-p-get-next-received-packet-size">
+										<code>getNextRecievedPacketSize()</code>
+										function</a>
+									to retrieve the exact size of the data packet before you call the EOS API
+									<a href="/docs/api-ref/functions/eos-p-2-p-receive-packet">
+										<code>EOS_P2P_ReceivePacket()</code>
+										function</a>.
+									<ul>
+										<li>You can use this information to ensure that the buffer for the packet is the proper size to prevent data truncating.</li>
+									</ul>
+								</li>
+								<li>Call
+									<code>EOS_P2P_ReceivePacket()</code>
+									often to prevent the internal packet queue from filling up.</li>
+								<li>Your packet queue can affect your network performance. Packets might be delayed or dropped if your queue is too full. For information on how to customize the packet queue size and more for P2P, see section
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+									of this guide.</li>
+							</ul>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function for the local player to receive data packets from a remote player. In the example, it's called
+																	<code>ReceiveMessageExample()</code>.</p>
+																<p>The example function takes an optional channel to filter data packets for as the only parameter:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::ReceiveMessageExample(uint8_t* Channel){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your receive message function, create an instance of the
+																	<code>EOS_P2P_ReceivePacketOptions</code>
+																	data structure to hold the options for receiving the data packet. In the example, it's called
+																	<code>Receive\PacketOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_ReceivePacketOptions ReceivePacketOptions = {};ReceivePacketOptions.ApiVersion = EOS_P2P_RECEIVEPACKET_API_LATEST;ReceivePacketOptions.LocalUserId = LocalProductUserIdReceivePacketOptions.MaxDataSizeBytes = 4096;ReceivePacketOptions.RequestedChannel = Channel;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Initialize out variables for the receive packet function:</p>
+																<div>
+																	<section>
+																		<pre>EOS_ProductUserId OutRemoteId = nullptr;EOS_P2P_SocketId OutSocketId = EOS_P2P_SocketId();uint8_t OutChannel = 0;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Initialize the memory for the data packet to receive:</p>
+																<div>
+																	<section>
+																		<pre>uint32_t BytesWritten = 0;std::vector&lt;char&gt; OutMessage;OutMessage.resize(ReceivePacketOptions.MaxDataSizeBytes);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<code>EOS_P2P_ReceivePacket</code>
+																	function. This function receives a data packet for the local player from the specified remote player.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The P2P Interface handle.</li>
+																	<li>A reference to the receive packet options.</li>
+																	<li>A reference to the out variable for the remote player's Product User ID.</li>
+																	<li>A reference to the out variable for the socket ID of the P2P connection.</li>
+																	<li>A reference to the out variable for the channel for the P2P connection.</li>
+																	<li>The data packet to receive.</li>
+																	<li>A reference to the bytes of received data that have been written.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_EResult ReceivePacketResult = EOS_P2P_ReceivePacket(P2PHandle, &amp;ReceivePacketOptions, &amp;OutRemoteId, &amp;OutSocketId, &amp;OutChannel, OutMessage.data(), &amp;BytesWritten);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<code>EOS_EResult</code>
+																	enum to confirm that the local player received the data packet successfully. If the socket ID doesn't match the expected socket ID for the P2P connection, notify the player. If the data packet is received successfully, notify the player. In the example, the console prints a success statement for each use case that includes the Product User ID of the remote player receiving the data packet and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>if (ReceivePacketResult == EOS_EResult::EOS_Success){    if (strcmp(OutSocketId.SocketName, SocketId-&gt;SocketName) != 0)    {        std::cerr &lt;&lt; "Socket IDs don't match! Out ID: "             &lt;&lt; OutSocketId.SocketName &lt;&lt; " - Saved ID: " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; std::endl;    }     char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);        std::string MessageString(OutMessage.data(), BytesWritten);    std::cout &lt;&lt; "Message received from PUID: " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; OutSocketId-&gt;SocketName &lt;&lt; ": " &lt;&lt; MessageString &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Tip:</strong>
+																	Use the EOS API
+																	<a href="/docs/api-ref/functions/eos-product-user-id-to-string">
+																		<code>EOS_ProductUserId_ToString()</code>
+																		function</a>
+																	to convert the EOS Product User ID to a string.</p>
+															</li>
+															<li>
+																<p>If there are no data packets to receive, return:</p>
+																<div>
+																	<section>
+																		<pre>else if (ReceivePacketResult == EOS_EResult::EOS_NotFound){    return;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the player does not receive the data packet successfully, handle the errors. In the example, the console prints an error statement that includes the Product User ID of the remote player that the local player attempted to send the data packet to and the socket ID the connection is on:</p>
+																<div>
+																	<section>
+																		<pre>else{    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);     std::cerr &lt;&lt; "Error receiving packet from Product User ID " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; OutSocketId-&gt;SocketName &lt;&lt; "! Error code: "&lt;&lt; static_cast&lt;int&gt;(ReceivePacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(ReceivePacketResult) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+														<p>
+															<strong>Note:</strong>
+															If the P2P Interface cannot establish a connection with the standard NAT traversal, it defaults to using secure relays to establish the peer-to-peer connection. For information on how to control relay settings, get NAT information and more for P2P, see section
+															<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/customize-settings">3. Customize Peer-to-Peer Settings for EOS P2P</a>
+															of this guide.</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="results">Results</h3>
+							</div>
+							<p>After you have established a P2P connection between your players, you can call
+								<code>P2PManager::SendMessageExample()</code>
+								to send a data packet from one player to another, and you can call
+								<code>P2PManager::ReceiveMessageExample()</code>
+								to receive a data packet from a player.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// P2PManager.h#pragma once #include &lt;eos_p2p.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;string&gt; class P2PManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the EOS Platform Interface obtained during EOS Platform Interface setup.     *     * @param InLocalProductUserId - The Product User ID of the local player obtained during Connect login.     */    P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**     * Send a message to the other player you are connected with.     *      * @param Message - The message to send to the remote player.     *      * @param Channel - A flag to allow the recipient to filter messages.      *      * @param Reliability - An enum to indicate the reliability and order of sent packets.      */    void SendMessageExample(const std::string&amp; Message, uint8_t Channel, EOS_EPacketReliability Reliability = EOS_EPacketReliability::EOS_PR_ReliableOrdered);      /**     * Receive any messages that have been sent from the other player. Call this function regularly.      *      * @param Channel - An optional flag to filter packets by channel. If set to nullptr, no packets are filtered.      */    void ReceiveMessageExample(uint8_t* Channel = nullptr);  private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The P2P Interface handle. */    EOS_HP2P P2PHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /** The Product User ID of the remote player that you're connected to. */    EOS_ProductUserId RemoteProductUserId = nullptr;     /** The socket ID of the current P2P connection. */    EOS_P2P_SocketId* SocketId = nullptr; };</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>//P2PManager.cppvoid P2PManager::SendMessageExample(const std::string&amp; Message, EOS_EPacketReliability Reliability, uint8_t Channel){    // Set the options for sending the message.    EOS_P2P_SendPacketOptions SendPacketOptions = {};    SendPacketOptions.ApiVersion = EOS_P2P_SENDPACKET_API_LATEST;     // Set the Product User ID of the local player sending a message.    SendPacketOptions.LocalUserId = LocalProductUserId;     // Set the Product User ID of the remote player to send a message to.    SendPacketOptions.RemoteUserId = RemoteProductUserId;     // Set the socket ID for the P2P connection.    SendPacketOptions.SocketId = SocketId;     // Set a boolean to specify whether to delay sending the message if the remote player is not currently connected.    // If you set this to false and a connection is not established with the peer, this data will be dropped.    SendPacketOptions.bAllowDelayedDelivery = EOS_TRUE;     // Set a channel to send messages on.    SendPacketOptions.Channel = Channel;     // Set an enum to indicate the reliability and order of sent packets.     SendPacketOptions.Reliability = Reliability;     // Set a boolean to specify whether to disable automatically establishing a connection with the remote player.    // If you set this to true, you must establish the connection manually with a call to P2P_AcceptConnection.    // If you set this to false, this function will automatically establish a connection with the remote player if one is not already established.    SendPacketOptions.bDisableAutoAcceptConnection = EOS_FALSE;     // Set the length in bytes of the message to send to the remote player.    SendPacketOptions.DataLengthBytes = static_cast&lt;uint32_t&gt;(Message.length());     // Set the message to send to the remote player.    SendPacketOptions.Data = Message.data();     // Call the EOS SDK to send the message to the remote player.     EOS_EResult SendPacketResult = EOS_P2P_SendPacket(P2PHandle, &amp;SendPacketOptions);     if (SendPacketResult == EOS_EResult::EOS_Success)    {        // If the code gets here, the message was successfully sent.         char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);         std::cout &lt;&lt; "Message sent to Product User ID : " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; ": " &lt;&lt; Message &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error sending packet to Product User ID " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; "! Error code: "             &lt;&lt; static_cast&lt;int&gt;(SendPacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(SendPacketResult) &lt;&lt; std::endl;    }} void P2PManager::ReceiveMessageExample(uint8_t* Channel){    // Set the options for receiving messages.     EOS_P2P_ReceivePacketOptions ReceivePacketOptions = {};    ReceivePacketOptions.ApiVersion = EOS_P2P_RECEIVEPACKET_API_LATEST;     // Set the Product User ID of the local player receiving a message.     ReceivePacketOptions.LocalUserId = LocalProductUserId;     // Set the maximum size in bytes of messages that the local player can receive.     ReceivePacketOptions.MaxDataSizeBytes = 4096;     // Set an optional channel to filter received messages with.    // If you specify a requested channel, the local player receives messages on that channel only.    // If set to nullptr, the local player receives messages on any channel.    ReceivePacketOptions.RequestedChannel = Channel;     // Initialize out variables for the receive packet function.     EOS_ProductUserId OutRemoteId = nullptr;    EOS_P2P_SocketId OutSocketId = EOS_P2P_SocketId();    uint8_t OutChannel = 0;     // Initialize the memory for the received message.     uint32_t BytesWritten = 0;    std::vector&lt;char&gt; OutMessage;    OutMessage.resize(ReceivePacketOptions.MaxDataSizeBytes);     // Call the EOS SDK to receive a message from the queue of messages sent by the remote player, if there are any.     EOS_EResult ReceivePacketResult = EOS_P2P_ReceivePacket(P2PHandle, &amp;ReceivePacketOptions,         &amp;OutRemoteId, &amp;OutSocketId, &amp;OutChannel, OutMessage.data(), &amp;BytesWritten);     if (ReceivePacketResult == EOS_EResult::EOS_Success)    {        // Verify that the received socket ID matches what is expected.        if (strcmp(OutSocketId.SocketName, SocketId-&gt;SocketName) != 0)        {            std::cerr &lt;&lt; "Socket IDs don't match! Out ID: "                 &lt;&lt; OutSocketId.SocketName &lt;&lt; " - Saved ID: " &lt;&lt; SocketId-&gt;SocketName &lt;&lt; std::endl;        }         // If the code gets here, a packet was successfully received.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);         std::string MessageString(OutMessage.data(), BytesWritten);        std::cout &lt;&lt; "Message received from PUID: " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; OutSocketId-&gt;SocketName &lt;&lt; ": " &lt;&lt; MessageString &lt;&lt; std::endl;    }    else if (ReceivePacketResult == EOS_EResult::EOS_NotFound)    {        // If the code gets here, there are no packets to receive.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(OutRemoteId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error receiving packet from Product User ID " &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; OutSocketId-&gt;SocketName &lt;&lt; "! Error code: "             &lt;&lt; static_cast&lt;int&gt;(ReceivePacketResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(ReceivePacketResult) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>After your players are done sending and receiving data and done with the P2P connection, close the connection.</p>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-send-packet">
+										<code>EOS_P2P_SendPacket</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-send-packet-options">
+												<code>EOS_P2P_SendPacketOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-receive-packet">
+										<code>EOS_P2P_ReceivePacket</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-receive-packet-options">
+												<code>EOS_P2P_ReceivePacketOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-socket-id">
+												<code>EOS_P2P_SocketId</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#manage-p2p-data">Manage P2P Data</a>
+								</li>
+								<li>
+									<a href="#step-a-modify-your-p2p-manager-class">Step A: Modify Your P2P Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-send-data-function">Step B: Implement Your Send Data Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-receive-data-function">Step C: Implement Your Receive Data Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

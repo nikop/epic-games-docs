@@ -1,0 +1,101 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Retrieve and Validate ID Tokens</h1>
+			<h2>Reference for how to retrieve and validate ID Tokens with the Auth Interface.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>For a breakdown of the ID token’s JSON structure, see the
+				<em>ID Token Structure</em>
+				section of the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference">Auth Interface Reference</a>
+				documentation.</p>
+			<div>
+				<h4 id="retrieve-an-id-token-for-a-player">
+					<strong>Retrieve an ID Token For a Player</strong>
+				</h4>
+			</div>
+			<p>Game clients can obtain ID Tokens for local players by calling the EOS_Auth_CopyIdToken SDK API after the player has been signed in, passing in a EOS_Auth_CopyIdTokenOptions structure containing the EOS_EpicAccountId of the player.</p>
+			<p>The outputted
+				<a href="/docs/api-ref/structs/eos-auth-id-token">EOS_Auth_IdToken</a>
+				structure contains the EOS_EpicAccountId of the player, and a JWT representing the ID Token data. Note, you must call EOS_Auth_IdToken_Release to release the ID Token structure when you are done with it.</p>
+			<p>After you’ve retrieved the ID token, the game client can then provide the ID Token to another party. An ID Token is always readily available for a signed-in local player.</p>
+			<div>
+				<h4 id="validate-id-tokens-on-game-server-using-the-eos-sdk">
+					<strong>Validate ID Tokens on Game Server Using the EOS SDK</strong>
+				</h4>
+			</div>
+			<p>The JSON Web Key Set (JWKS) endpoint for EOS Auth ID Tokens is:
+				<a href="https://api.epicgames.dev/epic/oauth/v2/.well-known/jwks.json">https://api.epicgames.dev/epic/oauth/v2/.well-known/jwks.json</a>.</p>
+			<p>Game servers can validate ID Tokens by calling the
+				<a href="/docs/api-ref/functions/eos-auth-verify-id-token">EOS_Auth_VerifyIdToken</a>
+				SDK API, and passing in a
+				<a href="/docs/api-ref/structs/eos-auth-verify-id-token-options">EOS_Auth_VerifyIdTokenOptions</a>
+				containing the EOS_Auth_IdToken. Note, game servers must use
+				<a href="/docs/api-ref/functions/eos-epic-account-id-from-string">EOS_EpicAccountId_FromString</a>
+				to populate the EOS_EpicAccountId part of the EOS_Auth_IdToken structure before calling verify, because the server's user handles are different to the user handles on the client.</p>
+			<div>
+				<h4 id="validate-id-tokens-on-backend-without-sdk">
+					<strong>Validate ID Tokens on Backend Without SDK</strong>
+				</h4>
+			</div>
+			<p>Backend services can verify the validity of ID Tokens and extract the token claims using any of the publicly available standard JWT libraries. See
+				<a href="https://jwt.io/">https://jwt.io/</a>
+				for a list of libraries for this purpose. The library you use should allow automatic caching of the retrieved JWKS information for the best performance and to reduce networking overhead.</p>
+			<p>The EOS SDK and other support libraries take care of the needed steps for securely validating the ID Token before its containing claims can be securely trusted. The steps performed are as following:</p>
+			<ol>
+				<li>Verify that the token signature algorithm ("alg") is present and is not set to "none".</li>
+				<li>Verify the JWT signature against the expected public certificate using the JWKS endpoint hosted by Epic Online Services.</li>
+				<li>Verify that the token issuer ("iss") is present and starts with the base URL of
+					<a href="https://api.epicgames.dev/">https://api.epicgames.dev</a>.</li>
+				<li>Verify that the token issue time ("iat") is in the past.</li>
+				<li>Verify that the token expiration time ("exp") is in the future.</li>
+				<li>Verify that the Client ID ("aud") matches the Client ID that you are using to initialize the EOS SDK with game clients or otherwise to authenticate players with Epic Online Services.</li>
+			</ol>
+			<p>After successfully verifying the ID Token you can trust the Epic Account ID ("sub") value. For a breakdown of the user ID token’s JSON structure, including the
+				<code>sub</code>
+				value, see the
+				<em>User ID Token Structure</em>
+				section of the
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-reference">Auth Interface Reference</a>
+				documentation.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#retrieve-an-id-token-for-a-player">Retrieve an ID Token For a Player</a>
+								</li>
+								<li>
+									<a href="#validate-id-tokens-on-game-server-using-the-eos-sdk">Validate ID Tokens on Game Server Using the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#validate-id-tokens-on-backend-without-sdk">Validate ID Tokens on Backend Without SDK</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

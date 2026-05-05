@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -11,89 +11,159 @@
 	</div>
 	<section>
 		<div>
-			<h1>Patching Live Builds</h1>
+			<h1>Patch Your Live Builds</h1>
 			<h2>Publish updated artifacts without additional review.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
-			<div>
-				<h2 id="overview">Overview</h2>
-			</div>
-			<p>In certain scenarios, you may need to update entities that have already gone through the
+			<p>In certain scenarios, you might need to update artifacts and binaries, settings, offers, offer pages, and product home pages that have gone through the
 				<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management">review process</a>
-				and been pushed to the Live
-				<span>
-					<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
-				</span>. Entities are the individual components of your product’s store presence, such as artifacts and offers. To streamline this process, some types of updates can be completed without needing to resubmit your product for review.</p>
+				and are in the Live sandbox.</p>
+			<p>To streamline this process, you can complete some types of updates without needing to resubmit your product for review.</p>
 			<p>
 				<strong>Note:</strong>
 				If you remove, add, or change a platform associated with your artifact, you must resubmit that artifact for review.</p>
 			<div>
 				<h2 id="publish-one-or-more-artifacts-without-review">Publish One or More Artifacts Without Review</h2>
 			</div>
-			<p>When you publish an artifact without putting it through review, the artifact moves directly from the Dev sandbox to the Live sandbox. The corresponding artifact in the Stage environment is also updated. You can promote multiple artifacts at the same time through this process.</p>
-			<p>To publish an artifact without review, the following criteria must be met:</p>
+			<p>When you publish an artifact and do not put it through review, the artifact moves directly from the Dev sandbox to the Live sandbox in the Developer Portal. The Epic Games Store also updates the corresponding artifact in the Stage sandbox. You can promote multiple artifacts at the same time through this process.</p>
+			<p>
+				<strong>Criteria to Publish Without Review</strong>
+			</p>
+			<p>If you want to publish an artifact without review, the artifact must meet the following criteria:</p>
 			<ul>
-				<li>The artifact being updated must have previously been pushed to your Live sandbox. To do this,
-					<a href="/docs/epic-games-store/store-presence/manage-artifacts#upload-the-binary">upload a new binary</a>
-					and set it as the active binary.</li>
+				<li>You must have previously pushed the artifact to your Live sandbox. To do this, upload a new binary and set it as the active binary. (Documentation:
+					<a href="/docs/epic-games-store/store-presence/manage-artifacts#how-to-upload-binaries-and-configure-artifacts-and-binaries">Manage Artifacts &gt; How to Upload Binaries and Configure Artifacts and Binaries</a>)</li>
 				<li>The artifact must have the
-					<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management#status-definitions">Ready for Stage status</a>
-					in the Dev sandbox.</li>
+					<code>Ready for Stage</code>
+					status in the Dev sandbox. (For guidance on statuses, see documentation:
+					<a href="/docs/epic-games-store/publishing-tools/publishing-process/release-management#status-definitions">Release Management &gt; Status Definitions</a>)</li>
+				<li>The artifact is required to fix broken functionality in your product. You cannot publish an artifact without review to add new functionality or to make changes that affect the product's age rating.</li>
 			</ul>
-			<p>Once these criteria are met, follow the steps below to publish one or more artifacts without review:</p>
+			<p>If the artifact does not meet the above criteria, then you must use the standard artifact update process. See documentation:
+				<a href="/docs/epic-games-store/store-presence/manage-artifacts">Manage Artifacts</a>.</p>
+			<p>
+				<strong>How to Publish Without Review</strong>
+			</p>
+			<p>Subject to the criteria listed above, you can publish one or more artifacts without review in the Developer Portal. To do this, follow the steps below:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
-				<li>Select the checkboxes next to the artifacts you want to promote to Live.
+				<li>In the Developer Portal, go to your product's Epic Games Store dashboard:
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product.</li>
+						<li>c. In the left navigation, click
+							<strong>Epic Games Store</strong>, then click
+							<strong>Release Management</strong>.</li>
+					</ul>
+				</li>
+				<li>At the top of the
+					<strong>Release Management</strong>
+					page, click
+					<strong>Make live update</strong>.</li>
+				<li>In the
+					<strong>Live Update</strong>
+					pane, Click
+					<strong>Artifacts and binaries</strong>.</li>
+				<li>Select the artifact that you want to update.</li>
+				<li>Click
+					<strong>Next</strong>.</li>
+				<li>Upload a new binary. The new binary displays in the
+					<strong>Inactive</strong>
+					section of the
+					<strong>Live Update</strong>
+					pane.
+					<ul>
+						<li>See documentation:
+							<a href="/docs/epic-games-store/store-presence/manage-artifacts#how-to-upload-binaries-and-configure-artifacts-and-binaries">Manage Artifacts &gt; How to Upload Binaries and Configure Artifacts and Binaries</a>
+						</li>
+					</ul>
+				</li>
+				<li>In the
+					<strong>Inactive</strong>
+					section of the
+					<strong>Live Update</strong>
+					pane, click
+					<strong>Set as active binary</strong>
+					to the right of the new binary.</li>
+				<li>In
+					<strong>Set update type</strong>, select
+					<strong>Bugfix</strong>.
 					<ul>
 						<li>
-							<strong>Note</strong>: You can only promote artifacts that have the
-							<em>Ready for Stage</em>
-							status. If any selected artifacts do not have this status, the button in the next step is disabled.</li>
+							<strong>Note:</strong>
+							If you select any other type, then you cannot publish the artifact without review.</li>
 					</ul>
 				</li>
 				<li>Click
-					<strong>Push to Live</strong>.</li>
+					<strong>Next</strong>.</li>
+				<li>In the preview, check that the artifact is set up as you want.</li>
 			</ol>
-			<p>After completing this process, review your artifacts in the Live sandbox to confirm they have been successfully updated.</p>
+			<ul>
+				<li>
+					<strong>Note:</strong>
+					After you make the live update, you cannot make changes to the artifact.</li>
+			</ul>
+			<ol start="11">
+				<li>To update the artifact in your Stage sandbox in addition to updating the artifact in your Live sandbox, select the
+					<strong>Push this change to the Stage Sandbox</strong>
+					checkbox. If you don't want to update the artifact in your Stage sandbox, clear the checkbox.</li>
+			</ol>
+			<ul>
+				<li>
+					<strong>Note:</strong>
+					We recommend that you update the artifact in the Stage sandbox whenever you update the Live sandbox. This ensures your artifacts are synchronized between sandboxes.</li>
+			</ul>
+			<ol start="12">
+				<li>Click
+					<strong>Make Live update</strong>.</li>
+				<li>To confirm the update, click
+					<strong>Continue</strong>.</li>
+			</ol>
+			<p>Review your artifacts in the Live sandbox to confirm they have been successfully updated. To do so:</p>
 			<ol>
-				<li>In the Dev Portal, navigate to
-					<strong>Your Product &gt; Epic Games Store &gt; Artifacts and Binaries</strong>.</li>
+				<li>In the Dev Portal, go to
+					<strong>Your Product</strong>
+					&gt;
+					<strong>Epic Games Store</strong>
+					&gt;
+					<strong>Artifacts and Binaries</strong>.</li>
 				<li>From the row of sandbox options, select
 					<strong>Live</strong>:</li>
-				<li>Locate the modified artifact in the list. Then, click its
-					<strong>menu (...) icon</strong>
-					and select
-					<strong>Manage Artifact</strong>
-					to review its details.</li>
+				<li>Locate the modified artifact in the list, and click its
+					<strong>menu (...)</strong>
+					icon.</li>
+				<li>Select
+					<strong>Manage Artifact</strong>.</li>
 			</ol>
 			<div>
-				<h2 id="updating-live-offer-dates">Updating Live Offer Dates</h2>
+				<h2 id="update-live-offer-dates">Update Live Offer Dates</h2>
 			</div>
-			<p>In certain scenarios, you may need to update offer dates for products that have already been pushed live (e.g., to accommodate release schedule changes). To learn more, review the Updating Offer Dates section of
-				<a href="/docs/epic-games-store/store-presence/manage-offers#updating-offer-dates-dev-or-live">Manage Offers</a>.</p>
+			<p>In certain scenarios, you might need to update offer dates for products that have already been pushed live (for example, to accommodate release schedule changes). See documentation:
+				<a href="/docs/epic-games-store/store-presence/offer-details#dates">Offer Details &gt; Dates</a>.</p>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#overview">Overview</a>
-					</li>
-					<li>
-						<a href="#publish-one-or-more-artifacts-without-review">Publish One or More Artifacts Without Review</a>
-					</li>
-					<li>
-						<a href="#updating-live-offer-dates">Updating Live Offer Dates</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#publish-one-or-more-artifacts-without-review">Publish One or More Artifacts Without Review</a>
+								</li>
+								<li>
+									<a href="#update-live-offer-dates">Update Live Offer Dates</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

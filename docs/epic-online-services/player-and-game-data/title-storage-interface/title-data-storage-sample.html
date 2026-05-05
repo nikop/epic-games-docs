@@ -1,0 +1,332 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Title Storage Sample</h1>
+			<h2>Overview of the Title Storage Sample.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div tabindex="0" aria-label="EOS SDK title storage sample image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="EOS SDK title storage sample" src="https://static-assets-prod.epicgames.com/eos-docs/game-services/title-storage/sample/hero-image.png" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<div>
+				<h2 id="before-you-begin">Before You Begin</h2>
+			</div>
+			<p>The Title Storage Sample signs in to EOS Epic Account Services to authenticate the local player for demonstration purposes. To use this sample, the client credentials that you use to initialize the Epic Online Services (EOS) SDK must be assigned to an application that is registered to use EOS Epic Account Services. For more information, see the following documentation:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/set-up-epic-account-services">Guide: Access EOS Epic Account Services With the Auth Interface — 1. Set Up Epic Account Services</a>.</p>
+			<p>The SDK functionality demonstrated in this sample works with any of the supported identity providers for player authentication.</p>
+			<div>
+				<p>Since the
+					<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface">Title Storage Interface</a>
+					does not have the ability to upload or tag files, you will need to do so through the
+					<a href="/docs/dev-portal">Developer Portal</a>. Note that the
+					<strong>Encryption Key</strong>
+					you are using when uploading files via the Developer Portal must match the one in
+					<code>SampleConstants.h</code>
+					within the sample. Otherwise, the decryption phase after download will produce incorrect results.</p>
+			</div>
+			<div>
+				<h2 id="sign-in">Sign In</h2>
+			</div>
+			<p>From the right-side panel, click one of these options to sign in:</p>
+			<ul>
+				<li>
+					<strong>Dev Auth</strong>: Enter the host port and credentials that you configured for the Developer Authentication Tool (for example,
+					<code>127.0.0.1:8080</code>
+					if you set
+					<code>8080</code>
+					for the host port) and click
+					<strong>LOG IN</strong>. See the
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/developer-authentication-tool">Developer Authentication Tool</a>
+					documentation for more information on the Developer Authentication Tool.</li>
+				<li>
+					<strong>Account Portal</strong>: Click
+					<strong>LOG IN</strong>
+					to sign in through the Account Portal with your Epic Games account credentials or a supported identity provider. See the
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					documentation for more information on identity providers.</li>
+			</ul>
+			<div>
+				<h2 id="explore-the-sample">Explore the Sample</h2>
+			</div>
+			<p>The Title Storage Sample is a simple file explorer for the cloud storage associated with your product. You can sign in or out with your account. When you are signed in, you can browse, download, and view your product's files. If you have tagged any files through the Dev Portal, you can perform queries based on those tags.</p>
+			<div>
+				<h3 id="the-title-storage-panel">The Title Storage Panel</h3>
+			</div>
+			<p>After you sign in, you can query, download, and view your product's files, if any exist.</p>
+			<div tabindex="0" aria-label="Title Storage main panel image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Title Storage main panel" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>The main panel for the title storage page. Click image to enlarge.</p>
+				</figcaption>
+			</div>
+			<p>The Title Storage Sample features the following functionality:</p>
+			<ul>
+				<li>
+					<strong>Download</strong>: Downloads a single file. Enter the name of the file you want to download in the field next to the
+					<strong>Download</strong>
+					button, then press the button. The back-end service will determine which file to send based on its
+					<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface/title-storage-overview#file-overriding">file override settings</a>, if any, and the sample will download that file and put it into the file list. Once the download is finished, you will be able to click on the file in the list and see its contents.</li>
+				<li>
+					<strong>Query</strong>: Populates the file list with all files that have at least one of a set of tags. Enter each tag that you want to include in your query into the text field next to the
+					<strong>Add Tag</strong>
+					button, one at a time, and press the button to add them to the tag list. You can clear the tag list at any time by pressing the
+					<strong>Clear List</strong>
+					button. Once the list contains all the tags you want to use in your query, press the
+					<strong>Query List</strong>
+					button to populate the file list at the bottom of the window with all files that contain at least one of the tags you listed. You can download a file from the list and view its contents by selecting it and pressing with the
+					<strong>Download</strong>
+					button.</li>
+			</ul>
+			<div>
+				<h3 id="the-console-panel">The Console Panel</h3>
+			</div>
+			<p>Log output from the program's operation, including the results of console commands, will appear in the text area at the top of the
+				<strong>Console</strong>
+				panel, which appears on the lower-left side of the user interface. In addition to pressing the buttons in the Title Storage panel, you can type in console commands at the bottom of the Console panel.</p>
+			<div tabindex="0" aria-label="The console panel for the title storage sample image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="The console panel for the title storage sample" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>The console panel for the title storage sample. Click image to enlarge.</p>
+				</figcaption>
+			</div>
+			<p>The following commands are supported:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Command</th>
+						<th>Arguments</th>
+						<th>Behavior</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>GETFILE</code>
+						</td>
+						<td>
+							<code>FILE_NAME</code>
+						</td>
+						<td>Downloads the specified file by name from the cloud</td>
+					</tr>
+					<tr>
+						<td>
+							<code>TESTFILE</code>
+						</td>
+						<td>
+							<code>FILE_NAME</code>,
+							<code>FILE_PATH</code>
+						</td>
+						<td>Retrieves
+							<code>FILE_NAME</code>
+							from the
+							<strong>Title Storage Interface</strong>
+							and compares its contents to the local, unencrypted file at
+							<code>FILE_PATH</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>HELP</code>
+						</td>
+						<td>(none)</td>
+						<td>Prints help information about all the above commands to the console output.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>You can add your own console commands in the
+				<code>Game::CreateConsoleCommands</code>
+				function in
+				<code>Game.cpp</code>.</p>
+			<div>
+				<h3 id="the-file-panel">The File Panel</h3>
+			</div>
+			<p>The
+				<strong>File</strong>
+				panel displays the contents of the currently-selected file (in the Title Storage panel).</p>
+			<div>
+				<h3 id="the-progress-bar-window">The Progress Bar Window</h3>
+			</div>
+			<p>The file transfer operations that the Title Storage Sample performs are asynchronous. While performing these operations, the sample shows a
+				<strong>Progress Bar</strong>
+				window, a popup with a progress bar, and a
+				<strong>Cancel</strong>
+				button. You can interrupt the transfer by clicking
+				<strong>Cancel</strong>. The sample only runs one file transfer operation at a time, although the Title Storage Interface can support multiple transfer operations at once.</p>
+			<div tabindex="0" aria-label="File transfer status image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="File transfer status" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>A file transfer in progress. Click image to enlarge.</p>
+				</figcaption>
+			</div>
+			<div>
+				<h2 id="exploring-the-source-code">Exploring the Source Code</h2>
+			</div>
+			<p>Most of the code that interacts with data files is in
+				<code>Samples/TitleStorage/Source/TitleStorage.cpp</code>. The following functions interact with the Title Storage Interface directly:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function Name</th>
+						<th>Behavior</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>QueryList</code>
+						</td>
+						<td>Retrieves the list of file entries based on currently selected tag.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>StartFileDataDownload</code>
+						</td>
+						<td>Retrieves the contents of a specific file.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>CancelCurrentTransfer</code>
+						</td>
+						<td>Cancels the current file transfer (if any).</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>These functions do not use the Title Storage Interface directly, but do interact with related data on the local system. They can be helpful as basic guides when building your own systems to manage locally-cached information about files:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Function Name</th>
+						<th>Behavior</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>GetFileList</code>
+						</td>
+						<td>Returns the local file list.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SetFileList</code>
+						</td>
+						<td>Sets the local file list.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>GetLocalData</code>
+						</td>
+						<td>Returns locally cached data for the file specified. The
+							<code>NoData</code>
+							flag is set to
+							<code>true</code>
+							when there is no data available locally.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SetLocalData</code>
+						</td>
+						<td>Sets local data for the specified file.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EraseLocalData</code>
+						</td>
+						<td>Erases local data for the specified file (if it exists).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AddTag</code>
+						</td>
+						<td>Adds new tag to the set of currently selected tags to be used by list queries.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ClearTags</code>
+						</td>
+						<td>Remove all currently selected tags</td>
+					</tr>
+					<tr>
+						<td>
+							<code>GetCurrentTags</code>
+						</td>
+						<td>Get selected tags</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-begin">Before You Begin</a>
+								</li>
+								<li>
+									<a href="#sign-in">Sign In</a>
+								</li>
+								<li>
+									<a href="#explore-the-sample">Explore the Sample</a>
+								</li>
+								<li>
+									<a href="#the-title-storage-panel">The Title Storage Panel</a>
+								</li>
+								<li>
+									<a href="#the-console-panel">The Console Panel</a>
+								</li>
+								<li>
+									<a href="#the-file-panel">The File Panel</a>
+								</li>
+								<li>
+									<a href="#the-progress-bar-window">The Progress Bar Window</a>
+								</li>
+								<li>
+									<a href="#exploring-the-source-code">Exploring the Source Code</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

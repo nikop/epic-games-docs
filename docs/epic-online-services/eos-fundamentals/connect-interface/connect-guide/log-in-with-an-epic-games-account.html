@@ -1,0 +1,1038 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Access EOS Game Services With the Connect Interface — 1. Log In With an Epic Games Account</h1>
+			<h2>Overview of how to log in with the Connect Interface and an Epic Games account in your game.</h2>
+			<div>
+				<div>33 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Introduction</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>To access EOS Game Services in your game or other software application, players must log in using the Connect Interface. They can do this with an external account through a supported identity provider or with an Epic Games account. This section of the guide shows you how to log in players with an Epic Games account. For more information on logging in with an external account, see the documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management#identity-provider-login-flow">Identity Provider Management &gt; Identity Provider Login Flow</a>.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>Note:</strong>
+										If your game requires players to use both
+										<span>
+											<span aria-label="tooltip type of service" tabindex="0" role="button">type of service</span>
+										</span>
+										(both
+										<span>
+											<span aria-label="tooltip EOS Game Services" tabindex="0" role="button">EOS Game Services</span>
+										</span>
+										and
+										<span>
+											<span aria-label="tooltip EOS Epic Account Services" tabindex="0" role="button">EOS Epic Account Services</span>
+										</span>), they must log in to EOS Game Services with their Epic Games account or a
+										<span>
+											<span aria-label="tooltip proxy account" tabindex="0" role="button">proxy account</span>
+										</span>. If players use EOS Epic Account Services in your game, they cannot log in to EOS Game Services with a supported
+										<span>
+											<span aria-label="tooltip external identity provider" tabindex="0" role="button">external identity provider</span>
+										</span>.</p>
+								</div>
+							</div>
+							<p>To log in players with the Connect Interface and an Epic Games account, use an
+								<span>
+									<span aria-label="tooltip ID Token" tabindex="0" role="button">ID Token</span>
+								</span>
+								for an Epic Games account, which you retrieve from the Auth Interface. The ID Token is a data structure from the
+								<a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">OpenID Connect</a>
+								protocol that the server uses to verify a user's identity. To retrieve an ID Token from the Auth Interface, you must first log in the player to their Epic Games account using the Auth Interface. For information on how to log in players using the Auth Interface, see the
+								<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/auth-intro">Auth Interface</a>
+								documentation.</p>
+							<p>All EOS Game Services data for an individual player is linked to a per-product unique identifier for the player called a Product User ID (PUID). When the player logs in using the Connect Interface, the game receives the player’s Product User ID. The Product User ID links the player’s accounts from different identity providers and is used to access EOS Game Services. For more information on linking accounts from different identity providers, see the documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-reference#link-an-external-account">Connect Interface Reference &gt; Link an External Account</a>.</p>
+							<p>
+								<strong>Note:</strong>
+							</p>
+							<ul>
+								<li>The EOS API refers to the process of creating a new Product User ID as “create user”.</li>
+							</ul>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you integrate the Connect Interface into your code to log in a player with their Epic Games account, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>Integrate the Auth Interface into your code. (Documentation:
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/auth-intro">Auth Interface</a>)</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								You do not need to set up an Identity Provider configuration to log in a player with their Epic Games account. Only external identity providers require this step. (See the documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management#configure-identity-providers-for-your-game">Identity Provider Management &gt; Configure Identity Providers for Your Game</a>.)</p>
+							<div>
+								<h2 id="log-in-using-the-connect-interface">Log In Using the Connect Interface</h2>
+							</div>
+							<p>Complete these steps to log in players using the Connect Interface and access EOS Game Services:</p>
+							<ul>
+								<li>
+									<a href="#step-a-modify-your-auth-manager-class-to-retrieve-an-id-token">Step A: Modify Your Auth Manager Class to Retrieve an ID Token</a>
+								</li>
+								<li>
+									<a href="#step-b-create-a-connect-manager-class">Step B: Create a Connect Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-id-token-login-function">Step C: Implement Your ID Token Login Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-id-token-login-callback-function">Step D: Implement Your ID Token Login Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-e-implement-your-create-user-callback-function">Step E: Implement Your Create User Callback Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-modify-your-auth-manager-class-to-retrieve-an-id-token">Step A: Modify Your Auth Manager Class to Retrieve an ID Token</h3>
+							</div>
+							<p>Modify your auth manager class to include a function to retrieve an ID Token. You need this to log in the player with the Connect Interface using their Epic Games account.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>In your auth manager class, declare a public function to retrieve an ID Token from the Auth Interface. In the example, it’s called
+																	<code>GetIdTokenExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In the
+																	<code>.cpp</code>
+																	file, implement the function to retrieve an ID Token from the Auth Interface:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Define a pointer to store the copied ID Token. In the example, it's called
+																	<code>IdToken</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your function to retrieve an ID Token, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-auth-copy-id-token-options">
+																		<code>EOS_Auth_CopyIdTokenOptions</code>
+																		data structure</a>
+																	to hold the copy options for the ID Token. In the example, it's called
+																	<code>CopyTokenOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-auth-copy-id-token">
+																		<code>EOS_Auth_CopyIdToken</code>
+																		function</a>
+																	to copy the ID Token to your pointer. The function takes the following arguments:</p>
+																<ul>
+																	<li>The Auth Interface handle.</li>
+																	<li>A reference to the copy options for the ID Token.</li>
+																	<li>A reference to the ID Token pointer to hold the returned ID Token.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the ID Token is copied successfully. If the copy is successful, return the ID Token:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the ID Token is not copied successfully, handle the errors and return
+																	<code>nullptr</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-create-a-connect-manager-class">Step B: Create a Connect Manager Class</h3>
+							</div>
+							<p>Create a class to manage the Connect Interface in your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>In your newly-created connect manager class, declare a public function to log in the player using an ID Token.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public getter to return the Product User ID of the logged-in local player.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private pointer for your auth manager class. This will be used by your connect manager class to access the instance of your auth manager class in your game.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-connect-login">
+																		<code>EOS_Connect_Login</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-connect-on-login-callback">
+																		<code>EOS_Connect_OnLoginCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-connect-login-callback-info">
+																		<code>EOS_Connect_LoginCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnConnectLogInWithIdTokenComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-connect-login">
+																			<code>EOS_Connect_Login</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-connect-create-user">
+																		<code>EOS_Connect_CreateUser</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-connect-on-create-user-callback">
+																		<code>EOS_Connect_OnCreateUserCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-connect-create-user-callback-info">
+																		<code>EOS_Connect_CreateUserCallbackInfo</code>
+																		data structure</a>. In the example, it’s called
+																	<code>OnConnectCreateUserComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-connect-create-user">
+																			<code>EOS_Connect_CreateUser</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>Declare the following variables:</p>
+																<ul>
+																	<li>A handle for the Platform Interface.</li>
+																	<li>A handle for the Connect Interface.</li>
+																	<li>A variable for the Product User ID of the logged-in local player. The EOS SDK returns the Product User ID after the player logs in. You use the Product User ID to access EOS Game Services.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your connect manager's ‘.cpp’ file (<code>ConnectManager.cpp</code>
+																	in the example), define the constructor for the connect manager class. In the constructor, do the following:</p>
+																<ul>
+																	<li>Pass the Platform Interface handle</li>
+																	<li>Pass a pointer to your auth manager class instance.</li>
+																	<li>Assign the Connect Interface handle. You need this handle to make EOS Connect Interface API calls.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-id-token-login-function">Step C: Implement Your ID Token Login Function</h3>
+							</div>
+							<p>In your connect manager class, implement the function to log in using the Connect Interface with the ID Token that you retrieve from the Auth Interface.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>In your connect manager class, implement the function to log in using an ID Token. In the example, the function is called
+																	<code>LogInWithIdTokenExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the pointer to the auth manager class instance to get an ID Token and temporarily store it in a pointer.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your login function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-connect-credentials">
+																		<code>EOS_Connect_Credentials</code>
+																		data structure</a>
+																	to hold the credentials to log in.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-connect-login-options">
+																		<code>EOS_Connect_LoginOptions</code>
+																		data structure</a>
+																	to hold the login options for the Connect Interface. In the example, the data structure is called
+																	<code>LoginOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-connect-login">
+																		<code>EOS_Connect_Login</code>
+																		function</a>
+																	to log in. This function takes the following arguments:</p>
+																<ul>
+																	<li>The Connect Interface handle.</li>
+																	<li>A reference to the login options data structure.</li>
+																	<li>(Optional) ClientData.<br>
+																		In the example, we pass the connect manager (<code>this</code>
+																		in the example) for the ClientData field so we can access it in the callback. If you don’t need to pass any additional data to the callback, pass
+																		<code>nullptr</code>
+																		instead.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-connect-login-callback-info">
+																			<code>EOS_Connect_LoginCallbackInfo</code>
+																			data structure</a>
+																		when the Connect Interface completes the login process.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>After you’re done using the ID Token, call the EOS API
+																	<a href="/docs/api-ref/functions/eos-auth-id-token-release">
+																		<code>EOS_Auth_IdToken_Release</code>
+																		function</a>
+																	on the ID Token pointer to free its memory.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-implement-your-id-token-login-callback-function">Step D: Implement Your ID Token Login Callback Function</h3>
+							</div>
+							<p>Implement the function that executes when the
+								<a href="/docs/api-ref/functions/eos-connect-login">
+									<code>EOS_Connect_Login</code>
+									function</a>
+								completes.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-connect-login">
+																		<code>EOS_Connect_Login</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-connect-on-login-callback">
+																		<code>EOS_Connect_OnLoginCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-connect-login-callback-info">
+																		<code>EOS_Connect_LoginCallbackInfo</code>
+																		data structure</a>. In the example, it’s called
+																	<code>OnConnectLogInWithIdTokenComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-connect-login">
+																			<code>EOS_Connect_Login</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the login is successful. If the login is successful, retrieve the connect manager pointer from the client data and set the variable for the local Product User ID:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the login fails because the result is
+																	<code>EOS_InvalidUser</code>, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-connect-create-user-options">
+																		<code>EOS_Connect_CreateUserOptions</code>
+																		data structure</a>
+																	to hold the options to create a new Product User ID. In the example, the data structure is called
+																	<code>CreateUserOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	If your game supports multiple login methods, we recommend that you ask the player at this point if they have played before with a different account, and prompt them to log in with that account if they have, to avoid the creation of duplicate Product User IDs for the same player.</p>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-connect-create-user">
+																		<code>EOS_Connect_CreateUser</code>
+																		function</a>, which creates a new Product User ID for a player who logs in using the Connect Interface for the first time. This function takes the following arguments:</p>
+																<ul>
+																	<li>The Connect Interface handle.</li>
+																	<li>A reference to the create user options data structure.</li>
+																	<li>(Optional) ClientData.<br>
+																		In the example, we pass the connect manager (<code>Self</code>
+																		in the example) for the ClientData field so we can access it in the callback. If you don’t need to pass any additional data to the callback, pass
+																		<code>nullptr</code>
+																		instead.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-connect-login-callback-info">
+																			<code>EOS_Connect_LoginCallbackInfo</code>
+																			data structure</a>
+																		when the Connect Interface completes the login process.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the login is complete. If the login is not complete, return. The callback is called again when the login is complete:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the login is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-e-implement-your-create-user-callback-function">Step E: Implement Your Create User Callback Function</h3>
+							</div>
+							<p>Implement the callback function that executes when the
+								<a href="/docs/api-ref/functions/eos-connect-create-user">
+									<code>EOS_Connect_CreateUser</code>
+									function</a>
+								completes.</p>
+							<p>
+								<strong>Note:</strong>
+								The EOS API refers to the process of creating a new Product User ID as “create user”.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-4">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-connect-create-user">
+																		<code>EOS_Connect_CreateUser</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-connect-on-create-user-callback">
+																		<code>EOS_Connect_OnCreateUserCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-connect-create-user-callback-info">
+																		<code>EOS_Connect_CreateUserCallbackInfo</code>
+																		data structure</a>. In the example, it’s called
+																	<code>OnConnectCreateUserComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-connect-create-user">
+																			<code>EOS_Connect_CreateUser</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the new Product User ID is created successfully. If the Product User ID creation is successful, retrieve the connect manager pointer from the client data and set the variable for the local Product User ID:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the Product User ID creation is not complete yet. If the Product User ID creation is not complete, return. The callback will be called again when the Product User ID creation is complete:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the Product User ID creation is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>When the player runs your game, they log in using their Epic Games account and the Connect Interface and receive a Product User ID. You can use this Product User ID to access EOS Game Services. The logged-in player stays logged in for one hour, at which point the player’s authentication expires. To keep the player logged in, you must log in the player again when the current authentication is about to expire (Section in this guide:
+								<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/refresh-player-authentication">2. Refresh Player Authentication</a>).</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>
+								<strong>Log the Player Out</strong>
+							</p>
+							<p>The EOS SDK automatically logs the player out when they close your game. To log the player out of your game while your game is running:</p>
+							<ol>
+								<li>
+									<p>Create an instance of the
+										<a href="/docs/api-ref/structs/eos-connect-logout-options">
+											<code>EOS_Connect_LogoutOptions</code>
+											data structure</a>
+										to hold the logout options for the player. In the example, it’s called
+										<code>LogoutOptions</code>:</p>
+									<div>
+										<section>
+											<pre>
+
+											</pre>
+										</section>
+									</div>
+								</li>
+								<li>
+									<p>Call the EOS API
+										<a href="/docs/api-ref/functions/eos-connect-logout">
+											<code>EOS_Connect_Logout</code>
+											function</a>
+										to log the player out. This function takes the following arguments:</p>
+									<ul>
+										<li>The Connect Interface handle.</li>
+										<li>A reference to the logout options data structure.</li>
+										<li>(Optional) ClientData. For example, you can pass a pointer to the connect manager for the ClientData field, so you can access it in the callback. If you don’t need to pass any additional data to the callback, pass a
+											<code>nullptr</code>
+											instead.</li>
+										<li>A callback function to receive the
+											<a href="/docs/api-ref/structs/eos-connect-logout-callback-info">
+												<code>EOS_Connect_LogoutCallbackInfo</code>
+												data structure</a>
+											when the Connect Interface completes the logout process.</li>
+									</ul>
+								</li>
+							</ol>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-auth-copy-id-token">
+										<code>EOS_Auth_CopyIdToken</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-auth-copy-id-token-options">
+												<code>EOS_Auth_CopyIdTokenOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-auth-id-token">
+												<code>EOS_Auth_IdToken</code>
+												data structure</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/functions/eos-auth-id-token-release">
+														<code>EOS_Auth_IdToken_Release</code>
+														function</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-connect-login">
+										<code>EOS_Connect_Login</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-connect-login-options">
+												<code>EOS_Connect_LoginOptions</code>
+												data structure</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-connect-credentials">
+														<code>EOS_Connect_Credentials</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-connect-on-login-callback">
+												<code>EOS_Connect_OnLoginCallback</code>
+												callback function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-connect-login-callback-info">
+														<code>EOS_Connect_LoginCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-connect-create-user">
+										<code>EOS_Connect_CreateUser</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-connect-create-user-options">
+												<code>EOS_Connect_CreateUserOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-connect-on-create-user-callback">
+												<code>EOS_Connect_OnCreateUserCallback</code>
+												callback function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-connect-create-user-callback-info">
+														<code>EOS_Connect_CreateUserCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/refresh-player-authentication">2. Refresh Player Authentication</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#log-in-using-the-connect-interface">Log In Using the Connect Interface</a>
+								</li>
+								<li>
+									<a href="#step-a-modify-your-auth-manager-class-to-retrieve-an-id-token">Step A: Modify Your Auth Manager Class to Retrieve an ID Token</a>
+								</li>
+								<li>
+									<a href="#step-b-create-a-connect-manager-class">Step B: Create a Connect Manager Class</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-id-token-login-function">Step C: Implement Your ID Token Login Function</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-id-token-login-callback-function">Step D: Implement Your ID Token Login Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-e-implement-your-create-user-callback-function">Step E: Implement Your Create User Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

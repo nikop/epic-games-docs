@@ -1,0 +1,270 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Configure the Age Verification Service Webhook</h1>
+			<h2>How to configure the Age Verification (AV) Service Webhook to receive verification events.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>When a user verifies their age using the Age Verification (AV) Service, KWS notifies you by sending an event that contains the user's verification status and a signature that you use to confirm the authenticity of the payload.</p>
+			<p>KWS offers two methods to confirm the validity of verified users:</p>
+			<ul>
+				<li>Webhook</li>
+				<li>Verification Response</li>
+			</ul>
+			<p>You can use one or both methods to configure the Age Verification Service.</p>
+			<p>We recommend using both the Webhook Method and the Verification Response to provide redundancy in case one response fails to reach your product for any reason.</p>
+			<div>
+				<h2 id="webhook">Webhook</h2>
+			</div>
+			<p>When a user successfully verifies their age using the Age Verification Service, KWS notifies your system by sending the
+				<code>adult-verified</code>
+				event using a webhook call.</p>
+			<p>To receive the
+				<code>adult-verified</code>
+				event, you need to set up the webhook for each product as follows:</p>
+			<ul>
+				<li>Provide a
+					<strong>Webhook URL</strong>. This is where KWS will send event notifications.</li>
+				<li>Take note of the
+					<strong>Webhook secret</strong>. This signature is automatically generated when you configure the Webhook method. You use this signature to confirm that the external payload comes from a genuine call from KWS.</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				Your test and production environments use different Webhook secrets.</p>
+			<p>You can configure the Webhook in two ways. Either:</p>
+			<ul>
+				<li>Option A — For all the products in your organization.</li>
+				<li>Option B — For an individual product.</li>
+			</ul>
+			<p>For more information about these options, see the documentation:
+				<a href="/docs/kids-web-services/kws-get-started#step-3--choose-to-set-up-kws-for-your-organization-or-product">Choose to Set Up KWS for Your Organization or Product</a>.</p>
+			<p>For both options, you configure the Webhook in the Developer Portal, on the
+				<strong>Age Verification</strong>
+				page’s
+				<strong>Configuration</strong>
+				tab. However, the way you access the tab depends on which option you use.</p>
+			<p>To configure the Webhook, follow the steps below:</p>
+			<div>
+				<h3 id="step-1--go-to-the-age-verification-page">Step 1 — Go to the Age Verification Page</h3>
+			</div>
+			<div>
+				<h4 id="option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Age Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h4 id="option-b-for-an-individual-product">Option B: For an individual product</h4>
+			</div>
+			<ol>
+				<li>
+					<p>Sign in to the Developer Portal at
+						<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>.</p>
+				</li>
+				<li>
+					<p>On the left navigation under
+						<strong>Your Products</strong>, select the name of the product you want to configure.</p>
+				</li>
+			</ol>
+			<ul>
+				<li>
+					<strong>Note:</strong>
+					If you can’t see the product you want, make sure you are working in the correct organization.</li>
+			</ul>
+			<ol start="3">
+				<li>
+					<p>In the left navigation, click
+						<strong>Kids Web Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Age Verification</strong>.</p>
+				</li>
+			</ol>
+			<div>
+				<h3 id="step-2--configure-the-webhook">Step 2 — Configure the Webhook</h3>
+			</div>
+			<ol>
+				<li>
+					<p>On the
+						<strong>Age Verification</strong>
+						page, click the
+						<strong>Configuration</strong>
+						tab.</p>
+				</li>
+				<li>
+					<p>Under
+						<strong>Configure Verification Service</strong>, click
+						<strong>Webhook Method</strong>
+						and follow the onscreen instructions.</p>
+				</li>
+			</ol>
+			<div>
+				<h4 id="information-and-tips">Information and Tips</h4>
+			</div>
+			<ul>
+				<li>Do not include information in the Webhook URL that might be sensitive to manipulation by an attacker (for example: numeric IDs that attackers can iterate over to find the correct numbers).</li>
+				<li>Do not include special characters in your Webhook URL.</li>
+				<li>KWS automatically generates the Webhook secret after you have clicked
+					<strong>Publish to Test</strong>.</li>
+				<li>KWS sends event notifications to the URL you specify using a POST request.</li>
+			</ul>
+			<div>
+				<h3 id="generate-your-signature">Generate Your Signature</h3>
+			</div>
+			<p>After you click
+				<strong>Publish to Test</strong>, the
+				<strong>Webhook secret</strong>
+				is displayed:</p>
+			<center>
+				<div tabindex="0" aria-label=" image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption>The Webhook secret in the AV Service configuration settings. Click image for full size.</figcaption>
+				</div>
+			</center>
+			<p>The webhook uses an HTTPS POST call with a standardized wrapper containing an event-specific external payload. Using your web server or web application, create a public endpoint to validate the signature header using the POST body described in the example below:</p>
+			<div>
+				<section>
+					<pre>POST https://www.yourdomain.com/your-webhook-endpointx-kws-signature: t=1621535329,v1=f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8Body{   "name": "adult-verified",   "time": "ISO8601 timestamp",   "orgId": "uuid",   "productId": "uuid" | null,   "payload":         {             "parentEmail": "user.email@example.com",            "externalPayload": "{\"hello\":\"world\"}",            "status":                 {                    "verified": true,                    "transactionId": "transactionId"                 }        }}</pre>
+				</section>
+			</div>
+			<p>The POST call header has the following structure:</p>
+			<div>
+				<section>
+					<pre>x-kws-signature: t=&lt;timestamp&gt;,v1=&lt;signature&gt;[,v1=&lt;signature&gt;]</pre>
+				</section>
+			</div>
+			<p>The
+				<code>&lt;signature&gt;</code>
+				is generated in
+				<code>HMAC_SHA256</code>
+				format using the following code:</p>
+			<div>
+				<section>
+					<pre>const timestamp =   /* extracted value of 't=' from the header */;const body =    /* raw request body as UTF-8 string */;const secretKey =   /* the Webhook Secret Code, as provided in the KWS Developer Portal */;const signature = crypto   .createHmac('sha256', secretKey)   .update('${timestamp}.${body}')   .digest('hex');</pre>
+				</section>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>Value</strong>
+						</th>
+						<th>
+							<strong>Definition</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>timestamp</code>
+						</td>
+						<td>The value of t= from the header</td>
+					</tr>
+					<tr>
+						<td>
+							<code>body</code>
+						</td>
+						<td>The raw request POST body as a UTF-8 string</td>
+					</tr>
+					<tr>
+						<td>
+							<code>secretKey</code>
+						</td>
+						<td>The Webhook secret displayed in the Developer Portal</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>To verify the webhook call, you compare the v1 signature passed to you in the header to the signature value you created. If the two values match, you can confirm that the call is genuine and sent by KWS.</p>
+			<p>The Webhook URL is intentionally not included in the signature algorithm to allow for easier signature validation when the request URL may be modified.</p>
+			<div>
+				<p>
+					<strong>IMPORTANT:</strong>
+					The raw POST body must be used. Do not attempt to parse and re-stringify the JSON, as this may result in mismatched signatures due to inconsistencies in JSON library implementations.</p>
+			</div>
+			<p>On successful verification, KWS returns the
+				<code>adult-verified</code>
+				event to your product with the following structure:</p>
+			<div>
+				<section>
+					<pre>{  "name": "adult-verified",  "time": "ISO8601 timestamp",  "orgId": "uuid",  "productId": "uuid",  "payload": {    "parentEmail": "user.email@example.com",    "externalPayload": "{\"hello\":\"world\"}",    "status": {      "verified": true,      "transactionId": "..."    }  }}
+					</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="webhook-retry-behavior">Webhook Retry Behavior</h3>
+			</div>
+			<p>The webhook's retry behavior depends on the status code your server returns to the POST request. If the status code indicates a failure, KWS retries the call with exponential backoff, which means periodically retrying the call with increasing delays between requests up to a maximum length of time.</p>
+			<p>The status code indicates a failure if it is any value other than 200 to 299.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#webhook">Webhook</a>
+								</li>
+								<li>
+									<a href="#step-1--go-to-the-age-verification-page">Step 1 — Go to the Age Verification Page</a>
+								</li>
+								<li>
+									<a href="#option-a-for-all-the-products-in-your-organization">Option A: For all the products in your organization</a>
+								</li>
+								<li>
+									<a href="#option-b-for-an-individual-product">Option B: For an individual product</a>
+								</li>
+								<li>
+									<a href="#step-2--configure-the-webhook">Step 2 — Configure the Webhook</a>
+								</li>
+								<li>
+									<a href="#information-and-tips">Information and Tips</a>
+								</li>
+								<li>
+									<a href="#generate-your-signature">Generate Your Signature</a>
+								</li>
+								<li>
+									<a href="#webhook-retry-behavior">Webhook Retry Behavior</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

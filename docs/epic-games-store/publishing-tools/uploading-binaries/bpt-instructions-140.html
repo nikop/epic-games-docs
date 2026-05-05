@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,7 +14,7 @@
 			<h1>BuildPatch Tool Instructions (1.4.0)</h1>
 			<h2>Setup and processing instructions for BPT 1.4.0.</h2>
 			<div>
-				<div>12 mins to read</div>
+				<div>13 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -22,7 +22,7 @@
 		<section role="main">
 			<div>
 				<strong>Important Note</strong>: For best results, we recommend using the most recent version of the BuildPatch Tool. To learn more, review
-				<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160">BuildPatch Tool Instructions (1.6.0)</a>.
+				<a href="/docs/buildpatch-tool-latest">BuildPatch Tool Instructions (1.8.1)</a>.
 			</div>
 			<div>
 				<h2 id="before-you-start">Before You Start</h2>
@@ -30,15 +30,24 @@
 			<div>
 				<h3 id="how-to-find-credential-ids">How to Find Credential IDs</h3>
 			</div>
-			<p>There are a number of IDs you will need to locate in the Developer Portal.</p>
+			<p>There are a number of IDs you will need to locate in the Developer Portal. To do this, follow the steps below:</p>
 			<p>
 				<strong>Client ID and Client Secret for the product</strong>
 			</p>
 			<ol>
-				<li>Go to
-					<strong>Developer Portal Dashboard &gt; Product &gt; Games Services &gt; Product Settings</strong>.</li>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Product Settings</strong>.</li>
 				<li>View the credentials in
-					<strong>Product Settings &gt; SDK Credentials &gt; BPT Credentials</strong>.</li>
+					<strong>BPT Credentials</strong>.</li>
 			</ol>
 			<p>
 				<strong>Artifact Name and ID for the offer</strong>
@@ -62,17 +71,27 @@
 			<p>
 				<strong>Offer IDs for the Offer</strong>
 			</p>
-			<ul>
-				<li>
-					<p>Go to
-						<strong>Product &gt; Offers page &gt; Offer</strong>.</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign in to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
 				</li>
-				<li>
-					<p>The Offer IDs are located at the bottom of the
-						<strong>Edit Offer</strong>
-						modal.</p>
-				</li>
-			</ul>
+				<li>In the left navigation, click
+					<strong>Epic Games Store</strong>
+					&gt;
+					<strong>Offers</strong>.</li>
+				<li>Click the name of the offer for which you want to retrieve credentials.</li>
+				<li>In the panel on the right, scroll down to the
+					<strong>IDs</strong>
+					section and save the
+					<strong>Offer ID</strong>.</li>
+			</ol>
+			<p>Repeat the above procedure for additional offers.</p>
 			<div>
 				<h3 id="view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</h3>
 			</div>
@@ -81,19 +100,35 @@
 				can view your BuildPatch Tool credentials for a product. They can also copy the credentials to the clipboard.</p>
 			<p>To view your organization’s BuildPatch Tool credentials:</p>
 			<ol>
-				<li>Sign in to the
-					<a href="https://dev.epicgames.com/portal">Dev Portal</a>.</li>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>a. Sign into to the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
 				<li>Select the product for which you want to view credentials.</li>
 				<li>Select
 					<strong>Product Settings</strong>.</li>
-				<li>Scroll down to
-					<strong>SDK Credentials &gt; BPT Credentials</strong>.</li>
+				<li>Click the
+					<strong>BPT Credentials</strong>
+					tab.</li>
 				<li>To copy the credentials to the clipboard, click
 					<strong>Copy</strong>:</li>
 			</ol>
-			<p>
-				<img src="https://static-assets-prod.epicgames.com/eos-docs/docs/epic-games-store/tech-features-config/bpt-instructions-spt/copy-14.png" alt="">
-			</p>
+			<center>
+				<div tabindex="0" aria-label=" image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
 			<div>
 				<h3 id="paths-on-the-command-line">Paths on the Command Line</h3>
 			</div>
@@ -150,7 +185,7 @@
 			<p>
 				<strong>Note:</strong>
 				The ZIP file link is always kept up to date with the newest version of the BPT. If you cannot access the file, create a private discussion using this support website:
-				<a href="https://eoshelp.epicgames.com/s/private-question-page">eoshelp.epicgames.com</a>.</p>
+				<a href="https://eoshelp.epicgames.com/s/eos-case-page?casetype=Private">eoshelp.epicgames.com</a>.</p>
 			<div>
 				<h2 id="authentication">Authentication</h2>
 			</div>
@@ -177,9 +212,7 @@
 				parameter, then your client secret should be passed verbatim as the value of the parameter:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe  -ClientId="&lt;YourClientId&gt;"  -ClientSecret="&lt;YourClientSecret&gt;"</pre>
 				</section>
 			</div>
 			<p>When using the
@@ -187,9 +220,7 @@
 				parameter, then you pass the name of an OS environment variable which contains the client secret:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;set MyEpicSecret=&lt;YourClientSecret&gt;Engine\Binaries\Win64&gt;BuildPatchTool.exe -ClientId="&lt;YourClientId&gt;"-ClientSecretEnvVar="MyEpicSecret"</pre>
 				</section>
 			</div>
 			<p>We recommend using the
@@ -205,9 +236,7 @@
 				mode, and point it at your build (see CLI argument details below). This will process your build, upload it to our cloud storage, and register the build with our backend:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe   -OrganizationId="&lt;YourOrg&gt;"  -ProductId="&lt;YourProduct&gt;"  -ArtifactId="&lt;YourArtifact&gt;"  -ClientId="&lt;YourClientId&gt;"  -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"  -mode=PatchGeneration  -BuildRoot="&lt;LocationOfLocalBuild&gt;"  -CloudDir="&lt;YourCloudDir&gt;"  -BuildVersion="&lt;YourBuildVersion&gt;"  -AppLaunch="&lt;AppToRun&gt;"  -AppArgs="&lt;LaunchArguments&gt;"  -FileAttributeList="&lt;LocationOfAttributesFile&gt;"  -FileIgnoreList="&lt;LocationOfIgnoreFile&gt;"</pre>
 				</section>
 			</div>
 			<p>Descriptions for each of the parameters that you have to specify are below. You can also add the
@@ -322,9 +351,7 @@
 			<p>Your custom FileAttributeList file must be a text file with one or more newline-separated entries. Each line must contain a quoted (BuildRoot-relative) filepath, followed by one or more space-delimited attributes to be applied to the referenced file:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>"&lt;QuotedRelativePathToFile&gt;" &lt;list of attributes&gt;</pre>
 				</section>
 			</div>
 			<p>
@@ -332,9 +359,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>"Relative/Path/To/My/file.bin" executable tag:my_tag"Second/Path/To/A/file.txt" tag:txt_files</pre>
 				</section>
 			</div>
 			<p>The following file attribute flags are supported:</p>
@@ -371,9 +396,7 @@
 				Mode:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe   -OrganizationId="&lt;YourOrg&gt;"  -ProductId="&lt;YourProduct&gt;"  -ArtifactId="&lt;YourArtifact&gt;"  -ClientId="&lt;YourClientId&gt;"  -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"  -mode=ListBinaries</pre>
 				</section>
 			</div>
 			<div>
@@ -407,15 +430,7 @@
 			<p>Most of the required arguments are the same used in the modes listed above.</p>
 			<p>
 				<code>SourceArtifactId=""</code>
-				— Specifies the ID of the
-				<span>
-					<span aria-label="tooltip artifact" tabindex="0" role="button">artifact</span>
-				</span>
-				the
-				<span>
-					<span aria-label="tooltip binary" tabindex="0" role="button">binary</span>
-				</span>
-				is being copied from</p>
+				— Specifies the ID of the artifact the binary is being copied from</p>
 			<p>
 				<code>DestArtifactId=""</code>
 				— Specifies the ID of the artifact the binary is being copied to</p>
@@ -434,9 +449,7 @@
 			<p>The following is a sample command line to improve delta patching between two builds:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Engine\Binaries\Win64&gt;BuildPatchTool.exe  -OrganizationId="&lt;YourOrg&gt;"  -ProductId="&lt;YourProduct&gt;"  -ArtifactId="&lt;YourArtifact&gt;"  -ClientId="&lt;YourClientId&gt;"  -ClientSecretEnvVar="&lt;YourSecretEnvVar&gt;"  -mode=ChunkDeltaOptimise  -CloudDir="&lt;YourCloudDir&gt;"  -BuildVersionA="&lt;YourSourceBuildVersion&gt;"  -BuildVersionB="&lt;YourDestinationBuildVersion&gt;"</pre>
 				</section>
 			</div>
 			<p>When running in
@@ -456,9 +469,7 @@
 				was already run between the two provided BuildVersion values, the process will succeed short circuiting the operation, indicated in the output.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Running optimization for patching 1.3.0-Windows -&gt; 1.3.1-Windows...** Chunk delta optimization already completed for provided manifests. **Loaded optimised delta file E:/CloudDir/Deltas/jd63jdu7-jsg58dh58dki8dk323/a5nbd0jbweof98fvytsvnthcsvf.delta</pre>
 				</section>
 			</div>
 			<p>Once the processing is completed, the output will show the improvement achieved.</p>
@@ -487,9 +498,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Final unknown compressed bytes, plus meta 400000  Original unknown compressed bytes         1000000  Improvement: 60%</pre>
 				</section>
 			</div>
 			<div>
@@ -578,9 +587,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Please check your provided %OrganizationId%, %ProductId% and ArtifactId arecorrect, and that you should have access to create binaries for thisartifact.Tool exited with: 6</pre>
 				</section>
 			</div>
 			<p>
@@ -591,9 +598,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>CloudDir, BuildRoot, ArtifactId, BuildVersion, AppLaunch, and AppArgsare required parametersTool exited with: 2</pre>
 				</section>
 			</div>
 			<p>
@@ -604,9 +609,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>Please ensure you have specified ClientId and also one of ClientSecret orClientSecretEnvVar. If using ClientSecretEnvVar, ensure the env variableis properly set.Tool exited with: 9</pre>
 				</section>
 			</div>
 			<p>
@@ -617,9 +620,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>An authentication error occurred - Check you have specified ClientId, andeither ClientSecret or ClientSecretEnvVar parameters correctly.Message: Sorry the client credentials you are using are invalidTool exited with: 10</pre>
 				</section>
 			</div>
 			<p>
@@ -630,9 +631,7 @@
 			</div>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>An unexpected error occurred. Error code: errors.com.epicgames.common.missing_permission;Error message: Sorry your login does not possess the permissions'artifact:o-7kyv8uwtz74njnl544kbxzt5xqephw:3bc138d96fb24d9597d4bbff23b9ecee:asdfasd READ'needed to perform the requested operationTool exited with: 5</pre>
 				</section>
 			</div>
 			<p>
@@ -642,82 +641,87 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#before-you-start">Before You Start</a>
-					</li>
-					<li>
-						<a href="#how-to-find-credential-ids">How to Find Credential IDs</a>
-					</li>
-					<li>
-						<a href="#view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</a>
-					</li>
-					<li>
-						<a href="#paths-on-the-command-line">Paths on the Command Line</a>
-					</li>
-					<li>
-						<a href="#examples-of-valid-path-syntax">Examples of Valid Path Syntax</a>
-					</li>
-					<li>
-						<a href="#invalid-path-syntax">Invalid Path Syntax</a>
-					</li>
-					<li>
-						<a href="#initial-setup">Initial Setup</a>
-					</li>
-					<li>
-						<a href="#authentication">Authentication</a>
-					</li>
-					<li>
-						<a href="#how-to-process-a-build">How to Process a Build</a>
-					</li>
-					<li>
-						<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
-					</li>
-					<li>
-						<a href="#setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</a>
-					</li>
-					<li>
-						<a href="#how-to-list-existing-binaries">How to List Existing Binaries</a>
-					</li>
-					<li>
-						<a href="#how-to-copy-a-binary">How to Copy a Binary</a>
-					</li>
-					<li>
-						<a href="#required-args">Required args</a>
-					</li>
-					<li>
-						<a href="#reducing-update-size">Reducing Update Size</a>
-					</li>
-					<li>
-						<a href="#downloadable-content-dlc">Downloadable Content (DLC)</a>
-					</li>
-					<li>
-						<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
-					</li>
-					<li>
-						<a href="#common-errors">Common errors</a>
-					</li>
-					<li>
-						<a href="#things-to-check">Things to check</a>
-					</li>
-					<li>
-						<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</a>
-					</li>
-					<li>
-						<a href="#error---missing-parameters">Error - Missing parameters</a>
-					</li>
-					<li>
-						<a href="#error---missing-credentials">Error - Missing credentials</a>
-					</li>
-					<li>
-						<a href="#error---authentication-error">Error - Authentication error</a>
-					</li>
-					<li>
-						<a href="#error---unexpected-error">Error - Unexpected error</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#how-to-find-credential-ids">How to Find Credential IDs</a>
+								</li>
+								<li>
+									<a href="#view-your-organizations-buildpatch-tool-credentials">View your Organization’s BuildPatch Tool credentials</a>
+								</li>
+								<li>
+									<a href="#paths-on-the-command-line">Paths on the Command Line</a>
+								</li>
+								<li>
+									<a href="#examples-of-valid-path-syntax">Examples of Valid Path Syntax</a>
+								</li>
+								<li>
+									<a href="#invalid-path-syntax">Invalid Path Syntax</a>
+								</li>
+								<li>
+									<a href="#initial-setup">Initial Setup</a>
+								</li>
+								<li>
+									<a href="#authentication">Authentication</a>
+								</li>
+								<li>
+									<a href="#how-to-process-a-build">How to Process a Build</a>
+								</li>
+								<li>
+									<a href="#setting-special-file-attributes">Setting Special File Attributes</a>
+								</li>
+								<li>
+									<a href="#setting-the-desktop-shortcut-icon">Setting the Desktop Shortcut Icon</a>
+								</li>
+								<li>
+									<a href="#how-to-list-existing-binaries">How to List Existing Binaries</a>
+								</li>
+								<li>
+									<a href="#how-to-copy-a-binary">How to Copy a Binary</a>
+								</li>
+								<li>
+									<a href="#required-args">Required args</a>
+								</li>
+								<li>
+									<a href="#reducing-update-size">Reducing Update Size</a>
+								</li>
+								<li>
+									<a href="#downloadable-content-dlc">Downloadable Content (DLC)</a>
+								</li>
+								<li>
+									<a href="#troubleshooting-common-errors">Troubleshooting Common Errors</a>
+								</li>
+								<li>
+									<a href="#common-errors">Common errors</a>
+								</li>
+								<li>
+									<a href="#things-to-check">Things to check</a>
+								</li>
+								<li>
+									<a href="#error---failed-to-retrieve-list-of-binaries-from-epic-services">Error - Failed to retrieve list of binaries from Epic services</a>
+								</li>
+								<li>
+									<a href="#error---missing-parameters">Error - Missing parameters</a>
+								</li>
+								<li>
+									<a href="#error---missing-credentials">Error - Missing credentials</a>
+								</li>
+								<li>
+									<a href="#error---authentication-error">Error - Authentication error</a>
+								</li>
+								<li>
+									<a href="#error---unexpected-error">Error - Unexpected error</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

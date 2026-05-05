@@ -1,0 +1,1561 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Peer-to-Peer to Your Game — 1. Notify Players About P2P Connections</h1>
+			<h2>Overview of how to register your players for notifications about the status of their peer-to-peer connections with EOS P2P.</h2>
+			<div>
+				<div>51 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/p2p-intro">Introduction</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>You can add code to your game to enable the P2P Interface after you have completed the precursor steps listed in
+								<em>Before You Start</em>, below.</p>
+							<p>You can use the P2P Interface to notify a player about the following events for peer-to-peer connections:</p>
+							<ul>
+								<li>Received a connection request.</li>
+								<li>Established a connection.</li>
+								<li>Connection is interrupted.</li>
+								<li>Connection closed.</li>
+							</ul>
+							<p>To receive these notifications, you must subscribe the player to peer-to-peer notifications through the P2P Interface. When you no longer want to send these notifications to the player, you can unsubscribe the player from them.</p>
+							<p>Note that when this guide refers to "player" connections, data sharing, and notifications, it means connections, data sharing, and notifications between each player’s game client.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete the following step:</p>
+							<ul>
+								<li>Complete the prerequisites listed in the
+									<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/p2p-intro">Introduction</a>
+									section of this guide.</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+							</p>
+							<ul>
+								<li>A player does not need an Epic Games account to access the P2P Interface.</li>
+								<li>We recommend that you set up the Logging Interface to receive messages that can help you diagnose technical issues with the EOS SDK. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="subscribe-to-p2p-notifications">Subscribe to P2P Notifications</h2>
+							</div>
+							<p>Complete the following steps to subscribe to and unsubscribe from peer-to-peer notifications:</p>
+							<ul>
+								<li>
+									<a href="#step-a-create-a-class-to-manage-eos-p2p">Step A: Create a Class to Manage EOS P2P</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-p2p-subscribe-functions">Step B: Implement Your P2P Subscribe Functions</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-p2p-unsubscribe-functions">Step C: Implement Your P2P Unsubscribe Functions</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-p2p-notification-callback-functions">Step D: Implement Your P2P Notification Callback Functions</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-create-a-class-to-manage-eos-p2p">Step A: Create a Class to Manage EOS P2P</h3>
+							</div>
+							<p>Create a class to manage EOS P2P in your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// P2PManager.h #pragma once #include &lt;eos_p2p.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;string&gt; class P2PManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the EOS Platform Interface obtained during EOS Platform Interface setup.     *     * @param InLocalProductUserId - The Product User ID of the local player obtained during Connect login.     */    P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**     * Subscribe to notifications for peer connection requests.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection request notifications.     */    void SubscribeToConnectionRequestNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for peer connection requests. */    void UnsubscribeFromConnectionRequestNotificationsExample();     /**     * Subscribe to notifications for established connections.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection established notifications.     */    void SubscribeToConnectionEstablishedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for established connections. */    void UnsubscribeFromConnectionEstablishedNotificationsExample();     /**     * Subscribe to notifications for interrupted connections.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection interrupted notifications.     */    void SubscribeToConnectionInterruptedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for interrupted connections. */    void UnsubscribeFromConnectionInterruptedNotificationsExample();     /**     * Subscribe to notifications for closed connections.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection closed notifications.     */    void SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for closed connections. */    void UnsubscribeFromConnectionClosedNotificationsExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The P2P Interface handle. */    EOS_HP2P P2PHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /** The Product User ID of the remote player that you're connected to. */    EOS_ProductUserId RemoteProductUserId = nullptr;     /** The socket ID of the current P2P connection. */    EOS_P2P_SocketId* SocketId = nullptr;     /** Notification IDs to keep track of notification subscriptions. */    EOS_NotificationId ConnectionRequestNotificationId = 0;    EOS_NotificationId ConnectionEstablishedNotificationId = 0;    EOS_NotificationId ConnectionInterruptedNotificationId = 0;    EOS_NotificationId ConnectionClosedNotificationId = 0;     /**     * Callback function that executes when a connection request comes in.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data);     /**     * Callback function that executes when a connection is established.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionEstablishedNotification(const EOS_P2P_OnPeerConnectionEstablishedInfo* Data);     /**     * Callback function that executes when a connection is interrupted.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionInterruptedNotification(const EOS_P2P_OnPeerConnectionInterruptedInfo* Data);     /**     * Callback function that executes when a connection is closed.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionClosedNotification(const EOS_P2P_OnRemoteConnectionClosedInfo* Data); };</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// P2PManager.cpp #include "P2PManager.h"#include &lt;iostream&gt; P2PManager::P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId){    // Get and save the handle to the P2P Interface.    P2PHandle = EOS_Platform_GetP2PInterface(PlatformHandle);}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								This guide does not cover how to sign in the player. For information on this, see the following documentation:</p>
+							<ul>
+								<li>How to sign in to EOS Epic Account Services:
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+								</li>
+								<li>How to sign in to EOS Game Services:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>
+								</li>
+							</ul>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>P2PManager.h</code>
+																	file, declare two public functions to handle notifications when a player receives a peer-to-peer connection request from another player (one to subscribe to the notifications, one to unsubscribe from the notifications). In the example, these functions are called
+																	<code>SubscribeToConnectionRequestNotificationsExample()</code>
+																	and
+																	<code>UnsubscribeFromConnectionRequestNotificationsExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SubscribeToP2PConnectionRequestNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr); void UnsubscribeFromP2PConnectionRequestNotificationsExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare two public functions to handle notifications when a player establishes a peer-to-peer connection with another player (one to subscribe to the notifications, one to unsubscribe from the notifications). In the example, these functions are called
+																	<code>SubscribetoConnectionEstablishedNotificationsExample()</code>
+																	and
+																	<code>UnsubscribeFromConnectionEstablishedNotificationsExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SubscribeToConnectionEstablishedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr); void UnsubscribeFromConnectionEstablishedNotificationsExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare two public functions to handle notifications when the player's peer-to-peer connection with another player is interrupted (one to subscribe to the notifications, one to unsubscribe from the notifications). In the example, these functions are called
+																	<code>SubscribeToConnectionInterruptedNotificationsExample()</code>
+																	and
+																	<code>UnsubscribeFromConnectionInterruptedNotificationsExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SubscribeToConnectionInterruptedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr); void UnsubscribeFromConnectionInterruptedNotificationsExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare two public functions to handle notifications when the player's peer-to-peer connection with another player closes (one to subscribe to the notifications, one to unsubscribe from the notifications). In the example, these functions are called
+																	<code>SubscribetoConnectionClosedNotificationsExample()</code>
+																	and
+																	<code>UnsubscribeFromConnectionClosedNotificationsExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>void SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr); void UnsubscribeFromConnectionClosedNotificationsExample();</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare the following private variables:</p>
+																<ul>
+																	<li>A handle for the Platform Interface.</li>
+																	<li>A handle for the P2P Interface.</li>
+																	<li>A variable for the Product User ID of the signed-in local player. You'll use the local player's Product User ID to make API calls.</li>
+																	<li>A variable for the Product User ID of the remote player that you connect to.</li>
+																	<li>A variable for the socket ID of the current peer-to-peer connection.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_HPlatform PlatformHandle = nullptr;EOS_HP2P P2PHandle = nullptr;EOS_ProductUserId LocalProductUserId = nullptr;EOS_ProductUserId RemoteProductUserId = nullptr;EOS_P2P_SocketId* SocketId = nullptr;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare private variables to hold the notification IDs to keep track of the player's notification subscriptions. When you call the EOS API function to subscribe to a notification, the function returns a notification ID for that subscription. To unsubscribe from a P2P notification, you must provide the notification ID for the subscription. For example, to unsubscribe the player from receiving connection request notifications, you must provide the connection request notification ID that the player receives when they call the function to subscribe to the connection request notification. In the example, the notification IDs use the pattern
+																	<code>SUBSCRIPTION_NAME_NotificationId</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_NotificationId ConnectionRequestNotificationId; EOS_NotificationId ConnectionEstablishedNotificationId;         EOS_NotificationId ConnectionInterruptedNotificationId;    EOS_NotificationId ConnectionClosedNotificationId;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the player receives a peer-to-peer connection request. The function definition must match
+																	<a href="/docs/api-ref/callbacks/eos-p-2-p-on-incoming-connection-request-callback">
+																		<code>EOS_P2P_OnIncomingConnectionRequestCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-p-2-p-on-incoming-connection-request-info">
+																		<code>EOS_P2P_OnIncomingConnectionRequestInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnConnectionRequestNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the P2P establishes the player's peer-to-peer connection. The function definition must match
+																	<a href="/docs/api-ref/callbacks/eos-p-2-p-on-peer-connection-established-callback">
+																		<code>EOS_P2P_OnPeerConnectionEstablishedCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-p-2-p-on-peer-connection-established-info">
+																		<code>EOS_P2P_OnPeerConnectionEstablishedInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnConnectionEstablishedNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnConnectionEstablishedNotification(const EOS_P2P_OnPeerConnectionEstablishedInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the player's peer-to-peer connection is interrupted, such as when the internet connection drops. The function definition must match
+																	<a href="/docs/api-ref/callbacks/eos-p-2-p-on-peer-connection-interrupted-callback">
+																		<code>EOS_P2P_OnPeerConnectionInterruptedCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-p-2-p-on-peer-connection-interrupted-info">
+																		<code>EOS_P2P_OnPeerConnectionInterruptedInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnConnectionInterruptedNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnConnectionInterruptedNotification(const EOS_P2P_OnPeerConnectionInterruptedInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the peer-to-peer connection is closed. The function definition must match
+																	<a href="/docs/api-ref/callbacks/eos-p-2-p-on-remote-connection-closed-callback">
+																		<code>EOS_P2P_OnRemoteConnectionClosedCallback</code>
+																		callback</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-p-2-p-on-remote-connection-closed-info">
+																		<code>EOS_P2P_OnRemoteConnectionClosedInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnConnectionClosedNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnConnectionClosedNotification(const EOS_P2P_OnRemoteConnectionClosedInfo* Data);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Define the constructor for the P2P manager class. In the constructor, do the following:</p>
+																<ul>
+																	<li>Pass the Platform Interface handle.</li>
+																	<li>Pass the Product User ID of the local signed-in player.</li>
+																	<li>Assign the P2P Interface handle. You need this handle to make EOS P2P Interface API calls.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>P2PManager::P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId){    P2PHandle = EOS_Platform_GetP2PInterface(PlatformHandle);}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-implement-your-p2p-subscribe-functions">Step B: Implement Your P2P Subscribe Functions</h3>
+							</div>
+							<p>In your
+								<code>P2PManger.cpp</code>
+								file, implement the functions to subscribe to P2P notifications.</p>
+							<div>
+								<h4 id="1-implement-your-subscribe-function-for-connection-request-received-notifications">1: Implement Your Subscribe Function for Connection Request Received Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SubscribeToConnectionRequestNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection request notifications.    EOS_P2P_AddNotifyPeerConnectionRequestOptions ConnectionRequestNotificationOptions = {};    ConnectionRequestNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONREQUEST_API_LATEST;     // Set the Product User ID of the local player subscribing to connection request notifications.    ConnectionRequestNotificationOptions.LocalUserId = LocalProductUserId;     // Set an optional socket ID to receive connection request notifications for.    // If you specify a socket ID, you only receive notifications for connections requested with that socket ID.    // If nullptr, you receive all connection request notifications.     ConnectionRequestNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for connection requests.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is requested.    // If you don't specify a socket ID, the callback function is called after any connection request.    ConnectionRequestNotificationId = EOS_P2P_AddNotifyPeerConnectionRequest(P2PHandle, &amp;ConnectionRequestNotificationOptions, this, OnConnectionRequestNotification);}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								If the network goes offline, you must call the EOS API
+								<a href="/docs/api-ref/functions/eos-platform-set-network-status">
+									<code>EOS_Platform_SetNetworkStatus</code>
+									function</a>
+								to change the EOS SDK network status to offline. When the network comes back online, you must call the function again to change the EOS SDK network status to online (Documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface#network-status">Platform Interface &gt; Network Status</a>). If you switch the EOS SDK network status from online to offline, you must call
+								<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-request">
+									<code>EOS_P2P_AddNotifyPeerConnectionRequest()</code>
+								</a>
+								again when the network gets back online. If you do not do this, incoming P2P connections fail.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the function to subscribe to a notification for when the player receives a connection request:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SubscribeToConnectionRequestNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your subscribe function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-request-options">
+																		<code>EOS_P2P_AddNotifyPeerConnectionRequestOptions</code>
+																		data structure</a>
+																	to hold the notification options for the peer-to-peer connection request notification. In the example, it's called
+																	<code>ConnectionRequestNotificationOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_AddNotifyPeerConnectionRequestOptions ConnectionRequestNotificationOptions = {};P2PConnectionRequestNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONREQUEST_API_LATEST;P2PConnectionRequestNotificationOptions.LocalUserId = LocalProductUserId;P2PConnectionRequestNotificationOptions.SocketId = SocketIdToFilterBy;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-request">
+																		<code>EOS_P2P_AddNotifyPeerConnectionRequest</code>
+																		function</a>
+																	to subscribe to peer-to-peer connection request notifications. Assign the returned notification ID to
+																	<code>ConnectionRequestNotificationId</code>. To unsubscribe from this notification, you must provide this ID (see the
+																	<em>Notes</em>
+																	section below for more information).<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>A reference to the notification options for the P2P notification.
+																		<ul>
+																			<li>In the example, we pass the P2P manager (<code>this</code>
+																				in the example) for the ClientData field, so we can access it in the callback.<br>
+																				If you don't need to pass any additional data to the callback, pass a
+																				<code>nullptr</code>
+																				instead.</li>
+																		</ul>
+																	</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-p-2-p-on-incoming-connection-request-info">
+																			<code>EOS_P2P_OnIncomingConnectionRequestInfo</code>
+																			data structure</a>
+																		when the player receives a peer-to-peer connection request.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>ConnectionRequestNotificationId = EOS_P2P_AddNotifyPeerConnectionRequest(P2PHandle, &amp;P2PConnectionRequestNotificationOptions, nullptr, OnConnectionRequestNotification);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="2-implement-your-subscribe-function-for-connection-established-notifications">2: Implement Your Subscribe Function for Connection Established Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SubscribeToConnectionEstablishedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection established notifications.    EOS_P2P_AddNotifyPeerConnectionEstablishedOptions ConnectionEstablishedNotificationOptions = {};    ConnectionEstablishedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONESTABLISHED_API_LATEST;     // Set the Product User ID of the local player subscribing to connection established notifications.    ConnectionEstablishedNotificationOptions.LocalUserId = LocalProductUserId;     // Set an optional socket ID to receive connection established notifications for.    // If you specify a socket ID, you only receive notifications for connections established with that socket ID.    // If nullptr, you receive all connection established notifications.    ConnectionEstablishedNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for established connections.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is established.    // If you don't specify a socket ID, the callback function is called after any of the local player's connections are established.    ConnectionEstablishedNotificationId = EOS_P2P_AddNotifyPeerConnectionEstablished(P2PHandle, &amp;ConnectionEstablishedNotificationOptions, this, OnConnectionEstablishedNotification);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the function to subscribe to a notification for when the player establishes a peer-to-peer connection with another player:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SubscribeToConnectionEstablishedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your subscribe function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-established-options">
+																		<code>EOS_P2P_AddNotifyPeerConnectionEstablishedOptions</code>
+																		data structure</a>
+																	to hold the notification options for the peer-to-peer connection established notification. In the example, it's called
+																	<code>ConnectionEstablishedNotificationOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_AddNotifyPeerConnectionEstablishedOptions ConnectionEstablishedNotificationOptions = {};ConnectionEstablishedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONESTABLISHED_API_LATEST;ConnectionEstablishedNotificationOptions.LocalUserId = LocalProductUserId;ConnectionEstablishedNotificationOptions.SocketId = SocketIdToFilterBy;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-established">
+																		<code>EOS_P2P_AddNotifyPeerConnectionEstablished</code>
+																		function</a>
+																	to subscribe to the peer-to-peer connection established notification. Assign the returned notification ID to
+																	<code>ConnectionEstablishedNotificationId</code>. To unsubscribe from this notification, you must provide this ID (see the
+																	<em>Notes</em>
+																	section below for more information).<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>A reference to the notification options for the P2P notification.
+																		<ul>
+																			<li>In the example, we pass the P2P manager (<code>this</code>
+																				in the example) for the ClientData field, so we can access it in the callback.<br>
+																				If you don't need to pass any additional data to the callback, pass a
+																				<code>nullptr</code>
+																				instead.</li>
+																		</ul>
+																	</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-p-2-p-on-peer-connection-established-info">
+																			<code>EOS_P2P_OnPeerConnectionEstablishedInfo</code>
+																			data structure</a>
+																		when the player's peer-to-peer connection is established.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>ConnectionEstablishedNotificationId = EOS_P2P_AddNotifyPeerConnectionEstablished(P2PHandle, &amp;ConnectionEstablishedNotificationOptions, nullptr, OnConnectionEstablishedNotification);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="3-implement-your-subscribe-function-for-connection-interrupted-notifications">3: Implement Your Subscribe Function for Connection Interrupted Notifications</h4>
+							</div>
+							<p>If the player hosting the peer-to-peer connection loses their internet connection (for example, if they turn off wifi on their mobile device), the connection-interrupted event fires for any players connected to them. To receive a notification for this event, you must subscribe the player to it.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SubscribeToConnectionInterruptedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection interrupted notifications.    EOS_P2P_AddNotifyPeerConnectionInterruptedOptions ConnectionInterruptedNotificationOptions = {};    ConnectionInterruptedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONINTERRUPTED_API_LATEST;     // Set the Product User ID of the local player subscribing to connection interrupted notifications.    ConnectionInterruptedNotificationOptions.LocalUserId = LocalProductUserId;     // Set an optional socket ID to receive connection interrupted notifications.    // If you specify a socket ID, you only receive notifications for connections interrupted with that socket ID.    // If nullptr, you receive all connection interrupted notifications.    ConnectionInterruptedNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for interrupted connections.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is interrupted.    // If you don't specify a socket ID, the callback function is called after any of the local player's connections are interrupted.    ConnectionInterruptedNotificationId = EOS_P2P_AddNotifyPeerConnectionInterrupted(P2PHandle, &amp;ConnectionInterruptedNotificationOptions, this, OnConnectionInterruptedNotification);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the function to subscribe to a notification for when the player's peer-to-peer connection is interrupted:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SubscribeToConnectionInterruptedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your subscribe function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-interrupted-options">
+																		<code>EOS_P2P_AddNotifyPeerConnectionInterruptedOptions</code>
+																		data structure</a>
+																	to hold the notification options for the peer-to-peer connection interrupted notification. In the example, it's called
+																	<code>ConnectionInterruptedNotificationOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_AddNotifyPeerConnectionInterruptedOptions ConnectionInterruptedNotificationOptions = {};ConnectionInterruptedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONINTERRUPTED_API_LATEST;ConnectionInterruptedNotificationOptions.LocalUserId = LocalProductUserId;ConnectionInterruptedNotificationOptions.SocketId = SocketIdToFilterBy;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-interrupted">
+																		<code>EOS_P2P_AddNotifyPeerConnectionInterrupted</code>
+																		function</a>
+																	to subscribe to the peer-to-peer connection interrupted notification. Assign the returned notification ID to
+																	<code>ConnectionInterruptedNotificationId</code>. To unsubscribe from this notification, you must provide this ID (see the
+																	<em>Notes</em>
+																	section below for more information).<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>A reference to the notification options for the P2P notification.
+																		<ul>
+																			<li>In the example, we pass the P2P manager (<code>this</code>
+																				in the example) for the ClientData field, so we can access it in the callback.<br>
+																				If you don't need to pass any additional data to the callback, pass a
+																				<code>nullptr</code>
+																				instead.</li>
+																		</ul>
+																	</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-p-2-p-on-peer-connection-interrupted-info">
+																			<code>EOS_P2P_OnPeerConnectionInterruptedInfo</code>
+																			data structure</a>
+																		when the player's peer-to-peer connection is interrupted.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>ConnectionInterruptedNotificationId = EOS_P2P_AddNotifyPeerConnectionInterrupted(P2PHandle, &amp;ConnectionInterruptedNotificationOptions, this, OnConnectionInterruptedNotification);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="4-implement-your-subscribe-function-for-connection-closed-notifications">4: Implement Your Subscribe Function for Connection Closed Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection closed notifications.    EOS_P2P_AddNotifyPeerConnectionClosedOptions ConnectionClosedNotificationOptions = {};    ConnectionClosedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONCLOSED_API_LATEST;     // Set the Product User ID of the local player subscribing to connection closed notifications.    ConnectionClosedNotificationOptions.LocalUserId = LocalProductUserId;     // Set an optional socket ID to receive connection closed notifications for.    // If you specify a socket ID, you only receive notifications for connections closed with that socket ID.    // If nullptr, you receive all connection closed notifications.    ConnectionClosedNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for closed connections.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is closed.    // If you don't specify a socket ID, the callback function is called after any of the local player's connections are closed.    ConnectionClosedNotificationId = EOS_P2P_AddNotifyPeerConnectionClosed(P2PHandle, &amp;ConnectionClosedNotificationOptions, this, OnConnectionClosedNotification);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-4">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your
+																	<code>.cpp</code>
+																	file, implement the function to subscribe to a notification for when the player's peer-to-peer connection closes:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your subscribe function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-closed-options">
+																		<code>EOS_P2P_AddNotifyPeerConnectionClosedOptions</code>
+																		data structure</a>
+																	to hold the notification options for the peer-to-peer connection closed notification. In the example, it's called
+																	<code>ConnectionClosedNotificationOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_AddNotifyPeerConnectionCLosedOptions ConnectionCLosedNotificationOptions = {};ConnectionCLosedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONCLOSED_API_LATEST;ConnectionCLosedNotificationOptions.LocalUserId = LocalProductUserId;ConnectionCLosedNotificationOptions.SocketId = SocketIdToFilterBy;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-closed">
+																		<code>EOS_P2P_AddNotifyPeerConnectionClosed</code>
+																		function</a>
+																	to subscribe to the peer-to-peer connection closed notification. Assign the returned notification ID to
+																	<code>ConnectionClosedNotificationId</code>. To unsubscribe from this notification, you must provide this ID (see the
+																	<em>Notes</em>
+																	section below for more information).<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>A reference to the notification options for the P2P notification.
+																		<ul>
+																			<li>In the example, we pass the P2P manager (<code>this</code>
+																				in the example) for the ClientData field, so we can access it in the callback.<br>
+																				If you don't need to pass any additional data to the callback, pass a
+																				<code>nullptr</code>
+																				instead.</li>
+																		</ul>
+																	</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-p-2-p-on-remote-connection-closed-info">
+																			<code>EOS_P2P_OnRemoteConnectionClosedInfo</code>
+																			data structure</a>
+																		when the player's peer-to-peer connection is closed.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>ConnectionClosedNotificationId = EOS_P2P_AddNotifyPeerConnectionClosed(P2PHandle, &amp;ConnectionClosedNotificationOptions, this, OnConnectionClosedNotification);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-p2p-unsubscribe-functions">Step C: Implement Your P2P Unsubscribe Functions</h3>
+							</div>
+							<p>In your
+								<code>P2PManager.cpp</code>
+								file, implement the functions to unsubscribe from P2P notifications.</p>
+							<div>
+								<h4 id="1-implement-your-unsubscribe-function-for-connection-request-notifications">1: Implement Your Unsubscribe Function for Connection Request Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::UnsubscribeFromConnectionRequestNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionRequest(P2PHandle, ConnectionRequestNotificationId);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-5">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to unsubscribe from a notification when the player receives a connection request from another player:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::UnsubscribeFromConnectionRequestNotificationsExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your unsubscribe function, call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-request">
+																		<code>EOS_P2P_RemoveNotifyPeerConnectionRequest</code>
+																		function</a>
+																	to unsubscribe from peer-to-peer connection request notifications.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>The notification ID that you received from the
+																		<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-request">
+																			<code>EOS_P2P_AddNotifyPeerConnectionRequest</code>
+																			function</a>.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_RemoveNotifyPeerConnectionRequest(P2PHandle, ConnectionRequestNotificationId);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="2-implement-your-unsubscribe-function-for-connection-established-notifications">2: Implement Your Unsubscribe Function for Connection Established Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::UnsubscribeFromConnectionEstablishedNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionEstablished(P2PHandle, ConnectionEstablishedNotificationId);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-6">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to unsubscribe from a notification when the player establishes a peer-to-peer connection with another player:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::UnsubscribeFromConnectionEstablishedNotificationsExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your unsubscribe function, call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-established">
+																		<code>EOS_P2P_RemoveNotifyPeerConnectionEstablished</code>
+																		function</a>
+																	to unsubscribe from peer-to-peer connection established notifications.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>The notification ID that you received from the
+																		<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-established">
+																			<code>EOS_P2P_AddNotifyPeerConnectionEstablished</code>
+																			function</a>.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_RemoveNotifyPeerConnectionEstablished(P2PHandle, ConnectionEstablishedNotificationId);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="3-implement-your-unsubscribe-function-for-connection-interrupted-notifications">3: Implement Your Unsubscribe Function for Connection Interrupted Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::UnsubscribeFromConnectionInterruptedNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionInterrupted(P2PHandle, ConnectionInterruptedNotificationId);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-7">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to unsubscribe from a notification when the player's peer-to-peer connection is interrupted:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::UnsubscribeFromP2PConnectionInterruptedNotificationsExample(){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your unsubscribe function, call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-interrupted">
+																		<code>EOS_P2P_RemoveNotifyPeerConnectionInterrupted</code>
+																		function</a>
+																	to unsubscribe from peer-to-peer connection interrupted notifications.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>The notification ID that you received from the
+																		<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-interrupted">
+																			<code>EOS_P2P_AddNotifyPeerConnectionInterrupted</code>
+																			function</a>.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_RemoveNotifyPeerConnectionInterrupted(P2PHandle, ConnectionInterruptedNotificationId);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="4-implement-your-unsubscribe-function-for-connection-closed-notifications">4: Implement Your Unsubscribe Function for Connection Closed Notifications</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void P2PManager::UnsubscribeFromConnectionClosedNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionClosed(P2PHandle, ConnectionClosedNotificationId);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-8">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your P2P manager class, implement the function to unsubscribe from a notification when the player's peer-to-peer connection with another player closes:</p>
+																<div>
+																	<section>
+																		<pre>void P2PManager::SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your unsubscribe function, call the EOS API
+																	<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-closed">
+																		<code>RemoveNotifyPeerConnectionClosed</code>
+																		function</a>
+																	to unsubscribe from peer-to-peer connection closed notifications.<br>
+																	The function takes the following arguments:</p>
+																<ul>
+																	<li>P2P Interface handle.</li>
+																	<li>The notification ID that you received from the
+																		<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-closed">
+																			<code>EOS_P2P_AddNotifyPeerConnectionClosed</code>
+																			function</a>.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_P2P_RemoveNotifyPeerConnectionClosed(P2PHandle, ConnectionClosedNotificationId);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-d-implement-your-p2p-notification-callback-functions">Step D: Implement Your P2P Notification Callback Functions</h3>
+							</div>
+							<p>In your
+								<code>.cpp</code>
+								file, in your P2P manager class, implement your callback functions for the P2P notifications.</p>
+							<div>
+								<h4 id="1-implement-your-p2p-connection-request-notification-callback-function">1: Implement Your P2P Connection Request Notification Callback Function</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL P2PManager::OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data){    std::cout &lt;&lt; "Connection request received." &lt;&lt; std::endl;         // Check if the socket ID of the connection request is what is expected.    if (strcmp(Data-&gt;SocketId-&gt;SocketName, EXPECTED_SOCKET_ID_HERE) != 0)    {        std::cerr &lt;&lt; "Bad socket ID - Connection not accepted." &lt;&lt; std::endl;        std::cerr &lt;&lt; "Socket ID == " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;        return;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-9">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the player receives a P2P connection request from another player. The function definition must match the
+																	<code>EOS_P2P_OnIncomingConnectionRequestCallback</code>
+																	callback which receives a
+																	<code>EOS_P2P_OnIncomingConnectionRequestInfo</code>
+																	data structure. In the example, it's called
+																	<code>OnConnectionRequestNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL P2PManager::OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the player receives a P2P connection request.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, notify the player that they have received an incoming connection request. In the example, the console prints a message to notify the player:</p>
+																<div>
+																	<section>
+																		<pre>std::cout &lt;&lt; "Connection request received." &lt;&lt; std::endl;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Check if the socket ID matches what you expect for the connection. You shouldn't accept a connection request from a socket ID that you don't recognize. The example accepts a connection with a socket ID
+																	<code>EXPECTED_SOCKET_ID_HERE</code>:</p>
+																<div>
+																	<section>
+																		<pre>if (strcmp(Data-&gt;SocketId-&gt;SocketName, EXPECTED_SOCKET_ID_HERE) != 0){    std::cerr &lt;&lt; "Bad socket ID - Connection not accepted." &lt;&lt; std::endl;    std::cerr &lt;&lt; "Socket ID = " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;    return;}</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	You must replace
+																	<code>EXPECTED_SOCKET_ID_HERE</code>
+																	with the actual name of the socket ID that you are accepting the peer-to-peer connection for.</p>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="2-implement-your-p2p-connection-established-notification-callback-function">2: Implement Your P2P Connection Established Notification Callback Function</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL P2PManager::OnConnectionEstablishedNotification(const EOS_P2P_OnPeerConnectionEstablishedInfo* Data){    // Retrieve the P2PManager pointer from from the client data passed to the callback function.    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     // Save the remote player's Product User ID and the socket ID for the established connection.     Self-&gt;RemoteProductUserId = Data-&gt;RemoteUserId;     Self-&gt;SocketId = new EOS_P2P_SocketId();    Self-&gt;SocketId-&gt;ApiVersion = EOS_P2P_SOCKETID_API_LATEST;    strncpy(Self-&gt;SocketId-&gt;SocketName, Data-&gt;SocketId-&gt;SocketName, sizeof(Data-&gt;SocketId-&gt;SocketName));     std::cout &lt;&lt; "Connection successfully established." &lt;&lt; std::endl;}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								This example uses some of the available data that you can access in the returned data structure. For the full list of available data that you can access, see the
+								<code>EOS_P2P_OnPeerConnectionEstablishedInfo</code>
+								data structure API reference documentation.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-10">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the player's P2P connection is established. The function definition must match the
+																	<code>EOS_P2P_OnPeerConnectionEstablishedCallback</code>
+																	callback which receives a
+																	<code>EOS_P2P_OnPeerConnectionEstablishedInfo</code>
+																	data structure. In the example, it's called
+																	<code>OnConnectionEsatblishedNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL P2PManager::OnConnectionEstablishedNotification(const EOS_P2P_OnPeerConnectionEstablishedInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the player establishes a P2P connection.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>Retrieve the P2P manager pointer from the client data:</p>
+																<div>
+																	<section>
+																		<pre>P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Save the remote player's Product User ID for the established connection to the
+																	<code>RemoteProductUserId</code>
+																	variable:</p>
+																<div>
+																	<section>
+																		<pre>Self-&gt;RemoteProductUserId = Data-&gt;RemoteUserId;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the EOS API
+																	<a href="/docs/api-ref/structs/eos-p-2-p-socket-id">
+																		<code>EOS_P2P_SocketId</code>
+																		data structure</a>
+																	to hold the socket ID for the established connection and save it to the
+																	<code>SocketId</code>
+																	variable:</p>
+																<div>
+																	<section>
+																		<pre>Self-&gt;SocketId = new EOS_P2P_SocketId();Self-&gt;SocketId-&gt;ApiVersion = EOS_P2P_SOCKETID_API_LATEST;strncpy(Self-&gt;SocketId-&gt;SocketName, Data-&gt;SocketId-&gt;SocketName, sizeof(Data-&gt;SocketId-&gt;SocketName));</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Notify the player that the peer-to-peer connection was successfully established:</p>
+																<div>
+																	<section>
+																		<pre>std::cout &lt;&lt; "Connection successfully established." &lt;&lt; std::endl;</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="3-implement-your-p2p-connection-interrupted-notification-callback-function">3: Implement Your P2P Connection Interrupted Notification Callback Function</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL P2PManager::OnConnectionInterruptedNotification(const EOS_P2P_OnPeerConnectionInterruptedInfo* Data){    // If this function is called, the connection was interrupted.    // If the connection is re-established, the connection established notification callback will be called.     // If the connection cannot be re-established, the connection closed notification callback will be called.     std::cout &lt;&lt; "P2P connection with the socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; " has been interrupted" &lt;&lt; std::endl;}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-11">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the player's peer-to-peer connection is interrupted. The function definition must match the
+																	<code>EOS_P2P_OnPeerConnectionInterruptedCallback</code>
+																	callback which receives a
+																	<code>EOS_P2P_OnPeerConnectionInterruptedInfo</code>
+																	data structure. In the example, it's called
+																	<code>OnConnectionInterruptedNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL P2PManager::OnConnectionInterruptedNotification(const EOS_P2P_OnPeerConnectionInterruptedInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the player's P2P connection is interrupted.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, notify the player that their peer-to-peer connection has been interrupted:</p>
+																<div>
+																	<section>
+																		<pre>std::cout &lt;&lt; "P2P connection with the socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; " has been interrupted" &lt;&lt; std::endl;</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 id="4-implement-your-p2p-connection-closed-notification-callback-function">4: Implement Your P2P Connection Closed Notification Callback Function</h4>
+							</div>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>void EOS_CALL P2PManager::OnConnectionClosedNotification(const EOS_P2P_OnRemoteConnectionClosedInfo* Data){    // Retrieve the P2PManager pointer from from the client data passed to the callback function.    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     // Clear the saved remote player's Product User ID and the socket ID.    Self-&gt;RemoteProductUserId = nullptr;    delete Self-&gt;SocketId;    Self-&gt;SocketId = nullptr;     std::cout &lt;&lt; "P2P connection with the socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; " has closed" &lt;&lt; std::endl;}</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								This example uses some of the available data that you can access in the returned data structure. For the full list of available data that you can access, see the
+								<a href="/docs/api-ref/structs/eos-p-2-p-on-remote-connection-closed-info">
+									<code>EOS_P2P_OnRemoteConnectionClosedInfo</code>
+									data structure</a>
+								API reference documentation.</p>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-12">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the player's peer-to-peer connection closes. The function definition must match the
+																	<code>EOS_P2P_OnRemoteConnectionClosedCallback</code>
+																	callback which receives a
+																	<code>EOS_P2P_OnRemoteConnectionClosedInfo</code>
+																	data structure. In the example, it's called
+																	<code>OnConnectionClosedNotification</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL P2PManager::OnConnectionClosedNotification(const EOS_P2P_OnPeerConnectionClosedInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the player's peer-to-peer connection closes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, retrieve the P2P manager pointer from the client data:</p>
+																<div>
+																	<section>
+																		<pre>P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the P2P manager pointer to clear the saved remote player's Product User ID and the socket ID because the connection is now closed:</p>
+																<div>
+																	<section>
+																		<pre>Self-&gt;RemoteProductUserId = nullptr;delete Self-&gt;SocketId;Self-&gt;SocketId = nullptr;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Notify the player that their peer-to-peer connection has closed:</p>
+																<div>
+																	<section>
+																		<pre>std::cout &lt;&lt; "P2P connection with the socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; " has closed" &lt;&lt; std::endl;</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>After you call the EOS API
+								<code>AddNotify…</code>
+								functions, your corresponding callback functions execute when the event executes:</p>
+							<table>
+								<thead>
+									<tr>
+										<th>EOS API Function to Call</th>
+										<th>Callback Function that executes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-request">
+												<code>EOS_P2P_AddNotifyPeerConnectionRequest()</code>
+											</a>
+										</td>
+										<td>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-incoming-connection-request-callback">
+												<code>EOS_P2P_OnIncomingConnectionRequestCallback</code>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-established">
+												<code>EOS_P2P_AddNotifyPeerConnectionEstablished()</code>
+											</a>
+										</td>
+										<td>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-peer-connection-established-callback">
+												<code>EOS_P2P_OnPeerConnectionEstablishedCallback</code>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-interrupted">
+												<code>EOS_P2P_AddNotifyPeerConnectionInterrupted()</code>
+											</a>
+										</td>
+										<td>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-peer-connection-interrupted-callback">
+												<code>EOS_P2P_OnPeerConnectionInterruptedCallback</code>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-closed">
+												<code>EOS_P2P_AddNotifyPeerConnectionClosed()</code>
+											</a>
+										</td>
+										<td>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-remote-connection-closed-callback">
+												<code>EOS_P2P_OnRemoteConnectionClosedCallback</code>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>You can also call the corresponding
+								<code>P2PManager::Unsubscribe…</code>
+								function in the example and pass in the
+								<code>P2PManager::EVENT_NOTIFICATION_ID</code>
+								in your game code to unsubscribe from the corresponding P2P notification:</p>
+							<table>
+								<thead>
+									<tr>
+										<th>P2P Manager Unsubscribe Function to Call</th>
+										<th>Notification ID to Pass As an Argument</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<code>UnsubscribeFromConnectionRequestNotificationsExample()</code>
+										</td>
+										<td>
+											<code>ConnectionRequestNotificationId</code>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<code>UnsubscribeFromConnectionEstablishedNotificationsExample()</code>
+										</td>
+										<td>
+											<code>ConnectionEstablishedNotificationId</code>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<code>UnsubscribeFromConnectionInterruptedNotificationsExample()</code>
+										</td>
+										<td>
+											<code>ConnectionInterruptedNotificationId</code>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<code>UnsubscribeFromConnectionClosedNotificationsExample()</code>
+										</td>
+										<td>
+											<code>ConnectionClosedNotificationId</code>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// P2PManager.h #pragma once #include &lt;eos_p2p.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;string&gt; class P2PManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the EOS Platform Interface obtained during EOS Platform Interface setup.     *     * @param InLocalProductUserId - The Product User Id of the local player obtained during Connect login.     */    P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**     * Subscribe to notifications for peer connection requests.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection request notifications.     */    void SubscribeToConnectionRequestNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for peer connection requests. */    void UnsubscribeFromConnectionRequestNotificationsExample();     /**     * Subscribe to notifications for established connections.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection established notifications.     */    void SubscribeToConnectionEstablishedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for established connections. */    void UnsubscribeFromConnectionEstablishedNotificationsExample();     /**     * Subscribe to notifications for interrupted connections.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection interrupted notifications.     */    void SubscribeToConnectionInterruptedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for interrupted connections. */    void UnsubscribeFromConnectionInterruptedNotificationsExample();     /**     * Subscribe to notifications for closed connections.     *     * @param SocketIdToFilterBy - An optional socket ID to receive notifications. If nullptr, you receive all connection closed notifications.     */    void SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy = nullptr);     /** Unsubscribe to notifications for closed connections. */    void UnsubscribeFromConnectionClosedNotificationsExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The P2P Interface handle. */    EOS_HP2P P2PHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /** The Product User ID of the remote player that you're connected to. */    EOS_ProductUserId RemoteProductUserId = nullptr;     /** The socket ID of the current P2P connection. */    EOS_P2P_SocketId* SocketId = nullptr;     /** Notification IDs to keep track of notification subscriptions. */    EOS_NotificationId ConnectionRequestNotificationId = 0;    EOS_NotificationId ConnectionEstablishedNotificationId = 0;    EOS_NotificationId ConnectionInterruptedNotificationId = 0;    EOS_NotificationId ConnectionClosedNotificationId = 0;     /**     * Callback function that executes when a connection request comes in.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data);     /**     * Callback function that executes when a connection is established.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionEstablishedNotification(const EOS_P2P_OnPeerConnectionEstablishedInfo* Data);     /**     * Callback function that executes when a connection is interrupted.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionInterruptedNotification(const EOS_P2P_OnPeerConnectionInterruptedInfo* Data);     /**     * Callback function that executes when a connection is closed.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnConnectionClosedNotification(const EOS_P2P_OnRemoteConnectionClosedInfo* Data); };</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// P2PManager.cpp #include "P2PManager.h"#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;cstring&gt; P2PManager::P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId){    // Get and save the handle to the P2P Interface.    P2PHandle = EOS_Platform_GetP2PInterface(PlatformHandle);} void P2PManager::SubscribeToConnectionRequestNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection request notifications.    EOS_P2P_AddNotifyPeerConnectionRequestOptions ConnectionRequestNotificationOptions = {};    ConnectionRequestNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONREQUEST_API_LATEST;     // Set the Product User ID of the local player subscribing to connection request notifications.    ConnectionRequestNotificationOptions.LocalUserId = LocalProductUserId;     // Set an optional socket ID to receive connection request notifications.    // If you specify a socket ID, you only receive notifications for connections requested with that socket ID.    // If nullptr, you receive all connection request notifications.     ConnectionRequestNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for connection requests.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is requested.    // If you don't specify a socket ID, the callback function is called after any connection request.    ConnectionRequestNotificationId = EOS_P2P_AddNotifyPeerConnectionRequest(P2PHandle, &amp;ConnectionRequestNotificationOptions, this, OnConnectionRequestNotification);} void P2PManager::UnsubscribeFromConnectionRequestNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionRequest(P2PHandle, ConnectionRequestNotificationId);} void P2PManager::SubscribeToConnectionEstablishedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection established notifications.    EOS_P2P_AddNotifyPeerConnectionEstablishedOptions ConnectionEstablishedNotificationOptions = {};    ConnectionEstablishedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONESTABLISHED_API_LATEST;     // Set the Product User ID of the local player.    ConnectionEstablishedNotificationOptions.LocalUserId = LocalProductUserId;     // (Optional) Specify a socket ID to only receive notifications for that socket ID. If nullptr, you receive all connection established notifications.    ConnectionEstablishedNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for established connections.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is established.    // If you don't specify a socket ID, the callback function is called after any of the local player's connections are established.    ConnectionEstablishedNotificationId = EOS_P2P_AddNotifyPeerConnectionEstablished(P2PHandle, &amp;ConnectionEstablishedNotificationOptions, this, OnConnectionEstablishedNotification);} void P2PManager::UnsubscribeFromConnectionEstablishedNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionEstablished(P2PHandle, ConnectionEstablishedNotificationId);} void P2PManager::SubscribeToConnectionInterruptedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection interrupted notifications.    EOS_P2P_AddNotifyPeerConnectionInterruptedOptions ConnectionInterruptedNotificationOptions = {};    ConnectionInterruptedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONINTERRUPTED_API_LATEST;     // Set the Product User ID of the local player.    ConnectionInterruptedNotificationOptions.LocalUserId = LocalProductUserId;     // (Optional) Specify a socket ID to only receive notifications for that socket ID. If nullptr, you receive all connection interrupted notifications.    ConnectionInterruptedNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for interrupted connections.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is interrupted.    // If you don't specify a socket ID, the callback function is called after any of the local player's connections are interrupted.    ConnectionInterruptedNotificationId = EOS_P2P_AddNotifyPeerConnectionInterrupted(P2PHandle, &amp;ConnectionInterruptedNotificationOptions, this, OnConnectionInterruptedNotification);} void P2PManager::UnsubscribeFromConnectionInterruptedNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionInterrupted(P2PHandle, ConnectionInterruptedNotificationId);} void P2PManager::SubscribeToConnectionClosedNotificationsExample(EOS_P2P_SocketId* SocketIdToFilterBy){    // Set the options for subscribing to connection closed notifications.    EOS_P2P_AddNotifyPeerConnectionClosedOptions ConnectionClosedNotificationOptions = {};    ConnectionClosedNotificationOptions.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONCLOSED_API_LATEST;     // Set the Product User ID of the local player.    ConnectionClosedNotificationOptions.LocalUserId = LocalProductUserId;     // (Optional) Specify a socket ID to only receive notifications for that socket ID. If nullptr, you receive all connection closed notifications.    ConnectionClosedNotificationOptions.SocketId = SocketIdToFilterBy;     // Set up notifications for closed connections.    // If you specify a socket ID, the callback function is called when a connection with the socket ID is closed.    // If you don't specify a socket ID, the callback function is called after any of the local player's connections are closed.    ConnectionClosedNotificationId = EOS_P2P_AddNotifyPeerConnectionClosed(P2PHandle, &amp;ConnectionClosedNotificationOptions, this, OnConnectionClosedNotification);} void P2PManager::UnsubscribeFromConnectionClosedNotificationsExample(){    EOS_P2P_RemoveNotifyPeerConnectionClosed(P2PHandle, ConnectionClosedNotificationId);}  void EOS_CALL P2PManager::OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data){    std::cout &lt;&lt; "Connection request received." &lt;&lt; std::endl;         // Check if the socket ID of the connection request is what is expected.    if (strcmp(Data-&gt;SocketId-&gt;SocketName, EXPECTED_SOCKET_ID_HERE) != 0)    {        std::cerr &lt;&lt; "Bad socket ID - Connection not accepted." &lt;&lt; std::endl;        std::cerr &lt;&lt; "Socket ID == " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;        return;    }     } void EOS_CALL P2PManager::OnConnectionEstablishedNotification(const EOS_P2P_OnPeerConnectionEstablishedInfo* Data){    // Retrieve the P2PManager pointer from from the client data passed to the callback function.    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     // Save the remote player's Product User ID and the socket ID for the established connection.    Self-&gt;RemoteProductUserId = Data-&gt;RemoteUserId;     Self-&gt;SocketId = new EOS_P2P_SocketId();    Self-&gt;SocketId-&gt;ApiVersion = EOS_P2P_SOCKETID_API_LATEST;    strncpy(Self-&gt;SocketId-&gt;SocketName, Data-&gt;SocketId-&gt;SocketName, sizeof(Data-&gt;SocketId-&gt;SocketName));     std::cout &lt;&lt; "Connection successfully established." &lt;&lt; std::endl;} void EOS_CALL P2PManager::OnConnectionInterruptedNotification(const EOS_P2P_OnPeerConnectionInterruptedInfo* Data){    // If this function is called, the connection was interrupted.    // If the connection is re-established, the connection established notification callback will be called.    // If the connection cannot be re-established, the connection closed notification callback will be called.    std::cout &lt;&lt; "P2P connection with the socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; " has been interrupted" &lt;&lt; std::endl;} void EOS_CALL P2PManager::OnConnectionClosedNotification(const EOS_P2P_OnRemoteConnectionClosedInfo* Data){    // Retrieve the P2PManager pointer from from the client data passed to the callback function.    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     // Clear the saved remote player's Product User ID and the socket ID.    Self-&gt;RemoteProductUserId = nullptr;    delete Self-&gt;SocketId;    Self-&gt;SocketId = nullptr;     std::cout &lt;&lt; "P2P connection with the socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; " has closed" &lt;&lt; std::endl;}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-closed">
+										<code>EOS_P2P_AddNotifyPeerConnectionClosed()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-closed-options">
+												<code>EOS_P2P_AddNotifyPeerConnectionClosedOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-remote-connection-closed-callback">
+												<code>EOS_P2P_OnRemoteConnectionClosedCallback()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-closed">
+												<code>EOS_P2P_RemoveNotifyPeerConnectionClosed()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-on-remote-connection-closed-info">
+												<code>EOS_P2P_OnRemoteConnectionClosedInfo</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-established">
+										<code>EOS_P2P_AddNotifyPeerConnectionEstablished()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-established-options">
+												<code>EOS_P2P_AddNotifyPeerConnectionEstablishedOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-peer-connection-established-callback">
+												<code>EOS_P2P_OnPeerConnectionEstablishedCallback()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-established">
+												<code>EOS_P2P_RemoveNotifyPeerConnectionEstablished()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-on-peer-connection-established-info">
+												<code>EOS_P2P_OnPeerConnectionEstablishedInfo</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-interrupted">
+										<code>EOS_P2P_AddNotifyPeerConnectionInterrupted()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-interrupted-options">
+												<code>EOS_P2P_AddNotifyPeerConnectionInterruptedOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-peer-connection-interrupted-callback">
+												<code>EOS_P2P_OnPeerConnectionInterruptedCallback()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-interrupted">
+												<code>EOS_P2P_RemoveNotifyPeerConnectionInterrupted()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-on-peer-connection-interrupted-info">
+												<code>EOS_P2P_OnPeerConnectionInterruptedInfo</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-p-2-p-add-notify-peer-connection-request">
+										<code>EOS_P2P_AddNotifyPeerConnectionRequest()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-add-notify-peer-connection-request-options">
+												<code>EOS_P2P_AddNotifyPeerConnectionRequestOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-p-2-p-on-incoming-connection-request-callback">
+												<code>EOS_P2P_OnIncomingConnectionRequestCallback()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/functions/eos-p-2-p-remove-notify-peer-connection-request">
+												<code>EOS_P2P_RemoveNotifyPeerConnectionRequest()</code>
+												function</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-p-2-p-on-incoming-connection-request-info">
+												<code>EOS_P2P_OnIncomingConnectionRequestInfo</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/establish-connections">2. Establish Peer-to-Peer Connections With EOS P2P</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#subscribe-to-p2p-notifications">Subscribe to P2P Notifications</a>
+								</li>
+								<li>
+									<a href="#step-a-create-a-class-to-manage-eos-p2p">Step A: Create a Class to Manage EOS P2P</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-p2p-subscribe-functions">Step B: Implement Your P2P Subscribe Functions</a>
+								</li>
+								<li>
+									<a href="#1-implement-your-subscribe-function-for-connection-request-received-notifications">1: Implement Your Subscribe Function for Connection Request Received Notifications</a>
+								</li>
+								<li>
+									<a href="#2-implement-your-subscribe-function-for-connection-established-notifications">2: Implement Your Subscribe Function for Connection Established Notifications</a>
+								</li>
+								<li>
+									<a href="#3-implement-your-subscribe-function-for-connection-interrupted-notifications">3: Implement Your Subscribe Function for Connection Interrupted Notifications</a>
+								</li>
+								<li>
+									<a href="#4-implement-your-subscribe-function-for-connection-closed-notifications">4: Implement Your Subscribe Function for Connection Closed Notifications</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-p2p-unsubscribe-functions">Step C: Implement Your P2P Unsubscribe Functions</a>
+								</li>
+								<li>
+									<a href="#1-implement-your-unsubscribe-function-for-connection-request-notifications">1: Implement Your Unsubscribe Function for Connection Request Notifications</a>
+								</li>
+								<li>
+									<a href="#2-implement-your-unsubscribe-function-for-connection-established-notifications">2: Implement Your Unsubscribe Function for Connection Established Notifications</a>
+								</li>
+								<li>
+									<a href="#3-implement-your-unsubscribe-function-for-connection-interrupted-notifications">3: Implement Your Unsubscribe Function for Connection Interrupted Notifications</a>
+								</li>
+								<li>
+									<a href="#4-implement-your-unsubscribe-function-for-connection-closed-notifications">4: Implement Your Unsubscribe Function for Connection Closed Notifications</a>
+								</li>
+								<li>
+									<a href="#step-d-implement-your-p2p-notification-callback-functions">Step D: Implement Your P2P Notification Callback Functions</a>
+								</li>
+								<li>
+									<a href="#1-implement-your-p2p-connection-request-notification-callback-function">1: Implement Your P2P Connection Request Notification Callback Function</a>
+								</li>
+								<li>
+									<a href="#2-implement-your-p2p-connection-established-notification-callback-function">2: Implement Your P2P Connection Established Notification Callback Function</a>
+								</li>
+								<li>
+									<a href="#3-implement-your-p2p-connection-interrupted-notification-callback-function">3: Implement Your P2P Connection Interrupted Notification Callback Function</a>
+								</li>
+								<li>
+									<a href="#4-implement-your-p2p-connection-closed-notification-callback-function">4: Implement Your P2P Connection Closed Notification Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

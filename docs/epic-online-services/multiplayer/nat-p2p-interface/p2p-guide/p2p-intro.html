@@ -1,0 +1,67 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Peer-to-Peer to Your Game — Introduction</h1>
+			<h2>Overview of how to use the EOS P2P service in your game.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>Use the Epic Online Services (EOS) Peer-to-Peer (P2P) Interface to manage peer-to-peer networking for your multiplayer game (or other software application). With peer-to-peer networking, your players' game clients can connect to other game clients to send and receive data.</p>
+			<p>EOS P2P establishes the connections between peers for you, but you can customize what data is sent, how it is sent, and to whom. For example, you might set up your game to send players' gameplay data to each other so each player's game client stays in sync with each other. You might send data such as player movement, player or object animation, or game-state data about when a match has started or ended.</p>
+			<p>Note that when this guide refers to "player" connections, data sharing, and notifications, it means connections, data sharing, and notifications between each player’s game client.</p>
+			<p>This guide consists of the following sections:</p>
+			<ol>
+				<li>Notify Players About P2P Connections</li>
+				<li>Establish P2P Connections</li>
+				<li>Customize P2P Settings</li>
+				<li>Send and Receive Data With EOS P2P</li>
+			</ol>
+			<p>Note that you must complete the sections of this guide in the order that they are listed above.</p>
+			<p>This guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<p>
+				<strong>Note:</strong>
+				The example code snippets in this guide demonstrate how to connect the local player to only one remote player. Your game might require that you connect the local player to more than one remote player at a time. If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+			<p>For more information on P2P, see the
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-reference">P2P Interface Reference</a>
+				documentation.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start this guide, you must complete these steps:</p>
+			<ul>
+				<li>Integrate EOS SDK into your game code. (<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>)</li>
+				<li>Add a client policy and at least one client for your game. (Note that in the Developer Portal, your game is usually known as a "product".) (Documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.)</li>
+				<li>Sign in the local player with the Connect Interface. (Documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide">Guide: Access Game Services With the Connect Interface</a>.)
+					<ul>
+						<li>The Connect Interface provides the local player's Product User ID. You need this to set up the P2P service.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>For a full list of the available guides, see the
+				<a href="/docs/epic-online-services/how-to-guides">How-to Guides</a>
+				page.</p>
+			<p>Next section:
+				<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/p2p-guide/notify-players">1. Notify Players About P2P Connections</a>
+			</p>
+		</section>
+	</section>
+</section>

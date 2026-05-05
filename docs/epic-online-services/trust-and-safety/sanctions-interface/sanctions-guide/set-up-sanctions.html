@@ -1,0 +1,381 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Sanction Players — 1. Set Up and Apply Sanctions</h1>
+			<h2>Step-by-step guide on how to set up and apply sanctions against players.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/sanctions-intro">Introduction</a>
+			</p>
+			<p>You set up and apply sanctions in the Developer Portal.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>
+					<p>A Sanction consists of the following:</p>
+					<ul>
+						<li>A definition of the restrictive action that you take against the player.
+							<ul>
+								<li>Define the restrictive action, and other specifications of the sanction, in the Developer Portal.</li>
+							</ul>
+						</li>
+						<li>An enforcement of the restrictive action that you take against the player.
+							<ul>
+								<li>Enforce the restrictive action in your game code, based on your use cases. (For example, you might disable certain functionality in your game based on the sanction).</li>
+								<li>
+									<strong>Note:</strong>
+									It is best to enforce sanctions on a dedicated server. This prevents players from being able to tamper with the sanctions.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>The EOS Sessions service has built-in sanction actions that the EOS Sessions service uses to enforce sanctions when players attempt to join a session for your game. Note that to enforce these sanctions, you must have sanctions enabled for the session when you create the session.</p>
+					<ul>
+						<li>Documentation:
+							<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/enforce-sanctions">Lobbies &amp; Sessions &gt; Sessions Interface &gt; Enforce Sanctions</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>To enforce sanctions against your players, you must first set up EOS Sanctions in the Developer Portal, as described on this page.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start, you must complete these steps:</p>
+			<ul>
+				<li>Integrate the EOS SDK into your code. (Documentation:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+				<li>In the Developer Portal, have a client policy and at least one client for your product. (Note that in the Developer Portal, your game is usually known as a "product".) (Documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.)</li>
+				<li>Add code to sign in the local player with the Connect Interface. (Documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Guide: Access Game Services With the Connect Interface</a>.)</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>We recommend that you set up the Logging Interface to receive useful messages that can help you diagnose technical issues with the EOS SDK. (Documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</li>
+				<li>This guide follows a numbered sequence. However, you only need to follow section 1. Set Up and Apply Sanctions first. You can follow the other sections of this guide independently of each other, in any order.</li>
+				<li>You can also apply sanctions when you resolve a player report in the Developer Portal. (Documentation:
+					<a href="/docs/epic-online-services/trust-and-safety/reports-interface">Reports Interface</a>.)</li>
+				<li>If you use the EOS anti-cheat service and have it generate cheat detections, it automatically creates sanctions based on the cheats it detects (Documentation:
+					<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#working-with-cheat-detections">Anti-Cheat Interfaces &gt; Using the Anti-Cheat Interfaces &gt; Working with Cheat Detections</a>).
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							By default, sanctions that anti-cheat creates have the
+							<em>pending</em>
+							status, unless you have the
+							<strong>Direct ban</strong>
+							option enabled for Anti-Cheat. For more information, see the
+							<em>Notes</em>
+							section below.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</h2>
+			</div>
+			<p>Complete the following steps in the Developer Portal to set up and apply EOS sanctions against a player:</p>
+			<ul>
+				<li>
+					<a href="#step-a-configure-your-games-client-policy">Step A: Configure Your Game's Client Policy</a>
+				</li>
+				<li>
+					<a href="#step-b-apply-sanctions-to-players">Step B: Apply Sanctions to Players</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="step-a-configure-your-games-client-policy">Step A: Configure Your Game's Client Policy</h3>
+			</div>
+			<p>To enable sanctions for your game, you must enable the sanctions feature for your client policy.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>If your client policy uses the
+					<strong>GameClient</strong>
+					or
+					<strong>GameClient w/ UnlockAchievements</strong>
+					client policy type, the sanctions feature is already enabled for your client policy by default (documentation:
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>).</li>
+				<li>If you have the sanctions feature enabled for your client policy, you can skip to
+					<a href="#step-b-apply-sanctions-to-players">Step B: Apply Sanctions to Players</a>
+					on this page.</li>
+			</ul>
+			<p>You configure your game's client policy in the Developer Portal, on the Product Settings page's
+				<strong>Clients</strong>
+				tab. To do this, follow the steps below.</p>
+			<p>
+				<strong>To go to the Clients tab:</strong>
+			</p>
+			<ol>
+				<li>Go to your game's product page in the Developer Portal.<br>
+					To do this:
+					<ul>
+						<li>a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your Products</strong>, click the name of your game (or software application).
+							<ul>
+								<li>
+									<strong>Note:</strong>
+									You might have to click
+									<strong>Back to organization</strong>
+									before you can do this.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Product Settings</strong>.</li>
+				<li>At the top of the page, click
+					<strong>Clients</strong>.</li>
+			</ol>
+			<p>
+				<strong>On the Clients tab:</strong>
+			</p>
+			<ol>
+				<li>Scroll down to the
+					<strong>Client policies</strong>
+					section.</li>
+				<li>Locate the client policy.</li>
+				<li>Click the three dots
+					<strong>(...)</strong>
+					next to your client policy, then select
+					<strong>Edit</strong>.</li>
+				<li>Scroll down to the
+					<strong>Features</strong>
+					section and use the
+					<strong>Sanctions</strong>
+					toggle to enable the sanctions feature. For information on the available actions for the sanctions feature, see the
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference#sanctions">Client and Client Policy Reference &gt; Client Policy Features &gt; Sanctions</a>
+					documentation.</li>
+				<li>Click
+					<strong>Save Edits</strong>.</li>
+			</ol>
+			<div>
+				<h3 id="step-b-apply-sanctions-to-players">Step B: Apply Sanctions to Players</h3>
+			</div>
+			<p>When you create a sanction, you must specify the players that you want to restrict. The following rules apply when you create a sanction in the Developer Portal:</p>
+			<ul>
+				<li>You must specify the players that you want the sanction to apply to when you create the sanction.</li>
+				<li>You can apply a sanction to one player or multiple players.</li>
+				<li>You can make a sanction permanent or have it last a specific number of days.</li>
+				<li>You cannot reuse a previous sanction as a template to sanction new players.
+					<ul>
+						<li>If you want to repeat a sanction, but against different players, you must create and apply a new sanction to those players.</li>
+					</ul>
+				</li>
+				<li>You cannot apply a duplicate sanction to the same player.
+					<ul>
+						<li>A duplicate sanction is one that has the same combination of action, duration, and status as another sanction on the player for the product.</li>
+					</ul>
+				</li>
+				<li>You cannot change the duration of a sanction after you have created it.</li>
+			</ul>
+			<p>You create and apply sanctions individually in the Developer Portal on the Sanctions page. To do this, follow the steps below.</p>
+			<p>
+				<strong>To go to the Sanctions page:</strong>
+			</p>
+			<ol>
+				<li>
+					<p>Go to your game's product page in the Developer Portal.</p>
+					<p>To do this:</p>
+					<ul>
+						<li>a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+						<li>b. In the left navigation, under
+							<strong>Your Products</strong>, click the name of your game.
+							<ul>
+								<li>
+									<strong>Note:</strong>
+									You might have to click
+									<strong>Back to organization</strong>
+									before you can do this.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>In the left navigation, click
+						<strong>Epic Online Services</strong>.</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Trust and Safety</strong>
+						section, click
+						<strong>Sanctions</strong>.</p>
+				</li>
+			</ol>
+			<p>
+				<strong>On the Sanctions page:</strong>
+			</p>
+			<ol>
+				<li>
+					<p>From the
+						<strong>Deployment</strong>
+						dropdown, select the deployment that you want to enable your sanctions for.</p>
+				</li>
+				<li>
+					<p>Click
+						<strong>Add new sanction</strong>.</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Action</strong>
+						field, do one of the following:</p>
+					<ul>
+						<li>Enter a name for the sanction action. Choose a name that is meaningful to you, because you will refer to this action name in your game code.
+							<ul>
+								<li>
+									<strong>Note:</strong>
+									The name can only contain the characters
+									<code>a-z</code>,
+									<code>A-Z</code>, and an underscore (<code>_</code>).</li>
+							</ul>
+						</li>
+						<li>Select an existing action from the dropdown. The EOS Sessions service has the following built-in sanction actions that you can use for a sanction:
+							<ul>
+								<li>
+									<code>RESTRICT_GAME_ACCESS</code>: Automatically kicks the sanctioned player from multiplayer sessions in games protected by Anti-Cheat. (Documentation:
+									<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces">Anti-Cheat Interfaces</a>.)</li>
+								<li>
+									<code>RESTRICT_MATCHMAKING</code>: Prevents the sanctioned player from joining the session. (More information:
+									<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/enforce-sanctions">Lobbies &amp; Sessions &gt; Sessions Interface &gt; Enforce Sanctions</a>.)</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>From the
+						<strong>Duration</strong>
+						dropdown, select the length of time that you want the sanction to apply to the affected players.</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Justification</strong>
+						field, enter a brief description that explains why you are applying the sanction to the players.</p>
+				</li>
+				<li>
+					<p>(Optional) Enter tags in the
+						<strong>Tags</strong>
+						field that you want to associate with the sanction. You can filter the list of sanctions on the Sanctions page in the Developer Portal by tag (see the section of this guide:
+						<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions#step-a-edit-sanctions">4. Manage Sanctions and Sanction Appeals &gt; Step A. Edit Sanctions</a>).</p>
+				</li>
+				<li>
+					<p>In the
+						<strong>Paste Player IDs</strong>
+						field, paste the Product User ID (PUID) or the platform-specific ID (for example, the Epic Games account ID) of the players that you want to apply the sanction to.</p>
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You can find the PUID through the submitted player report or through the Connect Interface when the player signs in. (Documentation:
+							<a href="/docs/epic-online-services/trust-and-safety/reports-interface/reports-guide">Guide: Enable Player Reporting for Your Game</a>.)</li>
+					</ul>
+				</li>
+				<li>
+					<p>Click
+						<strong>Save</strong>.</p>
+				</li>
+			</ol>
+			<p>For information on how to manage existing and past sanctions, see the following section of this guide:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/manage-sanctions">4. Manage Sanctions and Sanction Appeals in the Developer Portal</a>.</p>
+			<div>
+				<h2 id="results">Results</h2>
+			</div>
+			<p>You can create and apply sanctions to players and see them listed on your game's Sanctions page in the Developer Portal.</p>
+			<div>
+				<h2 id="notes">Notes</h2>
+			</div>
+			<div>
+				<h3 id="optional-automatically-sanction-players-that-anti-cheat-detects-have-cheated">Optional: Automatically Sanction Players That Anti-Cheat Detects Have Cheated</h3>
+			</div>
+			<p>If you use the EOS anti-cheat service and have it generate cheat detections, it automatically creates sanctions based on the cheats it detects (Documentation:
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#working-with-cheat-detections">Anti-Cheat Interfaces &gt; Using the Anti-Cheat Interfaces &gt; Working with Cheat Detections</a>).</p>
+			<p>By default, sanctions that anti-cheat creates have the
+				<em>pending</em>
+				status, unless you have the
+				<strong>Direct ban</strong>
+				option enabled for Anti-Cheat. You do this on the Anti-Cheat page in the Developer Portal. To do this:</p>
+			<ol>
+				<li>Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).</li>
+				<li>In the left navigation, under
+					<strong>Your Products</strong>, click the name of your game.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+				<li>In the left navigation, click
+					<strong>Epic Online Services</strong>.</li>
+				<li>In the
+					<strong>Trust and Safety</strong>
+					section, click
+					<strong>Anti-Cheat</strong>.</li>
+				<li>On the Anti-Cheat page, scroll down and use the
+					<strong>Direct ban</strong>
+					toggle to enable anti-cheat to automatically activate any sanctions that it creates based on the cheats it detects.</li>
+			</ol>
+			<p>
+				<strong>Note:</strong>
+				This guide follows a numbered sequence. However, you only need to follow section 1. Set Up and Apply Sanctions first. You can follow the other sections of this guide independently of each other, in any order.</p>
+			<p>Next section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/retrieve-sanctions">2. Retrieve Sanctions</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</a>
+								</li>
+								<li>
+									<a href="#step-a-configure-your-games-client-policy">Step A: Configure Your Game's Client Policy</a>
+								</li>
+								<li>
+									<a href="#step-b-apply-sanctions-to-players">Step B: Apply Sanctions to Players</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+								<li>
+									<a href="#optional-automatically-sanction-players-that-anti-cheat-detects-have-cheated">Optional: Automatically Sanction Players That Anti-Cheat Detects Have Cheated</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

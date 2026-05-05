@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -21,8 +21,8 @@
 	<section>
 		<section role="main">
 			<p>There are different types of SDK downloads to use, depending on which game platform your game client runs on.</p>
-			<p>For an overview and guidance on how to get the EOS SDK downloads, see the documentation: Get Started Steps:
-				<a href="/docs/epic-online-services/eos-get-started/services-quick-start#step-2---download-the-eos-sdk">Download the EOS SDK</a>.</p>
+			<p>For an overview and guidance on how to get the EOS SDK downloads, see the documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk#step-c-download-the-eos-sdk">Guide: Get Started With EOS &gt; 1. Set Up Your Account and Download the EOS SDK</a>.</p>
 			<p>To run the Epic Online Services (EOS) SDK, you must follow several prerequisite steps in your project's linking, packaging, and loading processes to ensure that your target platform loads and runs the EOS run-time. This page provides generic information about these processes, as well as information about how to use the
 				<strong>Unreal Build System</strong>
 				with EOS SDK.</p>
@@ -31,19 +31,19 @@
 				section of the documentation.</p>
 			<div>
 				<p>You can only access console documentation if you have the appropriate permissions. See the
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>
+					<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#access-the-eos-sdk-for-consoles">EOS Get Started Reference &gt; Access the EOS SDK for Consoles</a>
 					documentation for more information on how to access the EOS SDKs for consoles and their associated documentation.</p>
 			</div>
 			<p>
 				<strong>Note:</strong>
 				To use Epic Online Services (EOS) SDK, your local network, router, and firewall must allow access to specific host addresses. For a complete list of these host addresses, see the
-				<a href="/docs/epic-online-services/eos-get-started/firewall-considerations">Firewall Considerations</a>
+				<a href="/docs/epic-online-services/firewall-considerations">Firewall Considerations</a>
 				documentation.</p>
 			<div>
 				<h2 id="platforms-supported">Platforms Supported</h2>
 			</div>
 			<p>For a list of the platforms and platform versions which the EOS SDK supports for development and shipping,  see  the following documentation:
-				<a href="/docs/epic-online-services/eos-get-started/platform-support">Platforms Supported</a>.</p>
+				<a href="/docs/epic-online-services/platform-support">Platforms Supported</a>.</p>
 			<p>
 				<strong>Note</strong>: For a list of the console release versions that each EOS SDK release version supports, see the the documentation for each console.</p>
 			<div>
@@ -74,7 +74,8 @@
 				file:</p>
 			<div>
 				<section>
-					<pre>if (  !Target.IsInPlatformGroup(UnrealPlatformGroup.Windows) &amp;&amp;  !Target.IsInPlatformGroup(UnrealPlatformGroup.Unix) &amp;&amp;  !Target.IsInPlatformGroup(UnrealPlatformGroup.Apple) &amp;&amp;  !Target.IsInPlatformGroup(UnrealPlatformGroup.Android)) {  AppendStringToPublicDefinition(    'EOS_BUILD_PLATFORM_NAME',    Target.Platform.ToString()  );}
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -83,7 +84,9 @@
 				when using the different EOS interfaces:</p>
 			<div>
 				<section>
-					<pre>#include "eos_platform_prereqs.h"#include "eos_sdk.h"#include "eos_[interface]_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>For
@@ -92,7 +95,9 @@
 				with the interface you are using:</p>
 			<div>
 				<section>
-					<pre>#include "eos_friends_types.h"#include "eos_auth_types.h"#include "eos_lobby_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -103,7 +108,9 @@
 				doesn't fit with the project's build system, it can reference macros provided by custom compilers. For example:</p>
 			<div>
 				<section>
-					<pre>#if defined(__THECOMPILER__)#include "ThePlatform/eos_ThePlatform_base.h"#elif defined(__SOMECOMPILER__)#include "SomePlatform/eos_SomePlatform_base.h"#endif#include "eos_sdk.h"#include "eos_friends_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -114,7 +121,9 @@
 				for the EOS Friends Service, use the following:</p>
 			<div>
 				<section>
-					<pre>#include "ThePlatform/eos_ThePlatform_base.h"#include "eos_sdk.h"#include "eos_[interface]_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>For
@@ -123,7 +132,9 @@
 				with the interface you are using:</p>
 			<div>
 				<section>
-					<pre>#include "eos_friends_types.h"#include "eos_auth_types.h"#include "eos_lobby_types.h"</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -150,7 +161,9 @@
 				file should include code similar to the following:</p>
 			<div>
 				<section>
-					<pre>PublicAdditionalLibraries.Add(LibraryLinkName);string RuntimeLibrarySourcePath = Path.Combine(SDKBinariesDir, RuntimeLibraryFileName);string RuntimeLibraryTargetPath = Path.Combine(ProjectBinariesDir, RuntimeLibraryFileName);RuntimeDependencies.Add(RuntimeLibraryTargetPath, RuntimeLibrarySourcePath, StagedFileType.NonUFS);</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -191,46 +204,51 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#platforms-supported">Platforms Supported</a>
-					</li>
-					<li>
-						<a href="#building">Building</a>
-					</li>
-					<li>
-						<a href="#using-eos_platform_prereqsh">Using eos_platform_prereqs.h</a>
-					</li>
-					<li>
-						<a href="#custom-cross-platform-example">Custom Cross-Platform Example</a>
-					</li>
-					<li>
-						<a href="#single-platform-example">Single Platform Example</a>
-					</li>
-					<li>
-						<a href="#linking">Linking</a>
-					</li>
-					<li>
-						<a href="#linking-with-unreal-build-system">Linking with Unreal Build System</a>
-					</li>
-					<li>
-						<a href="#packaging">Packaging</a>
-					</li>
-					<li>
-						<a href="#loading">Loading</a>
-					</li>
-					<li>
-						<a href="#loading-with-unreal">Loading with Unreal</a>
-					</li>
-					<li>
-						<a href="#memory-functions">Memory Functions</a>
-					</li>
-					<li>
-						<a href="#memory-functions-with-unreal">Memory Functions with Unreal</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#platforms-supported">Platforms Supported</a>
+								</li>
+								<li>
+									<a href="#building">Building</a>
+								</li>
+								<li>
+									<a href="#using-eos_platform_prereqsh">Using eos_platform_prereqs.h</a>
+								</li>
+								<li>
+									<a href="#custom-cross-platform-example">Custom Cross-Platform Example</a>
+								</li>
+								<li>
+									<a href="#single-platform-example">Single Platform Example</a>
+								</li>
+								<li>
+									<a href="#linking">Linking</a>
+								</li>
+								<li>
+									<a href="#linking-with-unreal-build-system">Linking with Unreal Build System</a>
+								</li>
+								<li>
+									<a href="#packaging">Packaging</a>
+								</li>
+								<li>
+									<a href="#loading">Loading</a>
+								</li>
+								<li>
+									<a href="#loading-with-unreal">Loading with Unreal</a>
+								</li>
+								<li>
+									<a href="#memory-functions">Memory Functions</a>
+								</li>
+								<li>
+									<a href="#memory-functions-with-unreal">Memory Functions with Unreal</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

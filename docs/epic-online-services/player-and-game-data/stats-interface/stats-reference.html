@@ -1,0 +1,151 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Stats Interface Reference</h1>
+			<h2>Reference for the Stats Interface.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the EOS Stats service to track player statistics (also known as "stats") in your game or other software application.</p>
+			<p>You can use these stats to unlock achievements, to rank players in leaderboards, or to create custom functionality for your game.</p>
+			<p>Stats can be anything you want. Here are some examples:</p>
+			<ul>
+				<li>Track how much gamma radiation a player collects in your game and award them a "Radioactive Hero" achievement when they collect 1000 units of gamma radiation.</li>
+				<li>Track the total number of enemies a player defeats, so they can compete with their friends in a leaderboard.</li>
+				<li>Save a player's longest jump distance to show their personal record in the player log.</li>
+			</ul>
+			<p>See the Stats Interface guide and Stats Interface API documentation for details on how to integrate the service into your game (or software application).</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>Stats
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide/stats-intro">Guide: Add Stats to Your Game</a>
+						</li>
+						<li>
+							<a href="/docs/api-ref/interfaces/stats">EOS SDK API Reference &gt; EOS Stats Interface API Reference</a>
+						</li>
+					</ul>
+				</li>
+				<li>Related interfaces
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Achievements Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface">Leaderboards Interface</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="usage-limitations">Usage Limitations</h2>
+			</div>
+			<p>For general information about throttling, usage quotas, and best practices, see:
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK Conventions and Limitations</a>.</p>
+			<p>The following limits apply to the overall Stats system:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Number of stats</td>
+						<td>500 per deployment</td>
+					</tr>
+					<tr>
+						<td>Stat name length</td>
+						<td>256 characters</td>
+					</tr>
+					<tr>
+						<td>Max stats ingested per call</td>
+						<td>3000</td>
+					</tr>
+					<tr>
+						<td>Max milestones (default)</td>
+						<td>100</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Stats Ingestion is the endpoint for submitting stat changes to the service and has a per-user rate limit. When a dedicated server submits stats on behalf of users, the per-user limits do not apply. In these cases, limits are based on the rate per second for each clientId per deployment.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Usage Type</th>
+						<th>Per-User Limit</th>
+						<th>Per-Deployment Limit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Ingest stats</td>
+						<td>60 requests per minute, 500 stats per request</td>
+						<td>1 request per 5 Client IDs per minute</td>
+					</tr>
+					<tr>
+						<td>Get stats by Player ID</td>
+						<td>100 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Get stats by Player IDs</td>
+						<td>100 requests per minute, 64 players per request, 25 stats per player</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Create Stat</td>
+						<td>-</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Delete Stat</td>
+						<td>-</td>
+						<td>100 requests per minute</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="test-your-achievements-and-stats">Test Your Achievements and Stats</h2>
+			</div>
+			<p>To test your achievements in a sandbox, you must include your stats in a deployment to that sandbox. Do this before you deploy to your live environment. This allows you to check for errors in the stats structure and make sure that players can unlock achievements successfully.</p>
+			<p>For more information on creating a test sandbox for your game, see the documentation on
+				<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#usage-limitations">Usage Limitations</a>
+								</li>
+								<li>
+									<a href="#test-your-achievements-and-stats">Test Your Achievements and Stats</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

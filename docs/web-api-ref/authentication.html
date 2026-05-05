@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -12,7 +12,7 @@
 	<section>
 		<div>
 			<h1>Auth Web APIs</h1>
-			<h2>Use the Auth interface Web APIs to authenticate for Epic Account Services Web APIs.</h2>
+			<h2>Use the Auth interface Web APIs to authenticate for EOS Epic Account Services Web APIs.</h2>
 			<div>
 				<div>11 mins to read</div>
 			</div>
@@ -21,15 +21,16 @@
 	<section>
 		<section role="main">
 			<p>
-				<strong>Note</strong>: You can also authenticate with the Auth Interface. See Epic Account Services:
-				<a href="/docs/epic-account-services/auth/auth-interface">Auth Interface</a>
+				<strong>Note:</strong>
+				This service is also available through the Epic Online Services (EOS) SDK APIs. See Epic Account Services:
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
 				documentation for more information.</p>
-			<p>Epic Online Services (EOS) uses the
+			<p>EOS uses the
 				<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
 				protocol for authentication and authorization, supporting common-use cases for web servers and client-side applications. Epic has also introduced custom grant types for some specific use cases.</p>
 			<p>Before starting, you will need to obtain OAuth 2.0 client credentials from Epic. These will be in the form of a Client ID and Client Secret, and will be used when requesting an access token from the Epic authorization server. See the
-				<a href="/docs/epic-account-services/getting-started">Get Started</a>
-				documentation on Epic Account Services for more details.</p>
+				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/getting-started">Get Started</a>
+				documentation on EOS Epic Account Services for more details.</p>
 			<div>
 				<h2 id="scenarios">Scenarios</h2>
 			</div>
@@ -45,11 +46,7 @@
 				<strong>game client</strong>
 				as a command-line argument.</p>
 			<p>When the game client is launched, it will make a request to the Epic token endpoint that includes the client credentials and exchange code. The response will include an
-				<strong>access token</strong>, information about the client and
-				<span>
-					<span aria-label="tooltip account" tabindex="0" role="button">account</span>
-				</span>
-				that were authenticated, and an optional
+				<strong>access token</strong>, information about the client and account that were authenticated, and an optional
 				<strong>refresh token</strong>.</p>
 			<p>The game client will include the access token on all requests to Epic services. The access token can also be passed to trusted game servers for verification, or for use in service-to-service requests.</p>
 			<p>When applicable, a refresh token will also be included in the token response. The game client will need to use the refresh token if the access token expires. This typically occurs within 2 hours after the access token is issued.</p>
@@ -74,7 +71,7 @@
 			<div>
 				<h2 id="authentication">Authentication</h2>
 			</div>
-			<p>As the first step in the authentication flow, the user must authenticate with Epic Account Services. We only support
+			<p>As the first step in the authentication flow, the user must authenticate with EOS Epic Account Services. We only support
 				<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
 				for authentication, with additional custom grant types.</p>
 			<p>Once the client has the necessary information to request a token (including the exchange code, authorization code, and user credentials), it begins by requesting an access token.</p>
@@ -100,10 +97,11 @@
 							<code>grant_type</code>
 						</td>
 						<td>The grant type being used:
+							<code>authorization_code</code>,
+							<code>client_credentials</code>,
 							<code>exchange_code</code>,
-							<code>password</code>,
-							<code>refresh_token</code>, or
-							<code>client_credentials</code>.</td>
+							<code>password</code>, or
+							<code>refresh_token</code>.</td>
 					</tr>
 					<tr>
 						<td>
@@ -123,74 +121,6 @@
 							<code>friends_list</code>, and
 							<code>presence</code>
 						</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<td colspan="2">
-							<strong>For the
-								<code>password</code>
-								grant type</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>Parameter name</td>
-						<td>Description</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td colspan="2">The
-							<code>password</code>
-							grant type can be used during development, but will only be allowed for accounts that are members of the organization that this product is associated with.
-							<br>
-							<strong>Note:</strong>
-							The
-							<code>password</code>
-							grant type does not work with 2FA enabled.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>username</code>
-						</td>
-						<td>The username (email address) for the account; only used with the
-							<code>password</code>
-							grant type.</td>
-					</tr>
-					<tr>
-						<td>
-							<code>password</code>
-						</td>
-						<td>The password for the account; only used with the
-							<code>password</code>
-							grant type.</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<td colspan="2">
-							<strong>For the
-								<code>exchange_code</code>
-								grant type</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>Parameter name</td>
-						<td>Description</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<code>exchange_code</code>
-						</td>
-						<td>The exchange code passed by Launcher to the game client; only used with the
-							<code>exchange_code</code>
-							grant type.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -245,6 +175,99 @@
 							<code>client_secret</code>
 						</td>
 						<td>The OAuth Client Secret for your application.</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<td colspan="2">
+							<strong>For the
+								<code>exchange_code</code>
+								grant type</strong>
+						</td>
+					</tr>
+					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>exchange_code</code>
+						</td>
+						<td>The exchange code passed by Launcher to the game client; only used with the
+							<code>exchange_code</code>
+							grant type.</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<td colspan="2">
+							<strong>For the
+								<code>password</code>
+								grant type</strong>
+						</td>
+					</tr>
+					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2">The
+							<code>password</code>
+							grant type can be used during development, but will only be allowed for accounts that are members of the organization that this product is associated with.
+							<br>
+							<strong>Note:</strong>
+							The
+							<code>password</code>
+							grant type does not work with 2FA enabled.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>username</code>
+						</td>
+						<td>The username (email address) for the account; only used with the
+							<code>password</code>
+							grant type.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>password</code>
+						</td>
+						<td>The password for the account; only used with the
+							<code>password</code>
+							grant type.</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<td colspan="2">
+							<strong>For the
+								<code>refresh_token</code>
+								grant type</strong>
+						</td>
+					</tr>
+					<tr>
+						<td>Parameter name</td>
+						<td>Description</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>refresh_token</code>
+						</td>
+						<td>The refresh token passed by Launcher to the game client; only used with the
+							<code>refresh_token</code>
+							grant type.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -357,7 +380,7 @@
 			<p>For web and server-side applications, you will need to get an authorization code before requesting an access token. Before using the web authorization, your Epic OAuth Client needs to be configured with a redirect URL.</p>
 			<div>
 				<p>If you have a userless client setup (i.e. your
-					<a href="/docs/dev-portal/client-credentials#client-policies">Client Policy doesn't require a user</a>), you don't need to retrieve any user information and can therefore skip the redirect instructions shown below. You can initialize the client using just the
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-reference#predefined-client-policy-types">Client Policy doesn't require a user</a>), you don't need to retrieve any user information and can therefore skip the redirect instructions shown below. You can initialize the client using just the
 					<code>client_credentials</code>.</p>
 			</div>
 			<p>To initiate the flow, your application will need to redirect the user to the authorization page where they will be asked to log in to their Epic Games account. The authorization URL is:</p>
@@ -520,7 +543,7 @@
 						</td>
 						<td>The deployment that the application uses. This deployment must be in the sandbox specified by
 							<code>epicsandboxid</code>. For more information, see
-							<a href="/docs/epic-games-store/store-presence/manage-artifacts#select-deployment-id">Manage Artifacts - Select Deployment ID</a>.</td>
+							<a href="/docs/epic-games-store/store-presence/manage-artifacts#step-5-select-deployment-id-for-epic-online-services-only">Manage Artifacts - Select Deployment ID</a>.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -660,49 +683,54 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#scenarios">Scenarios</a>
-					</li>
-					<li>
-						<a href="#game-client-on-the-epic-games-store">Game Client on the Epic Games Store</a>
-					</li>
-					<li>
-						<a href="#web-server-applications">Web Server Applications</a>
-					</li>
-					<li>
-						<a href="#authentication">Authentication</a>
-					</li>
-					<li>
-						<a href="#requesting-an-access-token">Requesting an Access Token</a>
-					</li>
-					<li>
-						<a href="#web-applications">Web Applications</a>
-					</li>
-					<li>
-						<a href="#verifying-an-access-token">Verifying an Access Token</a>
-					</li>
-					<li>
-						<a href="#offline-verification">Offline Verification</a>
-					</li>
-					<li>
-						<a href="#online-verification">Online Verification</a>
-					</li>
-					<li>
-						<a href="#game-client-on-the-epic-games-store-1">Game Client on the Epic Games Store</a>
-					</li>
-					<li>
-						<a href="#account-information">Account Information</a>
-					</li>
-					<li>
-						<a href="#from-the-access-token">From the Access Token</a>
-					</li>
-					<li>
-						<a href="#fetching-accounts">Fetching Accounts</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#scenarios">Scenarios</a>
+								</li>
+								<li>
+									<a href="#game-client-on-the-epic-games-store">Game Client on the Epic Games Store</a>
+								</li>
+								<li>
+									<a href="#web-server-applications">Web Server Applications</a>
+								</li>
+								<li>
+									<a href="#authentication">Authentication</a>
+								</li>
+								<li>
+									<a href="#requesting-an-access-token">Requesting an Access Token</a>
+								</li>
+								<li>
+									<a href="#web-applications">Web Applications</a>
+								</li>
+								<li>
+									<a href="#verifying-an-access-token">Verifying an Access Token</a>
+								</li>
+								<li>
+									<a href="#offline-verification">Offline Verification</a>
+								</li>
+								<li>
+									<a href="#online-verification">Online Verification</a>
+								</li>
+								<li>
+									<a href="#game-client-on-the-epic-games-store-1">Game Client on the Epic Games Store</a>
+								</li>
+								<li>
+									<a href="#account-information">Account Information</a>
+								</li>
+								<li>
+									<a href="#from-the-access-token">From the Access Token</a>
+								</li>
+								<li>
+									<a href="#fetching-accounts">Fetching Accounts</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

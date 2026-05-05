@@ -1,0 +1,641 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: View EOS SDK Log Messages — 1. Enable EOS Logging</h1>
+			<h2>Overview of how to enable logs from the EOS SDK for your game.</h2>
+			<div>
+				<div>19 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/logging-intro">Introduction</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>To receive log messages from the EOS SDK, you must register a callback function through the Logging Interface. Then, you can set a log level for each log category to specify which log messages the EOS SDK sends to your game. We recommend that you save your log messages to a file when you receive them, so you can review them later if you need to or send them to support if you require help. You can also print them directly to the console for debugging.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must integrate the EOS SDK into your code. (Documentation:
+								<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</p>
+							<div>
+								<h2 id="receive-log-messages-from-the-eos-sdk">Receive Log Messages From the EOS SDK</h2>
+							</div>
+							<p>In this guide, you’ll complete these steps to create and register your callback function to receive EOS SDK log messages:</p>
+							<ul>
+								<li>
+									<a href="#step-1-create-a-class-to-manage-eos-logging">Step 1: Create a Class to Manage EOS Logging</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-log-message-callback-function">Step 2: Implement Your Log Message Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-3-register-your-callback-function">Step 3: Register Your Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-4-set-the-log-level">Step 4: Set the Log Level</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-1-create-a-class-to-manage-eos-logging">Step 1: Create a Class to Manage EOS Logging</h3>
+							</div>
+							<p>Create a class to manage the EOS Logging Interface in your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your logging manager class, declare a public function to register the callback to receive log messages from the EOS SDK. In the example, it’s called
+																	<code>RegisterLoggingCallbackExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to set the log level to the highest level (VeryVerbose) for all categories. In the example, it’s called
+																	<code>SetLogLevelVeryVerboseExample()</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private
+																	<code>std::ofstream</code>
+																	variable to handle saving the log messages to a log file. In the example, it’s called
+																	<code>LogFile</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Define the constructor for the logging manager class. In it, call the
+																	<code>ofstream.open()</code>
+																	function to open the file that you want to save the log messages to. This creates the file if it does not exist. In this example, the file is called
+																	<code>ExampleLogFile.log</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	By default, the
+																	<code>open()</code>
+																	function on an
+																	<code>std::ofstream</code>
+																	object replaces the file’s original contents with the new contents when you call it. If you would rather append the new contents to the end of the file’s existing contents, pass in
+																	<code>std::ofstream::app</code>
+																	as the second argument of the
+																	<code>open()</code>
+																	function.</p>
+															</li>
+															<li>
+																<p>Define the destructor. In it, call the
+																	<code>ofstream.close()</code>
+																	function to close the log file after your game code saves the EOS SDK log messages to it.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-2-implement-your-log-message-callback-function">Step 2: Implement Your Log Message Callback Function</h3>
+							</div>
+							<p>Implement your callback function that executes when the EOS SDK sends a log message. This example prints the message to the console and saves it to a file.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the EOS SDK sends a log message. The function definition must match the
+																	<code>EOS_LogMessageFunc</code>
+																	callback function which receives a
+																	<a href="/docs/api-ref/structs/eos-log-message">
+																		<code>EOS_LogMessage</code>
+																		data structure</a>. In the example, it’s called
+																	<code>OnLogMessageReceived</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Get the current local date and time. You can use the precise date and time to help you diagnose issues.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	If you use Visual Studio as your compiler, you might get an error when you use the
+																	<code>std::localtime</code>
+																	function. This is because Microsoft has deprecated this function in their own C++ Standard Library. To disable this error and other errors caused by using functions that Microsoft has deprecated in their own C++ Standard Library, add the line
+																	<code>#define _CRT_SECURE_NO_WARNINGS</code>
+																	to your
+																	<code>LoggingManager.cpp</code>
+																	file. Note that this might hide potential security vulnerabilities if you use other functions deprecated in Microsoft's C++ Standard Library.</p>
+															</li>
+															<li>
+																<p>Create a string from the
+																	<a href="/docs/api-ref/structs/eos-log-message">
+																		<code>EOS_LogMessage</code>
+																		data structure</a>
+																	to print the full log message.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note</strong>: This code example shows one approach. You can format this string however you need for your game. Here is an example log message that uses this formatting:</p>
+																<div>
+																	<code>2025.01.01-12:00:00 - LogEOS - 500 - Default Network Status: EOS_NS_Online
+																	</code>
+																</div>
+															</li>
+														</ol>
+														<br>
+														<ol start="4">
+															<li>
+																<p>Print the string to the console, so you can read it while your game is running.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Save the string to the log file, so you can read the log message later or send it to support.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-3-register-your-callback-function">Step 3: Register Your Callback Function</h3>
+							</div>
+							<p>Register your callback function with the EOS SDK so it can receive log messages. We recommend you register it right after you initialize the EOS SDK (documentation:
+								<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>) to ensure that you receive all EOS SDK log messages.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your logging manager class, implement the function to register your callback to receive log messages from the EOS SDK. In the example, it’s called
+																	<code>RegisterLoggingCallbackExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-logging-set-callback">
+																		<code>EOS_Logging_SetCallback()</code>
+																		function</a>
+																	to register your logging callback with the EOS SDK. This function takes a function pointer to your callback function as its argument:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the callback registers successfully. If the logging callback is not registered successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-4-set-the-log-level">Step 4: Set the Log Level</h3>
+							</div>
+							<p>Set the log level for a log category, or all log categories, to specify the log messages that you want to receive for a log category, or all log categories, and how detailed (verbose) you want that information to be. You can also disable log messages for specific log categories. For the full list of log categories, see the API reference documentation:
+								<a href="/docs/api-ref/enums/eos-e-log-category">
+									<code>EOS_ELogCategory</code>
+								</a>.</p>
+							<p>Log levels are ranked in the following order:</p>
+							<table>
+								<thead>
+									<tr>
+										<th align="left">Log Level</th>
+										<th align="left">Description</th>
+										<th align="left">Integer</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_VeryVerbose</code>
+										</td>
+										<td align="left">Includes the most information. Set this log level if you need to share logs with support.</td>
+										<td align="left">600</td>
+									</tr>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_Verbose</code>
+										</td>
+										<td align="left">Includes more detailed information about EOS SDK processes than the Info level.</td>
+										<td align="left">500</td>
+									</tr>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_Info</code>
+										</td>
+										<td align="left">Includes general information about EOS SDK processes. This is the default log level for most categories.</td>
+										<td align="left">400</td>
+									</tr>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_Warning</code>
+										</td>
+										<td align="left">Includes information that might be indicative of issues but it is not an immediate cause for alarm.</td>
+										<td align="left">300</td>
+									</tr>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_Error</code>
+										</td>
+										<td align="left">Includes errors that prevent proper functionality of the EOS SDK.</td>
+										<td align="left">200</td>
+									</tr>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_Fatal</code>
+										</td>
+										<td align="left">Includes errors that prevent the EOS SDK from running.</td>
+										<td align="left">100</td>
+									</tr>
+									<tr>
+										<td align="left">
+											<code>EOS_LOG_Off</code>
+										</td>
+										<td align="left">Disables all log messages for the specified category.</td>
+										<td align="left">0</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>Your registered callback can only receive log messages at or below the specified log level for a log category. For example, if you set the log level for a log category to “EOS_LOG_Warning”, then your registered callback function will receive log messages for that log category that have the log level
+								<code>EOS_LOG_Warning</code>,
+								<code>EOS_LOG_Error</code>, or
+								<code>EOS_LOG_Fatal</code>.</p>
+							<p>This guide shows how to set the log level to
+								<code>EOS_LOG_VeryVerbose</code>
+								for development purposes.
+								<code>EOS_LOG_VeryVerbose</code>
+								is ideal during development because it provides the most information.</p>
+							<p>
+								<strong>Note:</strong>
+								Do not set the log level to
+								<code>EOS_LOG_VeryVerbose</code>
+								in the shipped version of your game. Instead, set the log level to
+								<code>EOS_LOG_Info</code>. We recommend that you use a command line parameter to control the log level when you start the game. This approach lets you change your log level to
+								<code>EOS_LOG_VeryVerbose</code>
+								in the shipped version of your game if you need to.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your logging manager class, implement the function to set the log level. In the example, it’s called
+																	<code>SetLogLevelVeryVerboseExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-logging-set-log-level">
+																		<code>EOS_Logging_SetLogLevel()</code>
+																		function</a>
+																	to set the log level for all log categories to the highest level (<code>EOS_LOG_VeryVerbose</code>). This means that your registered callback will receive the most descriptive log messages for all log categories.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																	To set the log level for an individual log category, change the first argument of the function to your desired log category. For the full list of log categories, see the API reference documentation
+																	<a href="/docs/api-ref/enums/eos-e-log-category">
+																		<code>EOS_ELogCategory</code>
+																	</a>.</p>
+															</li>
+															<li>
+																<p>Use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">EOS_EResult enum</a>
+																	to confirm that the log level is set successfully. If the log level is not set successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>Your registered callback function receives VeryVerbose log messages for every log category for the EOS SDK. It prints the log messages to the console and saves them to a file.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>
+								<strong>API reference documentation:</strong>
+							</p>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-logging-set-callback">
+										<code>EOS_Logging_SetCallback()</code>
+										function</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/structs/eos-log-message">
+										<code>EOS_LogMessage</code>
+										data structure</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-logging-set-log-level">
+										<code>EOS_Logging_SetLogLevel()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/enums/eos-e-log-category">
+												<code>EOS_ELogCategory</code>
+												enum</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/enums/eos-e-log-level">
+												<code>EOS_ELogLevel</code>
+												enum</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/find-and-analyze-your-log-messages">2. Find and Analyze Your Log Messages</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#receive-log-messages-from-the-eos-sdk">Receive Log Messages From the EOS SDK</a>
+								</li>
+								<li>
+									<a href="#step-1-create-a-class-to-manage-eos-logging">Step 1: Create a Class to Manage EOS Logging</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-log-message-callback-function">Step 2: Implement Your Log Message Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-3-register-your-callback-function">Step 3: Register Your Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-4-set-the-log-level">Step 4: Set the Log Level</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,234 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Achievements to Your Game — 1. Set Up Achievements</h1>
+			<h2>Overview of how to add player achievements to your game that you can access through the EOS API.</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>To provide achievements in your game, you must first set up EOS achievements in the Developer Portal.</p>
+			<p>If you publish your game on the Epic Games Store, you can enhance your game's user experience further with Epic Games Store achievements. Epic Games Store achievements extend EOS achievements by rewarding your users with experience points (XP) and other benefits in their Epic Games accounts. This guide shows how to set up and manage EOS Achievements only. For more information on Epic Games Store achievements, see the documentation:
+				<a href="/docs/epic-games-store/services/epic-achievements/overview">Epic Games Store Achievements &gt; Achievements Overview</a>.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you start, you must complete these steps:</p>
+			<ul>
+				<li>Integrate the EOS SDK into your code. (Documentation:
+					<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+				<li>Set up stats in the Developer Portal. (Documentation:
+					<a href="/docs/epic-online-services/player-and-game-data/stats-interface/stats-guide/set-up-stats">Guide: Add Stats to Your Game &gt; 1. Set Up Stats</a>.)</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				We recommend that you set up the Logging Interface to receive useful messages that can help you diagnose technical issues with the EOS SDK. (Documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</p>
+			<p>
+				<strong>Note:</strong>
+				This guide follows an order. However, only section 1. Set Up Achievements is a pre-requisite to provide achievements in your game. You can follow any section of this guide from section 2 onwards independently of each other and in any order.</p>
+			<div>
+				<h2 id="configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</h2>
+			</div>
+			<p>Complete the following steps in the Developer Portal to set up the available EOS achievements for your game:</p>
+			<ul>
+				<li>
+					<a href="#step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</a>.</li>
+				<li>
+					<a href="#step-2-configure-your-games-eos-achievements">Step 2: Configure Your Game's EOS Achievements</a>.</li>
+			</ul>
+			<div>
+				<h3 id="step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				This guide uses a preset client policy type for simplicity. For a game in a production environment, we recommend that you create your own custom client policy to ensure your game is secure. For more information on client policies, see the following documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.</p>
+			<p>You configure your game's client policy in the Developer Portal, on the Product Settings page's
+				<strong>Clients</strong>
+				tab. To do this, follow the steps below. (Note that in the Developer Portal, your game is usually known as a "product".)</p>
+			<p>
+				<strong>To go to the Clients tab:</strong>
+			</p>
+			<p>A. Go to your game's product page in the Developer Portal.</p>
+			<ul>
+				<li>To do this:<br>
+					a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).<br>
+					b. In the left navigation, under
+					<strong>Your Products</strong>,  click the name of your game (or software application).
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>B. In the left navigation, click
+				<strong>Product Settings</strong>.<br>
+				C. From the default tab (<strong>SDK Download &amp; Credentials</strong>), click
+				<strong>Clients</strong>.</p>
+			<p>Note that the
+				<strong>Clients</strong>
+				tab might show new agreements to accept.</p>
+			<p>
+				<strong>On the Clients tab:</strong>
+			</p>
+			<p>A. Scroll down to the
+				<strong>Client policies</strong>
+				section. (This is below the
+				<strong>Clients</strong>
+				section.)<br>
+				B. Either create a new client policy or enable the Achievements feature for an existing client policy.</p>
+			<ul>
+				<li>To create a new client policy:<br>
+					a. Click
+					<strong>Add new client policy</strong>. (Do not click “Add new client”.)<br>
+					b. For
+					<strong>Client policy name</strong>, enter a name of your choice.<br>
+					c. For
+					<strong>Client policy type</strong>, select
+					<strong>GameClient w/ Unlock Achievements</strong>.<br>
+					d. Leave the default options and click
+					<strong>Add new client policy</strong>. The preset client policy enables the Achievements feature by default.</li>
+				<li>To enable the Achievements feature for an existing client policy:<br>
+					a. Locate the client policy and click the three dots
+					<strong>(...)</strong>
+					next to it, then select
+					<strong>Edit</strong>.<br>
+					b. In the
+					<strong>Edit client policy</strong>
+					pane, scroll down to
+					<strong>Features</strong>
+					and use the
+					<strong>Achievements</strong>
+					toggle to enable the achievements feature.</li>
+			</ul>
+			<div>
+				<h3 id="step-2-configure-your-games-eos-achievements">Step 2: Configure Your Game's EOS Achievements</h3>
+			</div>
+			<p>These steps demonstrate how to configure your game's achievements individually in the Developer Portal.</p>
+			<p>
+				<strong>Note:</strong>
+				You can also use the Bulk Importer and Exporter Tool to set up multiple achievements in one action. For more information, see the
+				<a href="/docs/epic-online-services/eos-fundamentals/tools/bulk-importer-exporter-tool">Tool: Bulk Import / Export</a>
+				documentation.</p>
+			<p>Players can unlock achievements through stat progression, or you can manually unlock an achievement with the EOS SDK API. This guide shows how to create achievements that you can manually unlock. To create an achievement that players automatically unlock through stat progression, select the stat(s) when you create the achievement.</p>
+			<p>You configure your game's achievements individually in the Developer Portal on the Achievements page. To create an achievement that you manually unlock, follow the steps below.</p>
+			<p>
+				<strong>To go to the Achievements page:</strong>
+			</p>
+			<p>A. Go to your game's product page in the Developer Portal.</p>
+			<ul>
+				<li>To do this:<br>
+					a. Sign in to the Developer Portal at (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>).<br>
+					b. In the left navigation, under
+					<strong>Your products</strong>,  click the name of your game.
+					<ul>
+						<li>
+							<strong>Note:</strong>
+							You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>B. In the left navigation, click
+				<strong>Epic Online Services</strong>.<br>
+				C. In the
+				<strong>Player &amp; Game Data</strong>
+				section, click
+				<strong>Achievements</strong>.</p>
+			<p>
+				<strong>On the Achievements page:</strong>
+			</p>
+			<p>A. From the
+				<strong>Deployment</strong>
+				dropdown, select a deployment that is attached to the same sandbox where you created your stats. Stats and achievements you create are shared for all deployments in a sandbox.<br>
+				B. Click
+				<strong>Create Achievement</strong>.<br>
+				C. Don't select a stat, and click
+				<strong>Next</strong>.<br>
+				D. In the
+				<strong>Achievement ID</strong>
+				field, enter a name for the new achievement. Choose a name that is meaningful to you, because you will refer to this achievement ID in your game code.</p>
+			<ul>
+				<li>
+					<strong>Note:</strong>
+					The achievement ID can't contain a percent (<code>%</code>) symbol.</li>
+			</ul>
+			<p>E. Select the Locale for the language that the achievement is written in.<br>
+				F. Follow the rest of the onscreen instructions to create the achievement.</p>
+			<p>
+				<strong>Note:</strong>
+				Image files that you upload for locked and unlocked icons must meet these requirements:</p>
+			<ul>
+				<li>Smaller than 1024 x 1024 pixels.
+					<ul>
+						<li>We recommend that you make your icons 192 x 192 pixels.</li>
+					</ul>
+				</li>
+				<li>JPG, PNG, BMP, or non-animated GIF format.</li>
+				<li>1.02 MB or less.</li>
+				<li>Have a unique file name.
+					<ul>
+						<li>If you upload an image with the same file name as an existing image, the new image overwrites the old one.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Repeat these steps to create as many achievements as your game requires.</p>
+			<div>
+				<h2 id="results">Results</h2>
+			</div>
+			<p>You can see the achievements on your game's Achievements page in the Developer Portal.</p>
+			<p>Next section:
+				<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/retrieve-achievements-for-your-game">2. Retrieve Achievements for Your Game</a>
+			</p>
+			<p>
+				<strong>Note:</strong>
+				This guide follows an order. However, only section 1. Set Up Achievements is a pre-requisite to provide achievements in your game. You can follow any section of this guide from section 2 onwards independently of each other and in any order.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#configure-your-game-in-the-developer-portal">Configure Your Game in the Developer Portal</a>
+								</li>
+								<li>
+									<a href="#step-1-configure-your-games-client-policy">Step 1: Configure Your Game's Client Policy</a>
+								</li>
+								<li>
+									<a href="#step-2-configure-your-games-eos-achievements">Step 2: Configure Your Game's EOS Achievements</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

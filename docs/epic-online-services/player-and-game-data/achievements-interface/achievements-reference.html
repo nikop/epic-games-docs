@@ -1,0 +1,300 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Achievements Interface Reference</h1>
+			<h2>Reference for the Achievements Interface.</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						You can display achievements in the Social Overlay. However, the Social Overlay does not support achievements for the following platforms: macOS, Linux, Linux ARM64, Android, and iOS.<br>
+						Players must sign in with their Epic Games account to use the Social Overlay.</p>
+				</div>
+			</div>
+			<p>Use the Epic Online Services (EOS) Achievements service to track player achievements in your game (or other software application). EOS Achievements are platform agnostic. This means that you can award the same achievements to players in your game with the EOS Achievements service, no matter which storefront those players purchase your game from or which platform they choose to play your game on.</p>
+			<p>Achievements can be anything you want. Here are some examples:</p>
+			<ul>
+				<li>Track how much gamma radiation a player collects in your game through a stat and automatically unlock a "Radioactive Hero" achievement when the player collects 1000 units of gamma radiation.</li>
+				<li>Track the distance the player has traveled in your game through your game code, and also track the number of postcards the player has collected from all the areas in your game through your game code. Manually unlock a "World Traveler" achievement through the EOS SDK API when the player has travelled 1000 miles and collected 100 postcards.</li>
+			</ul>
+			<p>If you publish your game on the Epic Games Store, you can enhance your game's user experience further with Epic Games Store achievements. Epic Games Store achievements extend EOS achievements by rewarding your users with experience points (XP) and other benefits in their Epic Games accounts. For more information on Epic Games Store achievements, see the documentation:
+				<a href="/docs/epic-games-store/services/epic-achievements/overview">Epic Games Store Achievements &gt; Achievements Overview</a>.</p>
+			<p>See the Achievements Interface guide and Achievements Interface API documentation for details on how to integrate the service into your game (or software application).</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>Achievements
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/achievements-intro">Guide: Add Achievements to Your Game</a>
+						</li>
+						<li>
+							<a href="/docs/api-ref/interfaces/achievements">EOS SDK API Reference &gt; EOS Achievements Interface API Reference</a>
+						</li>
+					</ul>
+				</li>
+				<li>Related Interfaces
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/stats-interface">Stats Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface">Leaderboards Interface</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="video-introduction-to-achievements">Video Introduction to Achievements</h2>
+			</div>
+			<p>See the introduction video on youtube.com:
+				<a href="https://www.youtube.com/watch?v=sP7MWjmcC7k">Introduction to Achievements</a>.</p>
+			<div>
+				<div>
+					<iframe title="video" src="https://www.youtube-nocookie.com/embed/sP7MWjmcC7k" width="500" height="300" frameborder="0" allowfullscreen="">Your browser does not support iframes!</iframe>
+				</div>
+				<p>
+					<em>Video: Accessing the Achievements Interface</em>
+				</p>
+			</div>
+			<div>
+				<h2 id="change-in-support-for-the-latest-aggregation-type">Change in Support for the LATEST Aggregation Type</h2>
+			</div>
+			<p>To retrieve data about Epic Online Services achievements or manually unlock them, you must first define your Epic Online Services achievements in the Developer Portal. For more information, see the
+				<a href="/docs/epic-online-services/player-and-game-data/achievements-interface/achievements-guide/set-up-achievements">Achievements Guide &gt; 1. Set Up Achievements</a>
+				documentation.</p>
+			<p>We no longer support the LATEST aggregation type in Epic Online Services achievement definitions.</p>
+			<p>The following rules apply for the aggregation type LATEST:</p>
+			<ul>
+				<li>You can create a stat that uses the aggregation type LATEST.</li>
+				<li>You can still edit an existing Epic Online Services achievement if it already references a stat that uses the LATEST aggregation type.</li>
+				<li>You cannot create a new Epic Online Services achievement that references a stat that uses the aggregation type LATEST.</li>
+			</ul>
+			<div>
+				<h2 id="troubleshooting-eos-achievements-in-the-social-overlay">Troubleshooting EOS Achievements in the Social Overlay</h2>
+			</div>
+			<p>If you use the Social Overlay in your game and your players experience issues with EOS achievements in the Social Overlay, here are some possible troubleshooting solutions.</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Issue</th>
+						<th align="left">Possible Solution</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">Players can’t view their EOS achievements in the Social Overlay.</td>
+						<td align="left">You must call the EOS API
+							<a href="/docs/api-ref/functions/eos-connect-create-user">
+								<code>EOS_Connect_CreateUser</code>
+								function</a>
+							as part of your initialization flow for new players.
+							<ul>
+								<li>This ensures that new players are assigned a Product User ID. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide">Guide: Access Game Services With the Connect Interface</a>.)</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td align="left">EOS achievement icons load slowly in the Social Overlay.</td>
+						<td align="left">Reduce the image size of your achievement icons and use
+							<code>.JPG</code>
+							images.</td>
+					</tr>
+					<tr>
+						<td align="left">EOS achievements that players unlock don’t display as unlocked in the Social Overlay.</td>
+						<td align="left">Complete the following checks for any errors or typos:
+							<ul>
+								<li>If the achievement is based on stat progression, verify that the name of the stat that is being ingested is correct in both the Developer Portal and your code.
+								</li>
+								<li>Verify that the name of the achievement that is being unlocked is correct in both the Developer Portal and your code.
+								</li>
+								<li>Check the logs for any warning or error messages that might indicate the cause of the issue. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/logging-interface">Logging Interface</a>.)</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td align="left">Players don’t receive notifications in the Social Overlay for EOS achievements that they unlock.</td>
+						<td align="left">Complete the following checks to verify that you are initializing the Social Overlay properly:
+							<ul>
+								<li>Verify that you have initialized the Social Overlay in your code.
+								</li>
+								<li>Check the logs for the message
+									<code>Social Overlay: Load Success</code>
+									in the
+									<code>LogEOSUI</code>
+									category.
+								</li>
+								<li>Try to open the Social Overlay with the keyboard shortcut:
+									<code>SHIFT+F3</code>.
+								</li>
+								<li>If the Social Overlay does not successfully initialize or open, check for warning or error logs in the
+									<code>LogEOSUI</code>,
+									<code>LogEOSAnalytics</code>, or
+									<code>LogEOSOverlay</code>
+									categories that might indicate the cause of the issue.</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="usage-limitations">Usage Limitations</h2>
+			</div>
+			<p>For general information about throttling, usage quotas, and best practices, see the documentation on service usage limitations:
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK Conventions and Limitations &gt; Service Usage Limitations</a>.</p>
+			<p>The following limits apply to a deployment's overall use of Epic Online Services achievements:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Total number of achievements</td>
+						<td>1000</td>
+					</tr>
+					<tr>
+						<td>Stats per achievement</td>
+						<td>3</td>
+					</tr>
+					<tr>
+						<td>Achievement ID length</td>
+						<td>256 characters</td>
+					</tr>
+					<tr>
+						<td>Localized text variations per achievement</td>
+						<td>22.
+							<strong>Note:</strong>
+							the EOS Overlay supports only 16 languages.</td>
+					</tr>
+					<tr>
+						<td>Localized text length</td>
+						<td>256 characters</td>
+					</tr>
+					<tr>
+						<td>Achievement icon file size</td>
+						<td>1.02 MB</td>
+					</tr>
+					<tr>
+						<td>Achievement icon resolution (maximum)</td>
+						<td>1024x1024 pixels</td>
+					</tr>
+					<tr>
+						<td>Achievement icon resolution (recommended)</td>
+						<td>192x192 pixels</td>
+					</tr>
+					<tr>
+						<td>Achievement icon file types</td>
+						<td>PNG, JPG, BMP, and GIF (not animated)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<strong>Note:</strong>
+				When you define an Epic Online Services achievement you cannot use the following symbols in the
+				<code>AchievementId</code>
+				parameter of
+				<code>EOS_Achievements_DefinitionV2</code>:</p>
+			<p>
+				<strong>, { ^ } % ` ] &gt; [ ~ &lt; # | &amp; $ @ = ; : +  ?   ! \ ( ) * /</strong>
+			</p>
+			<p>There are also usage-rate limitations that apply on a per-user or per-deployment basis. Per-user limitations apply to individual users playing games and interacting with existing achievements, while per-deployment limitations apply to calls that set up the achievements that players can see and unlock.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Per-User Limitation</th>
+						<th>Per-Deployment Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Get all achievement definitions</td>
+						<td>10 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Get one achievement definition</td>
+						<td>100 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Get a player's achievements</td>
+						<td>100 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Unlock achievement</td>
+						<td>100 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Create achievement</td>
+						<td>-</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Delete achievement</td>
+						<td>-</td>
+						<td>100 requests per minute</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="test-your-epic-online-services-achievements">Test your Epic Online Services achievements</h2>
+			</div>
+			<p>If your Epic Online Services (EOS) achievements unlock based on stat progression, you can test your EOS achievements in a sandbox as long as you include your stats in a deployment to that sandbox. Do this before you deploy to your live environment. This allows you to check for errors in the achievement definition and make sure that players can unlock EOS achievements successfully.</p>
+			<p>For more information on creating a test sandbox for your product, see the documentation on
+				<a href="/docs/dev-portal/product-management">Product, Sandbox, and Deployment IDs</a>.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#video-introduction-to-achievements">Video Introduction to Achievements</a>
+								</li>
+								<li>
+									<a href="#change-in-support-for-the-latest-aggregation-type">Change in Support for the LATEST Aggregation Type</a>
+								</li>
+								<li>
+									<a href="#troubleshooting-eos-achievements-in-the-social-overlay">Troubleshooting EOS Achievements in the Social Overlay</a>
+								</li>
+								<li>
+									<a href="#usage-limitations">Usage Limitations</a>
+								</li>
+								<li>
+									<a href="#test-your-epic-online-services-achievements">Test your Epic Online Services achievements</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

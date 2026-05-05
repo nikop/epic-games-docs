@@ -1,0 +1,163 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Leaderboards Interface Reference</h1>
+			<h2>Reference for the Leaderboards Interface.</h2>
+			<div>
+				<div>3 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Use the EOS Leaderboards service to track and rank player stats in your game (or other software application).</p>
+			<p>Leaderboards rank your players by score for selected stats over a period of time that you specify. This lets your players compete with their friends or other players worldwide for the top ranking. Some examples of leaderboards include:</p>
+			<ul>
+				<li>Rank all global players by the total number of enemies defeated.</li>
+				<li>Rank players by how much gamma radiation they have collected during a special timed event.</li>
+				<li>Offer players a way to compare who has the longest jump distance between friends.</li>
+			</ul>
+			<p>See the Leaderboards Interface guide and Leaderboards Interface API documentation for details on how to integrate the service into your game.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>Leaderboards
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/leaderboards-intro">Guide: Add Leaderboards to Your Game</a>
+						</li>
+						<li>
+							<a href="/docs/api-ref/interfaces/leaderboards">EOS SDK API Reference &gt; EOS Leaderboards Interface API Reference</a>
+						</li>
+					</ul>
+				</li>
+				<li>Related interfaces
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/stats-interface">Stats Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Achievements Interface</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="stat-milestones">Stat Milestones</h2>
+			</div>
+			<p>You are limited to 100 unique milestones across all of your game's leaderboards, per deployment.</p>
+			<p>For example, you create the first leaderboard for your game with the following settings:</p>
+			<ul>
+				<li>Start date: July 14th, 2025 at 9 AM</li>
+				<li>End date: July 25, 2025 at 5 PM</li>
+			</ul>
+			<p>In the example, you create two stat milestones: one for the start date and one for the end date. This leaves 98 possible milestones to use for all the leaderboards in your game.</p>
+			<p>Using the same example, you create a second leaderboard with the following settings:</p>
+			<ul>
+				<li>Start date: July 14th, 2025 at 9 AM (the same start date as the first leaderboard)</li>
+				<li>End date: July 30, 2025 at 5 PM (a different end date from the first leaderboard)</li>
+			</ul>
+			<p>To add the second leaderboard, you only need to create one new stat milestone. You would reuse the existing stat milestone for the start date of July 14th, 2025 at 9 AM and create one new stat milestone for the end date of July 30, 2025 at 5 PM. This leaves 97 stat milestones to use for all the other leaderboards in your game.</p>
+			<p>Notes:</p>
+			<ul>
+				<li>Leaderboards with no set end date (set to never expire) only use one stat milestone for the start date (if it's a unique start date that isn't shared by one of your other leaderboards).</li>
+				<li>The EOS SDK automatically deletes a stat milestone when the leaderboards in your game no longer reference it. This frees up a slot for other stat milestones.</li>
+			</ul>
+			<div>
+				<h2 id="usage-limitations">Usage Limitations</h2>
+			</div>
+			<p>For general information about throttling, usage quotas, and best practices, see the documentation on service usage limitations:
+				<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#service-usage-limitations">EOS SDK Conventions and Limitations &gt; Service Usage Limitations</a>.</p>
+			<p>The following limits apply to a deployment's overall use of leaderboards:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Number of global leaderboards</td>
+						<td>Limited by available milestones (see
+							<a href="#stat-milestones">Stats Milestones</a>
+							on this page).</td>
+					</tr>
+					<tr>
+						<td>Total global leaderboard entries</td>
+						<td>1000 (+1000 overflow)</td>
+					</tr>
+					<tr>
+						<td>Number of friend leaderboards</td>
+						<td>Unlimited (see
+							<a href="#stat-milestones">Stats Milestones</a>
+							on this page).
+							<br>
+							<strong>Note:</strong>
+							Friend leaderboards are made by directly querying Stats and are not affected by the global leaderboard limit.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>There are also usage-rate limitations that apply on a per-user or per-deployment basis. Per-user limitations apply to individual users playing games and viewing existing leaderboards, while per-deployment limitations apply to calls that create or delete those leaderboards.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Per-User Limitation</th>
+						<th>Per-Deployment Limitation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Get a single leaderboard value</td>
+						<td>100 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Get all leaderboard values</td>
+						<td>10 requests per minute</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Create a leaderboard</td>
+						<td>-</td>
+						<td>100 requests per minute</td>
+					</tr>
+					<tr>
+						<td>Delete a leaderboard</td>
+						<td>-</td>
+						<td>100 requests per minute</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#stat-milestones">Stat Milestones</a>
+								</li>
+								<li>
+									<a href="#usage-limitations">Usage Limitations</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

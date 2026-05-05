@@ -1,0 +1,284 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Get Started With Epic Online Services — 2. Create and Configure Your Visual Studio Project</h1>
+			<h2>Step-by-step guide on how to create and configure a Visual Studio project, based on CMake, to use EOS.</h2>
+			<div>
+				<div>9 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk">1. Set Up Your Account and Download the SDK</a>
+			</p>
+			<div>
+				<p>
+					<strong>Note</strong>: This section of the guide is for Windows only.</p>
+			</div>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>Visual Studio provides a robust interface that you can use to edit and run your code. Although it is not required, we recommend that you use Visual Studio to integrate the EOS SDK with your game.</p>
+							<p>This guide shows how to use CMake to set up a project in Visual Studio for Windows. CMake is a cross-platform build system generator that instructs Visual Studio (and other integrated development environments) how to compile, link, and run your project. For more information on CMake, see CMake’s documentation at
+								<a href="https://cmake.org/cmake/help/latest/">cmake.org/cmake/~/latest</a>.</p>
+							<p>
+								<strong>Note</strong>: CMake is included with Visual Studio when you install the
+								<em>Desktop development with C++</em>
+								workload.</p>
+							<p>
+								<strong>Unreal Engine, Unity, macOS, Linux</strong>
+								<br>
+								This section shows how to set up a Visual Studio project for game development in Windows, not using a game engine. Do not follow this section if you are using Unreal Engine or Unity.<br>
+								Do not follow this section if you are using macOS or Linux. Visual Studio is not available for macOS or Linux.</p>
+							<p>If you are using Unreal Engine or Unity, see the following documentation:</p>
+							<ul>
+								<li>Unreal Engine and Visual Studio:
+									<ul>
+										<li>
+											<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine">Setting Up Visual Studio Development Environment for C++ Projects in Unreal Engine</a>
+											<br>
+											(This does not include integrating the EOS SDK with your game.)</li>
+									</ul>
+								</li>
+								<li>Unreal Engine, Unity, and EOS SDK integration:
+									<ul>
+										<li>
+											<a href="/docs/epic-online-services/game-engines/game-engines-introduction">EOS SDK and Game Engines Introduction</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<p>
+								<strong>Visual Studio Version</strong>
+								<br>
+								This guide was last tested with Visual Studio Community 2026 version 18.3.3.</p>
+							<p>You can still follow these steps if you are using a later release version of Visual Studio or a different type of Visual Studio, such as Professional or Enterprise. To ensure the steps work, make sure you are using Visual Studio with the
+								<em>Desktop development with C++</em>
+								workload.</p>
+							<p>You cannot follow this guide if you are using Visual Studio Code, which is a different tool from Visual Studio.</p>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before following this section of the guide, complete the following steps:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide/set-up-account-and-download-eos-sdk">Set Up Your Account and Download the SDK</a>
+								</li>
+								<li>Download and install Visual Studio from
+									<a href="https://visualstudio.microsoft.com/">visualstudio.microsoft.com</a>. Be sure to download Visual Studio and not Visual Studio Code, which is a different tool.
+									<ul>
+										<li>
+											<strong>Note</strong>: You must install the the
+											<em>Desktop development with C++</em>
+											workload as part of your installation. Leave the default opti ons selected.</li>
+									</ul>
+								</li>
+							</ul>
+							<div>
+								<h2 id="create-and-configure-your-visual-studio-project">Create and Configure Your Visual Studio Project</h2>
+							</div>
+							<p>Complete the following steps to set up your Visual Studio project with CMake and configure it to use the EOS SDK:</p>
+							<ul>
+								<li>
+									<a href="#step-a-create-your-project-structure">Step A: Create Your Project Structure</a>
+								</li>
+								<li>
+									<a href="#step-b-open-and-build-the-project-in-visual-studio">Step B: Open and Build the Project in Visual Studio</a>
+								</li>
+							</ul>
+							<div>
+								<h3 id="step-a-create-your-project-structure">Step A: Create Your Project Structure</h3>
+							</div>
+							<ol>
+								<li>
+									<p>Create a new directory called “ExampleEOSGame” to hold your project in the location of your choice.<br>
+										Visual Studio uses the name of the directory as the project’s name.</p>
+								</li>
+								<li>
+									<p>From your EOS SDK download directory, copy the
+										<code>SDK</code>
+										directory into the
+										<code>ExampleEOSGame</code>
+										directory you just created.</p>
+								</li>
+								<li>
+									<p>In the
+										<code>ExampleEOSGame</code>
+										directory, create a file called
+										<code>CMakeLists.txt</code>
+										and copy the following configuration to it:</p>
+									<div>
+										<section>
+											<pre>
+
+											</pre>
+										</section>
+									</div>
+									<p>This file instructs CMake how to build the Visual Studio project. Visual Studio uses these instructions to configure the project settings.</p>
+								</li>
+								<li>
+									<p>Save the file.</p>
+								</li>
+								<li>
+									<p>In the
+										<code>ExampleEOSGame</code>
+										directory, create a
+										<code>Source</code>
+										subdirectory.</p>
+								</li>
+								<li>
+									<p>In the
+										<code>ExampleEOSGame/Source</code>
+										subdirectory, create a C++ file called
+										<code>EOSGame.cpp</code>.</p>
+									<p>
+										<strong>Tip:</strong>
+										If you use File Explorer to create the C++ file, you can only edit the extension if file extensions are visible. To make file extensions visible, in the top navigation of the File Explorer, click
+										<strong>View</strong>
+										&gt;
+										<strong>Show</strong>
+										&gt;
+										<strong>File name extensions</strong>. This is helpful whenever you need to create files with extensions other than
+										<code>.txt</code>.</p>
+								</li>
+							</ol>
+							<p>You now have the following directory structure:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h3 id="step-b-open-and-build-the-project-in-visual-studio">Step B: Open and Build the Project in Visual Studio</h3>
+							</div>
+							<ol>
+								<li>
+									<p>Open Visual Studio.</p>
+								</li>
+								<li>
+									<p>Click
+										<strong>Open a local folder</strong>.</p>
+								</li>
+								<li>
+									<p>Navigate to the project directory
+										<code>ExampleEOSGame</code>
+										that you created in
+										<em>Step A</em>
+										and click
+										<strong>Select Folder</strong>.<br>
+										Visual Studio detects the
+										<code>CMakeLists.txt</code>
+										file in your project directory and imports the configuration settings. After Visual Studio opens the project, the
+										<strong>Output</strong>
+										window in the bottom pane displays the CMake build output. The output ends with the message
+										<code>CMake generation finished</code>.</p>
+								</li>
+								<li>
+									<p>In the top navigation, confirm that the green play button displays the executable name
+										<code>ExampleEOSGame.exe</code>
+										next to it.<br>
+										You defined this executable name in
+										<code>CMakeLists.txt</code>. Don’t click the play button yet: your project still needs the
+										<code>main</code>
+										function to run.<br>
+										<strong>Note</strong>: If you do not see the CMake output, or if the executable name
+										<code>ExampleEOSGame.exe</code>
+										is not beside the green play button, there was a problem with the CMake import or generation. Close the Visual Studio project and verify that the filename, extension, and contents of
+										<code>CMakeLists.txt</code>
+										match the
+										<code>CMakeLists.txt</code>
+										file that you configured in
+										<em>Step A.</em>
+									</p>
+								</li>
+								<li>
+									<p>In the Solution Explorer, expand the
+										<code>Source</code>
+										folder and double-click
+										<code>EOSGame.cpp</code>
+										to open it.</p>
+								</li>
+								<li>
+									<p>Copy and paste the following code into
+										<code>EOSGame.cpp</code>
+										to add a main function with a print statement:</p>
+									<div>
+										<section>
+											<pre>
+
+											</pre>
+										</section>
+									</div>
+									<p>The
+										<code>main</code>
+										function provides an entry point for the game.</p>
+								</li>
+								<li>
+									<p>Run the project.<br>
+										To do this, from the top navigation, click the green play button beside the “ExampleEOSGame.exe” text.<br>
+										This builds the project using CMake and runs the resulting executable file
+										<code>ExampleEOSGame.exe</code>. A console opens and displays the text “Hello World!”</p>
+								</li>
+							</ol>
+							<p>
+								<strong>Note</strong>: This guide provides instructions to set up a simple command-line project that demonstrates the implementation of most EOS services. If you want to use the EOS Overlay, your game requires graphics rendering, which is outside the scope of this guide.<br>
+								For more information, see the documentation:
+								<a href="/docs/epic-online-services/accounts-and-social/eos-overlay-overview">EOS Overlay Overview</a>.</p>
+							<p>Your project is now configured to use the EOS SDK.</p>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">3. Set Up the EOS SDK</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#create-and-configure-your-visual-studio-project">Create and Configure Your Visual Studio Project</a>
+								</li>
+								<li>
+									<a href="#step-a-create-your-project-structure">Step A: Create Your Project Structure</a>
+								</li>
+								<li>
+									<a href="#step-b-open-and-build-the-project-in-visual-studio">Step B: Open and Build the Project in Visual Studio</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -12,7 +12,7 @@
 	<section>
 		<div>
 			<h1>Product Settings, Sandbox, and Deployment</h1>
-			<h2>Overview of managing and configuring your product.</h2>
+			<h2>How to manage and configure your product.</h2>
 			<div>
 				<div>13 mins to read</div>
 			</div>
@@ -20,24 +20,30 @@
 	</section>
 	<section>
 		<section role="main">
-			<p>In Epic Games Store and Epic Online Services (EOS), data relating to your Epic Games account is organized in a hierarchy. Products, sandboxes and deployments are part of the hierarchy.</p>
-			<p>You manage product, sandbox, and deployment in the Product Settings page.</p>
+			<p>In the Epic Games Store, Epic Online Services (EOS), and Unreal Engine, data relating to your Epic Games account is organized in a hierarchy. Products, sandboxes and deployments are part of the hierarchy.</p>
+			<p>You manage product, sandbox, and deployment in the Product Settings page of the Developer Portal.</p>
 			<p>For an overview of the Epic data hierarchy, see the following documentation:</p>
 			<ul>
-				<li>Developer Portal -
-					<a href="/docs/dev-portal/dev-portal-intro#your-organization-and-products">Introduction - Your Organization and Products</a>
+				<li>
+					<a href="/docs/dev-portal/dev-portal-intro#your-organization-and-products">Developer Portal &gt; Introduction &gt; Your Organization and Products</a>
 				</li>
 			</ul>
 			<div>
-				<h2 id="whats-a-product">What’s a Product?</h2>
+				<h2 id="whats-a-product">What's a Product?</h2>
 			</div>
-			<p>A product is a game or other software application that uses one or more EOS service, Epic Games Store distribution, or Epic Games Store service. A product is owned by an organization and contains all information relevant to that software application, such as add-ons, mods, editors, development builds, and distributions on different platforms.</p>
+			<p>A product is a game or other software application that uses one or more EOS services, Epic Games Store distribution, Epic Games Store services, or Unreal Engine. A product is owned by an organization and contains all information relevant to that software application, such as add-ons, mods, editors, development builds, and distributions on different platforms.</p>
 			<p>Your organization can have multiple products. You can have multiple versions of a product.</p>
+			<p>To create a product, you must have the
+				<strong>Owner</strong>
+				or
+				<strong>Admin</strong>
+				role in your organization. Members with other roles, including custom roles, cannot create products. For more information on roles, see the documentation:
+				<a href="/docs/dev-portal/roles/list-of-roles">Available Roles in the Developer Portal</a>.</p>
 			<p>
 				<strong>Note</strong>: You decide on the names for your products. We recommend setting product names and any associated information to codenames during development. This acts as an additional safeguard for sensitive information. (The default product name comes from the
 				<code>ProductName</code>
 				field in the EOS SDK API
-				<a href="https://dev.epicgames.com/docs/en-US/api-ref/functions/eos-initialize">EOS_Initialize</a>.)</p>
+				<a href="/docs/api-ref/functions/eos-initialize">EOS_Initialize</a>.)</p>
 			<p>There is information on sandboxes and deployments, in the
 				<a href="#sandboxes-and-deployments">Sandboxes and Deployments</a>
 				section of this page.</p>
@@ -56,29 +62,32 @@
 					</span>
 				</div>
 				<figcaption>
-					<p>The Developer Portal left navigation menu, showing an organization name at the top and its list of products at the bottom (here the organization is called “Your..” and there is one product called “Your Product Name Here”). Click image for full size.</p>
+					<p>The Developer Portal left navigation menu, showing an organization name at the top and its list of products at the bottom (here the organization is called "Your.." and there is one product called "Your Product Name"). Click image for full size.</p>
 				</figcaption>
 			</div>
 			<p>
-				<strong>Note</strong>: In the image above,  the left navigation menu also shows other Epic Tools you might choose to use in game development. You do not need these tools to use Epic Games Store for the distribution of your product, either of the sets of Epic Online Services (EOS) -  EOS Epic Games Services, EOS Epic Account Services,  or to see your product’s analytics.</p>
-			<p>To access the Product Settings page:</p>
+				<strong>Note</strong>: In the image above, the left navigation menu also shows other Epic Tools you might choose to use in game development. You do not need these tools to use Epic Games Store for the distribution of your product, to use Epic Online Services (EOS), or to see your product's analytics.</p>
+			<p>To access the
+				<strong>Product Settings</strong>
+				page:</p>
 			<ol>
-				<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), make sure you are in the correct organization relating to your product. To do this:
-					<ol>
-						<li>Select
+				<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), make sure you are in the correct organization for your product. To do this:
+					<ul>
+						<li>a. Select
 							<strong>Organization</strong>
 							from the top of the left navigation’s dropdown menu (in the images below, the organization name is  “Your…”).</li>
-						<li>Follow the onscreen instructions to choose your organization.</li>
-						<li>This displays a list of your organization’s products at the bottom of the left navigation menu under
-							<strong>Your Products</strong>.</li>
-					</ol>
+						<li>b. Follow the on-screen instructions to choose your organization.</li>
+						<li>c. This displays a list of your organization’s products at the bottom of the left navigation menu under
+							<strong>Your products</strong>.</li>
+					</ul>
 				</li>
-				<li>Click your product name from under the list of Your Products in the left navigation menu (in the image below, the product name is “Your Product Name Here”). This displays the following on the left navigation:
+				<li>In the left navigation, in the
+					<strong>Your products</strong>
+					section, click your product name. (In the image below, the product name is "Your Product Name"). This displays the following in the left navigation:
 					<ul>
-						<li>A list of services your product might use:
-							<strong>Epic Games Store</strong>, EOS
-							<strong>Game Services</strong>, EOS
-							<strong>Epic Account Services</strong>, and
+						<li>A list of services your product might use, including
+							<strong>Epic Games Store</strong>,
+							<strong>Epic Online Services</strong>, and
 							<strong>Analytics</strong>.</li>
 						<li>The
 							<strong>Product Settings</strong>
@@ -88,7 +97,9 @@
 				<li>Click
 					<strong>Product Settings</strong>. This displays the Product Settings page.</li>
 			</ol>
-			<p>The image below shows the tabs in the Product Settings page. Click a tab's title to see the information you require.</p>
+			<p>The image below highlights the tabs on the
+				<strong>Product Settings</strong>
+				page. Click a tab's title to see the information you want.</p>
 			<div tabindex="0" aria-label=" image, press Enter to open full size">
 				<div>
 					<span>
@@ -106,13 +117,14 @@
 			<div>
 				<h3 id="sdk-download--credentials">SDK Download &amp; Credentials</h3>
 			</div>
-			<p>In this tab, you can access the EOS SDK downloads and generate credentials so your game can integrate with EOS.</p>
+			<p>In this tab, you can access the EOS SDK downloads and generate credentials so your product can integrate with EOS.</p>
 			<div>
 				<h4 id="eos-sdk-download">EOS SDK Download</h4>
 			</div>
 			<ul>
 				<li>For information on the EOS SDK download types, see documentation: Epic Online Services -
-					<a href="/docs/epic-online-services/eos-get-started/services-quick-start#eos-sdk-download-types">Get Started Steps: EOS SDK Download Types</a>.</li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-get-started-reference#eos-sdk-download-types">EOS Get Started Reference &gt; EOS SDK Download Types</a>
+					documentation.</li>
 			</ul>
 			<div>
 				<h4 id="eos-sdk-credentials">EOS SDK Credentials</h4>
@@ -121,8 +133,8 @@
 				For details of these terms in the product hierarchy, see the following documentation: Developer Portal -
 				<a href="/docs/dev-portal/dev-portal-intro">Introduction</a>.</p>
 			<p>You use these IDs and the client secret in your product’s code when you initialize the SDK with the EOS Platform Interface. You add them in a header file.<br>
-				For information, see documentation: EOS Game Services - Platform Interface -
-				<a href="/docs/game-services/eos-platform-interface#creating-the-platform-interface">Creating the Platform Interface</a>.</p>
+				For information, see the following documentation:
+				<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">Guide: Get Started With EOS &gt; 3. Set Up the EOS SDK</a>.</p>
 			<p>You can use this tab to generate credentials code that you need to add to your product’s header file. The code is a struct that you can use in either C or C++.</p>
 			<div>
 				<h5 id="how-to-generate-credentials-code">How to Generate Credentials Code</h5>
@@ -130,9 +142,9 @@
 			<ol>
 				<li>Go to your product’s Product Settings page in the Developer Portal. To do this
 					<ul>
-						<li>In the Developer Portal (<a href="https://dev.epicgames.com/porta">dev.epicgames.com/portal</a>), from the left navigation, under
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/porta">dev.epicgames.com/portal</a>), in the left navigation, under
 							<strong>Your Product</strong>, click the name of your product.</li>
-						<li>Once you are in your product page, from the left navigation, click
+						<li>When you are in your product's Developer Portal page, in the left navigation, click
 							<strong>Product Settings</strong>.</li>
 					</ul>
 				</li>
@@ -158,11 +170,11 @@
 			</ol>
 			<p>For information on client credentials, see the following documentation:</p>
 			<ul>
-				<li>Developer Portal -
-					<a href="https://dev.epicgames.com/docs/dev-portal/client-credentials">Client Credential and Client Policy Management</a>
+				<li>Epic Online Services -
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client Policy</a>
 				</li>
 				<li>EOS SDK API Reference -
-					<a href="https://dev.epicgames.com/docs/en-US/api-ref/structs/eos-platform-client-credentials">EOS_Platform_ClientCredenti</a>
+					<a href="/docs/api-ref/structs/eos-platform-client-credentials">EOS_Platform_ClientCredenti</a>
 				</li>
 			</ul>
 			<div>
@@ -173,9 +185,9 @@
 					<br>
 					To do this:
 					<ol>
-						<li>In the Developer Portal (<a href="https://dev.epicgames.com/porta">dev.epicgames.com/portal</a>), click
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), click
 							<strong>Organization</strong>
-							from the left navigation. (<strong>Note</strong>: You might have to click
+							in the left navigation. (<strong>Note</strong>: You might have to click
 							<strong>Back to organization</strong>
 							before you can do this.)</li>
 						<li>On the Organization page, click
@@ -190,8 +202,8 @@
 					section of this page.</li>
 				<li>Set up an application for your product.
 					<ul>
-						<li>To set up the application for your product, see documentation: EOS Epic Account Services - Get Started -
-							<a href="/docs/epic-account-services/getting-started#3-register-your-product-with-eos-epic-account-services">Register Your Product with EOS Epic Account Services</a>.</li>
+						<li>To set up the application for your product, see documentation:
+							<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/getting-started#3-register-your-product-with-eos-epic-account-services">EOS Epic Account Services &gt; Get Started &gt; Register Your Product with EOS Epic Account Services</a>.</li>
 						<li>To find out more about an application, see documentation: Developer Portal - Introduction -
 							<a href="/docs/dev-portal/dev-portal-intro#application">Application</a>.</li>
 					</ul>
@@ -202,10 +214,13 @@
 			</div>
 			<p>If you are distributing your product on the Epic Games Store, the BuildPatch Tool (BPT) is a command-line tool you use to upload your product binaries to the store. To use the tool successfully, you need to authenticate using the BPT credentials in this tab.</p>
 			<p>For information about the BuildPatch Tool, see the documentation: Developer Portal -
-				<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160">BuildPatch Tool Instructions</a>.</p>
+				<a href="/docs/buildpatch-tool-latest">BuildPatch Tool Instructions</a>.</p>
 			<div>
 				<h3 id="sandboxes">Sandboxes</h3>
 			</div>
+			<p>
+				<strong>Note:</strong>
+				Applies to Epic Games Store and Epic Online Services (EOS) only.</p>
 			<p>Use this tab to manage sandboxes and deployments. Because deployments are associated with a sandbox, you create, edit, or archive the deployments in the Sandbox tab of the Developer Portal’s Product Settings page.</p>
 			<p>For more information, see the
 				<a href="#sandboxes-and-deployments">Sandboxes and Deployments</a>
@@ -225,7 +240,7 @@
 			</ul>
 			<p>With crossplay, players can share their in-game unlocked achievements, see each other on friends lists, and be in sessions and lobbies with each other.</p>
 			<p>For details of supported identity providers and how to configure them see the documentation: Developer Portal -
-				<a href="/docs/dev-portal/identity-provider-management">Identity Provider Management</a>.</p>
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>.</p>
 			<div>
 				<h3 id="clients">Clients</h3>
 			</div>
@@ -256,13 +271,13 @@
 			</ul>
 			<p>
 				<strong>Note</strong>: You must associate a client with client policies. You cannot create a client without a client policy in place.</p>
-			<p>For more information, see documentation: Developer Portal -
-				<a href="/docs/dev-portal/client-credentials">Client Credentials and Client Policy Management</a>.</p>
+			<p>For more information, see documentation: Epic Online Services -
+				<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Client Policy</a>.</p>
 			<div>
 				<h3 id="player-groups">Player Groups</h3>
 			</div>
 			<p>Use player groups to grant users who are not members of your organization, access to your private sandboxes and deployments. By default, private sandbox or deployment access is denied to users who are not members of your organization, unless you give them permission by using player groups.</p>
-			<p>For example, you can add your product’s QA team to a player group so the team can test a private version of your product.</p>
+			<p>For example, you can add your product’s QA team to a player group so the team can test a private version of your product. Note you can create a maximum of 20 groups.</p>
 			<p>
 				<strong>Warnings</strong>:</p>
 			<ul>
@@ -272,7 +287,7 @@
 					If your product is using Epic Account Services, but you have not yet completed the brand review process, user access is denied to non-organization members, even if you have granted them access through player groups.
 					<br>
 					For information on the process, see the documentation:
-					<a href="/docs/epic-account-services/brand-review/brand-review-process">Brand Review Process</a>.</li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/brand-review/brand-review-process">Brand Review Process</a>.</li>
 				<li>
 					<strong>Members have automatic access</strong>
 					<br>
@@ -292,7 +307,7 @@
 					<ul>
 						<li>In the Developer Portal (<a href="https://dev.epicgames.com/porta">dev.epicgames.com/portal</a>), from the left navigation, under
 							<strong>Your Product</strong>, click the name of your product.</li>
-						<li>Once you are in your product page, from the left navigation, click
+						<li>When you are in your product's Developer Portal page, from the left navigation, click
 							<strong>Product Settings</strong>.</li>
 						<li>The default tab is SDK Download &amp; Credentials. Click
 							<strong>Player Groups</strong>.</li>
@@ -306,7 +321,7 @@
 					<p>Follow the on-screen instructions to create a new group.
 						<br>
 						<strong>Notes</strong>:</p>
-					<ol>
+					<ul>
 						<li>
 							<strong>Account Ids</strong>
 							are unique IDs for user accounts provided by a real-world organization listed in the Identity Provider dropdown list.</li>
@@ -317,7 +332,8 @@
 							For more information, see the
 							<a href="#identity-providers">Identity Providers</a>
 							section of this page.</li>
-					</ol>
+						<li>You can add a maximum of 500 users to a player group.</li>
+					</ul>
 				</li>
 				<li>
 					<p>To edit or remove an existing group, click the three dots (
@@ -327,7 +343,7 @@
 			</ol>
 			<p>
 				<strong>Note</strong>: The Developer Portal uses the terms “user group” and “player group” interchangeably.</p>
-			<p>Once you finish creating player groups, you can select the sandboxes and deployments this group can access. Once you create the group and give it access to a private sandbox, all users in that player group can access deployments in that private sandbox.</p>
+			<p>When you finish creating player groups, you can select the sandboxes and deployments this group can access. When you create the group and give it access to a private sandbox, all users in that player group can access deployments in that private sandbox.</p>
 			<div>
 				<h5 id="bulk-import-user-account-ids">Bulk Import User Account IDs</h5>
 			</div>
@@ -341,14 +357,16 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>'identityProviderId', 'accountId', 'environment';'apple', 'abcdef.0123456789abcdef0123456789abcdef.0123';'discord', '123456789012345678';'epicgames', 'abcdef0123456789abcdef0123456789';'gog', '12345678901234567';'google', '123456789012345678901';'itchio', '1234567';'nintendo_nsa_id', 'abcdef0123456789', '&lt;nintendo_env&gt;';'oculus', '1234567890123456';'openid', '&lt;determined_by_dev&gt;';'psn', '1234567890123456789', '&lt;playstation_env&gt;';'steam', '12345678901234567';'xbl', '1234567890123456';
 					</pre>
 				</section>
 			</div>
 			<div>
 				<h2 id="sandboxes-and-deployments">Sandboxes and Deployments</h2>
 			</div>
+			<p>
+				<strong>Note:</strong>
+				Applies to Epic Games Store and Epic Online Services (EOS) only.</p>
 			<div>
 				<h3 id="sandboxes-1">Sandboxes</h3>
 			</div>
@@ -356,37 +374,17 @@
 				<h4 id="what-is-a-sandbox">What is a Sandbox?</h4>
 			</div>
 			<p>A sandbox is an environment for versions of a product.  You can use sandboxes to keep the different stages of your product's development and release cycle separate.</p>
-			<p>As well as a public sandbox (“Live”), for deployments of your live product accessible to users, you can have private sandboxes (“Dev”, “Stage”). You can use private sandboxes to ensure that your product’s deployments for development and testing are not visible to people outside your organization.</p>
+			<p>When you create a product, the Developer Portal automatically creates a public sandbox for that product. This sandbox is named after your product's codename.</p>
+			<p>As well as a public sandbox (named after your product's codename), for deployments of your live product accessible to users, you can have private sandboxes (“Dev”, “Stage”). By default, only members of your organization or individuals added to a Player Group can access the Dev and Stage sandboxes.</p>
+			<p>You can use private sandboxes to ensure that your product’s deployments for development and testing are not visible to people outside your organization. Typically you use “Dev” for development deployments and “Stage” for QA testing deployments.</p>
+			<p>If you are using an Epic-Managed product, Dev and Stage sandboxes are only available after you complete the EGS achievements onboarding steps.</p>
 			<p>A sandbox contains Epic Games Store-related information, mod configurations, and one or more deployments of a game.</p>
 			<p>Documentation:</p>
 			<ul>
-				<li>Developer Portal -
-					<a href="/docs/dev-portal/dev-portal-intro#your-organization-and-products">Introduction - Your Organization and Products</a>
+				<li>
+					<a href="/docs/dev-portal/dev-portal-intro#your-organization-and-products">Developer Portal &gt; Introduction &gt; Your Organization and Products</a>
 					- an overview of the Epic Games Store and EOS data hierarchy and how sandboxes fit into it.</li>
 			</ul>
-			<p>When you set up a product in the Developer Portal, by default, there is one public sandbox called “Live”. You can get two additional sandboxes, “Dev” and “Stage” that default to private to your organization.
-				<br>
-				Typically you use “Dev” for development deployments and “Stage” for QA testing deployments.</p>
-			<div>
-				<h4 id="get-additional-sandboxes">Get Additional Sandboxes</h4>
-			</div>
-			<p>To get the two additional default sandboxes, apply for either of the following:</p>
-			<ul>
-				<li>Distribute your product on the Epic Games Store.
-					<br>
-					Documentation:
-					<a href="/docs/epic-games-store/publishing-tools">Publishing Tools</a>.</li>
-				<li>Use Epic Games Store achievements.
-					<br>
-					Documentation:
-					<a href="/docs/epic-games-store/services/epic-achievements">Epic Games Store Achievements</a>.</li>
-			</ul>
-			<p>To get additional sandboxes for a different use, for example to test identity providers (related to using the Auth Interface and Connect Interface):</p>
-			<p>Contact Epic Games Support using a private discussion.
-				<br>
-				See the support page section:
-				<a href="/docs/support#using-the-eos-developer-support-website">Using the EOS Developer Support Website</a>
-			</p>
 			<div>
 				<h4 id="configure-sandboxes">Configure Sandboxes</h4>
 			</div>
@@ -394,7 +392,7 @@
 			<ul>
 				<li>Deployments.</li>
 				<li>Identity providers. (Documentation:
-					<a href="/docs/dev-portal/identity-provider-management">Identity Provider Management</a>.)</li>
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>.)</li>
 			</ul>
 			<div>
 				<h3 id="deployments">Deployments</h3>
@@ -402,7 +400,7 @@
 			<div>
 				<h4 id="what-is-a-deployment">What is a Deployment?</h4>
 			</div>
-			<p>A deployment is an iteration of your game that contains a unique set of player progression data, such as achievements, statistics, and matchmaking. This player progression data includes achievement statuses, statistics, and any ongoing matches in matchmaking.</p>
+			<p>A deployment is an iteration of your product that contains a unique set of player progression data, such as achievements, statistics, and Sessions. This player progression data includes achievement statuses, statistics, and any ongoing matches in Sessions.</p>
 			<p>Documentation:</p>
 			<ul>
 				<li>Developer Portal -
@@ -417,36 +415,32 @@
 			<p>Because deployments are associated with a sandbox, you create, edit, or archive the deployments in the Sandbox tab of the Developer Portal’s Product Settings page.</p>
 			<p>To manage deployments:</p>
 			<ol>
-				<li>
-					<p>Go to your product’s Product Settings page in the Developer Portal and click
-						<strong>Sandboxes</strong>.
-						<br>
-						To do this</p>
+				<li>Go to your product’s Product Settings page in the Developer Portal and click
+					<strong>Sandboxes</strong>.
+					<br>
+					To do this
 					<ul>
 						<li>In the Developer Portal (<a href="https://dev.epicgames.com/porta">dev.epicgames.com/portal</a>), from the left navigation, under
 							<strong>Your Product</strong>, click the name of your product.</li>
-						<li>Once you are in your products page, from the left navigation, click
+						<li>When you are in your products page, from the left navigation, click
 							<strong>Product Settings</strong>.</li>
 						<li>The default tab is SDK Download &amp; Credentials. Click
 							<strong>Sandboxes</strong>.</li>
 					</ul>
 				</li>
-				<li>
-					<p>In the Sandboxes tab, click
-						<strong>Deployments</strong>.</p>
-				</li>
-				<li>
-					<p>To add a new deployment, In the sandbox deployment’s pane, click
-						<strong>New deployment</strong>.</p>
-				</li>
-				<li>
-					<p>To edit or archive an existing deployment, click the three dots (
-						<strong>…</strong>
-						) and select the action you want to take.</p>
-				</li>
+				<li>In the Sandboxes tab, click
+					<strong>Deployments</strong>.</li>
+				<li>To add a new deployment, In the sandbox deployment’s pane, click
+					<strong>New deployment</strong>.</li>
+				<li>To edit or archive an existing deployment, click the three dots (
+					<strong>…</strong>
+					) and select the action you want to take.</li>
 			</ol>
 			<p>
-				<strong>Note</strong>: If you archive a deployment, neither you nor Epic Games can unarchive it.</p>
+				<strong>Note</strong>: If you archive a deployment, it stays listed in the Live Sandbox Deployments panel, with the status
+				<code>archive</code>. To unarchive it, click on the three dots (
+				<strong>…</strong>
+				) and follow the onscreen instructions.</p>
 			<div>
 				<h4 id="deployment-ids">Deployment IDs</h4>
 			</div>
@@ -457,18 +451,12 @@
 					<p>
 						<strong>Integrate your game with EOS</strong>
 						<br>
-						You use the deployment ID to initialize the EOS SDK.  This enables EOS services to access product session data for the deployment, as well as information stored at the sandbox level.
+						You use the deployment ID to initialize the EOS SDK. This enables EOS services to access product session data for the deployment, as well as information stored at the sandbox level.
 						<br>
 						Documentation:</p>
 					<ul>
 						<li>EOS Get Started Steps:
-							<a href="https://dev.epicgames.com/docs/epic-online-services/eos-get-started/services-quick-start#step-3---integrate-the-platform-interface">Step 3 - Integrate the Platform Interface
-							</a>
-							<ul>
-								<li>EOS Platform Interface:
-									<a href="https://dev.epicgames.com/docs/game-services/eos-platform-interface#initializing-the-sdk">Initializing the SDK</a>
-								</li>
-							</ul>
+							<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">Guide: Get Started With EOS &gt; 3. Set Up the EOS SDK</a>
 						</li>
 					</ul>
 				</li>
@@ -482,7 +470,7 @@
 				</li>
 				<li>
 					<p>Epic Games Store:
-						<a href="https://dev.epicgames.com/docs/epic-games-store/services/launcher-invites">Launcher Invites</a>
+						<a href="/docs/epic-games-store/services/launcher-invites">Launcher Invites</a>
 					</p>
 				</li>
 			</ul>
@@ -618,108 +606,109 @@
 					<em>Dev-ReleaseBranchPlaytest</em>
 				</li>
 			</ul>
-			<p>.</p>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#whats-a-product">What’s a Product?</a>
-					</li>
-					<li>
-						<a href="#product-settings-page">Product Settings Page</a>
-					</li>
-					<li>
-						<a href="#product-settings-page-tabs">Product Settings Page Tabs</a>
-					</li>
-					<li>
-						<a href="#sdk-download--credentials">SDK Download &amp; Credentials</a>
-					</li>
-					<li>
-						<a href="#eos-sdk-download">EOS SDK Download</a>
-					</li>
-					<li>
-						<a href="#eos-sdk-credentials">EOS SDK Credentials</a>
-					</li>
-					<li>
-						<a href="#how-to-generate-credentials-code">How to Generate Credentials Code</a>
-					</li>
-					<li>
-						<a href="#how-to-add-a-client-and-application">How to Add a Client and Application</a>
-					</li>
-					<li>
-						<a href="#bpt-credentials">BPT Credentials</a>
-					</li>
-					<li>
-						<a href="#sandboxes">Sandboxes</a>
-					</li>
-					<li>
-						<a href="#identity-providers">Identity Providers</a>
-					</li>
-					<li>
-						<a href="#clients">Clients</a>
-					</li>
-					<li>
-						<a href="#what-are-clients">What are clients?</a>
-					</li>
-					<li>
-						<a href="#player-groups">Player Groups</a>
-					</li>
-					<li>
-						<a href="#create-a-new-player-group">Create a New Player Group</a>
-					</li>
-					<li>
-						<a href="#bulk-import-user-account-ids">Bulk Import User Account IDs</a>
-					</li>
-					<li>
-						<a href="#sandboxes-and-deployments">Sandboxes and Deployments</a>
-					</li>
-					<li>
-						<a href="#sandboxes-1">Sandboxes</a>
-					</li>
-					<li>
-						<a href="#what-is-a-sandbox">What is a Sandbox?</a>
-					</li>
-					<li>
-						<a href="#get-additional-sandboxes">Get Additional Sandboxes</a>
-					</li>
-					<li>
-						<a href="#configure-sandboxes">Configure Sandboxes</a>
-					</li>
-					<li>
-						<a href="#deployments">Deployments</a>
-					</li>
-					<li>
-						<a href="#what-is-a-deployment">What is a Deployment?</a>
-					</li>
-					<li>
-						<a href="#manage-deployments">Manage Deployments</a>
-					</li>
-					<li>
-						<a href="#deployment-ids">Deployment IDs</a>
-					</li>
-					<li>
-						<a href="#deployment-use-case-examples">Deployment Use-Case Examples</a>
-					</li>
-					<li>
-						<a href="#single-branch-deployment">Single-Branch Deployment</a>
-					</li>
-					<li>
-						<a href="#single-branch-beta-test-deployment">Single-Branch Beta Test Deployment</a>
-					</li>
-					<li>
-						<a href="#separate-development-branches">Separate Development Branches</a>
-					</li>
-					<li>
-						<a href="#a-cicd-pipeline">A CI/CD Pipeline</a>
-					</li>
-					<li>
-						<a href="#separate-development-needs">Separate Development Needs</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#whats-a-product">What's a Product?</a>
+								</li>
+								<li>
+									<a href="#product-settings-page">Product Settings Page</a>
+								</li>
+								<li>
+									<a href="#product-settings-page-tabs">Product Settings Page Tabs</a>
+								</li>
+								<li>
+									<a href="#sdk-download--credentials">SDK Download &amp; Credentials</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-download">EOS SDK Download</a>
+								</li>
+								<li>
+									<a href="#eos-sdk-credentials">EOS SDK Credentials</a>
+								</li>
+								<li>
+									<a href="#how-to-generate-credentials-code">How to Generate Credentials Code</a>
+								</li>
+								<li>
+									<a href="#how-to-add-a-client-and-application">How to Add a Client and Application</a>
+								</li>
+								<li>
+									<a href="#bpt-credentials">BPT Credentials</a>
+								</li>
+								<li>
+									<a href="#sandboxes">Sandboxes</a>
+								</li>
+								<li>
+									<a href="#identity-providers">Identity Providers</a>
+								</li>
+								<li>
+									<a href="#clients">Clients</a>
+								</li>
+								<li>
+									<a href="#what-are-clients">What are clients?</a>
+								</li>
+								<li>
+									<a href="#player-groups">Player Groups</a>
+								</li>
+								<li>
+									<a href="#create-a-new-player-group">Create a New Player Group</a>
+								</li>
+								<li>
+									<a href="#bulk-import-user-account-ids">Bulk Import User Account IDs</a>
+								</li>
+								<li>
+									<a href="#sandboxes-and-deployments">Sandboxes and Deployments</a>
+								</li>
+								<li>
+									<a href="#sandboxes-1">Sandboxes</a>
+								</li>
+								<li>
+									<a href="#what-is-a-sandbox">What is a Sandbox?</a>
+								</li>
+								<li>
+									<a href="#configure-sandboxes">Configure Sandboxes</a>
+								</li>
+								<li>
+									<a href="#deployments">Deployments</a>
+								</li>
+								<li>
+									<a href="#what-is-a-deployment">What is a Deployment?</a>
+								</li>
+								<li>
+									<a href="#manage-deployments">Manage Deployments</a>
+								</li>
+								<li>
+									<a href="#deployment-ids">Deployment IDs</a>
+								</li>
+								<li>
+									<a href="#deployment-use-case-examples">Deployment Use-Case Examples</a>
+								</li>
+								<li>
+									<a href="#single-branch-deployment">Single-Branch Deployment</a>
+								</li>
+								<li>
+									<a href="#single-branch-beta-test-deployment">Single-Branch Beta Test Deployment</a>
+								</li>
+								<li>
+									<a href="#separate-development-branches">Separate Development Branches</a>
+								</li>
+								<li>
+									<a href="#a-cicd-pipeline">A CI/CD Pipeline</a>
+								</li>
+								<li>
+									<a href="#separate-development-needs">Separate Development Needs</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

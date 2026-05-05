@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,7 +14,7 @@
 			<h1>EOS SDK for Android</h1>
 			<h2>How to implement EOS SDK in an Android project with Android Studio.</h2>
 			<div>
-				<div>7 mins to read</div>
+				<div>9 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -34,7 +34,12 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>EOS SDK 1.10.2 - 1.16.3</td>
+						<td>EOS SDK 1.18.0.4-CL45343210 - 1.19.0.7-CL52449437</td>
+						<td>supports</td>
+						<td>NDK 21.4.7075529 and NDK 27.2.12479018</td>
+					</tr>
+					<tr>
+						<td>EOS SDK 1.10.2 - 1.17.1.3-CL44532354</td>
 						<td>supports</td>
 						<td>6.0 (API level 23)</td>
 					</tr>
@@ -58,6 +63,18 @@
 			<p>Before implementing the EOS SDK with Android, see the documentation on
 				<a href="/docs/epic-online-services/platforms/guidelines-and-references">general guidelines and references</a>
 				for information on platform implementation.</p>
+			<p>
+				<strong>Notes</strong>
+			</p>
+			<ul>
+				<li>The EOS SDK is not thread safe. You must make all calls to EOS from the same thread. For more information, see the following documentation:
+					<a href="/docs/epic-online-services/working-with-the-eos-sdk/conventions-and-limitations#thread-safety">Conventions and Limitations &gt; Thread Safety</a>.</li>
+				<li>You must call the
+					<a href="/docs/api-ref/functions/eos-platform-set-application-status">
+						<code>EOS_Platform_SetApplicationStatus</code>
+						function</a>
+					when you place your application into the background or foreground.</li>
+			</ul>
 			<div>
 				<h3 id="1-prerequisites">1. Prerequisites</h3>
 			</div>
@@ -207,7 +224,7 @@
 					<code>System.loadLibrary("EOSSDK");</code>
 					from Java.</li>
 				<li>Call
-					<code>EOSSDK.init(getApplicationContext());</code>
+					<code>EOSSDK.init(this);</code>
 					from Java.</li>
 				<li>Call
 					<code>EOS_Initialize</code>
@@ -215,6 +232,9 @@
 				<li>Add your unique EOS Client ID to
 					<code>strings.xml</code>.</li>
 			</ol>
+			<div>
+				<h4 id="add-eos-sdk-as-a-dependency">Add EOS SDK as a dependency</h4>
+			</div>
 			<p>To add
 				<code>eos-sdk.aar</code>
 				as a dependency of your game, follow these steps:</p>
@@ -276,13 +296,71 @@
 						<code>build.gradle.kts</code>, find the dependencies section and add the following entries:</p>
 					<div>
 						<section>
-							<pre>
-
-							</pre>
+							<pre>implementation 'androidx.appcompat:appcompat:1.5.1'implementation 'androidx.constraintlayout:constraintlayout:2.1.4'implementation 'androidx.security:security-crypto:1.0.0'implementation 'androidx.browser:browser:1.4.0'implementation 'androidx.webkit:webkit:1.7.0'</pre>
 						</section>
 					</div>
 					<p>For more details, see the Android documentation at
 						<a href="https://developer.android.com/studio/projects/android-library#psd-add-library-dependency">developer.android.com</a>.</p>
+				</li>
+				<li>
+					<p>If you use a version of Gradle earlier than 8.x, to successfully build your project, you must do the following:</p>
+					<ul>
+						<li>
+							<p>Specify a version of the R8 compiler that is 8.x or higher in your project-level
+								<code>build.gradle</code>
+								file. To do this,  add the following to the dependencies section:</p>
+							<ul>
+								<li>
+									<code>classpath "com.android.tools:r8:[R8_VERSION]"</code>
+								</li>
+								<li>Where
+									<code>r8_VERSION</code>
+									is the version number of the R8 compiler.</li>
+							</ul>
+							<p>For example:</p>
+							<div>
+								<section>
+									<pre>buildscript {    repositories {	    google()	    mavenCentral()     }     dependencies {	     classpath "com.android.tools.build:gradle:7.4.2"	    classpath "com.android.tools:r8:8.1.56"     } }</pre>
+								</section>
+							</div>
+						</li>
+						<li>
+							<p>Set your JDK to version 11 or higher.<br>
+								For guidance on how to set your JDK to version 11 or higher, see the documentation: Java versions in Android builds at
+								<a href="https://developer.android.com/build/jdks">https://developer.android.com/build/jdks</a>.</p>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Add the desugar OpenJDK library (<code>desugar_jdk_libs</code>) as a dependency. To do this, include the OpenJDK library required for your Gradle plugin version:</p>
+					<ul>
+						<li>
+							<strong>Gradle Plugin (AGP) 8.0+</strong>
+							<br>
+							<code>coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'</code>
+						</li>
+						<li>
+							<strong>Gradle Plugin (AGP) 7.4+</strong>
+							<br>
+							<code>coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'</code>
+						</li>
+						<li>
+							<strong>Gradle Plugin (AGP) 7.3</strong>
+							<br>
+							<code>coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.3'</code>
+						</li>
+						<li>
+							<strong>Gradle Plugin (AGP) 7.2</strong>
+							<br>
+							<code>coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.9</code>
+						</li>
+					</ul>
+					<p>For example:</p>
+					<div>
+						<section>
+							<pre>buildscript {	repositories {		google()		mavenCentral()	}	dependencies {		classpath "com.android.tools.build:gradle:7.4.2"		classpath "com.android.tools:r8:8.1.56"	coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'	}}</pre>
+						</section>
+					</div>
 				</li>
 			</ol>
 			<p>The SDK is now imported into your project and will be included in your builds. The
@@ -314,9 +392,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>add_library(EOSSDK SHARED IMPORTED) set(EOSSDKDIR PATH_TO_YOUR_EXPANDED_ZIP_HERE) set_property(TARGET EOSSDK PROPERTY IMPORTED_LOCATION ${EOSSDKDIR}/SDK/Bin/Android/static-stdc++/libs/${ANDROID_ABI}/libEOSSDK.so) set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${EOSSDKDIR}/SDK/Include/)</pre>
 				</section>
 			</div>
 			<p>If you expanded the zip in the same directory as the
@@ -326,9 +402,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>add_library(EOSSDK SHARED IMPORTED) set(EOSSDKDIR ${CMAKE_SOURCE_DIR}) set_property(TARGET EOSSDK PROPERTY IMPORTED_LOCATION ${EOSSDKDIR}/SDK/Bin/Android/static-stdc++/libs/${ANDROID_ABI}/libEOSSDK.so) set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${EOSSDKDIR}/SDK/Include/)</pre>
 				</section>
 			</div>
 			<p>Finally, make sure the EOS SDK is linked with the appropriate library in your project. In an Android Studio C++ project created in the New Project Wizard, that would look like this:</p>
@@ -337,9 +411,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>target_link_libraries( # Specifies the target library.						native-lib						#Links the target library to the EOSSDK						EOSSDK 						# Links the target library to the log library						# included in the NDK.						${log-lib} )</pre>
 				</section>
 			</div>
 			<p>At this point, sync Gradle and you should be able to import EOS SDK symbols into your C++ project and move to the
@@ -360,9 +432,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>LOCAL_PATH := $(call my-dir) include $(CLEAR_VARS) LOCAL_MODULE    := hello-jniLOCAL_SRC_FILES := hello-jni.cLOCAL_LDLIBS    := -llog -landroid include $(BUILD_SHARED_LIBRARY)</pre>
 				</section>
 			</div>
 			<p>This file defines a
@@ -375,9 +445,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>include $(CLEAR_VARS)LOCAL_MODULE := eossdkLOCAL_SRC_FILES := $(LOCAL_PATH)/SDK/Bin/Android/static-stdc++/libs/$(TARGET_ARCH_ABI)/libEOSSDK.soLOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/SDK/Includeinclude $(PREBUILT_SHARED_LIBRARY)</pre>
 				</section>
 			</div>
 			<p>In this example, the zip file was inflated in the same directory as the
@@ -399,9 +467,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>include $(CLEAR_VARS)LOCAL_MODULE    := hello-jniLOCAL_SRC_FILES := hello-jni.cLOCAL_SHARED_LIBRARIES := eossdk c++_sharedLOCAL_LDLIBS    := -llog -landroidinclude $(BUILD_SHARED_LIBRARY)</pre>
 				</section>
 			</div>
 			<p>At this point, the
@@ -415,9 +481,7 @@
 			</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>LOCAL_PATH := $(call my-dir) include $(CLEAR_VARS)LOCAL_MODULE := eossdkLOCAL_SRC_FILES := $(LOCAL_PATH)/SDK/Bin/Android/static-stdc++/libs/$(TARGET_ARCH_ABI)/libEOSSDK.soLOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/SDK/Includeinclude $(PREBUILT_SHARED_LIBRARY) include $(CLEAR_VARS)LOCAL_MODULE    := hello-jniLOCAL_SRC_FILES := hello-jni.cLOCAL_SHARED_LIBRARIES := eossdk c++_sharedLOCAL_LDLIBS    := -llog -landroidinclude $(BUILD_SHARED_LIBRARY)</pre>
 				</section>
 			</div>
 			<p>For more information about ndk-build, refer to
@@ -430,16 +494,13 @@
 				(Some game engines do this automatically when importing plugins):</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>static {	System.loadLibrary("EOSSDK");}</pre>
 				</section>
 			</div>
-			<p>And pass application context to the SDK as follows:</p>
+			<p>And pass application activity to the EOS SDK as follows:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>EOSSDK.init(this);
 					</pre>
 				</section>
 			</div>
@@ -451,9 +512,7 @@
 			<p>The following example of initializing the EOS SDK on Android can be adapted for specific use cases:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>extern "C" JNIEXPORT jboolean JNICALLJava_com_example_eossdk_MainActivity_initializeSdk( JNIEnv* env,jobject /* this */){	EOS_InitializeOptions SDKOptions = { 0 };	SDKOptions.ApiVersion = EOS_INITIALIZE_API_LATEST;	SDKOptions.ProductName = "EOSDocumentationExample";	SDKOptions.ProductVersion = "0.1";	EOS_EResult InitResult = EOS_Initialize(&amp;SDKOptions);	if(InitResult != EOS_EResult::EOS_Success){		return JNI_FALSE;	}	return JNI_TRUE;}</pre>
 				</section>
 			</div>
 			<p>To set up optional directory paths for disk access, the EOS SDK has platform-specific
@@ -461,9 +520,7 @@
 				for Android:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>extern "C" JNIEXPORT jboolean JNICALLJava_com_example_eossdk_MainActivity_InitializeSDK(		JNIEnv* env,		jobject /* this */,		jstring internalPath, jstring externalPath){	EOS_InitializeOptions SDKOptions = { 0 };	SDKOptions.ApiVersion = EOS_INITIALIZE_API_LATEST;	SDKOptions.ProductName = "EOSDocumentationExample";	SDKOptions.ProductVersion = "0.1";	const char* androidInternalPath = env-&gt;GetStringUTFChars(internalPath, nullptr);	const char* androidExternalPath = env-&gt;GetStringUTFChars(externalPath, nullptr);	static EOS_Android_InitializeOptions JNIOptions = { 0 };	JNIOptions.ApiVersion = EOS_ANDROID_INITIALIZEOPTIONS_API_LATEST;	JNIOptions.Reserved = nullptr;	JNIOptions.OptionalInternalDirectory = androidInternalPath;	JNIOptions.OptionalExternalDirectory = androidExternalPath;	SDKOptions.SystemInitializeOptions = &amp;JNIOptions;	EOS_EResult InitResult = EOS_Initialize(&amp;SDKOptions);	if(InitResult != EOS_EResult::EOS_Success) {		return JNI_FALSE;	}	return JNI_TRUE;}</pre>
 				</section>
 			</div>
 			<div>
@@ -471,13 +528,29 @@
 			</div>
 			<p>For the EOS SDK to receive the correct login results, you must supply your Client ID in
 				<code>strings.xml</code>.</p>
-			<div>
-				<p>The Client ID must be lowercase. Scheme matching in the Android framework is case-sensitive, and you should always specify schemes using lowercase letters.</p>
-				<p>Each application should have a unique EOS Client ID, otherwise the Android Intent-Filter can match multiple applications, only one of which will work correctly. For implementation details, see the
-					<code>AndroidManifest.xml</code>
-					in
-					<code>eos-sdk.aar</code>.</p>
-			</div>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>Scheme matching in the Android framework is case-sensitive, and you should always specify schemes using lowercase letters.</li>
+				<li>The Client ID must be lowercase.
+					<ul>
+						<li>If the Client ID you set in
+							<code>res/values/strings.xml</code>
+							as the
+							<code>eos_login_protocol_scheme</code>
+							is not lowercase, the browser-based login flow might fail.</li>
+					</ul>
+				</li>
+				<li>You must set a unique EOS Client ID for each application, otherwise the Android Intent-Filter can match multiple applications, only one of which will work correctly.
+					<ul>
+						<li>For implementation details, see the
+							<code>AndroidManifest.xml</code>
+							in
+							<code>eos-sdk.aar</code>.</li>
+					</ul>
+				</li>
+			</ul>
 			<p>In
 				<code>res/values/strings.xml</code>, set up
 				<code>eos_login_protocol_scheme</code>
@@ -485,52 +558,77 @@
 				<code>clientId</code>:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>&lt;string name="eos_login_protocol_scheme"  &gt;eos.[your_lowercase_client_id_here]&lt;/string&gt;
 					</pre>
 				</section>
 			</div>
+			<div>
+				<h2 id="troubleshooting">Troubleshooting</h2>
+			</div>
+			<p>When you build your game, you might receive the following error if you use a version of Gradle earlier than 8.x:</p>
+			<div>
+				<section>
+					<pre>Execution failed for task ':launcher:mergeExtDexDebug'.&gt; Could not resolve all files for configuration ':launcher:debugRuntimeClasspath'.  &gt; Failed to transform eossdk-StaticSTDC-release-.aar (:eossdk-StaticSTDC-release:) to match attributes {artifactType=android-dex, asm-transformed-variant=NONE, dexing-enable-desugaring=true, dexing-enable-jacoco-instrumentation=false, dexing-is-debuggable=true, dexing-min-sdk=29, org.gradle.status=integration, org.gradle.usage=java-runtime}.</pre>
+				</section>
+			</div>
+			<p>To resolve this error, in your project-level
+				<code>build.gradle</code>
+				file, you must specify a version of the R8 compiler that is 8.x or higher in your project-level
+				<code>build.gradle</code>
+				file and set your JDK to version 11 or higher. To do this, see
+				<a href="#add-eos-sdk-as-a-dependency">Add EOS SDK as a dependency: Step 6</a>.</p>
 		</section>
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#supported-android-release-versions">Supported Android Release Versions</a>
-					</li>
-					<li>
-						<a href="#set-up-the-eos-sdk-for-android">Set up the EOS SDK for Android</a>
-					</li>
-					<li>
-						<a href="#1-prerequisites">1. Prerequisites</a>
-					</li>
-					<li>
-						<a href="#2-eos-sdk-for-android-contents">2. EOS SDK for Android Contents</a>
-					</li>
-					<li>
-						<a href="#3-choose-between-dynamic-and-static-c-runtime-versions">3. Choose Between Dynamic and Static C++ Runtime Versions</a>
-					</li>
-					<li>
-						<a href="#4-add-the-eos-sdk-to-your-android-studio-project">4. Add the EOS SDK to Your Android Studio Project</a>
-					</li>
-					<li>
-						<a href="#5-include-the-eos-sdk-with-your-build-system">5. Include the EOS SDK With Your Build System</a>
-					</li>
-					<li>
-						<a href="#how-to-use-eos-with-cmake">How to use EOS With CMake</a>
-					</li>
-					<li>
-						<a href="#how-to-use-eos-with-ndk-build">How to use EOS With ndk-build</a>
-					</li>
-					<li>
-						<a href="#6-android-specific-system-initialize-options">6. Android-Specific System Initialize Options</a>
-					</li>
-					<li>
-						<a href="#7-how-to-receive-login-callback">7. How to receive Login Callback</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#supported-android-release-versions">Supported Android Release Versions</a>
+								</li>
+								<li>
+									<a href="#set-up-the-eos-sdk-for-android">Set up the EOS SDK for Android</a>
+								</li>
+								<li>
+									<a href="#1-prerequisites">1. Prerequisites</a>
+								</li>
+								<li>
+									<a href="#2-eos-sdk-for-android-contents">2. EOS SDK for Android Contents</a>
+								</li>
+								<li>
+									<a href="#3-choose-between-dynamic-and-static-c-runtime-versions">3. Choose Between Dynamic and Static C++ Runtime Versions</a>
+								</li>
+								<li>
+									<a href="#4-add-the-eos-sdk-to-your-android-studio-project">4. Add the EOS SDK to Your Android Studio Project</a>
+								</li>
+								<li>
+									<a href="#add-eos-sdk-as-a-dependency">Add EOS SDK as a dependency</a>
+								</li>
+								<li>
+									<a href="#5-include-the-eos-sdk-with-your-build-system">5. Include the EOS SDK With Your Build System</a>
+								</li>
+								<li>
+									<a href="#how-to-use-eos-with-cmake">How to use EOS With CMake</a>
+								</li>
+								<li>
+									<a href="#how-to-use-eos-with-ndk-build">How to use EOS With ndk-build</a>
+								</li>
+								<li>
+									<a href="#6-android-specific-system-initialize-options">6. Android-Specific System Initialize Options</a>
+								</li>
+								<li>
+									<a href="#7-how-to-receive-login-callback">7. How to receive Login Callback</a>
+								</li>
+								<li>
+									<a href="#troubleshooting">Troubleshooting</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

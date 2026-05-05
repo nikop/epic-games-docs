@@ -1,0 +1,626 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Epic Online Services (EOS) Overview</h1>
+			<h2>Epic Online Services (EOS) are free, cross-platform services for multiplayer games.</h2>
+			<div>
+				<div>10 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Epic Online Services (EOS) are free, games-platform-agnostic services to launch, operate, and scale your game, whatever games platform your game clients run on, and whatever game engine you use for development, or if you use no game engine at all.</p>
+			<p>You integrate EOS services into your game by referencing service interfaces (SDK API or Web API) in your game code. There are multiple services, each with their own interface and set of APIs. The following are groups of services:</p>
+			<ul>
+				<li>
+					<strong>Accounts and Social</strong>
+					<br>
+					Bring your players together with the Epic Games account ecosystem, tapping into a cross-platform network of nearly a billion players.
+					<ul>
+						<li>See the section on this page for more information:
+							<a href="#accounts-and-social">Accounts and Social</a>.</li>
+						<li>Accounts and Social are EOS Epic Account Services — players can connect to these services in your game with an Epic Games account or proxy account. For details, see the section on this page:
+							<a href="#type-of-service">Type of Service</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Multiplayer</strong>
+					<br>
+					Make every match possible, however your players choose to connect. Enable multiplayer experiences across diverse platforms and services.
+					<ul>
+						<li>See the section on this page for more information:
+							<a href="#multiplayer">Multiplayer</a>.</li>
+						<li>Multiplayer services are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see the section on this page:
+							<a href="#type-of-service">Type of Service</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Player and Game Data</strong>
+					<br>
+					Keep progress persistent and increase long-term engagement. Securely manage and sync data across platforms.
+					<ul>
+						<li>See the section on this page for more information:
+							<a href="#player-and-game-data">Player and Game Data</a>.</li>
+						<li>Player and Game Data are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see the section on this page:
+							<a href="#type-of-service">Type of Service</a>.</li>
+					</ul>
+				</li>
+				<li>
+					<strong>Trust and Safety</strong>
+					<br>
+					Protect players, build trust, safeguard your game’s integrity, and navigate the complexities of parental consent and verification.
+					<ul>
+						<li>See the section on this page for more information:
+							<a href="#trust-and-safety">Trust and Safety</a>.</li>
+						<li>Trust and Safety are EOS Game Services — players can connect to your game with an account from any supported identity provider. For details, see the section on this page:
+							<a href="#type-of-service">Type of Service</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				<strong>Other Services</strong>
+			</p>
+			<ul>
+				<li>
+					<p>
+						<strong>EOS Fundamentals</strong>
+						<br>
+						EOS Fundamentals are the foundation to using Epic Online Services in your game. To use any EOS service, you must integrate the EOS Fundamentals' Platform Interface with your game. The Platform Interface initializes the EOS SDK in your game. We recommend you use the Logging Interface to analyze EOS diagnostic output during development and after your game has shipped.</p>
+					<p>Documentation:</p>
+					<p>For a full list of the EOS Fundamentals interfaces and features, see documentation:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Get Started Introduction</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/eos-fundamentals/">EOS Fundamentals</a>
+						</li>
+					</ul>
+					<p>Additional information:</p>
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/eos-get-started/get-started-guide/integrate-eos-sdk">Guide: Get Started With EOS &gt; 3. Set Up the EOS SDK</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>
+						</li>
+						<li>
+							<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/">Logging Interface</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>
+						<strong>Epic Games Store Services</strong>
+						<br>
+						EOS also provides services for the Epic Games Store.</p>
+					<p>Documentation:</p>
+					<p>
+						<a href="/docs/epic-games-store/services/">Epic Games Store Services</a>
+					</p>
+				</li>
+			</ul>
+			<p>
+				<strong>Tools</strong>
+			</p>
+			<p>To use EOS services in your game, you integrate interfaces using the following tools:</p>
+			<ul>
+				<li>The Developer Portal.
+					<br>
+					Documentation:
+					<a href="/docs/dev-portal/">Developer Portal</a>
+				</li>
+				<li>The EOS SDK and API — in C and C#.
+					<br>
+					Documentation:
+					<a href="/docs/epic-online-services/working-with-the-eos-sdk">Working with the EOS SDK</a>
+					and
+					<a href="/docs/api-ref/">EOS SDK API Reference</a>
+				</li>
+				<li>The EOS Web API — HTTP APIs for common use cases.
+					<br>
+					Documentation:
+					<a href="/docs/web-api-ref/web-api-introduction">EOS Web API Introduction</a>
+				</li>
+			</ul>
+			<div>
+				<h2 id="type-of-service">Type of Service</h2>
+			</div>
+			<p>There are two types of service:</p>
+			<ul>
+				<li>EOS Game Services</li>
+				<li>EOS Epic Account Services</li>
+			</ul>
+			<p>The type affects what player authentication interface you use and what player accounts can connect to the service.</p>
+			<div>
+				<h3 id="eos-game-services">EOS Game Services</h3>
+			</div>
+			<p>Game Services use the Connect Interface to authenticate players. You can integrate Games Services into your game without any requirement for your players to have an Epic Games account. Players can connect to your game with an account from any supported identity provider, such as a Steam account, Google account, or Amazon account, among many others, including an Epic Games account. (See the
+				<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+				documentation for a full list of providers.)</p>
+			<p>The following groups of services and their interfaces are EOS Game Services:</p>
+			<ul>
+				<li>EOS Fundamentals</li>
+				<li>Multiplayer</li>
+				<li>Player and Game Data</li>
+				<li>Trust and Safety</li>
+			</ul>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/">Connect Interface</a>
+					(Use this interface to authenticate players using EOS Game Services.)</li>
+			</ul>
+			<div>
+				<h3 id="eos-epic-account-services">EOS Epic Account Services</h3>
+			</div>
+			<p>Epic Account Services use the Auth Interface to authenticate players. To use Epic Account Services, players of your game must have an Epic Games account (or a proxy account).</p>
+			<p>The following group of services and their interfaces are EOS Epic Account Services:</p>
+			<ul>
+				<li>Accounts and Social</li>
+			</ul>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/">Auth Interface</a>
+					(Use this interface to authenticate players using EOS Epic Account Services.)</li>
+			</ul>
+			<div>
+				<h2 id="get-started-with-eos">Get Started with EOS</h2>
+			</div>
+			<p>For a step-by-step guide to get started with Epic Online Services (EOS), including code snippets and explanations on what’s happening in the code, see documentation:
+				<a href="/docs/epic-online-services/eos-get-started/">Get Started
+				</a>.</p>
+			<p>After you have read the Guide: Get Started With EOS documentation, you can read the other step-by-step guides on how to use multiple services, with code snippets and explanations:
+				<a href="/docs/epic-online-services/how-to-guides/">How-To Guides</a>.</p>
+			<div>
+				<h2 id="eos-services">EOS Services</h2>
+			</div>
+			<div>
+				<h3 id="accounts-and-social">Accounts and Social</h3>
+			</div>
+			<p>Bring your community together and reach nearly a billion players with the Epic Games account ecosystem, powering friend management, rich presence information, streamlined crossplay, and a unified UI and UX with the Social Overlay. Deliver a consistent, connected experience across every platform and storefront on the engine of your choice.</p>
+			<p>
+				<strong>EOS Epic Account Services</strong>
+				<br>
+				Accounts and Social are EOS Epic Account Services: EOS Epic Account Services use the Auth Interface to authenticate players. To use EOS Epic Account Services, players of your game must have an Epic Games account (or a proxy account).</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/">Auth Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="epics-account-ecosystem">Epic's Account Ecosystem</h4>
+			</div>
+			<p>EOS Epic Account Services provide player accounts: either an Epic Games account or a proxy account. This enables your game to tap into a player account ecosystem of nearly a billion players across multiple platforms and stores.</p>
+			<div>
+				<h4 id="crossplay">Crossplay</h4>
+			</div>
+			<p>Enable players accessing your game from different storefronts to play together using a combined friends list.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/crossplay/crossplay-introduction">Crossplay Introduction</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="friends">Friends</h4>
+			</div>
+			<p>Enable players to invite friends to join a game-play session, as well as retrieve and display player-friend information. Your game can display to any signed-in player their friends and their invite status in relation to other players. You can enable players to add new friends and to keep their friends list up-to-date by subscribing to friends status updates.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">Friends Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="social-overlay">Social Overlay</h4>
+			</div>
+			<p>Display to a player their achievements and friends information, including if their friends are playing the same game.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/social-overlay/">Social Overlay</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-friends-interface">Friends Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="presence">Presence</h4>
+			</div>
+			<p>Display a player's status (online, offline, playing) in a game. You can update and delete a player’s presence data. In combination with the friends feature, players can also view their friends' presence information.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/eos-presence-interface">Presence Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="full-list-of-interfaces-and-features">Full List of Interfaces and Features</h4>
+			</div>
+			<p>For a full list of the Accounts and Social Interfaces and features, see documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Get Started Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/">Accounts and Social</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="multiplayer">Multiplayer</h3>
+			</div>
+			<p>Make every match possible, however your players choose to connect. Turn your playerbase into a community by enabling multiplayer experiences across platforms. Give players the tools to form groups, set up matches, and communicate in real time with peer-to-peer, sessions, lobbies, and voice chat.</p>
+			<p>
+				<strong>EOS Game Services</strong>
+				<br>
+				Multiplayer services are EOS Game Services: EOS Game Services use the Connect Interface to authenticate players. You can integrate Game Services into your game without any requirement for your players to have an Epic Games account.</p>
+			<p>Players can connect to your game with an account from any supported identity provider, such as a Steam account, Google account, or Amazon account, among many others, including an Epic Games account.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/">Connect Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					(For a full list of supported identity providers.)</li>
+			</ul>
+			<div>
+				<h4 id="peer-to-peer-p2p-connections">Peer-to-Peer (P2P) Connections</h4>
+			</div>
+			<p>Enable players to connect with other players in a game.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/nat-p2p-interface/">Peer-to-Peer (P2P) Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="lobbies">Lobbies</h4>
+			</div>
+			<p>Enable players to create, remove, join, and leave lobbies.</p>
+			<p>
+				<strong>Note:</strong>
+				You can use the Social Overlay to enable players to accept lobby invites. The Social Overlay is not part of the Lobby Interface, it is part of Accounts and Social and EOS Epic Account Services.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions">Lobbies and Sessions Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/">Lobby Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/">Sessions Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/accounts-and-social/social-overlay/">Social Overlay</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="sessions">Sessions</h4>
+			</div>
+			<p>Allow players to host, find, and interact with online gaming sessions.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobbies-and-sessions-introduction">Lobbies and Sessions Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/">Sessions Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/">Lobby Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="voice">Voice</h4>
+			</div>
+			<p>Help players talk, strategize, and socialize. Voice chat enables you to create and manage cross-platform voice chat rooms between your players during matches or in lobbies. Real-time-communication (RTC) text chat is also available. To integrate voice or text chat, either use EOS Lobbies (through the Lobby Interface) or your own trusted server.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/voice-and-rtc-interface/voice-interface">Voice Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="full-list-of-interfaces-and-features-1">Full List of Interfaces and Features</h4>
+			</div>
+			<p>For a full list of the Multiplayer interfaces and features, see documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Get Started Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/">Multiplayer</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="player-and-game-data">Player and Game Data</h3>
+			</div>
+			<p>Keep player progress persistent and increase long-term player engagement and retention. Enable players to carry their stats, achievements, and progression wherever they play, while you securely manage and sync data across platforms.</p>
+			<p>
+				<strong>EOS Game Services</strong>
+				<br>
+				Player and Game Data are EOS Game Services: EOS Game Services use the Connect Interface to authenticate players. You can integrate Game Services into your game without any requirement for your players to have an Epic Games account.</p>
+			<p>Players can connect to your game with an account from any supported identity provider, such as a Steam account, Google account, or Amazon account, among many others, including an Epic Games account.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/">Connect Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					(For a full list of supported identity providers.)</li>
+			</ul>
+			<div>
+				<h4 id="leaderboards">Leaderboards</h4>
+			</div>
+			<p>Define leaderboards for your game, choose the stats to include, how you rank players, and the lifespan of the leaderboards.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/">Leaderboards Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="stats">Stats</h4>
+			</div>
+			<p>Define the stats for your game in the Developer Portal. You can include any statistical data about a player that you want to track, for example the number of items the player has collected. You can use these stats to determine when to unlock achievements and how to rank players in leaderboards.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/stats-interface">Stats Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Achievements Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/">Leaderboards Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="achievements">Achievements</h4>
+			</div>
+			<p>Access data about player achievements, unlock them for a player, get data on a player's progression for an achievement, and send notifications to players when they unlock an achievement.</p>
+			<p>
+				<strong>Note:</strong>
+				Epic Games Store achievements are built on Epic Online Services achievements. You can offer XP to players in games distributed on the Epic Games Store by using Epic Games Store achievements.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/achievements-interface">Achievements Interface</a>
+					for Epic Online Services achievements.</li>
+				<li>
+					<a href="/docs/epic-games-store/services/epic-achievements">Epic Games Store &gt; Epic Games Store Achievements</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="player-data-storage">Player Data Storage</h4>
+			</div>
+			<p>Save, download, copy, and delete player-related data for your game on cloud servers in encrypted form.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					(For a full list of supported identity providers.)</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/player-data-storage-interface">Player Data Storage Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="title-storage">Title Storage</h4>
+			</div>
+			<p>Use the Title Storage Interface to retrieve game-specific data that is stored in encrypted form on cloud servers.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/title-storage-interface/">Title Storage Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="full-list-of-interfaces-and-features-2">Full List of Interfaces and Features</h4>
+			</div>
+			<p>For a full list of the Player Data and Storage interfaces and features, see documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Get Started Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/player-and-game-data/">Player and Game Data</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="trust-and-safety">Trust and Safety</h3>
+			</div>
+			<p>Build player trust by safeguarding your community and promoting a fair and safe experience for everyone. Easy Anti-Cheat (the Anti-Cheat Interfaces), player reports, and sanctions protect game integrity and help curb problem behavior. Kids Web Services (KWS) make it easier to navigate the complex global landscape of parental consent and verification, building confidence with parents and players alike.</p>
+			<p>
+				<strong>EOS Game Services</strong>
+				<br>
+				Trust and Safety are EOS Game Services: EOS Game Services use the Connect Interface to authenticate players. You can integrate Game Services into your game without any requirement for your players to have an Epic Games account.</p>
+			<p>Players can connect to your game with an account from any supported identity provider, such as a Steam account, Google account, or Amazon account, among many others, including an Epic Games account.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/">Connect Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/identity-provider-management">Identity Provider Management</a>
+					(For a full list of supported identity providers.)</li>
+			</ul>
+			<div>
+				<h4 id="easy-anti-cheat">Easy Anti-Cheat</h4>
+			</div>
+			<p>(Also known as "Anti-Cheat".)</p>
+			<p>Prevent and detect players cheating in your game.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/">Anti-Cheat Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="player-reports">Player Reports</h4>
+			</div>
+			<p>Collect and publish player behavior to player reports. View details about player cheating, verbal abuse and offensive profiles.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety/reports-interface/">Reports Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="sanctions">Sanctions</h4>
+			</div>
+			<p>Define and manage sanctions for your game. In the Developer Portal, you can view the details of all sanctions placed on a player.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/">Sanctions Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="kids-web-services-kws">Kids Web Services (KWS)</h4>
+			</div>
+			<p>KWS provides parent verification so you can manage youth audiences at scale. KWS greatly reduces the complexity and cost of global verification and consent management.</p>
+			<p>KWS is a separate service set from EOS. See the KWS documentation for more information.</p>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/kids-web-services">Kids Web Services (KWS)</a>
+				</li>
+			</ul>
+			<div>
+				<h4 id="full-list-of-interfaces-and-features-3">Full List of Interfaces and Features</h4>
+			</div>
+			<p>For a full list of the Trust and Safety interfaces and features, see documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-get-started/eos-introduction">EOS Get Started Introduction</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety/">Trust and Safety</a>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#type-of-service">Type of Service</a>
+								</li>
+								<li>
+									<a href="#eos-game-services">EOS Game Services</a>
+								</li>
+								<li>
+									<a href="#eos-epic-account-services">EOS Epic Account Services</a>
+								</li>
+								<li>
+									<a href="#get-started-with-eos">Get Started with EOS</a>
+								</li>
+								<li>
+									<a href="#eos-services">EOS Services</a>
+								</li>
+								<li>
+									<a href="#accounts-and-social">Accounts and Social</a>
+								</li>
+								<li>
+									<a href="#epics-account-ecosystem">Epic's Account Ecosystem</a>
+								</li>
+								<li>
+									<a href="#crossplay">Crossplay</a>
+								</li>
+								<li>
+									<a href="#friends">Friends</a>
+								</li>
+								<li>
+									<a href="#social-overlay">Social Overlay</a>
+								</li>
+								<li>
+									<a href="#presence">Presence</a>
+								</li>
+								<li>
+									<a href="#full-list-of-interfaces-and-features">Full List of Interfaces and Features</a>
+								</li>
+								<li>
+									<a href="#multiplayer">Multiplayer</a>
+								</li>
+								<li>
+									<a href="#peer-to-peer-p2p-connections">Peer-to-Peer (P2P) Connections</a>
+								</li>
+								<li>
+									<a href="#lobbies">Lobbies</a>
+								</li>
+								<li>
+									<a href="#sessions">Sessions</a>
+								</li>
+								<li>
+									<a href="#voice">Voice</a>
+								</li>
+								<li>
+									<a href="#full-list-of-interfaces-and-features-1">Full List of Interfaces and Features</a>
+								</li>
+								<li>
+									<a href="#player-and-game-data">Player and Game Data</a>
+								</li>
+								<li>
+									<a href="#leaderboards">Leaderboards</a>
+								</li>
+								<li>
+									<a href="#stats">Stats</a>
+								</li>
+								<li>
+									<a href="#achievements">Achievements</a>
+								</li>
+								<li>
+									<a href="#player-data-storage">Player Data Storage</a>
+								</li>
+								<li>
+									<a href="#title-storage">Title Storage</a>
+								</li>
+								<li>
+									<a href="#full-list-of-interfaces-and-features-2">Full List of Interfaces and Features</a>
+								</li>
+								<li>
+									<a href="#trust-and-safety">Trust and Safety</a>
+								</li>
+								<li>
+									<a href="#easy-anti-cheat">Easy Anti-Cheat</a>
+								</li>
+								<li>
+									<a href="#player-reports">Player Reports</a>
+								</li>
+								<li>
+									<a href="#sanctions">Sanctions</a>
+								</li>
+								<li>
+									<a href="#kids-web-services-kws">Kids Web Services (KWS)</a>
+								</li>
+								<li>
+									<a href="#full-list-of-interfaces-and-features-3">Full List of Interfaces and Features</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

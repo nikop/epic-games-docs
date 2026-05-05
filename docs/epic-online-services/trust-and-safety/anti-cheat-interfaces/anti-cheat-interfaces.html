@@ -1,0 +1,667 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Anti-Cheat Interfaces</h1>
+			<h2>Understand the prerequisites, network architecture, platform components, and more involved in implementing Anti-Cheat in your EOS product.</h2>
+			<div>
+				<div>12 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						Anti-Cheat does not support the following platforms: Linux ARM64 (Anti-Cheat Client Interface), Android, iOS, and console platforms.<br>
+						Anti-Cheat requires EOS SDK 1.15 or higher, the
+						<code>start_protected_game.exe</code>
+						from EOS SDK 1.16 or higher, and a 64-bit operating system.</p>
+				</div>
+			</div>
+			<p>Integrate the Anti-Cheat Interfaces (also known as "Easy Anti-Cheat") into your game (or other software application) to use the features of the Epic Online Services (EOS) anti-cheat service.</p>
+			<p>You can use the Anti-Cheat Interfaces to help reduce cheating in online multiplayer play. They provide tools to start your game client in an anti-cheat protected mode which is then validated by either of the following methods:</p>
+			<ul>
+				<li>A game server - using the Anti-Cheat Server Interface.</li>
+				<li>Another game client - using the Anti-Cheat Client Interface.</li>
+			</ul>
+			<p>These interfaces are not digital rights management (DRM) or code obfuscation tools and are not useful for offline or solo play.</p>
+			<p>
+				<strong>Note:</strong>
+				<br>
+				The two Anti-Cheat Interfaces support virtual machines differently:</p>
+			<ul>
+				<li>The Anti-Cheat Server Interface does support virtual machines (VM).</li>
+				<li>The Anti-Cheat Client Interface does
+					<strong>not</strong>
+					support virtual machines (VM).</li>
+			</ul>
+			<p>
+				<strong>Paid Support and Features</strong>
+				<br>
+				The anti-cheat service is free. Additional support and features are available with a paid enterprise agreement that includes:</p>
+			<ul>
+				<li>Cheat detection work specific to your game by the Epic Games team of analysts.</li>
+				<li>Tooling to manage recurring cheaters who create new accounts on the same machine.</li>
+				<li>Training and application of machine-learning models for detection of aim-assisting cheats in shooter games: the models are based on game servers’ data on player behavior.</li>
+			</ul>
+			<p>For more information, contact the Epic Games anti-cheat licensing team at
+				<a href="https://easy.ac/licensing">easy.ac/licensing</a>.</p>
+			<p>
+				<strong>Protection Types</strong>
+				<br>
+				The anti-cheat interfaces provide two kinds of protection:</p>
+			<ul>
+				<li>
+					<strong>Cheat prevention</strong>
+					to passively prevent common cheating techniques such as reading and writing the game process memory using straightforward methods.</li>
+				<li>
+					<strong>Cheat detection</strong>
+					to identify accounts using more specialized methods to manipulate the game so that you can then apply sanctions to them. There are two levels of cheat detection, as follows:
+					<ul>
+						<li>
+							<strong>Detections for common cheating tools</strong>: As part of the free anti-cheat service, Epic Games might generate detections for common cheating tools that are used across multiple games. However, because creating and maintaining cheat detections require continuous effort from the Epic Games team of analysts, detections for common cheating tools are not guaranteed.</li>
+						<li>
+							<strong>Game-specific cheat detection</strong>: Cheat detection work specific to your game by the Epic Games team of analysts is available as part of a paid enterprise agreement.  For more information, contact the Epic Games anti-cheat licensing team at
+							<a href="https://easy.ac/licensing">easy.ac/licensing</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="anti-cheat-interface-integration-steps">Anti-Cheat Interface Integration Steps</h2>
+			</div>
+			<p>To use the Anti-Cheat Interfaces, you must:</p>
+			<ol>
+				<li>Review and adhere to the development pre-requisites.<br>
+					Documentation:
+					<ul>
+						<li>
+							<a href="#development-prerequisites">Development Prerequisites</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>Determine your network architecture and client policy type.<br>
+					Documentation:
+					<ul>
+						<li>
+							<a href="#game-network-architecture">Game Network Architecture</a>
+							on this page.</li>
+						<li>
+							<a href="#client-credentials-and-policy-configuration">Client Credentials and Policy Configuration</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>Configure your client module, anti-cheat integrity tool, and Anti-Cheat Bootstrapper executable.<br>
+					Documentation:
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#client-module-setup-and-updates">Using the Anti-Cheat Interfaces &gt; Client Module Setup and Updates</a>.</li>
+						<li>
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#anti-cheat-integrity-tool-configuration">Using the Anti-Cheat Interfaces &gt; Anti-Cheat Integrity Tool Configuration</a>.</li>
+						<li>
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#configure-the-anti-cheat-bootstrapper-executable">Using the Anti-Cheat Interfaces &gt; Configure the Anti-Cheat Bootstrapper Executable</a>.</li>
+					</ul>
+				</li>
+				<li>(<em>Windows Only</em>) Configure the Windows Service Installer.<br>
+					Documentation:
+					<ul>
+						<li>
+							<a href="#windows-service-installer">Windows Service Installer</a>
+							on this page.</li>
+					</ul>
+				</li>
+				<li>Integrate the Anti-Cheat interfaces with your game code:
+					<ul>
+						<li>a. Establish user identity with the Connect Interface.<br>
+							Documentation:
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>.</li>
+							</ul>
+						</li>
+						<li>b. Register callbacks for Client-Server mode or Peer-to-Peer mode.<br>
+							Documentation:
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#client-server-mode">Using the Anti-Cheat Interfaces &gt; Client Server Mode</a>.</li>
+								<li>
+									<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#peer-to-peer-mode">Using the Anti-Cheat Interfaces &gt; Peer-to-Peer Mode</a>.</li>
+							</ul>
+						</li>
+						<li>c. Set up protected game-session notifications.<br>
+							Documentation:
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#protected-game-session-notifications">Using the Anti-Cheat Interfaces &gt; Protected Game Session Notifications</a>.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Confirm the Anti-Cheat interfaces are working properly by following the Anti-Cheat integration checklist.<br>
+					Documentation:
+					<ul>
+						<li>
+							<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/anti-cheat-integration-check-list">Anti-Cheat Integration Checklist</a>.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>This service is also available as a web API. See the
+					<a href="/docs/web-api-ref/anti-cheat-web-apis">Anti-Cheat Web APIs</a>
+					documentation for details.</li>
+			</ul>
+			<div>
+				<h2 id="development-prerequisites">Development Prerequisites</h2>
+			</div>
+			<p>For the anti-cheat services to be effective, they must go on top of a solid game foundation that follows security best practices and actively addresses game issues as they arise.</p>
+			<div>
+				<h3 id="game-architecture">Game Architecture</h3>
+			</div>
+			<p>We highly recommend using dedicated game servers with authority over as much of the game state as possible.</p>
+			<p>For example, cheats allowing players to fly, teleport, or move extremely fast can usually be completely prevented at the game architecture level by giving game servers authority over player positions and movement.</p>
+			<div>
+				<h3 id="game-exploits">Game Exploits</h3>
+			</div>
+			<p>Game logic errors, bugs, or edge cases are often discovered and exploited by players. However, anti-cheat understands the game code to be working as written and cannot solve these issues. As the game developer, you must fix these problems as you continue to develop and new exploits are discovered.</p>
+			<div>
+				<h3 id="game-level-anti-cheat">Game Level Anti-Cheat</h3>
+			</div>
+			<p>Your own development team can prevent and detect cheating at the game level using their knowledge of game-specific details. Games targeted by cheat sellers see major benefit from having a small development team to address game issues, complemented by the anti-cheat service.</p>
+			<div>
+				<h3 id="player-reports">Player Reports</h3>
+			</div>
+			<p>It is critical to implement the Reports Interface to allow players to submit reports when they believe another player in the same game session is cheating. This provides valuable context and feedback on the effectiveness of the anti-cheat protection in each game.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>To generate sanctions with the Anti-Cheat service, you must first implement the Reports Interface.</li>
+			</ul>
+			<p>Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety/reports-interface">Reports Interface</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="player-progression-management">Player Progression Management</h3>
+			</div>
+			<p>The anti-cheat service cannot effectively protect offline or solo play scenarios where progress is later synced to the game’s servers.</p>
+			<div>
+				<h2 id="game-network-architecture">Game Network Architecture</h2>
+			</div>
+			<p>The Anti-Cheat interfaces support different modes for a variety of game network architectures. While the Anti-Cheat Client interface supports each of these game networks, the Anti-Cheat Server interface works specifically for dedicated servers (client-server mode).</p>
+			<div>
+				<h3 id="dedicated-server-client-server-mode">Dedicated Server (Client-Server Mode)</h3>
+			</div>
+			<p>Use this mode with an authoritative game server, and implement both the Anti-Cheat Client and Server interfaces.</p>
+			<div tabindex="0" aria-label="Communication flow of the Client-Server mode of network architecture image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Communication flow of the Client-Server mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>The operator of an individual game server can intentionally disable or disconnect the anti-cheat within their server by manipulating network connections or through other methods. This is an accepted risk for games that support community operated servers. To mitigate this risk, the user interface may differentiate between “official” and “unofficial” game servers.</p>
+			<p>You must match your client protected sessions with game server calls so that the client calls
+				<a href="/docs/api-ref/functions/eos-anti-cheat-client-begin-session">
+					<code>EOS_AntiCheatClient_BeginSession</code>
+				</a>
+				just before joining a game and triggering the game server to call
+				<a href="/docs/api-ref/functions/eos-anti-cheat-server-register-client">
+					<code>EOS_AntiCheatServer_RegisterClient</code>
+				</a>.</p>
+			<div>
+				<h3 id="peer-to-peer-mesh-peer-to-peer-mode">Peer-to-Peer Mesh (Peer-to-Peer Mode)</h3>
+			</div>
+			<p>Use this mode with a full-mesh layout where each game client exchanges network messages with every other game client, but none of them has full authority over the game session.</p>
+			<div tabindex="0" aria-label="Communication flow of the Peer-to-Peer mode of network architecture image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Communication flow of the Peer-to-Peer mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>In this mode, the Anti-Cheat Server interface is not used. Instead, each player uses the Anti-Cheat Client interface to verify that the others have anti-cheat protection active.</p>
+			<p>Call the
+				<a href="/docs/api-ref/functions/eos-anti-cheat-client-register-peer">
+					<code>EOS_AntiCheatClient_RegisterPeer</code>
+				</a>
+				function for each peer that participates in the same game session as the local user.</p>
+			<div>
+				<h3 id="listen-server">Listen Server</h3>
+			</div>
+			<p>When a single player acts as an authoritative game host for a game session, you must use either Client-Server mode or Peer-to-Peer mode.</p>
+			<div tabindex="0" aria-label="Communication flow of the Listen Server mode of network architecture image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="Communication flow of the Listen Server mode of network architecture" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>With Client-Server Mode:</p>
+			<ul>
+				<li>A simpler approach, but the authoritative game host client has a more privileged role with potential for abuse. In particular, a malicious authoritative game host client can intentionally block the anti-cheat from working in their session. If this is a concern, you should use the Peer-to-Peer mode implementation instead.</li>
+				<li>Implementation is the same as for dedicated servers, except that the logged-in local player must be specified in the call to
+					<a href="/docs/api-ref/functions/eos-anti-cheat-server-begin-session">
+						<code>EOS_AntiCheatServer_BeginSession</code>
+					</a>.</li>
+			</ul>
+			<p>With Peer-to-Peer Mode:</p>
+			<ul>
+				<li>The authoritative game host client should validate every player in the game session by registering each one as a peer and exchanging data as appropriate.
+					<ul>
+						<li>If a removal action required callback is triggered for a peer, the authoritative game host should kick that player from the game session.</li>
+					</ul>
+				</li>
+				<li>Non-authoritative game clients should validate the game host client only by registering that specific client as a peer and exchanging data as appropriate.
+					<ul>
+						<li>If a removal action required callback is triggered for the game host, the non-authoritative client should disconnect and display an appropriate error message.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="client-credentials-and-policy-configuration">Client Credentials and Policy Configuration</h2>
+			</div>
+			<p>When configuring your client credentials for the Anti-Cheat Interfaces, consider your network architecture and use case.<br>
+				Documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy">Epic Online Services &gt; Client Policy</a>.</li>
+				<li>
+					<a href="#game-network-architecture">Game Network Architecture</a>
+					on this page.</li>
+			</ul>
+			<p>For the Anti-Cheat Client Interface, you should use the predefined
+				<em>GameClient</em>
+				policy type. Always enable the
+				<code>User Required</code>
+				flag for game clients.</p>
+			<p>For the Anti-Cheat Server interface and a game using only trusted official servers, you should use the predefined
+				<code>TrustedServer</code>
+				policy type and keep the credential secret.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>It might be necessary to use a different predefined policy type or custom policy, but consider this carefully.</li>
+			</ul>
+			<p>The following policy actions are available:</p>
+			<p>
+				<code>authenticateForLocalUser</code>
+				<br>
+				<em>Required</em>
+			</p>
+			<ul>
+				<li>Allows the client credential holder to authenticate itself with the anti-cheat backend using either the Client-Server or Peer-to-Peer anti-cheat client modes</li>
+			</ul>
+			<p>
+				<code>authenticateForAnyUser</code>
+				<br>
+				<em>Only use this policy action when the client hosts a listen server using the Client-Server mode.</em>
+			</p>
+			<ul>
+				<li>Allows the client credential holder to authenticate other users using the Anti-Cheat Server Interface</li>
+			</ul>
+			<p>
+				<code>sendTrustedGamePlayDataForAnyUser</code>
+				<br>
+				<em>Only use this policy action for a trusted, official dedicated server. Never use or publish for a game client or community hosted game server.</em>
+			</p>
+			<ul>
+				<li>Allows the client credential holder to submit anti-cheat gameplay data for any user, and should only be used with trusted official dedicated servers that you are confident cannot be tampered with.</li>
+			</ul>
+			<div>
+				<h2 id="platform-components">Platform Components</h2>
+			</div>
+			<p>Using the Anti-Cheat Interfaces requires distributing some binaries to game clients. These are included in the EOS SDK download zip file in the following directory:
+				<code>SDK/Tools/EOS_AntiCheatTools/</code>.</p>
+			<p>Be sure to only distribute files in the
+				<code>dist</code>
+				subdirectory to players as part of the game client. The other files are for development use only, and you must not distribute them. You must update the platform component files in use every time you update to a new version of the EOS SDK.</p>
+			<div>
+				<h3 id="windows">Windows</h3>
+			</div>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>The Anti-Cheat Client only supports 64-bit Windows versions. 32-bit games are supported as long as the operating system itself has been installed with 64-bit support.</li>
+			</ul>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>File Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Service Installer</td>
+						<td>
+							<code>EasyAntiCheat_EOS_Setup.exe</code>
+						</td>
+						<td>(<strong>Required</strong>) Used to install, repair, or uninstall the Anti-Cheat Windows service</td>
+					</tr>
+					<tr>
+						<td>Anti-Cheat Bootstrapper</td>
+						<td>
+							<code>start_protected_game.exe</code>
+						</td>
+						<td>Prepares the anti-cheat and starts the game process with normal anti-cheat client protection available</td>
+					</tr>
+					<tr>
+						<td>Service</td>
+						<td>
+							<code>EasyAntiCheat_EOS.exe</code>
+						</td>
+						<td>A Windows service executable that allows the anti-cheat to initialize its other components</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="windows-dist-subdirectory-structure">Windows 'dist' Subdirectory Structure</h4>
+			</div>
+			<div>
+				<section>
+					<pre>&lt;GameRoot&gt;\start_protected_game.exe&lt;GameRoot&gt;\EasyAntiCheat\EasyAntiCheat_EOS_Setup.exe&lt;GameRoot&gt;\EasyAntiCheat\Settings.json&lt;GameRoot&gt;\EasyAntiCheat\SplashScreen.png&lt;GameRoot&gt;\EasyAntiCheat\Localization</pre>
+				</section>
+			</div>
+			<div>
+				<h4 id="windows-service-installer">Windows Service Installer</h4>
+			</div>
+			<p>For Windows, you must configure an anti-cheat system service to install and uninstall with your game. This requires the Windows user to have admin rights while installing the game, but does not require admin rights to start the game later. When an anti-cheat protected game starts, the anti-cheat bootstrapper automatically starts the Windows service. When the game exits, the Windows service automatically stops.</p>
+			<div>
+				<h5 id="configuration">Configuration</h5>
+			</div>
+			<ol>
+				<li>Get your game's ProductId from the Product Settings page in the Developer Portal. (Note that your game is known as a "product" in the Developer Portal.)<br>
+					To do this:
+					<ul>
+						<li>a. Go to the Developer Portal
+							<a href="https://dev.epicgames.com/portal/en-US/">dev.epicgames.com/portal</a>.<br>
+							(Make sure you are in the correct organization for your game (product)–click
+							<strong>Organization</strong>
+							at the top of the left navigation to check.)</li>
+						<li>b. In the left navigation, click the name of your game (product)–it's listed under
+							<strong>Your products</strong>
+							in the left navigation.</li>
+						<li>c. In the left navigation, click
+							<strong>Product Settings</strong>.</li>
+						<li>d. Scroll down to
+							<strong>PRODUCT</strong>
+							to see your game's (product's) product ID.</li>
+					</ul>
+				</li>
+				<li>Configure your installer to run the following commands:
+					<ul>
+						<li>
+							<code>EasyAntiCheat_EOS_Setup.exe install &lt;Your ProductId&gt;</code>
+						</li>
+						<li>
+							<code>EasyAntiCheat_EOS_Setup.exe uninstall &lt;Your ProductId&gt;</code>
+						</li>
+					</ul>
+				</li>
+				<li>If successful, the process exit code of this command is
+					<code>0</code>. A non-zero process exit code indicates failure.</li>
+			</ol>
+			<div>
+				<h5 id="store-specific-prerequisites">Store-Specific Prerequisites</h5>
+			</div>
+			<p>
+				<strong>Epic Games Store</strong>
+				<br>
+				Refer to the Epic Games Store documentation provided to you.</p>
+			<p>
+				<strong>Steam</strong>
+				<br>
+				Refer to the Steamworks install script documentation at
+				<a href="https://partner.steamgames.com/doc/sdk/installscripts">partner.steamgames.com/~installscripts</a>. Typically, you define the following:</p>
+			<ul>
+				<li>A “Run Process"
+					<a href="https://partner.steamgames.com/doc/sdk/installscripts#run_process">partner.steamgames.com/~run_process</a>
+					block to trigger the service install operation.</li>
+				<li>A "Run Process On Uninstall"<a href="https://partner.steamgames.com/doc/sdk/installscripts#runOnUninstall">partner.steamgames.com/~runOnIntall</a>” block to trigger the service uninstall operation.</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>Steam Install script functionality might not be available on platforms other than Windows.</li>
+			</ul>
+			<div>
+				<h3 id="mac">Mac</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>File Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Anti-Cheat Bootstrapper (universal)</td>
+						<td>
+							<code>start_protected_game.app</code>
+						</td>
+						<td>Use the universal version of the anti-cheat bootstrapper if your game has a universal build. This prepares the anti-cheat and starts the game process with normal anti-cheat client protection available.</td>
+					</tr>
+					<tr>
+						<td>Anti-Cheat Bootstrapper (x86-64)</td>
+						<td>
+							<code>start_protected_game_x86-64.app</code>
+						</td>
+						<td>Use the x86-64 version of the anti-cheat bootstrapper if your game has only an x86-64 build. This prepares the anti-cheat and starts the game process with normal anti-cheat client protection available.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="mac-dist-subdirectory-structure">Mac dist Subdirectory Structure</h4>
+			</div>
+			<div>
+				<section>
+					<pre>&lt;GameRoot&gt;\start_protected_game.app&lt;GameRoot&gt;\start_protected_game_x86-64.app&lt;GameRoot&gt;\EasyAntiCheat\Settings.json&lt;GameRoot&gt;\EasyAntiCheat\SplashScreen.png&lt;GameRoot&gt;\EasyAntiCheat\Localization</pre>
+				</section>
+			</div>
+			<div>
+				<h3 id="linux">Linux</h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>File Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Anti-Cheat Bootstrapper</td>
+						<td>
+							<code>start_protected_game</code>
+						</td>
+						<td>Prepares the anti-cheat and starts the game process with normal anti-cheat client protection available</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="linux-dist-subdirectory-structure">Linux
+					<strong>dist</strong>
+					Subdirectory Structure</h4>
+			</div>
+			<div>
+				<section>
+					<pre>&lt;GameRoot&gt;\start_protected_game&lt;GameRoot&gt;\EasyAntiCheat\Settings.json&lt;GameRoot&gt;\EasyAntiCheat\SplashScreen.png&lt;GameRoot&gt;\EasyAntiCheat\Localization</pre>
+				</section>
+			</div>
+			<div>
+				<h2 id="windows-security-feature-requirements">Windows Security Feature Requirements</h2>
+			</div>
+			<p>Players must have Secure Boot, TPM, and HVCI enabled when they use the Anti-Cheat Interfaces on the following versions of Windows for x86-64:</p>
+			<ul>
+				<li>Windows on Arm</li>
+				<li>Beta</li>
+				<li>Insider</li>
+			</ul>
+			<p>These security features are enabled by default on Windows on Arm, and if disabled, players are prompted to enable them.</p>
+			<div>
+				<h2 id="linux-wine-and-proton-support">Linux Wine and Proton Support</h2>
+			</div>
+			<p>It is possible to run many Windows games on Linux using the Wine or Proton compatibility layers and the anti-cheat client protection can support this configuration. To enable support for your game, you must be using SDK version 1.14 or greater and activate a client module for the Linux platform (documentation:
+				<a href="/docs/epic-online-services/trust-and-safety/anti-cheat-interfaces/using-anti-cheat#client-module-setup-and-updates">Using the Anti-Cheat Interfaces &gt; Client Module Setup and Updates</a>).</p>
+			<p>Players running the game using Wine or Proton will use the Linux client module, so you should test and activate client module updates for Linux regularly in addition to Windows.</p>
+			<div>
+				<h2 id="console-support">Console Support</h2>
+			</div>
+			<p>Console platforms generally rely on hardware security features to prevent arbitrary code execution, which is a prerequisite for most types of cheats. Because these platform-specific security features cover most needs, anti-cheat client protection is not offered for consoles. The Anti-Cheat Client interface in Peer-to-Peer mode can be used to support cross-platform play. For the client-server mode, a console client can't host a protected session (listen server), but a console client can connect to a PC hosting a protected session.</p>
+			<p>To support cross-platform play between PC and console users, you must first determine whether a player is using a platform that does not require client protection when they join a protected game session. This check must not rely on the player’s game client being untampered. Having the game client send a message indicating the platform it is using is not enough since a malicious user could manipulate the value to avoid anti-cheat enforcement.</p>
+			<p>The EOS Connect interface provides EOS ID Tokens (documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-reference#id-tokens">Connect Interface Reference &gt; ID Tokens</a>) which include a device type field that can be used to securely verify when a player is running the game from common consoles. To support other platforms you must consult the platform vendor’s own documentation and find a way to do a robust check with a platform ticket or token that the game client generates and the game server, backend, or peer player independently verifies. When these checks validate a user is on a console platform that does not require anti-cheat client protection, the client can be registered with anti-cheat using the
+				<code>EOS_ACCCT_UnprotectedClient</code>
+				flag to exempt the client from anti-cheat client checks. This allows them to still participate in Peer-to-Peer mode sessions with protected PC players or be referenced in server-side anti-cheat gameplay data collection.</p>
+			<p>For more information about ID Tokens, see the following documentation:</p>
+			<ul>
+				<li>If you are not using Epic Games accounts:
+					<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-reference#id-tokens">Connect Interface Reference &gt; ID Tokens</a>.</li>
+				<li>If you are using Epic games accounts,
+					<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/retrieve-and-validate-id-tokens">Retrieve and Validate ID Tokens</a>.</li>
+			</ul>
+			<div>
+				<h2 id="mobile-support">Mobile Support</h2>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				Peer-to-Peer mode is not supported on mobile.</p>
+			<p>Mobile clients can connect to a dedicated server on a PC and play with other players on a PC-based client with anti-cheat protection.</p>
+			<p>After your game confirms the client is on a mobile device, the server must call
+				<a href="/docs/api-ref/functions/eos-anti-cheat-server-register-client">
+					<code>EOS_AntiCheatServer_RegisterClient</code>
+				</a>
+				with
+				<code>EOS_ACCCT_UnprotectedClient</code>
+				. Unlike console devices, the EOS SDK does not provide a mechanism to confirm a client is on a mobile device. You must include your own mechanism to confirm the client is on a mobile device in your game.</p>
+			<p>
+				<strong>Note:</strong>
+				Implementing a solution for confirming a client is on a mobile device is out of scope of Epic Games support.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#anti-cheat-interface-integration-steps">Anti-Cheat Interface Integration Steps</a>
+								</li>
+								<li>
+									<a href="#development-prerequisites">Development Prerequisites</a>
+								</li>
+								<li>
+									<a href="#game-architecture">Game Architecture</a>
+								</li>
+								<li>
+									<a href="#game-exploits">Game Exploits</a>
+								</li>
+								<li>
+									<a href="#game-level-anti-cheat">Game Level Anti-Cheat</a>
+								</li>
+								<li>
+									<a href="#player-reports">Player Reports</a>
+								</li>
+								<li>
+									<a href="#player-progression-management">Player Progression Management</a>
+								</li>
+								<li>
+									<a href="#game-network-architecture">Game Network Architecture</a>
+								</li>
+								<li>
+									<a href="#dedicated-server-client-server-mode">Dedicated Server (Client-Server Mode)</a>
+								</li>
+								<li>
+									<a href="#peer-to-peer-mesh-peer-to-peer-mode">Peer-to-Peer Mesh (Peer-to-Peer Mode)</a>
+								</li>
+								<li>
+									<a href="#listen-server">Listen Server</a>
+								</li>
+								<li>
+									<a href="#client-credentials-and-policy-configuration">Client Credentials and Policy Configuration</a>
+								</li>
+								<li>
+									<a href="#platform-components">Platform Components</a>
+								</li>
+								<li>
+									<a href="#windows">Windows</a>
+								</li>
+								<li>
+									<a href="#windows-dist-subdirectory-structure">Windows 'dist' Subdirectory Structure</a>
+								</li>
+								<li>
+									<a href="#windows-service-installer">Windows Service Installer</a>
+								</li>
+								<li>
+									<a href="#configuration">Configuration</a>
+								</li>
+								<li>
+									<a href="#store-specific-prerequisites">Store-Specific Prerequisites</a>
+								</li>
+								<li>
+									<a href="#mac">Mac</a>
+								</li>
+								<li>
+									<a href="#mac-dist-subdirectory-structure">Mac dist Subdirectory Structure</a>
+								</li>
+								<li>
+									<a href="#linux">Linux</a>
+								</li>
+								<li>
+									<a href="#linux-dist-subdirectory-structure">Linux dist Subdirectory Structure</a>
+								</li>
+								<li>
+									<a href="#windows-security-feature-requirements">Windows Security Feature Requirements</a>
+								</li>
+								<li>
+									<a href="#linux-wine-and-proton-support">Linux Wine and Proton Support</a>
+								</li>
+								<li>
+									<a href="#console-support">Console Support</a>
+								</li>
+								<li>
+									<a href="#mobile-support">Mobile Support</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

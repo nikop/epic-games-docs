@@ -1,0 +1,256 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Social</h1>
+			<h2>Details on what a player can do on the Social tab of the Social Overlay.</h2>
+			<div>
+				<div>5 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						The Social Overlay does not support the following platforms: macOS, Linux, Linux ARM64, Android, and iOS.<br>
+						Players must sign in with their Epic Games account or a proxy account to use the Social Overlay.</p>
+				</div>
+			</div>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>This documentation assumes that you install the Social Overlay with your game and initialize the EOS SDK when a player starts your game. For more information on how to install and initialize the Social Overlay, see the
+						<a href="/docs/epic-online-services/accounts-and-social/social-overlay/sdk-integration">SDK Integration</a>
+						documentation.</p>
+				</div>
+			</div>
+			<p>When a player in your game opens the Social Overlay for the first time, they see the Social tab. They can also navigate to the Social tab if it is not open. The player can use the Social tab to see a list of their friends.</p>
+			<div>
+				<h4 id="what-is-a-friend">What is a Friend?</h4>
+			</div>
+			<p>A player (Player 1) is a friend to another player (Player 2) if:</p>
+			<ul>
+				<li>Both players have an Epic Games account, or an account on a platform supported by the Social Overlay.</li>
+				<li>Player 1 receives and accepts an invitation via the Social Overlay from Player 2 to join their friends list, or accepts an invitation on a platform supported by the Social Overlay.</li>
+				<li>Neither player blocks the other player (EOS SDK 1.15 onwards only)</li>
+			</ul>
+			<p>For more information on how to send an invite or block a player, see the sections below on each EOS SDK version.</p>
+			<p>For a list of platforms supported by the Social Overlay, see the
+				<a href="/docs/epic-online-services/accounts-and-social/social-overlay/technical-overview">Technical Overview</a>
+				documentation.</p>
+			<p>The player can also use the Social tab, or Add Friends tab with EOS SDK 1.16 or later, to search for other players that have an Epic Games account, see if their friends are online, and if they are playing the same game.</p>
+			<center>
+				<div tabindex="0" aria-label="The Social Overlay when the player selects the Social tab image, press Enter to open full size">
+					<div>
+						<span>
+							<img alt="The Social Overlay when the player selects the Social tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+							<noscript></noscript>
+						</span>
+					</div>
+					<figcaption></figcaption>
+				</div>
+			</center>
+			<center>
+				<em>The Social Overlay when the player selects the Social tab.</em>
+			</center>
+			<br>
+			<p>When a player uses the Social tab, what they can do depends on the version of the EOS SDK that you use for your game. See the sections below on each SDK version for more information.</p>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h3 id="the-social-tab-with-eos-sdk-114">The Social tab with EOS SDK 1.14</h3>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>When you use EOS SDK 1.14 for your game, the player can use the Social tab to do the following:</p>
+										<ul>
+											<li>See a list of their friends, and:
+												<ul>
+													<li>Their friends' Epic Games account name.
+														<br>
+														<strong>Note:</strong>
+														A player can only be a friend if they receive a friend invitation in your game and accept it in your game (EOS SDK 1.14 only).
+														<br>
+														For more information on how a friend is defined, see the
+														<a href="#what-is-a-friend">What is a Friend?</a>
+														section.</li>
+													<li>If their friends are online and playing the same game or not. Online friends playing the same game show the text "Online" below their name.
+														<br>
+														<strong>Note:</strong>
+														Friends that are online, but are not playing your game, are shown on the Social tab as offline (EOS SDK 1.14 only).</li>
+												</ul>
+											</li>
+										</ul>
+										<p>When you use EOS SDK 1.14 for your game, players using the Social Overlay see the list of friends grouped in the following order:</p>
+										<ol>
+											<li>Friends playing your game and in your lobby or party.</li>
+											<li>Friends playing your game that are not in your lobby or party.</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h3 id="the-social-tab-with-eos-sdk-115">The Social tab with EOS SDK 1.15</h3>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>When you use EOS SDK 1.15 for your game, the player can use the Social tab to do the following:</p>
+										<ul>
+											<li>See a list of their friends, and:
+												<ul>
+													<li>Their friends' Epic Games account name and their display names for each games platform they are on.
+														<br>
+														For more information on how a friend is defined, see the
+														<a href="#what-is-a-friend">What is a Friend?</a>
+														section.</li>
+													<li>What games platform their friends are currently playing on.</li>
+													<li>Players that are not on their friends list but are in their party or lobby in your game.</li>
+													<li>If their friends are online and playing the same game or not. The player can see the text "Online" below their friend's name when they are playing the same game.</li>
+												</ul>
+											</li>
+											<li>Search for other players that have an Epic Games account and are not on your friends list. The player can use their Epic Games account or their display name from other games platforms to search.</li>
+											<li>Send an invitation to another player with an Epic Games account to join their friends list, game, player party, or game lobby.</li>
+											<li>Receive and accept an invitation from another player to join their friends list, game, player party, or game lobby.</li>
+											<li>Block another player. This removes the other player from their friends list (if they are on it), stops them from receiving invitations from that player, and hides their online status from the other player.</li>
+										</ul>
+										<p>
+											<strong>Note:</strong>
+											If the player is under the age of digital consent and their account requires a Guardian PIN, then they have to enter the Guardian PIN to send or accept invitations. See the
+											<a href="https://www.epicgames.com/site/en-US/cabinedaccounts">Epic Games Cabined Accounts</a>
+											documentation for more information.</p>
+										<p>When you use EOS SDK 1.15 for your game, players using the Social Overlay see the list of friends grouped in the following order:</p>
+										<ol>
+											<li>Friends playing your game and in your lobby or party.</li>
+											<li>Friends playing your game that are not in your lobby or session.</li>
+											<li>Friends who are offline.</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div tabindex="0" role="button" aria-expanded="false">
+						<div>
+							<h3 id="the-social-tab-with-eos-sdk-116-or-later">The Social tab with EOS SDK 1.16 or later</h3>
+						</div>
+						<div></div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<div role="region">
+									<div>
+										<p>When you use EOS SDK 1.16 or later for your game, the player can use the Social tab to do the following:</p>
+										<ul>
+											<li>
+												<p>See a list of their friends, and:</p>
+												<ul>
+													<li>Their friends' Epic Games account name and their display names for each games platform they are on.</li>
+													<li>Players that are not on their friends list but are in their party or lobby in your game. These players are not listed separately, the player only sees a number that represents how many players are not friends. For example, +2.
+														<br>
+														For more information on how a friend is defined, see the
+														<a href="#what-is-a-friend">What is a Friend?</a>
+														section.</li>
+													<li>What games platform their friends are currently playing on.</li>
+													<li>If their friends are online and playing the same game or not. The player can see the text "Online" below their friend's name when they are playing the same game.</li>
+												</ul>
+											</li>
+											<li>
+												<p>Search for other players that have an Epic Games account and are not on your friends list. The player can use their Epic Games account or their display name from other games platforms to search.</p>
+											</li>
+											<li>
+												<p>Send an invitation to another player with an Epic Games account to join their friends list, game, player party, or game lobby.</p>
+											</li>
+											<li>
+												<p>Receive and accept an invitation from another player to join their friends list, game, player party, or game lobby.</p>
+											</li>
+											<li>
+												<p>Block another player. This removes the other player from their friends list (if they are on it), stops them from receiving invitations from that player, and hides their online status from the other player.</p>
+											</li>
+											<li>
+												<p>Select
+													<strong>Leave Party</strong>
+													to leave a player party in your game.</p>
+											</li>
+										</ul>
+										<p>
+											<strong>Note:</strong>
+											If the player is under the age of digital consent and their account requires a Guardian PIN, then they have to enter the Guardian PIN to send or accept invitations. See the
+											<a href="https://www.epicgames.com/site/en-US/cabinedaccounts">Epic Games Cabined Accounts</a>
+											documentation for more information.</p>
+										<p>When you use EOS SDK 1.16 or later for your game, players using the Social Overlay see the list of friends grouped in the following order:</p>
+										<ol>
+											<li>Friends playing your game and in your lobby, session or party.</li>
+											<li>Friends playing your game that are not in your lobby or party.</li>
+											<li>Friends who are offline.</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#what-is-a-friend">What is a Friend?</a>
+								</li>
+								<li>
+									<a href="#the-social-tab-with-eos-sdk-114">The Social tab with EOS SDK 1.14</a>
+								</li>
+								<li>
+									<a href="#the-social-tab-with-eos-sdk-115">The Social tab with EOS SDK 1.15</a>
+								</li>
+								<li>
+									<a href="#the-social-tab-with-eos-sdk-116-or-later">The Social tab with EOS SDK 1.16 or later</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -1,0 +1,85 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Sanction Players — Introduction</h1>
+			<h2>Overview of how to sanction players in your game.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Game Service — authenticate players with the Connect Interface.</p>
+			</div>
+			<p>You can apply a sanction to players who violate the rules and community guidelines of your game. It prevents these players from using certain features or participating in certain game activities. For example, if a player mistreats other players in voice chat, you could apply a sanction against them that restricts them from being able to use voice chat. Use the Epic Online Services (EOS) Sanctions service to retrieve active sanctions against a player and create sanction appeals for players of your game.</p>
+			<p>
+				<strong>Note:</strong>
+			</p>
+			<ul>
+				<li>The EOS Sanctions service only stores information about sanctions.</li>
+				<li>You are responsible for implementing the actual consequences of a sanction that you have defined.</li>
+				<li>You can make a sanction last a specific number of days, or you can make it permanent.</li>
+				<li>The EOS Sessions service provides the following predefined sanctions that you can use out of the box. For more information, see the following section of this guide:
+					<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/set-up-sanctions#step-b-apply-sanctions-to-players">1. Set Up and Apply Sanctions &gt; Step B. Apply Sanctions to Players</a>.
+					<ul>
+						<li>
+							<code>RESTRICT_GAME_ACCESS</code>
+						</li>
+						<li>
+							<code>RESTRICT_MATCHMAKING</code>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Some examples of sanctions include:</p>
+			<ul>
+				<li>A ban from joining a session to play your game.</li>
+				<li>A communications ban.</li>
+			</ul>
+			<p>
+				<strong>Note:</strong>
+				The Sanctions service is also available as a Web API. See the
+				<a href="/docs/web-api-ref/sanctions-web-apis">Sanctions Web APIs</a>
+				documentation for more information. This guide does not cover how to use the Sanctions Web APIs.</p>
+			<p>You can use the Sanctions service by itself in your game, but we recommend that you combine it with related EOS services. For example, combine it with the Reports service so you can use the information from player reports to determine whether to enact restrictions against a player. You can also combine it with the Sessions service to enforce matchmaking restrictions against a player when they try to join a session.</p>
+			<p>For more information, see the following documentation:</p>
+			<ul>
+				<li>
+					<a href="/docs/epic-online-services/trust-and-safety/reports-interface">Reports Interface</a>
+				</li>
+				<li>
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface">Sessions Interface</a>
+				</li>
+			</ul>
+			<p>This guide consists of the following sections:</p>
+			<ol>
+				<li>Set Up and Apply Sanctions</li>
+				<li>Retrieve Sanctions</li>
+				<li>Allow Players to Appeal Sanctions</li>
+				<li>Manage Sanctions and Sanction Appeals</li>
+			</ol>
+			<p>
+				<strong>Note:</strong>
+				This guide follows a numbered sequence. However, you only need to follow section 1. Set Up and Apply Sanctions first. You can follow the other sections of this guide independently of each other, in any order.</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<p>For a full list of the available guides, see the
+				<a href="/docs/epic-online-services/how-to-guides">How-to Guides</a>
+				page.</p>
+			<p>Next section:
+				<a href="/docs/epic-online-services/trust-and-safety/sanctions-interface/sanctions-guide/set-up-sanctions">1. Set Up and Apply Sanctions</a>
+			</p>
+		</section>
+	</section>
+</section>

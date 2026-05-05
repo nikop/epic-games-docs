@@ -1,0 +1,341 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Identity Provider Management</h1>
+			<h2>Configure which identity provider accounts can participate in the EOS cross-platform features of your game.</h2>
+			<div>
+				<div>7 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Epic Online Services (EOS) can link player accounts from multiple online stores and gaming services. These are known as "identity providers" (or "platforms"). This enables players to share their data across different platforms they use and participate in cross-platform features like Sessions when they are using your game.</p>
+			<p>Identity providers supported by EOS:</p>
+			<ul>
+				<li>Amazon</li>
+				<li>Apple</li>
+				<li>Discord</li>
+				<li>Epic Games<code>*</code>
+				</li>
+				<li>GOG Galaxy</li>
+				<li>Google</li>
+				<li>itch.io</li>
+				<li>Nintendo</li>
+				<li>Oculus</li>
+				<li>PlayStation Network</li>
+				<li>Steam</li>
+				<li>Xbox Live</li>
+				<li>OpenID</li>
+			</ul>
+			<p>
+				<strong>Note</strong>: Identity providers denoted
+				<code>*</code>
+				do not require configuration in your Developer Portal.</p>
+			<div>
+				<h2 id="identity-provider-login-flow">Identity Provider Login Flow</h2>
+			</div>
+			<p>The EOS Connect Interface provides authentication for identity providers. When a player starts an instance of your game, on a supported and enabled identity provider, the game authenticates the player through the EOS Connect Interface. See the diagram below for details of the login flow.</p>
+			<p>For more information, see the documentation:
+				<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>.</p>
+			<p>
+				<strong>Note:</strong>
+				The Connect Interface only provides authentication for EOS Game Services which is one type of service that is available for EOS. For more information on the types of service available, see the following documentation:
+				<a href="/docs/epic-online-services/eos-overview#type-of-service">EOS Overview &gt; Type of Service</a>.</p>
+			<hr>
+			<div tabindex="0" aria-label=" image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption>
+					<p>The identity provider login flow using the EOS Connect Interface.</p>
+				</figcaption>
+			</div>
+			<hr>
+			<p>
+				<strong>Notes on the Login Flow</strong>
+			</p>
+			<ul>
+				<li>
+					<p>The identity provider provides the authentication token. Use the EOS SDK APIs listed below to specify the following:</p>
+					<ul>
+						<li>The type of authentication token needed to validate the player.</li>
+						<li>Which identity provider to check the token trust and validity.</li>
+						<li>Use these EOS SDK APIs:
+							<ul>
+								<li>
+									<a href="/docs/api-ref/enums/eos-e-external-credential-type">EOS_EExternalCredentialType</a>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-connect-login">EOS_Connect_Login</a>
+								</li>
+								<li>
+									<strong>Note</strong>: You may need multiple authentication tokens for game with multiple environments.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>The EOS service verifies the submitted token and the player's identity. The service uses the identity provider configuration to connect the player to existing game data.</p>
+				</li>
+				<li>
+					<p>If the player is accessing the game for the first time on a new platform, the EOS service sees that the player has no data for that game on that platform.</p>
+					<ul>
+						<li>Your game client can then ask the player to do either of the following:
+							<ul>
+								<li>Proceed with their user account on the current platform.</li>
+								<li>Create a new user account for that game on that platform.</li>
+								<li>Log in using another user account that they have previously used to access the game.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>If the player chooses to log in with an existing account from another identity provider, your game can ask the player if they want to link the two accounts.<br>
+						After this initial event, the EOS service remembers which account to use when the player accesses this game, and does not prompt the player again.</p>
+				</li>
+			</ul>
+			<div>
+				<h2 id="player-data">Player Data</h2>
+			</div>
+			<p>The EOS Connect Interface service stores the following data about your player:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Usage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Identity Provider ID</td>
+						<td>Identifies the external user identity provider uniquely by name.</td>
+						<td>A unique string. For example, this could be
+							<code>epicgames</code>,
+							<code>steam</code>,
+							<code>uplay</code>,<code>psn</code>,
+							<code>nintendo</code>, or
+							<code>xbl</code>.</td>
+					</tr>
+					<tr>
+						<td>Identity Provider Environment</td>
+						<td>Identifies the environment to which the account is scoped for, if applicable.</td>
+						<td>A unique string within the scope of an identity provider.</td>
+					</tr>
+					<tr>
+						<td>Account ID</td>
+						<td>Identifies a player uniquely within the external user account system.</td>
+						<td>An arbitrary string. For example, this could be the player's Epic Account ID or Steam ID.</td>
+					</tr>
+					<tr>
+						<td>Display Name</td>
+						<td>The player's last seen platform display name that is shown to other players in-game. This is updated each time the player authenticates with EOS Connect.</td>
+						<td>This is the name that is used for player leaderboards. For example, the top 10 best scorers for EOS Leaderboards game service and potentially other future EOS game services.</td>
+					</tr>
+					<tr>
+						<td>Time Last Seen</td>
+						<td>Timestamp of when the player last authenticated with EOS Connect.</td>
+						<td>This is useful for informational purposes and to determine the player's current connected platform.</td>
+					</tr>
+					<tr>
+						<td>Device Model</td>
+						<td>Used only with EOS Device ID feature. This is an application-defined freeform text description intended to identify the device type and model.</td>
+						<td>You can use this to help customer support distinguish between different devices that the player might have linked with.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="configure-identity-providers-for-your-game">Configure Identity Providers for Your Game</h2>
+			</div>
+			<p>To configure identity providers for your game, go to the Product Settings page and click
+				<strong>Identity Providers</strong>
+			</p>
+			<p>To do this:</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>,  click the name of your product.(<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are in your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+				<li>The default tab is SDK Download &amp; Credentials. Click
+					<strong>Identity Providers</strong>.</li>
+				<li>Follow the onscreen instructions to add new identity providers.</li>
+			</ol>
+			<p>After you have added an identity provider, you can enable it in any of your product's sandboxes. To enable an identity provider:</p>
+			<ol>
+				<li>Go to the Product Settings page and click
+					<strong>Sandboxes</strong>.</li>
+				<li>In the Sandboxes tab, click
+					<strong>Identity Providers</strong>
+					against the sandbox you want to enable identity providers for.</li>
+				<li>Follow the onscreen instructions to configure identity providers.</li>
+			</ol>
+			<div>
+				<h2 id="propriety-user-accounts-and-openid-provider">Propriety User Accounts and OpenID Provider</h2>
+			</div>
+			<p>If your organization owns a proprietary user account system, you can add authentication support by adding OpenID as an identity provider. Use the OpenID Provider configuration to authenticate your game's players with the EOS service and use the services in the same way as other identity providers.</p>
+			<p>The OpenID Provider verifies tokens by using the UserInfo API Endpoint or JSON Web Key Set (JWKS).</p>
+			<div>
+				<h3 id="userinfo-api-endpoint">UserInfo API Endpoint</h3>
+			</div>
+			<p>To configure the UserInfo API Endpoint, you need to specify either of the following:</p>
+			<ul>
+				<li>The claim names of the JWT access token.</li>
+				<li>JSON response field names for the user's account ID.</li>
+			</ul>
+			<p>You must also specify the display name returned by the UserInfo Endpoint.</p>
+			<p>The EOS authentication service uses the access token passed to the EOS API
+				<a href="/docs/api-ref/functions/eos-connect-login">EOS_Connect_Login</a>
+				to call the UserInfo API Endpoint.</p>
+			<p>The API endpoint uses the HTTPS protocol and either the GET or POST HTTP methods. You must also implement the following possible error responses:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<strong>HTTP Response Code</strong>
+						</th>
+						<th>
+							<strong>EOS_EResult Returned</strong>
+						</th>
+						<th>
+							<strong>Description</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>200 OK</td>
+						<td>EOS_Success</td>
+						<td>The access token is valid and trusted.</td>
+					</tr>
+					<tr>
+						<td>401 Unauthorized</td>
+						<td>EOS_Connect_ExternalTokenValidationFailed</td>
+						<td>The access token is invalid, expired, or otherwise cannot be trusted.</td>
+					</tr>
+					<tr>
+						<td>403 Forbidden</td>
+						<td>EOS_Connect_ExternalTokenValidationFailed</td>
+						<td>The EOS authentication service was not allowed to make the request.
+							<strong>Warning</strong>: This should not happen.</td>
+					</tr>
+					<tr>
+						<td>404 Not Found</td>
+						<td>EOS_Connect_ExternalTokenValidationFailed</td>
+						<td>The player was not found in the account system.
+							<strong>Warning</strong>: This should not happen.</td>
+					</tr>
+					<tr>
+						<td>500 Internal Server Error</td>
+						<td>EOS_Connect_ExternalServiceUnvailable</td>
+						<td>Something went wrong and the authentication service could not complete the request.</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="json-web-key-set-jwks">JSON Web Key Set (JWKS)</h3>
+			</div>
+			<p>The OpenID Provider uses JWKS to verify the submitted ID Tokens. For this, you need to provide a publicly accessible JWKS URL.</p>
+			<p>The user’s account ID is extracted from the “sub” claim.</p>
+			<p>The expected audience item value (the "aud" claim) for the ID Token must be configured along with the claim name for the player's display name.</p>
+			<div>
+				<h2 id="identity-provider-specific-information">Identity-Provider-Specific Information</h2>
+			</div>
+			<div>
+				<h3 id="nintendo">Nintendo</h3>
+			</div>
+			<p>If your game depends on multiple Nintendo App IDs, add credential entries for each of them with their respective environments, and tick all of the ones used for your EOS sandbox.</p>
+			<div>
+				<h3 id="oculus">Oculus</h3>
+			</div>
+			<p>By default, Rift and Quest devices are treated as two separate platforms by the Oculus ecosystem. This means that the game will see different Oculus app-scoped user IDs for players depending on the device they are using. The EOS Connect service still recognizes the player as the same across Oculus devices, as the account linking keyring uses the Oculus organization-scoped user ID to recognize the logged-in player.</p>
+			<p>If a player has logged into the game on both Oculus devices, their
+				<code>EOS_ProductUserID</code>
+				internally maps to two separate Oculus app-scoped user IDs. This allows the player's EOS data to persist across Oculus devices as expected.</p>
+			<p>However, querying linked Oculus accounts of an
+				<code>EOS_ProductUserID</code>
+				returns, indeterminately, either of the known Oculus app-scoped user IDs. As such, the returned Oculus app-scoped user ID by the EOS SDK might not match the Oculus app-scoped user ID seen by the Oculus SDK. For example, the EOS SDK returns the user's Rift-based app-scoped user ID while the player is currently using the Oculus Quest device.</p>
+			<p>To avoid your players having separate Oculus app-scoped user IDs across devices, you can use the Oculus App Groupings feature to enable cross-device authentication support. This makes the Oculus ecosystem re-use the same Oculus app-scoped user ID across the Oculus devices and treating the player as one.</p>
+			<p>For more information on this, see the Oculus documentation on Cross-Device Development with App Groupings at
+				<a href="https://developer.oculus.com/documentation/native/ps-cross-device-app-groupings/">developer.oculus.com</a>.</p>
+			<div>
+				<h3 id="steam">Steam</h3>
+			</div>
+			<p>EOS Epic Account Services require using Steam Session Tickets as the login credentials type for the EOS SDK API:
+				<a href="/docs/api-ref/functions/eos-auth-login">EOS_Auth_Login</a>. Your game client must use the Steamworks SDK API
+				<code>ISteamUser::GetAuthTicketForWebApi</code>
+				for Steam Session Tickets. This is the required Steamworks API used with the EOS SDK. You must use Steamworks SDK version 1.57 or higher.</p>
+			<p>See the Steamworks API documentation at
+				<a href="https://partner.steamgames.com/doc/api/ISteamUser#GetAuthTicketForWebApi">partner.steamgames.com</a>.</p>
+			<p>EOS Game Services support the following methods for Steam player authentication:</p>
+			<ul>
+				<li>Steam Session Tickets and Steam Encrypted App Tickets through the Steamworks SDK.</li>
+				<li>Steam OAuth via web-based login flows.</li>
+			</ul>
+			<p>
+				<strong>Tip</strong>: If your game is using Steam Auth Session Tickets, use the same Encryption Key for all of the SteamAppIDs in your Steamworks web dashboard configuration. This allows you to use a single EOS credentials entry across your different Steam game builds.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#identity-provider-login-flow">Identity Provider Login Flow</a>
+								</li>
+								<li>
+									<a href="#player-data">Player Data</a>
+								</li>
+								<li>
+									<a href="#configure-identity-providers-for-your-game">Configure Identity Providers for Your Game</a>
+								</li>
+								<li>
+									<a href="#propriety-user-accounts-and-openid-provider">Propriety User Accounts and OpenID Provider</a>
+								</li>
+								<li>
+									<a href="#userinfo-api-endpoint">UserInfo API Endpoint</a>
+								</li>
+								<li>
+									<a href="#json-web-key-set-jwks">JSON Web Key Set (JWKS)</a>
+								</li>
+								<li>
+									<a href="#identity-provider-specific-information">Identity-Provider-Specific Information</a>
+								</li>
+								<li>
+									<a href="#nintendo">Nintendo</a>
+								</li>
+								<li>
+									<a href="#oculus">Oculus</a>
+								</li>
+								<li>
+									<a href="#steam">Steam</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

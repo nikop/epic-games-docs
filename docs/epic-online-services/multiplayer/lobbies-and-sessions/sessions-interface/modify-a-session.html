@@ -1,0 +1,507 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Modify a Session</h1>
+			<h2>How to modify session properties and create custom attributes.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>To modify an existing session, first call
+				<code>EOS_Sessions_UpdateSessionModification</code>
+				with a pointer to a default
+				<code>EOS_HSessionModification</code>
+				object and an
+				<code>EOS_Sessions_UpdateSessionModificationOptions</code>
+				structure initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_UPDATESESSIONMODIFICATION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionName</code>
+						</td>
+						<td>The name of the session you want to modify</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>If this call succeeds, it will return
+				<code>EOS_Success</code>, the modification will be applied to the local session, and the
+				<code>EOS_HSessionModification</code>
+				object you provided will now be a valid handle. If you are the session owner, you can use that handle to apply the local changes you've made to the back-end service's version of the session, by calling
+				<code>EOS_Sessions_UpdateSession</code>. This function works for both new sessions (those that have not yet been created on the server) and pre-existing ones. The following functions modify different aspects of the session:</p>
+			<table>
+				<thead>
+					<tr>
+						<td>Function</td>
+						<td>Effect</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_SetHostAddress</code>
+						</td>
+						<td>This changes the string containing the data required to reach the server. The host address does not have to be an IP address; a socket ID, URL, or other attribution can work.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_SetBucketId</code>
+						</td>
+						<td>The Bucket ID is the main search criteria, containing game-specific information that is required in all searches. For example, a format like "GameMode:Region:MapName" could be used to form the Bucket ID.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_SetMaxPlayers</code>
+						</td>
+						<td>Use this to set the maximum number of players allowed in the session.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_SetJoinInProgressAllowed</code>
+						</td>
+						<td>You can permit or forbid players to join games that have already begun (see the section on
+							<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/sessions-intro#start-and-end-play">start and end play</a>
+							for more details) with this function.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_SetPermissionLevel</code>
+						</td>
+						<td>This function can change the session's privacy settings to any of the following:
+							<ul>
+								<li>
+									<code>EOS_OSPF_PublicAdvertised</code>: The session will be visible to all players and will show up in searches.</li>
+								<li>
+									<code>EOS_OSPF_JoinViaPresence</code>: Only players with access to the creating user's presence information, which contains the session ID, can find this session.</li>
+								<li>
+									<code>EOS_OSPF_InviteOnly</code>: The session is available only to invited players.</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_AddAttribute</code>
+						</td>
+						<td>Adds a custom attribute (type
+							<code>EOS_SessionDetails_AttributeData</code>) to the session. See the
+							<a href="#custom-attributes">Custom Attributes</a>
+							section for more information.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SessionModification_RemoveAttribute</code>
+						</td>
+						<td>Removes a custom attribute from the session. See the
+							<a href="#custom-attributes">Custom Attributes</a>
+							section for more information.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>After modifying the session locally, you can update the session on the back-end service if you are the session owner. To do this, call
+				<code>EOS_Sessions_UpdateSession</code>
+				with an
+				<code>EOS_Sessions_UpdateSessionOptions</code>
+				containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_UPDATESESSION_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionModificationHandle</code>
+						</td>
+						<td>The handle (<code>EOS_HSessionModification</code>) for the session you want the server to create or update</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>This operation will call your callback function, of type
+				<code>EOS_Sessions_OnUpdateSessionCallback</code>, with an
+				<code>EOS_Sessions_UpdateSessionCallbackInfo</code>
+				data structure upon completion.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>EOS supports modifying sessions during play. Even a session that has ended but has not been destroyed can receive updates and start again. A common use case for this behavior is a game that runs a match on one map or level, then cycles through a list to find the next one, and starts a fresh match there, with different players joining and leaving between (or even during) matches.</p>
+				</div>
+			</div>
+			<div>
+				<h3 id="custom-attributes">Custom Attributes</h3>
+			</div>
+			<p>Sessions can contain user-defined data, called
+				<strong>attributes</strong>. Each attribute has a name, which acts as a string key, a value, an enumerated variable identifying the value's type, and a visibility setting. The following variable types are currently supported:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<code>EOS_ESessionAttributeType</code>
+						</th>
+						<th>Value Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_SAT_BOOLEAN</code>
+						</td>
+						<td>
+							<code>EOS_Bool</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SAT_INT64</code>
+						</td>
+						<td>
+							<code>int64_t</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SAT_DOUBLE</code>
+						</td>
+						<td>
+							<code>double</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SAT_STRING</code>
+						</td>
+						<td>
+							<code>const char*</code>
+							(null-terminated UTF8 string)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The following visibility types are available:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<code>EOS_ESessionAttributeAdvertisementType</code>
+						</th>
+						<th>Visbility</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_SAAT_DontAdvertise</code>
+						</td>
+						<td>Not visible to other users</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_SAAT_Advertise</code>
+						</td>
+						<td>Visible to other users</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h4 id="access-an-attribute">Access an Attribute</h4>
+			</div>
+			<p>You can find out how many attributes a session has by calling
+				<code>EOS_SessionDetails_GetSessionAttributeCount</code>
+				with a valid
+				<code>EOS_HSessionDetails</code>
+				handle and an
+				<code>EOS_SessionDetails_CopySessionAttributeByIndexOptions</code>
+				containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ApiVersion</td>
+						<td>
+							<code>EOS_SESSIONDETAILS_GETSESSIONATTRIBUTECOUNT_API_LATEST</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>To get a copy of an attribute, call
+				<code>EOS_SessionDetails_CopySessionAttributeByIndex</code>
+				with a valid
+				<code>EOS_HSessionDetails</code>
+				handle and an
+				<code>EOS_SessionDetails_CopySessionAttributeByIndexOptions</code>
+				initialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ApiVersion</td>
+						<td>
+							<code>EOS_SESSIONDETAILS_COPYSESSIONATTRIBUTEBYINDEX_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AttrIndex</code>
+						</td>
+						<td>The index of the attribute to copy</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>On success, this will return
+				<code>EOS_Success</code>
+				and your output parameter will contain a copy of the
+				<code>EOS_SessionDetails_Attribute</code>
+				structure corresponding to the attribute index you requested. This structure contains the Attribute's value and type in an
+				<code>EOS_Sessions_AttributeData</code>
+				data structure, and its visibility in an
+				<code>EOS_ESessionAttributeAdvertisementType</code>
+				enumerated value. When you no longer need this data, release it with
+				<code>EOS_SessionDetails_Attribute_Release</code>.</p>
+			<div>
+				<h4 id="add-an-attribute">Add an Attribute</h4>
+			</div>
+			<p>You can set up an attribute that you would like to add or modify by filling an
+				<code>EOS_Sessions_AttributeData</code>
+				data structure with the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONS_SESSIONATTRIBUTEDATA_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Key</code>
+						</td>
+						<td>The name of the attribute</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Value</code>
+						</td>
+						<td>The attribute's value, or, in the case of strings, a pointer to the string</td>
+					</tr>
+					<tr>
+						<td>
+							<code>ValueType</code>
+						</td>
+						<td>An
+							<code>EOS_ESessionAttributeType</code>
+							that describes
+							<code>Value</code>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Once you have this data ready, call
+				<code>EOS_SessionModification_AddAttribute</code>
+				to add the attribute. You must provide your
+				<code>EOS_HSessionModification</code>
+				handle and an
+				<code>EOS_SessionModification_AddAttributeOptions</code>, intialized as follows:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONMODIFICATION_ADDATTRIBUTE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>SessionAttribute</code>
+						</td>
+						<td>A const pointer to an
+							<code>EOS_Sessions_AttributeData</code>
+							containing the modification you want to make</td>
+					</tr>
+					<tr>
+						<td>
+							<code>AdvertisementType</code>
+						</td>
+						<td>An
+							<code>EOS_ESessionAttributeAdvertisementType</code>
+							indicating whether or not this attribute should be publicly visible</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>You can store up to
+				<code>EOS_SESSIONMODIFICATION_MAX_SESSION_ATTRIBUTES</code>
+				(currently 64) in a session, and each attribute's name can be up to
+				<code>EOS_SESSIONMODIFICATION_MAX_SESSION_ATTRIBUTE_LENGTH</code>
+				(currently 32) characters long.</p>
+			<div>
+				<p>This function only sets up the attribute that you want to add or update. It does not actually add or update the attribute, or interact with the session in any way. You will still need to call
+					<code>EOS_Sessions_UpdateSession</code>
+					as described at the top of the documentation:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session">Modify a Session</a>.</p>
+			</div>
+			<div>
+				<h4 id="remove-an-attribute">Remove an Attribute</h4>
+			</div>
+			<p>To remove an attribute, call
+				<code>EOS_SessionModification_RemoveAttribute</code>
+				with the
+				<code>EOS_HSessionModification</code>
+				handle for your session, and an
+				<code>EOS_SessionModification_RemoveAttributeOptions</code>
+				structure containing the following information:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>ApiVersion</code>
+						</td>
+						<td>
+							<code>EOS_SESSIONMODIFICATION_REMOVEATTRIBUTE_API_LATEST</code>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>Key</code>
+						</td>
+						<td>The name (key) of the attribute you want to remove</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<p>This function only establishes that you want to remove a certain attribute. It does not actually remove the attribute, or interact with the session in any way. You will still need to call
+					<code>EOS_Sessions_UpdateSession</code>
+					as described at the top of the documentation:
+					<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/sessions-interface/modify-a-session">Modify a Session</a>.</p>
+			</div>
+			<div>
+				<h3 id="permission-levels">Permission Levels</h3>
+			</div>
+			<p>When you create a session you can specify a
+				<strong>permission level</strong>
+				for the session using
+				<code>EOS_SessionModification_SetPermissionLevel</code>. Sessions have 3 levels of security:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Security Level</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_OSPF_PublicAdvertised</code>
+						</td>
+						<td>Any client can get the session in search results without needing to know the session id and can read session information as long as the session is not started or session allows join in progress. Any client/player that has access to the unique session identifier can view session information even if the session is not joinable. Players can also find the session using a registered player's ID, as long as the registered player is in a public session.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_OSPF_JoinViaPresence</code>
+						</td>
+						<td>Any client/player that has access to the unique session identifier can view session information (typically this information is shared via presence data but can be shared in other ways as well).</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_OSPF_InviteOnly</code>
+						</td>
+						<td>Only players which have been explicitly invited to the session by an existing member of the session can view session information.</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#custom-attributes">Custom Attributes</a>
+								</li>
+								<li>
+									<a href="#access-an-attribute">Access an Attribute</a>
+								</li>
+								<li>
+									<a href="#add-an-attribute">Add an Attribute</a>
+								</li>
+								<li>
+									<a href="#remove-an-attribute">Remove an Attribute</a>
+								</li>
+								<li>
+									<a href="#permission-levels">Permission Levels</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

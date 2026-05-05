@@ -1,0 +1,221 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Search For a Lobby</h1>
+			<h2>How to search for lobbies.</h2>
+			<div>
+				<div>2 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>
+				<code>EOS_Lobby_CreateLobbySearch</code>
+				creates a handle (type
+				<code>EOS_HLobbySearch</code>) that you can use to search for lobbies that are set up to be discoverable (see the section on:
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/modify-a-lobby#permission-levels">Permission Levels</a>
+				in the
+				<em>Modify a Lobby</em>
+				page for more information). Use the functions below to configure this handle, then call
+				<code>EOS_LobbySearch_Find</code>
+				to execute it. On successful completion, the application can navigate through the search results. Multiple search operations can run simultaneously with different handles.</p>
+			<p>After a search completes, use
+				<code>EOS_LobbySearch_GetSearchResultCount</code>
+				to get the number of results for a given
+				<code>EOS_HLobbySearch</code>
+				handle. You can then request copies of individual results with
+				<code>EOS_LobbySearch_CopySearchResultByIndex</code>. When you are finished with your copy of the data, dispose of it with
+				<code>EOS_LobbyDetails_Release</code>
+				to reclaim the memory it was using.</p>
+			<div>
+				<h2 id="search-by-lobby-id">Search By Lobby ID</h2>
+			</div>
+			<p>If a user has the exact lobby ID, they can search directly for it with
+				<code>EOS_LobbySearch_SetLobbyId</code>. Sharing the lobby ID with other users is outside the scope of the API.</p>
+			<div>
+				<h2 id="search-by-user-id">Search By User ID</h2>
+			</div>
+			<p>
+				<code>EOS_LobbySearch_SetTargetUserId</code>
+				takes a known user ID and will return search results representing lobbies for which the target user is a member.</p>
+			<div>
+				<h3 id="search-by-attributes">Search By Attributes</h3>
+			</div>
+			<p>The most robust way to find lobbies is to search for a desired subset of settings. This could be in response to the user choosing a collection of filters in a user interface, it could be done automatically behind the scenes based on the user's skill and other factors, or it could be a combination of both methods.</p>
+			<p>
+				<code>EOS_LobbySearch_SetParameter</code>
+				allows for the user to set up
+				<code>EOS_Lobby_AttributeData</code>
+				and provide an
+				<code>EOS_EComparisonOp</code>
+				that dictates how the attribute is compared against all existing lobbies stored with the service.  One or more of these calls will set the search parameters with an implicit boolean
+				<code>AND</code>
+				between them.</p>
+			<div>
+				<h4 id="comparison-operators">Comparison Operators</h4>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>Operator</td>
+						<td>Description</td>
+					</tr>
+					<tr>
+						<td colspan="2">Comparisons that work on all attribution types</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_CO_EQUAL</code>
+						</td>
+						<td>Search value is exactly the attribute.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_CO_NOTEQUAL</code>
+						</td>
+						<td>Search value is exactly not the attribute.</td>
+					</tr>
+				</tbody>
+				<thead>
+					<tr>
+						<td colspan="2">Comparisons that operate on number types</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_CO_GREATERTHAN</code>
+						</td>
+						<td>Attribute is greater than the search value.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_CO_GREATERTHANOREQUAL</code>
+						</td>
+						<td>Attribute is greater than or equal to the search value.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_CO_LESSTHAN</code>
+						</td>
+						<td>Attribute is less than the search value.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_CO_LESSTHANOREQUAL</code>
+						</td>
+						<td>Attribute is less than or equal to the search value.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_CO_DISTANCE</code>
+						</td>
+						<td>Attribute is close to the search value, following the formula
+							<em>abs(attribute - searchvalue) = 0</em>
+						</td>
+					</tr>
+				</tbody>
+				<thead>
+					<tr>
+						<td colspan="2">Comparisons that operate on string types</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>EOS_CO_ANYOF</code>
+						</td>
+						<td>The attribute is any in a list of string values separated by semicolons. Example: "This;OrThis;MaybeThis"</td>
+					</tr>
+					<tr>
+						<td>
+							<code>EOS_CO_NOTANYOF</code>
+						</td>
+						<td>The attribute is not any in a list of string values. Example: "NotThis;OrThisEither"</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h2 id="limit-search-results">Limit Search Results</h2>
+			</div>
+			<p>To limit the maximum number of search results that you can retrieve, use the
+				<code>EOS_LobbySearch_SetMaxResults</code>
+				function.</p>
+			<div>
+				<h2 id="search-result-limitations">Search Result limitations</h2>
+			</div>
+			<p>You can use the same functionality described in the section
+				<a href="/docs/epic-online-services/multiplayer/lobbies-and-sessions/lobby-interface/get-information-about-a-lobby#work-with-data-while-in-an-active-lobby">Work With Data While in an Active Lobby</a>
+				on the
+				<em>Get Information about a Lobby</em>
+				page, except when you use the functions below.</p>
+			<p>These functions are not available for search results and are only available if you are actively in the lobby:</p>
+			<ul>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-by-index">
+						<code>EOS_LobbyDetails_GetMemberByIndex</code>
+					</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-get-member-attribute-count">
+						<code>EOS_LobbyDetails_GetMemberAttributeCount</code>
+					</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-copy-member-attribute-by-index">
+						<code>EOS_LobbyDetails_CopyMemberAttributeByIndex</code>
+					</a>
+				</li>
+				<li>
+					<a href="/docs/api-ref/functions/eos-lobby-details-copy-member-attribute-by-key">
+						<code>EOS_LobbyDetails_CopyMemberAttributeByKey</code>
+					</a>
+				</li>
+			</ul>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#search-by-lobby-id">Search By Lobby ID</a>
+								</li>
+								<li>
+									<a href="#search-by-user-id">Search By User ID</a>
+								</li>
+								<li>
+									<a href="#search-by-attributes">Search By Attributes</a>
+								</li>
+								<li>
+									<a href="#comparison-operators">Comparison Operators</a>
+								</li>
+								<li>
+									<a href="#limit-search-results">Limit Search Results</a>
+								</li>
+								<li>
+									<a href="#search-result-limitations">Search Result limitations</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

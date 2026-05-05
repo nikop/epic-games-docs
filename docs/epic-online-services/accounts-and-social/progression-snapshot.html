@@ -1,0 +1,149 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Progression Snapshot Interface</h1>
+			<h2>Using the Progression Snapshot Interface to merge Epic Accounts</h2>
+			<div>
+				<div>4 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<div>
+				<p>Type of service : This interface is an EOS Epic Account Service — authenticate players with the Auth Interface.</p>
+			</div>
+			<div>
+				<h2 id="progression-snapshot-interface">Progression Snapshot Interface</h2>
+			</div>
+			<p>The Progression Snapshot Interface allows storing player-specific game data for the purposes of supporting an end-user experience for Epic account merging. As of today, the concept of merging two separate Epic accounts, owned by the same user, into a single Epic account does not exist. However, this type of account merging is a feature that will be made available to users of Epic Accounts in the future.</p>
+			<p>The progression snapshot feature becomes relevant for users in cases where they have two separate Epic accounts, and have played the same game on both of the accounts. In such a case, if the user chooses to merge their Epic accounts into a single account, the EOS Overlay will be able to present a snapshot view of their game progress for both accounts. This allows users to choose their preferred game progression to preserve as a result of the account merge operation.</p>
+			<div>
+				<p>Account merging is relevant for users who have created a new frictionless Epic "proxy" account within in-game context outside of the Epic Games Store, while already having another existing Epic account.</p>
+				<p>Merging of an in-game created Epic "proxy" account into another existing Epic account will allow users to unify their social graph, ecom entitlements, linked accounts and other account information.</p>
+				<p>Specifics and limitations of Epic account merging and the user experience will be made through new documentation closer to making the operation available to end-users. For now, games will be able to start recording progression snapshots ahead of time in preparation to better support users who may go through the account merge and have conflicting game progressions on both accounts.</p>
+			</div>
+			<div>
+				<h4 id="usage-of-the-progression-snapshot">Usage of the Progression Snapshot</h4>
+			</div>
+			<p>Progression Snapshots provide means for developers to record relevant game progression data with the Epic Online Services backend as the game is played. This information, in the form of key-value pairs, provides context for users that may need to merge accounts in a cross-progression environment. Users will be able to compare the game progress made using both accounts side-by-side, and choose the preferred progression to keep.</p>
+			<div tabindex="0" aria-label="alt_text image, press Enter to open full size">
+				<div>
+					<span>
+						<img alt="alt_text" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="fill">
+						<noscript></noscript>
+					</span>
+				</div>
+				<figcaption></figcaption>
+			</div>
+			<p>Mockup design of the end-user experience subject to change. Progression snapshot data is presented to the user as part of the Epic account merging process within the in-game EOS Overlay experience.</p>
+			<div>
+				<p>As the key-value pairs are stored as-is on the backend, the game is responsible for any localization of the stored data, if needed.</p>
+			</div>
+			<div>
+				<p>We recommend using easy to understand key-value pairs such as "Character Level: 10". The game could also calculate a total progression value based on different variables, such as "Game Completion: 72%".</p>
+			</div>
+			<div>
+				<h4 id="selected-account-id">Selected Account ID</h4>
+			</div>
+			<p>The progression snapshot and user choice at the time of an account merge is application-scoped. This allows users to make the game progression selection for each game separately, with the introduction of a new
+				<code>Selected Epic account ID</code>
+				concept. This is a new Epic account identifier that will be set at login time to the Epic account ID the user chooses to use with the application. It is always set to the same value as the Epic account ID, or if the user has gone through an account merge operation and has had to make a selection, it is set to the Epic account ID that the application should use for all game-scoped data.</p>
+			<div>
+				<h3 id="storing-a-game-progression-snapshot-for-users">Storing a Game Progression Snapshot For Users</h3>
+			</div>
+			<p>Progression snapshots for the local user should be sent to the backend once per game session. The recommended times to do so are when the local user has been logged in and their current game state successfully loaded and whenever the user makes significant progress in the game (e.g. level up, match played, stage completed, etc.).</p>
+			<p>Updating the progression snapshot will always fully overwrite any previously stored snapshot. For example, if a previous snapshot contained 4 key-value pairs and a new snapshot includes only 3, the result snapshot will contain the 3 key-value pairs that the snapshot was updated with.</p>
+			<p>Creating the initial progression snapshot, or updating an already existing snapshot follows the same application code flow. First a local snapshot state is initialized using the
+				<strong>EOS_ProgressionSnapshot_BeginSnapshot</strong>
+				API and passing in the local user’s
+				<strong>EOS_ProductUserId</strong>
+				in the
+				<strong>EOS_ProgressionSnapshot_BeginSnapshotOptions</strong>
+				structure.</p>
+			<p>Then key-value pairs representing the game state are added as the snapshot data using the
+				<strong>EOS_ProgressionSnapshot_AddProgressionOptions</strong>
+				API, passing the
+				<strong>SnapshotId</strong>
+				and the key-value pairs in the
+				<strong>EOS_ProgressionSnapshot_AddProgressionOptions</strong>
+				structure. This API must be called once per key-value pair that should be added to the progression snapshot. The order in which key-value pairs are added to the snapshot are ultimately the order in which they will be presented to the user in the EOS Overlay. Make sure to pass the most important information first to help users more quickly identify the progression they are interested in.</p>
+			<p>After filling in the complete snapshot data, upload the collected snapshot to the backend using the
+				<strong>EOS_ProgressionSnapshot_SubmitSnapshot</strong>
+				API, passing the
+				<strong>SnapshotId</strong>
+				in the
+				<strong>EOS_ProgressionSnapshot_SubmitSnapshotOptions</strong>
+				structure.</p>
+			<p>Finally, release internal memory resources allocated by the SDK using the
+				<strong>EOS_ProgressionSnapshot_EndSnapshot</strong>
+				API, passing the
+				<strong>SnapshotId</strong>
+				in the
+				<strong>EOS_ProgressionSnapshot_EndSnapshotOptions</strong>
+				structure.</p>
+			<div>
+				<h3 id="deleting-game-progression-snapshot-for-users">Deleting Game Progression Snapshot For Users</h3>
+			</div>
+			<p>It is not necessary to delete any previously stored progression snapshot before updating it with a newer state. However, if you need to delete the progression snapshot for integration testing purposes or otherwise, the game client may do so for the local logged in user.</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>It is important to note that the deletion operation, similarly to updating an existing snapshot, is permanent and cannot be reversed.</p>
+				</div>
+			</div>
+			<p>To delete the stored progression snapshot for a local logged in user, use the
+				<strong>EOS_ProgressionSnapshot_DeleteSnapshot</strong>
+				API, passing the
+				<strong>EOS_ProductUserId</strong>
+				in the
+				<strong>EOS_ProgressionSnapshot_DeleteSnapshotOptions</strong>
+				structure.</p>
+			<p>If the backend data was successfully deleted, the
+				<strong>CompletionDelegate</strong>
+				passed in by the application will return an
+				<strong>EOS_EResult::EOS_Success</strong>
+				result status. If no progression snapshot data existed for the user,
+				<strong>EOS_EResult::EOS_NotFound</strong>
+				is returned.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#progression-snapshot-interface">Progression Snapshot Interface</a>
+								</li>
+								<li>
+									<a href="#usage-of-the-progression-snapshot">Usage of the Progression Snapshot</a>
+								</li>
+								<li>
+									<a href="#selected-account-id">Selected Account ID</a>
+								</li>
+								<li>
+									<a href="#storing-a-game-progression-snapshot-for-users">Storing a Game Progression Snapshot For Users</a>
+								</li>
+								<li>
+									<a href="#deleting-game-progression-snapshot-for-users">Deleting Game Progression Snapshot For Users</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

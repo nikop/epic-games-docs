@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<div>
-				<form name="bodySearch" method="get" action="https://dev.epicgames.com/en-US/bing-search">
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
 					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
 					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
 				</form>
@@ -14,12 +14,96 @@
 			<h1>BuildPatch Tool Release Notes</h1>
 			<h2>What's changed in updates to the BuildPatch Tool.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>3 mins to read</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<section role="main">
+			<div>
+				<h2 id="181-2026-march-25">1.8.1: 2026-march-25</h2>
+			</div>
+			<div>
+				<h3 id="new-command-line-option">New Command Line Option</h3>
+			</div>
+			<p>Use
+				<code>-InstallBinary</code>
+				to download a binary before its release date. You can use this to test your product as part of your moderation or QA process.</p>
+			<div>
+				<h3 id="bug-fixes-and-improvements">Bug Fixes and Improvements</h3>
+			</div>
+			<ul>
+				<li>Added support for install tags selection in
+					<code>InstallBinary</code>
+					mode.</li>
+				<li>Improved the user messaging around missed files and folders when uploading the binary.</li>
+				<li>Added logging to track the progress of the verify process.</li>
+				<li>Suppressed looking for binary: warning on Linux and Mac.</li>
+				<li>Added support for percentage-based diff abort thresholds.</li>
+				<li>Supported reproducing empty directories.</li>
+				<li>Extended
+					<code>ExtractMetadata</code>
+					mode to also support outputting the various fields and information stored in a chunk file.</li>
+				<li>Added verification to check that
+					<code>ClientSecret</code>/<code>ClientSecretEnvVar</code>
+					are not empty.</li>
+				<li>Ensured the BuildPatch Tool doesn't exit when its version is deprecated.</li>
+				<li>Added graceful handling of any 412 errors when trying to re-upload existing chunk.</li>
+				<li>Added a warning when same build version is provided in
+					<code>DiffBinaries</code>
+					mode.</li>
+			</ul>
+			<div>
+				<h2 id="1731-2025-september-17">1.7.3.1: 2025-september-17</h2>
+			</div>
+			<div>
+				<h3 id="new-user-interface">New User Interface</h3>
+			</div>
+			<p>You can now use a graphical user interface, called the BuildPatch Tool Interface, to upload your binaries to the Developer Portal.</p>
+			<p>For information, see
+				<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/buildpatch-tool-interface">The BuildPatch Tool Interface</a>.</p>
+			<div>
+				<h3 id="bug-fixes-and-improvements-1">Bug Fixes and Improvements</h3>
+			</div>
+			<ul>
+				<li>Fixed a bug that could lead to a crash when the manifest data size was too small.</li>
+			</ul>
+			<div>
+				<h2 id="170-2024-september-22">1.7.0: 2024-september-22</h2>
+			</div>
+			<div>
+				<h3 id="new-command-line-option-1">New Command Line Option</h3>
+			</div>
+			<p>Use the command line option
+				<code>-verboseLogs</code>
+				to get detailed BuildPatch Tool logs.</p>
+			<div>
+				<h3 id="bug-fixes-and-improvements-2">Bug Fixes and Improvements</h3>
+			</div>
+			<ul>
+				<li>Performance improvements:
+					<ul>
+						<li>Implemented a fix to prevent crashes when users run out of disk space.</li>
+					</ul>
+				</li>
+				<li>Command-line modes:
+					<ul>
+						<li>
+							<code>DiffBinaries</code>
+							and
+							<code>BinaryDeltaOptimise</code>
+							modes: Added support to download files in separate chunks, which the BuildPatch Tool serves through signed URLs.</li>
+						<li>
+							<code>DiffBinaries</code>
+							mode: Fixed a few bugs.</li>
+					</ul>
+				</li>
+				<li>Improved logging features:
+					<ul>
+						<li>Logging features now alert users to unusually slow hard drive response times during installations. This helps identify potential issues.</li>
+					</ul>
+				</li>
+			</ul>
 			<div>
 				<h2 id="160-2024-february-23">1.6.0: 2024-february-23</h2>
 			</div>
@@ -81,7 +165,7 @@
 							</ul>
 						</li>
 						<li>Documentation:
-							<a href="https://dev.epicgames.com/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160#setting-special-file-attributes">Build Patch Tool Instructions 1.6.0: Setting Special File Attributes</a>.</li>
+							<a href="/docs/epic-games-store/publishing-tools/uploading-binaries/bpt-instructions-160#setting-special-file-attributes">Build Patch Tool Instructions 1.6.0: Setting Special File Attributes</a>.</li>
 					</ul>
 				</li>
 			</ul>
@@ -93,10 +177,7 @@
 			</div>
 			<ul>
 				<li>Use the command-line argument
-					<code>GetBinaryMetadata</code>to see information about a
-					<span>
-						<span aria-label="tooltip binary" tabindex="0" role="button">binary</span>
-					</span>. The information is in human-readable or
+					<code>GetBinaryMetadata</code>to see information about a binary. The information is in human-readable or
 					<code>json</code>
 					format.</li>
 				<li>Use
@@ -108,7 +189,7 @@
 					mode to set up an executable file to launch just before product uninstall.</li>
 			</ul>
 			<div>
-				<h4 id="bug-fixes-and-improvements">Bug Fixes and Improvements</h4>
+				<h4 id="bug-fixes-and-improvements-3">Bug Fixes and Improvements</h4>
 			</div>
 			<ul>
 				<li>File uploads:
@@ -164,25 +245,57 @@
 		<aside>
 			<div>Contents</div>
 			<div>
-				<ul>
-					<li>
-						<a href="#160-2024-february-23">1.6.0: 2024-february-23</a>
-					</li>
-					<li>
-						<a href="#important-information">Important Information</a>
-					</li>
-					<li>
-						<a href="#new-features">New Features</a>
-					</li>
-					<li>
-						<a href="#new-mode">New Mode</a>
-					</li>
-					<li>
-						<a href="#bug-fixes-and-improvements">Bug Fixes and Improvements</a>
-					</li>
-				</ul>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#181-2026-march-25">1.8.1: 2026-march-25</a>
+								</li>
+								<li>
+									<a href="#new-command-line-option">New Command Line Option</a>
+								</li>
+								<li>
+									<a href="#bug-fixes-and-improvements">Bug Fixes and Improvements</a>
+								</li>
+								<li>
+									<a href="#1731-2025-september-17">1.7.3.1: 2025-september-17</a>
+								</li>
+								<li>
+									<a href="#new-user-interface">New User Interface</a>
+								</li>
+								<li>
+									<a href="#bug-fixes-and-improvements-1">Bug Fixes and Improvements</a>
+								</li>
+								<li>
+									<a href="#170-2024-september-22">1.7.0: 2024-september-22</a>
+								</li>
+								<li>
+									<a href="#new-command-line-option-1">New Command Line Option</a>
+								</li>
+								<li>
+									<a href="#bug-fixes-and-improvements-2">Bug Fixes and Improvements</a>
+								</li>
+								<li>
+									<a href="#160-2024-february-23">1.6.0: 2024-february-23</a>
+								</li>
+								<li>
+									<a href="#important-information">Important Information</a>
+								</li>
+								<li>
+									<a href="#new-features">New Features</a>
+								</li>
+								<li>
+									<a href="#new-mode">New Mode</a>
+								</li>
+								<li>
+									<a href="#bug-fixes-and-improvements-3">Bug Fixes and Improvements</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</aside>
 	</section>
-	<section></section>
 </section>

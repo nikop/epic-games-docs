@@ -34,14 +34,48 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>EOS SDK 1.18.0.4-CL45343210 - 1.19.0.7-CL52449437</td>
+						<td>EOS SDK 1.19.1.2-CL53289219</td>
 						<td>supports</td>
-						<td>NDK 21.4.7075529 and NDK 27.2.12479018</td>
+						<td>API level 26 (Android 8.0)</td>
 					</tr>
 					<tr>
-						<td>EOS SDK 1.10.2 - 1.17.1.3-CL44532354</td>
+						<td>EOS SDK 1.10.2 - 1.19.0.7-CL52449437</td>
 						<td>supports</td>
-						<td>6.0 (API level 23)</td>
+						<td>API level 23 (Android 6.0)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>The table below lists the Android architecture version which each EOS SDK release version supports:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>EOS SDK Release Version</th>
+						<th></th>
+						<th>Android Architecture Version</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>EOS SDK 1.19.0.7-CL52449437 - 1.19.1.2-CL53289219</td>
+						<td>supports</td>
+						<td>
+							<ul>
+								<li>arm64-v8a</li>
+								<li>x86_64</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>EOS SDK 1.10.2 - EOS SDK 1.18.1.2-CL47370208</td>
+						<td>supports</td>
+						<td>
+							<ul>
+								<li>armeabi-v7a</li>
+								<li>arm64-v8a</li>
+								<li>x86</li>
+								<li>x86_64</li>
+							</ul>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -116,19 +150,33 @@
 								</li>
 							</ul>
 						</li>
-						<li>Each AAR supports four architectures:
+						<li>Each AAR supports specific architectures, depending on the version of the EOS SDK:
 							<ul>
-								<li>
-									<code>arm64-v8a</code>
+								<li>EOS SDK 1.19.0.7-CL52449437 and higher:
+									<ul>
+										<li>
+											<code>arm64-v8a</code>
+										</li>
+										<li>
+											<code>X86_64</code>
+										</li>
+									</ul>
 								</li>
-								<li>
-									<code>armeabi-v7a</code>
-								</li>
-								<li>
-									<code>x86</code>
-								</li>
-								<li>
-									<code>X86_64</code>
+								<li>EOS SDK 1.18.1.2-CL47370208 and lower:
+									<ul>
+										<li>
+											<code>arm64-v8a</code>
+										</li>
+										<li>
+											<code>armeabi-v7a</code>
+										</li>
+										<li>
+											<code>x86</code>
+										</li>
+										<li>
+											<code>X86_64</code>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</li>
@@ -296,7 +344,9 @@
 						<code>build.gradle.kts</code>, find the dependencies section and add the following entries:</p>
 					<div>
 						<section>
-							<pre>implementation 'androidx.appcompat:appcompat:1.5.1'implementation 'androidx.constraintlayout:constraintlayout:2.1.4'implementation 'androidx.security:security-crypto:1.0.0'implementation 'androidx.browser:browser:1.4.0'implementation 'androidx.webkit:webkit:1.7.0'</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 					<p>For more details, see the Android documentation at
@@ -320,7 +370,9 @@
 							<p>For example:</p>
 							<div>
 								<section>
-									<pre>buildscript {    repositories {	    google()	    mavenCentral()     }     dependencies {	     classpath "com.android.tools.build:gradle:7.4.2"	    classpath "com.android.tools:r8:8.1.56"     } }</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 						</li>
@@ -358,7 +410,9 @@
 					<p>For example:</p>
 					<div>
 						<section>
-							<pre>buildscript {	repositories {		google()		mavenCentral()	}	dependencies {		classpath "com.android.tools.build:gradle:7.4.2"		classpath "com.android.tools:r8:8.1.56"	coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'	}}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -392,7 +446,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>add_library(EOSSDK SHARED IMPORTED) set(EOSSDKDIR PATH_TO_YOUR_EXPANDED_ZIP_HERE) set_property(TARGET EOSSDK PROPERTY IMPORTED_LOCATION ${EOSSDKDIR}/SDK/Bin/Android/static-stdc++/libs/${ANDROID_ABI}/libEOSSDK.so) set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${EOSSDKDIR}/SDK/Include/)</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>If you expanded the zip in the same directory as the
@@ -402,7 +458,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>add_library(EOSSDK SHARED IMPORTED) set(EOSSDKDIR ${CMAKE_SOURCE_DIR}) set_property(TARGET EOSSDK PROPERTY IMPORTED_LOCATION ${EOSSDKDIR}/SDK/Bin/Android/static-stdc++/libs/${ANDROID_ABI}/libEOSSDK.so) set_property(TARGET EOSSDK PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${EOSSDKDIR}/SDK/Include/)</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>Finally, make sure the EOS SDK is linked with the appropriate library in your project. In an Android Studio C++ project created in the New Project Wizard, that would look like this:</p>
@@ -411,7 +469,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>target_link_libraries( # Specifies the target library.						native-lib						#Links the target library to the EOSSDK						EOSSDK 						# Links the target library to the log library						# included in the NDK.						${log-lib} )</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>At this point, sync Gradle and you should be able to import EOS SDK symbols into your C++ project and move to the
@@ -432,7 +492,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>LOCAL_PATH := $(call my-dir) include $(CLEAR_VARS) LOCAL_MODULE    := hello-jniLOCAL_SRC_FILES := hello-jni.cLOCAL_LDLIBS    := -llog -landroid include $(BUILD_SHARED_LIBRARY)</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>This file defines a
@@ -445,7 +507,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>include $(CLEAR_VARS)LOCAL_MODULE := eossdkLOCAL_SRC_FILES := $(LOCAL_PATH)/SDK/Bin/Android/static-stdc++/libs/$(TARGET_ARCH_ABI)/libEOSSDK.soLOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/SDK/Includeinclude $(PREBUILT_SHARED_LIBRARY)</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>In this example, the zip file was inflated in the same directory as the
@@ -467,7 +531,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>include $(CLEAR_VARS)LOCAL_MODULE    := hello-jniLOCAL_SRC_FILES := hello-jni.cLOCAL_SHARED_LIBRARIES := eossdk c++_sharedLOCAL_LDLIBS    := -llog -landroidinclude $(BUILD_SHARED_LIBRARY)</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>At this point, the
@@ -481,7 +547,9 @@
 			</p>
 			<div>
 				<section>
-					<pre>LOCAL_PATH := $(call my-dir) include $(CLEAR_VARS)LOCAL_MODULE := eossdkLOCAL_SRC_FILES := $(LOCAL_PATH)/SDK/Bin/Android/static-stdc++/libs/$(TARGET_ARCH_ABI)/libEOSSDK.soLOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/SDK/Includeinclude $(PREBUILT_SHARED_LIBRARY) include $(CLEAR_VARS)LOCAL_MODULE    := hello-jniLOCAL_SRC_FILES := hello-jni.cLOCAL_SHARED_LIBRARIES := eossdk c++_sharedLOCAL_LDLIBS    := -llog -landroidinclude $(BUILD_SHARED_LIBRARY)</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>For more information about ndk-build, refer to
@@ -494,13 +562,16 @@
 				(Some game engines do this automatically when importing plugins):</p>
 			<div>
 				<section>
-					<pre>static {	System.loadLibrary("EOSSDK");}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>And pass application activity to the EOS SDK as follows:</p>
 			<div>
 				<section>
-					<pre>EOSSDK.init(this);
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -512,7 +583,9 @@
 			<p>The following example of initializing the EOS SDK on Android can be adapted for specific use cases:</p>
 			<div>
 				<section>
-					<pre>extern "C" JNIEXPORT jboolean JNICALLJava_com_example_eossdk_MainActivity_initializeSdk( JNIEnv* env,jobject /* this */){	EOS_InitializeOptions SDKOptions = { 0 };	SDKOptions.ApiVersion = EOS_INITIALIZE_API_LATEST;	SDKOptions.ProductName = "EOSDocumentationExample";	SDKOptions.ProductVersion = "0.1";	EOS_EResult InitResult = EOS_Initialize(&amp;SDKOptions);	if(InitResult != EOS_EResult::EOS_Success){		return JNI_FALSE;	}	return JNI_TRUE;}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>To set up optional directory paths for disk access, the EOS SDK has platform-specific
@@ -520,7 +593,9 @@
 				for Android:</p>
 			<div>
 				<section>
-					<pre>extern "C" JNIEXPORT jboolean JNICALLJava_com_example_eossdk_MainActivity_InitializeSDK(		JNIEnv* env,		jobject /* this */,		jstring internalPath, jstring externalPath){	EOS_InitializeOptions SDKOptions = { 0 };	SDKOptions.ApiVersion = EOS_INITIALIZE_API_LATEST;	SDKOptions.ProductName = "EOSDocumentationExample";	SDKOptions.ProductVersion = "0.1";	const char* androidInternalPath = env-&gt;GetStringUTFChars(internalPath, nullptr);	const char* androidExternalPath = env-&gt;GetStringUTFChars(externalPath, nullptr);	static EOS_Android_InitializeOptions JNIOptions = { 0 };	JNIOptions.ApiVersion = EOS_ANDROID_INITIALIZEOPTIONS_API_LATEST;	JNIOptions.Reserved = nullptr;	JNIOptions.OptionalInternalDirectory = androidInternalPath;	JNIOptions.OptionalExternalDirectory = androidExternalPath;	SDKOptions.SystemInitializeOptions = &amp;JNIOptions;	EOS_EResult InitResult = EOS_Initialize(&amp;SDKOptions);	if(InitResult != EOS_EResult::EOS_Success) {		return JNI_FALSE;	}	return JNI_TRUE;}</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<div>
@@ -558,7 +633,8 @@
 				<code>clientId</code>:</p>
 			<div>
 				<section>
-					<pre>&lt;string name="eos_login_protocol_scheme"  &gt;eos.[your_lowercase_client_id_here]&lt;/string&gt;
+					<pre>
+
 					</pre>
 				</section>
 			</div>
@@ -568,7 +644,9 @@
 			<p>When you build your game, you might receive the following error if you use a version of Gradle earlier than 8.x:</p>
 			<div>
 				<section>
-					<pre>Execution failed for task ':launcher:mergeExtDexDebug'.&gt; Could not resolve all files for configuration ':launcher:debugRuntimeClasspath'.  &gt; Failed to transform eossdk-StaticSTDC-release-.aar (:eossdk-StaticSTDC-release:) to match attributes {artifactType=android-dex, asm-transformed-variant=NONE, dexing-enable-desugaring=true, dexing-enable-jacoco-instrumentation=false, dexing-is-debuggable=true, dexing-min-sdk=29, org.gradle.status=integration, org.gradle.usage=java-runtime}.</pre>
+					<pre>
+
+					</pre>
 				</section>
 			</div>
 			<p>To resolve this error, in your project-level

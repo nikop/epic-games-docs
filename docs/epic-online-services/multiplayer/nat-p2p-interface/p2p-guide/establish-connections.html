@@ -108,9 +108,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// P2PManager.h...class P2PManager{public:...    /**     * Request a connection with another player.     *      * @param RemoteProductUserId - The Product User ID of the remote player to request a connection with.     *      * @param RequestConnectionSocketId - The socket ID to use for the connection.      */    void RequestConnectionExample(EOS_ProductUserId RemoteProductUserId, EOS_P2P_SocketId* RequestConnectionSocketId);     /** Close the current P2P connection. */    void CloseConnectionExample(); private:... };</pre>
 								</section>
 							</div>
 							<p>
@@ -146,9 +144,7 @@
 																	<code>RequestConnectionExample()</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void RequestConnectionExample(EOS_ProductUserId RemoteProductUserId, EOS_P2P_SocketId* RequestConnectionSocketId);</pre>
 																	</section>
 																</div>
 															</li>
@@ -157,9 +153,7 @@
 																	<code>CloseConnectionExample()</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void CloseConnectionExample();</pre>
 																	</section>
 																</div>
 															</li>
@@ -186,9 +180,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>void P2PManager::RequestConnectionExample(EOS_ProductUserId RemoteProductUserId, EOS_P2P_SocketId* RequestConnectionSocketId){    // Set the options for requesting a connection.    EOS_P2P_AcceptConnectionOptions AcceptConnectionOptions = {};    AcceptConnectionOptions.ApiVersion = EOS_P2P_ACCEPTCONNECTION_API_LATEST;     // Set the Product User ID of the local player requesting the connection.    AcceptConnectionOptions.LocalUserId = LocalProductUserId;     // Set the Product User ID of the remote player to request a connection with.    AcceptConnectionOptions.RemoteUserId = RemoteProductUserId;     // Set the socket ID for the requested connection.    AcceptConnectionOptions.SocketId = RequestConnectionSocketId;     // Call the EOS SDK to send a connection request to the remote player.     EOS_EResult AcceptConnectionResult = EOS_P2P_AcceptConnection(P2PHandle, &amp;AcceptConnectionOptions);     if (AcceptConnectionResult == EOS_EResult::EOS_Success)    {        // If the code gets here, a connection request was successfully sent.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);         std::cout &lt;&lt; "Connection request successfully sent to Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; RequestConnectionSocketId-&gt;SocketName &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error requesting connection with Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; RequestConnectionSocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(AcceptConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(AcceptConnectionResult) &lt;&lt; std::endl;    }}</pre>
 								</section>
 							</div>
 							<p>
@@ -222,9 +214,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void P2PManager::RequestConnectionExample(EOS_ProductUserId RemoteProductUserId, EOS_P2P_SocketId* RequestConnectionSocketId){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -238,9 +228,7 @@
 																	In this instance, the EOS API refers to the options as "AcceptConnectionOptions" even though you will use these options to request the P2P connection.:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_P2P_AcceptConnectionOptions AcceptConnectionOptions = {};AcceptConnectionOptions.ApiVersion = EOS_P2P_ACCEPTCONNECTION_API_LATEST;AcceptConnectionOptions.LocalUserId = LocalProductUserId;AcceptConnectionOptions.RemoteUserId = RemoteProductUserId;AcceptConnectionOptions.SocketId = RequestConnectionSocketId;</pre>
 																	</section>
 																</div>
 															</li>
@@ -260,9 +248,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_EResult AcceptConnectionResult = EOS_P2P_AcceptConnection(P2PHandle, &amp;AcceptConnectionOptions);</pre>
 																	</section>
 																</div>
 															</li>
@@ -277,9 +263,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (AcceptConnectionResult == EOS_EResult::EOS_Success){    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);     std::cout &lt;&lt; "Connection request successfully sent to Product User ID "         &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; RequestConnectionSocketId-&gt;SocketName &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 																<p>
@@ -294,9 +278,7 @@
 																<p>If the player’s connection request is not sent successfully, handle the errors. In the example, the console prints an error statement that includes the Product User ID of the remote player that the local player sent the connection request to and the socket ID the connection is on:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else (AcceptConnectionResult == EOS_EResult::EOS_Success){    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);     std::cerr &lt;&lt; "Error requesting connection with Product User ID "         &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; RequestConnectionSocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(AcceptConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(AcceptConnectionResult) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -321,9 +303,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>void EOS_CALL P2PManager::OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data){    std::cout &lt;&lt; "Connection request received." &lt;&lt; std::endl;     // Check if the socket ID of the connection request is what is expected.    if (strcmp(Data-&gt;SocketId-&gt;SocketName, EXPECTED_SOCKET_ID_HERE) != 0)    {        std::cerr &lt;&lt; "Bad socket ID - Connection not accepted." &lt;&lt; std::endl;        std::cerr &lt;&lt; "Socket ID == " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;        return;    }     // Retrieve the P2PManager pointer from from the client data passed to the callback function.    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     // Set the options for accepting a requested connection.     EOS_P2P_AcceptConnectionOptions AcceptConnectionOptions = {};    AcceptConnectionOptions.ApiVersion = EOS_P2P_ACCEPTCONNECTION_API_LATEST;     // Set the Product User ID of the local player accepting the connection.     AcceptConnectionOptions.LocalUserId = Data-&gt;LocalUserId;     // Set the Product User ID of the remote player requesting a connection.     AcceptConnectionOptions.RemoteUserId = Data-&gt;RemoteUserId;     // Set the socket ID of the connection being requested.     AcceptConnectionOptions.SocketId = Data-&gt;SocketId;     // Call the EOS SDK to accept the requested connection.     EOS_EResult AcceptConnectionResult = EOS_P2P_AcceptConnection(Self-&gt;P2PHandle, &amp;AcceptConnectionOptions);     if (AcceptConnectionResult == EOS_EResult::EOS_Success)    {        // If the code gets here, the incoming connection request was accepted.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(Data-&gt;RemoteUserId, PuidString, &amp;PuidStringMaxLength);         std::cout &lt;&lt; "Connection request accepted from Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(Data-&gt;RemoteUserId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error accepting connection request from Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(AcceptConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(AcceptConnectionResult) &lt;&lt; std::endl;    }}</pre>
 								</section>
 							</div>
 							<p>
@@ -358,9 +338,7 @@
 																	<code>EXPECTED_SOCKET_ID_HERE</code>. Note that you must replace this with the actual name of the socket ID that you are accepting the peer-to-peer connection for:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (strcmp(Data-&gt;SocketId-&gt;SocketName, EXPECTED_SOCKET_ID_HERE) != 0){    std::cerr &lt;&lt; "Bad socket ID - Connection not accepted." &lt;&lt; std::endl;    std::cerr &lt;&lt; "Socket ID == " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;    return;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -368,9 +346,7 @@
 																<p>If the socket ID is the one you expect for the connection, retrieve the P2P manager pointer from the client data:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);</pre>
 																	</section>
 																</div>
 															</li>
@@ -381,9 +357,7 @@
 																	<code>AcceptConnectionOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_P2P_AcceptConnectionOptions AcceptConnectionOptions = {};AcceptConnectionOptions.ApiVersion = EOS_P2P_ACCEPTCONNECTION_API_LATEST;AcceptConnectionOptions.LocalUserId = Data-&gt;LocalUserId;AcceptConnectionOptions.RemoteUserId = Data-&gt;RemoteUserId;AcceptConnectionOptions.SocketId = Data-&gt;SocketId;</pre>
 																	</section>
 																</div>
 															</li>
@@ -398,9 +372,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_EResult AcceptConnectionResult = EOS_P2P_AcceptConnection(Self-&gt;P2PHandle, &amp;AcceptConnectionOptions);</pre>
 																	</section>
 																</div>
 															</li>
@@ -412,9 +384,7 @@
 																	to confirm that the connection request was successfully accepted. If the connection is successful, notify the player that they have accepted the connection request. In the example, the console prints a success statement that includes the Product User ID of the remote player that accepted the connection request and the socket ID the connection is on:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (AcceptConnectionResult == EOS_EResult::EOS_Success){    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(Data-&gt;RemoteUserId, PuidString, &amp;PuidStringMaxLength);     std::cout &lt;&lt; "Connection request accepted from Product User ID "             &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 																<p>
@@ -429,9 +399,7 @@
 																<p>If the connection is not successful, handle any errors. In the example, the console prints an error statement that includes the Product User ID of the remote player that failed to accept the connection request and the socket ID the connection is on:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else{    char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];    int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;    EOS_ProductUserId_ToString(Data-&gt;RemoteUserId, PuidString, &amp;PuidStringMaxLength);     std::cerr &lt;&lt; "Error accepting connection request from Product User ID "             &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(AcceptConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(AcceptConnectionResult) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -449,9 +417,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>void P2PManager::CloseConnectionExample(){    // Set the options for closing the connection.     EOS_P2P_CloseConnectionOptions CloseConnectionOptions = {};    CloseConnectionOptions.ApiVersion = EOS_P2P_CLOSECONNECTION_API_LATEST;     // Set the Product User ID of the local player closing the connection.     CloseConnectionOptions.LocalUserId = LocalProductUserId;     // Set the Product User ID of the remote player you're connected with.    CloseConnectionOptions.RemoteUserId = RemoteProductUserId;     // Set the socket ID of the connection to close.     CloseConnectionOptions.SocketId = SocketId;     // Call the EOS SDK to close the requested connection.     EOS_EResult CloseConnectionResult = EOS_P2P_CloseConnection(P2PHandle, &amp;CloseConnectionOptions);     if (CloseConnectionResult == EOS_EResult::EOS_Success)    {        // If the code gets here, the connection closing process has started.         // The close connection notification callback function will be called when the connection is closed.         std::cout &lt;&lt; "Closing connection." &lt;&lt; std::endl;    }                                                                                 else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error closing connection! Error code: "            &lt;&lt; static_cast&lt;int&gt;(CloseConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(CloseConnectionResult) &lt;&lt; std::endl;    }}</pre>
 								</section>
 							</div>
 							<div>
@@ -474,9 +440,7 @@
 																	<code>CloseConnectionExample()</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void P2PManager::CloseConnectionExample(){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -487,9 +451,7 @@
 																	<code>CloseConnectionOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_P2P_CloseConnectionOptions CloseConnectionOptions = {};CloseConnectionOptions.ApiVersion = EOS_P2P_CLOSECONNECTION_API_LATEST;CloseConnectionOptions.LocalUserId = LocalProductUserId;CloseConnectionOptions.RemoteUserId = RemoteProductUserId;CloseConnectionOptions.SocketId = SocketId;</pre>
 																	</section>
 																</div>
 															</li>
@@ -504,9 +466,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_EResult CloseConnectionResult = EOS_P2P_CloseConnection(P2PHandle, &amp;CloseConnectionOptions);</pre>
 																	</section>
 																</div>
 															</li>
@@ -518,9 +478,7 @@
 																	to confirm that the connection was closed successfully. If the connection is closed, notify the player:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (CloseConnectionResult == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Closing connection." &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -528,9 +486,7 @@
 																<p>If the connection is not successful, handle any errors:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else{    std::cerr &lt;&lt; "Error closing connection! Error code: "        &lt;&lt; static_cast&lt;int&gt;(CloseConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(CloseConnectionResult) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -558,16 +514,12 @@
 							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// P2PManager.h#pragma once #include &lt;eos_p2p.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;string&gt; class P2PManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the EOS Platform Interface obtained during EOS Platform Interface setup.     *     * @param InLocalProductUserId - The Product User ID of the local player obtained during Connect login.     */    P2PManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);        /**     * Request a connection with another player.     *      * @param RemoteProductUserId - The Product User ID of the remote player to request a connection with.     *      * @param RequestConnectionSocketId - The socket ID to use for the connection.      */    void RequestConnectionExample(EOS_ProductUserId RemoteProductUserId, EOS_P2P_SocketId* RequestConnectionSocketId);     /** Close the current P2P connection. */    void CloseConnectionExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The P2P Interface handle. */    EOS_HP2P P2PHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /** The Product User ID of the remote player that you're connected to. */    EOS_ProductUserId RemoteProductUserId = nullptr;     /** The socket ID of the current P2P connection. */    EOS_P2P_SocketId* SocketId = nullptr; };</pre>
 								</section>
 							</div>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>//P2PManager.cppvoid P2PManager::RequestConnectionExample(EOS_ProductUserId RemoteProductUserId, EOS_P2P_SocketId* RequestConnectionSocketId){    // Set the options for requesting a connection.    EOS_P2P_AcceptConnectionOptions AcceptConnectionOptions = {};    AcceptConnectionOptions.ApiVersion = EOS_P2P_ACCEPTCONNECTION_API_LATEST;     // Set the Product User ID of the local player requesting the connection.    AcceptConnectionOptions.LocalUserId = LocalProductUserId;     // Set the Product User ID of the remote player to request a connection with.    AcceptConnectionOptions.RemoteUserId = RemoteProductUserId;     // Set the socket ID for the requested connection.    AcceptConnectionOptions.SocketId = RequestConnectionSocketId;     // Call the EOS SDK to send a connection request to the remote player.     EOS_EResult AcceptConnectionResult = EOS_P2P_AcceptConnection(P2PHandle, &amp;AcceptConnectionOptions);     if (AcceptConnectionResult == EOS_EResult::EOS_Success)    {        // If the code gets here, a connection request was successfully sent.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);         std::cout &lt;&lt; "Connection request successfully sent to Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; RequestConnectionSocketId-&gt;SocketName &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(RemoteProductUserId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error requesting connection with Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; RequestConnectionSocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(AcceptConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(AcceptConnectionResult) &lt;&lt; std::endl;    }} void EOS_CALL P2PManager::OnConnectionRequestNotification(const EOS_P2P_OnIncomingConnectionRequestInfo* Data){    // Check if the socket ID of the connection request is what is expected.    // We should still include something about this in the guide but it should be up to them to determine what counts as a valid socket ID to them.    if (strcmp(Data-&gt;SocketId-&gt;SocketName, EXPECTED_SOCKET_ID_HERE) != 0)    {        std::cerr &lt;&lt; "Bad socket ID - Connection not accepted." &lt;&lt; std::endl;        std::cerr &lt;&lt; "Socket ID == " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;        return;    }     // Retrieve the P2PManager pointer from from the client data passed to the callback function.    P2PManager* Self = static_cast&lt;P2PManager*&gt;(Data-&gt;ClientData);     // Set the options for accepting a requested connection.     EOS_P2P_AcceptConnectionOptions AcceptConnectionOptions = {};    AcceptConnectionOptions.ApiVersion = EOS_P2P_ACCEPTCONNECTION_API_LATEST;     // Set the Product User ID of the local player accepting the connection.     AcceptConnectionOptions.LocalUserId = Data-&gt;LocalUserId;     // Set the Product User ID of the remote player requesting a connection.     AcceptConnectionOptions.RemoteUserId = Data-&gt;RemoteUserId;     // Set the socket ID of the connection being requested.     AcceptConnectionOptions.SocketId = Data-&gt;SocketId;     // Call the EOS SDK to accept the requested connection.     EOS_EResult AcceptConnectionResult = EOS_P2P_AcceptConnection(Self-&gt;P2PHandle, &amp;AcceptConnectionOptions);     if (AcceptConnectionResult == EOS_EResult::EOS_Success)    {        // If the code gets here, the incoming connection request was accepted.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(Data-&gt;RemoteUserId, PuidString, &amp;PuidStringMaxLength);         std::cout &lt;&lt; "Connection request accepted from Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; std::endl;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        char PuidString[EOS_PRODUCTUSERID_MAX_LENGTH + 1];        int32_t PuidStringMaxLength = EOS_PRODUCTUSERID_MAX_LENGTH + 1;        EOS_ProductUserId_ToString(Data-&gt;RemoteUserId, PuidString, &amp;PuidStringMaxLength);         std::cerr &lt;&lt; "Error accepting connection request from Product User ID "                 &lt;&lt; PuidString &lt;&lt; " on socket ID " &lt;&lt; Data-&gt;SocketId-&gt;SocketName &lt;&lt; "! Error code: " &lt;&lt; static_cast&lt;int&gt;(AcceptConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(AcceptConnectionResult) &lt;&lt; std::endl;    }} void P2PManager::CloseConnectionExample(){    // Set the options for closing the connection.     EOS_P2P_CloseConnectionOptions CloseConnectionOptions = {};    CloseConnectionOptions.ApiVersion = EOS_P2P_CLOSECONNECTION_API_LATEST;     // Set the Product User ID of the local player closing the connection.     CloseConnectionOptions.LocalUserId = LocalProductUserId;     // Set the Product User ID of the remote player you're connected with.    CloseConnectionOptions.RemoteUserId = RemoteProductUserId;     // Set the socket ID of the connection to close.     CloseConnectionOptions.SocketId = SocketId;     // Call the EOS SDK to close the requested connection.     EOS_EResult CloseConnectionResult = EOS_P2P_CloseConnection(P2PHandle, &amp;CloseConnectionOptions);     if (CloseConnectionResult == EOS_EResult::EOS_Success)    {        // If the code gets here, the connection closing process has started.         // The close connection notification callback function will be called when the connection is closed.         std::cout &lt;&lt; "Closing connection." &lt;&lt; std::endl;    }                                                                                    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error closing connection! Error code: "            &lt;&lt; static_cast&lt;int&gt;(CloseConnectionResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(CloseConnectionResult) &lt;&lt; std::endl;    }}</pre>
 								</section>
 							</div>
 							<div>

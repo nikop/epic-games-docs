@@ -1,0 +1,291 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: View EOS SDK Log Messages — 2. Find and Analyze Your Log Messages</h1>
+			<h2>Overview of how to find and analyze the log messages sent by the EOS SDK.</h2>
+			<div>
+				<div>6 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/enable-eos-logging">1. Enable EOS Logging</a>
+			</p>
+			<p>After you enable EOS logging for your game, you receive log messages from the EOS SDK. These log messages contain vital information about the EOS SDK processes that run in your game (or other software application). You can analyze the log messages to help you diagnose any issues you run into with the EOS SDK. You can also share your log messages directly with support so they can help you troubleshoot the issue (Documentation:
+				<a href="/docs/support">Support</a>).</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						If you share your log messages with support, always send the entire set of log messages, from the startup of your game to the shutdown of your game. Do not send an excerpt of your log messages, even if you have identified the specific log message that relates to your issue.</p>
+				</div>
+			</div>
+			<p>This guide shows how to find your log messages if you develop your game in Unreal Engine or Unity. It also shows how to analyze your log messages.</p>
+			<div>
+				<h2 id="before-you-start">Before You Start</h2>
+			</div>
+			<p>Before you locate and analyze your log messages, do the following:</p>
+			<ul>
+				<li>If you aren’t using the latest version of the EOS SDK, try to reproduce your issue with the latest version of the EOS SDK.
+					<ul>
+						<li>Your issue might already be resolved in the latest version.</li>
+						<li>
+							<strong>Note:</strong>
+							To do this, replace the EOS SDK binary with the latest version of the same binary.</li>
+					</ul>
+				</li>
+				<li>If you can reproduce the issue with the latest version of the EOS SDK, enable all logs:
+					<ul>
+						<li>Set the log level to
+							<code>VeryVerbose</code>.</li>
+						<li>Enable logging for all log categories.</li>
+						<li>Section in this guide:
+							<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/enable-eos-logging#step-4-set-the-log-level">1. Enable EOS Logging &gt; Set the Log Level</a>.</li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<h2 id="locate-your-logs">Locate Your Logs</h2>
+			</div>
+			<p>If you develop your game in Unreal Engine or Unity, your EOS SDK log messages are saved in a predefined directory. If you don’t develop your game in Unreal Engine or Unity, you must specify where to save your EOS SDK log messages if the engine does not already have functionality to output EOS SDK log messages to a file. (Section in this guide:
+				<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/enable-eos-logging">1. Enable EOS Logging</a>).</p>
+			<div>
+				<h3 id="unreal-engine">Unreal Engine</h3>
+			</div>
+			<p>If you develop your game in Unreal Engine, find your EOS SDK log messages in the following directory:<br>
+				<code>%localappdata%\&lt;ProjectName&gt;\Saved\Logs</code>, or under
+				<code>&lt;GameName&gt;\&lt;ProjectName&gt;\SavedLogs</code>
+			</p>
+			<p>
+				<strong>Note:</strong>
+				Unreal Engine projects don’t have logging enabled by default in shipping builds. If you need to view log messages for your game, you must either use a debug build or manually enable logging in your shipping build (more information:
+				<a href="https://dev.epicgames.com/community/learning/knowledge-base/vzvZ/unreal-engine-enabling-logging-in-shipping-builds">dev.epicgames.com/~unreal-engine-enabling-logging-in-shipping-builds</a>).</p>
+			<div>
+				<h3 id="unity">Unity</h3>
+			</div>
+			<p>If you develop your game in Unity, find your EOS SDK log messages in the following directory:<br>
+				<code>%UserProfile%\AppData\LocalLow\&lt;CompanyName&gt;\&lt;GameName&gt;</code>.</p>
+			<div>
+				<h2 id="analyze-your-logs">Analyze Your Logs</h2>
+			</div>
+			<p>To diagnose your issue, you must know how to analyze your log messages to find the information you need.</p>
+			<p>When you read your log messages, always start from the very beginning and work your way through to the point where the issue occurred. Do not jump to the section in the log messages where you believe the issue occurred with the EOS SDK. Often the root cause of an issue in your game is earlier than you think. If you skip the beginning of your log messages, you might miss the root cause.</p>
+			<p>Complete the following steps to help diagnose your issue:</p>
+			<ul>
+				<li>
+					<a href="#step-1-confirm-that-your-credentials-are-correct">Step 1: Confirm That Your Credentials Are Correct</a>
+				</li>
+				<li>
+					<a href="#step-2-search-for-fatal-error-and-warning-log-messages">Step 2: Search for Fatal, Error, and Warning Log Messages</a>
+				</li>
+				<li>
+					<a href="#step-3-focus-on-log-messages-for-the-appropriate-log-category-for-the-issue">Step 3: Focus on Log Messages for the Appropriate Log Category for the Issue</a>
+				</li>
+				<li>
+					<a href="#step-4-when-all-else-fails-read-every-log-message">Step 4: When All Else Fails, Read Every Log Message</a>
+				</li>
+				<li>
+					<a href="#step-5-if-you-cant-resolve-the-issue-share-your-log-messages-with-support">Step 5: If You Can’t Resolve the Issue, Share Your Log Messages With Support</a>
+				</li>
+			</ul>
+			<div>
+				<h3 id="step-1-confirm-that-your-credentials-are-correct">Step 1: Confirm That Your Credentials Are Correct</h3>
+			</div>
+			<p>When you start up your game and the EOS SDK, some of the very first log messages list the credentials that you used to initialize the EOS SDK (for example, your client ID and sandbox ID). If this information does not match your product's settings in the Developer Portal, it is most likely the cause of your issue. (Note that in the Developer Portal, your game is usually known as a "product".) Verify that the following information is correct and matches your product’s settings in the Developer Portal:</p>
+			<ul>
+				<li>Client ID</li>
+				<li>Product ID</li>
+				<li>Sandbox ID</li>
+				<li>Deployment ID</li>
+			</ul>
+			<p>Example:</p>
+			<div>
+				<section>
+					<pre>2025.01.01-12:00:00 - LogEOS - 400 - [Boot] EOSSDK Version (VERSION_NUMBER_HERE) booting at (STARTUP_TIME) using C  2025.01.01-12:00:00 - LogEOS - 400 - [Boot] EOSSDK Platform Properties [OS=(OS_INFO_HERE), ClientId=(CLIENT_ID_HERE), ProductId=(PRODUCT_ID_HERE), SandboxId=(SANDBOX_ID_HERE), DeploymentId=(DEPLOYMENT_ID_HERE), ProductName=(PRODUCT_NAME_HERE), ProductVersion=(PRODUCT_VERSION_HERE), IsServer=(IS_SERVER_HERE), Flags=(INITIALIZATION_FLAGS_HERE)]</pre>
+				</section>
+			</div>
+			<p>
+				<strong>Note:</strong>
+				The log messages in the example are formatted using the C++ code in the previous section (<a href="/docs/epic-online-services/eos-fundamentals/logging-interface/logging-guide/enable-eos-logging">1. Enable EOS Logging</a>). Your log messages might appear different.</p>
+			<p>To view your credentials, go to the
+				<strong>Product Settings</strong>
+				page in the Developer Portal.</p>
+			<p>
+				<strong>To go to the Product Settings page</strong>:</p>
+			<ol>
+				<li>Go to your product's Developer Portal page:
+					<ul>
+						<li>In the Developer Portal (<a href="https://dev.epicgames.com/portal">dev.epicgames.com/portal</a>), in the left navigation, under
+							<strong>Your Products</strong>, click the name of your product. (<strong>Note</strong>: You might have to click
+							<strong>Back to organization</strong>
+							before you can do this.)</li>
+					</ul>
+				</li>
+				<li>When you are in your product's Developer Portal page, in the left navigation, click
+					<strong>Product Settings</strong>.</li>
+			</ol>
+			<p>
+				<strong>On the Product Settings page</strong>:</p>
+			<ol>
+				<li>The default tab is
+					<strong>SDK Download &amp; Credentials</strong>.</li>
+				<li>Scroll down to the
+					<strong>EOS SDK Credentials</strong>
+					heading.</li>
+			</ol>
+			<div>
+				<h3 id="step-2-search-for-fatal-error-and-warning-log-messages">Step 2: Search for Fatal, Error, and Warning Log Messages</h3>
+			</div>
+			<p>Search your log messages for any messages that have the log level Warning, Error, or Fatal and address them. Even if these messages seem unrelated to the issue you’re trying to solve, addressing them might actually resolve your issue in the process.</p>
+			<p>
+				<strong>Note:</strong>
+				In C++, the EOS SDK represents the
+				<code>EOS_ELogLevel</code>
+				enum as an integer in the
+				<code>EOS_LogMessage</code>. The following table shows the integer that maps to each log level:</p>
+			<table>
+				<thead>
+					<tr>
+						<th align="left">Log Level</th>
+						<th align="left">Description</th>
+						<th align="left">Integer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_VeryVerbose</code>
+						</td>
+						<td align="left">Includes the most information. Set this log level if you need to share logs with support.</td>
+						<td align="left">600</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Verbose</code>
+						</td>
+						<td align="left">Includes more detailed information about EOS SDK processes than the Info level.</td>
+						<td align="left">500</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Info</code>
+						</td>
+						<td align="left">Includes general information about EOS SDK processes. This is the default log level for most categories.</td>
+						<td align="left">400</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Warning</code>
+						</td>
+						<td align="left">Includes information that might be indicative of issues but it is not an immediate cause for alarm.</td>
+						<td align="left">300</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Error</code>
+						</td>
+						<td align="left">Includes errors that prevent proper functionality of the EOS SDK.</td>
+						<td align="left">200</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Fatal</code>
+						</td>
+						<td align="left">Includes errors that prevent the EOS SDK from running.</td>
+						<td align="left">100</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<code>EOS_LOG_Off</code>
+						</td>
+						<td align="left">Hides all logs for the specified category.</td>
+						<td align="left">0</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<h3 id="step-3-focus-on-log-messages-for-the-appropriate-log-category-for-the-issue">Step 3: Focus on Log Messages for the Appropriate Log Category for the Issue</h3>
+			</div>
+			<p>If your issue concerns a specific interface of the EOS SDK, such as Auth or Ecom, focus your review on log messages that belong to the relevant log category. For the full list of log categories, see the API reference documentation:
+				<a href="/docs/api-ref/enums/eos-e-log-category">
+					<code>EOS_ELogCategory</code>
+				</a>.</p>
+			<p>
+				<strong>Tip:</strong>
+				Also review log messages for the “Core” category. The “Core” category covers all log messages not related to a specific EOS service or interface.</p>
+			<div>
+				<h3 id="step-4-when-all-else-fails-read-every-log-message">Step 4: When All Else Fails, Read Every Log Message</h3>
+			</div>
+			<p>If you’ve tried the previous steps and still haven’t resolved your issue, read every log message, from the startup of your game to the shutdown of your game. Though it might be time-consuming, the true source of the issue might be in a log message you have yet to review.</p>
+			<div>
+				<h3 id="step-5-if-you-cant-resolve-the-issue-share-your-log-messages-with-support">Step 5: If You Can’t Resolve the Issue, Share Your Log Messages With Support</h3>
+			</div>
+			<p>If you are unable to determine the cause of the issue on your own, then you can contact support and share your log messages with them so they can help troubleshoot the issue (Documentation:
+				<a href="/docs/support">Support</a>).</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>
+						<strong>Note:</strong>
+						If you share your log messages with support, always send the entire set of log messages, from the startup of your game to the shutdown of your game. Do not send an excerpt of your log messages, even if you have identified the specific log message that relates to your issue.</p>
+				</div>
+			</div>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#locate-your-logs">Locate Your Logs</a>
+								</li>
+								<li>
+									<a href="#unreal-engine">Unreal Engine</a>
+								</li>
+								<li>
+									<a href="#unity">Unity</a>
+								</li>
+								<li>
+									<a href="#analyze-your-logs">Analyze Your Logs</a>
+								</li>
+								<li>
+									<a href="#step-1-confirm-that-your-credentials-are-correct">Step 1: Confirm That Your Credentials Are Correct</a>
+								</li>
+								<li>
+									<a href="#step-2-search-for-fatal-error-and-warning-log-messages">Step 2: Search for Fatal, Error, and Warning Log Messages</a>
+								</li>
+								<li>
+									<a href="#step-3-focus-on-log-messages-for-the-appropriate-log-category-for-the-issue">Step 3: Focus on Log Messages for the Appropriate Log Category for the Issue</a>
+								</li>
+								<li>
+									<a href="#step-4-when-all-else-fails-read-every-log-message">Step 4: When All Else Fails, Read Every Log Message</a>
+								</li>
+								<li>
+									<a href="#step-5-if-you-cant-resolve-the-issue-share-your-log-messages-with-support">Step 5: If You Can’t Resolve the Issue, Share Your Log Messages With Support</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

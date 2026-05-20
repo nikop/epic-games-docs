@@ -14,7 +14,7 @@
 			<h1>EOS SDK for Windows</h1>
 			<h2>Reference information for implementing EOS SDK for Windows.</h2>
 			<div>
-				<div>2 mins to read</div>
+				<div>6 mins to read</div>
 			</div>
 		</div>
 	</section>
@@ -33,6 +33,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr>
+						<td>EOS SDK 1.19.1.2-CL53289219</td>
+						<td>supports</td>
+						<td>Windows 10 or higher and Windows on Arm</td>
+					</tr>
 					<tr>
 						<td>Any release version</td>
 						<td>supports</td>
@@ -96,17 +101,13 @@
 				<code>delayhlp.cpp</code>. You can prevent the automatic loading of the DLL by providing a completely blank implementation, similar to:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>extern "C"FARPROC WINAPI__delayLoadHelper2(  PCImgDelayDescr     pidd,  FARPROC *           ppfnIATEntry){  return NULL;}</pre>
 				</section>
 			</div>
 			<p>Alternatively, you can explicitly load the module with the following:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>HMODULE Module = ::LoadLibrary(Filename);</pre>
 				</section>
 			</div>
 			<p>Where
@@ -123,6 +124,130 @@
 			</p>
 			<p>Where Module is the value returned by
 				<code>::LoadLibrary</code>.</p>
+			<div>
+				<h3 id="windows-on-arm-support-for-c">Windows on Arm Support for C#</h3>
+			</div>
+			<p>EOS SDK 1.19.1.2-CL53289219 and higher supports Windows on Arm (excluding the Social Overlay).</p>
+			<div role="alert">
+				<div></div>
+				<div>
+					<p>If you're using the EOS Plugin for Unity at
+						<a href="https://github.com/EOS-Contrib/eos_plugin_for_unity">github.com/~/eos_plugin_for_unity</a>, you don't need to do anything. The plugin already supports Windows on Arm.</p>
+				</div>
+			</div>
+			<p>If you use the EOS SDK for C# and you don't use the EOS Plugin for Unity, you must make updates to the EOS SDK to add support for Windows on Arm.</p>
+			<p>The sections below cover the following updates:</p>
+			<ul>
+				<li>Required updates to support EOS SDK for C#.</li>
+				<li>Additional updates that apply if you develop outside of Unity.</li>
+				<li>Additional updates that are Unity-specific (without the plugin).</li>
+			</ul>
+			<div>
+				<h4 id="required-updates-to-support-eos-sdk-for-c">Required Updates to Support EOS SDK for C#</h4>
+			</div>
+			<p>To add support for Windows on Arm to the EOS SDK for C#, you must specify the name of the Windows on Arm library you want to use for the EOS SDK. To do this, follow these steps:</p>
+			<ol>
+				<li>
+					<p>Locate your
+						<code>SDK/Source/Core/Common.cs</code>
+						file of your EOS SDK download.</p>
+				</li>
+				<li>
+					<p>Modify the
+						<code>LIBRARY_NAME</code>
+						variable to include assignments for Windows on Arm in Unity and outside of Unity, as shown in the code snippet below:</p>
+					<div>
+						<section>
+							<pre>...         public const string LIBRARY_NAME =        ...         #elif EOS_PLATFORM_WINDOWS_ARM64 &amp;&amp; EOS_UNITY            "EOSSDK-Win64-Shippingarm64"        #elif EOS_PLATFORM_WINDOWS_ARM64            "EOSSDK-Win64-Shippingarm64.dll"         ...</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+			<div>
+				<h4 id="additional-updates-that-apply-if-you-develop-outside-of-unity">Additional Updates That Apply If You Develop Outside of Unity</h4>
+			</div>
+			<p>If you're using the EOS SDK for C# and you're not developing your game in Unity, follow these additional steps to add support for Windows on Arm:</p>
+			<ol>
+				<li>
+					<p>Define the following new symbol in your
+						<code>WinARM64</code>
+						builds:</p>
+					<div>
+						<code>EOS_PLATFORM_WINDOWS_ARM64
+						</code>
+					</div>
+				</li>
+				<li>
+					<p>Locate the
+						<code>/SDK/Source/Generated/Windows/</code>
+						directory in your EOS SDK download.</p>
+				</li>
+				<li>
+					<p>Modify the conditional statement
+						<code>#if EOS_PLATFORM_WINDOWS_32 || EOS_PLATFORM_WINDOWS_64</code>
+						in all the files in this directory and its subdirectories to include a check for the new
+						<code>EOS_PLATFORM_WINDOWS_ARM64</code>
+						symbol, as shown in the code snippet below:</p>
+					<div>
+						<section>
+							<pre>...#if EOS_PLATFORM_WINDOWS_32 || EOS_PLATFORM_WINDOWS_64 || EOS_PLATFORM_WINDOWS_ARM64...</pre>
+						</section>
+					</div>
+				</li>
+			</ol>
+			<div>
+				<h4 id="additional-unity-specific-updates-without-the-plugin">Additional Unity-Specific Updates (Without the Plugin)</h4>
+			</div>
+			<p>If you use Unity without the EOS Plugin for Unity, follow these additional steps to add support for Windows on Arm.</p>
+			<ol>
+				<li>
+					<p>Locate your
+						<code>SDK/Source/Core/Common.cs</code>
+						file of your EOS SDK download.</p>
+				</li>
+				<li>
+					<p>Modify the file to include a check for the
+						<code>EOS_PLATFORM_WINDOWS_ARM64</code>
+						symbol.</p>
+					<p>
+						<strong>Note:</strong>
+						Make sure you change the existing
+						<code>#if UNITY_EDITOR_WIN</code>
+						statement into an
+						<code>#elif</code>
+						statement, as shown in the code snippet below.</p>
+					<div>
+						<section>
+							<pre>...#if EOS_PLATFORM_WINDOWS_ARM64    // Set externally by the Windows ARM64 build pipeline.    // Unity does not provide a built-in Windows ARM64 scripting symbol.#elif UNITY_EDITOR_WIN    #define EOS_PLATFORM_WINDOWS_64...    #endif</pre>
+						</section>
+					</div>
+				</li>
+				<li>
+					<p>Write a build hook to add the
+						<code>EOS_PLATFORM_WINDOWS_ARM64</code>
+						symbol in WinARM64 builds when you make a build using Unity's build window. An example code snippet is shown below:</p>
+					<div>
+						<section>
+							<pre>using System;using UnityEditor;using UnityEditor.Build;using UnityEngine; /// &lt;summary&gt;/// Manages the EOS_PLATFORM_WINDOWS_ARM64 scripting define for WinARM64 builds./// Unity does not provide a built-in scripting define to distinguish ARM64 from x64/// on Standalone Windows, so this symbol must be managed manually.////// IMPORTANT: scripting defines set during build preprocess only affect the *next*/// build's script compilation, not the current one. Switching between x64 and ARM64/// requires running the menu item below once before the first build, or building twice./// &lt;/summary&gt;internal static class WindowsArm64Define{    public const string Symbol = "EOS_PLATFORM_WINDOWS_ARM64";    private const string Architecture = "ARM64";     /// &lt;summary&gt;    /// Returns true when the active Standalone build is configured to produce ARM64 binaries.    /// &lt;/summary&gt;    public static bool IsArm64Active()    {        if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.StandaloneWindows64)        {            return false;        }         try        {            string arch = EditorUserBuildSettings.GetPlatformSettings(                BuildPipeline.GetBuildTargetName(BuildTarget.StandaloneWindows64),                "Architecture");             if (!string.IsNullOrEmpty(arch))            {                return string.Equals(arch, Architecture, StringComparison.OrdinalIgnoreCase);            }        }        catch (Exception ex)        {            Debug.LogWarning($"Could not read ARM64 architecture setting: {ex.Message}");        }         return false;    }     /// &lt;summary&gt;    /// Intercepts the Build button to auto-inject or remove the ARM64 define before    /// Unity compiles scripts, so the correct symbol is set on the first build attempt.    /// &lt;/summary&gt;    [InitializeOnLoad]    private static class BuildGuard    {        static BuildGuard()        {            BuildPlayerWindow.RegisterBuildPlayerHandler(OnBuildPlayer);        }         private static void OnBuildPlayer(BuildPlayerOptions options)        {            if (options.target == BuildTarget.StandaloneWindows64)            {                bool wantsArm64  = IsArm64Active();                bool defineIsSet = IsDefineSet();                 if (wantsArm64 &amp;&amp; !defineIsSet)                {                    var existing = options.extraScriptingDefines ?? Array.Empty&lt;string&gt;();                    var injected = new string[existing.Length + 1];                    existing.CopyTo(injected, 0);                    injected[existing.Length] = Symbol;                    options.extraScriptingDefines = injected;                }                 if (!wantsArm64 &amp;&amp; defineIsSet)                {                    RemoveDefine(Symbol);                    throw new BuildFailedException($"Scripting define '{Symbol}' was left over from a previous ARM64 build. " +                        "It has been removed. Please rebuild to compile with Windows x64 support.");                }            }             BuildPlayerWindow.DefaultBuildMethods.BuildPlayer(options);        }    }     [MenuItem("EOS Plugin/Advanced/Windows ARM64/Enable scripting define")]    private static void EnableArm64Define()    {        AddDefine(Symbol);        Debug.Log($"'{Symbol}' enabled. Build for ARM64 architecture to produce ARM64 binaries.");    }     [MenuItem("EOS Plugin/Advanced/Windows ARM64/Disable scripting define")]    private static void DisableArm64Define()    {        RemoveDefine(Symbol);        Debug.Log($"'{Symbol}' disabled. Subsequent builds will produce x64 binaries.");    }     private static bool IsDefineSet()    {        NamedBuildTarget named = NamedBuildTarget.FromBuildTargetGroup(BuildTargetGroup.Standalone);        string defines = PlayerSettings.GetScriptingDefineSymbols(named);        return !string.IsNullOrEmpty(defines)            &amp;&amp; Array.IndexOf(defines.Split(';'), Symbol) &gt;= 0;    }     private static void AddDefine(string symbol)    {        NamedBuildTarget named = NamedBuildTarget.FromBuildTargetGroup(BuildTargetGroup.Standalone);        string defines = PlayerSettings.GetScriptingDefineSymbols(named);        if (Array.IndexOf(defines.Split(';'), symbol) &lt; 0)        {            PlayerSettings.SetScriptingDefineSymbols(named, defines + ";" + symbol);        }    }     private static void RemoveDefine(string symbol)    {        NamedBuildTarget named = NamedBuildTarget.FromBuildTargetGroup(BuildTargetGroup.Standalone);        string defines = PlayerSettings.GetScriptingDefineSymbols(named);        string updated = string.Join(";", Array.FindAll(defines.Split(';'), d =&gt; d != symbol));        PlayerSettings.SetScriptingDefineSymbols(named, updated);    }}</pre>
+						</section>
+					</div>
+					<p>
+						<strong>Note:</strong>
+						If you build using
+						<code>BuildPipeline.BuildPlayer()</code>, then you must also add the
+						<code>EOS_PLATFORM_WINDOWS_ARM64</code>
+						symbol to
+						<code>BuildPlayerOptions.extraScriptingDefines</code>.</p>
+				</li>
+				<li>
+					<p>Select the EOS SDK's
+						<code>WinARM64</code>
+						binary in Unity and change the platform settings to ensure it's only included in WinARM64 builds.</p>
+				</li>
+				<li>
+					<p>Repeat the same process for the Windows x64 binary to ensure it's not included in WinARM64 builds.</p>
+				</li>
+			</ol>
 		</section>
 		<aside>
 			<div>Contents</div>
@@ -148,6 +273,18 @@
 								</li>
 								<li>
 									<a href="#unloading-the-module">Unloading the Module</a>
+								</li>
+								<li>
+									<a href="#windows-on-arm-support-for-c">Windows on Arm Support for C#</a>
+								</li>
+								<li>
+									<a href="#required-updates-to-support-eos-sdk-for-c">Required Updates to Support EOS SDK for C#</a>
+								</li>
+								<li>
+									<a href="#additional-updates-that-apply-if-you-develop-outside-of-unity">Additional Updates That Apply If You Develop Outside of Unity</a>
+								</li>
+								<li>
+									<a href="#additional-unity-specific-updates-without-the-plugin">Additional Unity-Specific Updates (Without the Plugin)</a>
 								</li>
 							</ul>
 						</div>

@@ -118,9 +118,7 @@
 							</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// StatsManager.h #include &lt;map&gt;#include &lt;string&gt;... class StatsManager{public:    /**      * Getter for a read-only copy of the map.      *      * @return A read-only copy of the RetrievedStats map.     */    const std::map&lt;std::string, int32_t&gt;&amp; GetRetrievedStats() const { return RetrievedStats; }        /** Function to manage querying all stats. */    void RetrieveAllStatsExample();    ... private:    /** Map to hold copied stat name, value pairs. */    std::map&lt;std::string, int32_t&gt; RetrievedStats;     /**      * Callback function that executes when the stats query completes.      *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnQueryAllStatsComplete(const EOS_Stats_OnQueryStatsCompleteCallbackInfo* Data);     /** Function to copy all the player's stats after a query. */    void CopyAllStatsExample();    ...}</pre>
 								</section>
 							</div>
 							<div>
@@ -146,9 +144,7 @@
 																	<code>GetRetrievedStats</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>const std::map&lt;std::string, int32_t&gt; RetrievedStats&amp; GetRetrievedStats() const { return RetrievedStats; }</pre>
 																	</section>
 																</div>
 															</li>
@@ -157,9 +153,7 @@
 																	<code>RetrieveAllStatsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void RetrieveAllStatsExample();</pre>
 																	</section>
 																</div>
 															</li>
@@ -168,9 +162,7 @@
 																	<code>RetrievedStats</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>std::map&lt;std::string, int32_t&gt; RetrievedStats;</pre>
 																	</section>
 																</div>
 																<p>
@@ -187,9 +179,7 @@
 																	<code>OnQueryAllStatsComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>static void EOS_CALL OnQueryAllStatsComplete(const EOS_Stats_OnQueryStatsCompleteCallbackInfo* Data);</pre>
 																	</section>
 																</div>
 															</li>
@@ -198,9 +188,7 @@
 																	<code>CopyAllStatsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void CopyAllStatsExample();</pre>
 																	</section>
 																</div>
 															</li>
@@ -221,9 +209,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>void StatsManager::RetrieveAllStatsExample(){    // Create a data structure to hold the options to query stats.    EOS_Stats_QueryStatsOptions QueryStatsOptions = {};    QueryStatsOptions.ApiVersion = EOS_STATS_QUERYSTATS_API_LATEST;     // The Product User ID of the local player requesting the query.    QueryStatsOptions.LocalUserId = LocalProductUserId;     // The Product User ID for the player whose stats you want to query.    QueryStatsOptions.TargetUserId = LocalProductUserId;     // Set to something other than undefined to get stats starting from a certain POSIX time, and not before.    QueryStatsOptions.StartTime = EOS_STATS_TIME_UNDEFINED;     // Set to something other than undefined to get stats ending at a certain POSIX time and not after.    QueryStatsOptions.EndTime = EOS_STATS_TIME_UNDEFINED;     // Call the EOS SDK to query your stats.    // The callback function executes when the `QueryStats` function completes.    EOS_Stats_QueryStats(StatsHandle, &amp;QueryStatsOptions, this, OnQueryAllStatsComplete);}</pre>
 								</section>
 							</div>
 							<p>
@@ -250,9 +236,7 @@
 																	<code>RetrieveAllStatsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void StatsManager::RetrieveAllStatsExample(){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -265,9 +249,7 @@
 																	<code>QueryStatsOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Stats_QueryStatsOptions QueryStatsOptions = {};QueryStatsOptions.ApiVersion = EOS_STATS_QUERYSTATS_API_LATEST;QueryStatsOptions.LocalUserId = LocalProductUserId;QueryStatsOptions.TargetUserId = LocalProductUserId;QueryStatsOptions.StartTime = EOS_STATS_TIME_UNDEFINED;QueryStatsOptions.EndTime = EOS_STATS_TIME_UNDEFINED;</pre>
 																	</section>
 																</div>
 																<p>
@@ -298,9 +280,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Stats_QueryStats(StatsHandle, &amp;QueryStatsOptions, this, OnQueryStatByNameComplete);</pre>
 																	</section>
 																</div>
 															</li>
@@ -321,9 +301,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>void EOS_CALL StatsManager::OnQueryAllStatsComplete(const EOS_Stats_OnQueryStatsCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the stats were queried successfully.         // Retrieve the StatsManager pointer from the client data passed        // into the callback function.        StatsManager* Self = static_cast&lt;StatsManager*&gt;(Data-&gt;ClientData);         // Copy all stats.        Self-&gt;CopyAllStatsExample();    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error querying all stats! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
 								</section>
 							</div>
 							<div>
@@ -359,9 +337,7 @@
 																	<code>OnQueryAllStatsComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void EOS_CALL StatsManager::OnQueryAllStatsComplete(const EOS_Stats_OnQueryStatsCompleteCallbackInfo* Data){ }</pre>
 																	</section>
 																</div>
 																<p>Notes:</p>
@@ -382,9 +358,7 @@
 																	to confirm that the query is successful. If the query is successful, retrieve the stats manager pointer from the client data and call your function to copy the player's stats:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    StatsManager* Self = static_cast&lt;StatsManager*&gt;(Data-&gt;ClientData);    Self-&gt;CopyAllStatsExample();}</pre>
 																	</section>
 																</div>
 															</li>
@@ -396,9 +370,7 @@
 																	to check if the query is not complete yet. if the query is not complete, return so the operation can complete:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -406,9 +378,7 @@
 																<p>If the query is not successful, handle the errors.</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else{    std::cerr &lt;&lt; "Error querying stats! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 																<p>
@@ -440,9 +410,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>void StatsManager::CopyAllStatsExample(){	    // Create a data structure to hold the stat count options.    EOS_Stats_GetStatCountOptions StatsCountOptions = {};    StatsCountOptions.ApiVersion = EOS_STATS_GETSTATSCOUNT_API_LATEST;     // The Product User ID of the player whose stats you want to count.    StatsCountOptions.TargetUserId = LocalProductUserId;     // Get the total number of stats from the EOS SDK.    uint32_t NumStats = EOS_Stats_GetStatsCount(StatsHandle, &amp;StatsCountOptions);     // Loop through the player's stats and copy each one to the stats map.    for (uint32_t StatIndex = 0; StatIndex &lt; NumStats; StatIndex++)    {         // Create a data structure to hold the options to copy the stats.        EOS_Stats_CopyStatByIndexOptions CopyStatOptions = {};        CopyStatOptions.ApiVersion = EOS_STATS_COPYSTATBYINDEX_API_LATEST;         // The Product User ID of the player whose stat you want to copy.        CopyStatOptions.TargetUserId = LocalProductUserId;         // The index of the stat that you want to copy.        CopyStatOptions.StatIndex = StatIndex;         // A variable to temporarily hold the copied stat data.        EOS_Stats_Stat* Stat = nullptr;         // Call the EOS SDK to copy the player's stats.        EOS_EResult CopyStatResult = EOS_Stats_CopyStatByIndex(StatsHandle, &amp;CopyStatOptions, &amp;Stat);         if (CopyStatResult == EOS_EResult::EOS_Success &amp;&amp; Stat != nullptr)        {            // Store the retrieved stat in the map.            std::cout &lt;&lt; "Stat retrieved - " &lt;&lt; Stat-&gt;Name &lt;&lt; ": " &lt;&lt; Stat-&gt;Value &lt;&lt; std::endl;            RetrievedStats[Stat-&gt;Name] = Stat-&gt;Value;             // Free the stat's memory when you're finished with it.            EOS_Stats_Stat_Release(Stat);        }        else        {            // If the code gets here, there was an error.            // Handle this however you need for your game.            std::cerr &lt;&lt; "Error copying all stats! Error code: " &lt;&lt; static_cast&lt;int&gt;(CopyStatResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(CopyStatResult) &lt;&lt; std::endl;        }    }}</pre>
 								</section>
 							</div>
 							<div>
@@ -467,9 +435,7 @@
 																	<code>CopyAllStatsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void StatsManager::CopyAllStatsExample(){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -482,9 +448,7 @@
 																	<code>StatsCountOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Stats_GetStatCountOptions StatsCountOptions = {};StatsCountOptions.ApiVersion = EOS_STATS_GETSTATSCOUNT_API_LATEST;StatsCountOptions.TargetUserId = LocalProductUserId;</pre>
 																	</section>
 																</div>
 															</li>
@@ -501,9 +465,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>uint32_t NumStats = EOS_Stats_GetStatsCount(StatsHandle, &amp;StatsCountOptions);</pre>
 																	</section>
 																</div>
 															</li>
@@ -511,9 +473,7 @@
 																<p>Use the stats count to iterate through the list of queried stats that you want to copy:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>for (uint32_t StatIndex = 0; StatIndex &lt; NumStats; StatIndex++)</pre>
 																	</section>
 																</div>
 															</li>
@@ -526,9 +486,7 @@
 																	<code>CopyStatOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Stats_CopyStatByIndexOptions CopyStatOptions = {};CopyStatOptions.ApiVersion = EOS_STATS_COPYSTATBYINDEX_API_LATEST;CopyStatOptions.TargetUserId = LocalProductUserId;CopyStatOptions.StatIndex = StatIndex;</pre>
 																	</section>
 																</div>
 															</li>
@@ -537,9 +495,7 @@
 																	<code>Stat</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Stats_Stat* Stat = nullptr;</pre>
 																	</section>
 																</div>
 															</li>
@@ -566,9 +522,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_EResult CopyStatResult = EOS_Stats_CopyStatByIndex(StatsHandle, &amp;CopyStatOptions, &amp;Stat);</pre>
 																	</section>
 																</div>
 															</li>
@@ -580,9 +534,7 @@
 																	call is successful, retrieve data for the stat from the stat pointer variable that you passed, and save the stat name and stat value pair to the stats map:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (CopyStatResult == EOS_EResult::EOS_Success &amp;&amp; Stat != nullptr){    std::cout &lt;&lt; "Stat retrieved - " &lt;&lt; Stat-&gt;Name &lt;&lt; ": " &lt;&lt; Stat-&gt;Value &lt;&lt; std::endl;    RetrievedStats[Stat-&gt;Name] = Stat-&gt;Value;</pre>
 																	</section>
 																</div>
 															</li>
@@ -594,9 +546,7 @@
 																	to release the memory for the stat pointer variable when you've finished using it:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Stats_Stat_Release(Stat);}</pre>
 																	</section>
 																</div>
 															</li>
@@ -608,9 +558,7 @@
 																	call is not successful, handle any errors:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else{    std::cerr &lt;&lt; "Error copying all stats! Error code: " &lt;&lt; static_cast&lt;int&gt;(CopyStatResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(CopyStatResult) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 																<p>
@@ -661,9 +609,7 @@
 							</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// StatsManager.h #pragma once #include &lt;eos_stats.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_common.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;map&gt;#include &lt;string&gt; class StatsManager{public:    /**      * Constructor     *     * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     *     * @param InLocalProductUserId - The ProductUserId of the local player obtained during login.     */    StatsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /** Destructor */    ~StatsManager() {}     /**      * Getter for a read-only copy of the map.      *      * @return A read-only copy of the RetrievedStats map.     */    const std::map&lt;std::string, int32_t&gt;&amp; GetRetrievedStats() const { return RetrievedStats; }     /** Function to manage querying all stats. */    void RetrieveAllStatsExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Stats Interface handle. */    EOS_HStats StatsHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /** Map to hold copied stat name, value pairs. */    std::map&lt;std::string, int32_t&gt; RetrievedStats;     /**      * Callback function that executes when the stats query completes.      *     * @param Data - Information passed to the callback function by the EOS. SDK     */    static void EOS_CALL OnQueryAllStatsComplete(const EOS_Stats_OnQueryStatsCompleteCallbackInfo* Data);     /** Function to copy all the player's stats after a query. */    void CopyAllStatsExample();};</pre>
 								</section>
 							</div>
 							<p>
@@ -671,9 +617,7 @@
 							</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// StatsManager.cpp #include "StatsManager.h"#include &lt;iostream&gt; // ConstructorStatsManager::StatsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)	: PlatformHandle(InPlatformHandle)	, LocalProductUserId(InLocalProductUserId){	// Get and save the handle to the Stats Interface.	StatsHandle = EOS_Platform_GetStatsInterface(PlatformHandle);} void StatsManager::RetrieveAllStatsExample(){    // Create a data structure to hold the options to query stats.    EOS_Stats_QueryStatsOptions QueryStatsOptions = {};    QueryStatsOptions.ApiVersion = EOS_STATS_QUERYSTATS_API_LATEST;     // The Product User ID of the local player requesting the query.    QueryStatsOptions.LocalUserId = LocalProductUserId;     // The Product User ID for the player whose stats you want to query.    QueryStatsOptions.TargetUserId = LocalProductUserId;     // Set to something other than undefined to get stats starting from a certain POSIX time and not before.    QueryStatsOptions.StartTime = EOS_STATS_TIME_UNDEFINED;     // Set to something other than undefined to get stats ending at a certain POSIX time and not after.    QueryStatsOptions.EndTime = EOS_STATS_TIME_UNDEFINED;     // Call the EOS SDK to query your stats.    // The callback function executes when the `QueryStats` function completes.    EOS_Stats_QueryStats(StatsHandle, &amp;QueryStatsOptions, this, OnQueryAllStatsComplete);} void EOS_CALL StatsManager::OnQueryAllStatsComplete(const EOS_Stats_OnQueryStatsCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the stats were queried successfully.         // Retrieve the StatsManager pointer from ClientData.        StatsManager* Self = static_cast&lt;StatsManager*&gt;(Data-&gt;ClientData);         // Copy all stats.        Self-&gt;CopyAllStatsExample();    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error querying all stats! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }} void StatsManager::CopyAllStatsExample(){    // Create a data structure to hold the stat count options.    EOS_Stats_GetStatCountOptions StatsCountOptions = {};    StatsCountOptions.ApiVersion = EOS_STATS_GETSTATSCOUNT_API_LATEST;     // The Product User ID of the player whose stats you want to count.    StatsCountOptions.TargetUserId = LocalProductUserId;     // Get the total number of stats from the EOS SDK.    uint32_t NumStats = EOS_Stats_GetStatsCount(StatsHandle, &amp;StatsCountOptions);     // Loop through the player's stats and copy each one to the stats map.    for (uint32_t StatIndex = 0; StatIndex &lt; NumStats; StatIndex++)    {         // Create a data structure to hold the options to copy the stats.        EOS_Stats_CopyStatByIndexOptions CopyStatOptions = {};        CopyStatOptions.ApiVersion = EOS_STATS_COPYSTATBYINDEX_API_LATEST;         // The Product User ID of the player whose stat you want to copy.        CopyStatOptions.TargetUserId = LocalProductUserId;         // The index of the stat that you want to copy.        CopyStatOptions.StatIndex = StatIndex;         // A variable to temporarily hold the copied stat data.        EOS_Stats_Stat* Stat = nullptr;         // Call the EOS SDK to copy the player's stats.        EOS_EResult CopyStatResult = EOS_Stats_CopyStatByIndex(StatsHandle, &amp;CopyStatOptions, &amp;Stat);         if (CopyStatResult == EOS_EResult::EOS_Success &amp;&amp; Stat != nullptr)        {            // Store the retrieved stat in the map.            std::cout &lt;&lt; "Stat retrieved - " &lt;&lt; Stat-&gt;Name &lt;&lt; ": " &lt;&lt; Stat-&gt;Value &lt;&lt; std::endl;            RetrievedStats[Stat-&gt;Name] = Stat-&gt;Value;             // Free the stat's memory when you're finished with it.            EOS_Stats_Stat_Release(Stat);        }        else        {            // If the code gets here, there was an error.            // Handle this however you need for your game.            std::cerr &lt;&lt; "Error copying all stats! Error code: " &lt;&lt; static_cast&lt;int&gt;(CopyStatResult) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(CopyStatResult) &lt;&lt; std::endl;        }    }}</pre>
 								</section>
 							</div>
 							<div>

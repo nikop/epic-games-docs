@@ -92,7 +92,9 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>// AuthManager.h class AuthManager{public:    ...     /**      * Log in to the player's Epic Games account using persistent authorization,      * or fall back to logging in with the Account Portal if the persistent authorization     * login fails.     */    void AttemptLogInWithPersistentAuthExample();     ... private:    ...     /**     * Callback function that executes when persistent authorization login is complete.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthLogInWithPersistentAuthComplete(const EOS_Auth_LoginCallbackInfo* Data);        /**     * Callback function that executes when Account Portal login is complete.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthLogInWithAccountPortalComplete(const EOS_Auth_LoginCallbackInfo* Data);     /** Log in to the player's Epic Games account using the Account Portal. */    void LogInWithAccountPortalExample();     ...}</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<div>
@@ -115,7 +117,9 @@
 																	<code>AttemptLogInWithPersistentAuthExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>void AttemptLogInWithPersistentAuthExample();</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -134,7 +138,9 @@
 																	<code>OnAuthLogInWithPersistentAuthComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>static void EOS_CALL OnAuthLogInWithPersistentAuthComplete(const EOS_Auth_LoginCallbackInfo* Data);</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -153,7 +159,9 @@
 																	<code>OnAuthLogInWithAccountPortalComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>static void EOS_CALL OnAuthLogInWithAccountPortalComplete(const EOS_Auth_LoginCallbackInfo* Data);</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -162,7 +170,9 @@
 																	<code>LogInWithAccountPortalExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>void LogInWithAccountPortalExample();</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -181,7 +191,9 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>//AuthManager.cpp void AuthManager::AttemptLogInWithPersistentAuthExample(){    // Set the credentials for persistent authorization.    EOS_Auth_Credentials Credentials = {};    Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;    Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_PersistentAuth;    Credentials.Token = nullptr;    Credentials.Id = nullptr;     // Set the options for logging in.    EOS_Auth_LoginOptions LoginOptions = {};    LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;    LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;    LoginOptions.Credentials = &amp;Credentials;     // Log into an Epic Games account using the Auth Interface.    EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithPersistentAuthComplete);}</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<p>
@@ -209,7 +221,9 @@
 																	<code>AttemptLogInWithPersistentAuthExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>void AuthManager::AttemptLogInWithPersistentAuthExample(){ }</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -221,7 +235,9 @@
 																	to hold the credentials to log in.</p>
 																<div>
 																	<section>
-																		<pre>EOS_Auth_Credentials Credentials = {};Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_PersistentAuth;Credentials.Token = nullptr;Credentials.Id = nullptr;</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -234,7 +250,9 @@
 																	<code>LoginOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>EOS_Auth_LoginOptions LoginOptions = {};LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;LoginOptions.Credentials = &amp;Credentials;</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 																<p>
@@ -265,7 +283,9 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithPersistentAuthComplete);</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -288,7 +308,9 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>//AuthManager.cpp void EOS_CALL AuthManager::OnAuthLogInWithPersistentAuthComplete(const EOS_Auth_LoginCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Logged in with persistent authorization successfully!" &lt;&lt; std::endl;         // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);         // Retrieve the Epic Account ID.         Self-&gt;EpicId = Data-&gt;LocalUserId;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error;        // attempt logging in using the account portal instead.        std::cerr &lt;&lt; "Failed to log in with persistent authorization. Attempting log in through Account Portal. Error code: "            &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;                // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);                // If logging in with persistent authorization didn't work, try logging in through the Account Portal instead.        Self-&gt;LogInWithAccountPortalExample();    }}</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<div>
@@ -321,7 +343,9 @@
 																	<code>OnAuthLogInWithPersistentAuthComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>void EOS_CALL AuthManager::OnAuthLogInWithPersistentAuthComplete(const EOS_Auth_LoginCallbackInfo* Data){ }</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 																<p>Notes:</p>
@@ -344,7 +368,9 @@
 																	to confirm that the login is successful with persistent authorization. If the login is successful, retrieve the auth manager pointer from the client data and set the variable for the Epic Account ID:</p>
 																<div>
 																	<section>
-																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Logged in with persistent authorization successfully!" &lt;&lt; std::endl;     AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);     Self-&gt;EpicId = Data-&gt;LocalUserId;}</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -356,7 +382,9 @@
 																	to check if the login is complete yet. If the login is not complete, return. The callback is called again when the login is complete:</p>
 																<div>
 																	<section>
-																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -364,7 +392,9 @@
 																<p>If the login is not successful with persistent authorization, attempt to log in using the Account Portal instead:</p>
 																<div>
 																	<section>
-																		<pre>else{    std::cerr &lt;&lt; "Failed to log in with persistent authorization. Attempting log in through Account Portal. Error code: "        &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);        Self-&gt;LogInWithAccountPortalExample();}</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -383,7 +413,9 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>//AuthManager.cpp void AuthManager::LogInWithAccountPortalExample(){    //  Set the credentials for the Account Portal.    EOS_Auth_Credentials Credentials = {};    Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;    Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_AccountPortal;    Credentials.Token = nullptr;    Credentials.Id = nullptr;     // Set the options for logging in.    EOS_Auth_LoginOptions LoginOptions = {};    LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;    LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;    LoginOptions.Credentials = &amp;Credentials;     // Log into an Epic Games account using the Auth Interface.    EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithAccountPortalComplete);}</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<p>
@@ -411,7 +443,9 @@
 																	<code>LogInWithAccountPortalExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>void AuthManager::LogInWithAccountPortalExample(){ }</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -423,7 +457,9 @@
 																	to hold the credentials to log in.</p>
 																<div>
 																	<section>
-																		<pre>EOS_Auth_Credentials Credentials = {};Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_AccountPortal;Credentials.Token = nullptr;Credentials.Id = nullptr;</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -436,7 +472,9 @@
 																	<code>LoginOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>EOS_Auth_LoginOptions LoginOptions= {};LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;LoginOptions.Credentials = &amp;Credentials;</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 																<p>
@@ -467,7 +505,9 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithAccountPortalComplete);</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -490,7 +530,9 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>//AuthManager.cpp void EOS_CALL AuthManager::OnAuthLogInWithAccountPortalComplete(const EOS_Auth_LoginCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Logged in through the Account Portal successfully!" &lt;&lt; std::endl;         // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);         // Retrieve the Epic Account ID.        Self-&gt;EpicId = Data-&gt;LocalUserId;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Failed to log in through the Account Portal. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt;             " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<div>
@@ -523,7 +565,9 @@
 																	<code>OnAuthLogInWithAccountPortalComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>void EOS_CALL AuthManager::OnAuthLogInWithAccountPortalComplete(const EOS_Auth_LoginCallbackInfo* Data){ }</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 																<p>Notes:</p>
@@ -546,7 +590,9 @@
 																	to confirm that the login is successful. If the login is successful, retrieve the auth manager pointer from the client data and set the variable for the Epic Account ID:</p>
 																<div>
 																	<section>
-																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Logged in through the Account Portal successfully!" &lt;&lt; std::endl;     AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);     Self-&gt;EpicId = Data-&gt;LocalUserId;}</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -556,7 +602,9 @@
 																	to check if the login is complete yet. If the login is not complete, return. The callback is called again when the login is complete:</p>
 																<div>
 																	<section>
-																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -564,7 +612,9 @@
 																<p>If the login is not successful, handle the errors:</p>
 																<div>
 																	<section>
-																		<pre>else{    std::cerr &lt;&lt; "Failed to log in through the Account Portal. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt;         " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
+																		<pre>
+
+																		</pre>
 																	</section>
 																</div>
 															</li>
@@ -598,12 +648,16 @@
 							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
 							<div>
 								<section>
-									<pre>// AuthManager.h #pragma once #include &lt;eos_auth.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_sdk.h&gt; class AuthManager{public:    /**      * Constructor      *      * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     */    AuthManager(EOS_HPlatform InPlatformHandle);     /**      * Log in to the player's Epic Games account using persistent authorization,      * or fall back to logging in with the Account Portal if the persistent authorization     * login fails.     */    void AttemptLogInWithPersistentAuthExample(); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Auth Interface handle. */    EOS_HAuth AuthHandle = nullptr;     /** Epic Account ID obtained on successful Auth login. */    EOS_EpicAccountId EpicId = nullptr;     /**     * Callback function that executes when persistent authorization login is complete.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthLogInWithPersistentAuthComplete(const EOS_Auth_LoginCallbackInfo* Data);        /**     * Callback function that executes when Account Portal login is complete.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnAuthLogInWithAccountPortalComplete(const EOS_Auth_LoginCallbackInfo* Data);     /** Log in to the player's Epic Games account using the Account Portal. */    void LogInWithAccountPortalExample();};</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<div>
 								<section>
-									<pre>// AuthManager.cpp #include "AuthManager.h"#include &lt;iostream&gt; AuthManager::AuthManager(EOS_HPlatform InPlatformHandle)    : PlatformHandle(InPlatformHandle){    AuthHandle = EOS_Platform_GetAuthInterface(PlatformHandle);} void AuthManager::AttemptLogInWithPersistentAuthExample(){    // Set the credentials for persistent authorization.    EOS_Auth_Credentials Credentials = {};    Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;    Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_PersistentAuth;    Credentials.Token = nullptr;    Credentials.Id = nullptr;     // Set the options for logging in.    EOS_Auth_LoginOptions LoginOptions = {};    LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;    LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;    LoginOptions.Credentials = &amp;Credentials;     // Log into an Epic Games account using the Auth Interface.    EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithPersistentAuthComplete);} void EOS_CALL AuthManager::OnAuthLogInWithPersistentAuthComplete(const EOS_Auth_LoginCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Logged in with persistent authorization successfully!" &lt;&lt; std::endl;         // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);         // Retrieve the Epic Account ID.         Self-&gt;EpicId = Data-&gt;LocalUserId;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error;        // attempt logging in using the account portal instead.        std::cerr &lt;&lt; "Failed to log in with persistent authorization. Attempting log in through Account Portal. Error code: "            &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;                // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);                // If logging in with persistent authorization didn't work, try logging in through the Account Portal instead.        Self-&gt;LogInWithAccountPortalExample();    }} void AuthManager::LogInWithAccountPortalExample(){    //  Set the credentials for the Account Portal.    EOS_Auth_Credentials Credentials = {};    Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;    Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_AccountPortal;    Credentials.Token = nullptr;    Credentials.Id = nullptr;     // Set the options for logging in.    EOS_Auth_LoginOptions LoginOptions = {};    LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;    LoginOptions.ScopeFlags = EOS_EAuthScopeFlags::EOS_AS_BasicProfile;    LoginOptions.Credentials = &amp;Credentials;     // Log into an Epic Games account using the Auth Interface.    EOS_Auth_Login(AuthHandle, &amp;LoginOptions, this, OnAuthLogInWithAccountPortalComplete);} void EOS_CALL AuthManager::OnAuthLogInWithAccountPortalComplete(const EOS_Auth_LoginCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        std::cout &lt;&lt; "Logged in through the Account Portal successfully!" &lt;&lt; std::endl;         // Retrieve the AuthManager pointer from the client data passed into the callback function.        AuthManager* Self = static_cast&lt;AuthManager*&gt;(Data-&gt;ClientData);         // Retrieve the Epic Account ID.        Self-&gt;EpicId = Data-&gt;LocalUserId;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Failed to log in through the Account Portal. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt;             " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+									<pre>
+
+									</pre>
 								</section>
 							</div>
 							<div>
@@ -623,7 +677,9 @@
 										<code>LogoutOptions</code>:</p>
 									<div>
 										<section>
-											<pre>EOS_Auth_LogoutOptions LogoutOptions = {};LogoutOptions.ApiVersion = EOS_AUTH_LOGOUT_API_LATEST;LogoutOptions.LocalUserId = EpicId;</pre>
+											<pre>
+
+											</pre>
 										</section>
 									</div>
 								</li>

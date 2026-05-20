@@ -208,9 +208,7 @@
 			<p>Some C structures for the EOS SDK have optional fields. If you want to use one of the optional fields, you must initialize all the optional fields, even if you don't plan to assign a value to them. We recommend that you initialize the entire options structure before you use it. See the example code snippet below:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_Reports_SendPlayerBehaviorReportOptions Options = {};</pre>
 				</section>
 			</div>
 			<p>After you initialize the entire options structure, you can assign a value to the individual fields that you want to use.</p>
@@ -260,9 +258,7 @@
 				</a>. Here is an example configuration:</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>EOS_InitializeOptions SDKOptions{ 0 };SDKOptions.ApiVersion = EOS_INITIALIZE_API_LATEST;SDKOptions.ProductName = EOS_TEST_PRODUCT_NAME;SDKOptions.ProductVersion = EOS_TEST_PRODUCT_VERSION;[...]EOS_Initialize_ThreadAffinity ThreadAffinity = {};ThreadAffinity.ApiVersion = EOS_INITIALIZE_THREADAFFINITY_API_LATEST;ThreadAffinity.NetworkWork = MyNetworkAffinity;ThreadAffinity.StorageIo = MyStorageIoAffinity;ThreadAffinity.WebSocketIo = MyWebSocketAffinity;ThreadAffinity.P2PIo = MyP2PIoAffinity;ThreadAffinity.HttpRequestIo = MyHttpRequestIoAffinity;ThreadAffinity.EmbeddedOverlayMainThread = MyOverlayMainThreadAffinity;ThreadAffinity.EmbeddedOverlayWorkerThreads = MyOverlayWorkerThreadAffinity;SDKOptions.OverrideThreadAffinity = &amp;ThreadAffinity;</pre>
 				</section>
 			</div>
 			<p>

@@ -111,9 +111,7 @@
 							</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// LeaderboardsManager.h /** A data structure to hold information copied from the queried leaderboard records. */struct LeaderboardRecordCopy{    /** The ID of the leaderboard, exactly as you wrote it in the Developer Portal. */    std::string LeaderboardId;     /** The ranking of the leaderboard record based on the score. */    uint32_t Rank;        /** The score set for the leaderboard by the player holding the record. */    int32_t Score;     /** The display name of the player holding the record. */    std::string UserDisplayName;     /** The Product User ID of the player holding the record. */    EOS_ProductUserId UserId;}; class LeaderboardsManager{public:    ...     /**     * Getter for a read-only copy of one of the records maps.     *     * @return A read-only copy of a map within the RetrievedRecords map of maps.     */    const std::map&lt;uint32_t, LeaderboardRecordCopy&gt;        GetRetrievedLeaderboardRecords(const char* LeaderboardId) const { return RetrievedRecords.at(LeaderboardId); }        /**     * Begins the process of querying and then copying the records of a leaderboard.     *     * @param LeaderboardId - The ID of the leaderboard to retrieve the records of.     */    void RetrieveLeaderboardRecordsExample(const char* LeaderboardId); private:    ...     /** Map of maps to hold copied leaderboard records for each definition. */    std::map&lt;std::string, std::map&lt;uint32_t, LeaderboardRecordCopy&gt;&gt; RetrievedRecords;        /**     * Callback function that executes when the records (ranks) query completes.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnQueryLeaderboardRanksComplete(const EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo* Data);     /** Called after querying leaderboard records to copy the records to the records map. */    void CopyLeaderboardRecordsExample(const char* LeaderboardId);     ...};</pre>
 								</section>
 							</div>
 							<div>
@@ -138,9 +136,7 @@
 																	<code>LeaderboardRecordCopy</code>.</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>struct LeaderboardRecordCopy{    std::string LeaderboardId;    uint32_t Rank;    int32_t Score;    std::string UserDisplayName;    EOS_ProductUserId UserId;};</pre>
 																	</section>
 																</div>
 															</li>
@@ -150,9 +146,7 @@
 																	<code>GetRetrievedLeaderboardRecords</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>const std::map&lt;uint32_t, LeaderboardRecordCopy&gt;        GetRetrievedLeaderboardRecords(const char* LeaderboardId) const { return RetrievedRecords.at(LeaderboardId); }</pre>
 																	</section>
 																</div>
 															</li>
@@ -161,9 +155,7 @@
 																	<code>RetrieveLeaderboardRecordsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void RetrieveLeaderboardRecordsExample(const char* LeaderboardId);</pre>
 																	</section>
 																</div>
 															</li>
@@ -172,9 +164,7 @@
 																	<code>RetrievedRecords</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>std::map&lt;std::string, std::map&lt;uint32_t, LeaderboardRecordCopy&gt;&gt; RetrievedRecords;</pre>
 																	</section>
 																</div>
 															</li>
@@ -194,9 +184,7 @@
 																	<code>OnQueryLeaderboardRanksComplete</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>static void EOS_CALL OnQueryLeaderboardRanksComplete(const EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo* Data);</pre>
 																	</section>
 																</div>
 															</li>
@@ -205,9 +193,7 @@
 																	<code>CopyLeaderboardRecordsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void CopyLeaderboardRecordsExample(const char* LeaderboardId);</pre>
 																	</section>
 																</div>
 															</li>
@@ -229,9 +215,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// LeaderboardsManager.cpp void LeaderboardsManager::RetrieveLeaderboardRecordsExample(const char* LeaderboardId){    EOS_Leaderboards_QueryLeaderboardRanksOptions QueryRankOptions = {};    QueryRankOptions.ApiVersion = EOS_LEADERBOARDS_QUERYLEADERBOARDRANKS_API_LATEST;     // The ID of the leaderboard whose records you are querying (also referred to as "ranks").    QueryRankOptions.LeaderboardId = LeaderboardId;     // The Product User ID of the local player requesting the query.    QueryRankOptions.LocalUserId = LocalProductUserId;     // Create an std::pair to store both the class pointer and the leaderboard ID.    auto ClassPointerAndLeaderboardId = new std::pair&lt;LeaderboardsManager*, const char*&gt;(this, LeaderboardId);     // Call the EOS SDK to query your leaderboard records (ranks).    // The callback function will be called when it finishes.    EOS_Leaderboards_QueryLeaderboardRanks(LeaderboardsHandle, &amp;QueryRankOptions,         ClassPointerAndLeaderboardId, OnQueryLeaderboardRanksComplete);}</pre>
 								</section>
 							</div>
 							<div>
@@ -254,9 +238,7 @@
 																	<code>RetrieveLeaderboardRecordsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void LeaderboardsManager::RetrieveLeaderboardRecordsExample(const char* LeaderboardId){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -272,9 +254,7 @@
 																	In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Leaderboards_QueryLeaderboardRanksOptions QueryRankOptions = {};QueryRankOptions.ApiVersion = EOS_LEADERBOARDS_QUERYLEADERBOARDRANKS_API_LATEST;QueryRankOptions.LeaderboardId = LeaderboardId;QueryRankOptions.LocalUserId = LocalProductUserId;</pre>
 																	</section>
 																</div>
 															</li>
@@ -284,9 +264,7 @@
 																	object that will store both a pointer to the leaderboards manager class and the ID of the leaderboard that you want to query the ranks for.</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>auto ClassPointerAndLeaderboardId = new std::pair&lt;LeaderboardsManager*, const char*&gt;(this, LeaderboardId);</pre>
 																	</section>
 																</div>
 															</li>
@@ -315,9 +293,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Leaderboards_QueryLeaderboardRanks(LeaderboardsHandle, &amp;QueryRankOptions,     ClassPointerAndLeaderboardId, OnQueryLeaderboardRanksComplete);</pre>
 																	</section>
 																</div>
 															</li>
@@ -343,9 +319,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// LeaderboardsManager.cpp void EOS_CALL LeaderboardsManager::OnQueryLeaderboardRanksComplete(const EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the leaderboard ranks were queried successfully.         // Retrieve the LeaderboardsManager pointer and the leaderboard ID from the client data passed to the callback function.        auto ClassPointerAndLeaderboardId = static_cast&lt;std::pair&lt;LeaderboardsManager*, const char*&gt;*&gt;(Data-&gt;ClientData);        LeaderboardsManager* Self = ClassPointerAndLeaderboardId-&gt;first;        const char* LeaderboardId = ClassPointerAndLeaderboardId-&gt;second;         // Free the memory for the std::pair now that the data from the std::pair has been copied.        delete ClassPointerAndLeaderboardId;         // Copy all leaderboard records.        Self-&gt;CopyLeaderboardRecordsExample(LeaderboardId);    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error querying leaderboard ranks! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode)            &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
 								</section>
 							</div>
 							<div>
@@ -384,9 +358,7 @@
 																	In this instance, the EOS API refers to a leaderboard record as a “rank.”</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void EOS_CALL LeaderboardsManager::OnQueryLeaderboardRanksComplete(const EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo* Data){ }</pre>
 																	</section>
 																</div>
 																<p>
@@ -421,9 +393,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    auto ClassPointerAndLeaderboardId = static_cast&lt;std::pair&lt;LeaderboardsManager*, const char*&gt;*&gt;(Data-&gt;ClientData);    LeaderboardsManager* Self = ClassPointerAndLeaderboardId-&gt;first;    const char* LeaderboardId = ClassPointerAndLeaderboardId-&gt;second;     delete ClassPointerAndLeaderboardId;     Self-&gt;CopyLeaderboardRecordsExample(LeaderboardId);}</pre>
 																	</section>
 																</div>
 															</li>
@@ -433,9 +403,7 @@
 																	to check if the query is not complete yet. if the query is not complete, return so the operation can complete:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -443,9 +411,7 @@
 																<p>If the query is not successful, handle the errors:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else{    std::cerr &lt;&lt; "Error querying leaderboard ranks! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode)        &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -466,9 +432,7 @@
 							<p>Example:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// LeaderboardsManager.cpp void LeaderboardsManager::CopyLeaderboardRecordsExample(const char* LeaderboardId){    EOS_Leaderboards_GetLeaderboardRecordCountOptions GetRecordCountOptions = {};    GetRecordCountOptions.ApiVersion = EOS_LEADERBOARDS_GETLEADERBOARDRECORDCOUNT_API_LATEST;     // Get the number of leaderboard records for the currently cached leaderboard from the EOS SDK.    uint32_t RecordCount = EOS_Leaderboards_GetLeaderboardRecordCount(        LeaderboardsHandle, &amp;GetRecordCountOptions);     // Loop over each record.    for (uint32_t RecordIndex = 0; RecordIndex &lt; RecordCount; RecordIndex++)    {        EOS_Leaderboards_CopyLeaderboardRecordByIndexOptions CopyRecordOptions = {};        CopyRecordOptions.ApiVersion = EOS_LEADERBOARDS_COPYLEADERBOARDRECORDBYINDEX_API_LATEST;         // The current record index.        CopyRecordOptions.LeaderboardRecordIndex = RecordIndex;         // Create a pointer to store the record info.        EOS_Leaderboards_LeaderboardRecord* Record = nullptr;         // Copy the record data from the cache into the record pointer.        EOS_EResult CopyRecordResult = EOS_Leaderboards_CopyLeaderboardRecordByIndex(            LeaderboardsHandle, &amp;CopyRecordOptions, &amp;Record);         if (CopyRecordResult == EOS_EResult::EOS_Success)        {            // Copy the record data to the map.            LeaderboardRecordCopy&amp; Entry = RetrievedRecords[LeaderboardId][Record-&gt;Rank];            Entry.LeaderboardId = LeaderboardId;            Entry.Rank = Record-&gt;Rank;            Entry.Score = Record-&gt;Score;            Entry.UserDisplayName = Record-&gt;UserDisplayName;            Entry.UserId = Record-&gt;UserId;             std::cout &lt;&lt; "Record copied for leaderboard " &lt;&lt; LeaderboardId &lt;&lt; " - User: " &lt;&lt;                 Record-&gt;UserDisplayName &lt;&lt; " Rank: " &lt;&lt; Record-&gt;Rank &lt;&lt; " Score: " &lt;&lt; Record-&gt;Score &lt;&lt; std::endl;             // Release the memory for the EOS API struct when done with it.            EOS_Leaderboards_LeaderboardRecord_Release(Record);        }        else        {            // If the code gets here, there was an error.            // Handle this however you need for your game.            std::cerr &lt;&lt; "Error copying leaderboard records! Error code: " &lt;&lt; static_cast&lt;int&gt;(CopyRecordResult)                &lt;&lt; EOS_EResult_ToString(CopyRecordResult) &lt;&lt; std::endl;        }    }}</pre>
 								</section>
 							</div>
 							<div>
@@ -493,9 +457,7 @@
 																	<code>CopyLeaderboardRecordsExample</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>void LeaderboardsManager::CopyLeaderboardRecordsExample(const char* LeaderboardId){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -508,9 +470,7 @@
 																	<code>GetRecordCountOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Leaderboards_GetLeaderboardRecordCountOptions GetRecordCountOptions = {};GetRecordCountOptions.ApiVersion = EOS_LEADERBOARDS_GETLEADERBOARDRECORDCOUNT_API_LATEST;</pre>
 																	</section>
 																</div>
 															</li>
@@ -527,9 +487,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>uint32_t RecordCount = EOS_Leaderboards_GetLeaderboardRecordCount(    LeaderboardsHandle, &amp;GetRecordCountOptions);</pre>
 																	</section>
 																</div>
 															</li>
@@ -537,9 +495,7 @@
 																<p>Use the record count to iterate through the list of queried records that you want to copy:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>for (uint32_t RecordIndex = 0; RecordIndex &lt; RecordCount; RecordIndex++){ }</pre>
 																	</section>
 																</div>
 															</li>
@@ -552,9 +508,7 @@
 																	<code>CopyRecordOptions</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Leaderboards_CopyLeaderboardRecordByIndexOptions CopyRecordOptions = {};CopyRecordOptions.ApiVersion = EOS_LEADERBOARDS_COPYLEADERBOARDRECORDBYINDEX_API_LATEST;CopyRecordOptions.LeaderboardRecordIndex = RecordIndex;</pre>
 																	</section>
 																</div>
 															</li>
@@ -563,9 +517,7 @@
 																	<code>Record</code>:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_Leaderboards_LeaderboardRecord* Record = nullptr;</pre>
 																	</section>
 																</div>
 															</li>
@@ -583,9 +535,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>EOS_EResult CopyRecordResult = EOS_Leaderboards_CopyLeaderboardRecordByIndex(    LeaderboardsHandle, &amp;CopyRecordOptions, &amp;Record);</pre>
 																	</section>
 																</div>
 															</li>
@@ -606,9 +556,7 @@
 																</ul>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>if (CopyRecordResult == EOS_EResult::EOS_Success){    // Copy the record data to the map.    LeaderboardRecordCopy&amp; Entry = RetrievedRecords[LeaderboardId][Record-&gt;Rank];    Entry.LeaderboardId = LeaderboardId;    Entry.Rank = Record-&gt;Rank;    Entry.Score = Record-&gt;Score;    Entry.UserDisplayName = Record-&gt;UserDisplayName;    Entry.UserId = Record-&gt;UserId;     std::cout &lt;&lt; "Record copied for leaderboard " &lt;&lt; LeaderboardId &lt;&lt; " - User: " &lt;&lt;         Record-&gt;UserDisplayName &lt;&lt; " Rank: " &lt;&lt; Record-&gt;Rank &lt;&lt; " Score: " &lt;&lt; Record-&gt;Score &lt;&lt; std::endl;     // Release the memory for the EOS API struct when done with it.    EOS_Leaderboards_LeaderboardRecord_Release(Record);}</pre>
 																	</section>
 																</div>
 															</li>
@@ -620,9 +568,7 @@
 																	call is not successful, handle any errors:</p>
 																<div>
 																	<section>
-																		<pre>
-
-																		</pre>
+																		<pre>else{    std::cerr &lt;&lt; "Error copying leaderboard records! Error code: " &lt;&lt; static_cast&lt;int&gt;(CopyRecordResult)        &lt;&lt; EOS_EResult_ToString(CopyRecordResult) &lt;&lt; std::endl;}</pre>
 																	</section>
 																</div>
 															</li>
@@ -659,9 +605,7 @@
 							</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// LeaderboardsManager.h #pragma once #include &lt;eos_leaderboards.h&gt;#include &lt;eos_init.h&gt;#include &lt;eos_common.h&gt;#include &lt;eos_sdk.h&gt;#include &lt;map&gt;#include &lt;string&gt; /** A data structure to hold information copied from the queried leaderboard records. */struct LeaderboardRecordCopy{    /** The ID of the leaderboard, exactly as you wrote it in the Developer Portal. */    std::string LeaderboardId;     /** The ranking of the leaderboard record based on the score. */    uint32_t Rank;        /** The score set for the leaderboard by the player holding the record. */    int32_t Score;     /** The display name of the player holding the record. */    std::string UserDisplayName;     /** The Product User ID of the player holding the record. */    EOS_ProductUserId UserId;}; class LeaderboardsManager{public:    /**     * Constructor     *     * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     *     * @param InLocalProductUserId - The ProductUserId of the local player obtained during sign in.     */    LeaderboardsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /** Destructor */    ~LeaderboardsManager() {}     /**     * Getter for a read-only copy of one of the records maps.     *     * @return A read-only copy of a map within the RetrievedRecords map of maps.     */    const std::map&lt;uint32_t, LeaderboardRecordCopy&gt;        GetRetrievedLeaderboardRecords(const char* LeaderboardId) const { return RetrievedRecords.at(LeaderboardId); }        /**     * Begins the process of querying and then copying the records of a leaderboard.     *     * @param LeaderboardId - The ID of the leaderboard to retrieve the records of.     */    void RetrieveLeaderboardRecordsExample(const char* LeaderboardId); private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Leaderboards Interface handle. */    EOS_HLeaderboards LeaderboardsHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /** Map of maps to hold copied leaderboard records for each definition. */    std::map&lt;std::string, std::map&lt;uint32_t, LeaderboardRecordCopy&gt;&gt; RetrievedRecords;        /**     * Callback function that executes when the records (ranks) query completes.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnQueryLeaderboardRanksComplete(const EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo* Data);     /** Called after querying leaderboard records to copy the records to the records map. */    void CopyLeaderboardRecordsExample(const char* LeaderboardId);};</pre>
 								</section>
 							</div>
 							<p>
@@ -669,9 +613,7 @@
 							</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>// LeaderboardsManager.cpp void LeaderboardsManager::RetrieveLeaderboardRecordsExample(const char* LeaderboardId){    EOS_Leaderboards_QueryLeaderboardRanksOptions QueryRankOptions = {};    QueryRankOptions.ApiVersion = EOS_LEADERBOARDS_QUERYLEADERBOARDRANKS_API_LATEST;     // The ID of the leaderboard whose records you are querying (also referred to as "ranks").    QueryRankOptions.LeaderboardId = LeaderboardId;     // The Product User ID of the local player requesting the query.    QueryRankOptions.LocalUserId = LocalProductUserId;     // Create an std::pair to store both the class pointer and the leaderboard ID.    auto ClassPointerAndLeaderboardId = new std::pair&lt;LeaderboardsManager*, const char*&gt;(this, LeaderboardId);     // Call the EOS SDK to query your leaderboard records (ranks).    // The callback function will be called when it finishes.    EOS_Leaderboards_QueryLeaderboardRanks(LeaderboardsHandle, &amp;QueryRankOptions,         ClassPointerAndLeaderboardId, OnQueryLeaderboardRanksComplete);} void EOS_CALL LeaderboardsManager::OnQueryLeaderboardRanksComplete(const EOS_Leaderboards_OnQueryLeaderboardRanksCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the leaderboard ranks were queried successfully.         // Retrieve the LeaderboardsManager pointer and the leaderboard ID from the client data passed to the callback function.        auto ClassPointerAndLeaderboardId = static_cast&lt;std::pair&lt;LeaderboardsManager*, const char*&gt;*&gt;(Data-&gt;ClientData);        LeaderboardsManager* Self = ClassPointerAndLeaderboardId-&gt;first;        const char* LeaderboardId = ClassPointerAndLeaderboardId-&gt;second;         // Free the memory for the std::pair now that the data from the std::pair has been copied.        delete ClassPointerAndLeaderboardId;         // Copy all leaderboard records.        Self-&gt;CopyLeaderboardRecordsExample(LeaderboardId);    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Error querying leaderboard ranks! Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode)            &lt;&lt; " - " &lt;&lt; EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }} void LeaderboardsManager::CopyLeaderboardRecordsExample(const char* LeaderboardId){    EOS_Leaderboards_GetLeaderboardRecordCountOptions GetRecordCountOptions = {};    GetRecordCountOptions.ApiVersion = EOS_LEADERBOARDS_GETLEADERBOARDRECORDCOUNT_API_LATEST;     // Get the number of leaderboard records for the currently cached leaderboard from the EOS SDK.    uint32_t RecordCount = EOS_Leaderboards_GetLeaderboardRecordCount(        LeaderboardsHandle, &amp;GetRecordCountOptions);     // Loop over each record.    for (uint32_t RecordIndex = 0; RecordIndex &lt; RecordCount; RecordIndex++)    {        EOS_Leaderboards_CopyLeaderboardRecordByIndexOptions CopyRecordOptions = {};        CopyRecordOptions.ApiVersion = EOS_LEADERBOARDS_COPYLEADERBOARDRECORDBYINDEX_API_LATEST;         // The current record index.        CopyRecordOptions.LeaderboardRecordIndex = RecordIndex;         // Create a pointer to store the record info.        EOS_Leaderboards_LeaderboardRecord* Record = nullptr;         // Copy the record data from the cache into the record pointer.        EOS_EResult CopyRecordResult = EOS_Leaderboards_CopyLeaderboardRecordByIndex(            LeaderboardsHandle, &amp;CopyRecordOptions, &amp;Record);         if (CopyRecordResult == EOS_EResult::EOS_Success)        {            // Copy the record data to the map.            LeaderboardRecordCopy&amp; Entry = RetrievedRecords[LeaderboardId][Record-&gt;Rank];            Entry.LeaderboardId = LeaderboardId;            Entry.Rank = Record-&gt;Rank;            Entry.Score = Record-&gt;Score;            Entry.UserDisplayName = Record-&gt;UserDisplayName;            Entry.UserId = Record-&gt;UserId;             std::cout &lt;&lt; "Record copied for leaderboard " &lt;&lt; LeaderboardId &lt;&lt; " - User: " &lt;&lt;                 Record-&gt;UserDisplayName &lt;&lt; " Rank: " &lt;&lt; Record-&gt;Rank &lt;&lt; " Score: " &lt;&lt; Record-&gt;Score &lt;&lt; std::endl;             // Release the memory for the EOS API struct when done with it.            EOS_Leaderboards_LeaderboardRecord_Release(Record);        }        else        {            // If the code gets here, there was an error.            // Handle this however you need for your game.            std::cerr &lt;&lt; "Error copying leaderboard records! Error code: " &lt;&lt; static_cast&lt;int&gt;(CopyRecordResult)                &lt;&lt; EOS_EResult_ToString(CopyRecordResult) &lt;&lt; std::endl;        }    }}</pre>
 								</section>
 							</div>
 							<div>

@@ -138,7 +138,9 @@
 						class in your project to manage the EOS SDK:</p>
 					<div>
 						<section>
-							<pre>using System;using Epic.OnlineServices;using Epic.OnlineServices.Platform; public static class EOSSDKManager{    }</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -149,7 +151,9 @@
 						You use the Platform Interface in the next section (<a href="#step-3-create-the-eos-platform-interface">Step 3: Create the EOS Platform Interface</a>).</p>
 					<div>
 						<section>
-							<pre>using System; public static class EOSSDKManager{    static public PlatformInterface PlatformInterfaceHandle { private set; get; } = null;}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -159,7 +163,9 @@
 						class, add a method to initialize the EOS SDK and configure the initialization options for your platform:</p>
 					<div>
 						<section>
-							<pre>static public Epic.OnlineServices.Result InitializePlatformInterface(){    InitializeOptions initOptions = new InitializeOptions();     initOptions.ProductName = /*YOUR_PRODUCT_NAME*/;    initOptions.ProductVersion = /*YOUR_PRODUCT_VERSION*/;     initOptions.AllocateMemoryFunction = IntPtr.Zero;    initOptions.ReallocateMemoryFunction = IntPtr.Zero;    initOptions.ReleaseMemoryFunction = IntPtr.Zero;     var overrideThreadAffinity = new InitializeThreadAffinity();     // You might need to configure these thread affinity values, depending on your application's needs.    // Setting the values to Zero, which is the default in C#, lets you configure the priority through the EOS SDK.    overrideThreadAffinity.NetworkWork   = 0;    overrideThreadAffinity.StorageIo 	= 0;    overrideThreadAffinity.WebSocketIo   = 0;    overrideThreadAffinity.P2PIo     	= 0;    overrideThreadAffinity.HttpRequestIo = 0;    overrideThreadAffinity.RTCIo     	= 0;     initOptions.OverrideThreadAffinity = overrideThreadAffinity;     return PlatformInterface.Initialize(ref initOptions);}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 					<p>For more information, see the following documentation:</p>
@@ -179,7 +185,9 @@
 						method.</p>
 					<div>
 						<section>
-							<pre>using UnityEngine;using Epic.OnlineServices; public class Game : MonoBehaviour{    void Awake()    {        Result result = EOSSDKManager.InitializePlatformInterface();        if (result != Result.Success)        {            Debug.LogError("Failed to initialize platform interface");            Debug.Break();        }    }}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -204,7 +212,9 @@
 						class, add a method to create the Platform Interface:</p>
 					<div>
 						<section>
-							<pre>static public Result CreatePlatformInterface(){ }</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -214,7 +224,9 @@
 						method to include the platform options for your platform.</p>
 					<div>
 						<section>
-							<pre>var platformOptions = new Epic.OnlineServices.Platform.Options();    platformOptions.CacheDirectory = Application.temporaryCachePath;    platformOptions.IsServer = /*YOUR_IS_SERVER_VALUE*/; //For Title Storage and Player Data Storage    platformOptions.EncryptionKey = /*YOUR_ENCRYPTION_KEY*/;    platformOptions.OverrideCountryCode = null;    platformOptions.OverrideLocaleCode = null;    platformOptions.ProductId = /*YOUR_PRODUCT_ID*/;    platformOptions.SandboxId = /*YOUR_SANDBOX_ID*/;    platformOptions.DeploymentId = /*YOUR_DEPLOYMENT_ID*/;     platformOptions.TickBudgetInMilliseconds =/*YOUR_TICK_BUDGET*/; var clientCredentials = new Epic.OnlineServices.Platform.ClientCredentials    {            ClientId = /*YOUR_CLIENT_ID*/,            ClientSecret = /*YOUR_CLIENT_SECRET*/    };    platformOptions.ClientCredentials = clientCredentials;</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 					<p>For more information on the available platform options, see the
@@ -252,7 +264,9 @@
 						<code>Platformflags.LoadingInEditor</code>.</p>
 					<div>
 						<section>
-							<pre>platformOptions.Flags =#if UNITY_EDITOR        PlatformFlags.LoadingInEditor;#else        PlatformFlags.None;#endif PlatformInterfaceHandle = PlatformInterface.Create(ref platformOptions); return Result.Success;</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 					<p>
@@ -281,7 +295,9 @@
 						You must initialize the EOS SDK before you create the platform.</p>
 					<div>
 						<section>
-							<pre>public class Game : MonoBehaviour{    void Awake()    {        Result result = EOSSDKManager.InitializePlatformInterface();        if (result != Result.Success)        {            Debug.LogError("Failed to initialize platform interface");            Debug.Break();        }         result = EOSSDKManager.CreatePlatformInterface();        if (result != Result.Success)        {            Debug.LogError("Failed to create platform interface");            Debug.Break();        }                Debug.LogError("EOS SDK ready to be used!");    }    ...}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -291,7 +307,9 @@
 						method to include the call to tick the platform, so the per-frame code for EOS SDK runs correctly.</p>
 					<div>
 						<section>
-							<pre>public void Update(){    EOSSDKManager.PlatformInterfaceHandle?.Tick();}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 					<p>
@@ -314,7 +332,9 @@
 					<p>Add a method to shut down the EOS SDK:</p>
 					<div>
 						<section>
-							<pre>static public void ShutDownEOSSDK(){ }</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -326,7 +346,9 @@
 						to release the EOS Platform Interface instance.</p>
 					<div>
 						<section>
-							<pre>static public void ShutDownEOSSDK(){    PlatformInterfaceHandle.Release();}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>
@@ -338,7 +360,9 @@
 						to complete the process and shut down the EOS SDK.</p>
 					<div>
 						<section>
-							<pre>static public void ShutDownEOSSDK(){    PlatformInterfaceHandle.Release();    PlatformInterface.Shutdown();}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 					<p>
@@ -356,7 +380,9 @@
 						<code>true</code>.</p>
 					<div>
 						<section>
-							<pre>public void Update(){    EOSSDKManager.PlatformInterfaceHandle?.Tick();        if (timeToShutDownMyGame)    {        EOSSDKManager.ShutDownEOSSDK();    }}</pre>
+							<pre>
+
+							</pre>
 						</section>
 					</div>
 				</li>

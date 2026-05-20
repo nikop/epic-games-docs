@@ -20,7 +20,14 @@
 	</section>
 	<section>
 		<section role="main">
-			<p>Webhooks are HTTP callbacks you must create in order to use a web shop. They connect your web shop on the Epic Games Store to your product’s backend every time a web shop item is purchased or refunded on your web shop. The communication between your webhook and your product is sandbox agnostic. You manage webhooks on the Web Shop page of the Developer Portal.</p>
+			<p>Webhooks are HTTP callbacks you must create in order to use a
+				<span>
+					<span aria-label="tooltip web shop" tabindex="0" role="button">web shop</span>
+				</span>. They connect your web shop on the Epic Games Store to your product’s backend every time a web shop item is purchased or refunded on your web shop. The communication between your webhook and your product is
+				<span>
+					<span aria-label="tooltip sandbox" tabindex="0" role="button">sandbox</span>
+				</span>
+				agnostic. You manage webhooks on the Web Shop page of the Developer Portal.</p>
 			<p>There are a few requirements for webhooks, because your webhook sends and receives confidential information between your product’s backend and the Epic Games Store. You must:</p>
 			<ul>
 				<li>Generate and maintain at least one webhook secret. You use this secret to securely communicate with the webhook API.</li>
@@ -275,7 +282,11 @@
 				<li>
 					<code>response-v1-fulfill</code>: A fulfillment event is used to fulfill a purchase. You must respond with a properly signed 200 response of type ResponseV1Fulfill to indicate success.</li>
 				<li>
-					<code>response-v1-clawback</code>: A clawback response is the final state of a clawback event. Under some circumstances (such as intermittence in your webhook or network), you might receive a clawback event first. For any fulfillment events that arrive after a clawback event, you must do the following:
+					<code>response-v1-clawback</code>: A
+					<span>
+						<span aria-label="tooltip clawback" tabindex="0" role="button">clawback</span>
+					</span>
+					response is the final state of a clawback event. Under some circumstances (such as intermittence in your webhook or network), you might receive a clawback event first. For any fulfillment events that arrive after a clawback event, you must do the following:
 					<ul>
 						<li>You must acknowledge the fulfillment event with a properly-signed 200 response.</li>
 						<li>You must not grant the purchase to the player.</li>
@@ -377,7 +388,8 @@
 									<div>
 										<div>
 											<section>
-												<pre>import crypto from 'crypto'; // Example secret id and value. Substitute the values with your id and secret.const SECRET_ID = 'S7663';const SECRET = 'KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ='; // Sign() calculates the signature using timestamp and body. Use createHmac() to create a hmac Object.export function sign(timestamp: string, body: string | Buffer): string {  const data = timestamp + body;  const hmac = crypto.createHmac('sha256', SECRET);  const signature = hmac.update(data).digest('hex');  return `${SECRET_ID}=${signature}`;} // verifySignature() verifies that signature is valid. The function returns true if the constant expectedSignature is equal to signature.export function verifySignature(  signature: string,  timestamp: string,  body: string | Buffer): boolean {  const expectedSignature = sign(timestamp, body);   const [signatureId, signatureValue] = signature.split('=');  const [expectedId, expectedValue] = expectedSignature.split('=');   // verify the id is the same  if (signatureId !== expectedId) {    return false;  }   // verify the signature values are not empty  if (!signatureValue || !expectedValue) {    return false;  }   // compares using timingSafeEqual to prevent timing attacks  const signatureBuffer = Buffer.from(signatureValue, 'hex');  const expectedBuffer = Buffer.from(expectedValue, 'hex');   // timingSafeEqual requires buffers to be the same length  if (    signatureBuffer.length === 0 ||    signatureBuffer.length !== expectedBuffer.length  ) {    return false;  }   return crypto.timingSafeEqual(signatureBuffer, expectedBuffer);} // verifyTimestamp() verifies that the timestamp has less than a 5 minute difference from your system time.export function verifyTimestamp(timestamp: string): boolean {  const now = Date.now();  const date = Date.parse(timestamp);   // + or - 5 minutes (in ms)  const min = now - 300_000;  const max = now + 300_000;   return date &gt;= min &amp;&amp; date &lt;= max;}
+												<pre>
+
 												</pre>
 											</section>
 										</div>
@@ -403,7 +415,9 @@
 									<div>
 										<div>
 											<section>
-												<pre>package com.example.webhook; import org.springframework.stereotype.Service; import javax.crypto.Mac;import javax.crypto.spec.SecretKeySpec;import java.nio.charset.StandardCharsets;import java.security.InvalidKeyException;import java.security.NoSuchAlgorithmException;import java.time.Duration;import java.time.Clock;import java.time.Instant;import java.time.format.DateTimeParseException; @Servicepublic class SigningService {    private static final String ALGORITHM = "HmacSHA256";    private static final String SECRET_ID = "S7663";    private static final String SECRET = "KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ=";    private final Clock clock;     public SigningService(Clock clock) {        this.clock = clock;    }     public boolean verifySignature(String idAndSignature, String timestamp, byte[] data) {        try {             String[] parts = idAndSignature.split("=", 2);            if (parts.length != 2) {                return false;            }            if (!parts[0].equals(SECRET_ID)) {                return false;            }            Instant signedAt = Instant.parse(timestamp);            verifyTimestamp(signedAt);            String computedIdAndSignature = sign(signedAt, data);            return idAndSignature.equals(computedIdAndSignature);        } catch (DateTimeParseException e) {            throw new RuntimeException("Failed to parse webhook timestamp", e);        }    }     public boolean verifyTimestamp(Instant signedAt) {        Instant lowerBoundary = Instant.now(clock).minus(Duration.ofMinutes(5L));        Instant upperBoundary = Instant.now(clock).plus(Duration.ofMinutes(5L));         return signedAt.isAfter(lowerBoundary) &amp;&amp; signedAt.isBefore(upperBoundary);    }     public String sign(Instant timestamp, byte[] data) {        try {            SecretKeySpec secretKeySpec = new SecretKeySpec(SECRET.getBytes(), ALGORITHM);            Mac mac = Mac.getInstance(ALGORITHM);            mac.init(secretKeySpec);            byte[] combinedBytes = combine(timestamp, data);            return SECRET_ID + "=" + bytesToHex(mac.doFinal(combinedBytes));        } catch (NoSuchAlgorithmException | InvalidKeyException | IllegalArgumentException e) {            throw new RuntimeException("Failed to calculate HMAC", e);        }    }     private static byte[] combine(Instant timestamp, byte[] data) {        byte[] timeStampBytes = timestamp.toString().getBytes(StandardCharsets.UTF_8);        byte[] combined = new byte[timeStampBytes.length + data.length];        System.arraycopy(timeStampBytes, 0, combined, 0, timeStampBytes.length);        System.arraycopy(data, 0, combined, timeStampBytes.length, data.length);        return combined;    }     private static String bytesToHex(byte[] bytes) {        StringBuilder hexStringBuilder = new StringBuilder();        for (byte b : bytes) {            hexStringBuilder.append(String.format("%02x", b));        }        return hexStringBuilder.toString();    }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>
@@ -428,7 +442,9 @@
 									<div>
 										<div>
 											<section>
-												<pre>import hmacimport hashlibimport base64from datetime import datetime, timedelta # Example secret id and value# In real app, these values are stored in your database.# Python requires bytes for HMAC, so we convert from base64 to bytes.SECRET_ID = 'S7663'  # Identifier for the secret keySECRET = b'KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ='  # Base64-encoded secret # Calculates signature from timestamp and bodydef sign(timestamp: str, body: str | bytes) -&gt; str:    # Convert to bytes if string    if isinstance(body, str):        body = body.encode('utf-8')        data = timestamp.encode('utf-8') + body # converts to bytes. ex: b'12345'     # Generates SHA-256 HMAC (a valid hexadecimal string) for given data using secret key    signature = hmac.new(SECRET, data, hashlib.sha256).hexdigest()        return f"{SECRET_ID}={signature}" # Verifies that signature is validdef verify_signature(signature: str, timestamp: str, body: str | bytes) -&gt; bool:    expected_signature = sign(timestamp, body)    try:        signature_id, signature_value = signature.split('=')        expected_id, expected_value = expected_signature.split('=')    except ValueError:        return False     # Verify the id is the same    if signature_id != expected_id:        return False     # Verify the signature values are not empty    if not signature_value or not expected_value:        return False     # Compares using hmac.compare_digest to prevent timing attacks    try:        signature_bytes = bytes.fromhex(signature_value)        expected_bytes = bytes.fromhex(expected_value)    except ValueError:        # Invalid hex string        return False      # compare_digest requires buffers to be the same length    if len(signature_bytes) == 0 or len(signature_bytes) != len(expected_bytes):        return False     return hmac.compare_digest(signature_bytes, expected_bytes) # Verfies that the timestamp is current with system timedef verify_timestamp(timestamp: str) -&gt; bool:    try:        # Parse the timestamp string into a datetime object        ts = datetime.fromisoformat(timestamp.rstrip('Z'))         now = datetime.utcnow()        window = timedelta(minutes=5)         return now - window &lt;= ts &lt;= now + window    except Exception:        return False</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>
@@ -483,7 +499,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>webhook-sample/├── tsconfig.json├── package.json└── src/    ├── index.ts    └── signer.ts</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -494,7 +512,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>{  "compilerOptions": {    "target": "ES2019",    "module": "commonjs",    "rootDir": "src",    "outDir": "dist",    "strict": true,    "esModuleInterop": true  },  "include": ["src"]}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -502,7 +522,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>{  "name": "webhook-sample",  "version": "1.0.0",  "description": "",  "main": "index.js",  "scripts": {    "build": "tsc",    "start": "node dist/index.js",    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"  },  "keywords": [],  "author": "",  "license": "ISC",  "dependencies": {    "express": "^5.1.0"  },  "devDependencies": {    "@types/express": "^5.0.3",    "@types/node": "^22.15.30",    "ts-node-dev": "^2.0.0",    "typescript": "^5.8.3"  }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -510,7 +532,8 @@
 										</div>
 										<div>
 											<section>
-												<pre>import crypto from 'crypto'; // Example secret id and valueconst SECRET_ID = 'S7663';const SECRET = 'KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ='; // Calculates signature from timestamp and bodyexport function sign(timestamp: string, body: string | Buffer): string {  const data = timestamp + body;  const hmac = crypto.createHmac('sha256', SECRET);  const signature = hmac.update(data).digest('hex');  return `${SECRET_ID}=${signature}`;} // Verifies that signature is validexport function verifySignature(  signature: string,  timestamp: string,  body: string | Buffer): boolean {  const expectedSignature = sign(timestamp, body);   const [signatureId, signatureValue] = signature.split('=');  const [expectedId, expectedValue] = expectedSignature.split('=');   // verify the id is the same  if (signatureId !== expectedId) {    return false;  }   // verify the signature values are not empty  if (!signatureValue || !expectedValue) {    return false;  }   // compares using timingSafeEqual to prevent timing attacks  const signatureBuffer = Buffer.from(signatureValue, 'hex');  const expectedBuffer = Buffer.from(expectedValue, 'hex');   // timingSafeEqual requires buffers to be the same length  if (    signatureBuffer.length === 0 ||    signatureBuffer.length !== expectedBuffer.length  ) {    return false;  }   return crypto.timingSafeEqual(signatureBuffer, expectedBuffer);} // Verifies that the timestamp is current with system timeexport function verifyTimestamp(timestamp: string): boolean {  const now = Date.now();  const date = Date.parse(timestamp);   // + or - 5 minutes (in ms)  const min = now - 300_000;  const max = now + 300_000;   return date &gt;= min &amp;&amp; date &lt;= max;}
+												<pre>
+
 												</pre>
 											</section>
 										</div>
@@ -519,7 +542,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>import express, { Request, Response, NextFunction } from 'express';import {sign, verifySignature, verifyTimestamp}  from './signer'; // Middleware to intercept and sign responseconst responseHmacSigner = () =&gt; {    return (_req: Request, res: Response, next: NextFunction) =&gt; {        const originalJson = res.json.bind(res);         res.json = function (body: any) {            const bodyString = JSON.stringify(body);            const timestamp = new Date().toISOString();            const signature = sign(timestamp, bodyString);             res.setHeader('X-Timestamp', timestamp);            res.setHeader('X-Signature', signature);                        originalJson(body);                        return res;        }         next();    }}; // Middleware to intercept and verify the signatureconst verifyHmac = () =&gt; {    return (req: Request, res: Response, next: NextFunction) =&gt; {         const signatureHeader = req.headers['x-signature'] as string;        if (!signatureHeader) {            return res.status(428).send('Missing signature');        }         const timestamp = req.headers['x-timestamp'] as string;        if (!timestamp) {            return res.status(428).send('Missing timestamp');        }         if (!verifyTimestamp(timestamp)) {            return res.status(400).send('Invalid or missing timestamp');        }         // Use the raw body from the request because parsing may modify whitespaces or property order        const rawBody = (req as any).rawBody as Buffer;         // Split the signature header into individual signatures and verify at least one is valid        const signatures = signatureHeader.split(',').map(s =&gt; s.trim());        for (const signature of signatures) {            const isValid = verifySignature(signature, timestamp, rawBody);            if (isValid) {                next();                return;            }        }         return res.status(401).send('Invalid signature');    } }; const app = express();const PORT = 3000; app.use(express.json({    // copies the raw buffer to the request for use in verifyHmac middleware    verify: (req, _res, buffer) =&gt; {        (req as any).rawBody = buffer;    }})); app.post('/api/event', verifyHmac(), responseHmacSigner(), (req, res) =&gt; {    // Example shows only player id verification event type to illustrate signing in a real application, all event    //  types would need to be handled. Be sure to review the requirements for each event type in the webhook    //  OpenAPI specification.    if (req.body.eventType === 'event-v1-player-id-verification') {        //...        res.json({             responseType: 'response-v1-player-id-verification',            playerId: 'some-external-player-id',            status: 'ALLOWED',            eventId: 'some-event-id'        });    } else {        res.status(400).send('Unsupported event type');    }}); app.listen(PORT, () =&gt; {    console.log(`Server running on http://localhost:${PORT}`);});</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>
@@ -571,7 +596,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>webhook-sample/├── build.gradle├── settings.gradle└── src/    └── main/        ├── java/com/example/webhook/        │   ├── model/        │   │   ├── Event.java        │   │   ├── EventV1PlayerIdVerification.java        │   │   ├── Response.java        │   │   └── ResponseV1PlayerIdVerification.java        │   ├── EventController.java        │   ├── RequestVerificationFilter.java        │   ├── ResponseSigningFilter.java        │   ├── SigningService.java        │   └── WebhookApplication.java        └── resources/            └── application.properties</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -582,7 +609,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>plugins {  id 'org.springframework.boot' version '3.1.8'  id 'io.spring.dependency-management' version '1.1.0'  id 'java'} java {  toolchain {    languageVersion = JavaLanguageVersion.of(21)  }} group = 'com.example'version = '0.0.1-SNAPSHOT' repositories {  mavenCentral()} dependencies {  implementation 'org.springframework.boot:spring-boot-starter-web'  testImplementation 'org.springframework.boot:spring-boot-starter-test'} bootJar {  archiveBaseName = 'webhook-sample'  archiveVersion = version}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -590,7 +619,8 @@
 										</div>
 										<div>
 											<section>
-												<pre>rootProject.name = 'webhook-sample';
+												<pre>
+
 												</pre>
 											</section>
 										</div>
@@ -599,7 +629,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook.model; import com.fasterxml.jackson.annotation.JsonSubTypes;import com.fasterxml.jackson.annotation.JsonTypeInfo; @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY,  property = "eventType", visible = true)@JsonSubTypes({  @JsonSubTypes.Type(value = EventV1PlayerIdVerification.class, name = "event-v1-player-id-verification")})public class Event {    private String eventId;    private String productId;    private String eventType;      public String getEventId() { return eventId; }    public void setEventId(String eventId) { this.eventId = eventId; }    public String getProductId() { return productId; }    public void setProductId(String productId) { this.productId = productId; }    public String getEventType() { return eventType; }    public void setEventType(String eventType) { this.eventType = eventType; }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -607,7 +639,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook.model; public class EventV1PlayerIdVerification extends Event {    private String playerId;      public String getPlayerId() { return playerId; }    public void setPlayerId(String playerId) { this.playerId = playerId; }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -615,7 +649,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook.model; import com.fasterxml.jackson.annotation.JsonSubTypes;import com.fasterxml.jackson.annotation.JsonTypeInfo; @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY,    property = "responseType", visible = true)@JsonSubTypes({  @JsonSubTypes.Type(value = ResponseV1PlayerIdVerification.class, name = "response-v1-player-id-verification")})public class Response {    private final String eventId;    private final String responseType;        public Response(String eventId, String responseType) {        this.eventId = eventId;        this.responseType = responseType;    }     public String getEventId() { return eventId; }    public String getResponseType() { return responseType; }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -623,7 +659,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook.model; public class ResponseV1PlayerIdVerification extends Response {    private final String playerId;    private final String status;     public ResponseV1PlayerIdVerification(String eventId, String playerId, String status) {        super(eventId, "response-v1-player-id-verification");        this.playerId = playerId;        this.status = status;    }     public String getPlayerId() { return playerId; }    public String getStatus() { return status; }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -631,7 +669,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook; import org.springframework.http.ResponseEntity;import org.springframework.web.bind.annotation.PostMapping;import org.springframework.web.bind.annotation.RequestBody;import org.springframework.web.bind.annotation.RestController;import com.example.webhook.model.Event;import com.example.webhook.model.EventV1PlayerIdVerification;import com.example.webhook.model.Response;import com.example.webhook.model.ResponseV1PlayerIdVerification; @RestControllerpublic class EventController {     @PostMapping("/event")    public ResponseEntity&lt;Response&gt; handleEvent(@RequestBody Event event) {        Response response;         // Example shows only player id verification event type to illustrate signing in a real application, all event        //  types would need to be handled. Be sure to review the requirements for each event type in the webhook        //  OpenAPI specification.        if (event instanceof EventV1PlayerIdVerification verifyEvent) {            response = new ResponseV1PlayerIdVerification(                    verifyEvent.getEventId(),                    verifyEvent.getPlayerId(),                    "ALLOWED"            );            return ResponseEntity.ok().body(response);        }        return ResponseEntity.badRequest().build();    }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -639,7 +679,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook; import jakarta.servlet.FilterChain;import jakarta.servlet.ReadListener;import jakarta.servlet.ServletException;import jakarta.servlet.ServletInputStream;import jakarta.servlet.http.HttpServletRequest;import jakarta.servlet.http.HttpServletRequestWrapper;import jakarta.servlet.http.HttpServletResponse;import org.springframework.http.HttpStatus;import org.springframework.stereotype.Component;import org.springframework.web.filter.OncePerRequestFilter; import java.io.BufferedReader;import java.io.ByteArrayInputStream;import java.io.IOException;import java.io.InputStreamReader;import java.time.Instant;import java.util.Arrays; import static java.nio.charset.StandardCharsets.UTF_8; @Componentpublic class RequestVerificationFilter extends OncePerRequestFilter {    private final SigningService signingService;     public RequestVerificationFilter(SigningService signingService) {        this.signingService = signingService;    }     @Override    protected void doFilterInternal(HttpServletRequest request,                                    HttpServletResponse response,                                    FilterChain filterChain)            throws ServletException, IOException {         String timestamp = request.getHeader("X-Timestamp");        String signatureHeader = request.getHeader("X-Signature");         if (timestamp == null) {            response.setStatus(HttpStatus.PRECONDITION_REQUIRED.value());            response.getWriter().write("Missing timestamp");            return;        }         if (signatureHeader == null) {            response.setStatus(HttpStatus.PRECONDITION_REQUIRED.value());            response.getWriter().write("Missing signature");            return;        }         if (!signingService.verifyTimestamp(Instant.parse(timestamp))) {            response.setStatus(HttpStatus.BAD_REQUEST.value());            response.getWriter().write("Invalid timestamp");            return;        }         // Use the raw body from the request because parsing may modify whitespaces or property order        //  NOTE: This will consume the input stream, so we need to re-wrap it before handing off to the controller        byte[] rawBody = request.getInputStream().readAllBytes();         // Wrap the body with a replayable wrapper so the controller gets the same body        HttpServletRequest wrappedRequest = new HttpServletRequestWrapper(request) {            @Override            public ServletInputStream getInputStream() {                ByteArrayInputStream bs = new ByteArrayInputStream(rawBody);                return new ServletInputStream() {                    @Override                    public int read() throws IOException {                        return bs.read();                    }                    @Override public boolean isFinished() { return bs.available() == 0; }                    @Override public boolean isReady() { return true; }                    @Override public void setReadListener(ReadListener listener) { }                };            }            @Override            public BufferedReader getReader() throws IOException {                return new BufferedReader(new InputStreamReader(getInputStream(), UTF_8));            }        };         boolean validSignature = Arrays.stream(signatureHeader.split(","))                .map(String::trim)                .anyMatch(signature -&gt; signingService.verifySignature(signature, timestamp, rawBody));         if (!validSignature) {            response.setStatus(HttpStatus.UNAUTHORIZED.value());            response.getWriter().write("Invalid signature");            return;        }         filterChain.doFilter(wrappedRequest, response);    }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -647,7 +689,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook; import jakarta.servlet.FilterChain;import jakarta.servlet.ServletException;import jakarta.servlet.http.HttpServletRequest;import jakarta.servlet.http.HttpServletResponse;import org.springframework.stereotype.Component;import org.springframework.web.filter.OncePerRequestFilter;import org.springframework.web.util.ContentCachingResponseWrapper;import java.io.IOException;import java.time.Instant;import java.time.Clock; @Componentpublic class ResponseSigningFilter extends OncePerRequestFilter {    private final SigningService signingService;    private final Clock clock;     public ResponseSigningFilter(SigningService signingService, Clock clock) {        this.signingService = signingService;        this.clock = clock;    }     @Override    protected void doFilterInternal(HttpServletRequest request,                                    HttpServletResponse response,                                    FilterChain filterChain)            throws ServletException, IOException {        ContentCachingResponseWrapper wrapped = new ContentCachingResponseWrapper(response);        filterChain.doFilter(request, wrapped);         byte[] body = wrapped.getContentAsByteArray();        Instant timestamp = Instant.now(clock);        String signature = signingService.sign(timestamp, body);         response.setHeader("X-Timestamp", timestamp.toString());        response.setHeader("X-Signature", signature);         wrapped.copyBodyToResponse();    }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -655,7 +699,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook; import org.springframework.stereotype.Service; import javax.crypto.Mac;import javax.crypto.spec.SecretKeySpec;import java.nio.charset.StandardCharsets;import java.security.InvalidKeyException;import java.security.NoSuchAlgorithmException;import java.time.Duration;import java.time.Clock;import java.time.Instant;import java.time.format.DateTimeParseException; @Servicepublic class SigningService {    private static final String ALGORITHM = "HmacSHA256";    private static final String SECRET_ID = "S7663";    private static final String SECRET = "KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ=";    private final Clock clock;     public SigningService(Clock clock) {        this.clock = clock;    }     public boolean verifySignature(String idAndSignature, String timestamp, byte[] data) {        try {             String[] parts = idAndSignature.split("=", 2);            if (parts.length != 2) {                return false;            }            if (!parts[0].equals(SECRET_ID)) {                return false;            }            Instant signedAt = Instant.parse(timestamp);            verifyTimestamp(signedAt);            String computedIdAndSignature = sign(signedAt, data);            return idAndSignature.equals(computedIdAndSignature);        } catch (DateTimeParseException e) {            throw new RuntimeException("Failed to parse webhook timestamp", e);        }    }     public boolean verifyTimestamp(Instant signedAt) {        Instant lowerBoundary = Instant.now(clock).minus(Duration.ofMinutes(5L));        Instant upperBoundary = Instant.now(clock).plus(Duration.ofMinutes(5L));         return signedAt.isAfter(lowerBoundary) &amp;&amp; signedAt.isBefore(upperBoundary);    }     public String sign(Instant timestamp, byte[] data) {        try {            SecretKeySpec secretKeySpec = new SecretKeySpec(SECRET.getBytes(), ALGORITHM);            Mac mac = Mac.getInstance(ALGORITHM);            mac.init(secretKeySpec);            byte[] combinedBytes = combine(timestamp, data);            return SECRET_ID + "=" + bytesToHex(mac.doFinal(combinedBytes));        } catch (NoSuchAlgorithmException | InvalidKeyException | IllegalArgumentException e) {            throw new RuntimeException("Failed to calculate HMAC", e);        }    }     private static byte[] combine(Instant timestamp, byte[] data) {        byte[] timeStampBytes = timestamp.toString().getBytes(StandardCharsets.UTF_8);        byte[] combined = new byte[timeStampBytes.length + data.length];        System.arraycopy(timeStampBytes, 0, combined, 0, timeStampBytes.length);        System.arraycopy(data, 0, combined, timeStampBytes.length, data.length);        return combined;    }     private static String bytesToHex(byte[] bytes) {        StringBuilder hexStringBuilder = new StringBuilder();        for (byte b : bytes) {            hexStringBuilder.append(String.format("%02x", b));        }        return hexStringBuilder.toString();    }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -663,7 +709,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>package com.example.webhook; import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.context.annotation.Bean; import java.time.Clock; @SpringBootApplicationpublic class WebhookApplication {    public static void main(String[] args) {        SpringApplication.run(WebhookApplication.class, args);    }     @Bean    public Clock clock() {        return Clock.systemUTC();    }}</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -671,7 +719,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>server.servlet.context-path=/apiserver.servlet.encoding.charset=UTF-8server.servlet.encoding.enabled=trueserver.servlet.encoding.force=true</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>
@@ -743,7 +793,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>manage.py                       # Django CLI tooltestProject/                    # Django project├── settings.py                 # Main configuration├── urls.py                     # URL routing   webhookSample/                  # Webhook signing app├── middleware.py               # Request interceptors for validation├── views.py                    # Webhook handlers├── urls_webhook.py             # App routing├── apps.py                     # App configuration└── signer.py                   # Signer implementation and signature/timestamp verification</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -754,7 +806,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>#!/usr/bin/env python"""Django's command-line utility for administrative tasks."""import osimport sys def main():    """Run administrative tasks."""    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testProject.settings')    try:        from django.core.management import execute_from_command_line    except ImportError as exc:        raise ImportError(            "Couldn't import Django. Are you sure it's installed and "            "available on your PYTHONPATH environment variable? Did you "            "forget to activate a virtual environment?"        ) from exc    execute_from_command_line(sys.argv) if __name__ == '__main__':    main()</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -762,7 +816,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>from pathlib import Path BASE_DIR = Path(__file__).resolve().parent.parent# SECURITY WARNING: keep the secret key used in production secret!# This is used for dev purposes by Django to sign cookies and session data. # It is not the same as the SECRET and SECRET_ID in views.py.SECRET_KEY = 'your-unique-secret-key-here'  # Generate your own! # Set `DEBUG = False` in productionDEBUG = TrueALLOWED_HOSTS = [] INSTALLED_APPS = [    'webhookSample'] MIDDLEWARE = [    'django.middleware.common.CommonMiddleware',    'django.middleware.csrf.CsrfViewMiddleware',    'webhookSample.middleware.VerifyHmacMiddleware',    'webhookSample.middleware.ResponseHmacSignerMiddleware',] ROOT_URLCONF = 'testProject.urls' USE_TZ = True</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -770,7 +826,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>from django.urls import path, include urlpatterns = [    path('', include('webhookSample.urls_webhook')),  # Route root URL to webhookSample app]</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -778,7 +836,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>from django.apps import AppConfig class webhookSampleConfig(AppConfig):    default_auto_field = 'django.db.models.BigAutoField'    name = 'webhookSample'</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -786,7 +846,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>import hmacimport hashlibimport jsonfrom django.utils.deprecation import MiddlewareMixinfrom django.http import HttpResponse, HttpRequest, JsonResponsefrom . import signerfrom datetime import datefrom datetime import datetime class VerifyHmacMiddleware:    def __init__(self, get_response):        self.get_response = get_response     def __call__(self, request):        if request.path == "/api/event" and request.method == "POST":            signature_header = request.headers.get('X-Signature')            timestamp = request.headers.get('X-Timestamp')                        if signature_header is None or not signature_header:                return JsonResponse({'error': 'Missing signature'}, status=428)             if timestamp is None or not timestamp:                return JsonResponse({'error': 'Missing timestamp'}, status=428)             if signer.verify_timestamp(timestamp) is None or not signer.verify_timestamp(timestamp):                return JsonResponse({'error': 'Invalid or missing timestamp'}, status=400)             raw_body = request.body             # Split the signature header into individual signatures and verify at least one is valid            signatures = [s.strip() for s in signature_header.split(',')]             is_valid_signature = any(signer.verify_signature(sig, timestamp, raw_body) for sig in signatures)            if not is_valid_signature:                return JsonResponse({'error': 'Invalid signature'}, status=401)             # Passed all conditions. Signature is valid, save for downstream use (e.g. in signer middleware)            request._hmac_timestamp = timestamp            request._hmac_raw_body = raw_body         return self.get_response(request)    class ResponseHmacSignerMiddleware:    def __init__(self, get_response):        self.get_response = get_response     def __call__(self, request):        response = self.get_response(request)         if request.path == "/api/event" and request.method == "POST":            try:                body_str = response.content.decode('utf-8')                timestamp = datetime.utcnow().isoformat() + 'Z'                signature = signer.sign(timestamp, body_str)                response['X-Timestamp'] = timestamp                response['X-Signature'] = signature            except Exception:                pass         return response</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -794,7 +856,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>from django.urls import pathfrom . import views urlpatterns = [    path('', views.homepage, name="homepage"),    path('api/event', views.event_view, name="event_view")]</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -802,7 +866,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>import jsonfrom django.shortcuts import renderfrom django.http import HttpResponse, HttpRequest, JsonResponsefrom . import signerfrom datetime import datetime, timedeltafrom django.views.decorators.csrf import csrf_exempt def homepage(request):    return HttpResponse("Hello! Welcome to the homepage.") # Django enforces a CSRF protection error on unsafe HTTP methods like POST, PUT, DELETE. # This exemption makes request come from a trusted origin.@csrf_exemptdef event_view(request: HttpRequest):    if request.method != 'POST':        return JsonResponse({ 'error': 'Method not allowed'}, status=405)        # Get signature and timestamp from headers for verification    signature = request.headers.get('X-Signature')    timestamp = request.headers.get('X-Timestamp')        # Check for missing headers    if not signature:        return JsonResponse({'error': 'Missing signature'}, status=428)        if not timestamp:        return JsonResponse({'error': 'Missing timestamp'}, status=428)        # Verify timestamp first    if not signer.verify_timestamp(timestamp):        return JsonResponse({'error': 'Invalid timestamp'}, status=400)        try:        payload = json.loads(request.body)    except json.JSONDecodeError:        return JsonResponse({'error': 'Invalid JSON'}, status=400)        if payload.get('eventType') == 'event-v1-player-id-verification':        response_payload = {            'responseType': 'response-v1-player-id-verification',            'playerId': 'some-external-player-id',            'status': 'ALLOWED',            'eventId': 'some-event-id',        }                # Create response first        response = JsonResponse(response_payload)                # Sign the actual response content        response_body = response.content.decode('utf-8')        response_timestamp = datetime.utcnow().isoformat() + 'Z'        response_signature = signer.sign(response_timestamp, response_body)                # Add signature headers to response        response['X-Signature'] = response_signature        response['X-Timestamp'] = response_timestamp        return response        else:         return JsonResponse({ 'error': 'Unsupported event type'}, status=400)</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -810,7 +876,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>import hmacimport hashlibimport base64from datetime import datetime, timedelta # Example secret id and value# In real app, these values are stored in your database.# Python requires bytes for HMAC, so we convert from base64 to bytes.SECRET_ID = 'S7663'  # Identifier for the secret keySECRET = b'KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ='  # Base64-encoded secret # Calculates signature from timestamp and bodydef sign(timestamp: str, body: str | bytes) -&gt; str:    # Convert to bytes if string    if isinstance(body, str):        body = body.encode('utf-8')        data = timestamp.encode('utf-8') + body # converts to bytes. ex: b'12345'     # Generates SHA-256 HMAC (a valid hexadecimal string) for given data using secret key    signature = hmac.new(SECRET, data, hashlib.sha256).hexdigest()        return f"{SECRET_ID}={signature}" # Verifies that signature is validdef verify_signature(signature: str, timestamp: str, body: str | bytes) -&gt; bool:    expected_signature = sign(timestamp, body)    try:        signature_id, signature_value = signature.split('=')        expected_id, expected_value = expected_signature.split('=')    except ValueError:        return False     # Verify the id is the same    if signature_id != expected_id:        return False     # Verify the signature values are not empty    if not signature_value or not expected_value:        return False     # Compares using hmac.compare_digest to prevent timing attacks    try:        signature_bytes = bytes.fromhex(signature_value)        expected_bytes = bytes.fromhex(expected_value)    except ValueError:        # Invalid hex string        return False      # compare_digest requires buffers to be the same length    if len(signature_bytes) == 0 or len(signature_bytes) != len(expected_bytes):        return False     return hmac.compare_digest(signature_bytes, expected_bytes) # Verifies that the timestamp is current with system timedef verify_timestamp(timestamp: str) -&gt; bool:    try:        # Parse the timestamp string into a datetime object        ts = datetime.fromisoformat(timestamp.rstrip('Z'))         now = datetime.utcnow()        window = timedelta(minutes=5)         return now - window &lt;= ts &lt;= now + window    except Exception:        return False</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>
@@ -855,7 +923,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>BODY='{"eventType":"event-v1-player-id-verification","productId":"some-product-id","playerId":"some-external-player-id","eventId":"some-event-id"}'TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")SID="S7663"SIG=$(echo -n "$TS$BODY" | openssl dgst -sha256 -hmac "KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ=" | awk '{print $2}')curl -i -X POST http://localhost:3000/api/event \    -H "Content-Type: application/json" \    -H "X-Timestamp: $TS" \    -H "X-Signature: $SID=$SIG" \    -d "$BODY"</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 										<div>
@@ -872,7 +942,8 @@
 										</div>
 										<div>
 											<section>
-												<pre>// Fixed values for testingconst fixedTimestamp = '2025-05-30T21:59:12.668205100Z';const fixedBody = `{"responseType":"response-v1-player-id-verification","playerId":"some-external-player-id","status":"ALLOWED","eventId":"some-event-id"}`; // Calling the sign function with fixed valuesconst signature = sign(fixedTimestamp, fixedBody);console.log(signature);//'S7663=cb4a592b16d10d1d182fffda82b3931958058fed8c71e9d380a0f01838af687c' // Calling the verifySignature function with fixed valuesconst isSignatureValid = verifySignature(signature, fixedTimestamp, fixedBody);console.log(isSignatureValid); // true // Calling the verifyTimestamp function with dynamic valuesconst currentTimestamp = new Date().toISOString();const isTimestampValid = verifyTimestamp(currentTimestamp);console.log(isTimestampValid); // true
+												<pre>
+
 												</pre>
 											</section>
 										</div>
@@ -915,7 +986,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>BODY='{"eventType":"event-v1-player-id-verification","productId":"some-product-id","playerId":"some-external-player-id","eventId":"some-event-id"}'TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")SID="S7663"SIG=$(echo -n "$TS$BODY" | openssl dgst -sha256 -hmac "KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ=" | awk '{print $2}')curl -i -X POST http://localhost:8080/api/event \    -H "Content-Type: application/json" \    -H "X-Timestamp: $TS" \    -H "X-Signature: $SID=$SIG" \    -d "$BODY"</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>
@@ -951,7 +1024,9 @@
 										</div>
 										<div>
 											<section>
-												<pre>BODY='{"eventType":"event-v1-player-id-verification","productId":"some-product-id","playerId":"some-external-player-id","eventId":"some-event-id"}'TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")SID="S7663"SIG=$(echo -n "$TS$BODY" | openssl dgst -sha256 -hmac "KXJaWQDXVrIRyB6OV5znTn2EJ6ugN/Y1tdWOx48g6jQ=" | awk '{print $2}')curl -i -X POST http://localhost:8000/api/event \    -H "Content-Type: application/json" \    -H "X-Timestamp: $TS" \    -H "X-Signature: $SID=$SIG" \    -d "$BODY"</pre>
+												<pre>
+
+												</pre>
 											</section>
 										</div>
 									</div>

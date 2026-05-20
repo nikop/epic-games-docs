@@ -128,9 +128,7 @@
 										and copy the following configuration to it:</p>
 									<div>
 										<section>
-											<pre>
-
-											</pre>
+											<pre>cmake_minimum_required(VERSION 3.15) project(EOSHowTosCpp) set(CMAKE_CXX_STANDARD 17) # Define pathsset(EOS_SDK_PATH "${CMAKE_SOURCE_DIR}/SDK")set(EOS_DLL "${EOS_SDK_PATH}/Bin/EOSSDK-Win64-Shipping.dll")set(EOS_LIB "${EOS_SDK_PATH}/Lib/EOSSDK-Win64-Shipping.lib") # Grab source filesfile(GLOB_RECURSE SOURCES "Source/*.cpp") # Add main executableadd_executable(ExampleEOSGame ${SOURCES}) # Add Include pathtarget_include_directories(ExampleEOSGame PRIVATE "${EOS_SDK_PATH}/Include") # Link librarytarget_link_libraries(ExampleEOSGame PRIVATE "${EOS_LIB}") # Copy EOS DLL to build outputadd_custom_command(TARGET ExampleEOSGame POST_BUILD   COMMAND ${CMAKE_COMMAND} -E copy_if_different      "${EOS_DLL}"      $&lt;TARGET_FILE_DIR:ExampleEOSGame&gt;)</pre>
 										</section>
 									</div>
 									<p>This file instructs CMake how to build the Visual Studio project. Visual Studio uses these instructions to configure the project settings.</p>
@@ -164,9 +162,7 @@
 							<p>You now have the following directory structure:</p>
 							<div>
 								<section>
-									<pre>
-
-									</pre>
+									<pre>ExampleEOSGame/  ├──CMakeLists.txt  ├──SDK/  ├──Source/        └──EOSGame.cpp</pre>
 								</section>
 							</div>
 							<div>
@@ -225,9 +221,7 @@
 										to add a main function with a print statement:</p>
 									<div>
 										<section>
-											<pre>
-
-											</pre>
+											<pre>#include &lt;iostream&gt; int main(){   std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;}</pre>
 										</section>
 									</div>
 									<p>The

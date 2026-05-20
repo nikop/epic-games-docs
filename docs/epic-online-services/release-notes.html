@@ -49,6 +49,75 @@
 				<h1 id="2026">2026</h1>
 			</div>
 			<div>
+				<h2 id="11912-cl53289219---2026-may-19">1.19.1.2-CL53289219 - 2026-may-19</h2>
+			</div>
+			<div>
+				<h3 id="eos-core">EOS CORE</h3>
+			</div>
+			<ul>
+				<li>
+					<p>
+						<strong>New</strong>: EOS SDK now supports Windows on Arm.</p>
+					<p>
+						<strong>Social Overlay</strong>
+						<br>
+						The Social Overlay does NOT support Windows on Arm. This means the following interfaces and features do not support Windows on Arm:</p>
+					<ul>
+						<li>Achievements Interface</li>
+						<li>Lobby Interface</li>
+						<li>Leaderboards Interface</li>
+						<li>Your Party</li>
+					</ul>
+					<p>
+						<strong>EOS SDK for C#</strong>
+					</p>
+					<p>If you use the EOS SDK for C# and you’re not using the EOS Plugin for Unity, you must make updates to the EOS SDK to use Windows on Arm. For more information, see the
+						<a href="/docs/epic-online-services/platforms/windows">EOS SDK for Windows</a>
+						documentation.</p>
+				</li>
+				<li>
+					<p>
+						<strong>Update:</strong>
+						We have updated our list of
+						<a href="https://onlineservices.epicgames.com/services/terms/subprocessors">subprocessors</a>
+						— the third-party service providers that assist us in processing data to deliver EOS — to ensure continued transparency across our infrastructure.</p>
+				</li>
+			</ul>
+			<div>
+				<h3 id="interfaces">INTERFACES</h3>
+			</div>
+			<div>
+				<h4 id="voice">Voice</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New:</strong>
+					Extended
+					<code>EOS_Initialize::RTCIo</code>
+					to support passing
+					<code>RTCIo</code>
+					for high-priority audio threads.</li>
+			</ul>
+			<div>
+				<h4 id="social-overlay">Social Overlay</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New</strong>: Use
+					<code>EOS_CustomInvites_DisableRequestToJoin</code>
+					to disable the Request to Join button in the Social Overlay.</li>
+			</ul>
+			<div>
+				<h4 id="ecom">Ecom</h4>
+			</div>
+			<ul>
+				<li>
+					<strong>New:</strong>
+					The EOS SDK now returns
+					<code>EOS_EResult::EOS_Ecom_CatalogOfferInvalid</code>
+					when an offer is not valid in the catalog for the current sandbox.</li>
+			</ul>
+			<div>
 				<h2 id="11907---cl52449437---2026-apr-08">1.19.0.7 - CL52449437 - 2026-apr-08</h2>
 			</div>
 			<p>
@@ -81,7 +150,7 @@
 				<h2 id="11903---cl49960398---2026-feb-10">1.19.0.3 - CL49960398 - 2026-feb-10</h2>
 			</div>
 			<div>
-				<h3 id="eos-core">EOS CORE</h3>
+				<h3 id="eos-core-1">EOS CORE</h3>
 			</div>
 			<ul>
 				<li>
@@ -146,7 +215,7 @@
 						This means that when a player runs a game as an elevated user (as an administrator or similar super-user), their elevated user status does not apply to the redistributable installer.<br>
 						This is more secure because a game using the redistributable installer no longer requires administrator-level access for elevated users. Note that this does not affect any other part of the game, including the EOS bootstrapper: a player with an elevated-user status maintains their elevated status in every other part of the game, including the bootstrapper, to not break any existing user flows.</p>
 					<div>
-						<h3 id="interfaces">INTERFACES</h3>
+						<h3 id="interfaces-1">INTERFACES</h3>
 					</div>
 					<div>
 						<h4 id="anti-cheat">Anti-Cheat</h4>
@@ -178,7 +247,7 @@
 					<p>
 						<strong>Bug fix</strong>: Fixed an issue where querying ID tokens could fail in rare circumstances.</p>
 					<div>
-						<h4 id="ecom">Ecom</h4>
+						<h4 id="ecom-1">Ecom</h4>
 					</div>
 				</li>
 				<li>
@@ -204,7 +273,7 @@
 						<code>EOS_Ecom_QueryOffers</code>
 						when one or more of the offers contains an invalid price.</p>
 					<div>
-						<h4 id="voice">Voice</h4>
+						<h4 id="voice-1">Voice</h4>
 					</div>
 				</li>
 				<li>
@@ -289,7 +358,7 @@
 						<h3 id="upgrade-notes">UPGRADE NOTES</h3>
 					</div>
 					<div>
-						<h4 id="eos-core-1">EOS Core</h4>
+						<h4 id="eos-core-2">EOS Core</h4>
 					</div>
 				</li>
 				<li>
@@ -312,7 +381,7 @@
 						<h3 id="programming-upgrade-notes">PROGRAMMING UPGRADE NOTES</h3>
 					</div>
 					<div>
-						<h4 id="eos-core-2">EOS Core</h4>
+						<h4 id="eos-core-3">EOS Core</h4>
 					</div>
 				</li>
 				<li>
@@ -348,7 +417,7 @@
 				<h2 id="11812---cl47370208---2025-nov-04">1.18.1.2 - CL47370208 - 2025-Nov-04</h2>
 			</div>
 			<div>
-				<h3 id="interfaces-1">INTERFACES</h3>
+				<h3 id="interfaces-2">INTERFACES</h3>
 			</div>
 			<div>
 				<h4 id="auth">Auth</h4>
@@ -362,7 +431,7 @@
 					documentation.</li>
 			</ul>
 			<div>
-				<h4 id="ecom-1">Ecom</h4>
+				<h4 id="ecom-2">Ecom</h4>
 			</div>
 			<ul>
 				<li>
@@ -6581,13 +6650,31 @@
 									<a href="#2026">2026</a>
 								</li>
 								<li>
+									<a href="#11912-cl53289219---2026-may-19">1.19.1.2-CL53289219 - 2026-may-19</a>
+								</li>
+								<li>
+									<a href="#eos-core">EOS CORE</a>
+								</li>
+								<li>
+									<a href="#interfaces">INTERFACES</a>
+								</li>
+								<li>
+									<a href="#voice">Voice</a>
+								</li>
+								<li>
+									<a href="#social-overlay">Social Overlay</a>
+								</li>
+								<li>
+									<a href="#ecom">Ecom</a>
+								</li>
+								<li>
 									<a href="#11907---cl52449437---2026-apr-08">1.19.0.7 - CL52449437 - 2026-apr-08</a>
 								</li>
 								<li>
 									<a href="#11903---cl49960398---2026-feb-10">1.19.0.3 - CL49960398 - 2026-feb-10</a>
 								</li>
 								<li>
-									<a href="#eos-core">EOS CORE</a>
+									<a href="#eos-core-1">EOS CORE</a>
 								</li>
 								<li>
 									<a href="#eos-sdk-in-c">EOS SDK in C#</a>
@@ -6596,7 +6683,7 @@
 									<a href="#eos-overlay">EOS OVERLAY</a>
 								</li>
 								<li>
-									<a href="#interfaces">INTERFACES</a>
+									<a href="#interfaces-1">INTERFACES</a>
 								</li>
 								<li>
 									<a href="#anti-cheat">Anti-Cheat</a>
@@ -6605,10 +6692,10 @@
 									<a href="#authentication">Authentication</a>
 								</li>
 								<li>
-									<a href="#ecom">Ecom</a>
+									<a href="#ecom-1">Ecom</a>
 								</li>
 								<li>
-									<a href="#voice">Voice</a>
+									<a href="#voice-1">Voice</a>
 								</li>
 								<li>
 									<a href="#samples">SAMPLES</a>
@@ -6635,7 +6722,7 @@
 									<a href="#upgrade-notes">UPGRADE NOTES</a>
 								</li>
 								<li>
-									<a href="#eos-core-1">EOS Core</a>
+									<a href="#eos-core-2">EOS Core</a>
 								</li>
 								<li>
 									<a href="#mobile-1">Mobile</a>
@@ -6647,7 +6734,7 @@
 									<a href="#programming-upgrade-notes">PROGRAMMING UPGRADE NOTES</a>
 								</li>
 								<li>
-									<a href="#eos-core-2">EOS Core</a>
+									<a href="#eos-core-3">EOS Core</a>
 								</li>
 								<li>
 									<a href="#known-issues">KNOWN ISSUES</a>
@@ -6662,13 +6749,13 @@
 									<a href="#11812---cl47370208---2025-nov-04">1.18.1.2 - CL47370208 - 2025-Nov-04</a>
 								</li>
 								<li>
-									<a href="#interfaces-1">INTERFACES</a>
+									<a href="#interfaces-2">INTERFACES</a>
 								</li>
 								<li>
 									<a href="#auth">Auth</a>
 								</li>
 								<li>
-									<a href="#ecom-1">Ecom</a>
+									<a href="#ecom-2">Ecom</a>
 								</li>
 								<li>
 									<a href="#console-specific">CONSOLE-SPECIFIC</a>

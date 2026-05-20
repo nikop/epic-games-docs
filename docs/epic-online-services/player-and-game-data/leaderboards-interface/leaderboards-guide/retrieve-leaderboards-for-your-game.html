@@ -1,0 +1,772 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Add Leaderboards to Your Game — 2. Retrieve Leaderboards for Your Game</h1>
+			<h2>Overview of how to retrieve leaderboards for your game.</h2>
+			<div>
+				<div>27 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/set-up-leaderboards">1. Set Up Leaderboards</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>You can add code to your game to retrieve the leaderboards that you have defined for your game (or other software application) after you have completed the precursor steps listed in
+								<em>Before You Start</em>
+								below.</p>
+							<p>To add code to your game to retrieve the leaderboards that you have defined for your game, you query the leaderboard definitions to save them to the local cache. Then you can copy the cached leaderboard definitions and access the data for each definition.</p>
+							<p>You can either copy the cached leaderboard definitions by leaderboard ID (for example, "CarsSmashedWorldwide") or copy them all. This guide shows how to copy all leaderboard definitions. For information on how to copy leaderboard definitions individually by leaderboard ID, see the
+								<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-definition-by-leaderboard-id">
+									<code>EOS_Leaderboards_CopyLeaderboardDefinitionByLeaderboardId</code>
+									function</a>
+								API reference documentation.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you start, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With EOS</a>.)</li>
+								<li>Use the Connect Interface in your code to get the local player’s Product User ID. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Guide: Access EOS Game Services With the Connect Interface</a>.)</li>
+								<li>Create a leaderboard in the Developer Portal. (Section in this guide:
+									<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/set-up-leaderboards">1. Set Up Leaderboards</a>.)</li>
+							</ul>
+							<div>
+								<h2 id="retrieve-the-leaderboards-for-your-game">Retrieve the Leaderboards for Your Game</h2>
+							</div>
+							<p>Complete the following steps to retrieve the available leaderboards for your game and save them so you can look them up later:</p>
+							<ul>
+								<li>
+									<a href="#step-1-create-a-class-to-manage-eos-leaderboards">Step 1: Create a Class to Manage EOS Leaderboards</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-retrieve-available-leaderboards-function">Step 2: Implement Your Retrieve Available Leaderboards Function</a>
+								</li>
+								<li>
+									<a href="#step-3-implement-your-query-leaderboard-definitions-callback-function">Step 3: Implement Your Query Leaderboard Definitions Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-4-implement-your-copy-leaderboard-definitions-function">Step 4: Implement Your Copy Leaderboard Definitions Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code snippet after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-1-create-a-class-to-manage-eos-leaderboards">Step 1: Create a Class to Manage EOS Leaderboards</h3>
+							</div>
+							<p>Create a class to manage EOS Leaderboards in your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<strong>Note:</strong>
+								This guide does not cover how to sign in the player. For more information, see the following documentation:</p>
+							<ul>
+								<li>
+									<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface">Auth Interface</a>
+								</li>
+								<li>
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface">Connect Interface</a>
+								</li>
+							</ul>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In the
+																	<code>LeaderboardsManager.h</code>
+																	file, create a custom leaderboard definition data structure to hold the leaderboard definition data that you want to copy for your game. In the example, the data structure is called
+																	<code>LeaderboardDefinitionCopy</code>.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create a class to manage EOS Leaderboards for your players. In your leaderboards manager class, declare a public function to get read-only access to the leaderboard definitions map. (<strong>Note:</strong>
+																	The map itself is declared as a private variable and described in more detail in a step below.) In the example, it's called
+																	<code>GetRetrievedDefinitions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a public function to query the leaderboard definitions for your game.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare two private variables to hold handles for the two interfaces required for the EOS Leaderboards API calls (one for the Platform Interface, one for the Leaderboards Interface). Also, declare a private variable to hold the Product User ID of the signed-in local player. You'll use the player's Product User ID to make API calls.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private map to hold pairs of leaderboard IDs and your leaderboard definition data structure for the leaderboard definitions that you want to copy. In the example, it’s called
+																	<code>RetrievedDefinitions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+																		<code>EOS_Leaderboards_QueryLeaderboardDefinitions()</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryLeaderboardDefinitionsComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private function to copy the queried leaderboard definitions from the local cache.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your leaderboard manager's .cpp file (<code>LeaderboardsManager.cpp</code>
+																	in the example), define the constructor for the leaderboards manager class. In it, pass the Platform Interface handle and the Product User ID. Also, assign the Leaderboards Interface handle as part of the leaderboards manager class constructor. You need it to make EOS Leaderboards Interface API calls.</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-2-implement-your-retrieve-available-leaderboards-function">Step 2: Implement Your Retrieve Available Leaderboards Function</h3>
+							</div>
+							<p>In your leaderboards manager class, implement the function to retrieve the leaderboard definitions for your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your leaderboards manager class, implement the function to query the leaderboard definitions. In the example, it's called
+																	<code>RetrieveLeaderboardDefinitionsExample</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-leaderboards-query-leaderboard-definitions-options">
+																		<code>EOS_Leaderboards_QueryLeaderboardDefinitionsOptions</code>
+																		data structure</a>
+																	to hold the query options for the leaderboard definitions. In the example, it's called
+																	<code>QueryDefinitionOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+																		<code>EOS_Leaderboards_QueryLeaderboardDefinitions()</code>
+																		function</a>. This function saves the leaderboard definitions to the local cache.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The Leaderboards Interface handle.</li>
+																	<li>A reference to the options for querying the leaderboard definitions.</li>
+																	<li>(Optional) ClientData.<br>
+																		In the example, we pass the leaderboards manager (<code>this</code>
+																		in the example) for the ClientData field, so we can access it in the callback. If you don’t need to pass any additional data to the callback pass a
+																		<code>nullptr</code>
+																		instead.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+																			<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallbackInfo</code>
+																			data structure</a>
+																		when the EOS Leaderboards service completes the definitions query.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-3-implement-your-query-leaderboard-definitions-callback-function">Step 3: Implement Your Query Leaderboard Definitions Callback Function</h3>
+							</div>
+							<p>Implement the callback function that executes when the
+								<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+									<code>EOS_Leaderboards_QueryLeaderboardDefinitions()</code>
+									function</a>
+								completes.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+																		<code>EOS_Leaderboards_QueryLeaderboardDefinitions()</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallback</code>
+																		callback</a>
+																	which receives an
+																	<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+																		<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnQueryLeaderboardDefinitionsComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+																<p>Notes:</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+																			<code>EOS_Leaderboards_QueryLeaderboardDefinitions()</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the query is successful. If the query is successful, retrieve the leaderboards manager pointer from the client data and call your function to copy the leaderboard definitions:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the query is not complete yet. If the query is not complete, return so the operation can complete:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the query is not successful, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-4-implement-your-copy-leaderboard-definitions-function">Step 4: Implement Your Copy Leaderboard Definitions Function</h3>
+							</div>
+							<p>Implement the function to copy the leaderboard definitions for your game and save those definitions to a map for retrieval later on.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-3">What's happening in the code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the function to copy the leaderboard definitions for your game and save those definitions to a map for retrieval later on:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In your copy function, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-leaderboards-get-leaderboard-definition-count-options">
+																		<code>EOS_Leaderboards_GetLeaderboardDefinitionCountOptions</code>
+																		data structure</a>
+																	to hold the count options for your leaderboard definitions. You will use these options to get the total number of leaderboard definitions that are cached locally. In the example, it’s called
+																	<code>GetDefinitionCountOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-leaderboards-get-leaderboard-definition-count">
+																		<code>EOS_Leaderboards_GetLeaderboardDefinitionCount()</code>
+																		function</a>
+																	to get the number of leaderboard definitions stored in the local cache, and assign the value to a variable to hold the returned count.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The Leaderboards Interface handle.</li>
+																	<li>A reference to the count options for the leaderboard definitions.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the definition count to iterate through the list of queried definitions that you want to copy:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>In the for loop, create an instance of the
+																	<a href="/docs/api-ref/structs/eos-leaderboards-copy-leaderboard-definition-by-index-options">
+																		<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndexOptions</code>
+																		data structure</a>
+																	to hold the copy options for your leaderboard definitions. In the example, it's called
+																	<code>CopyDefinitionOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Define a pointer to temporarily store the copied leaderboard definition data. In the example, it's called
+																	<code>Definition</code>:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-definition-by-index">
+																		<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex()</code>
+																		function</a>
+																	to copy the leaderboard definitions from the local cache.</p>
+																<p>The function takes the following arguments:</p>
+																<ul>
+																	<li>The Leaderboards Interface handle.</li>
+																	<li>A reference to the copy options for the leaderboard definitions.</li>
+																	<li>A reference to the leaderboard definition pointer to hold the returned definition data.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-definition-by-index">
+																		<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex()</code>
+																		function</a>
+																	call is successful, retrieve data for the leaderboard definition from the definition pointer variable that you passed in, and save the leaderboard ID and leaderboard definition data structure pair to the definitions map. Also, call the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-definition-release">
+																		<code>EOS_Leaderboards_Definition_Release</code>
+																		function</a>
+																	on the definition pointer to free its memory:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the
+																	<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-definition-by-index">
+																		<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex()</code>
+																		function</a>
+																	call is not successful, handle any errors:</p>
+																<div>
+																	<section>
+																		<pre>
+
+																		</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>You can access the
+								<a href="/docs/api-ref/structs/eos-leaderboards-definition">
+									<code>EOS_Leaderboards_Definition</code>
+									data structure</a>
+								through the leaderboard definition pointer that you passed in the
+								<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-definition-by-index">
+									<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex()</code>
+									function</a>
+								call. The
+								<a href="/docs/api-ref/structs/eos-leaderboards-definition">
+									<code>EOS_Leaderboards_Definition</code>
+									data structure</a>
+								contains information about the leaderboard at the given index in the cached list of leaderboard definitions.</p>
+							<p>You can also call the
+								<code>LeaderboardsManager::GetRetrievedDefinitions()</code>
+								function in your game code to access the leaderboard definitions that you copied to the definitions map. Make sure there are no definition queries in progress before you call
+								<code>LeaderboardsManager::GetRetrievedDefinitions()</code>. If there are queries in progress, the leaderboard definitions you retrieve might not include the latest updates from the active query and will therefore be outdated.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<p>
+								<code>LeaderboardsManager.h</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<p>
+								<code>LeaderboardsManager.cpp</code>
+							</p>
+							<div>
+								<section>
+									<pre>
+
+									</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>
+								<strong>API reference documentation:</strong>
+							</p>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-leaderboards-query-leaderboard-definitions">
+										<code>EOS_Leaderboards_QueryLeaderboardDefinitions()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-query-leaderboard-definitions-options">
+												<code>EOS_Leaderboards_QueryLeaderboardDefinitionsOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+												<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallback</code>
+												function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-leaderboards-on-query-leaderboard-definitions-complete-callba">
+														<code>EOS_Leaderboards_OnQueryLeaderboardDefinitionsCompleteCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-leaderboards-get-leaderboard-definition-count">
+										<code>EOS_Leaderboards_GetLeaderboardDefinitionCount()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-get-leaderboard-definition-count-options">
+												<code>EOS_Leaderboards_GetLeaderboardDefinitionCountOptions</code>
+												data structure</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="/docs/api-ref/functions/eos-leaderboards-copy-leaderboard-definition-by-index">
+										<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndex()</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-copy-leaderboard-definition-by-index-options">
+												<code>EOS_Leaderboards_CopyLeaderboardDefinitionByIndexOptions</code>
+												data structure</a>
+										</li>
+										<li>
+											<a href="/docs/api-ref/structs/eos-leaderboards-definition">
+												<code>EOS_Leaderboards_Definition</code>
+												data structure</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/functions/eos-leaderboards-definition-release">
+														<code>EOS_Leaderboards_Definition_Release()</code>
+														function</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next Section:
+				<a href="/docs/epic-online-services/player-and-game-data/leaderboards-interface/leaderboards-guide/retrieve-records-for-a-leaderboard">3. Retrieve Records for a Leaderboard</a>
+			</p>
+			<p>
+				<strong>Note:</strong>
+				This guide follows an order. However, only section 1. Set Up Leaderboards is a prerequisite to provide leaderboards in your game. You can follow any section of this guide from section 2 onwards independently of each other and in any order.</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#retrieve-the-leaderboards-for-your-game">Retrieve the Leaderboards for Your Game</a>
+								</li>
+								<li>
+									<a href="#step-1-create-a-class-to-manage-eos-leaderboards">Step 1: Create a Class to Manage EOS Leaderboards</a>
+								</li>
+								<li>
+									<a href="#step-2-implement-your-retrieve-available-leaderboards-function">Step 2: Implement Your Retrieve Available Leaderboards Function</a>
+								</li>
+								<li>
+									<a href="#step-3-implement-your-query-leaderboard-definitions-callback-function">Step 3: Implement Your Query Leaderboard Definitions Callback Function</a>
+								</li>
+								<li>
+									<a href="#step-4-implement-your-copy-leaderboard-definitions-function">Step 4: Implement Your Copy Leaderboard Definitions Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

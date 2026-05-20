@@ -1,0 +1,543 @@
+<section class="page">
+	<div>
+		<div>
+			<div>
+				<form name="bodySearch" method="get" action="https://dev.epicgames.com/bing-search">
+					<input type="hidden" name="filter" value="Documentation" tabindex="-1">
+					<input tabindex="-1" type="search" name="keyword" placeholder="Search Documentation..." autocomplete="off" aria-label="Search field">
+				</form>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div>
+			<h1>Guide: Enable Player Reporting for Your Game — 1. Send Player Reports From Your Game</h1>
+			<h2>Step-by-step guide on how to send player reports from your game.</h2>
+			<div>
+				<div>19 mins to read</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<section role="main">
+			<p>Previous section:
+				<a href="/docs/epic-online-services/trust-and-safety/reports-interface/reports-guide/reports-intro">Introduction</a>
+			</p>
+			<p>This section of the guide is available in C++ and C#. The C++ version uses the EOS SDK API in C.</p>
+			<div>
+				<div>
+					<div>
+						<div aria-label="Content Tabs" role="tablist"></div>
+						<span></span>
+					</div>
+				</div>
+				<div role="tabpanel" id="simple-tabpanel-0" aria-labelledby="simple-tab-0">
+					<div>
+						<div>
+							<p>Players can use the EOS Player Reports service to report other players for not respecting your community rules. To use the EOS Player Reports service in your game, you must first implement the Reports Interface in your game (or software application).</p>
+							<p>You can also use the Player Reports Web API to retrieve player reports and manage them with your own player reports system, in addition to the Developer Portal. See the
+								<a href="/docs/web-api-ref/player-reports-web-apis">Player Reports Web APIs</a>
+								documentation for more information. This guide does not cover how to use the Player Reports Web APIs.</p>
+							<div role="alert">
+								<div></div>
+								<div>
+									<p>
+										<strong>The example code snippets in this guide are for guidance only.</strong>
+										If you use the snippets, make sure you tailor them to the unique circumstances of your game.</p>
+								</div>
+							</div>
+							<div>
+								<h2 id="before-you-start">Before You Start</h2>
+							</div>
+							<p>Before you implement the Reports Interface in your game, you must complete these steps:</p>
+							<ul>
+								<li>Integrate the EOS SDK into your code. (Documentation:
+									<a href="/docs/epic-online-services/eos-get-started/get-started-guide">Guide: Get Started With Epic Online Services</a>.)</li>
+								<li>Use the Connect Interface in your code to get the local player’s Product User ID. (Documentation:
+									<a href="/docs/epic-online-services/eos-fundamentals/connect-interface/connect-guide/connect-intro">Guide: Access Game Services With the Connect Interface</a>.)</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								The Reports Interface is intended for use in networked multiplayer games. This guide assumes that you have already implemented networking in your game and does not include instructions to help you create or use network architecture.</p>
+							<p>
+								<strong>Note:</strong>
+								You can use the Reports Interface to send a report directly from a client or from a trusted server. To send a report from a trusted server you must complete the following steps:</p>
+							<ul>
+								<li>
+									<p>Initialize the Platform Interface with
+										<code>bIsServer</code>
+										set to true. (Documentation:
+										<a href="/docs/epic-online-services/eos-fundamentals/eos-platform-interface">Platform Interface</a>.)</p>
+								</li>
+								<li>
+									<p>Enable the
+										<code>reports:sendReportForAnyUser</code>
+										feature for your trusted server’s Client Policy. (Documentation:
+										<a href="/docs/epic-online-services/eos-fundamentals/client-and-client-policy/client-policy-guide">Guide: Manage Your Clients and Client Policies</a>.)</p>
+									<p>Sending a player report from a trusted server is a sensitive action, which means that the server’s trust in the client’s current session must be validated before sending the report. You must ensure that the associated
+										<code>ClientId</code>
+										and
+										<code>ClientSecret</code>
+										remain secret. Use them as part of the configuration for the trusted server only.</p>
+								</li>
+							</ul>
+							<div>
+								<h2 id="implement-the-reports-interface">Implement the Reports Interface</h2>
+							</div>
+							<p>Complete the following steps to implement the Reports Interface in your game:</p>
+							<ul>
+								<li>
+									<a href="#step-a-create-a-class-to-manage-player-reports">Step A: Create a Class to Manage Player Reports</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-send-player-report-function">Step B: Implement Your Send Player Report Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-send-player-report-callback-function">Step C: Implement Your Send Player Report Callback Function</a>
+								</li>
+							</ul>
+							<p>
+								<strong>Note:</strong>
+								There is a complete code example after these steps in the
+								<a href="#complete-code">Complete Code</a>
+								section.</p>
+							<div>
+								<h3 id="step-a-create-a-class-to-manage-player-reports">Step A: Create a Class to Manage Player Reports</h3>
+							</div>
+							<p>Create a class to manage the Reports Interface in your game.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// ReportsManager.h #pragma once #include &lt;eos_reports.h&gt;#include &lt;eos_sdk.h&gt; class ReportsManager{public:    /**     * Constructor     *      * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     *     * @param InLocalProductUserId - The ProductUserId of the local player obtained during Connect login.     */    ReportsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**      * Report a player's behavior.     *      * @param PlayerToReport - The Product User ID of the player to report.     *      * @param BehaviorCategory - The type of behavior to report the player for.     *      * @param Message - An optional plain-text message to include with the report.     *      * @param JsonContext - An optional JSON message to include with the report.     */    void SendPlayerReportExample(EOS_ProductUserId PlayerToReport, EOS_EPlayerReportsCategory BehaviorCategory, const char* Message = nullptr, const char* JsonContext = nullptr);    private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Reports Interface handle. */    EOS_HReports ReportsHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /**     * Callback function that executes when a player report is sent.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnSendPlayerReportComplete(const EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo* Data);};</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// ReportsManager.cpp #include "ReportsManager.h"#include &lt;iostream&gt; ReportsManager::ReportsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId) {    ReportsHandle = EOS_Platform_GetReportsInterface(PlatformHandle);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code">What's Happening in the Code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your reports manager class, declare a public function to send a player report. In the example, it’s called
+																	<code>SendPlayerReportExample</code>. This example function takes the following arguments:</p>
+																<ul>
+																	<li>The Product User ID of the player to report.</li>
+																	<li>The type of behavior to report the player for, represented by an
+																		<a href="/docs/api-ref/enums/eos-e-player-reports-category">
+																			<code>EOS_EPlayerReportsCategory</code>
+																			enum</a>.</li>
+																	<li>(Optional) A plain-text string to include with the report.</li>
+																	<li>(Optional) A JSON string to include with the report.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>void SendPlayerReportExample(EOS_ProductUserId PlayerToReport, EOS_EPlayerReportsCategory BehaviorCategory, const char* Message = nullptr, const char* JsonContext = nullptr);</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare the following private variables:</p>
+																<ul>
+																	<li>A handle for the Platform Interface.</li>
+																	<li>A handle for the Reports Interface.</li>
+																	<li>A variable for the Product User ID of the signed-in local player. You’ll use the local player’s Product User ID to make API calls.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_HPlatform PlatformHandle = nullptr;EOS_HReports ReportsHandle = nullptr;EOS_ProductUserId LocalProductUserId = nullptr;</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Declare a private static callback function to execute when the
+																	<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+																		<code>EOS_Reports_SendPlayerBehaviorReport</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-reports-on-send-player-behavior-report-complete-callback">
+																		<code>EOS_Reports_OnSendPlayerBehaviorReportCompleteCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-reports-send-player-behavior-report-complete-callback-info">
+																		<code>EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnSendPlayerReportComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>static void EOS_CALL OnSendPlayerReportComplete(const EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo* Data);</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+																			<code>EOS_Reports_SendPlayerBehaviorReport</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your reports manager's
+																	<code>.cpp</code>
+																	file (<code>ReportsManager.cpp</code>
+																	in the example), define the constructor for the reports manager class. The example constructor takes the following parameters:</p>
+																<ul>
+																	<li>The Platform Interface handle.</li>
+																	<li>The Product User ID of the local player.</li>
+																</ul>
+																<p>In the constructor, assign the Reports Interface handle. You’ll use this handle to make EOS Reports Interface API calls.</p>
+																<div>
+																	<section>
+																		<pre>ReportsManager::ReportsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId) {    ReportsHandle = EOS_Platform_GetReportsInterface(PlatformHandle);}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-b-implement-your-send-player-report-function">Step B: Implement Your Send Player Report Function</h3>
+							</div>
+							<p>In your reports manager class, implement the function to send a player report.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// ReportsManager.cpp void ReportsManager::SendPlayerReportExample(EOS_ProductUserId PlayerToReport, EOS_EPlayerReportsCategory BehaviorCategory, const char* Message, const char* JsonContext){    // Set the options for sending the player report.    EOS_Reports_SendPlayerBehaviorReportOptions SendReportOptions = {};    SendReportOptions.ApiVersion = EOS_REPORTS_SENDPLAYERBEHAVIORREPORT_API_LATEST;     // The Product User ID of the player who is filing the report.    SendReportOptions.ReporterUserId = LocalProductUserId;     // The Product User ID of the player who is being reported.    SendReportOptions.ReportedUserId = PlayerToReport;     // The category of behavior to report the player for.    SendReportOptions.Category = BehaviorCategory;     // An optional plain-text message to include with the report.    SendReportOptions.Message = Message;     // An optional JSON message to include with the report.    SendReportOptions.Context = JsonContext;     // Call the EOS SDK to send the report.    // The callback function will be called when the report is sent.    EOS_Reports_SendPlayerBehaviorReport(ReportsHandle, &amp;SendReportOptions, nullptr, OnSendPlayerReportComplete);}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-1">What's Happening in the Code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>In your reports manager class, implement the function to send a player report. In the example, the function is called
+																	<code>SendPlayerReportExample</code>. This example function takes the following arguments:</p>
+																<ul>
+																	<li>The Product User ID of the player to report.</li>
+																	<li>The type of behavior to report the player for, represented by an
+																		<a href="/docs/api-ref/enums/eos-e-player-reports-category">
+																			<code>EOS_EPlayerReportsCategory</code>
+																			enum</a>.</li>
+																	<li>(Optional) A plain-text string to include with the report.</li>
+																	<li>(Optional) A JSON string to include with the report.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>void ReportsManager::SendPlayerReportExample(EOS_ProductUserId PlayerToReport, EOS_EPlayerReportsCategory BehaviorCategory, const char* Message, const char* JsonContext){ }</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Create an instance of the
+																	<a href="/docs/api-ref/structs/eos-reports-send-player-behavior-report-options">
+																		<code>EOS_Reports_SendPlayerBehaviorReportOptions</code>
+																		data structure</a>
+																	to hold the options to send a player report. In the example, it’s called
+																	<code>SendReportOptions</code>:</p>
+																<div>
+																	<section>
+																		<pre>EOS_Reports_SendPlayerBehaviorReportOptions SendReportOptions = {};SendReportOptions.ApiVersion = EOS_REPORTS_SENDPLAYERBEHAVIORREPORT_API_LATEST;SendReportOptions.ReporterUserId = LocalProductUserId;SendReportOptions.ReportedUserId = PlayerToReport;SendReportOptions.Category = BehaviorCategory;SendReportOptions.Message = Message;SendReportOptions.Context = JsonContext;</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>
+																		<code>ReporterUserId</code>
+																		must match the Product User ID of the local player unless a trusted server is sending the report. If a trusted server is sending the report, see
+																		<a href="#before-you-start">
+																			<em>Before You Start</em>
+																		</a>
+																		for additional requirements that you must complete.</li>
+																	<li>
+																		<code>ReporterUserId</code>
+																		and
+																		<code>ReportedUserId</code>
+																		cannot be set to the same Product User ID.</li>
+																</ul>
+															</li>
+															<li>
+																<p>Call the EOS API
+																	<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+																		<code>EOS_Reports_SendPlayerBehaviorReport</code>
+																		function</a>
+																	to send a player report. This function takes the following arguments:</p>
+																<ul>
+																	<li>The Reports Interface handle.</li>
+																	<li>A reference to the player report options data structure.</li>
+																	<li>(Optional)
+																		<code>ClientData</code>.<br>
+																		In the example, we pass
+																		<code>nullptr</code>
+																		because we don't need to pass any additional data to the callback.</li>
+																	<li>A callback function to receive the
+																		<a href="/docs/api-ref/structs/eos-reports-send-player-behavior-report-complete-callback-info">
+																			<code>EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo</code>
+																			data structure</a>
+																		when the Reports Interface sends the player report.</li>
+																</ul>
+																<div>
+																	<section>
+																		<pre>EOS_Reports_SendPlayerBehaviorReport(ReportsHandle, &amp;SendReportOptions, nullptr, OnSendPlayerReportComplete);</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 id="step-c-implement-your-send-player-report-callback-function">Step C: Implement Your Send Player Report Callback Function</h3>
+							</div>
+							<p>Implement the function that executes when the
+								<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+									<code>EOS_Reports_SendPlayerBehaviorReport</code>
+									function</a>
+								completes.</p>
+							<p>Example:</p>
+							<div>
+								<section>
+									<pre>// ReportsManager.cpp void EOS_CALL ReportsManager::OnSendPlayerReportComplete(const EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the report was successfully sent.        std::cout &lt;&lt; "Sent report successfully!" &lt;&lt; std::endl;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Failed to send report. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt;            EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<div>
+									<div tabindex="0" role="button" aria-expanded="false">
+										<div>
+											<h4 id="whats-happening-in-the-code-2">What's Happening in the Code?</h4>
+										</div>
+										<div></div>
+									</div>
+									<div>
+										<div>
+											<div>
+												<div role="region">
+													<div>
+														<p>The following sub-steps are a breakdown of the code example above.</p>
+														<ol>
+															<li>
+																<p>Implement the callback function that executes when the
+																	<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+																		<code>EOS_Reports_SendPlayerBehaviorReport</code>
+																		function</a>
+																	completes. The function definition must match the
+																	<a href="/docs/api-ref/callbacks/eos-reports-on-send-player-behavior-report-complete-callback">
+																		<code>EOS_Reports_OnSendPlayerBehaviorReportCompleteCallback</code>
+																		callback function</a>
+																	which receives a
+																	<a href="/docs/api-ref/structs/eos-reports-send-player-behavior-report-complete-callback-info">
+																		<code>EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo</code>
+																		data structure</a>. In the example, it's called
+																	<code>OnSendPlayerReportComplete</code>:</p>
+																<div>
+																	<section>
+																		<pre>void EOS_CALL ReportsManager::OnSendPlayerReportComplete(const EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo* Data){ }</pre>
+																	</section>
+																</div>
+																<p>
+																	<strong>Note:</strong>
+																</p>
+																<ul>
+																	<li>The EOS SDK calls this callback function asynchronously each time the
+																		<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+																			<code>EOS_Reports_SendPlayerBehaviorReport</code>
+																			function</a>
+																		completes.</li>
+																	<li>The
+																		<code>EOS_CALL</code>
+																		macro is part of the required definition.</li>
+																</ul>
+															</li>
+															<li>
+																<p>In your callback function, use the returned
+																	<a href="/docs/api-ref/enums/eos-e-result">
+																		<code>EOS_EResult</code>
+																		enum</a>
+																	to confirm that the report is sent successfully.</p>
+																<div>
+																	<section>
+																		<pre>if (Data-&gt;ResultCode == EOS_EResult::EOS_Success){    std::cout &lt;&lt; "Sent report successfully! View the report in the Developer Portal." &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>Use the
+																	<a href="/docs/api-ref/functions/eos-e-result-is-operation-complete">
+																		<code>EOS_EResult_IsOperationComplete</code>
+																		function</a>
+																	to check if the report is sent yet. If the report is not sent yet, return. The callback is called again when the report is sent:</p>
+																<div>
+																	<section>
+																		<pre>else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE){    return;}</pre>
+																	</section>
+																</div>
+															</li>
+															<li>
+																<p>If the report is not sent successfully, handle the errors:</p>
+																<div>
+																	<section>
+																		<pre>else{    std::cerr &lt;&lt; "Failed to send report. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt;        EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;}</pre>
+																	</section>
+																</div>
+															</li>
+														</ol>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 id="results">Results</h2>
+							</div>
+							<p>After you call the
+								<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+									<code>EOS_Reports_SendPlayerBehaviorReport</code>
+									function</a>, the EOS SDK sends a player report to the EOS Player Reports service. You can view and manage your game’s player reports from the Developer Portal. For more information about managing player reports from the Developer Portal, see the next section:
+								<a href="/docs/epic-online-services/trust-and-safety/reports-interface/reports-guide/manage-player-reports-in-the-developer-portal">2. Manage Player Reports in the Developer Portal</a>.</p>
+							<div>
+								<h2 id="complete-code">Complete Code</h2>
+							</div>
+							<p>This is the complete example code. It collates all the code snippet examples in the steps above.</p>
+							<div>
+								<section>
+									<pre>// ReportsManager.h #pragma once #include &lt;eos_reports.h&gt;#include &lt;eos_sdk.h&gt; class ReportsManager{public:    /**     * Constructor     *      * @param InPlatformHandle - The handle for the platform interface obtained during platform setup.     *     * @param InLocalProductUserId - The ProductUserId of the local player obtained during Connect login.     */    ReportsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId);     /**      * Report a player's behavior.     *      * @param PlayerToReport - The Product User ID of the player to report.     *      * @param BehaviorCategory - The type of behavior to report the player for.     *      * @param Message - An optional plain-text message to include with the report.     *      * @param JsonContext - An optional JSON message to include with the report.     */    void SendPlayerReportExample(EOS_ProductUserId PlayerToReport, EOS_EPlayerReportsCategory BehaviorCategory, const char* Message = nullptr, const char* JsonContext = nullptr);    private:    /** The Platform Interface handle. */    EOS_HPlatform PlatformHandle = nullptr;     /** The Reports Interface handle. */    EOS_HReports ReportsHandle = nullptr;     /** The Product User ID of the local player. */    EOS_ProductUserId LocalProductUserId = nullptr;     /**     * Callback function that executes when a player report is sent.     *     * @param Data - Information passed to the callback function by the EOS SDK.     */    static void EOS_CALL OnSendPlayerReportComplete(const EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo* Data);};</pre>
+								</section>
+							</div>
+							<div>
+								<section>
+									<pre>// ReportsManager.cpp #include "ReportsManager.h"#include &lt;iostream&gt; ReportsManager::ReportsManager(EOS_HPlatform InPlatformHandle, EOS_ProductUserId InLocalProductUserId)    : PlatformHandle(InPlatformHandle)    , LocalProductUserId(InLocalProductUserId) {    ReportsHandle = EOS_Platform_GetReportsInterface(PlatformHandle);} void ReportsManager::SendPlayerReportExample(EOS_ProductUserId PlayerToReport, EOS_EPlayerReportsCategory BehaviorCategory, const char* Message, const char* JsonContext){    // Set the options for sending the player report.    EOS_Reports_SendPlayerBehaviorReportOptions SendReportOptions = {};    SendReportOptions.ApiVersion = EOS_REPORTS_SENDPLAYERBEHAVIORREPORT_API_LATEST;     // The Product User ID of the player who is filing the report.    SendReportOptions.ReporterUserId = LocalProductUserId;     // The Product User ID of the player who is being reported.    SendReportOptions.ReportedUserId = PlayerToReport;     // The category of behavior to report the player for.    SendReportOptions.Category = BehaviorCategory;     // An optional plain-text message to include with the report.    SendReportOptions.Message = Message;     // An optional JSON message to include with the report.    SendReportOptions.Context = JsonContext;     // Call the EOS SDK to send the report.    // The callback function will be called when the report is sent.    EOS_Reports_SendPlayerBehaviorReport(ReportsHandle, &amp;SendReportOptions, nullptr, OnSendPlayerReportComplete);} void EOS_CALL ReportsManager::OnSendPlayerReportComplete(const EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo* Data){    if (Data-&gt;ResultCode == EOS_EResult::EOS_Success)    {        // If the code gets here, the report was successfully sent.        std::cout &lt;&lt; "Sent report successfully!" &lt;&lt; std::endl;    }    else if (EOS_EResult_IsOperationComplete(Data-&gt;ResultCode) == EOS_FALSE)    {        // If the code gets here, the operation is retrying and is not yet complete.        return;    }    else    {        // If the code gets here, there was an error.        // Handle this however you need for your game.        std::cerr &lt;&lt; "Failed to send report. Error code: " &lt;&lt; static_cast&lt;int&gt;(Data-&gt;ResultCode) &lt;&lt; " - " &lt;&lt;            EOS_EResult_ToString(Data-&gt;ResultCode) &lt;&lt; std::endl;    }}</pre>
+								</section>
+							</div>
+							<div>
+								<h2 id="notes">Notes</h2>
+							</div>
+							<p>You might not be able to view reports in the Developer Portal (or your own player reports system) immediately after the EOS Player Reports service sends them. Reports might take some minutes to appear in the Developer Portal or your own player reports system.</p>
+							<div>
+								<h2 id="api-reference-documentation">API Reference Documentation</h2>
+							</div>
+							<ul>
+								<li>
+									<a href="/docs/api-ref/functions/eos-reports-send-player-behavior-report">
+										<code>EOS_Reports_SendPlayerBehaviorReport</code>
+										function</a>
+									<ul>
+										<li>
+											<a href="/docs/api-ref/structs/eos-reports-send-player-behavior-report-options">
+												<code>EOS_Reports_SendPlayerBehaviorReportOptions</code>
+												data structure</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/enums/eos-e-player-reports-category">
+														<code>EOS_EPlayerReportsCategory</code>
+														enum</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="/docs/api-ref/callbacks/eos-reports-on-send-player-behavior-report-complete-callback">
+												<code>EOS_Reports_OnSendPlayerBehaviorReportCompleteCallback</code>
+												callback function</a>
+											<ul>
+												<li>
+													<a href="/docs/api-ref/structs/eos-reports-send-player-behavior-report-complete-callback-info">
+														<code>EOS_Reports_SendPlayerBehaviorReportCompleteCallbackInfo</code>
+														data structure</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" hidden="" id="simple-tabpanel-1" aria-labelledby="simple-tab-1"></div>
+			</div>
+			<p>Next section:
+				<a href="/docs/epic-online-services/trust-and-safety/reports-interface/reports-guide/manage-player-reports-in-the-developer-portal">2. Manage Player Reports in the Developer Portal</a>
+			</p>
+		</section>
+		<aside>
+			<div>Contents</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<ul>
+								<li>
+									<a href="#before-you-start">Before You Start</a>
+								</li>
+								<li>
+									<a href="#implement-the-reports-interface">Implement the Reports Interface</a>
+								</li>
+								<li>
+									<a href="#step-a-create-a-class-to-manage-player-reports">Step A: Create a Class to Manage Player Reports</a>
+								</li>
+								<li>
+									<a href="#step-b-implement-your-send-player-report-function">Step B: Implement Your Send Player Report Function</a>
+								</li>
+								<li>
+									<a href="#step-c-implement-your-send-player-report-callback-function">Step C: Implement Your Send Player Report Callback Function</a>
+								</li>
+								<li>
+									<a href="#results">Results</a>
+								</li>
+								<li>
+									<a href="#complete-code">Complete Code</a>
+								</li>
+								<li>
+									<a href="#notes">Notes</a>
+								</li>
+								<li>
+									<a href="#api-reference-documentation">API Reference Documentation</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</section>
+</section>

@@ -34,7 +34,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>EOS SDK 1.17.0-CL43712763 - 1.19.0.7-CL52449437</td>
+						<td>EOS SDK 1.17.0-CL43712763 - 1.19.1.2-CL53289219</td>
 						<td>supports</td>
 						<td>iOS 12 and 18</td>
 					</tr>
@@ -284,9 +284,7 @@
 			</ol>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>#import &lt;AuthenticationServices/AuthenticationServices.h&gt;#import &lt;UIKit/UIKit.h&gt; @interface PresentationContextProvider : NSObject &lt;ASWebAuthenticationPresentationContextProviding&gt;@end @implementation PresentationContextProvider- (ASPresentationAnchor)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession *)session{	return UIApplication.sharedApplication.delegate.window;}@end</pre>
 				</section>
 			</div>
 			<ol start="2">
@@ -302,9 +300,7 @@
 				<a href="/docs/epic-online-services/accounts-and-social/eos-epic-account-services/auth-interface/auth-guide/auth-intro">Guide: Access Epic Account Services With the Auth Interface</a>.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>#import "eos_ios.h" // ... 	// Initialize the provider	PresentationContextProvider* Provider = [PresentationContextProvider new]; 	// Store a C pointer to the provider	// You must retain this so it won't get deallocated at this point due to the compiler not seeing any more Obj-C references to it	// The EOS SDK calls `CFBridgingRelease()` on the provider automatically when it's no longer in use.	EOS_IOS_Auth_CredentialsOptions CredentialsOptions = {};	CredentialsOptions.ApiVersion = EOS_IOS_AUTH_CREDENTIALSOPTIONS_API_LATEST;	CredentialsOptions.PresentationContextProviding = (void*)CFBridgingRetain(Provider);	// Additional CredentialsOptions setup 	EOS_Auth_Credentials Credentials = {};	Credentials.ApiVersion = EOS_AUTH_CREDENTIALS_API_LATEST;	Credentials.Type = EOS_ELoginCredentialType::EOS_LCT_AccountPortal;	Credentials.SystemAuthCredentialsOptions = (void*)&amp;CredentialsOptions;	// Additional Credentials setup 	EOS_Auth_LoginOptions LoginOptions = {};	LoginOptions.ApiVersion = EOS_AUTH_LOGIN_API_LATEST;	LoginOptions.Credentials = &amp;Credentials;	// Additional LoginOptions setup</pre>
 				</section>
 			</div>
 			<ol start="3">

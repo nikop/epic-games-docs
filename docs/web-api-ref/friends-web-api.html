@@ -80,9 +80,7 @@
 				parameter.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>curl -H "Authorization: Bearer &lt;token&gt;" --request GET 'https://api.epicgames.dev/epic/friends/v1/{accountId}'</pre>
 				</section>
 			</div>
 			<table>
@@ -102,8 +100,7 @@
 			<p>Example 200 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "friends": [    {      "accountId": "[accountId]",      "created": "2089-07-17T01:22:20.024Z",      "favorite": true,      "nickname": "Rob"    }  ],  "blockList": [    {      "accountId": "[accountId]",      "created": "2025-10-01T15:46:00.267Z"    }  ]}
 					</pre>
 				</section>
 			</div>
@@ -124,8 +121,7 @@
 			<p>Example 400 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.validation.validation_failed",  "errorMessage": "Validation Failed. Invalid fields were [accountId]",  "numericErrorCode": 1040,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>
@@ -146,8 +142,7 @@
 			<p>Example 401 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.common.authentication.token_verification_failed",  "errorMessage": "Sorry we couldn't validate your token [token]. Please try with a new token.",  "numericErrorCode": 1031,  "messageVars": ["[token]"]}
 					</pre>
 				</section>
 			</div>
@@ -168,15 +163,13 @@
 			<p>Example 403 responses</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.forbidden",  "errorMessage": "Forbidden to access [accountID] account data",  "numericErrorCode": 1003,  "messageVars": ["[accountID]"]}
 					</pre>
 				</section>
 			</div>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.common.insufficient_scopes",  "errorMessage": "Insufficient access scopes. Expected: [basic_profile friends_list]",  "numericErrorCode": 1056,  "messageVars": ["basic_profile friends_list"]}
 					</pre>
 				</section>
 			</div>
@@ -197,8 +190,7 @@
 			<p>Example 404 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.friends.account_not_found",  "errorMessage": "Account [accountId] was not found",  "numericErrorCode": 14011,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>
@@ -240,9 +232,7 @@
 				parameter.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>curl -H "Authorization: Bearer &lt;token&gt;" --request GET 'https://api.epicgames.dev/epic/friends/v1/{accountId}/friends'</pre>
 				</section>
 			</div>
 			<p>This endpoint provides the following responses:</p>
@@ -263,8 +253,7 @@
 			<p>Example 200 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "accountId": "[accountId]",  "created": "2089-07-17T01:22:20.024Z",  "favorite": true,  "nickname": "Rob"}
 					</pre>
 				</section>
 			</div>
@@ -285,8 +274,7 @@
 			<p>Example 400 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.validation.validation_failed",  "errorMessage": "Validation Failed. Invalid fields were [accountId]",  "numericErrorCode": 1040,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>
@@ -307,8 +295,7 @@
 			<p>Example 401 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.common.authentication.token_verification_failed",  "errorMessage": "Sorry we couldn't validate your token [token]. Please try with a new token.",  "numericErrorCode": 1031,  "messageVars": ["[token]"]}
 					</pre>
 				</section>
 			</div>
@@ -329,15 +316,13 @@
 			<p>Example 403 responses:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.forbidden",  "errorMessage": "Forbidden to access [accountID] account data",  "numericErrorCode": 1003,  "messageVars": ["[accountID]"]}
 					</pre>
 				</section>
 			</div>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.common.insufficient_scopes",  "errorMessage": "Insufficient access scopes. Expected: [basic_profile friends_list]",  "numericErrorCode": 1056,  "messageVars": ["basic_profile friends_list"]}
 					</pre>
 				</section>
 			</div>
@@ -358,8 +343,7 @@
 			<p>Example 404 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.friends.account_not_found",  "errorMessage": "Account [accountId] was not found",  "numericErrorCode": 14011,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>
@@ -401,9 +385,7 @@
 				parameter.</p>
 			<div>
 				<section>
-					<pre>
-
-					</pre>
+					<pre>curl -H "Authorization: Bearer &lt;token&gt;" --request GET 'https://api.epicgames.dev/epic/friends/v1/{accountId}/blocklist'</pre>
 				</section>
 			</div>
 			<p>This endpoint provides the following responses:</p>
@@ -424,8 +406,7 @@
 			<p>Example 200 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>[  {    "accountId": "[accountId]",    "created": "2089-07-17T01:22:20.024Z"  }]
 					</pre>
 				</section>
 			</div>
@@ -446,8 +427,7 @@
 			<p>Example 400 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.validation.validation_failed",  "errorMessage": "Validation Failed. Invalid fields were [accountId]",  "numericErrorCode": 1040,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>
@@ -468,8 +448,7 @@
 			<p>Example 401 response:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.common.authentication.token_verification_failed",  "errorMessage": "Sorry we couldn't validate your token [token]. Please try with a new token.",  "numericErrorCode": 1031,  "messageVars": ["[token]"]}
 					</pre>
 				</section>
 			</div>
@@ -490,15 +469,13 @@
 			<p>Example 403 responses:</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.forbidden",  "errorMessage": "Forbidden to access [accountId] account data",  "numericErrorCode": 1003,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.common.insufficient_scopes",  "errorMessage": "Insufficient access scopes. Expected: [basic_profile friends_list]",  "numericErrorCode": 1056,  "messageVars": ["basic_profile friends_list"]}
 					</pre>
 				</section>
 			</div>
@@ -519,8 +496,7 @@
 			<p>Example 404 response :</p>
 			<div>
 				<section>
-					<pre>
-
+					<pre>{  "errorCode": "errors.com.epicgames.friends.account_not_found",  "errorMessage": "Account [accountId] was not found",  "numericErrorCode": 14011,  "messageVars": ["[accountId]"]}
 					</pre>
 				</section>
 			</div>

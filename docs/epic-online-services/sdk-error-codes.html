@@ -253,15 +253,9 @@
 			<table>
 				<thead>
 					<tr>
-						<th>
-							<strong>Numeric Code</strong>
-						</th>
-						<th>
-							<strong>Code Return</strong>
-						</th>
-						<th>
-							<strong>Cause/Reason</strong>
-						</th>
+						<th>Numeric Value</th>
+						<th>Enumerated Value</th>
+						<th>Meaning</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -308,7 +302,7 @@
 						<td>
 							<code>EOS_InvalidAuth</code>
 						</td>
-						<td>Failed due to invalid or missing authentication token for user e.g. not logged in.</td>
+						<td>Failed due to invalid or missing authentication token for user (e.g. not logged in).</td>
 					</tr>
 					<tr>
 						<td>
@@ -398,13 +392,7 @@
 						<td>
 							<code>EOS_NotConfigured</code>
 						</td>
-						<td>Not configured correctly for use.
-							<br>
-							<br>A client requested an action that they have disabled.<ul>
-								<li>For example, if a client requests to show the EOS Overlay, but it was disabled during
-									<code>EOS_PlatformCreate</code>.</li>
-							</ul>
-						</td>
+						<td>Not configured correctly for use.</td>
 					</tr>
 					<tr>
 						<td>
@@ -431,7 +419,7 @@
 						<td>
 							<code>EOS_Canceled</code>
 						</td>
-						<td>Operation was canceled likely by user.</td>
+						<td>Operation was canceled (likely by user).</td>
 					</tr>
 					<tr>
 						<td>
@@ -476,8 +464,7 @@
 						<td>
 							<code>EOS_LimitExceeded</code>
 						</td>
-						<td>A maximum limit was exceeded on the client, different from
-							<code>EOS_TooManyRequests</code>.</td>
+						<td>A maximum limit was exceeded on the client, different from TooManyRequests.</td>
 					</tr>
 					<tr>
 						<td>
@@ -495,16 +482,7 @@
 						<td>
 							<code>EOS_DuplicateNotAllowed</code>
 						</td>
-						<td>Duplicate entry not allowed</td>
-					</tr>
-					<tr>
-						<td>
-							<code>25</code>
-						</td>
-						<td>
-							<code>EOS_MissingParameters_DEPRECATED</code>
-						</td>
-						<td>Required parameters are missing. DEPRECATED: This error is no longer used.</td>
+						<td>Duplicate entry not allowed.</td>
 					</tr>
 					<tr>
 						<td>
@@ -513,7 +491,7 @@
 						<td>
 							<code>EOS_InvalidSandboxId</code>
 						</td>
-						<td>Sandbox ID is invalid</td>
+						<td>Sandbox ID is invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -522,7 +500,7 @@
 						<td>
 							<code>EOS_TimedOut</code>
 						</td>
-						<td>Request timed out</td>
+						<td>Request timed out.</td>
 					</tr>
 					<tr>
 						<td>
@@ -540,7 +518,7 @@
 						<td>
 							<code>EOS_Missing_Role</code>
 						</td>
-						<td>Client is missing the whitelisted role</td>
+						<td>Client is missing the whitelisted role.</td>
 					</tr>
 					<tr>
 						<td>
@@ -549,7 +527,7 @@
 						<td>
 							<code>EOS_Missing_Feature</code>
 						</td>
-						<td>Client is missing the whitelisted feature</td>
+						<td>Client is missing the whitelisted feature.</td>
 					</tr>
 					<tr>
 						<td>
@@ -558,7 +536,7 @@
 						<td>
 							<code>EOS_Invalid_Sandbox</code>
 						</td>
-						<td>The sandbox given to the backend is invalid</td>
+						<td>The sandbox given to the backend is invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -567,7 +545,7 @@
 						<td>
 							<code>EOS_Invalid_Deployment</code>
 						</td>
-						<td>The deployment given to the backend is invalid</td>
+						<td>The deployment given to the backend is invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -576,7 +554,7 @@
 						<td>
 							<code>EOS_Invalid_Product</code>
 						</td>
-						<td>The product ID specified to the backend is invalid</td>
+						<td>The product ID specified to the backend is invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -585,7 +563,7 @@
 						<td>
 							<code>EOS_Invalid_ProductUserID</code>
 						</td>
-						<td>The product user ID specified to the backend is invalid</td>
+						<td>The product user ID specified to the backend is invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -594,7 +572,7 @@
 						<td>
 							<code>EOS_ServiceFailure</code>
 						</td>
-						<td>There was a failure with the backend service</td>
+						<td>There was a failure with the backend service.</td>
 					</tr>
 					<tr>
 						<td>
@@ -621,7 +599,7 @@
 						<td>
 							<code>EOS_InvalidState</code>
 						</td>
-						<td>The request failed because resource was in an invalid state</td>
+						<td>The request failed because resource was in an invalid state.</td>
 					</tr>
 					<tr>
 						<td>
@@ -630,7 +608,7 @@
 						<td>
 							<code>EOS_RequestInProgress</code>
 						</td>
-						<td>Request is in progress</td>
+						<td>Request is in progress.</td>
 					</tr>
 					<tr>
 						<td>
@@ -639,7 +617,7 @@
 						<td>
 							<code>EOS_ApplicationSuspended</code>
 						</td>
-						<td>Application is suspended</td>
+						<td>Application is suspended.</td>
 					</tr>
 					<tr>
 						<td>
@@ -648,7 +626,16 @@
 						<td>
 							<code>EOS_NetworkDisconnected</code>
 						</td>
-						<td>Network is disconnected</td>
+						<td>Network is disconnected.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>42</code>
+						</td>
+						<td>
+							<code>EOS_InsufficientOutputBuffer</code>
+						</td>
+						<td>Given output buffer is insufficient to complete the operation.</td>
 					</tr>
 					<tr>
 						<td>
@@ -657,7 +644,7 @@
 						<td>
 							<code>EOS_ClientPolicyMissingAction</code>
 						</td>
-						<td>The client permission is not set up for this call: your client policy does not have the required features.</td>
+						<td>The associated feature or action is not enabled in the client policy.</td>
 					</tr>
 					<tr>
 						<td>
@@ -666,7 +653,7 @@
 						<td>
 							<code>EOS_Auth_AccountLocked</code>
 						</td>
-						<td>Account locked due to login failures</td>
+						<td>Account locked due to login failures.</td>
 					</tr>
 					<tr>
 						<td>
@@ -684,7 +671,7 @@
 						<td>
 							<code>EOS_Auth_InvalidRefreshToken</code>
 						</td>
-						<td>Refresh token used was invalid</td>
+						<td>Refresh token used was invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -693,7 +680,7 @@
 						<td>
 							<code>EOS_Auth_InvalidToken</code>
 						</td>
-						<td>Invalid access token, typically when switching between backend environments</td>
+						<td>Invalid access token, typically when switching between backend environments.</td>
 					</tr>
 					<tr>
 						<td>
@@ -702,7 +689,7 @@
 						<td>
 							<code>EOS_Auth_AuthenticationFailure</code>
 						</td>
-						<td>Invalid bearer token</td>
+						<td>Invalid bearer token.</td>
 					</tr>
 					<tr>
 						<td>
@@ -711,7 +698,7 @@
 						<td>
 							<code>EOS_Auth_InvalidPlatformToken</code>
 						</td>
-						<td>Invalid platform token</td>
+						<td>Invalid platform token.</td>
 					</tr>
 					<tr>
 						<td>
@@ -720,7 +707,7 @@
 						<td>
 							<code>EOS_Auth_WrongAccount</code>
 						</td>
-						<td>Auth parameters are not associated with this account</td>
+						<td>Auth parameters are not associated with this account.</td>
 					</tr>
 					<tr>
 						<td>
@@ -729,7 +716,7 @@
 						<td>
 							<code>EOS_Auth_WrongClient</code>
 						</td>
-						<td>Auth parameters are not associated with this client</td>
+						<td>Auth parameters are not associated with this client.</td>
 					</tr>
 					<tr>
 						<td>
@@ -738,7 +725,7 @@
 						<td>
 							<code>EOS_Auth_FullAccountRequired</code>
 						</td>
-						<td>Full account is required</td>
+						<td>Full account is required.</td>
 					</tr>
 					<tr>
 						<td>
@@ -747,7 +734,7 @@
 						<td>
 							<code>EOS_Auth_HeadlessAccountRequired</code>
 						</td>
-						<td>Headless account is required</td>
+						<td>Headless account is required.</td>
 					</tr>
 					<tr>
 						<td>
@@ -756,7 +743,7 @@
 						<td>
 							<code>EOS_Auth_PasswordResetRequired</code>
 						</td>
-						<td>Password reset is required</td>
+						<td>Password reset is required.</td>
 					</tr>
 					<tr>
 						<td>
@@ -765,7 +752,7 @@
 						<td>
 							<code>EOS_Auth_PasswordCannotBeReused</code>
 						</td>
-						<td>Password was previously used and cannot be reused</td>
+						<td>Password was previously used and cannot be reused.</td>
 					</tr>
 					<tr>
 						<td>
@@ -774,7 +761,7 @@
 						<td>
 							<code>EOS_Auth_Expired</code>
 						</td>
-						<td>Authorization code/exchange code has expired</td>
+						<td>Authorization code/exchange code has expired.</td>
 					</tr>
 					<tr>
 						<td>
@@ -783,7 +770,7 @@
 						<td>
 							<code>EOS_Auth_ScopeConsentRequired</code>
 						</td>
-						<td>Consent has not been given by the user</td>
+						<td>Consent has not been given by the user.</td>
 					</tr>
 					<tr>
 						<td>
@@ -792,7 +779,7 @@
 						<td>
 							<code>EOS_Auth_ApplicationNotFound</code>
 						</td>
-						<td>The application has no profile on the backend</td>
+						<td>The application has no profile on the backend.</td>
 					</tr>
 					<tr>
 						<td>
@@ -801,7 +788,7 @@
 						<td>
 							<code>EOS_Auth_ScopeNotFound</code>
 						</td>
-						<td>The requested consent wasn't found on the backend</td>
+						<td>The requested consent wasn't found on the backend.</td>
 					</tr>
 					<tr>
 						<td>
@@ -810,7 +797,7 @@
 						<td>
 							<code>EOS_Auth_AccountFeatureRestricted</code>
 						</td>
-						<td>This account has been denied access to login</td>
+						<td>This account has been denied access to login.</td>
 					</tr>
 					<tr>
 						<td>
@@ -943,7 +930,7 @@
 							<code>1050</code>
 						</td>
 						<td>
-							<code>EOS_Auth_PersistentAuth_AccountNotActive</code>
+							<code>EOS_Auth_AccountNotActive</code>
 						</td>
 						<td>The account has been disabled and cannot be used for authentication.</td>
 					</tr>
@@ -981,7 +968,7 @@
 						<td>
 							<code>EOS_Auth_UserInterfaceRequired</code>
 						</td>
-						<td>Silent login failed when EOS_LF_NO_USER_INTERFACE was specified, and user interaction is needed before the user can be logged in.</td>
+						<td>Silent login failed when Auth.LoginFlags.NoUserInterface was specified, and user interaction is needed before the user can be logged in.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1062,7 +1049,9 @@
 						<td>
 							<code>EOS_Presence_DataInvalid</code>
 						</td>
-						<td>Request data was null or invalid.</td>
+						<td>Request data was
+							<code>null</code>
+							or invalid.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1116,7 +1105,7 @@
 						<td>
 							<code>EOS_Presence_RichTextInvalid</code>
 						</td>
-						<td>Request contained an invalid rich text string.</td>
+						<td>Request contained an invalid rich text</td>
 					</tr>
 					<tr>
 						<td>
@@ -1125,7 +1114,7 @@
 						<td>
 							<code>EOS_Presence_RichTextLengthInvalid</code>
 						</td>
-						<td>Request contained a rich text string that was too long.</td>
+						<td>Request contained a rich text Utf8String that was too long.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1135,6 +1124,100 @@
 							<code>EOS_Presence_StatusInvalid</code>
 						</td>
 						<td>Request contained an invalid status state.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3009</code>
+						</td>
+						<td>
+							<code>EOS_Presence_RichTextNotSupported</code>
+						</td>
+						<td>Request created with a template - rich text is not supported.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3010</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateNotSupported</code>
+						</td>
+						<td>Request not created with a template - rich text expected.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3011</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateIdInvalid</code>
+						</td>
+						<td>Invalid Rich Presence Template ID.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3012</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateTypeInvalid</code>
+						</td>
+						<td>Template type value is not supported.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3013</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateKeyInvalid</code>
+						</td>
+						<td>Template key is
+							<code>null</code>
+							or not supplied.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3014</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateValueInvalid</code>
+						</td>
+						<td>Template value, if type is a Utf8String , is
+							<code>null</code>
+							or not supplie.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3015</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateNotFound</code>
+						</td>
+						<td>Template id was not found for the product or deployment.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3016</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateInvalidVariableInput</code>
+						</td>
+						<td>Failed to format template with given vairable data.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3017</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateLocalizationServerError</code>
+						</td>
+						<td>Localization server failed to format template.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>3018</code>
+						</td>
+						<td>
+							<code>EOS_Presence_TemplateUnknownError</code>
+						</td>
+						<td>Unknown error formatting template.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1161,7 +1244,7 @@
 						<td>
 							<code>EOS_Ecom_CatalogItemStale</code>
 						</td>
-						<td>The item or associated structure retrieved is stale.</td>
+						<td>The item or associated structure retrieved is stale, requery for updated information.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1170,7 +1253,7 @@
 						<td>
 							<code>EOS_Ecom_CatalogOfferPriceInvalid</code>
 						</td>
-						<td>The one or more offers have an invalid price. This may be caused by the price setup.</td>
+						<td>The one or more offers has an invalid price. This may be caused by the price setup.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1189,6 +1272,15 @@
 							<code>EOS_Ecom_PurchaseProcessing</code>
 						</td>
 						<td>The player closed the purchase flow overlay after clicking the purchase button. The purchase may still go through, and the game needs to query unredeemed entitlements for a short time.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>4006</code>
+						</td>
+						<td>
+							<code>EOS_Ecom_CatalogOfferInvalid</code>
+						</td>
+						<td>The offer is not valid in the catalog for the current sandbox.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1485,10 +1577,7 @@
 						<td>
 							<code>EOS_PlayerDataStorage_UserErrorFromDataCallback</code>
 						</td>
-						<td>User data callback returned error
-							<code>EOS_PlayerDataStorage_EWriteResult::EOS_WR_FailRequest</code>
-							or
-							<code>EOS_PlayerDataStorage_EReadResult::EOS_RR_FailRequest</code>.</td>
+						<td>User data callback returned error (PlayerDataStorage.WriteResult.FailRequest or PlayerDataStorage.ReadResult.FailRequest ).</td>
 					</tr>
 					<tr>
 						<td>
@@ -1497,7 +1586,7 @@
 						<td>
 							<code>EOS_PlayerDataStorage_FileHeaderHasNewerVersion</code>
 						</td>
-						<td>User is trying to read a file that has a header from a newer version of SDK. Game/SDK needs to be updated.</td>
+						<td>User is trying to read file that has header from newer version of SDK. Game/SDK needs to be updated.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1506,7 +1595,7 @@
 						<td>
 							<code>EOS_PlayerDataStorage_FileCorrupted</code>
 						</td>
-						<td>The file is corrupted. In some cases, retrying can fix the issue.</td>
+						<td>The file is corrupted. In some cases retry can fix the issue.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1582,21 +1671,12 @@
 					</tr>
 					<tr>
 						<td>
-							<code>7008</code>
-						</td>
-						<td>
-							<code>EOS_Connect_LinkAccountFailedMissingNintendoIdAccount_DEPRECATED</code>
-						</td>
-						<td>EOS Auth Account link failure. Tried to link Nintendo Network Service Account without first linking Nintendo Account. DEPRECATED: The requirement has been removed and this error is no longer used.</td>
-					</tr>
-					<tr>
-						<td>
 							<code>8000</code>
 						</td>
 						<td>
 							<code>EOS_UI_SocialOverlayLoadError</code>
 						</td>
-						<td>The social overlay page failed to load</td>
+						<td>The social overlay page failed to load.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1839,7 +1919,7 @@
 						<td>
 							<code>EOS_Mods_ModSdkProcessIsAlreadyRunning</code>
 						</td>
-						<td>ModSdk process is already running. This error comes from the EOS SDK.</td>
+						<td>ModSdk process is already running. This error comes from the EOSSDK.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1875,7 +1955,7 @@
 						<td>
 							<code>EOS_Mods_ToolInternalError</code>
 						</td>
-						<td>An internal error occurred in the external ModSdk process that we were unable to resolve.</td>
+						<td>A internal error occurred in the external ModSdk process that we were unable to resolve.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1884,7 +1964,7 @@
 						<td>
 							<code>EOS_Mods_IPCFailure</code>
 						</td>
-						<td>An IPC failure occurred in the external ModSdk process.</td>
+						<td>A IPC failure occurred in the external ModSdk process.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1893,7 +1973,7 @@
 						<td>
 							<code>EOS_Mods_InvalidIPCResponse</code>
 						</td>
-						<td>An invalid IPC response received in the external ModSdk process.</td>
+						<td>A invalid IPC response received in the external ModSdk process.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1974,7 +2054,7 @@
 						<td>
 							<code>EOS_Mods_CannotGetManifestLocation</code>
 						</td>
-						<td>Failed to get manifest location. Either the ModSdk configuration file is missing or the manifest location is empty</td>
+						<td>Failed to get manifest location. Either the ModSdk configuration file is missing or the manifest location is empty.</td>
 					</tr>
 					<tr>
 						<td>
@@ -1992,7 +2072,7 @@
 						<td>
 							<code>EOS_AntiCheat_ClientProtectionNotAvailable</code>
 						</td>
-						<td>The anti-cheat client protection is not available. Check that the game was started using the correct launcher.</td>
+						<td>The anti-cheat client protection is not available. Check that the game was started using the anti-cheat bootstrapper.</td>
 					</tr>
 					<tr>
 						<td>
@@ -2019,7 +2099,7 @@
 						<td>
 							<code>EOS_AntiCheat_ClientSandboxIdMismatch</code>
 						</td>
-						<td>The Sandbox ID provided to the anti-cheat client helper executable does not match what was used to initialize the EOS SDK.</td>
+						<td>The SandboxId provided to the anti-cheat client helper executable does not match what was used to initialize the EOS SDK.</td>
 					</tr>
 					<tr>
 						<td>
@@ -2028,7 +2108,7 @@
 						<td>
 							<code>EOS_AntiCheat_ProtectMessageSessionKeyRequired</code>
 						</td>
-						<td>ProtectMessage/UnprotectMessage No session key is available, but it is required to complete this operation.</td>
+						<td>(ProtectMessage/UnprotectMessage) No session key is available, but it is required to complete this operation</td>
 					</tr>
 					<tr>
 						<td>
@@ -2037,7 +2117,7 @@
 						<td>
 							<code>EOS_AntiCheat_ProtectMessageValidationFailed</code>
 						</td>
-						<td>ProtectMessage/UnprotectMessage Message integrity is invalid.</td>
+						<td>(ProtectMessage/UnprotectMessage) Message integrity is invalid</td>
 					</tr>
 					<tr>
 						<td>
@@ -2046,7 +2126,7 @@
 						<td>
 							<code>EOS_AntiCheat_ProtectMessageInitializationFailed</code>
 						</td>
-						<td>ProtectMessage/UnprotectMessage Initialization failed.</td>
+						<td>(ProtectMessage/UnprotectMessage) Initialization failed</td>
 					</tr>
 					<tr>
 						<td>
@@ -2055,7 +2135,7 @@
 						<td>
 							<code>EOS_AntiCheat_PeerAlreadyRegistered</code>
 						</td>
-						<td>RegisterPeer Peer is already registered.</td>
+						<td>(RegisterPeer) Peer is already registered</td>
 					</tr>
 					<tr>
 						<td>
@@ -2064,7 +2144,7 @@
 						<td>
 							<code>EOS_AntiCheat_PeerNotFound</code>
 						</td>
-						<td>UnregisterPeer Peer does not exist.</td>
+						<td>(UnregisterPeer) Peer does not exist</td>
 					</tr>
 					<tr>
 						<td>
@@ -2073,7 +2153,7 @@
 						<td>
 							<code>EOS_AntiCheat_PeerNotProtected</code>
 						</td>
-						<td>ReceiveMessageFromPeer Invalid call: Peer is not protected.</td>
+						<td>(ReceiveMessageFromPeer) Invalid call: Peer is not protected</td>
 					</tr>
 					<tr>
 						<td>
@@ -2164,6 +2244,42 @@
 							<code>EOS_RTC_UserIsInBlocklist</code>
 						</td>
 						<td>EOS RTC operation failed because the user is in the local user's block list.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>13009</code>
+						</td>
+						<td>
+							<code>EOS_RTC_AllocationFailed</code>
+						</td>
+						<td>Failed to allocate resources.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>13010</code>
+						</td>
+						<td>
+							<code>EOS_RTC_VoiceModerationModeMismatch</code>
+						</td>
+						<td>Failed to join room due to voice moderation mode mismatch.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>13011</code>
+						</td>
+						<td>
+							<code>EOS_RTC_EmptyRecord</code>
+						</td>
+						<td>EOS RTC record buffer was empty.</td>
+					</tr>
+					<tr>
+						<td>
+							<code>13012</code>
+						</td>
+						<td>
+							<code>EOS_RTC_RoomOptionsMismatch</code>
+						</td>
+						<td>Failed to join room due to room options mismatch.</td>
 					</tr>
 					<tr>
 						<td>
@@ -2343,7 +2459,7 @@
 						<td>
 							<code>EOS_ConsoleInit_OnNetworkRequestedDeprecatedCallbackNotSet</code>
 						</td>
-						<td>OnNetworkRequested_DEPRECATED callback not set when initializing platform</td>
+						<td>OnNetworkRequested_DEPRECATED callback not set when initializing platform.</td>
 					</tr>
 					<tr>
 						<td>
@@ -2386,7 +2502,7 @@
 							<code>0x7FFFFFFF</code>
 						</td>
 						<td>
-							<code>_LASTEOS_UnexpectedError</code>
+							<code>EOS_UnexpectedError</code>
 						</td>
 						<td>An unexpected error that we cannot identify has occurred.</td>
 					</tr>
